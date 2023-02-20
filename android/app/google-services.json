@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "658828835070",
+    "project_id": "flutterbase7",
+    "storage_bucket": "flutterbase7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:658828835070:android:0bcd6185da90a1bd150daf",
+        "android_client_info": {
+          "package_name": "com.anywhostudios.flutterbase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "658828835070-83kbhp3tgpl9f9fnosb53r8ccke0vm28.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anywhostudios.flutterbase",
+            "certificate_hash": "87fbf6788c61fa4656dcebe730d57175bbe12291"
+          }
+        },
+        {
+          "client_id": "658828835070-lar86ucg7rcesedshjjs97501st5d3ri.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anywhostudios.flutterbase",
+            "certificate_hash": "175c41b723a5aace09c04c0788a95b57d1a295ff"
+          }
+        },
+        {
+          "client_id": "658828835070-o05v9al0eiurhtk67dnk7badebo6mobk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anywhostudios.flutterbase",
+            "certificate_hash": "cd600ed35958af53ba955ac649da64c80b8ae89d"
+          }
+        },
+        {
+          "client_id": "658828835070-7d6ge5lgsoflblv1hk15h1pus9vo9gel.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjtuldXFULi-2MVxxni0-4zJdVUyoWdyE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "658828835070-7d6ge5lgsoflblv1hk15h1pus9vo9gel.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
