@@ -17,18 +17,95 @@
       ]
     },
     {
+      "name": "Launch development (web)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main_development.dart",
+      "args": [
+        "--flavor",
+        "development",
+        "--target",
+        "lib/main_development.dart",
+        "-d",
+        "chrome",
+        "--web-hostname",
+        "localhost",
+        "--web-port",
+        "5000"
+      ]
+    },
+    {
+      "name": "Launch development (web) (web-renderer html)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main_development.dart",
+      "args": [
+        "--flavor",
+        "development",
+        "--target",
+        "lib/main_development.dart",
+        "-d",
+        "chrome",
+        "--web-hostname",
+        "localhost",
+        "--web-port",
+        "5000"
+      ]
+    },
+    {
+      "name": "Launch with profile",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile",
+      "program": "lib/main_production.dart",
+      "args": [
+        "--flavor",
+        "production",
+        "--target",
+        "lib/main_production.dart",
+        "--web-renderer",
+        "html"
+      ]
+    },
+    {
       "name": "Launch staging",
       "request": "launch",
       "type": "dart",
       "program": "lib/main_staging.dart",
-      "args": ["--flavor", "staging", "--target", "lib/main_staging.dart"]
+      "args": [
+        "--flavor",
+        "staging",
+        "--target",
+        "lib/main_staging.dart"
+      ]
     },
     {
       "name": "Launch production",
       "request": "launch",
       "type": "dart",
       "program": "lib/main_production.dart",
-      "args": ["--flavor", "production", "--target", "lib/main_production.dart"]
+      "args": [
+        "--flavor",
+        "production",
+        "--target",
+        "lib/main_production.dart"
+      ]
+    },
+    {
+      "name": "Integration tests",
+      "request": "launch",
+      "type": "dart",
+      "program": "integration_test/router_integration_test.dart",
+      "args": [
+        "--flavor",
+        "development",
+      ]
+    },
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Debug emulator functions",
+      "port": 9229
     }
   ]
 }
