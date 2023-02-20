@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutterbase/counter/counter.dart';
+import 'package:flutterbase/app/view/auth_page.dart';
 import 'package:flutterbase/l10n/l10n.dart';
 
 class App extends StatelessWidget {
@@ -27,7 +27,7 @@ class App extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      home: const AuthPage(),
     );
   }
 }
