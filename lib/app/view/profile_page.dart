@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterbase/app/view/auth.dart';
-// import 'package:google_sign_in/google_sign_in.dart';
 
 /// Displayed as a profile image if the user doesn't have one.
 const placeholderImage = 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Portrait_Placeholder_Square.png';
@@ -187,42 +186,6 @@ class _ProfilePageState extends State<ProfilePage> {
                         hintText: '+33612345678',
                         labelText: 'Phone number',
                       ),
-                    ),
-                    const SizedBox(height: 20),
-                    TextButton(
-                      onPressed: () async {
-                        final session = await user.multiFactor.getSession();
-                        final auth = FirebaseAuth.instance;
-                        await auth.verifyPhoneNumber(
-                          multiFactorSession: session,
-                          phoneNumber: phoneController.text,
-                          verificationCompleted: (_) {},
-                          verificationFailed: print,
-                          codeSent: (String verificationId, int? resendToken) async {
-                            final smsCode = await getSmsCodeFromUser(context);
-
-                            if (smsCode != null) {
-                              // Create a PhoneAuthCredential with the code
-                              final credential = PhoneAuthProvider.credential(
-                                verificationId: verificationId,
-                                smsCode: smsCode,
-                              );
-
-                              try {
-                                await user.multiFactor.enroll(
-                                  PhoneMultiFactorGenerator.getAssertion(
-                                    credential,
-                                  ),
-                                );
-                              } on FirebaseAuthException catch (e) {
-                                print(e.message);
-                              }
-                            }
-                          },
-                          codeAutoRetrievalTimeout: print,
-                        );
-                      },
-                      child: const Text('Verify Number For MFA'),
                     ),
                     const SizedBox(height: 20),
                     TextButton(
