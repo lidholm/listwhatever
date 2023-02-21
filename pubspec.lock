@@ -37,19 +37,12 @@ packages:
     source: hosted
     version: "2.9.0"
   bloc:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: bloc
       url: "https://pub.dartlang.org"
     source: hosted
     version: "8.0.3"
-  bloc_test:
-    dependency: "direct dev"
-    description:
-      name: bloc_test
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "9.0.3"
   boolean_selector:
     dependency: transitive
     description:
@@ -113,13 +106,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.11"
-  diff_match_patch:
-    dependency: transitive
-    description:
-      name: diff_match_patch
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.4.1"
   email_validator:
     dependency: transitive
     description:
