@@ -69,7 +69,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '658828835070',
     projectId: 'flutterbase7',
     storageBucket: 'flutterbase7.appspot.com',
-    androidClientId: '658828835070-83kbhp3tgpl9f9fnosb53r8ccke0vm28.apps.googleusercontent.com',
+    androidClientId: '658828835070-07rj049n2npd161jn5ihpksotgc094ii.apps.googleusercontent.com',
     iosClientId: '658828835070-smau1li0irtvboulqts6qci3etvupg8i.apps.googleusercontent.com',
     iosBundleId: 'com.anywhostudios.flutterbase',
   );

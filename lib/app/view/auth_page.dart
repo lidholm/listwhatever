@@ -8,6 +8,7 @@ class AuthPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('currentUser: ${FirebaseAuth.instance.currentUser}');
     return MaterialApp(
       title: 'Firebase Example App',
       theme: ThemeData(primarySwatch: Colors.amber),
@@ -39,8 +40,9 @@ class AuthPage extends StatelessWidget {
                 SizedBox(
                   width: constraints.maxWidth >= 1200 ? constraints.maxWidth / 2 : constraints.maxWidth,
                   child: StreamBuilder<User?>(
-                    stream: FirebaseAuth.instance.authStateChanges(),
+                    stream: FirebaseAuth.instance.userChanges(),
                     builder: (context, snapshot) {
+                      print('hasData: ${snapshot.hasData}');
                       if (snapshot.hasData) {
                         return const ProfilePage();
                       }

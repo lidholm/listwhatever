@@ -47,8 +47,8 @@ class AuthGate extends StatefulWidget {
 }
 
 class _AuthGateState extends State<AuthGate> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController(text: 'test3@email.com');
+  TextEditingController passwordController = TextEditingController(text: 'test1234');
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String error = '';
@@ -138,11 +138,7 @@ class _AuthGateState extends State<AuthGate> {
                             width: double.infinity,
                             height: 50,
                             child: ElevatedButton(
-                              onPressed: isLoading
-                                  ? null
-                                  : () => _handleMultiFactorException(
-                                        _emailAndPassword,
-                                      ),
+                              onPressed: isLoading ? null : () => _handleMultiFactorException(_emailAndPassword),
                               child: isLoading ? const CircularProgressIndicator.adaptive() : Text(mode.label),
                             ),
                           ),

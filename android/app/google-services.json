@@ -7,6 +7,66 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:658828835070:android:45a1a7efd6167683150daf",
+        "android_client_info": {
+          "package_name": "com.anywhostudios.com.stg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "658828835070-fnh21dabhp4otf0l1f4rcfavdaet9rlu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anywhostudios.com.stg",
+            "certificate_hash": "87fbf6788c61fa4656dcebe730d57175bbe12291"
+          }
+        },
+        {
+          "client_id": "658828835070-hegqvl2fsn0tqj5npi4f5katdm0en5oc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anywhostudios.com.stg",
+            "certificate_hash": "cd600ed35958af53ba955ac649da64c80b8ae89d"
+          }
+        },
+        {
+          "client_id": "658828835070-lasdish2omfhllasl0kjieeqk7o9gk17.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anywhostudios.com.stg",
+            "certificate_hash": "175c41b723a5aace09c04c0788a95b57d1a295ff"
+          }
+        },
+        {
+          "client_id": "658828835070-7d6ge5lgsoflblv1hk15h1pus9vo9gel.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjtuldXFULi-2MVxxni0-4zJdVUyoWdyE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "658828835070-7d6ge5lgsoflblv1hk15h1pus9vo9gel.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "658828835070-smau1li0irtvboulqts6qci3etvupg8i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.anywhostudios.flutterbase"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:658828835070:android:0bcd6185da90a1bd150daf",
         "android_client_info": {
           "package_name": "com.anywhostudios.flutterbase"
@@ -53,6 +113,73 @@
             {
               "client_id": "658828835070-7d6ge5lgsoflblv1hk15h1pus9vo9gel.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "658828835070-smau1li0irtvboulqts6qci3etvupg8i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.anywhostudios.flutterbase"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:658828835070:android:c8ccebf75cc859cb150daf",
+        "android_client_info": {
+          "package_name": "com.anywhostudios.flutterbase.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "658828835070-07rj049n2npd161jn5ihpksotgc094ii.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anywhostudios.flutterbase.dev",
+            "certificate_hash": "175c41b723a5aace09c04c0788a95b57d1a295ff"
+          }
+        },
+        {
+          "client_id": "658828835070-reps1vgb610np9bt252nona7ig9i5q4c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anywhostudios.flutterbase.dev",
+            "certificate_hash": "cd600ed35958af53ba955ac649da64c80b8ae89d"
+          }
+        },
+        {
+          "client_id": "658828835070-svbv16rfcnudvic6lbipgeojmfqogs70.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anywhostudios.flutterbase.dev",
+            "certificate_hash": "87fbf6788c61fa4656dcebe730d57175bbe12291"
+          }
+        },
+        {
+          "client_id": "658828835070-7d6ge5lgsoflblv1hk15h1pus9vo9gel.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjtuldXFULi-2MVxxni0-4zJdVUyoWdyE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "658828835070-7d6ge5lgsoflblv1hk15h1pus9vo9gel.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "658828835070-smau1li0irtvboulqts6qci3etvupg8i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.anywhostudios.flutterbase"
+              }
             }
           ]
         }
