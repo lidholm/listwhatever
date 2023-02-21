@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterbase/app/view/auth.dart';
+import 'package:flutterbase/counter/counter.dart';
 
 /// Displayed as a profile image if the user doesn't have one.
 const placeholderImage = 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Portrait_Placeholder_Square.png';
@@ -209,7 +210,13 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: const Text('Save changes'),
                       ),
               ),
-            )
+            ),
+            Positioned.directional(
+              textDirection: Directionality.of(context),
+              end: 40,
+              top: 40,
+              child: const CounterPage(),
+            ),
           ],
         ),
       ),
