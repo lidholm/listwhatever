@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterbase/app/view/auth.dart';
+import 'package:flutterbase/app/view/loading_user_page.dart';
 import 'package:flutterbase/app/view/profile_page.dart';
 
 class AuthPage extends StatelessWidget {
@@ -43,8 +44,12 @@ class AuthPage extends StatelessWidget {
                     stream: FirebaseAuth.instance.userChanges(),
                     builder: (context, snapshot) {
                       print('hasData: ${snapshot.hasData}');
-                      if (snapshot.hasData) {
-                        return const ProfilePage();
+                      if (FirebaseAuth.instance.currentUser != null) {
+                        if (snapshot.hasData) {
+                          return const ProfilePage();
+                        } else {
+                          return const LoadingUserPage();
+                        }
                       }
                       return const AuthGate();
                     },

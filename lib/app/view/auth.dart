@@ -199,7 +199,7 @@ class _AuthGateState extends State<AuthGate> {
       if (firstHint is! PhoneMultiFactorInfo) {
         return;
       }
-      final auth = FirebaseAuth.instance;
+      // final auth = FirebaseAuth.instance;
     } on FirebaseAuthException catch (e) {
       setState(() {
         error = '${e.message}';
