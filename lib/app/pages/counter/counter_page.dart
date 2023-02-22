@@ -11,7 +11,6 @@ class CounterPage extends ConsumerWidget {
     final count = ref.watch(counterProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Counter')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
