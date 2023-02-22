@@ -7,7 +7,7 @@
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutterbase/app/app.dart';
-import 'package:flutterbase/counter/counter.dart';
+import 'package:flutterbase/app/pages/counter/counter_page.dart';
 
 void main() {
   group('App', () {

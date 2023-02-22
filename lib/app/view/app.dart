@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutterbase/app/view/auth.dart';
-import 'package:flutterbase/app/view/auth_page.dart';
-import 'package:flutterbase/app/view/current_user_provider.dart';
-import 'package:flutterbase/app/view/loading_user_page.dart';
-import 'package:flutterbase/app/view/profile_page.dart';
-import 'package:flutterbase/counter/counter.dart';
+import 'package:flutterbase/app/pages/Auth/loading_user_page.dart';
+import 'package:flutterbase/app/pages/auth/auth.dart';
+import 'package:flutterbase/app/pages/auth/current_user_provider.dart';
+import 'package:flutterbase/app/pages/counter/counter_page.dart';
+import 'package:flutterbase/app/pages/profile/profile_page.dart';
 import 'package:go_router/go_router.dart';
 
 // GoRouter configuration
 final routerProvider = Provider(
   (ref) => GoRouter(
     routes: [
-      GoRoute(
-        path: '/',
-        builder: (context, state) => const AuthPage(),
-      ),
       GoRoute(
         path: '/loading_user',
         builder: (context, state) => const LoadingUserPage(),
