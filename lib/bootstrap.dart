@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart' hide PhoneAuthProvider, EmailA
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 // import 'package:firebase_ui_oauth_apple/firebase_ui_oauth_apple.dart';
-// import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
+import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutterbase/app/firebase/firebase_options.dart';
@@ -58,7 +58,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
     EmailAuthProvider(),
     // emailLinkProviderConfig,
     PhoneAuthProvider(),
-    // GoogleProvider(clientId: GOOGLE_CLIENT_ID),
+    GoogleProvider(clientId: 'GOOGLE_CLIENT_ID'),
     // AppleProvider(),
   ]);
 
