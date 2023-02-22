@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutterbase/app/navigation/current_user_provider.dart';
 import 'package:flutterbase/app/navigation/loading_user_page.dart';
+import 'package:flutterbase/app/navigation/routes.dart';
 import 'package:flutterbase/app/pages/counter/counter_page.dart';
 import 'package:flutterbase/app/pages/profile/profile_page.dart';
 import 'package:go_router/go_router.dart';
@@ -13,6 +14,7 @@ final routerProvider = Provider(
   (ref) => GoRouter(
     initialLocation: '/profile',
     routes: [
+      $counterPageRoute,
       GoRoute(
         path: '/loading_user',
         builder: (context, state) => const LoadingUserPage(),
