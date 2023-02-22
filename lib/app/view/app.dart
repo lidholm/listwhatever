@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutterbase/app/view/auth.dart';
@@ -6,6 +5,7 @@ import 'package:flutterbase/app/view/auth_page.dart';
 import 'package:flutterbase/app/view/current_user_provider.dart';
 import 'package:flutterbase/app/view/loading_user_page.dart';
 import 'package:flutterbase/app/view/profile_page.dart';
+import 'package:flutterbase/counter/counter.dart';
 import 'package:go_router/go_router.dart';
 
 // GoRouter configuration
@@ -28,23 +28,21 @@ final routerProvider = Provider(
         path: '/authgate',
         builder: (context, state) => const AuthGate(),
       ),
+      GoRoute(
+        path: '/counter',
+        builder: (context, state) => const CounterPage(),
+      ),
     ],
     redirect: (context, state) {
       // and then use userChanges to check for changes to if a user is logged in or not
       final userChanges = ref.watch(userChangesProvider);
-      final currentUser = FirebaseAuth.instance.currentUser;
 
-      print('currentUser: ${currentUser?.email}');
       print('userChanges: ${userChanges.asData?.value?.email}');
 
-      if (currentUser != null) {
-        print('going to: /profile');
-        return '/profile';
-      }
       final path = userChanges.when(
         error: (e, st) => '/error_loading_user',
         loading: () => '/loading_user',
-        data: (user) => user == null ? '/authgate' : '/profile',
+        data: (user) => user == null ? '/authgate' : null,
       );
       print('going to. $path');
       return path;

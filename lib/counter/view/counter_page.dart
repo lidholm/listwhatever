@@ -10,19 +10,23 @@ class CounterPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final count = ref.watch(counterProvider);
 
-    return Center(
-      child: Column(
-        children: [
-          Text('$count', style: Theme.of(context).textTheme.headline1),
-          ElevatedButton(
-            onPressed: () => ref.read(counterProvider.notifier).state = count + 1,
-            child: const Icon(Icons.add),
-          ),
-          ElevatedButton(
-            onPressed: () => ref.read(counterProvider.notifier).state = count - 1,
-            child: const Icon(Icons.remove),
-          )
-        ],
+    return Scaffold(
+      appBar: AppBar(title: const Text('Counter')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('$count', style: Theme.of(context).textTheme.headline1),
+            ElevatedButton(
+              onPressed: () => ref.read(counterProvider.notifier).state = count + 1,
+              child: const Icon(Icons.add),
+            ),
+            ElevatedButton(
+              onPressed: () => ref.read(counterProvider.notifier).state = count - 1,
+              child: const Icon(Icons.remove),
+            )
+          ],
+        ),
       ),
     );
   }
