@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterbase/app/pages/auth/auth.dart';
+import 'package:flutterbase/app/navigation/auth.dart';
 import 'package:go_router/go_router.dart';
 
 /// Displayed as a profile image if the user doesn't have one.

@@ -13,7 +13,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
 
-  final shouldUseFirebaseEmulator = Random().nextInt(10) > 0;
+  final shouldUseFirebaseEmulator = Random().nextInt(10) > -1;
 
 // Requires that the Firebase Auth emulator is running locally
 // e.g via `melos run firebase:emulator`.
