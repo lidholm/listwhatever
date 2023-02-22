@@ -2,38 +2,15 @@ import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutterbase/app/navigation/current_user_provider.dart';
-import 'package:flutterbase/app/navigation/loading_user_page.dart';
 import 'package:flutterbase/app/navigation/routes.dart';
-import 'package:flutterbase/app/pages/counter/counter_page.dart';
-import 'package:flutterbase/app/pages/profile/profile_page.dart';
 import 'package:go_router/go_router.dart';
 
 final providers = [EmailAuthProvider()];
 // GoRouter configuration
 final routerProvider = Provider(
   (ref) => GoRouter(
-    initialLocation: '/profile',
-    routes: [
-      $counterPageRoute,
-      GoRoute(
-        path: '/loading_user',
-        builder: (context, state) => const LoadingUserPage(),
-      ),
-      GoRoute(
-        path: '/profile',
-        builder: (context, state) => const ProfilePage(),
-      ),
-      GoRoute(
-        path: '/authgate',
-        builder: (context, state) => SignInScreen(
-          providers: providers,
-        ),
-      ),
-      GoRoute(
-        path: '/counter',
-        builder: (context, state) => const CounterPage(),
-      ),
-    ],
+    initialLocation: HomeScreenRoute().location,
+    routes: $appRoutes,
     redirect: (context, state) {
       // and then use userChanges to check for changes to if a user is logged in or not
       final userChanges = ref.watch(userChangesProvider);
@@ -42,8 +19,8 @@ final routerProvider = Provider(
 
       final path = userChanges.when(
         error: (e, st) => '/error_loading_user',
-        loading: () => '/loading_user',
-        data: (user) => user == null ? '/authgate' : null,
+        loading: () => const LoadingUserRoute().location,
+        data: (user) => user == null ? const SignInScreenRoute().location : null,
       );
       print('going to. $path');
       return path;
