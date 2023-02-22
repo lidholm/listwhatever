@@ -1,12 +1,13 @@
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutterbase/app/navigation/auth.dart';
 import 'package:flutterbase/app/navigation/current_user_provider.dart';
 import 'package:flutterbase/app/navigation/loading_user_page.dart';
 import 'package:flutterbase/app/pages/counter/counter_page.dart';
 import 'package:flutterbase/app/pages/profile/profile_page.dart';
 import 'package:go_router/go_router.dart';
 
+final providers = [EmailAuthProvider()];
 // GoRouter configuration
 final routerProvider = Provider(
   (ref) => GoRouter(
@@ -22,7 +23,9 @@ final routerProvider = Provider(
       ),
       GoRoute(
         path: '/authgate',
-        builder: (context, state) => const AuthGate(),
+        builder: (context, state) => SignInScreen(
+          providers: providers,
+        ),
       ),
       GoRoute(
         path: '/counter',
