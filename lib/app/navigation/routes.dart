@@ -1,8 +1,8 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterbase/app/navigation/home_screen.dart';
 import 'package:flutterbase/app/navigation/loading_user_page.dart';
 import 'package:flutterbase/app/pages/counter/counter_page.dart';
-import 'package:flutterbase/app/pages/profile/profile_page.dart';
 import 'package:go_router/go_router.dart';
 
 part 'routes.g.dart';
@@ -25,7 +25,7 @@ part 'routes.g.dart';
 class HomeScreenRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const ProfilePage();
+    return HomeScreen();
   }
 }
 
