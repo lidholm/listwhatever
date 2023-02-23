@@ -125,3 +125,10 @@ app.*.map.json
 !.idea/codeStyles/
 !.idea/dictionaries/
 !.idea/runConfigurations/
+
+# Mine
+key.txt
+android/app/google-services.json
+ios/firebase_app_id_file.json
+lib/app/firebase/firebase_options.dart
+ios/Runner/GoogleService-Info.plist
