@@ -5,7 +5,7 @@ with open('.prod.env', 'r') as file:
 variables = {}
 
 for i in variablesData:
-    if i.strip() == "":
+    if i.strip() == "" or i.strip()[0] == "#":
         continue
     variables[i.split('=')[0]] = i.split('=')[1][1:-2]
 
@@ -14,6 +14,8 @@ with open('./scripts/replace_env_vars.config', 'r') as file:
 
 for config in configs:
     filename = config.split('|')[0]
+    if filename.strip()[0] == "#":
+        continue
     variable = config.split('|')[1]
 
     with open(filename, 'r') as file:

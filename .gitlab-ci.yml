@@ -1,0 +1,195 @@
+image: lidholm/flutter:0.0.17
+
+cache:
+  paths:
+    - node_modules/
+    - test/firestore/node_modules/
+    - $CI_PROJECT_DIR/.pub-cache/
+
+stages:
+  - pre_setup
+  - setup
+  - verify
+  - build
+  - deploy
+
+release-notes:
+  stage: pre_setup
+  except:
+    - main
+  script:
+    - bash scripts/gitlabci/verifyReleaseNotes.sh
+
+flutter-setup:
+  stage: pre_setup
+  script:
+    - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
+    - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
+    - echo "PUB_CACHE"
+    - echo $PUB_CACHE
+    - flutter pub get
+    - flutter pub global activate junitreport
+  artifacts:
+    paths:
+      - .dart_tool
+    expire_in: 2700 seconds #45 minutes
+
+decrypt-sops:
+  stage: setup
+  script:
+    - sh scripts/gitlabci/decryptSops.sh
+  artifacts:
+    paths:
+      - android/app/google-services.json
+      - android/app/listanything-upload-keystore.jks
+      - android/key.properties
+      - .prod.env
+      - android/google_play_store_service_account.json
+      - ios/Runner/GoogleService-Info.plist
+      - firebase-deploy-service-account.json
+      - firebase-adminsdk-google-cloud-service-account.json
+      - assets/google_sheets_service_account.json
+      - lib/app/firebase/firebase_options.dart
+      - ios/firebase_app_id_file.json
+
+    expire_in: 2700 seconds #45 minutes
+
+replace_about_screen:
+  stage: setup
+  script:
+    - sh scripts/gitlabci/replaceAboutScreen.sh
+
+lint_check:
+  stage: verify
+  script:
+    - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
+    - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
+    - flutter analyze
+
+unit_tests:
+  stage: verify
+  script:
+    - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
+    - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
+    - flutter test # --machine --coverage
+
+# firestore_rules_tests:
+#   stage: verify
+#   script:
+#     - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
+#     - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
+#     - cd test/firestore
+#     - chmod +x runtest.sh
+#     - npm i
+#     - ./node_modules/.bin/firebase emulators:exec --only firestore "./runtest.sh"
+#   artifacts:
+#     paths:
+#       - test/firestore/firestore-debug.log
+#     expire_in: 2700 seconds #45 minutes
+
+# firebase_functions_tests:
+#   stage: verify
+#   script:
+#     - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
+#     - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
+#     - cd functions
+#     - chmod +x runtest.sh
+#     - npm i
+#     - ./node_modules/.bin/firebase emulators:exec --only firestore "./runtest.sh"
+#   artifacts:
+#     paths:
+#       - test/firestore/firestore-debug.log
+#     expire_in: 2700 seconds #45 minutes
+
+# buildReleaseBundle:
+#     stage: build
+#     only:
+#         - main
+#     script:
+#         - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
+#         - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
+#         - flutter build appbundle --release --flavor production -t lib/main_production.dart
+#         - java -jar /bundletool-all.jar dump manifest --bundle build/app/outputs/bundle/productionRelease/app-production-release.aab --xpath /manifest/@android:versionCode
+#         - cp build/app/outputs/bundle/productionRelease/app-production-release.aab .
+#     artifacts:
+#         paths:
+#           - "app-production-release.aab"
+#         expire_in: 2 days
+
+# buildDebugApk:
+#     stage: build
+#     only:
+#         - main
+#     script:
+#         - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
+#         - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
+#         - flutter build apk --target lib/main_development.dart --flavor development
+#         - cp build/app/outputs/flutter-apk/app-development-release.apk .
+#     artifacts:
+#         paths:
+#           - "app-development-release.apk"
+#         expire_in: 2 days
+
+buildWebBundle:
+  stage: build
+  only:
+    - main
+  script:
+    - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
+    - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
+    - flutter build web --release -t lib/main_production.dart
+  artifacts:
+    paths:
+      - "build/web/"
+    expire_in: 2 days
+
+# runIntegrationTest:
+#     stage: build
+#     only:
+#         - main
+#     script:
+#         - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
+#         - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
+#         - flutter pub get
+#         - KEY_ALIAS=`cat android/key.properties | grep keyAlias | cut -d '=' -f 2 | sed -e 's/  *$//'`
+#         - KEY_PASSWORD=`cat android/key.properties | grep keyPassword | cut -d '=' -f 2 | sed -e 's/  *$//'`
+#         - STORE_PASSWORD=`cat android/key.properties | grep storePassword  | cut -d '=' -f 2 | sed -e 's/  *$//'`
+#         - echo $KEY_PASSWORD > key.pwd
+#         - echo $STORE_PASSWORD > store.pwd
+
+#         - sh scripts/gitlabci/buildIntegrationTestApk.sh
+#         - sh scripts/gitlabci/runIntegrationTest.sh
+#     artifacts:
+#         paths:
+#           - "app-development-debug-androidTest.apk"
+#         expire_in: 2 days
+
+# deployToGooglePlayStore:
+#     stage: deploy
+#     environment:
+#         name: production/google-play-store
+#         url: https://play.google.com/store/apps/details?id=com.anywhostudios.listanything
+#     only:
+#         - main
+#     script:
+#         - sh scripts/gitlabci/deployToGooglePlayStore.sh
+
+deployToFirebaseHostingAndRules:
+  stage: deploy
+  environment:
+    name: production/web
+    url: https://listanything-2b9b0.web.app/
+  only:
+    - main
+  script:
+    - pwd
+    - source .prod.env
+    - echo $FIREBASE_TOKEN | head -c 10
+    - head -c  15 /builds/lidholm/listanything/firebase-deploy-service-account.json
+    - export GOOGLE_APPLICATION_CREDENTIALS=/builds/lidholm/listanything/firebase-deploy-service-account.json
+    - head -c 100 /builds/lidholm/listanything/firebase-deploy-service-account.json
+    - /firebase projects:list
+    - /firebase use listanything-2b9b0
+    - /firebase --version
+    - /firebase deploy --only hosting
+    - /firebase deploy --only firestore:rules
