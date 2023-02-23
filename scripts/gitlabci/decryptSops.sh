@@ -1,0 +1,21 @@
+echo "Decrypt sops file(s)"
+export PATH="$PATH:."
+
+echo "===="
+echo $SOPS_AGE_KEY | head -c 20
+echo "===="
+
+sed -i'' -e 's/\r$//' ./scripts/decrypt_secrets.sh 
+chmod +x ./scripts/decrypt_secrets.sh
+bash -c './scripts/decrypt_secrets.sh'
+
+echo "===="
+
+sed -i'' -e 's/\r$//' ./scripts/replace_env_vars.py
+python3 ./scripts/replace_env_vars.py 
+
+echo "===="
+grep android:value android/app/src/main/AndroidManifest.xml | tail -n 1 | head -c 34
+
+ls -l .prod.env
+ls -l assets
