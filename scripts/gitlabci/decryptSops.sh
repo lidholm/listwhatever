@@ -17,5 +17,3 @@ python3 ./scripts/replace_env_vars.py
 echo "===="
 grep android:value android/app/src/main/AndroidManifest.xml | tail -n 1 | head -c 34
 
-ls -l .prod.env
-ls -l assets
