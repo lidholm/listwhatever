@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart' as foundation;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutterbase/app/firebase/device_info_provider.dart';
+import 'package:listanything/app/firebase/device_info_provider.dart';
 
 bool? override;
 

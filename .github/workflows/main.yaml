@@ -1,4 +1,4 @@
-name: flutterbase
+name: listanything
 
 on: [pull_request, push]
 

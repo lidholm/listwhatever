@@ -1,8 +1,8 @@
 {
   "project_info": {
     "project_number": "658828835070",
-    "project_id": "flutterbase7",
-    "storage_bucket": "flutterbase7.appspot.com"
+    "project_id": "listanything-2b9b0",
+    "storage_bucket": "listanything-2b9b0.appspot.com"
   },
   "client": [
     {
@@ -58,7 +58,7 @@
               "client_id": "658828835070-smau1li0irtvboulqts6qci3etvupg8i.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.anywhostudios.flutterbase"
+                "bundle_id": "com.anywhostudios.listanything"
               }
             }
           ]
@@ -69,7 +69,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:658828835070:android:0bcd6185da90a1bd150daf",
         "android_client_info": {
-          "package_name": "com.anywhostudios.flutterbase"
+          "package_name": "com.anywhostudios.listanything"
         }
       },
       "oauth_client": [
@@ -77,7 +77,7 @@
           "client_id": "658828835070-83kbhp3tgpl9f9fnosb53r8ccke0vm28.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.anywhostudios.flutterbase",
+            "package_name": "com.anywhostudios.listanything",
             "certificate_hash": "87fbf6788c61fa4656dcebe730d57175bbe12291"
           }
         },
@@ -85,7 +85,7 @@
           "client_id": "658828835070-lar86ucg7rcesedshjjs97501st5d3ri.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.anywhostudios.flutterbase",
+            "package_name": "com.anywhostudios.listanything",
             "certificate_hash": "175c41b723a5aace09c04c0788a95b57d1a295ff"
           }
         },
@@ -93,7 +93,7 @@
           "client_id": "658828835070-o05v9al0eiurhtk67dnk7badebo6mobk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.anywhostudios.flutterbase",
+            "package_name": "com.anywhostudios.listanything",
             "certificate_hash": "cd600ed35958af53ba955ac649da64c80b8ae89d"
           }
         },
@@ -118,7 +118,7 @@
               "client_id": "658828835070-smau1li0irtvboulqts6qci3etvupg8i.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.anywhostudios.flutterbase"
+                "bundle_id": "com.anywhostudios.listanything"
               }
             }
           ]
@@ -129,7 +129,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:658828835070:android:c8ccebf75cc859cb150daf",
         "android_client_info": {
-          "package_name": "com.anywhostudios.flutterbase.dev"
+          "package_name": "com.anywhostudios.listanything.dev"
         }
       },
       "oauth_client": [
@@ -137,7 +137,7 @@
           "client_id": "658828835070-07rj049n2npd161jn5ihpksotgc094ii.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.anywhostudios.flutterbase.dev",
+            "package_name": "com.anywhostudios.listanything.dev",
             "certificate_hash": "175c41b723a5aace09c04c0788a95b57d1a295ff"
           }
         },
@@ -145,7 +145,7 @@
           "client_id": "658828835070-reps1vgb610np9bt252nona7ig9i5q4c.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.anywhostudios.flutterbase.dev",
+            "package_name": "com.anywhostudios.listanything.dev",
             "certificate_hash": "cd600ed35958af53ba955ac649da64c80b8ae89d"
           }
         },
@@ -153,7 +153,7 @@
           "client_id": "658828835070-svbv16rfcnudvic6lbipgeojmfqogs70.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.anywhostudios.flutterbase.dev",
+            "package_name": "com.anywhostudios.listanything.dev",
             "certificate_hash": "87fbf6788c61fa4656dcebe730d57175bbe12291"
           }
         },
@@ -178,7 +178,7 @@
               "client_id": "658828835070-smau1li0irtvboulqts6qci3etvupg8i.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.anywhostudios.flutterbase"
+                "bundle_id": "com.anywhostudios.listanything"
               }
             }
           ]

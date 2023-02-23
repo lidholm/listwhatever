@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart' as fire_auth;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutterbase/app/firebase/use_firebase_emulator_provider.dart';
+import 'package:listanything/app/firebase/use_firebase_emulator_provider.dart';
 
 final Provider<fire_auth.FirebaseAuth> baseFirebaseAuthProvider = Provider<fire_auth.FirebaseAuth>((ref) {
   return fire_auth.FirebaseAuth.instance;

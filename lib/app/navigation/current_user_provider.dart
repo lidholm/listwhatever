@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutterbase/app/firebase/firebase_auth_provider.dart';
+import 'package:listanything/app/firebase/firebase_auth_provider.dart';
 
 final userChangesProvider = StreamProvider((ref) async* {
   final auth = await ref.watch(firebaseAuthProvider.future);

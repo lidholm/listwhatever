@@ -1,5 +1,5 @@
-alias startEmulators="firebase emulators:start --import ./emulatorData  --project flutterbase7 --inspect-functions"
-alias exportEmulatorData="firebase emulators:export ./emulatorData   --project flutterbase7"
+alias startEmulators="firebase emulators:start --import ./emulatorData  --project listanything-2b9b0 --inspect-functions"
+alias exportEmulatorData="firebase emulators:export ./emulatorData   --project listanything-2b9b0"
 alias buildImage="docker build -t lidholm/flutter:0.0.9 ."
 alias uploadImage="docker push lidholm/flutter:0.0.9"
 alias killPorts="kill-port --port 8000,9099,5001,8080,9000,5000,8085,9199,4000,4400,4500"

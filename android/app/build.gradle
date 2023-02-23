@@ -52,7 +52,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.anywhostudios.flutterbase"
+        applicationId "com.anywhostudios.listanything"
         minSdkVersion 26
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
@@ -88,17 +88,17 @@ android {
         production {
             dimension "default"
             applicationIdSuffix ""
-            manifestPlaceholders = [appName: "Flutterbase"]
+            manifestPlaceholders = [appName: "listanything"]
         }
         staging {
             dimension "default"
             applicationIdSuffix ".stg"
-            manifestPlaceholders = [appName: "[STG] Flutterbase"]
+            manifestPlaceholders = [appName: "[STG] listanything"]
         }        
         development {
             dimension "default"
             applicationIdSuffix ".dev"
-            manifestPlaceholders = [appName: "[DEV] Flutterbase"]
+            manifestPlaceholders = [appName: "[DEV] listanything"]
         }
     }
 

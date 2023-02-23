@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.anywhostudios.flutterbase">
+    package="com.anywhostudios.listanything">
    <application
         android:label="${appName}"
         android:usesCleartextTraffic="${usesCleartextTraffic}"

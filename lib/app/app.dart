@@ -1,10 +1,10 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutterbase/app/navigation/current_user_provider.dart';
-import 'package:flutterbase/app/navigation/routes/loading_user_route.dart';
-import 'package:flutterbase/app/navigation/routes/routes.dart';
-import 'package:flutterbase/app/navigation/routes/sign_in_screen_route.dart';
+import 'package:listanything/app/navigation/current_user_provider.dart';
+import 'package:listanything/app/navigation/routes/loading_user_route.dart';
+import 'package:listanything/app/navigation/routes/routes.dart';
+import 'package:listanything/app/navigation/routes/sign_in_screen_route.dart';
 import 'package:go_router/go_router.dart';
 
 final providers = [EmailAuthProvider()];

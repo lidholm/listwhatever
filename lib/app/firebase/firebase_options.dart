@@ -49,27 +49,27 @@ class DefaultFirebaseOptions {
     apiKey: 'AIzaSyC8Q0z7scHYEkwXsgKsCrUP1wUt3Di2HQ8',
     appId: '1:658828835070:web:6594672af988aa72150daf',
     messagingSenderId: '658828835070',
-    projectId: 'flutterbase7',
-    authDomain: 'flutterbase7.firebaseapp.com',
-    storageBucket: 'flutterbase7.appspot.com',
+    projectId: 'listanything-2b9b0',
+    authDomain: 'listanything-2b9b0.firebaseapp.com',
+    storageBucket: 'listanything-2b9b0.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBjtuldXFULi-2MVxxni0-4zJdVUyoWdyE',
     appId: '1:658828835070:android:0bcd6185da90a1bd150daf',
     messagingSenderId: '658828835070',
-    projectId: 'flutterbase7',
-    storageBucket: 'flutterbase7.appspot.com',
+    projectId: 'listanything-2b9b0',
+    storageBucket: 'listanything-2b9b0.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDKRhQw8keAKAytYeNYctAoLwiWB_TThUA',
     appId: '1:658828835070:ios:789a818edebeee2e150daf',
     messagingSenderId: '658828835070',
-    projectId: 'flutterbase7',
-    storageBucket: 'flutterbase7.appspot.com',
+    projectId: 'listanything-2b9b0',
+    storageBucket: 'listanything-2b9b0.appspot.com',
     androidClientId: '658828835070-07rj049n2npd161jn5ihpksotgc094ii.apps.googleusercontent.com',
     iosClientId: '658828835070-smau1li0irtvboulqts6qci3etvupg8i.apps.googleusercontent.com',
-    iosBundleId: 'com.anywhostudios.flutterbase',
+    iosBundleId: 'com.anywhostudios.listanything',
   );
 }
