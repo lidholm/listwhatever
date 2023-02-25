@@ -64,7 +64,6 @@ class ListsPage extends ConsumerWidget {
 
   void selectList(WidgetRef ref, BuildContext context, ListOfThings list) {
     ref.read(selectedListIdProvider.notifier).state = list.id;
-    // const AddOrEditListRoute().push(context);
     const ListItemsPageRoute().push(context);
     print(list);
   }

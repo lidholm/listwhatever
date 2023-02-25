@@ -1,19 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 extension FirebaseFirestoreExt on FirebaseFirestore {
-  CollectionReference<Map<String, dynamic>> lists(String userId) {
-    return collection('users/$userId/lists');
+  CollectionReference<Map<String, dynamic>> lists(Map<String, String?> identifiers) {
+    final path = 'users/${identifiers['userId']!}/lists';
+    return collection(path);
   }
 
-  DocumentReference<Map<String, dynamic>> list(String userId, String listId) {
-    return collection('users/$userId/lists').doc(listId);
+  DocumentReference<Map<String, dynamic>> list(Map<String, String?> identifiers) {
+    final path = 'users/${identifiers['userId']!}/lists/${identifiers['itemId']!}';
+    return doc(path);
   }
 
-  CollectionReference<Map<String, dynamic>> listItems(String userId, String listId) {
-    return collection('users/$userId/lists/$listId/items');
+  CollectionReference<Map<String, dynamic>> listItems(Map<String, String?> identifiers) {
+    final path = 'users/${identifiers['userId']!}/lists/${identifiers['listId']!}/items';
+    return collection(path);
   }
 
-  DocumentReference<Map<String, dynamic>> listItem(String userId, String listId, String listItemId) {
-    return collection('users/$userId/lists/$listId/items').doc(listItemId);
+  DocumentReference<Map<String, dynamic>> listItem(Map<String, String?> identifiers) {
+    final path = 'users/${identifiers['userId']!}/lists/${identifiers['listId']!}/items/${identifiers['itemId']!}';
+    return doc(path);
   }
 }

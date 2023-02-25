@@ -1,31 +1,47 @@
 // ignore_for_file: avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:listanything/app/firebase/firebase_firestore_extensions.dart';
-import 'package:listanything/app/pages/lists/list_of_things.dart';
 import 'package:listanything/app/widgets/standardWidgets/custom_exception.dart';
 import 'package:listanything/app/widgets/standardWidgets/error_monitor.dart';
 
-abstract class BaseListRepository {
-  Stream<List<ListOfThings>> retrieveListsStream();
-  Stream<ListOfThings> retrieveListStream({required String listId});
-  Future<String> createList({required ListOfThings list});
-  Future<String> updateList({required ListOfThings list});
+abstract class BaseRepository<T> {
+  Stream<List<T>> retrieveItemsStream();
+  Stream<T> retrieveItemStream({required String itemId});
+  Future<String> createItem({required T item});
+  Future<String> updateItem({required String itemId, required T item});
   // Future<void> deleteItem({required SimpleTodoItem itemId});
 }
 
-class ListRepository implements BaseListRepository {
-  ListRepository(this.firestore, this.errorMonitor, this.userId);
+class BaseRepositoryImpl<T> implements BaseRepository<T> {
+  BaseRepositoryImpl(
+    this.firestore,
+    this.errorMonitor,
+    this.firestoreItemsPath,
+    this.firestoreItemPath,
+    this.identifiers,
+    this.itemConverter,
+    this.jsonFunction,
+  ) {
+    if (identifiers.values.take(identifiers.length - 1).any((i) => i == null)) {
+      throw CustomException(
+        message:
+            'Some identifiers are not set: ${identifiers.entries.where((e) => e.value == null).map((e) => e.key).join(', ')}',
+      );
+    }
+  }
 
   final ErrorMonitor errorMonitor;
   final FirebaseFirestore firestore;
-  final String? userId;
+  final Map<String, String?> identifiers;
+  final CollectionReference<Map<String, dynamic>> Function(Map<String, String?>) firestoreItemsPath;
+  final DocumentReference<Map<String, dynamic>> Function(Map<String, String?>) firestoreItemPath;
+  final T Function(Map<String, dynamic>, String) itemConverter;
+  final Map<String, dynamic> Function(T) jsonFunction;
 
   @override
-  Stream<List<ListOfThings>> retrieveListsStream() async* {
-    if (userId == null) throw const CustomException(message: 'User is not logged in');
+  Stream<List<T>> retrieveItemsStream() async* {
     try {
-      final query = firestore.lists(userId!);
+      final query = firestoreItemsPath(identifiers);
       yield* query.snapshots().map(convertCollection);
     } on FirebaseException catch (e, s) {
       await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
@@ -34,10 +50,9 @@ class ListRepository implements BaseListRepository {
   }
 
   @override
-  Stream<ListOfThings> retrieveListStream({required String listId}) async* {
-    if (userId == null) throw const CustomException(message: 'User is not logged in');
+  Stream<T> retrieveItemStream({required String itemId}) async* {
     try {
-      final query = firestore.list(userId!, listId);
+      final query = firestoreItemPath({...identifiers, 'itemId': itemId});
       yield* query.snapshots().map(convertDocument);
     } on FirebaseException catch (e, s) {
       await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
@@ -45,26 +60,27 @@ class ListRepository implements BaseListRepository {
     }
   }
 
-  ListOfThings convertDocument(DocumentSnapshot<Map<String, dynamic>> doc) {
+  T convertDocument(DocumentSnapshot<Map<String, dynamic>> doc) {
     try {
-      final list = ListOfThings.fromJson(doc.data()!).copyWith(id: doc.id);
-      return list;
+      final item = itemConverter(doc.data()!, doc.id);
+      return item;
     } on FirebaseException catch (e, s) {
-      // ignore: flutter_style_todos, todo
       //TODO: Should be await
       errorMonitor.recordError(e, s, 'as an example of non-fatal error');
       throw CustomException(message: e.message);
     }
   }
 
-  List<ListOfThings> convertCollection(QuerySnapshot<Map<String, dynamic>> list) {
+  List<T> convertCollection(QuerySnapshot<Map<String, dynamic>> list) {
     try {
-      final lists = list.docs.map((d) {
-        return ListOfThings.fromJson(d.data()).copyWith(id: d.id);
+      final items = list.docs.map((d) {
+        // final item = ListItem.fromJson(d.data()).copyWith(id: d.id);
+        final item = itemConverter(d.data(), d.id);
+        return item;
       }).toList();
-      return lists;
+      print('items: $items');
+      return items;
     } on FirebaseException catch (e, s) {
-      // ignore: flutter_style_todos, todo
       //TODO: Should be await
       errorMonitor.recordError(e, s, 'as an example of non-fatal error');
       throw CustomException(message: e.message);
@@ -72,13 +88,11 @@ class ListRepository implements BaseListRepository {
   }
 
   @override
-  Future<String> createList({required ListOfThings list}) async {
-    if (userId == null) throw const CustomException(message: 'User is not logged in');
-
+  Future<String> createItem({required T item}) async {
     try {
-      final data = list.toJson();
+      final data = jsonFunction(item);
       print('data: $data');
-      final ref = await firestore.lists(userId!).add(data);
+      final ref = await firestoreItemsPath(identifiers).add(data);
       return ref.id;
     } on FirebaseException catch (e, s) {
       await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
@@ -87,12 +101,10 @@ class ListRepository implements BaseListRepository {
   }
 
   @override
-  Future<String> updateList({required ListOfThings list}) async {
-    if (userId == null) throw const CustomException(message: 'User is not logged in');
-
+  Future<String> updateItem({required String itemId, required T item}) async {
     try {
-      await firestore.list(userId!, list.id!).update(list.toJson());
-      return list.id!;
+      await firestoreItemPath({...identifiers, 'itemId': itemId}).update(jsonFunction(item));
+      return itemId;
     } on FirebaseException catch (e, s) {
       await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
       throw CustomException(message: e.message);

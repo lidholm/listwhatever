@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:listanything/app/navigation/routes/add_or_edit_list_item_route.dart';
+import 'package:listanything/app/navigation/routes/add_or_edit_list_route.dart';
 import 'package:listanything/app/navigation/routes/routes.dart';
 import 'package:listanything/app/pages/list_items/list_item.dart';
 import 'package:listanything/app/pages/list_items/list_items_provider.dart';
 import 'package:listanything/app/pages/list_items/selected_list_item_provider.dart';
+import 'package:listanything/app/pages/lists/selected_list_provider.dart';
 import 'package:listanything/app/string_extensions.dart';
 import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
 import 'package:listanything/app/widgets/standardWidgets/async_value_widget.dart';
@@ -15,8 +17,9 @@ class ListItemsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final listId = ref.watch(selectedListIdProvider);
     return AsyncValueWidget<List<ListItem>?>(
-      value: ref.read(listItemsProvider),
+      value: ref.watch(listItemsProvider),
       data: (items) => Scaffold(
         appBar: CommonAppBar(
           title: 'Items',
@@ -30,7 +33,7 @@ class ListItemsPage extends ConsumerWidget {
             AppBarAction(
               title: 'Edit list',
               icon: Icons.edit,
-              callback: () => print('edit'),
+              callback: () => editList(ref, context, listId!),
               overflow: true,
             ),
           ],
@@ -48,7 +51,7 @@ class ListItemsPage extends ConsumerWidget {
                     return Padding(
                       padding: const EdgeInsets.all(8),
                       child: InkWell(
-                        onTap: () => editList(ref, context, item),
+                        onTap: () => editListItem(ref, context, item),
                         child: Container(
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.blueAccent),
@@ -121,7 +124,12 @@ class ListItemsPage extends ConsumerWidget {
     );
   }
 
-  void editList(WidgetRef ref, BuildContext context, ListItem listItem) {
+  void editList(WidgetRef ref, BuildContext context, String listId) {
+    ref.read(selectedListIdProvider.notifier).state = listId;
+    const AddOrEditListRoute().push(context);
+  }
+
+  void editListItem(WidgetRef ref, BuildContext context, ListItem listItem) {
     ref.read(selectedListItemIdProvider.notifier).state = listItem.id;
     const AddOrEditListItemRoute().push(context);
   }

@@ -10,5 +10,5 @@ final selectedListItemProvider = StreamProvider<ListItem?>((ref) async* {
   if (listItemId == null) {
     yield* Stream.value(null);
   }
-  yield* repo.retrieveListItemStream(listItemId: listItemId!);
+  yield* repo.retrieveItemStream(itemId: listItemId!);
 });
