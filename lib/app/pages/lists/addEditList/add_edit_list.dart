@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:listanything/app/pages/lists/list_of_things.dart';
 import 'package:listanything/app/pages/lists/list_repository_provider.dart';
 import 'package:listanything/app/pages/lists/selected_list_provider.dart';
+import 'package:listanything/app/widgets/standardWidgets/async_value_widget.dart';
 
 extension ListTypeExtension on ListType {
   String get name {
@@ -39,16 +40,29 @@ extension ListTypeExtension on ListType {
   }
 }
 
-class AddEditList extends ConsumerStatefulWidget {
-  const AddEditList({Key? key}) : super(key: key);
+class AddEditList extends ConsumerWidget {
+  const AddEditList({super.key});
 
   @override
-  ConsumerState<AddEditList> createState() {
-    return _AddEditListState();
+  Widget build(BuildContext context, WidgetRef ref) {
+    return AsyncValueWidget<ListOfThings?>(
+      value: ref.watch(selectedListProvider),
+      data: (list) => AddEditListInner(list: list),
+    );
   }
 }
 
-class _AddEditListState extends ConsumerState<AddEditList> {
+class AddEditListInner extends ConsumerStatefulWidget {
+  const AddEditListInner({Key? key, required this.list}) : super(key: key);
+  final ListOfThings? list;
+
+  @override
+  ConsumerState<AddEditListInner> createState() {
+    return _AddEditListInnerState();
+  }
+}
+
+class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
   bool autoValidate = true;
   bool readOnly = false;
   bool showSegmentedControl = true;
@@ -58,9 +72,8 @@ class _AddEditListState extends ConsumerState<AddEditList> {
 
   @override
   Widget build(BuildContext context) {
-    final list = ref.watch(selectedListProvider);
-    final initialValue = list != null
-        ? <String, dynamic>{'name': list.name, 'type': list.type}
+    final initialValue = widget.list != null
+        ? <String, dynamic>{'name': widget.list!.name, 'type': widget.list!.type}
         : <String, dynamic>{'name': '', 'type': ListType.other};
 
     return Scaffold(
@@ -82,7 +95,7 @@ class _AddEditListState extends ConsumerState<AddEditList> {
                 initialValue: initialValue,
                 child: Column(
                   children: <Widget>[
-                    const SizedBox(height: 15),
+                    const SizedBox(height: 16),
                     FormBuilderTextField(
                       autovalidateMode: AutovalidateMode.always,
                       name: 'name',
@@ -136,6 +149,7 @@ class _AddEditListState extends ConsumerState<AddEditList> {
                   ],
                 ),
               ),
+              const SizedBox(height: 16),
               Row(
                 children: <Widget>[
                   Expanded(
@@ -143,7 +157,7 @@ class _AddEditListState extends ConsumerState<AddEditList> {
                       onPressed: () {
                         if (_formKey.currentState?.saveAndValidate() ?? false) {
                           debugPrint(_formKey.currentState?.value.toString());
-                          saveList(GoRouter.of(context), list);
+                          saveList(GoRouter.of(context), widget.list);
                         } else {
                           debugPrint(_formKey.currentState?.value.toString());
                           debugPrint('validation failed');
@@ -193,7 +207,7 @@ class _AddEditListState extends ConsumerState<AddEditList> {
       final newList = list.copyWith(name: name, type: type);
       final refId = await repo.updateList(list: newList);
       print('Updated $refId');
-      ref.read(selectedListProvider.notifier).state = null;
+      ref.read(selectedListIdProvider.notifier).state = null;
     }
     router.pop();
   }
