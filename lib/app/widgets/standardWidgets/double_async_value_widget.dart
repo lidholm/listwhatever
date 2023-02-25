@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DoubleAsyncValueWidget<T, S> extends StatelessWidget {
-  const DoubleAsyncValueWidget({Key? key, required this.firstValue, required this.secondValue, required this.data})
-      : super(key: key);
+  const DoubleAsyncValueWidget({super.key, required this.firstValue, required this.secondValue, required this.data});
   final AsyncValue<T> firstValue;
   final AsyncValue<S> secondValue;
   final Widget Function(T, S) data;

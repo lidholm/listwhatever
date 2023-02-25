@@ -26,6 +26,10 @@ GoRoute get $homeScreenRoute => GoRouteData.$route(
           path: 'counter',
           factory: $CounterPageRouteExtension._fromState,
         ),
+        GoRouteData.$route(
+          path: 'addoreditlist',
+          factory: $AddOrEditListRouteExtension._fromState,
+        ),
       ],
     );
 
@@ -82,6 +86,22 @@ extension $CounterPageRouteExtension on CounterPageRoute {
 
   String get location => GoRouteData.$location(
         '/counter',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: this);
+
+  void push(BuildContext context) => context.push(location, extra: this);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: this);
+}
+
+extension $AddOrEditListRouteExtension on AddOrEditListRoute {
+  static AddOrEditListRoute _fromState(GoRouterState state) =>
+      const AddOrEditListRoute();
+
+  String get location => GoRouteData.$location(
+        '/addoreditlist',
       );
 
   void go(BuildContext context) => context.go(location, extra: this);

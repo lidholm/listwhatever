@@ -17,7 +17,7 @@ final routerProvider = Provider(
       // and then use userChanges to check for changes to if a user is logged in or not
       final userChanges = ref.watch(userChangesProvider);
 
-      print('userChanges: ${userChanges.asData?.value?.email}');
+      print('userChanges: ${userChanges.asData?.value?.email} - ${userChanges.asData?.value?.uid}');
 
       final path = userChanges.when(
         error: (e, st) => '/error_loading_user',
@@ -31,7 +31,7 @@ final routerProvider = Provider(
 );
 
 class App extends ConsumerWidget {
-  const App({Key? key}) : super(key: key);
+  const App({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

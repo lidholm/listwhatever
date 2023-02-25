@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AboutPage extends ConsumerWidget {
   // implements Page {
-  const AboutPage({Key? key}) : super(key: key);
+  const AboutPage({super.key});
 
   // @override
   // Widget getTitle() {
