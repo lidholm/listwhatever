@@ -6,5 +6,5 @@ import 'package:listanything/app/pages/lists/list_repository_provider.dart';
 
 final listsProvider = StreamProvider<List<ListOfThings>>((ref) async* {
   final repo = await ref.watch(listRepositoryProvider.future);
-  yield* repo.retrieveListsStream();
+  yield* repo.retrieveItemsStream();
 });

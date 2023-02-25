@@ -201,11 +201,11 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
     if (list == null) {
       print('adding');
       final list = ListOfThings(name: name, type: type);
-      final refId = await repo.createList(list: list);
+      final refId = await repo.createItem(item: list);
       print('Added $refId');
     } else {
       final newList = list.copyWith(name: name, type: type);
-      final refId = await repo.updateList(list: newList);
+      final refId = await repo.updateItem(itemId: newList.id!, item: newList);
       print('Updated $refId');
       ref.read(selectedListIdProvider.notifier).state = null;
     }
