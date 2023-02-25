@@ -1,0 +1,19 @@
+{
+  "name": "restaurants.jpeg",
+  "bucket": "listanything-2b9b0.appspot.com",
+  "metageneration": 1,
+  "generation": 1677260087941,
+  "contentType": "image/jpeg",
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "downloadTokens": [
+    "946c3f7f-64d1-44f9-a492-ca1c2994e851"
+  ],
+  "etag": "RF3zqejHrErAH2qeqTwl0BBtY5A",
+  "customMetadata": {},
+  "timeCreated": "2023-02-24T17:34:47.941Z",
+  "updated": "2023-02-24T17:34:47.941Z",
+  "size": 525362,
+  "md5Hash": "93uvM/FMFZcRrIWEhITSMw==",
+  "crc32c": "2711535744"
+}

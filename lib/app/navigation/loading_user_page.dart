@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LoadingUserPage extends StatelessWidget {
-  const LoadingUserPage({Key? key}) : super(key: key);
+  const LoadingUserPage({super.key});
 
   @override
   Widget build(BuildContext context) {
