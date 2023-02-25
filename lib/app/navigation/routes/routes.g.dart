@@ -30,6 +30,14 @@ GoRoute get $homeScreenRoute => GoRouteData.$route(
           path: 'addoreditlist',
           factory: $AddOrEditListRouteExtension._fromState,
         ),
+        GoRouteData.$route(
+          path: 'listitems',
+          factory: $ListItemsPageRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
+          path: 'addoreditlistitem',
+          factory: $AddOrEditListItemRouteExtension._fromState,
+        ),
       ],
     );
 
@@ -102,6 +110,38 @@ extension $AddOrEditListRouteExtension on AddOrEditListRoute {
 
   String get location => GoRouteData.$location(
         '/addoreditlist',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: this);
+
+  void push(BuildContext context) => context.push(location, extra: this);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: this);
+}
+
+extension $ListItemsPageRouteExtension on ListItemsPageRoute {
+  static ListItemsPageRoute _fromState(GoRouterState state) =>
+      const ListItemsPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/listitems',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: this);
+
+  void push(BuildContext context) => context.push(location, extra: this);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: this);
+}
+
+extension $AddOrEditListItemRouteExtension on AddOrEditListItemRoute {
+  static AddOrEditListItemRoute _fromState(GoRouterState state) =>
+      const AddOrEditListItemRoute();
+
+  String get location => GoRouteData.$location(
+        '/addoreditlistitem',
       );
 
   void go(BuildContext context) => context.go(location, extra: this);

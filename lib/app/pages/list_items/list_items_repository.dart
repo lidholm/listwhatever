@@ -2,30 +2,34 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:listanything/app/firebase/firebase_firestore_extensions.dart';
-import 'package:listanything/app/pages/lists/list_of_things.dart';
+import 'package:listanything/app/pages/list_items/list_item.dart';
 import 'package:listanything/app/widgets/standardWidgets/custom_exception.dart';
 import 'package:listanything/app/widgets/standardWidgets/error_monitor.dart';
 
-abstract class BaseListRepository {
-  Stream<List<ListOfThings>> retrieveListsStream();
-  Stream<ListOfThings> retrieveListStream({required String listId});
-  Future<String> createList({required ListOfThings list});
-  Future<String> updateList({required ListOfThings list});
+abstract class BaseListItemsRepository {
+  Stream<List<ListItem>> retrieveListItemsStream();
+  Stream<ListItem> retrieveListItemStream({required String listItemId});
+  Future<String> createListItem({required ListItem listItem});
+  Future<String> updateListItem({required ListItem listItem});
   // Future<void> deleteItem({required SimpleTodoItem itemId});
 }
 
-class ListRepository implements BaseListRepository {
-  ListRepository(this.firestore, this.errorMonitor, this.userId);
+class ListItemsRepository implements BaseListItemsRepository {
+  ListItemsRepository(this.firestore, this.errorMonitor, this.userId, this.listId);
 
   final ErrorMonitor errorMonitor;
   final FirebaseFirestore firestore;
   final String? userId;
+  final String? listId;
 
   @override
-  Stream<List<ListOfThings>> retrieveListsStream() async* {
-    if (userId == null) throw const CustomException(message: 'User is not logged in');
+  Stream<List<ListItem>> retrieveListItemsStream() async* {
     try {
-      final query = firestore.lists(userId!);
+      if (userId == null || listId == null) {
+        yield* Stream.value([]);
+      }
+
+      final query = firestore.listItems(userId!, listId!);
       yield* query.snapshots().map(convertCollection);
     } on FirebaseException catch (e, s) {
       await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
@@ -34,10 +38,11 @@ class ListRepository implements BaseListRepository {
   }
 
   @override
-  Stream<ListOfThings> retrieveListStream({required String listId}) async* {
-    if (userId == null) throw const CustomException(message: 'User is not logged in');
+  Stream<ListItem> retrieveListItemStream({required String listItemId}) async* {
+    if (userId == null || listId == null) throw const CustomException(message: 'User is not logged in');
+
     try {
-      final query = firestore.list(userId!, listId);
+      final query = firestore.listItem(userId!, listId!, listItemId);
       yield* query.snapshots().map(convertDocument);
     } on FirebaseException catch (e, s) {
       await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
@@ -45,10 +50,10 @@ class ListRepository implements BaseListRepository {
     }
   }
 
-  ListOfThings convertDocument(DocumentSnapshot<Map<String, dynamic>> doc) {
+  ListItem convertDocument(DocumentSnapshot<Map<String, dynamic>> doc) {
     try {
-      final list = ListOfThings.fromJson(doc.data()!).copyWith(id: doc.id);
-      return list;
+      final item = ListItem.fromJson(doc.data()!).copyWith(id: doc.id);
+      return item;
     } on FirebaseException catch (e, s) {
       // ignore: flutter_style_todos, todo
       //TODO: Should be await
@@ -57,12 +62,14 @@ class ListRepository implements BaseListRepository {
     }
   }
 
-  List<ListOfThings> convertCollection(QuerySnapshot<Map<String, dynamic>> list) {
+  List<ListItem> convertCollection(QuerySnapshot<Map<String, dynamic>> list) {
     try {
-      final lists = list.docs.map((d) {
-        return ListOfThings.fromJson(d.data()).copyWith(id: d.id);
+      final items = list.docs.map((d) {
+        final item = ListItem.fromJson(d.data()).copyWith(id: d.id);
+        return item;
       }).toList();
-      return lists;
+      print('items: $items');
+      return items;
     } on FirebaseException catch (e, s) {
       // ignore: flutter_style_todos, todo
       //TODO: Should be await
@@ -72,13 +79,13 @@ class ListRepository implements BaseListRepository {
   }
 
   @override
-  Future<String> createList({required ListOfThings list}) async {
-    if (userId == null) throw const CustomException(message: 'User is not logged in');
+  Future<String> createListItem({required ListItem listItem}) async {
+    if (userId == null || listId == null) throw const CustomException(message: 'User is not logged in');
 
     try {
-      final data = list.toJson();
+      final data = listItem.toJson();
       print('data: $data');
-      final ref = await firestore.lists(userId!).add(data);
+      final ref = await firestore.listItems(userId!, listId!).add(data);
       return ref.id;
     } on FirebaseException catch (e, s) {
       await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
@@ -87,12 +94,12 @@ class ListRepository implements BaseListRepository {
   }
 
   @override
-  Future<String> updateList({required ListOfThings list}) async {
-    if (userId == null) throw const CustomException(message: 'User is not logged in');
+  Future<String> updateListItem({required ListItem listItem}) async {
+    if (userId == null || listId == null) throw const CustomException(message: 'User is not logged in');
 
     try {
-      await firestore.list(userId!, list.id!).update(list.toJson());
-      return list.id!;
+      await firestore.listItem(userId!, listId!, listItem.id!).update(listItem.toJson());
+      return listItem.id!;
     } on FirebaseException catch (e, s) {
       await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
       throw CustomException(message: e.message);
