@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:listanything/app/navigation/routes/about_page_route.dart';
 import 'package:listanything/app/navigation/routes/add_or_edit_list_route.dart';
 import 'package:listanything/app/navigation/routes/list_items_page_route.dart';
+import 'package:listanything/app/navigation/routes/profile_page_route.dart';
 import 'package:listanything/app/navigation/routes/routes.dart';
 import 'package:listanything/app/pages/lists/list_of_things.dart';
 import 'package:listanything/app/pages/lists/lists_provider.dart';
 import 'package:listanything/app/pages/lists/selected_list_provider.dart';
-import 'package:listanything/app/widgets/standardWidgets/async_value_widget.dart';
+import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
 import 'package:listanything/app/widgets/standardWidgets/common_app_bar.dart';
+import 'package:listanything/app/widgets/standardWidgets/exception_widget.dart';
 import 'package:listanything/app/widgets/standardWidgets/image_button.dart';
+import 'package:listanything/app/widgets/standardWidgets/shimmer.dart';
+import 'package:listanything/app/widgets/standardWidgets/shimmer_loading.dart';
 
 const images = {
   ListType.restaurants: 'assets/images/restaurants.jpeg',
@@ -22,42 +27,74 @@ class ListsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    return ref.watch(listsProvider).when(
+          error: (e, st) => ExceptionWidget(e: e, st: st),
+          loading: () => ListsPageInner(
+            lists: List.generate(8, (index) => const ListOfThings(name: '', type: ListType.other)),
+            isLoading: true,
+          ),
+          data: (lists) => ListsPageInner(lists: lists, isLoading: false),
+        );
+  }
+}
+
+class ListsPageInner extends ConsumerWidget {
+  const ListsPageInner({super.key, required this.lists, required this.isLoading});
+
+  final List<ListOfThings> lists;
+  final bool isLoading;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: const CommonAppBar(title: 'Lists'),
-      body: AsyncValueWidget<List<ListOfThings>>(
-        value: ref.watch(listsProvider),
-        data: (lists) {
-          return Padding(
-            padding: const EdgeInsets.all(24),
-            child: CustomScrollView(
-              slivers: [
-                SliverGrid.count(
-                  mainAxisSpacing: 20,
-                  crossAxisSpacing: 20,
-                  crossAxisCount: 2,
-                  children: [
-                    ...lists
-                        .map(
-                          (list) => ImageButton<ListOfThings>(
-                            item: list,
-                            image: images[list.type] ?? 'assets/images/generic.jpg',
-                            text: list.name,
-                            callback: (list) => selectList(ref, context, list),
-                          ),
-                        )
-                        .toList(),
-                    ImageButton<void>(
-                      item: null,
-                      image: 'assets/images/plus.jpg',
-                      text: 'Add new list',
-                      callback: (_) => addNewList(ref, context),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          );
-        },
+      appBar: CommonAppBar(
+        title: 'Lists',
+        actions: [
+          AppBarAction(
+            title: 'New item',
+            icon: Icons.playlist_add_outlined,
+            callback: () => addNewList(ref, context),
+            overflow: false,
+          ),
+          AppBarAction(
+            title: 'Profile',
+            icon: Icons.person,
+            callback: () => showProfilePage(context),
+            overflow: true,
+          ),
+          AppBarAction(
+            title: 'About',
+            icon: Icons.info,
+            callback: () => showAboutPage(context),
+            overflow: true,
+          ),
+        ],
+      ),
+      body: Shimmer(
+        linearGradient: shimmerGradient,
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: CustomScrollView(
+            slivers: [
+              SliverGrid.count(
+                mainAxisSpacing: 20,
+                crossAxisSpacing: 20,
+                crossAxisCount: 2,
+                children: lists
+                    .map(
+                      (list) => ImageButton<ListOfThings>(
+                        item: list,
+                        image: images[list.type] ?? 'assets/images/generic.jpg',
+                        text: list.name,
+                        callback: (list) => selectList(ref, context, list),
+                        isLoading: isLoading,
+                      ),
+                    )
+                    .toList(),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -69,6 +106,15 @@ class ListsPage extends ConsumerWidget {
   }
 
   Future<void> addNewList(WidgetRef ref, BuildContext context) async {
+    ref.read(selectedListIdProvider.notifier).state = null;
     const AddOrEditListRoute().push(context);
+  }
+
+  Future<void> showProfilePage(BuildContext context) async {
+    const ProfilePageRoute().push(context);
+  }
+
+  Future<void> showAboutPage(BuildContext context) async {
+    const AboutPageRoute().push(context);
   }
 }

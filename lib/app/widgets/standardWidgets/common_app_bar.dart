@@ -56,7 +56,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
             )
             .toList(),
-        popupMenuButtons
+        if (actions.where((e) => e.overflow).isNotEmpty) popupMenuButtons
       ],
     );
   }

@@ -1,3 +1,9 @@
+0.0.6
+* Filters
+
+0.0.5
+* Shimmer loading effect
+
 0.0.4
 * BaseRepository
 
