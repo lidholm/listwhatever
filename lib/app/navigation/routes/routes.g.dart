@@ -7,12 +7,12 @@ part of 'routes.dart';
 // **************************************************************************
 
 List<GoRoute> get $appRoutes => [
-      $homeScreenRoute,
+      $listsPageRoute,
     ];
 
-GoRoute get $homeScreenRoute => GoRouteData.$route(
+GoRoute get $listsPageRoute => GoRouteData.$route(
       path: '/',
-      factory: $HomeScreenRouteExtension._fromState,
+      factory: $ListsPageRouteExtension._fromState,
       routes: [
         GoRouteData.$route(
           path: 'loading_user',
@@ -38,11 +38,23 @@ GoRoute get $homeScreenRoute => GoRouteData.$route(
           path: 'addoreditlistitem',
           factory: $AddOrEditListItemRouteExtension._fromState,
         ),
+        GoRouteData.$route(
+          path: 'profile',
+          factory: $ProfilePageRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
+          path: 'about',
+          factory: $AboutPageRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
+          path: 'filter',
+          factory: $FilterPageRouteExtension._fromState,
+        ),
       ],
     );
 
-extension $HomeScreenRouteExtension on HomeScreenRoute {
-  static HomeScreenRoute _fromState(GoRouterState state) => HomeScreenRoute();
+extension $ListsPageRouteExtension on ListsPageRoute {
+  static ListsPageRoute _fromState(GoRouterState state) => ListsPageRoute();
 
   String get location => GoRouteData.$location(
         '/',
@@ -142,6 +154,54 @@ extension $AddOrEditListItemRouteExtension on AddOrEditListItemRoute {
 
   String get location => GoRouteData.$location(
         '/addoreditlistitem',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: this);
+
+  void push(BuildContext context) => context.push(location, extra: this);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: this);
+}
+
+extension $ProfilePageRouteExtension on ProfilePageRoute {
+  static ProfilePageRoute _fromState(GoRouterState state) =>
+      const ProfilePageRoute();
+
+  String get location => GoRouteData.$location(
+        '/profile',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: this);
+
+  void push(BuildContext context) => context.push(location, extra: this);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: this);
+}
+
+extension $AboutPageRouteExtension on AboutPageRoute {
+  static AboutPageRoute _fromState(GoRouterState state) =>
+      const AboutPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/about',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: this);
+
+  void push(BuildContext context) => context.push(location, extra: this);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: this);
+}
+
+extension $FilterPageRouteExtension on FilterPageRoute {
+  static FilterPageRoute _fromState(GoRouterState state) =>
+      const FilterPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/filter',
       );
 
   void go(BuildContext context) => context.go(location, extra: this);

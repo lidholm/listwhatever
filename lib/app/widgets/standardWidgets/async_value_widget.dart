@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:listanything/app/widgets/standardWidgets/exception_widget.dart';
 
 class AsyncValueWidget<T> extends StatelessWidget {
   const AsyncValueWidget({super.key, required this.value, required this.data});
@@ -18,12 +19,7 @@ class AsyncValueWidget<T> extends StatelessWidget {
           ],
         ),
       ),
-      error: (e, st) => Center(
-        child: Text(
-          e.toString(),
-          style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.red),
-        ),
-      ),
+      error: (e, st) => ExceptionWidget(e: e, st: st),
     );
   }
 }

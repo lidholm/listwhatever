@@ -11,7 +11,7 @@ final providers = [EmailAuthProvider()];
 // GoRouter configuration
 final routerProvider = Provider(
   (ref) => GoRouter(
-    initialLocation: HomeScreenRoute().location,
+    initialLocation: ListsPageRoute().location,
     routes: $appRoutes,
     redirect: (context, state) {
       // and then use userChanges to check for changes to if a user is logged in or not

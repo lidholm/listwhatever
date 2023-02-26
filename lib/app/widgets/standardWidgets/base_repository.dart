@@ -65,7 +65,6 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
       final item = itemConverter(doc.data()!, doc.id);
       return item;
     } on FirebaseException catch (e, s) {
-      //TODO: Should be await
       errorMonitor.recordError(e, s, 'as an example of non-fatal error');
       throw CustomException(message: e.message);
     }
@@ -81,7 +80,6 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
       print('items: $items');
       return items;
     } on FirebaseException catch (e, s) {
-      //TODO: Should be await
       errorMonitor.recordError(e, s, 'as an example of non-fatal error');
       throw CustomException(message: e.message);
     }
