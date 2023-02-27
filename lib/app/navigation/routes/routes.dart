@@ -7,7 +7,9 @@ import 'package:listanything/app/navigation/routes/counter_page_route.dart';
 import 'package:listanything/app/navigation/routes/filter_page_route.dart';
 import 'package:listanything/app/navigation/routes/list_items_page_route.dart';
 import 'package:listanything/app/navigation/routes/loading_user_route.dart';
+import 'package:listanything/app/navigation/routes/maps_page_route.dart';
 import 'package:listanything/app/navigation/routes/profile_page_route.dart';
+import 'package:listanything/app/navigation/routes/search_location_page_route.dart';
 import 'package:listanything/app/navigation/routes/sign_in_screen_route.dart';
 import 'package:listanything/app/pages/lists/lists_page.dart';
 
@@ -34,6 +36,9 @@ part 'routes.g.dart';
     TypedGoRoute<AddOrEditListItemRoute>(
       path: 'addoreditlistitem',
     ),
+    TypedGoRoute<SearchLocationPageRoute>(
+      path: 'searchlocation',
+    ),
     TypedGoRoute<ProfilePageRoute>(
       path: 'profile',
     ),
@@ -42,6 +47,9 @@ part 'routes.g.dart';
     ),
     TypedGoRoute<FilterPageRoute>(
       path: 'filter',
+    ),
+    TypedGoRoute<MapsPageRoute>(
+      path: 'map',
     ),
   ],
 )

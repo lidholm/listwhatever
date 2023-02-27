@@ -67,14 +67,14 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
   bool readOnly = false;
   bool showSegmentedControl = true;
   final _formKey = GlobalKey<FormBuilderState>();
-  bool _nameHasError = true;
+  bool _nameHasError = false;
   bool _typeHasError = false;
 
   @override
   Widget build(BuildContext context) {
     final initialValue = widget.list != null
-        ? <String, dynamic>{'name': widget.list!.name, 'type': widget.list!.type}
-        : <String, dynamic>{'name': '', 'type': ListType.other};
+        ? <String, dynamic>{'name': widget.list!.name, 'type': widget.list!.type, 'withMap': widget.list!.withMap}
+        : <String, dynamic>{'name': '', 'type': ListType.other, 'withMap': false};
 
     return Scaffold(
       appBar: AppBar(title: const Text('Add List')),
@@ -146,6 +146,10 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
                       },
                       valueTransformer: (val) => val?.toString(),
                     ),
+                    FormBuilderSwitch(
+                      title: const Text('Show on map'),
+                      name: 'withMap',
+                    ),
                   ],
                 ),
               ),
@@ -198,16 +202,16 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
     final repo = await ref.read(listRepositoryProvider.future);
     final name = fields['name']!.value as String;
     final type = fields['type']!.value as ListType;
+    final withMap = fields['withMap']!.value as bool;
     if (list == null) {
       print('adding');
-      final list = ListOfThings(name: name, type: type);
+      final list = ListOfThings(name: name, type: type, withMap: withMap);
       final refId = await repo.createItem(item: list);
       print('Added $refId');
     } else {
-      final newList = list.copyWith(name: name, type: type);
+      final newList = list.copyWith(name: name, type: type, withMap: withMap);
       final refId = await repo.updateItem(itemId: newList.id!, item: newList);
       print('Updated $refId');
-      ref.read(selectedListIdProvider.notifier).state = null;
     }
     router.pop();
   }

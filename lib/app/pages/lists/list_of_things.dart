@@ -17,6 +17,7 @@ class ListOfThings with _$ListOfThings {
     String? id,
     required String name,
     required ListType type,
+    @Default(false) bool withMap,
   }) = _ListOfThings;
 
   factory ListOfThings.fromJson(Map<String, dynamic> json) => _$ListOfThingsFromJson(json);

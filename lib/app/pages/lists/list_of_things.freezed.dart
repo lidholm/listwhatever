@@ -23,6 +23,7 @@ mixin _$ListOfThings {
   String? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   ListType get type => throw _privateConstructorUsedError;
+  bool get withMap => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +37,7 @@ abstract class $ListOfThingsCopyWith<$Res> {
           ListOfThings value, $Res Function(ListOfThings) then) =
       _$ListOfThingsCopyWithImpl<$Res, ListOfThings>;
   @useResult
-  $Res call({String? id, String name, ListType type});
+  $Res call({String? id, String name, ListType type, bool withMap});
 }
 
 /// @nodoc
@@ -55,6 +56,7 @@ class _$ListOfThingsCopyWithImpl<$Res, $Val extends ListOfThings>
     Object? id = freezed,
     Object? name = null,
     Object? type = null,
+    Object? withMap = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -69,6 +71,10 @@ class _$ListOfThingsCopyWithImpl<$Res, $Val extends ListOfThings>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as ListType,
+      withMap: null == withMap
+          ? _value.withMap
+          : withMap // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -81,7 +87,7 @@ abstract class _$$_ListOfThingsCopyWith<$Res>
       __$$_ListOfThingsCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? id, String name, ListType type});
+  $Res call({String? id, String name, ListType type, bool withMap});
 }
 
 /// @nodoc
@@ -98,6 +104,7 @@ class __$$_ListOfThingsCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = null,
     Object? type = null,
+    Object? withMap = null,
   }) {
     return _then(_$_ListOfThings(
       id: freezed == id
@@ -112,6 +119,10 @@ class __$$_ListOfThingsCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as ListType,
+      withMap: null == withMap
+          ? _value.withMap
+          : withMap // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -119,7 +130,8 @@ class __$$_ListOfThingsCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_ListOfThings implements _ListOfThings {
-  const _$_ListOfThings({this.id, required this.name, required this.type});
+  const _$_ListOfThings(
+      {this.id, required this.name, required this.type, this.withMap = false});
 
   factory _$_ListOfThings.fromJson(Map<String, dynamic> json) =>
       _$$_ListOfThingsFromJson(json);
@@ -130,10 +142,13 @@ class _$_ListOfThings implements _ListOfThings {
   final String name;
   @override
   final ListType type;
+  @override
+  @JsonKey()
+  final bool withMap;
 
   @override
   String toString() {
-    return 'ListOfThings(id: $id, name: $name, type: $type)';
+    return 'ListOfThings(id: $id, name: $name, type: $type, withMap: $withMap)';
   }
 
   @override
@@ -143,12 +158,13 @@ class _$_ListOfThings implements _ListOfThings {
             other is _$_ListOfThings &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.type, type) || other.type == type));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.withMap, withMap) || other.withMap == withMap));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, type);
+  int get hashCode => Object.hash(runtimeType, id, name, type, withMap);
 
   @JsonKey(ignore: true)
   @override
@@ -168,7 +184,8 @@ abstract class _ListOfThings implements ListOfThings {
   const factory _ListOfThings(
       {final String? id,
       required final String name,
-      required final ListType type}) = _$_ListOfThings;
+      required final ListType type,
+      final bool withMap}) = _$_ListOfThings;
 
   factory _ListOfThings.fromJson(Map<String, dynamic> json) =
       _$_ListOfThings.fromJson;
@@ -179,6 +196,8 @@ abstract class _ListOfThings implements ListOfThings {
   String get name;
   @override
   ListType get type;
+  @override
+  bool get withMap;
   @override
   @JsonKey(ignore: true)
   _$$_ListOfThingsCopyWith<_$_ListOfThings> get copyWith =>

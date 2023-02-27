@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:listanything/app/geocoder/latlong.dart';
 
 Iterable<MapEntry<int, T>> mapIndexed<T>(
   Iterable<T> items,
@@ -39,3 +41,9 @@ DateTime getCurrentTime() {
 final dateFormatter = DateFormat('yyyy-MM-dd');
 final timeFormatter = DateFormat('HH:mm');
 final readableDateAndTimeFormatter = DateFormat('d MMM HH:mm');
+
+extension LatLongExtension on LatLong {
+  LatLng toLatLng() {
+    return LatLng(lat, lng);
+  }
+}

@@ -1,69 +1,79 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:listanything/app/navigation/routes/add_or_edit_list_item_route.dart';
 import 'package:listanything/app/navigation/routes/add_or_edit_list_route.dart';
 import 'package:listanything/app/navigation/routes/filter_page_route.dart';
-import 'package:listanything/app/navigation/routes/maps_page_route.dart';
+import 'package:listanything/app/navigation/routes/list_items_page_route.dart';
 import 'package:listanything/app/navigation/routes/routes.dart';
-import 'package:listanything/app/navigation/routes/search_location_page_route.dart';
 import 'package:listanything/app/pages/list_items/filter_provider.dart';
 import 'package:listanything/app/pages/list_items/filtered_list_items_provider.dart';
 import 'package:listanything/app/pages/list_items/list_item.dart';
-import 'package:listanything/app/pages/list_items/list_item_item.dart';
 import 'package:listanything/app/pages/list_items/selected_list_item_provider.dart';
-import 'package:listanything/app/pages/lists/list_of_things.dart';
 import 'package:listanything/app/pages/lists/selected_list_provider.dart';
 import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
 import 'package:listanything/app/widgets/standardWidgets/common_app_bar.dart';
 import 'package:listanything/app/widgets/standardWidgets/exception_widget.dart';
-import 'package:listanything/app/widgets/standardWidgets/shimmer.dart';
-import 'package:listanything/app/widgets/standardWidgets/shimmer_loading.dart';
 
-class ListItemsPage extends ConsumerWidget {
-  const ListItemsPage({super.key});
+double doubleInRange(Random source, num start, num end) => source.nextDouble() * (end - start) + start;
+
+class MapsPage extends ConsumerWidget {
+  const MapsPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(filtededLIstItemsAndListProvider).when(
+    return ref.watch(filteredListIemsProvider).when(
           error: (e, st) => ExceptionWidget(e: e, st: st),
-          loading: () => ListItemsPageInner(
+          loading: () => MapsPageInner(
             items: List.generate(5, (index) => const ListItem(name: '', categories: {})),
             isLoading: true,
           ),
-          data: (value) {
-            final items = value.item1;
-            final list = value.item2;
-            return ListItemsPageInner(items: items, isLoading: false, list: list);
-          },
+          data: (items) => MapsPageInner(items: items, isLoading: false),
         );
   }
 }
 
-class ListItemsPageInner extends ConsumerWidget {
-  const ListItemsPageInner({super.key, required this.items, required this.isLoading, this.list});
+class MapsPageInner extends ConsumerWidget {
+  const MapsPageInner({super.key, required this.items, required this.isLoading});
   final List<ListItem> items;
   final bool isLoading;
-  final ListOfThings? list;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final listId = ref.watch(selectedListIdProvider);
     final hasFilters = ref.watch(filterProvider).values.expand((e) => e).isNotEmpty;
+
+    final allMarkers = items
+        .where((item) => item.latLong != null)
+        .map(
+          (item) => Marker(
+            point: LatLng(item.latLong!.lat, item.latLong!.lng),
+            builder: (context) => const Icon(
+              Icons.circle,
+              color: Colors.red,
+              size: 12,
+            ),
+          ),
+        )
+        .toList();
+
     return Scaffold(
       appBar: CommonAppBar(
-        title: 'Items - ${list?.name ?? 'Loading'}',
+        title: 'Items',
         actions: [
-          if (list?.withMap ?? false)
-            AppBarAction(
-              title: 'Show map',
-              icon: Icons.map_outlined,
-              callback: () => showMap(ref, context),
-              overflow: false,
-            ),
+          AppBarAction(
+            title: 'Show list',
+            icon: Icons.list,
+            callback: () => showListItemPage(ref, context),
+            overflow: false,
+          ),
           AppBarAction(
             title: 'New item',
             icon: Icons.playlist_add_outlined,
-            callback: () => addNewListItem(ref, context),
+            callback: () => addNewList(ref, context),
             overflow: false,
           ),
           AppBarAction(
@@ -80,32 +90,27 @@ class ListItemsPageInner extends ConsumerWidget {
           ),
         ],
       ),
-      body: Shimmer(
-        linearGradient: shimmerGradient,
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: CustomScrollView(
-            slivers: [
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                    final item = items[index];
-
-                    return Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: InkWell(
-                        onTap: () => editListItem(ref, context, item),
-                        child: ListItemItem(item: item, isLoading: isLoading),
-                      ),
-                    );
-                  },
-                  // 40 list items
-                  childCount: items.length,
-                ),
+      body: Column(
+        children: [
+          Flexible(
+            child: FlutterMap(
+              options: MapOptions(
+                center: LatLng(32.71009, -117.16063),
+                zoom: 13.5,
+                interactiveFlags: InteractiveFlag.all - InteractiveFlag.rotate,
               ),
-            ],
+              children: [
+                TileLayer(
+                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  userAgentPackageName: 'dev.fleaflet.flutter_map.example',
+                ),
+                MarkerLayer(
+                  markers: allMarkers,
+                ),
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -120,20 +125,16 @@ class ListItemsPageInner extends ConsumerWidget {
     const AddOrEditListItemRoute().push(context);
   }
 
-  void addNewListItem(WidgetRef ref, BuildContext context) {
+  void addNewList(WidgetRef ref, BuildContext context) {
     ref.read(selectedListItemIdProvider.notifier).state = null;
-    if (list?.withMap ?? false) {
-      const SearchLocationPageRoute().push(context);
-    } else {
-      const AddOrEditListItemRoute().push(context);
-    }
+    const AddOrEditListItemRoute().push(context);
   }
 
   void filterPage(BuildContext context) {
     const FilterPageRoute().push(context);
   }
 
-  void showMap(WidgetRef ref, BuildContext context) {
-    const MapsPageRoute().push(context);
+  void showListItemPage(WidgetRef ref, BuildContext context) {
+    const ListItemsPageRoute().push(context);
   }
 }

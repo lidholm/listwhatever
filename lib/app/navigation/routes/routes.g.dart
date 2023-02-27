@@ -39,6 +39,10 @@ GoRoute get $listsPageRoute => GoRouteData.$route(
           factory: $AddOrEditListItemRouteExtension._fromState,
         ),
         GoRouteData.$route(
+          path: 'searchlocation',
+          factory: $SearchLocationPageRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
           path: 'profile',
           factory: $ProfilePageRouteExtension._fromState,
         ),
@@ -49,6 +53,10 @@ GoRoute get $listsPageRoute => GoRouteData.$route(
         GoRouteData.$route(
           path: 'filter',
           factory: $FilterPageRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
+          path: 'map',
+          factory: $MapsPageRouteExtension._fromState,
         ),
       ],
     );
@@ -164,6 +172,22 @@ extension $AddOrEditListItemRouteExtension on AddOrEditListItemRoute {
       context.pushReplacement(location, extra: this);
 }
 
+extension $SearchLocationPageRouteExtension on SearchLocationPageRoute {
+  static SearchLocationPageRoute _fromState(GoRouterState state) =>
+      const SearchLocationPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/searchlocation',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: this);
+
+  void push(BuildContext context) => context.push(location, extra: this);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: this);
+}
+
 extension $ProfilePageRouteExtension on ProfilePageRoute {
   static ProfilePageRoute _fromState(GoRouterState state) =>
       const ProfilePageRoute();
@@ -202,6 +226,21 @@ extension $FilterPageRouteExtension on FilterPageRoute {
 
   String get location => GoRouteData.$location(
         '/filter',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: this);
+
+  void push(BuildContext context) => context.push(location, extra: this);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: this);
+}
+
+extension $MapsPageRouteExtension on MapsPageRoute {
+  static MapsPageRoute _fromState(GoRouterState state) => const MapsPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/map',
       );
 
   void go(BuildContext context) => context.go(location, extra: this);
