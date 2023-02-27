@@ -69,6 +69,7 @@ class _FilterPageInnerState extends State<FilterPageInner> {
   Widget build(BuildContext context) {
     final initialValue = widget.filters;
 
+    //TODO: Get name of list
     return Scaffold(
       appBar: AppBar(title: const Text('Filter for <Restaurants>')),
       body: Padding(

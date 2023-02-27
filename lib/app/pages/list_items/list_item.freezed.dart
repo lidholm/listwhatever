@@ -24,6 +24,10 @@ mixin _$ListItem {
   String get name => throw _privateConstructorUsedError;
   Map<String, List<String>> get categories =>
       throw _privateConstructorUsedError;
+  String? get searchPhrase => throw _privateConstructorUsedError;
+  String? get address => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _fromJsonGeoPoint, toJson: _toJsonGeoPoint)
+  LatLong? get latLong => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +40,16 @@ abstract class $ListItemCopyWith<$Res> {
   factory $ListItemCopyWith(ListItem value, $Res Function(ListItem) then) =
       _$ListItemCopyWithImpl<$Res, ListItem>;
   @useResult
-  $Res call({String? id, String name, Map<String, List<String>> categories});
+  $Res call(
+      {String? id,
+      String name,
+      Map<String, List<String>> categories,
+      String? searchPhrase,
+      String? address,
+      @JsonKey(fromJson: _fromJsonGeoPoint, toJson: _toJsonGeoPoint)
+          LatLong? latLong});
+
+  $LatLongCopyWith<$Res>? get latLong;
 }
 
 /// @nodoc
@@ -55,6 +68,9 @@ class _$ListItemCopyWithImpl<$Res, $Val extends ListItem>
     Object? id = freezed,
     Object? name = null,
     Object? categories = null,
+    Object? searchPhrase = freezed,
+    Object? address = freezed,
+    Object? latLong = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -69,7 +85,31 @@ class _$ListItemCopyWithImpl<$Res, $Val extends ListItem>
           ? _value.categories
           : categories // ignore: cast_nullable_to_non_nullable
               as Map<String, List<String>>,
+      searchPhrase: freezed == searchPhrase
+          ? _value.searchPhrase
+          : searchPhrase // ignore: cast_nullable_to_non_nullable
+              as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      latLong: freezed == latLong
+          ? _value.latLong
+          : latLong // ignore: cast_nullable_to_non_nullable
+              as LatLong?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LatLongCopyWith<$Res>? get latLong {
+    if (_value.latLong == null) {
+      return null;
+    }
+
+    return $LatLongCopyWith<$Res>(_value.latLong!, (value) {
+      return _then(_value.copyWith(latLong: value) as $Val);
+    });
   }
 }
 
@@ -80,7 +120,17 @@ abstract class _$$_ListItemCopyWith<$Res> implements $ListItemCopyWith<$Res> {
       __$$_ListItemCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? id, String name, Map<String, List<String>> categories});
+  $Res call(
+      {String? id,
+      String name,
+      Map<String, List<String>> categories,
+      String? searchPhrase,
+      String? address,
+      @JsonKey(fromJson: _fromJsonGeoPoint, toJson: _toJsonGeoPoint)
+          LatLong? latLong});
+
+  @override
+  $LatLongCopyWith<$Res>? get latLong;
 }
 
 /// @nodoc
@@ -97,6 +147,9 @@ class __$$_ListItemCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = null,
     Object? categories = null,
+    Object? searchPhrase = freezed,
+    Object? address = freezed,
+    Object? latLong = freezed,
   }) {
     return _then(_$_ListItem(
       id: freezed == id
@@ -111,6 +164,18 @@ class __$$_ListItemCopyWithImpl<$Res>
           ? _value._categories
           : categories // ignore: cast_nullable_to_non_nullable
               as Map<String, List<String>>,
+      searchPhrase: freezed == searchPhrase
+          ? _value.searchPhrase
+          : searchPhrase // ignore: cast_nullable_to_non_nullable
+              as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      latLong: freezed == latLong
+          ? _value.latLong
+          : latLong // ignore: cast_nullable_to_non_nullable
+              as LatLong?,
     ));
   }
 }
@@ -118,10 +183,14 @@ class __$$_ListItemCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_ListItem implements _ListItem {
-  _$_ListItem(
+  const _$_ListItem(
       {this.id,
       required this.name,
-      required final Map<String, List<String>> categories})
+      required final Map<String, List<String>> categories,
+      this.searchPhrase = null,
+      this.address = null,
+      @JsonKey(fromJson: _fromJsonGeoPoint, toJson: _toJsonGeoPoint)
+          this.latLong = null})
       : _categories = categories;
 
   factory _$_ListItem.fromJson(Map<String, dynamic> json) =>
@@ -139,8 +208,18 @@ class _$_ListItem implements _ListItem {
   }
 
   @override
+  @JsonKey()
+  final String? searchPhrase;
+  @override
+  @JsonKey()
+  final String? address;
+  @override
+  @JsonKey(fromJson: _fromJsonGeoPoint, toJson: _toJsonGeoPoint)
+  final LatLong? latLong;
+
+  @override
   String toString() {
-    return 'ListItem(id: $id, name: $name, categories: $categories)';
+    return 'ListItem(id: $id, name: $name, categories: $categories, searchPhrase: $searchPhrase, address: $address, latLong: $latLong)';
   }
 
   @override
@@ -151,13 +230,23 @@ class _$_ListItem implements _ListItem {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality()
-                .equals(other._categories, _categories));
+                .equals(other._categories, _categories) &&
+            (identical(other.searchPhrase, searchPhrase) ||
+                other.searchPhrase == searchPhrase) &&
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.latLong, latLong) || other.latLong == latLong));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, name, const DeepCollectionEquality().hash(_categories));
+      runtimeType,
+      id,
+      name,
+      const DeepCollectionEquality().hash(_categories),
+      searchPhrase,
+      address,
+      latLong);
 
   @JsonKey(ignore: true)
   @override
@@ -174,10 +263,14 @@ class _$_ListItem implements _ListItem {
 }
 
 abstract class _ListItem implements ListItem {
-  factory _ListItem(
+  const factory _ListItem(
       {final String? id,
       required final String name,
-      required final Map<String, List<String>> categories}) = _$_ListItem;
+      required final Map<String, List<String>> categories,
+      final String? searchPhrase,
+      final String? address,
+      @JsonKey(fromJson: _fromJsonGeoPoint, toJson: _toJsonGeoPoint)
+          final LatLong? latLong}) = _$_ListItem;
 
   factory _ListItem.fromJson(Map<String, dynamic> json) = _$_ListItem.fromJson;
 
@@ -187,6 +280,13 @@ abstract class _ListItem implements ListItem {
   String get name;
   @override
   Map<String, List<String>> get categories;
+  @override
+  String? get searchPhrase;
+  @override
+  String? get address;
+  @override
+  @JsonKey(fromJson: _fromJsonGeoPoint, toJson: _toJsonGeoPoint)
+  LatLong? get latLong;
   @override
   @JsonKey(ignore: true)
   _$$_ListItemCopyWith<_$_ListItem> get copyWith =>

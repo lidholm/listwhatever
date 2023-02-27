@@ -41,6 +41,10 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
   @override
   Stream<List<T>> retrieveItemsStream() async* {
     try {
+      if (identifiers.values.any((element) => element == null)) {
+        yield* Stream.value([]);
+        return;
+      }
       final query = firestoreItemsPath(identifiers);
       yield* query.snapshots().map(convertCollection);
     } on FirebaseException catch (e, s) {
