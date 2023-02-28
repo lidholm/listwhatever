@@ -7,18 +7,21 @@ import 'package:listanything/app/pages/lists/list_of_things.dart';
 import 'package:listanything/app/pages/lists/selected_list_provider.dart';
 import 'package:tuple/tuple.dart';
 
-final filteredListIemsProvider = FutureProvider<List<ListItem>>((ref) async {
-  final listItems = await ref.watch(listItemsProvider.future);
+final filteredListIemsProvider = Provider<AsyncValue<List<ListItem>>>((ref) {
+  final listItemsValue = ref.watch(listItemsProvider);
   final filters = ref.watch(filterProvider);
-  if (listItems == null || listItems.isEmpty) {
-    return [];
-  }
 
-  return filterListItems(listItems, filters);
+  return listItemsValue.whenData((listItems) => filterListItems(listItems ?? [], filters));
 });
 
-final filtededLIstItemsAndListProvider = FutureProvider<Tuple2<List<ListItem>, ListOfThings?>>((ref) async {
-  final filteredListItems = await ref.watch(filteredListIemsProvider.future);
-  final list = await ref.watch(selectedListProvider.future);
-  return Tuple2(filteredListItems, list);
+final filtededLIstItemsAndListProvider = Provider<AsyncValue<Tuple2<List<ListItem>, ListOfThings?>>>((ref) {
+  final filteredListItemsValue = ref.watch(filteredListIemsProvider);
+  final listValue = ref.watch(selectedListProvider);
+
+  return filteredListItemsValue.when(
+    data: (filteredListItems) =>
+        listValue.whenData((list) => Tuple2(filteredListItems, const ListOfThings(name: '', type: ListType.other))),
+    error: AsyncValue.error,
+    loading: AsyncValue.loading,
+  );
 });

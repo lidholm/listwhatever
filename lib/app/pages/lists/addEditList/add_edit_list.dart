@@ -6,7 +6,9 @@ import 'package:go_router/go_router.dart';
 import 'package:listanything/app/pages/lists/list_of_things.dart';
 import 'package:listanything/app/pages/lists/list_repository_provider.dart';
 import 'package:listanything/app/pages/lists/selected_list_provider.dart';
+import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
 import 'package:listanything/app/widgets/standardWidgets/async_value_widget.dart';
+import 'package:listanything/app/widgets/standardWidgets/common_app_bar.dart';
 
 extension ListTypeExtension on ListType {
   String get name {
@@ -77,7 +79,18 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
         : <String, dynamic>{'name': '', 'type': ListType.other, 'withMap': false};
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Add List')),
+      appBar: CommonAppBar(
+        title: widget.list != null ? 'Edit List' : 'Add List',
+        actions: [
+          if (widget.list != null)
+            AppBarAction(
+              title: 'Delete list',
+              icon: Icons.delete,
+              callback: () => deleteList(ref, GoRouter.of(context), widget.list!.id!),
+              overflow: false,
+            ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: SingleChildScrollView(
@@ -213,6 +226,13 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
       final refId = await repo.updateItem(itemId: newList.id!, item: newList);
       print('Updated $refId');
     }
+    router.pop();
+  }
+
+  Future<void> deleteList(WidgetRef ref, GoRouter router, String listId) async {
+    print('delete');
+    final repo = await ref.read(listRepositoryProvider.future);
+    await repo.deleteItem(itemId: listId);
     router.pop();
   }
 }

@@ -16,6 +16,8 @@ import 'package:listanything/app/pages/list_items/selected_list_item_provider.da
 import 'package:listanything/app/pages/lists/list_of_things.dart';
 import 'package:listanything/app/pages/lists/selected_list_provider.dart';
 import 'package:listanything/app/pages/map/searchLocation/selected_address_provider.dart';
+import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
+import 'package:listanything/app/widgets/standardWidgets/common_app_bar.dart';
 import 'package:listanything/app/widgets/standardWidgets/double_async_value_widget.dart';
 
 class AddEditListItem extends ConsumerWidget {
@@ -46,6 +48,8 @@ class AddEditListItemInner extends ConsumerStatefulWidget {
 }
 
 const nameFieldName = 'name';
+const urlsFieldName = 'urls';
+const infoFieldName = 'info';
 const addressFieldName = 'address';
 const latFieldName = 'lat';
 const longFieldName = 'long';
@@ -56,11 +60,15 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
   bool showSegmentedControl = true;
   final _formKey = GlobalKey<FormBuilderState>();
   bool _nameHasError = false;
+  bool _infoHasError = false;
+  List<bool> _urlHasError = [];
   List<bool> _categoryNameHasError = [];
   List<bool> _categoryValuesHasError = [];
   bool _addressHasError = false;
   bool _latHasError = false;
   bool _longHasError = false;
+  List<String> urlInitialValue = List.generate(100, (index) => 'http://');
+  Map<String, dynamic> initialValue = <String, dynamic>{};
 
   @override
   void initState() {
@@ -68,29 +76,28 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
     _categoryNameHasError = List.generate(widget.listItem?.categories.length ?? 0, (index) => false);
     _categoryValuesHasError = List.generate(widget.listItem?.categories.length ?? 0, (index) => false);
     _nameHasError = widget.listItem == null;
-  }
 
-  @override
-  Widget build(BuildContext context) {
-    print('list: ${widget.list}');
-
-    final initialValue = widget.listItem != null
+    initialValue = widget.listItem != null
         ? <String, dynamic>{
             // TODO: Set name from selectedAddress if value is not already set
             nameFieldName: widget.listItem!.name,
+            urlsFieldName: widget.listItem!.urls,
+            infoFieldName: widget.listItem!.info,
             addressFieldName: widget.selectedAddress?.formattedAddress ?? widget.listItem!.address,
             latFieldName: '${widget.selectedAddress?.geometry.location.lat ?? widget.listItem!.latLong?.lat ?? ''}',
             longFieldName: '${widget.selectedAddress?.geometry.location.lng ?? widget.listItem!.latLong?.lng ?? ''}',
           }
         : <String, dynamic>{
             nameFieldName: '',
+            urlsFieldName: '',
+            infoFieldName: '',
             addressFieldName: widget.selectedAddress?.formattedAddress ?? '',
             latFieldName: '${widget.selectedAddress?.geometry.location.lat ?? ''}',
             longFieldName: '${widget.selectedAddress?.geometry.location.lng ?? '0.0'}',
           };
 
     if (widget.listItem != null) {
-      mapIndexed(widget.listItem!.categories.entries).forEach((e) {
+      mapIndexed(widget.listItem?.categories.entries ?? <MapEntry<String, List<String>>>[]).forEach((e) {
         final index = e.key;
         final key = e.value.key;
         final values = e.value.value;
@@ -98,11 +105,35 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
         initialValue['categoryValues-$index'] = values.join(', ');
       });
     }
+    mapIndexed(widget.listItem?.urls ?? <String>[]).forEach((e) {
+      final index = e.key;
+      final url = e.value;
+      urlInitialValue[index] = url;
+    });
 
+    _urlHasError = List<bool>.generate(widget.listItem?.urls.length ?? 0, (index) => true);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    print('list: ${widget.list}');
+
+    final urlIndices = List.generate(max(widget.listItem?.urls.length ?? 0, _urlHasError.length), (i) => i);
     final categoryIndices =
         List.generate(max(widget.listItem?.categories.length ?? 0, _categoryNameHasError.length), (i) => i);
     return Scaffold(
-      appBar: AppBar(title: const Text('Add List Item')),
+      appBar: CommonAppBar(
+        title: widget.listItem?.id != null ? 'Edit List Item' : 'Add List Item',
+        actions: [
+          if (widget.list?.id != null)
+            AppBarAction(
+              title: 'Delete list',
+              icon: Icons.delete,
+              callback: () => deleteListItem(ref, GoRouter.of(context), widget.listItem!.id!),
+              overflow: false,
+            ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: SingleChildScrollView(
@@ -111,7 +142,6 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
             children: <Widget>[
               FormBuilder(
                 key: _formKey,
-                // enabled: false,
                 onChanged: () {
                   _formKey.currentState!.save();
                   debugPrint(_formKey.currentState!.value.toString());
@@ -143,6 +173,65 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                       ]),
                       keyboardType: TextInputType.name,
                       textInputAction: TextInputAction.next,
+                    ),
+                    FormBuilderTextField(
+                      autovalidateMode: AutovalidateMode.always,
+                      name: infoFieldName,
+                      minLines: 3, maxLines: 6,
+                      decoration: InputDecoration(
+                        labelText: 'Extra info',
+                        suffixIcon: _infoHasError
+                            ? const Icon(Icons.error, color: Colors.red)
+                            : const Icon(Icons.check, color: Colors.green),
+                      ),
+                      onChanged: (val) {
+                        setState(() {
+                          _infoHasError = !(_formKey.currentState?.fields[infoFieldName]?.validate() ?? false);
+                        });
+                      },
+                      // valueTransformer: (text) => num.tryParse(text),
+                      validator: FormBuilderValidators.compose([
+                        FormBuilderValidators.maxLength(1000),
+                      ]),
+                      keyboardType: TextInputType.name,
+                      textInputAction: TextInputAction.newline,
+                    ),
+                    const SizedBox(height: 32),
+                    const Text('URLs', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                    ...urlIndices.map(
+                      (urlIndex) {
+                        print('url-$urlIndex');
+                        return FormBuilderTextField(
+                          autovalidateMode: AutovalidateMode.always,
+                          name: 'url-$urlIndex',
+                          initialValue: urlInitialValue[urlIndex],
+                          decoration: InputDecoration(
+                            labelText: 'URL',
+                            suffixIcon: _urlHasError[urlIndex]
+                                ? const Icon(Icons.error, color: Colors.red)
+                                : const Icon(Icons.check, color: Colors.green),
+                          ),
+                          onChanged: (val) {
+                            setState(() {
+                              _urlHasError[urlIndex] =
+                                  !(_formKey.currentState?.fields['url-$urlIndex']?.validate() ?? false);
+                            });
+                          },
+                          validator: FormBuilderValidators.compose([
+                            FormBuilderValidators.maxLength(200),
+                          ]),
+                          keyboardType: TextInputType.name,
+                          textInputAction: TextInputAction.next,
+                        );
+                      },
+                    ).toList(),
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          _urlHasError = [..._urlHasError, true];
+                        });
+                      },
+                      child: const Text('Add new category'),
                     ),
                     if (widget.list?.withMap ?? false) ...[
                       const SizedBox(height: 32),
@@ -366,6 +455,12 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
     final fields = _formKey.currentState!.fields;
     final repo = await ref.read(listItemsRepositoryProvider.future);
     final name = fields[nameFieldName]!.value as String;
+    final info = fields[infoFieldName]!.value as String;
+    final urls = fields.entries
+        .where((e) => e.key.startsWith('url-'))
+        .map((e) => e.value)
+        .map((e) => e.value as String)
+        .toList();
     final categoryNames = fields.entries
         .where((e) => e.key.startsWith('categoryName-'))
         .map((e) => e.value)
@@ -391,13 +486,22 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
 
     if (listItem == null) {
       print('adding');
-      final listItem =
-          ListItem(name: name, categories: categories, address: address, latLong: latLong, searchPhrase: searchPhrase);
+      final listItem = ListItem(
+        name: name,
+        info: info,
+        urls: urls,
+        categories: categories,
+        address: address,
+        latLong: latLong,
+        searchPhrase: searchPhrase,
+      );
       final refId = await repo.createItem(item: listItem);
       print('Added $refId');
     } else {
       final newListItem = listItem.copyWith(
         name: name,
+        info: info,
+        urls: urls,
         categories: categories,
         address: address,
         latLong: latLong,
@@ -416,5 +520,16 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
 
   void editSearchLocation(BuildContext context, String? searchPhrase) {
     SearchLocationPageRoute(searchPhrase: searchPhrase).push(context);
+  }
+
+  Future<void> deleteListItem(WidgetRef ref, GoRouter router, String listItemId) async {
+    print('delete');
+    final repo = await ref.read(listItemsRepositoryProvider.future);
+    await repo.deleteItem(itemId: listItemId);
+    router.pop();
+    if (ref.read(selectedAddressProvider) != null) {
+      ref.read(selectedAddressProvider.notifier).state = null;
+      router.pop();
+    }
   }
 }

@@ -1,3 +1,6 @@
+0.0.8
+* Delete lists and list item, privacy policy start, and urls for list items
+
 0.0.7
 * Map
 

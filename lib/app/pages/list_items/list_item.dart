@@ -19,6 +19,8 @@ class ListItem with _$ListItem {
     @Default(null) String? searchPhrase,
     @Default(null) String? address,
     @Default(null) @JsonKey(fromJson: _fromJsonGeoPoint, toJson: _toJsonGeoPoint) LatLong? latLong,
+    @Default(<String>[]) List<String> urls,
+    @Default('') String info,
   }) = _ListItem;
 
   factory ListItem.fromJson(Map<String, dynamic> json) => _$ListItemFromJson(json);
