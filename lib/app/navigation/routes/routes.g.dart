@@ -58,6 +58,10 @@ GoRoute get $listsPageRoute => GoRouteData.$route(
           path: 'map',
           factory: $MapsPageRouteExtension._fromState,
         ),
+        GoRouteData.$route(
+          path: 'privacypolicy',
+          factory: $PrivacyPolicyPageRouteExtension._fromState,
+        ),
       ],
     );
 
@@ -174,10 +178,15 @@ extension $AddOrEditListItemRouteExtension on AddOrEditListItemRoute {
 
 extension $SearchLocationPageRouteExtension on SearchLocationPageRoute {
   static SearchLocationPageRoute _fromState(GoRouterState state) =>
-      const SearchLocationPageRoute();
+      SearchLocationPageRoute(
+        searchPhrase: state.queryParams['search-phrase'],
+      );
 
   String get location => GoRouteData.$location(
         '/searchlocation',
+        queryParams: {
+          if (searchPhrase != null) 'search-phrase': searchPhrase!,
+        },
       );
 
   void go(BuildContext context) => context.go(location, extra: this);
@@ -241,6 +250,22 @@ extension $MapsPageRouteExtension on MapsPageRoute {
 
   String get location => GoRouteData.$location(
         '/map',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: this);
+
+  void push(BuildContext context) => context.push(location, extra: this);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: this);
+}
+
+extension $PrivacyPolicyPageRouteExtension on PrivacyPolicyPageRoute {
+  static PrivacyPolicyPageRoute _fromState(GoRouterState state) =>
+      const PrivacyPolicyPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/privacypolicy',
       );
 
   void go(BuildContext context) => context.go(location, extra: this);

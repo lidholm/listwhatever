@@ -133,3 +133,4 @@ ios/firebase_app_id_file.json
 lib/app/firebase/firebase_options.dart
 ios/Runner/GoogleService-Info.plist
 .prod.env
+firebase-deploy-service-account.json

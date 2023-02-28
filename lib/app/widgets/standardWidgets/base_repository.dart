@@ -9,7 +9,7 @@ abstract class BaseRepository<T> {
   Stream<T> retrieveItemStream({required String itemId});
   Future<String> createItem({required T item});
   Future<String> updateItem({required String itemId, required T item});
-  // Future<void> deleteItem({required SimpleTodoItem itemId});
+  Future<void> deleteItem({required String itemId});
 }
 
 class BaseRepositoryImpl<T> implements BaseRepository<T> {
@@ -42,8 +42,7 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
   Stream<List<T>> retrieveItemsStream() async* {
     try {
       if (identifiers.values.any((element) => element == null)) {
-        yield* Stream.value([]);
-        return;
+        throw CustomException(message: 'Some null items $identifiers');
       }
       final query = firestoreItemsPath(identifiers);
       yield* query.snapshots().map(convertCollection);
@@ -113,13 +112,13 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
     }
   }
 
-  // @override
-  // Future<void> deleteItem({required String itemId}) async {
-  //   try {
-  //     await firestore.mapWithListRef(user!.uid, mapType!.id!).doc(itemId).delete();
-  //   } on FirebaseException catch (e, s) {
-  //     await firebaseCrashlytics.recordError(e, s, reason: 'as an example of non-fatal error');
-  //     throw CustomException(message: e.message);
-  //   }
-  // }
+  @override
+  Future<void> deleteItem({required String itemId}) async {
+    try {
+      await firestoreItemPath({...identifiers, 'itemId': itemId}).delete();
+    } on FirebaseException catch (e, s) {
+      await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
+      throw CustomException(message: e.message);
+    }
+  }
 }

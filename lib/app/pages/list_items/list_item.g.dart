@@ -18,6 +18,10 @@ _$_ListItem _$$_ListItemFromJson(Map<String, dynamic> json) => _$_ListItem(
       latLong: json['latLong'] == null
           ? null
           : _fromJsonGeoPoint(json['latLong'] as GeoPoint?),
+      urls:
+          (json['urls'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              const <String>[],
+      info: json['info'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_ListItemToJson(_$_ListItem instance) =>
@@ -28,4 +32,6 @@ Map<String, dynamic> _$$_ListItemToJson(_$_ListItem instance) =>
       'searchPhrase': instance.searchPhrase,
       'address': instance.address,
       'latLong': _toJsonGeoPoint(instance.latLong),
+      'urls': instance.urls,
+      'info': instance.info,
     };
