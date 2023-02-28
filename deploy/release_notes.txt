@@ -1,3 +1,6 @@
+0.0.9
+* Firebase deploy
+
 0.0.8
 * Delete lists and list item, privacy policy start, and urls for list items
 
