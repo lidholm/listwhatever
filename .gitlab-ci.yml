@@ -51,6 +51,7 @@ decrypt-sops:
       - assets/google_sheets_service_account.json
       - lib/app/firebase/firebase_options.dart
       - ios/firebase_app_id_file.json
+      - .firebase-deploy-service-account.json
 
     expire_in: 2700 seconds #45 minutes
 
