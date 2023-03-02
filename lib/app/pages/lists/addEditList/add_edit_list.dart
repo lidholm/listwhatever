@@ -126,7 +126,7 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
                       // valueTransformer: (text) => num.tryParse(text),
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(),
-                        FormBuilderValidators.maxLength(16),
+                        FormBuilderValidators.maxLength(50),
                       ]),
                       keyboardType: TextInputType.name,
                       textInputAction: TextInputAction.next,

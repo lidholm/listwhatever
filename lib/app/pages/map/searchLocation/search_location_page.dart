@@ -66,7 +66,8 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
 
   @override
   Widget build(BuildContext context) {
-    initialValue = <String, dynamic>{searchPhraseName: widget.searchPhrase ?? 'play it again sports san diego'};
+    print('In SearchLocationPage');
+    initialValue = <String, dynamic>{searchPhraseName: widget.searchPhrase ?? ''};
 
     return Scaffold(
       appBar: AppBar(title: const Text('Search for location')),
@@ -244,6 +245,7 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                       onPressed: () {
                         // TODO: Implement
                         _formKey.currentState?.reset();
+                        const AddOrEditListItemRoute().push(context);
                       },
                       // color: Theme.of(context).colorScheme.secondary,
                       child: Text(

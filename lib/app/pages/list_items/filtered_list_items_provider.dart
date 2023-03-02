@@ -19,8 +19,7 @@ final filtededLIstItemsAndListProvider = Provider<AsyncValue<Tuple2<List<ListIte
   final listValue = ref.watch(selectedListProvider);
 
   return filteredListItemsValue.when(
-    data: (filteredListItems) =>
-        listValue.whenData((list) => Tuple2(filteredListItems, const ListOfThings(name: '', type: ListType.other))),
+    data: (filteredListItems) => listValue.whenData((list) => Tuple2(filteredListItems, list)),
     error: AsyncValue.error,
     loading: AsyncValue.loading,
   );

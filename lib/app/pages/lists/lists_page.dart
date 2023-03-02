@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:listanything/app/navigation/routes/add_or_edit_list_route.dart';
@@ -45,6 +46,8 @@ class ListsPageInner extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    print('screen size: ${MediaQuery.of(context).size.width}');
+    final crossAxisCount = kIsWeb ? (MediaQuery.of(context).size.width / 350).floor() : 2;
     return Scaffold(
       drawer: const Drawer(child: CommonDrawer()),
       appBar: CommonAppBar(
@@ -67,7 +70,7 @@ class ListsPageInner extends ConsumerWidget {
               SliverGrid.count(
                 mainAxisSpacing: 20,
                 crossAxisSpacing: 20,
-                crossAxisCount: 2,
+                crossAxisCount: crossAxisCount,
                 children: lists
                     .map(
                       (list) => ImageButton<ListOfThings>(

@@ -122,9 +122,12 @@ class ListItemsPageInner extends ConsumerWidget {
 
   void addNewListItem(WidgetRef ref, BuildContext context) {
     ref.read(selectedListItemIdProvider.notifier).state = null;
+    print('list: $list');
     if (list?.withMap ?? false) {
+      print('Routing to SearchLocationPageRoute');
       const SearchLocationPageRoute().push(context);
     } else {
+      print('Routing to AddOrEditListItemRoute');
       const AddOrEditListItemRoute().push(context);
     }
   }
