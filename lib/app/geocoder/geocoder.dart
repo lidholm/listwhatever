@@ -8,7 +8,7 @@ import 'package:listanything/app/geocoder/geometry.dart';
 import 'package:listanything/app/geocoder/latlong.dart';
 import 'package:listanything/app/geocoder/pluscode.dart';
 
-const useRealEndpoint = false;
+const useRealEndpoint = true;
 
 class Geocoder {
   static Future<List<GeocoderResult>?> getDataFromAddress({

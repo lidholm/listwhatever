@@ -169,7 +169,7 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                       // valueTransformer: (text) => num.tryParse(text),
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(),
-                        FormBuilderValidators.maxLength(16),
+                        FormBuilderValidators.maxLength(50),
                       ]),
                       keyboardType: TextInputType.name,
                       textInputAction: TextInputAction.next,
@@ -295,7 +295,7 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                                 });
                               },
                               validator: FormBuilderValidators.compose([
-                                FormBuilderValidators.required(),
+                                // FormBuilderValidators.required(),
                                 FormBuilderValidators.maxLength(30),
                                 FormBuilderValidators.numeric(),
                               ]),
@@ -319,7 +319,7 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                                 });
                               },
                               validator: FormBuilderValidators.compose([
-                                FormBuilderValidators.required(),
+                                // FormBuilderValidators.required(),
                                 FormBuilderValidators.maxLength(30),
                                 FormBuilderValidators.numeric(),
                               ]),

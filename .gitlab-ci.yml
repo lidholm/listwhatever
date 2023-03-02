@@ -193,4 +193,4 @@ deployToFirebaseHostingAndRules:
     - /firebase use listanything-2b9b0
     - /firebase --version
     - /firebase deploy --only hosting
-    - /firebase deploy --only firestore:rules
+    # - /firebase deploy --only firestore:rules
