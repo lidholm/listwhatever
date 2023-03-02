@@ -1,6 +1,6 @@
 name: listanything
 description: List anything, sometimes with a map
-version: 0.0.9+0000001
+version: 0.0.10+0000001
 publish_to: none
 
 environment:

@@ -21,6 +21,7 @@ class ListItem with _$ListItem {
     @Default(null) @JsonKey(fromJson: _fromJsonGeoPoint, toJson: _toJsonGeoPoint) LatLong? latLong,
     @Default(<String>[]) List<String> urls,
     @Default('') String info,
+    @Default(null) @JsonKey(fromJson: _fromJsonDateTime, toJson: _toJsonDateTime) DateTime? datetime,
   }) = _ListItem;
 
   factory ListItem.fromJson(Map<String, dynamic> json) => _$ListItemFromJson(json);
@@ -38,4 +39,18 @@ LatLong? _fromJsonGeoPoint(GeoPoint? geoPoint) {
     return null;
   }
   return LatLong(lat: geoPoint.latitude, lng: geoPoint.longitude);
+}
+
+Timestamp? _toJsonDateTime(DateTime? dateTime) {
+  if (dateTime == null) {
+    return null;
+  }
+  return Timestamp.fromDate(dateTime);
+}
+
+DateTime? _fromJsonDateTime(Timestamp? timestamp) {
+  if (timestamp == null) {
+    return null;
+  }
+  return timestamp.toDate();
 }

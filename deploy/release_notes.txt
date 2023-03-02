@@ -1,3 +1,6 @@
+0.0.10
+* Dates for list items
+
 0.0.9
 * Firebase deploy
 

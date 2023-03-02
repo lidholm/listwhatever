@@ -8,3 +8,4 @@
 [x] Filter
 [x] Fix FutureProvider that should be StreamProvider or AsyncValueProvider
 [x] Privacy policy page
+[x] Order list item by date

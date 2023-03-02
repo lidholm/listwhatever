@@ -64,6 +64,12 @@ class AddEditListInner extends ConsumerStatefulWidget {
   }
 }
 
+const nameFieldName = 'name';
+const typeFieldName = 'type';
+const withMapFieldName = 'withMap';
+const withDatesFieldName = 'withDates';
+const withTimesFieldName = 'withTimes';
+
 class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
   bool autoValidate = true;
   bool readOnly = false;
@@ -71,12 +77,31 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
   final _formKey = GlobalKey<FormBuilderState>();
   bool _nameHasError = false;
   bool _typeHasError = false;
+  bool showTimesField = false;
+
+  @override
+  void initState() {
+    super.initState();
+    showTimesField = widget.list?.withDates ?? false;
+  }
 
   @override
   Widget build(BuildContext context) {
     final initialValue = widget.list != null
-        ? <String, dynamic>{'name': widget.list!.name, 'type': widget.list!.type, 'withMap': widget.list!.withMap}
-        : <String, dynamic>{'name': '', 'type': ListType.other, 'withMap': false};
+        ? <String, dynamic>{
+            nameFieldName: widget.list!.name,
+            typeFieldName: widget.list!.type,
+            withMapFieldName: widget.list!.withMap,
+            withDatesFieldName: widget.list!.withDates,
+            withTimesFieldName: widget.list!.withTimes,
+          }
+        : <String, dynamic>{
+            nameFieldName: '',
+            typeFieldName: ListType.other,
+            withMapFieldName: false,
+            withDatesFieldName: false,
+            withTimesFieldName: false,
+          };
 
     return Scaffold(
       appBar: CommonAppBar(
@@ -111,7 +136,7 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
                     const SizedBox(height: 16),
                     FormBuilderTextField(
                       autovalidateMode: AutovalidateMode.always,
-                      name: 'name',
+                      name: nameFieldName,
                       decoration: InputDecoration(
                         labelText: 'List name',
                         suffixIcon: _nameHasError
@@ -120,7 +145,7 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
                       ),
                       onChanged: (val) {
                         setState(() {
-                          _nameHasError = !(_formKey.currentState?.fields['name']?.validate() ?? false);
+                          _nameHasError = !(_formKey.currentState?.fields[nameFieldName]?.validate() ?? false);
                         });
                       },
                       // valueTransformer: (text) => num.tryParse(text),
@@ -132,7 +157,7 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
                       textInputAction: TextInputAction.next,
                     ),
                     FormBuilderDropdown<ListType>(
-                      name: 'type',
+                      name: typeFieldName,
                       decoration: InputDecoration(
                         labelText: 'List type',
                         suffix: _typeHasError
@@ -154,15 +179,29 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
                           .toList(),
                       onChanged: (val) {
                         setState(() {
-                          _typeHasError = !(_formKey.currentState?.fields['type']?.validate() ?? false);
+                          _typeHasError = !(_formKey.currentState?.fields[typeFieldName]?.validate() ?? false);
                         });
                       },
                       valueTransformer: (val) => val?.toString(),
                     ),
                     FormBuilderSwitch(
                       title: const Text('Show on map'),
-                      name: 'withMap',
+                      name: withMapFieldName,
                     ),
+                    FormBuilderSwitch(
+                      title: const Text('Include dates for items'),
+                      name: withDatesFieldName,
+                      onChanged: (value) {
+                        setState(() {
+                          showTimesField = value ?? false;
+                        });
+                      },
+                    ),
+                    if (showTimesField)
+                      FormBuilderSwitch(
+                        title: const Text('Include times for items'),
+                        name: withTimesFieldName,
+                      ),
                   ],
                 ),
               ),
@@ -213,16 +252,19 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
   Future<void> saveList(GoRouter router, ListOfThings? list) async {
     final fields = _formKey.currentState!.fields;
     final repo = await ref.read(listRepositoryProvider.future);
-    final name = fields['name']!.value as String;
-    final type = fields['type']!.value as ListType;
-    final withMap = fields['withMap']!.value as bool;
+    final name = fields[nameFieldName]!.value as String;
+    final type = fields[typeFieldName]!.value as ListType;
+    final withMap = fields[withMapFieldName]!.value as bool;
+    final withDates = fields[withDatesFieldName]!.value as bool;
+    final withTimes = withDates && (fields[withTimesFieldName]?.value as bool? ?? false);
     if (list == null) {
       print('adding');
-      final list = ListOfThings(name: name, type: type, withMap: withMap);
+      final list = ListOfThings(name: name, type: type, withMap: withMap, withDates: withDates, withTimes: withTimes);
       final refId = await repo.createItem(item: list);
       print('Added $refId');
     } else {
-      final newList = list.copyWith(name: name, type: type, withMap: withMap);
+      final newList =
+          list.copyWith(name: name, type: type, withMap: withMap, withDates: withDates, withTimes: withTimes);
       final refId = await repo.updateItem(itemId: newList.id!, item: newList);
       print('Updated $refId');
     }

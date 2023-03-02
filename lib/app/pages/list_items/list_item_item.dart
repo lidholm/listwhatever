@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/pages/list_items/list_item.dart';
 import 'package:listanything/app/string_extensions.dart';
 import 'package:listanything/app/widgets/standardWidgets/shimmer_loading.dart';
@@ -20,50 +21,57 @@ class ListItemItem extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(color: Colors.blueAccent),
         ),
-        height: 80,
-        alignment: Alignment.center,
-        child: Row(
-          children: [
-            Container(
-              height: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.lightBlue[100],
-                border: const Border(
-                  right: BorderSide(color: Colors.blueAccent),
-                ),
-              ),
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-                  child: SizedBox(
-                    width: 120,
+        child: ListView(
+          shrinkWrap: true,
+          padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+          children: <Widget>[
+            inHeader(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 8, 0, 4),
                     child: Text(
                       item.name,
                       style: const TextStyle(fontSize: 24),
                     ),
                   ),
-                ),
+                  if (item.datetime != null)
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+                      child: Text(
+                        dateFormatter.format(item.datetime!),
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                    ),
+                ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: isLoading
-                    ? getCategoriesShimmers()
-                    : [
-                        ...categoriesToShow
-                            .map(
-                              (c) => Row(
-                                children: getCategories(c),
-                              ),
-                            )
-                            .toList(),
-                        if (item.categories.entries.length > 4) const Text('...'),
-                      ],
+            if (item.address?.trim().isNotEmpty ?? false)
+              inHeader(
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 4),
+                  child: Text(
+                    item.address!,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ),
               ),
-            )
+            const SizedBox(height: 8),
+            if (isLoading)
+              ...leftPaddings(getCategoriesShimmers())
+            else ...[
+              ...leftPaddings(
+                categoriesToShow
+                    .map(
+                      (c) => Row(
+                        children: getCategories(c),
+                      ),
+                    )
+                    .toList(),
+              ),
+              if (item.categories.entries.length > 4) const Text('...'),
+            ]
           ],
         ),
       ),
@@ -103,5 +111,20 @@ class ListItemItem extends StatelessWidget {
         width: 150,
       )
     ];
+  }
+
+  Widget inHeader(Widget child) {
+    return Container(
+      color: Colors.lightBlue[100],
+      child: leftPadding(child),
+    );
+  }
+
+  Widget leftPadding(Widget child) {
+    return Padding(padding: const EdgeInsets.fromLTRB(8, 0, 0, 0), child: child);
+  }
+
+  List<Widget> leftPaddings(List<Widget> children) {
+    return children.map(leftPadding).toList();
   }
 }
