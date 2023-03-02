@@ -24,6 +24,8 @@ mixin _$ListOfThings {
   String get name => throw _privateConstructorUsedError;
   ListType get type => throw _privateConstructorUsedError;
   bool get withMap => throw _privateConstructorUsedError;
+  bool get withDates => throw _privateConstructorUsedError;
+  bool get withTimes => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +39,13 @@ abstract class $ListOfThingsCopyWith<$Res> {
           ListOfThings value, $Res Function(ListOfThings) then) =
       _$ListOfThingsCopyWithImpl<$Res, ListOfThings>;
   @useResult
-  $Res call({String? id, String name, ListType type, bool withMap});
+  $Res call(
+      {String? id,
+      String name,
+      ListType type,
+      bool withMap,
+      bool withDates,
+      bool withTimes});
 }
 
 /// @nodoc
@@ -57,6 +65,8 @@ class _$ListOfThingsCopyWithImpl<$Res, $Val extends ListOfThings>
     Object? name = null,
     Object? type = null,
     Object? withMap = null,
+    Object? withDates = null,
+    Object? withTimes = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -75,6 +85,14 @@ class _$ListOfThingsCopyWithImpl<$Res, $Val extends ListOfThings>
           ? _value.withMap
           : withMap // ignore: cast_nullable_to_non_nullable
               as bool,
+      withDates: null == withDates
+          ? _value.withDates
+          : withDates // ignore: cast_nullable_to_non_nullable
+              as bool,
+      withTimes: null == withTimes
+          ? _value.withTimes
+          : withTimes // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -87,7 +105,13 @@ abstract class _$$_ListOfThingsCopyWith<$Res>
       __$$_ListOfThingsCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? id, String name, ListType type, bool withMap});
+  $Res call(
+      {String? id,
+      String name,
+      ListType type,
+      bool withMap,
+      bool withDates,
+      bool withTimes});
 }
 
 /// @nodoc
@@ -105,6 +129,8 @@ class __$$_ListOfThingsCopyWithImpl<$Res>
     Object? name = null,
     Object? type = null,
     Object? withMap = null,
+    Object? withDates = null,
+    Object? withTimes = null,
   }) {
     return _then(_$_ListOfThings(
       id: freezed == id
@@ -123,6 +149,14 @@ class __$$_ListOfThingsCopyWithImpl<$Res>
           ? _value.withMap
           : withMap // ignore: cast_nullable_to_non_nullable
               as bool,
+      withDates: null == withDates
+          ? _value.withDates
+          : withDates // ignore: cast_nullable_to_non_nullable
+              as bool,
+      withTimes: null == withTimes
+          ? _value.withTimes
+          : withTimes // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -131,7 +165,12 @@ class __$$_ListOfThingsCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ListOfThings implements _ListOfThings {
   const _$_ListOfThings(
-      {this.id, required this.name, required this.type, this.withMap = false});
+      {this.id,
+      required this.name,
+      required this.type,
+      this.withMap = false,
+      this.withDates = false,
+      this.withTimes = false});
 
   factory _$_ListOfThings.fromJson(Map<String, dynamic> json) =>
       _$$_ListOfThingsFromJson(json);
@@ -145,10 +184,16 @@ class _$_ListOfThings implements _ListOfThings {
   @override
   @JsonKey()
   final bool withMap;
+  @override
+  @JsonKey()
+  final bool withDates;
+  @override
+  @JsonKey()
+  final bool withTimes;
 
   @override
   String toString() {
-    return 'ListOfThings(id: $id, name: $name, type: $type, withMap: $withMap)';
+    return 'ListOfThings(id: $id, name: $name, type: $type, withMap: $withMap, withDates: $withDates, withTimes: $withTimes)';
   }
 
   @override
@@ -159,12 +204,17 @@ class _$_ListOfThings implements _ListOfThings {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.type, type) || other.type == type) &&
-            (identical(other.withMap, withMap) || other.withMap == withMap));
+            (identical(other.withMap, withMap) || other.withMap == withMap) &&
+            (identical(other.withDates, withDates) ||
+                other.withDates == withDates) &&
+            (identical(other.withTimes, withTimes) ||
+                other.withTimes == withTimes));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, type, withMap);
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, type, withMap, withDates, withTimes);
 
   @JsonKey(ignore: true)
   @override
@@ -185,7 +235,9 @@ abstract class _ListOfThings implements ListOfThings {
       {final String? id,
       required final String name,
       required final ListType type,
-      final bool withMap}) = _$_ListOfThings;
+      final bool withMap,
+      final bool withDates,
+      final bool withTimes}) = _$_ListOfThings;
 
   factory _ListOfThings.fromJson(Map<String, dynamic> json) =
       _$_ListOfThings.fromJson;
@@ -198,6 +250,10 @@ abstract class _ListOfThings implements ListOfThings {
   ListType get type;
   @override
   bool get withMap;
+  @override
+  bool get withDates;
+  @override
+  bool get withTimes;
   @override
   @JsonKey(ignore: true)
   _$$_ListOfThingsCopyWith<_$_ListOfThings> get copyWith =>

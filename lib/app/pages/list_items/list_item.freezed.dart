@@ -30,6 +30,8 @@ mixin _$ListItem {
   LatLong? get latLong => throw _privateConstructorUsedError;
   List<String> get urls => throw _privateConstructorUsedError;
   String get info => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _fromJsonDateTime, toJson: _toJsonDateTime)
+  DateTime? get datetime => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,7 +53,9 @@ abstract class $ListItemCopyWith<$Res> {
       @JsonKey(fromJson: _fromJsonGeoPoint, toJson: _toJsonGeoPoint)
           LatLong? latLong,
       List<String> urls,
-      String info});
+      String info,
+      @JsonKey(fromJson: _fromJsonDateTime, toJson: _toJsonDateTime)
+          DateTime? datetime});
 
   $LatLongCopyWith<$Res>? get latLong;
 }
@@ -77,6 +81,7 @@ class _$ListItemCopyWithImpl<$Res, $Val extends ListItem>
     Object? latLong = freezed,
     Object? urls = null,
     Object? info = null,
+    Object? datetime = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -111,6 +116,10 @@ class _$ListItemCopyWithImpl<$Res, $Val extends ListItem>
           ? _value.info
           : info // ignore: cast_nullable_to_non_nullable
               as String,
+      datetime: freezed == datetime
+          ? _value.datetime
+          : datetime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 
@@ -143,7 +152,9 @@ abstract class _$$_ListItemCopyWith<$Res> implements $ListItemCopyWith<$Res> {
       @JsonKey(fromJson: _fromJsonGeoPoint, toJson: _toJsonGeoPoint)
           LatLong? latLong,
       List<String> urls,
-      String info});
+      String info,
+      @JsonKey(fromJson: _fromJsonDateTime, toJson: _toJsonDateTime)
+          DateTime? datetime});
 
   @override
   $LatLongCopyWith<$Res>? get latLong;
@@ -168,6 +179,7 @@ class __$$_ListItemCopyWithImpl<$Res>
     Object? latLong = freezed,
     Object? urls = null,
     Object? info = null,
+    Object? datetime = freezed,
   }) {
     return _then(_$_ListItem(
       id: freezed == id
@@ -202,6 +214,10 @@ class __$$_ListItemCopyWithImpl<$Res>
           ? _value.info
           : info // ignore: cast_nullable_to_non_nullable
               as String,
+      datetime: freezed == datetime
+          ? _value.datetime
+          : datetime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -218,7 +234,9 @@ class _$_ListItem implements _ListItem {
       @JsonKey(fromJson: _fromJsonGeoPoint, toJson: _toJsonGeoPoint)
           this.latLong = null,
       final List<String> urls = const <String>[],
-      this.info = ''})
+      this.info = '',
+      @JsonKey(fromJson: _fromJsonDateTime, toJson: _toJsonDateTime)
+          this.datetime = null})
       : _categories = categories,
         _urls = urls;
 
@@ -256,10 +274,13 @@ class _$_ListItem implements _ListItem {
   @override
   @JsonKey()
   final String info;
+  @override
+  @JsonKey(fromJson: _fromJsonDateTime, toJson: _toJsonDateTime)
+  final DateTime? datetime;
 
   @override
   String toString() {
-    return 'ListItem(id: $id, name: $name, categories: $categories, searchPhrase: $searchPhrase, address: $address, latLong: $latLong, urls: $urls, info: $info)';
+    return 'ListItem(id: $id, name: $name, categories: $categories, searchPhrase: $searchPhrase, address: $address, latLong: $latLong, urls: $urls, info: $info, datetime: $datetime)';
   }
 
   @override
@@ -276,7 +297,9 @@ class _$_ListItem implements _ListItem {
             (identical(other.address, address) || other.address == address) &&
             (identical(other.latLong, latLong) || other.latLong == latLong) &&
             const DeepCollectionEquality().equals(other._urls, _urls) &&
-            (identical(other.info, info) || other.info == info));
+            (identical(other.info, info) || other.info == info) &&
+            (identical(other.datetime, datetime) ||
+                other.datetime == datetime));
   }
 
   @JsonKey(ignore: true)
@@ -290,7 +313,8 @@ class _$_ListItem implements _ListItem {
       address,
       latLong,
       const DeepCollectionEquality().hash(_urls),
-      info);
+      info,
+      datetime);
 
   @JsonKey(ignore: true)
   @override
@@ -316,7 +340,9 @@ abstract class _ListItem implements ListItem {
       @JsonKey(fromJson: _fromJsonGeoPoint, toJson: _toJsonGeoPoint)
           final LatLong? latLong,
       final List<String> urls,
-      final String info}) = _$_ListItem;
+      final String info,
+      @JsonKey(fromJson: _fromJsonDateTime, toJson: _toJsonDateTime)
+          final DateTime? datetime}) = _$_ListItem;
 
   factory _ListItem.fromJson(Map<String, dynamic> json) = _$_ListItem.fromJson;
 
@@ -337,6 +363,9 @@ abstract class _ListItem implements ListItem {
   List<String> get urls;
   @override
   String get info;
+  @override
+  @JsonKey(fromJson: _fromJsonDateTime, toJson: _toJsonDateTime)
+  DateTime? get datetime;
   @override
   @JsonKey(ignore: true)
   _$$_ListItemCopyWith<_$_ListItem> get copyWith =>

@@ -50,6 +50,7 @@ class AddEditListItemInner extends ConsumerStatefulWidget {
 const nameFieldName = 'name';
 const urlsFieldName = 'urls';
 const infoFieldName = 'info';
+const dateTimeField = 'date';
 const addressFieldName = 'address';
 const latFieldName = 'lat';
 const longFieldName = 'long';
@@ -83,6 +84,7 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
             nameFieldName: widget.listItem!.name,
             urlsFieldName: widget.listItem!.urls,
             infoFieldName: widget.listItem!.info,
+            dateTimeField: widget.listItem!.datetime,
             addressFieldName: widget.selectedAddress?.formattedAddress ?? widget.listItem!.address,
             latFieldName: '${widget.selectedAddress?.geometry.location.lat ?? widget.listItem!.latLong?.lat ?? ''}',
             longFieldName: '${widget.selectedAddress?.geometry.location.lng ?? widget.listItem!.latLong?.lng ?? ''}',
@@ -91,6 +93,7 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
             nameFieldName: '',
             urlsFieldName: '',
             infoFieldName: '',
+            dateTimeField: getCurrentDate(),
             addressFieldName: widget.selectedAddress?.formattedAddress ?? '',
             latFieldName: '${widget.selectedAddress?.geometry.location.lat ?? ''}',
             longFieldName: '${widget.selectedAddress?.geometry.location.lng ?? '0.0'}',
@@ -116,8 +119,6 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
 
   @override
   Widget build(BuildContext context) {
-    print('list: ${widget.list}');
-
     final urlIndices = List.generate(max(widget.listItem?.urls.length ?? 0, _urlHasError.length), (i) => i);
     final categoryIndices =
         List.generate(max(widget.listItem?.categories.length ?? 0, _categoryNameHasError.length), (i) => i);
@@ -166,7 +167,6 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                           _nameHasError = !(_formKey.currentState?.fields[nameFieldName]?.validate() ?? false);
                         });
                       },
-                      // valueTransformer: (text) => num.tryParse(text),
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(),
                         FormBuilderValidators.maxLength(50),
@@ -200,7 +200,6 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                     const Text('URLs', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                     ...urlIndices.map(
                       (urlIndex) {
-                        print('url-$urlIndex');
                         return FormBuilderTextField(
                           autovalidateMode: AutovalidateMode.always,
                           name: 'url-$urlIndex',
@@ -233,6 +232,22 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                       },
                       child: const Text('Add new category'),
                     ),
+                    if (widget.list?.withDates ?? false) ...[
+                      const SizedBox(height: 32),
+                      FormBuilderDateTimePicker(
+                        name: dateTimeField,
+                        inputType: widget.list!.withTimes ? InputType.both : InputType.date,
+                        decoration: InputDecoration(
+                          labelText: widget.list!.withTimes ? 'Date and Time' : 'Date',
+                          suffixIcon: IconButton(
+                            icon: const Icon(Icons.close),
+                            onPressed: () {
+                              _formKey.currentState!.fields[dateTimeField]?.didChange(null);
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
                     if (widget.list?.withMap ?? false) ...[
                       const SizedBox(height: 32),
                       SizedBox(
@@ -319,7 +334,7 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                                 });
                               },
                               validator: FormBuilderValidators.compose([
-                                // FormBuilderValidators.required(),
+                                FormBuilderValidators.required(),
                                 FormBuilderValidators.maxLength(30),
                                 FormBuilderValidators.numeric(),
                               ]),
@@ -334,7 +349,6 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                     const Text('Categories and values', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                     ...categoryIndices.map(
                       (categoryIndex) {
-                        print('categoryName-$categoryIndex');
                         return Flex(
                           direction: Axis.horizontal,
                           children: [
@@ -414,10 +428,10 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                     child: ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState?.saveAndValidate() ?? false) {
-                          debugPrint(_formKey.currentState?.value.toString());
+                          debugPrint('values: ${_formKey.currentState?.value.toString()}');
                           saveListItem(GoRouter.of(context), widget.listItem);
                         } else {
-                          debugPrint(_formKey.currentState?.value.toString());
+                          debugPrint('values: ${_formKey.currentState?.value.toString()}');
                           debugPrint('validation failed');
                         }
                       },
@@ -456,6 +470,8 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
     final repo = await ref.read(listItemsRepositoryProvider.future);
     final name = fields[nameFieldName]!.value as String;
     final info = fields[infoFieldName]!.value as String;
+    final datetime = fields[dateTimeField]?.value as DateTime?;
+
     final urls = fields.entries
         .where((e) => e.key.startsWith('url-'))
         .map((e) => e.value)
@@ -475,8 +491,8 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
     print('categoryValues: $categoryValues');
     final address = fields[addressFieldName]?.value as String?;
     final searchPhrase = widget.selectedAddress?.searchPhrase;
-    final lat = fields[latFieldName]?.value as String?;
-    final long = fields[longFieldName]?.value as String?;
+    final lat = nullIfEmpty(fields[latFieldName]?.value as String?);
+    final long = nullIfEmpty(fields[longFieldName]?.value as String?);
     final latLong = lat != null ? LatLong(lat: double.parse(lat), lng: double.parse(long!)) : null;
 
     final categories = Map.fromEntries(
@@ -491,6 +507,7 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
         info: info,
         urls: urls,
         categories: categories,
+        datetime: datetime,
         address: address,
         latLong: latLong,
         searchPhrase: searchPhrase,
@@ -503,6 +520,7 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
         info: info,
         urls: urls,
         categories: categories,
+        datetime: datetime,
         address: address,
         latLong: latLong,
         searchPhrase: searchPhrase,
@@ -512,10 +530,16 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
       ref.read(selectedListItemIdProvider.notifier).state = null;
     }
     router.pop();
-    if (ref.read(selectedAddressProvider) != null) {
+    if (widget.list?.withMap ?? false) {
       ref.read(selectedAddressProvider.notifier).state = null;
       router.pop();
     }
+  }
+
+  String? nullIfEmpty(String? s) {
+    if (s == null) return null;
+    if (s.trim().isEmpty) return null;
+    return s;
   }
 
   void editSearchLocation(BuildContext context, String? searchPhrase) {
@@ -531,5 +555,20 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
       ref.read(selectedAddressProvider.notifier).state = null;
       router.pop();
     }
+  }
+
+  DateTime getCurrentDate() {
+    var now = DateTime.now();
+    // ignore: join_return_with_assignment
+    now = now.subtract(
+      Duration(
+        hours: now.hour,
+        minutes: now.minute,
+        seconds: now.second,
+        milliseconds: now.millisecond,
+        microseconds: now.microsecond,
+      ),
+    );
+    return now;
   }
 }

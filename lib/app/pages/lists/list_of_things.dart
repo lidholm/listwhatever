@@ -18,6 +18,8 @@ class ListOfThings with _$ListOfThings {
     required String name,
     required ListType type,
     @Default(false) bool withMap,
+    @Default(false) bool withDates,
+    @Default(false) bool withTimes,
   }) = _ListOfThings;
 
   factory ListOfThings.fromJson(Map<String, dynamic> json) => _$ListOfThingsFromJson(json);

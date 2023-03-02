@@ -243,13 +243,12 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                   Expanded(
                     child: OutlinedButton(
                       onPressed: () {
-                        // TODO: Implement
                         _formKey.currentState?.reset();
                         const AddOrEditListItemRoute().push(context);
                       },
                       // color: Theme.of(context).colorScheme.secondary,
                       child: Text(
-                        'Cancel',
+                        'Skip',
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.secondary,
                         ),

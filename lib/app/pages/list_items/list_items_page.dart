@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/navigation/routes/add_or_edit_list_item_route.dart';
 import 'package:listanything/app/navigation/routes/add_or_edit_list_route.dart';
 import 'package:listanything/app/navigation/routes/filter_page_route.dart';
@@ -33,9 +34,16 @@ class ListItemsPage extends ConsumerWidget {
           data: (value) {
             final items = value.item1;
             final list = value.item2;
-            return ListItemsPageInner(items: items, isLoading: false, list: list);
+            return ListItemsPageInner(items: sortItems(list, items), isLoading: false, list: list);
           },
         );
+  }
+
+  List<ListItem> sortItems(ListOfThings? list, List<ListItem> items) {
+    if (list?.withDates ?? false) {
+      return items.sortedBy((item) => item.datetime ?? DateTime.now()).toList();
+    }
+    return items.sortedBy((item) => item.name).toList();
   }
 }
 
