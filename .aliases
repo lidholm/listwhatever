@@ -1,7 +1,11 @@
-alias startEmulators="firebase emulators:start --import ./emulatorData  --project listanything-2b9b0 --inspect-functions"
-alias exportEmulatorData="firebase emulators:export ./emulatorData   --project listanything-2b9b0"
+alias startEmulators="firebase emulators:start --import ./emulatorData --project listanything-2b9b0 --inspect-functions"
+alias exportEmulatorData="firebase emulators:export ./emulatorData --project listanything-2b9b0"
 alias buildImage="docker build -t lidholm/flutter:0.0.9 ."
 alias uploadImage="docker push lidholm/flutter:0.0.9"
 alias killPorts="kill-port --port 8000,9099,5001,8080,9000,5000,8085,9199,4000,4400,4500"
 alias generateFreezed="flutter pub run build_runner build --delete-conflicting-outputs"
-# alias killPortsWindows="netstat -ano | findstr :8085"  && taskkill /PID <PID> /F
+alias generateFreezedWatch="flutter pub run build_runner watch --delete-conflicting-outputs"
+alias deployHosting="flutter build web --release -t lib/main_production.dart && firebase deploy --only hosting"
+alias deployFunctions="firebase deploy --only functions"
+
+# alias killPortsWindows="netstat -ano | findstr :8085" && taskkill /PID <PID> /F

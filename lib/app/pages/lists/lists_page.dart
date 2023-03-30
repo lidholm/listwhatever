@@ -1,12 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:listanything/app/navigation/routes/add_or_edit_list_route.dart';
+import 'package:listanything/app/navigation/routes/add_list_route.dart';
 import 'package:listanything/app/navigation/routes/list_items_page_route.dart';
 import 'package:listanything/app/navigation/routes/routes.dart';
 import 'package:listanything/app/pages/lists/list_of_things.dart';
 import 'package:listanything/app/pages/lists/lists_provider.dart';
-import 'package:listanything/app/pages/lists/selected_list_provider.dart';
 import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
 import 'package:listanything/app/widgets/standardWidgets/common_app_bar.dart';
 import 'package:listanything/app/widgets/standardWidgets/common_drawer.dart';
@@ -46,7 +45,7 @@ class ListsPageInner extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    print('screen size: ${MediaQuery.of(context).size.width}');
+    // print('screen size: ${MediaQuery.of(context).size.width}');
     final crossAxisCount = kIsWeb ? (MediaQuery.of(context).size.width / 350).floor() : 2;
     return Scaffold(
       drawer: const Drawer(child: CommonDrawer()),
@@ -91,13 +90,13 @@ class ListsPageInner extends ConsumerWidget {
   }
 
   void selectList(WidgetRef ref, BuildContext context, ListOfThings list) {
-    ref.read(selectedListIdProvider.notifier).state = list.id;
-    const ListItemsPageRoute().push(context);
+    // ref.read(selectedListIdProvider.notifier).state = list.shareCode;
+    print('clicking ${list.shareCode}');
+    ListItemsPageRoute(shareCode: list.shareCode!).push(context);
     print(list);
   }
 
   Future<void> addNewList(WidgetRef ref, BuildContext context) async {
-    ref.read(selectedListIdProvider.notifier).state = null;
-    const AddOrEditListRoute().push(context);
+    const AddListRoute().push(context);
   }
 }

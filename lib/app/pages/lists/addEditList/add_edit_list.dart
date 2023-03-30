@@ -5,7 +5,7 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listanything/app/pages/lists/list_of_things.dart';
 import 'package:listanything/app/pages/lists/list_repository_provider.dart';
-import 'package:listanything/app/pages/lists/selected_list_provider.dart';
+import 'package:listanything/app/pages/lists/lists_provider.dart';
 import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
 import 'package:listanything/app/widgets/standardWidgets/async_value_widget.dart';
 import 'package:listanything/app/widgets/standardWidgets/common_app_bar.dart';
@@ -43,12 +43,16 @@ extension ListTypeExtension on ListType {
 }
 
 class AddEditList extends ConsumerWidget {
-  const AddEditList({super.key});
+  const AddEditList({super.key, required this.shareCode});
+  final String? shareCode;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    if (shareCode == null) {
+      return const AddEditListInner(list: null);
+    }
     return AsyncValueWidget<ListOfThings?>(
-      value: ref.watch(selectedListProvider),
+      value: ref.watch(listProvider(shareCode!)),
       data: (list) => AddEditListInner(list: list),
     );
   }

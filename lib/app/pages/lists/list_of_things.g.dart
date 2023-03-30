@@ -14,6 +14,9 @@ _$_ListOfThings _$$_ListOfThingsFromJson(Map<String, dynamic> json) =>
       withMap: json['withMap'] as bool? ?? false,
       withDates: json['withDates'] as bool? ?? false,
       withTimes: json['withTimes'] as bool? ?? false,
+      shareCode: json['shareCode'] == null
+          ? null
+          : _fromJsonShareCode(json['shareCode'] as String),
     );
 
 Map<String, dynamic> _$$_ListOfThingsToJson(_$_ListOfThings instance) =>
@@ -24,6 +27,7 @@ Map<String, dynamic> _$$_ListOfThingsToJson(_$_ListOfThings instance) =>
       'withMap': instance.withMap,
       'withDates': instance.withDates,
       'withTimes': instance.withTimes,
+      'shareCode': _toJsonShareCode(instance.shareCode),
     };
 
 const _$ListTypeEnumMap = {

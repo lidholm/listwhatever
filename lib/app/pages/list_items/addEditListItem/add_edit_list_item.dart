@@ -9,26 +9,36 @@ import 'package:listanything/app/geocoder/geocoderresult.dart';
 import 'package:listanything/app/geocoder/latlong.dart';
 import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/navigation/routes/routes.dart';
-import 'package:listanything/app/navigation/routes/search_location_page_route.dart';
+import 'package:listanything/app/navigation/routes/search_location_for_edit_page_route.dart';
 import 'package:listanything/app/pages/list_items/list_item.dart';
+import 'package:listanything/app/pages/list_items/list_item_provider.dart';
 import 'package:listanything/app/pages/list_items/list_items_repository_provider.dart';
-import 'package:listanything/app/pages/list_items/selected_list_item_provider.dart';
 import 'package:listanything/app/pages/lists/list_of_things.dart';
-import 'package:listanything/app/pages/lists/selected_list_provider.dart';
+import 'package:listanything/app/pages/lists/lists_provider.dart';
 import 'package:listanything/app/pages/map/searchLocation/selected_address_provider.dart';
 import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
+import 'package:listanything/app/widgets/standardWidgets/async_value_widget.dart';
 import 'package:listanything/app/widgets/standardWidgets/common_app_bar.dart';
 import 'package:listanything/app/widgets/standardWidgets/double_async_value_widget.dart';
+import 'package:tuple/tuple.dart';
 
 class AddEditListItem extends ConsumerWidget {
-  const AddEditListItem({super.key});
+  const AddEditListItem({super.key, required this.shareCode, required this.listItemId});
+  final String shareCode;
+  final String? listItemId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedAddress = ref.watch(selectedAddressProvider);
+    if (listItemId == null) {
+      return AsyncValueWidget<ListOfThings?>(
+        value: ref.watch(listProvider(shareCode)),
+        data: (list) => AddEditListItemInner(listItem: null, list: list, selectedAddress: selectedAddress),
+      );
+    }
     return DoubleAsyncValueWidget<ListItem?, ListOfThings?>(
-      firstValue: ref.watch(selectedListItemProvider),
-      secondValue: ref.watch(selectedListProvider),
+      firstValue: ref.watch(listItemProvider(Tuple2(shareCode, listItemId!))),
+      secondValue: ref.watch(listProvider(shareCode)),
       data: (listItem, list) => AddEditListItemInner(listItem: listItem, list: list, selectedAddress: selectedAddress),
     );
   }
@@ -130,7 +140,7 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
             AppBarAction(
               title: 'Delete list',
               icon: Icons.delete,
-              callback: () => deleteListItem(ref, GoRouter.of(context), widget.listItem!.id!),
+              callback: () => deleteListItem(ref, GoRouter.of(context), widget.list!.shareCode!, widget.listItem!.id!),
               overflow: false,
             ),
         ],
@@ -264,7 +274,12 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                               bottom: 0,
                               right: 0,
                               child: ElevatedButton(
-                                onPressed: () => editSearchLocation(context, widget.listItem?.searchPhrase),
+                                onPressed: () => editSearchLocation(
+                                  context,
+                                  widget.listItem?.searchPhrase,
+                                  widget.list!.shareCode!,
+                                  widget.listItem!.id!,
+                                ),
                                 child: const Text('Edit'),
                               ),
                             )
@@ -310,7 +325,6 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                                 });
                               },
                               validator: FormBuilderValidators.compose([
-                                // FormBuilderValidators.required(),
                                 FormBuilderValidators.maxLength(30),
                                 FormBuilderValidators.numeric(),
                               ]),
@@ -334,7 +348,6 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                                 });
                               },
                               validator: FormBuilderValidators.compose([
-                                FormBuilderValidators.required(),
                                 FormBuilderValidators.maxLength(30),
                                 FormBuilderValidators.numeric(),
                               ]),
@@ -429,7 +442,7 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                       onPressed: () {
                         if (_formKey.currentState?.saveAndValidate() ?? false) {
                           debugPrint('values: ${_formKey.currentState?.value.toString()}');
-                          saveListItem(GoRouter.of(context), widget.listItem);
+                          saveListItem(GoRouter.of(context), widget.list!.shareCode!, widget.listItem);
                         } else {
                           debugPrint('values: ${_formKey.currentState?.value.toString()}');
                           debugPrint('validation failed');
@@ -446,10 +459,12 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                     child: OutlinedButton(
                       onPressed: () {
                         _formKey.currentState?.reset();
+                        print('AddEditListItem: pop once');
+                        GoRouter.of(context).pop();
                       },
                       // color: Theme.of(context).colorScheme.secondary,
                       child: Text(
-                        'Reset',
+                        'Cancel',
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.secondary,
                         ),
@@ -465,9 +480,9 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
     );
   }
 
-  Future<void> saveListItem(GoRouter router, ListItem? listItem) async {
+  Future<void> saveListItem(GoRouter router, String shareCode, ListItem? listItem) async {
     final fields = _formKey.currentState!.fields;
-    final repo = await ref.read(listItemsRepositoryProvider.future);
+    final repo = await ref.read(listItemsRepositoryProvider(shareCode).future);
     final name = fields[nameFieldName]!.value as String;
     final info = fields[infoFieldName]!.value as String;
     final datetime = fields[dateTimeField]?.value as DateTime?;
@@ -527,12 +542,12 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
       );
       final refId = await repo.updateItem(itemId: newListItem.id!, item: newListItem);
       print('Updated $refId');
-      ref.read(selectedListItemIdProvider.notifier).state = null;
     }
+    print('AddEditListItem: pop once');
     router.pop();
-    if (widget.list?.withMap ?? false) {
+    if ((widget.list?.withMap ?? false) && widget.listItem == null) {
       ref.read(selectedAddressProvider.notifier).state = null;
-      router.pop();
+      print('AddEditListItem: pop twice');
     }
   }
 
@@ -542,17 +557,20 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
     return s;
   }
 
-  void editSearchLocation(BuildContext context, String? searchPhrase) {
-    SearchLocationPageRoute(searchPhrase: searchPhrase).push(context);
+  void editSearchLocation(BuildContext context, String? searchPhrase, String shareCode, String listItemId) {
+    SearchLocationForEditPageRoute(searchPhrase: searchPhrase, shareCode: shareCode, listItemId: listItemId)
+        .push(context);
   }
 
-  Future<void> deleteListItem(WidgetRef ref, GoRouter router, String listItemId) async {
+  Future<void> deleteListItem(WidgetRef ref, GoRouter router, String shareCode, String listItemId) async {
     print('delete');
-    final repo = await ref.read(listItemsRepositoryProvider.future);
+    final repo = await ref.read(listItemsRepositoryProvider(shareCode).future);
     await repo.deleteItem(itemId: listItemId);
+    print('AddEditListItem: pop once');
     router.pop();
     if (ref.read(selectedAddressProvider) != null) {
       ref.read(selectedAddressProvider.notifier).state = null;
+      print('AddEditListItem: pop twice');
       router.pop();
     }
   }

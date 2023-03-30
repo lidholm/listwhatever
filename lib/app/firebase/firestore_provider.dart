@@ -13,7 +13,7 @@ final firestoreProvider = FutureProvider<FirebaseFirestore>((ref) async {
   final instance = ref.watch(baseFirestoreProvider);
 
   // ignore: avoid_print
-  print('firestoreProvider.instance: $instance');
+  // print('firestoreProvider.instance: $instance');
 
   if (useFirebaseEmulator) {
     // ignore: avoid_print

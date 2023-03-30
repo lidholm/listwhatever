@@ -3,11 +3,13 @@ import 'package:go_router/go_router.dart';
 import 'package:listanything/app/pages/lists/addEditList/add_edit_list.dart';
 
 @immutable
-class AddOrEditListRoute extends GoRouteData {
-  const AddOrEditListRoute();
-
+class EditListRoute extends GoRouteData {
+  const EditListRoute({this.shareCode});
+  final String? shareCode;
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const AddEditList();
+    return AddEditList(
+      shareCode: shareCode,
+    );
   }
 }

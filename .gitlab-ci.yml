@@ -194,3 +194,22 @@ deployToFirebaseHostingAndRules:
     - /firebase --version
     - /firebase deploy --only hosting
     # - /firebase deploy --only firestore:rules
+
+deployToFirebaseFunctions:
+  stage: deploy
+  environment:
+    name: production/web
+    url: https://listanything-2b9b0.web.app/
+  only:
+    - main
+  script:
+    - pwd
+    - source .prod.env
+    - echo $FIREBASE_TOKEN | head -c 10
+    - head -c  15 /builds/lidholm/listanything/firebase-deploy-service-account.json
+    - export GOOGLE_APPLICATION_CREDENTIALS=/builds/lidholm/listanything/firebase-deploy-service-account.json
+    - head -c 100 /builds/lidholm/listanything/firebase-deploy-service-account.json
+    - /firebase projects:list
+    - /firebase use listanything-2b9b0
+    - /firebase --version
+    - /firebase deploy --only functions
