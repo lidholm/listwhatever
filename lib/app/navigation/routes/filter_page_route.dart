@@ -4,10 +4,10 @@ import 'package:listanything/app/pages/list_items/filter_page.dart';
 
 @immutable
 class FilterPageRoute extends GoRouteData {
-  const FilterPageRoute();
-
+  const FilterPageRoute({required this.shareCode});
+  final String shareCode;
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const FilterPage();
+    return FilterPage(shareCode: shareCode);
   }
 }

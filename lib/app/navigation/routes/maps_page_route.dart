@@ -4,10 +4,14 @@ import 'package:listanything/app/pages/maps_page.dart';
 
 @immutable
 class MapsPageRoute extends GoRouteData {
-  const MapsPageRoute();
+  const MapsPageRoute({
+    required this.shareCode,
+  });
+
+  final String shareCode;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const MapsPage();
+    return MapsPage(shareCode: shareCode);
   }
 }

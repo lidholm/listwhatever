@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listanything/app/navigation/routes/about_page_route.dart';
-import 'package:listanything/app/navigation/routes/add_or_edit_list_item_route.dart';
-import 'package:listanything/app/navigation/routes/add_or_edit_list_route.dart';
+import 'package:listanything/app/navigation/routes/add_list_item_route.dart';
+import 'package:listanything/app/navigation/routes/add_list_route.dart';
 import 'package:listanything/app/navigation/routes/counter_page_route.dart';
+import 'package:listanything/app/navigation/routes/edit_list_item_route.dart';
+import 'package:listanything/app/navigation/routes/edit_list_route.dart';
 import 'package:listanything/app/navigation/routes/filter_page_route.dart';
 import 'package:listanything/app/navigation/routes/list_items_page_route.dart';
+import 'package:listanything/app/navigation/routes/list_page_route.dart';
 import 'package:listanything/app/navigation/routes/loading_user_route.dart';
 import 'package:listanything/app/navigation/routes/maps_page_route.dart';
 import 'package:listanything/app/navigation/routes/privacy_policy_page_route.dart';
 import 'package:listanything/app/navigation/routes/profile_page_route.dart';
-import 'package:listanything/app/navigation/routes/search_location_page_route.dart';
+import 'package:listanything/app/navigation/routes/search_location_for_add_page_route.dart';
+import 'package:listanything/app/navigation/routes/search_location_for_edit_page_route.dart';
 import 'package:listanything/app/navigation/routes/sign_in_screen_route.dart';
-import 'package:listanything/app/pages/lists/lists_page.dart';
 
 part 'routes.g.dart';
 
-@TypedGoRoute<ListsPageRoute>(
+@TypedGoRoute<WelcomeRoute>(
   path: '/',
   routes: [
     TypedGoRoute<LoadingUserRoute>(
@@ -28,17 +31,43 @@ part 'routes.g.dart';
     TypedGoRoute<CounterPageRoute>(
       path: 'counter',
     ),
-    TypedGoRoute<AddOrEditListRoute>(
-      path: 'addoreditlist',
-    ),
-    TypedGoRoute<ListItemsPageRoute>(
-      path: 'listitems',
-    ),
-    TypedGoRoute<AddOrEditListItemRoute>(
-      path: 'addoreditlistitem',
-    ),
-    TypedGoRoute<SearchLocationPageRoute>(
-      path: 'searchlocation',
+    TypedGoRoute<ListsPageRoute>(
+      path: 'lists',
+      routes: [
+        TypedGoRoute<AddListRoute>(
+          path: 'add',
+        ),
+        TypedGoRoute<EditListRoute>(
+          path: ':shareCode/edit',
+        ),
+        TypedGoRoute<MapsPageRoute>(
+          path: ':shareCode/map',
+        ),
+        TypedGoRoute<ListItemsPageRoute>(
+          path: ':shareCode/items',
+          routes: [
+            TypedGoRoute<EditListItemRoute>(
+              path: ':listItemId/edit',
+              routes: [
+                TypedGoRoute<SearchLocationForEditPageRoute>(
+                  path: 'searchlocation',
+                ),
+              ],
+            ),
+            TypedGoRoute<AddListItemRoute>(
+              path: 'add',
+              routes: [
+                TypedGoRoute<SearchLocationForAddPageRoute>(
+                  path: 'searchlocation',
+                ),
+              ],
+            ),
+            TypedGoRoute<FilterPageRoute>(
+              path: 'filter',
+            ),
+          ],
+        ),
+      ],
     ),
     TypedGoRoute<ProfilePageRoute>(
       path: 'profile',
@@ -46,21 +75,15 @@ part 'routes.g.dart';
     TypedGoRoute<AboutPageRoute>(
       path: 'about',
     ),
-    TypedGoRoute<FilterPageRoute>(
-      path: 'filter',
-    ),
-    TypedGoRoute<MapsPageRoute>(
-      path: 'map',
-    ),
     TypedGoRoute<PrivacyPolicyPageRoute>(
       path: 'privacypolicy',
     ),
   ],
 )
 @immutable
-class ListsPageRoute extends GoRouteData {
+class WelcomeRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const ListsPage();
+    return const Text('Welcome');
   }
 }

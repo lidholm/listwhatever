@@ -26,6 +26,8 @@ mixin _$ListOfThings {
   bool get withMap => throw _privateConstructorUsedError;
   bool get withDates => throw _privateConstructorUsedError;
   bool get withTimes => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _fromJsonShareCode, toJson: _toJsonShareCode)
+  String? get shareCode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +47,9 @@ abstract class $ListOfThingsCopyWith<$Res> {
       ListType type,
       bool withMap,
       bool withDates,
-      bool withTimes});
+      bool withTimes,
+      @JsonKey(fromJson: _fromJsonShareCode, toJson: _toJsonShareCode)
+          String? shareCode});
 }
 
 /// @nodoc
@@ -67,6 +71,7 @@ class _$ListOfThingsCopyWithImpl<$Res, $Val extends ListOfThings>
     Object? withMap = null,
     Object? withDates = null,
     Object? withTimes = null,
+    Object? shareCode = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -93,6 +98,10 @@ class _$ListOfThingsCopyWithImpl<$Res, $Val extends ListOfThings>
           ? _value.withTimes
           : withTimes // ignore: cast_nullable_to_non_nullable
               as bool,
+      shareCode: freezed == shareCode
+          ? _value.shareCode
+          : shareCode // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -111,7 +120,9 @@ abstract class _$$_ListOfThingsCopyWith<$Res>
       ListType type,
       bool withMap,
       bool withDates,
-      bool withTimes});
+      bool withTimes,
+      @JsonKey(fromJson: _fromJsonShareCode, toJson: _toJsonShareCode)
+          String? shareCode});
 }
 
 /// @nodoc
@@ -131,6 +142,7 @@ class __$$_ListOfThingsCopyWithImpl<$Res>
     Object? withMap = null,
     Object? withDates = null,
     Object? withTimes = null,
+    Object? shareCode = freezed,
   }) {
     return _then(_$_ListOfThings(
       id: freezed == id
@@ -157,6 +169,10 @@ class __$$_ListOfThingsCopyWithImpl<$Res>
           ? _value.withTimes
           : withTimes // ignore: cast_nullable_to_non_nullable
               as bool,
+      shareCode: freezed == shareCode
+          ? _value.shareCode
+          : shareCode // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -170,7 +186,9 @@ class _$_ListOfThings implements _ListOfThings {
       required this.type,
       this.withMap = false,
       this.withDates = false,
-      this.withTimes = false});
+      this.withTimes = false,
+      @JsonKey(fromJson: _fromJsonShareCode, toJson: _toJsonShareCode)
+          this.shareCode = null});
 
   factory _$_ListOfThings.fromJson(Map<String, dynamic> json) =>
       _$$_ListOfThingsFromJson(json);
@@ -190,10 +208,13 @@ class _$_ListOfThings implements _ListOfThings {
   @override
   @JsonKey()
   final bool withTimes;
+  @override
+  @JsonKey(fromJson: _fromJsonShareCode, toJson: _toJsonShareCode)
+  final String? shareCode;
 
   @override
   String toString() {
-    return 'ListOfThings(id: $id, name: $name, type: $type, withMap: $withMap, withDates: $withDates, withTimes: $withTimes)';
+    return 'ListOfThings(id: $id, name: $name, type: $type, withMap: $withMap, withDates: $withDates, withTimes: $withTimes, shareCode: $shareCode)';
   }
 
   @override
@@ -208,13 +229,15 @@ class _$_ListOfThings implements _ListOfThings {
             (identical(other.withDates, withDates) ||
                 other.withDates == withDates) &&
             (identical(other.withTimes, withTimes) ||
-                other.withTimes == withTimes));
+                other.withTimes == withTimes) &&
+            (identical(other.shareCode, shareCode) ||
+                other.shareCode == shareCode));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name, type, withMap, withDates, withTimes);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, type, withMap, withDates, withTimes, shareCode);
 
   @JsonKey(ignore: true)
   @override
@@ -237,7 +260,9 @@ abstract class _ListOfThings implements ListOfThings {
       required final ListType type,
       final bool withMap,
       final bool withDates,
-      final bool withTimes}) = _$_ListOfThings;
+      final bool withTimes,
+      @JsonKey(fromJson: _fromJsonShareCode, toJson: _toJsonShareCode)
+          final String? shareCode}) = _$_ListOfThings;
 
   factory _ListOfThings.fromJson(Map<String, dynamic> json) =
       _$_ListOfThings.fromJson;
@@ -254,6 +279,9 @@ abstract class _ListOfThings implements ListOfThings {
   bool get withDates;
   @override
   bool get withTimes;
+  @override
+  @JsonKey(fromJson: _fromJsonShareCode, toJson: _toJsonShareCode)
+  String? get shareCode;
   @override
   @JsonKey(ignore: true)
   _$$_ListOfThingsCopyWith<_$_ListOfThings> get copyWith =>

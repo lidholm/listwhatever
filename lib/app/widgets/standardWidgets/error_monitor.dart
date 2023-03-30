@@ -14,6 +14,7 @@ class ErrorMonitor {
 
   Future<void> recordError(dynamic e, StackTrace? s, String reason) async {
     if (crashlytics != null) {
+      print('got error $e $s');
       // await crashlytics!.recordError(e, s, reason: reason);
     } else {
       // ignore: avoid_print

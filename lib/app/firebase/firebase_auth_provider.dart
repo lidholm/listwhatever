@@ -10,9 +10,6 @@ final firebaseAuthProvider = FutureProvider<fire_auth.FirebaseAuth>((ref) async 
   final useFirebaseEmulator = await ref.watch(useFirebaseEmulatorProvider.future);
   final instance = ref.watch(baseFirebaseAuthProvider);
 
-  // ignore: avoid_print
-  print('firebaseAuthProvider.instance: $instance');
-
   if (useFirebaseEmulator) {
     final localHostString = await ref.watch(emulatorIpAddressProvider.future);
     const port = 9099;

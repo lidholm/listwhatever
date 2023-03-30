@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:listanything/app/navigation/routes/add_or_edit_list_item_route.dart';
-import 'package:listanything/app/navigation/routes/add_or_edit_list_route.dart';
+import 'package:listanything/app/navigation/routes/add_list_item_route.dart';
+import 'package:listanything/app/navigation/routes/edit_list_item_route.dart';
+import 'package:listanything/app/navigation/routes/edit_list_route.dart';
 import 'package:listanything/app/navigation/routes/filter_page_route.dart';
 import 'package:listanything/app/navigation/routes/list_items_page_route.dart';
 import 'package:listanything/app/navigation/routes/routes.dart';
 import 'package:listanything/app/pages/list_items/filter_provider.dart';
 import 'package:listanything/app/pages/list_items/filtered_list_items_provider.dart';
 import 'package:listanything/app/pages/list_items/list_item.dart';
-import 'package:listanything/app/pages/list_items/selected_list_item_provider.dart';
-import 'package:listanything/app/pages/lists/selected_list_provider.dart';
+import 'package:listanything/app/pages/lists/list_of_things.dart';
 import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
 import 'package:listanything/app/widgets/standardWidgets/common_app_bar.dart';
 import 'package:listanything/app/widgets/standardWidgets/exception_widget.dart';
@@ -21,29 +21,34 @@ import 'package:listanything/app/widgets/standardWidgets/exception_widget.dart';
 double doubleInRange(Random source, num start, num end) => source.nextDouble() * (end - start) + start;
 
 class MapsPage extends ConsumerWidget {
-  const MapsPage({super.key});
-
+  const MapsPage({super.key, required this.shareCode});
+  final String shareCode;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(filteredListIemsProvider).when(
+    return ref.watch(filtededListItemsAndListProvider(shareCode)).when(
           error: (e, st) => ExceptionWidget(e: e, st: st),
           loading: () => MapsPageInner(
             items: List.generate(5, (index) => const ListItem(name: '', categories: {})),
             isLoading: true,
+            list: const ListOfThings(name: 'Not used', type: ListType.other),
           ),
-          data: (items) => MapsPageInner(items: items, isLoading: false),
+          data: (value) {
+            final list = value.item2;
+            final items = value.item1;
+            return MapsPageInner(items: items, isLoading: false, list: list!);
+          },
         );
   }
 }
 
 class MapsPageInner extends ConsumerWidget {
-  const MapsPageInner({super.key, required this.items, required this.isLoading});
+  const MapsPageInner({super.key, required this.items, required this.isLoading, required this.list});
   final List<ListItem> items;
   final bool isLoading;
+  final ListOfThings list;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final listId = ref.watch(selectedListIdProvider);
     final hasFilters = ref.watch(filterProvider).values.expand((e) => e).isNotEmpty;
 
     final allMarkers = items
@@ -67,25 +72,25 @@ class MapsPageInner extends ConsumerWidget {
           AppBarAction(
             title: 'Show list',
             icon: Icons.list,
-            callback: () => showListItemPage(ref, context),
+            callback: () => showListItemPage(ref, context, list.id!),
             overflow: false,
           ),
           AppBarAction(
             title: 'New item',
             icon: Icons.playlist_add_outlined,
-            callback: () => addNewList(ref, context),
+            callback: () => addNewListItem(ref, context, list.shareCode!),
             overflow: false,
           ),
           AppBarAction(
             title: 'Filter',
             icon: hasFilters ? Icons.filter_alt : Icons.filter_alt_off,
-            callback: () => filterPage(context),
+            callback: () => filterPage(context, list.shareCode!),
             overflow: false,
           ),
           AppBarAction(
             title: 'Edit list',
             icon: Icons.edit,
-            callback: () => editList(ref, context, listId!),
+            callback: () => editList(ref, context, list.shareCode!),
             overflow: true,
           ),
         ],
@@ -115,26 +120,23 @@ class MapsPageInner extends ConsumerWidget {
     );
   }
 
-  void editList(WidgetRef ref, BuildContext context, String listId) {
-    ref.read(selectedListIdProvider.notifier).state = listId;
-    const AddOrEditListRoute().push(context);
+  void editList(WidgetRef ref, BuildContext context, String shareCode) {
+    EditListRoute(shareCode: shareCode).push(context);
   }
 
-  void editListItem(WidgetRef ref, BuildContext context, ListItem listItem) {
-    ref.read(selectedListItemIdProvider.notifier).state = listItem.id;
-    const AddOrEditListItemRoute().push(context);
+  void editListItem(WidgetRef ref, BuildContext context, ListItem listItem, String shareCode) {
+    EditListItemRoute(shareCode: shareCode, listItemId: listItem.id).push(context);
   }
 
-  void addNewList(WidgetRef ref, BuildContext context) {
-    ref.read(selectedListItemIdProvider.notifier).state = null;
-    const AddOrEditListItemRoute().push(context);
+  void addNewListItem(WidgetRef ref, BuildContext context, String shareCode) {
+    AddListItemRoute(shareCode: shareCode).push(context);
   }
 
-  void filterPage(BuildContext context) {
-    const FilterPageRoute().push(context);
+  void filterPage(BuildContext context, String shareCode) {
+    FilterPageRoute(shareCode: shareCode).push(context);
   }
 
-  void showListItemPage(WidgetRef ref, BuildContext context) {
-    const ListItemsPageRoute().push(context);
+  void showListItemPage(WidgetRef ref, BuildContext context, String listId) {
+    ListItemsPageRoute(shareCode: listId).push(context);
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listanything/app/navigation/current_user_provider.dart';
+import 'package:listanything/app/navigation/routes/list_page_route.dart';
 import 'package:listanything/app/navigation/routes/loading_user_route.dart';
 import 'package:listanything/app/navigation/routes/routes.dart';
 import 'package:listanything/app/navigation/routes/sign_in_screen_route.dart';
@@ -12,8 +13,10 @@ final providers = [EmailAuthProvider()];
 final routerProvider = Provider(
   (ref) => GoRouter(
     initialLocation: ListsPageRoute().location,
+    //debugLogDiagnostics: true,
     routes: $appRoutes,
     redirect: (context, state) {
+      print('state.fullpath: ${state.fullpath}');
       // and then use userChanges to check for changes to if a user is logged in or not
       final userChanges = ref.watch(userChangesProvider);
 
@@ -22,7 +25,10 @@ final routerProvider = Provider(
       final path = userChanges.when(
         error: (e, st) => '/error_loading_user',
         loading: () => const LoadingUserRoute().location,
-        data: (user) => user == null ? const SignInScreenRoute().location : null,
+        data: (user) {
+          print('router: user: $user');
+          return user == null ? const SignInScreenRoute().location : null;
+        },
       );
       print('going to. $path');
       return path;

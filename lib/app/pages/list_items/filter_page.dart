@@ -8,12 +8,13 @@ import 'package:listanything/app/pages/list_items/list_items_provider.dart';
 import 'package:listanything/app/widgets/standardWidgets/exception_widget.dart';
 
 class FilterPage extends ConsumerWidget {
-  const FilterPage({Key? key}) : super(key: key);
+  const FilterPage({Key? key, required this.shareCode}) : super(key: key);
+  final String shareCode;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final filters = ref.watch(filterProvider);
-    return ref.watch(listItemsProvider).when(
+    return ref.watch(listItemsProvider(shareCode)).when(
           error: (e, st) => ExceptionWidget(e: e, st: st),
           loading: () => FilterPageInner(categories: const {}, isLoading: true, ref: ref, filters: filters),
           data: (items) =>

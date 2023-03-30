@@ -8,35 +8,26 @@ import 'package:listanything/app/constants.dart';
 import 'package:listanything/app/geocoder/geocoder.dart';
 import 'package:listanything/app/geocoder/geocoderresult.dart';
 import 'package:listanything/app/helpers/constants.dart';
-import 'package:listanything/app/navigation/routes/add_or_edit_list_item_route.dart';
-import 'package:listanything/app/navigation/routes/routes.dart';
-import 'package:listanything/app/pages/list_items/list_item.dart';
-import 'package:listanything/app/pages/list_items/selected_list_item_provider.dart';
-import 'package:listanything/app/pages/lists/list_of_things.dart';
-import 'package:listanything/app/pages/lists/selected_list_provider.dart';
 import 'package:listanything/app/pages/map/searchLocation/selected_address_provider.dart';
-import 'package:listanything/app/widgets/standardWidgets/double_async_value_widget.dart';
 
 class SearchLocationPage extends ConsumerWidget {
-  const SearchLocationPage(this.searchPhrase, {super.key});
+  const SearchLocationPage(this.searchPhrase, {super.key, required this.shareCode, required this.listItemId});
   final String? searchPhrase;
+  final String shareCode;
+  final String? listItemId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return DoubleAsyncValueWidget<ListItem?, ListOfThings?>(
-      firstValue: ref.watch(selectedListItemProvider),
-      secondValue: ref.watch(selectedListProvider),
-      data: (listItem, list) => AddEditListItemInner(listItem: listItem, list: list, searchPhrase: searchPhrase),
-    );
+    return AddEditListItemInner(shareCode: shareCode, searchPhrase: searchPhrase, listItemId: listItemId);
   }
 }
 
 class AddEditListItemInner extends ConsumerStatefulWidget {
-  const AddEditListItemInner({Key? key, required this.listItem, required this.list, this.searchPhrase})
+  const AddEditListItemInner({Key? key, required this.shareCode, this.searchPhrase, required this.listItemId})
       : super(key: key);
-  final ListItem? listItem;
-  final ListOfThings? list;
+  final String shareCode;
   final String? searchPhrase;
+  final String? listItemId;
 
   @override
   ConsumerState<AddEditListItemInner> createState() {
@@ -125,7 +116,7 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                               print(results);
                               setState(() {
                                 addresses = results ?? [];
-                                selectedAddress = results?[0];
+                                selectedAddress = results?.first;
                               });
                             },
                             child: const Text('Search'),
@@ -227,7 +218,13 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                         if (_formKey.currentState?.saveAndValidate() ?? false) {
                           debugPrint(_formKey.currentState?.value.toString());
                           final searchPhrase = _formKey.currentState?.fields[searchPhraseName]?.value as String?;
-                          saveAddress(GoRouter.of(context), selectedAddress!, searchPhrase);
+                          saveAddress(
+                            GoRouter.of(context),
+                            selectedAddress!,
+                            searchPhrase,
+                            widget.shareCode,
+                            widget.listItemId,
+                          );
                         } else {
                           debugPrint(_formKey.currentState?.value.toString());
                           debugPrint('validation failed');
@@ -244,7 +241,12 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                     child: OutlinedButton(
                       onPressed: () {
                         _formKey.currentState?.reset();
-                        const AddOrEditListItemRoute().push(context);
+                        // TODO: Remove if statement?
+                        if (widget.listItemId == null) {
+                          GoRouter.of(context).pop();
+                        } else {
+                          GoRouter.of(context).pop();
+                        }
                       },
                       // color: Theme.of(context).colorScheme.secondary,
                       child: Text(
@@ -264,9 +266,21 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
     );
   }
 
-  Future<void> saveAddress(GoRouter router, GeocoderResult result, String? searchPhrase) async {
+  Future<void> saveAddress(
+    GoRouter router,
+    GeocoderResult result,
+    String? searchPhrase,
+    String shareCode,
+    String? listItemId,
+  ) async {
     ref.read(selectedAddressProvider.notifier).state =
         result.copyWith(searchPhrase: searchPhrase ?? 'No search phrase');
-    const AddOrEditListItemRoute().push(context);
+
+    // TODO: Remove if statement?
+    if (listItemId == null) {
+      router.pop();
+    } else {
+      router.pop();
+    }
   }
 }
