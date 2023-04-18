@@ -8,6 +8,6 @@ class AddListRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const AddEditList(shareCode: null);
+    return const AddEditList(publicListId: null);
   }
 }

@@ -21,16 +21,16 @@ import 'package:listanything/app/widgets/standardWidgets/exception_widget.dart';
 double doubleInRange(Random source, num start, num end) => source.nextDouble() * (end - start) + start;
 
 class MapsPage extends ConsumerWidget {
-  const MapsPage({super.key, required this.shareCode});
-  final String shareCode;
+  const MapsPage({super.key, required this.publicListId});
+  final String publicListId;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(filtededListItemsAndListProvider(shareCode)).when(
+    return ref.watch(filteredListItemsAndListProvider(publicListId)).when(
           error: (e, st) => ExceptionWidget(e: e, st: st),
           loading: () => MapsPageInner(
             items: List.generate(5, (index) => const ListItem(name: '', categories: {})),
             isLoading: true,
-            list: const ListOfThings(name: 'Not used', type: ListType.other),
+            list: const ListOfThings(name: 'Not used', userId: 'Not used since a shimmer', type: ListType.other),
           ),
           data: (value) {
             final list = value.item2;
@@ -78,19 +78,19 @@ class MapsPageInner extends ConsumerWidget {
           AppBarAction(
             title: 'New item',
             icon: Icons.playlist_add_outlined,
-            callback: () => addNewListItem(ref, context, list.shareCode!),
+            callback: () => addNewListItem(ref, context, list.publicListId!),
             overflow: false,
           ),
           AppBarAction(
             title: 'Filter',
             icon: hasFilters ? Icons.filter_alt : Icons.filter_alt_off,
-            callback: () => filterPage(context, list.shareCode!),
+            callback: () => filterPage(context, list.publicListId!),
             overflow: false,
           ),
           AppBarAction(
             title: 'Edit list',
             icon: Icons.edit,
-            callback: () => editList(ref, context, list.shareCode!),
+            callback: () => editList(ref, context, list.publicListId!),
             overflow: true,
           ),
         ],
@@ -120,23 +120,23 @@ class MapsPageInner extends ConsumerWidget {
     );
   }
 
-  void editList(WidgetRef ref, BuildContext context, String shareCode) {
-    EditListRoute(shareCode: shareCode).push(context);
+  void editList(WidgetRef ref, BuildContext context, String publicListId) {
+    EditListRoute(publicListId: publicListId).push(context);
   }
 
-  void editListItem(WidgetRef ref, BuildContext context, ListItem listItem, String shareCode) {
-    EditListItemRoute(shareCode: shareCode, listItemId: listItem.id).push(context);
+  void editListItem(WidgetRef ref, BuildContext context, ListItem listItem, String publicListId) {
+    EditListItemRoute(publicListId: publicListId, listItemId: listItem.id).push(context);
   }
 
-  void addNewListItem(WidgetRef ref, BuildContext context, String shareCode) {
-    AddListItemRoute(shareCode: shareCode).push(context);
+  void addNewListItem(WidgetRef ref, BuildContext context, String publicListId) {
+    AddListItemRoute(publicListId: publicListId).push(context);
   }
 
-  void filterPage(BuildContext context, String shareCode) {
-    FilterPageRoute(shareCode: shareCode).push(context);
+  void filterPage(BuildContext context, String publicListId) {
+    FilterPageRoute(publicListId: publicListId).push(context);
   }
 
-  void showListItemPage(WidgetRef ref, BuildContext context, String listId) {
-    ListItemsPageRoute(shareCode: listId).push(context);
+  void showListItemPage(WidgetRef ref, BuildContext context, String publicListId) {
+    ListItemsPageRoute(publicListId: publicListId).push(context);
   }
 }

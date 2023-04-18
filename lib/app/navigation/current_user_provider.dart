@@ -5,7 +5,7 @@ import 'package:listanything/app/navigation/selected_user.dart';
 
 const SelectedUser? userOverride = null;
 // final userOverride = SelectedUser(uid: 'XKyyh5drxmUMT3GI1jij6HGhyjk2', email: 'useroverride@email.com'); // Prod
-// final userOverride = SelectedUser(uid: 'p705JjMr9UzanvEERZhYUpsS5jqa', email: 'useroverride@email.com'); // Local
+// final userOverride = SelectedUser(uid: 'p705JjMr9UzanvEERZhYUpsS5jqa', email: 'regular@email.com'); // Local
 
 final userChangesProvider = StreamProvider<SelectedUser?>((ref) async* {
   // ignore: unnecessary_null_comparison

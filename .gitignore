@@ -133,3 +133,8 @@ lib/app/firebase/firebase_options.dart
 ios/Runner/GoogleService-Info.plist
 .prod.env
 firebase-deploy-service-account.json
+
+test/firestore/node_modules
+test/firestore/*.spec.js
+credentials.json
+firebaseExportCredentials.json

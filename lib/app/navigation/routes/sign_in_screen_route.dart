@@ -16,7 +16,12 @@ class SignInScreenRoute extends GoRouteData {
       builder: (context, ref, child) {
         return AsyncValueWidget<FirebaseAuth>(
           value: ref.watch(firebaseAuthProvider),
-          data: (auth) => SignInScreen(auth: auth),
+          data: (auth) => SignInScreen(
+            auth: auth,
+            providers: FirebaseUIAuth.providersFor(
+              auth.app,
+            ),
+          ),
         );
       },
     );

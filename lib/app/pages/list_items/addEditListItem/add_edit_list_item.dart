@@ -23,8 +23,8 @@ import 'package:listanything/app/widgets/standardWidgets/double_async_value_widg
 import 'package:tuple/tuple.dart';
 
 class AddEditListItem extends ConsumerWidget {
-  const AddEditListItem({super.key, required this.shareCode, required this.listItemId});
-  final String shareCode;
+  const AddEditListItem({super.key, required this.publicListId, required this.listItemId});
+  final String publicListId;
   final String? listItemId;
 
   @override
@@ -32,13 +32,13 @@ class AddEditListItem extends ConsumerWidget {
     final selectedAddress = ref.watch(selectedAddressProvider);
     if (listItemId == null) {
       return AsyncValueWidget<ListOfThings?>(
-        value: ref.watch(listProvider(shareCode)),
+        value: ref.watch(listProvider(publicListId)),
         data: (list) => AddEditListItemInner(listItem: null, list: list, selectedAddress: selectedAddress),
       );
     }
     return DoubleAsyncValueWidget<ListItem?, ListOfThings?>(
-      firstValue: ref.watch(listItemProvider(Tuple2(shareCode, listItemId!))),
-      secondValue: ref.watch(listProvider(shareCode)),
+      firstValue: ref.watch(listItemProvider(Tuple2(publicListId, listItemId!))),
+      secondValue: ref.watch(listProvider(publicListId)),
       data: (listItem, list) => AddEditListItemInner(listItem: listItem, list: list, selectedAddress: selectedAddress),
     );
   }
@@ -140,7 +140,8 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
             AppBarAction(
               title: 'Delete list',
               icon: Icons.delete,
-              callback: () => deleteListItem(ref, GoRouter.of(context), widget.list!.shareCode!, widget.listItem!.id!),
+              callback: () =>
+                  deleteListItem(ref, GoRouter.of(context), widget.list!.publicListId!, widget.listItem!.id!),
               overflow: false,
             ),
         ],
@@ -277,7 +278,7 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                                 onPressed: () => editSearchLocation(
                                   context,
                                   widget.listItem?.searchPhrase,
-                                  widget.list!.shareCode!,
+                                  widget.list!.publicListId!,
                                   widget.listItem!.id!,
                                 ),
                                 child: const Text('Edit'),
@@ -442,7 +443,7 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                       onPressed: () {
                         if (_formKey.currentState?.saveAndValidate() ?? false) {
                           debugPrint('values: ${_formKey.currentState?.value.toString()}');
-                          saveListItem(GoRouter.of(context), widget.list!.shareCode!, widget.listItem);
+                          saveListItem(GoRouter.of(context), widget.list!.publicListId!, widget.listItem);
                         } else {
                           debugPrint('values: ${_formKey.currentState?.value.toString()}');
                           debugPrint('validation failed');
@@ -480,9 +481,9 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
     );
   }
 
-  Future<void> saveListItem(GoRouter router, String shareCode, ListItem? listItem) async {
+  Future<void> saveListItem(GoRouter router, String publicListId, ListItem? listItem) async {
     final fields = _formKey.currentState!.fields;
-    final repo = await ref.read(listItemsRepositoryProvider(shareCode).future);
+    final repo = await ref.read(listItemsRepositoryProvider(publicListId).future);
     final name = fields[nameFieldName]!.value as String;
     final info = fields[infoFieldName]!.value as String;
     final datetime = fields[dateTimeField]?.value as DateTime?;
@@ -557,14 +558,14 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
     return s;
   }
 
-  void editSearchLocation(BuildContext context, String? searchPhrase, String shareCode, String listItemId) {
-    SearchLocationForEditPageRoute(searchPhrase: searchPhrase, shareCode: shareCode, listItemId: listItemId)
+  void editSearchLocation(BuildContext context, String? searchPhrase, String publicListId, String listItemId) {
+    SearchLocationForEditPageRoute(searchPhrase: searchPhrase, publicListId: publicListId, listItemId: listItemId)
         .push(context);
   }
 
-  Future<void> deleteListItem(WidgetRef ref, GoRouter router, String shareCode, String listItemId) async {
+  Future<void> deleteListItem(WidgetRef ref, GoRouter router, String publicListId, String listItemId) async {
     print('delete');
-    final repo = await ref.read(listItemsRepositoryProvider(shareCode).future);
+    final repo = await ref.read(listItemsRepositoryProvider(publicListId).future);
     await repo.deleteItem(itemId: listItemId);
     print('AddEditListItem: pop once');
     router.pop();

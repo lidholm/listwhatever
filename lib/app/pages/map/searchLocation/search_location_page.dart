@@ -11,21 +11,21 @@ import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/pages/map/searchLocation/selected_address_provider.dart';
 
 class SearchLocationPage extends ConsumerWidget {
-  const SearchLocationPage(this.searchPhrase, {super.key, required this.shareCode, required this.listItemId});
+  const SearchLocationPage(this.searchPhrase, {super.key, required this.publicListId, required this.listItemId});
   final String? searchPhrase;
-  final String shareCode;
+  final String publicListId;
   final String? listItemId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return AddEditListItemInner(shareCode: shareCode, searchPhrase: searchPhrase, listItemId: listItemId);
+    return AddEditListItemInner(publicListId: publicListId, searchPhrase: searchPhrase, listItemId: listItemId);
   }
 }
 
 class AddEditListItemInner extends ConsumerStatefulWidget {
-  const AddEditListItemInner({Key? key, required this.shareCode, this.searchPhrase, required this.listItemId})
+  const AddEditListItemInner({Key? key, required this.publicListId, this.searchPhrase, required this.listItemId})
       : super(key: key);
-  final String shareCode;
+  final String publicListId;
   final String? searchPhrase;
   final String? listItemId;
 
@@ -113,7 +113,7 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                                 address: searchPhrase,
                                 googleMapApiKey: getMapsApiKey(),
                               );
-                              print(results);
+                              print('search results: $results');
                               setState(() {
                                 addresses = results ?? [];
                                 selectedAddress = results?.first;
@@ -222,7 +222,7 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                             GoRouter.of(context),
                             selectedAddress!,
                             searchPhrase,
-                            widget.shareCode,
+                            widget.publicListId,
                             widget.listItemId,
                           );
                         } else {
@@ -270,7 +270,7 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
     GoRouter router,
     GeocoderResult result,
     String? searchPhrase,
-    String shareCode,
+    String publicListId,
     String? listItemId,
   ) async {
     ref.read(selectedAddressProvider.notifier).state =

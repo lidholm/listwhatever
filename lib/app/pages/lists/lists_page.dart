@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:listanything/app/navigation/routes/add_list_route.dart';
 import 'package:listanything/app/navigation/routes/list_items_page_route.dart';
 import 'package:listanything/app/navigation/routes/routes.dart';
+import 'package:listanything/app/navigation/routes/share_code_page_route.dart';
 import 'package:listanything/app/pages/lists/list_of_things.dart';
 import 'package:listanything/app/pages/lists/lists_provider.dart';
 import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
@@ -26,10 +27,13 @@ class ListsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(listsProvider).when(
+    return ref.watch(combinedListsProvider).when(
           error: (e, st) => ExceptionWidget(e: e, st: st),
           loading: () => ListsPageInner(
-            lists: List.generate(8, (index) => const ListOfThings(name: '', type: ListType.other)),
+            lists: List.generate(
+              8,
+              (index) => const ListOfThings(name: '', userId: 'Not used since a shimmer', type: ListType.other),
+            ),
             isLoading: true,
           ),
           data: (lists) => ListsPageInner(lists: lists, isLoading: false),
@@ -58,6 +62,12 @@ class ListsPageInner extends ConsumerWidget {
             callback: () => addNewList(ref, context),
             overflow: false,
           ),
+          AppBarAction(
+            title: 'Go to share code',
+            icon: Icons.add_card,
+            callback: () => shareCodeDialog(context),
+            overflow: true,
+          ),
         ],
       ),
       body: Shimmer(
@@ -78,6 +88,10 @@ class ListsPageInner extends ConsumerWidget {
                         text: list.name,
                         callback: (list) => selectList(ref, context, list),
                         isLoading: isLoading,
+                        topRightIcon: list.shared
+                            ? const Icon(Icons.supervised_user_circle)
+                            : const Icon(Icons.verified_user_outlined),
+                        topRightIconBorderColor: list.shared ? Colors.blue : Colors.grey,
                       ),
                     )
                     .toList(),
@@ -90,13 +104,52 @@ class ListsPageInner extends ConsumerWidget {
   }
 
   void selectList(WidgetRef ref, BuildContext context, ListOfThings list) {
-    // ref.read(selectedListIdProvider.notifier).state = list.shareCode;
-    print('clicking ${list.shareCode}');
-    ListItemsPageRoute(shareCode: list.shareCode!).push(context);
-    print(list);
+    // ref.read(selectedListIdProvider.notifier).state = list.publicListId;
+    print('clicking ${list.publicListId}');
+    ListItemsPageRoute(publicListId: list.publicListId!).push(context);
+    print('lists_page.selectList: $list');
   }
 
   Future<void> addNewList(WidgetRef ref, BuildContext context) async {
     const AddListRoute().push(context);
+  }
+
+  Future<void> shareCodeDialog(BuildContext context) async {
+    final _publicListIdController = TextEditingController(text: '');
+    final _shareCodeController = TextEditingController(text: '');
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('TextField in Dialog'),
+          content: Column(
+            children: [
+              TextField(
+                controller: _publicListIdController,
+                decoration: const InputDecoration(hintText: 'Public list id'),
+              ),
+              TextField(
+                controller: _shareCodeController,
+                decoration: const InputDecoration(hintText: 'Share code'),
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            MaterialButton(
+              color: Colors.green,
+              textColor: Colors.white,
+              child: const Text('OK'),
+              onPressed: () {
+                print(_publicListIdController.value.text);
+                ShareCodePageRoute(
+                  publicListId: _publicListIdController.value.text,
+                  shareCode: _shareCodeController.value.text,
+                ).go(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

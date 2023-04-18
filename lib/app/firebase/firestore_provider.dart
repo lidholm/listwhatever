@@ -19,6 +19,7 @@ final firestoreProvider = FutureProvider<FirebaseFirestore>((ref) async {
     // ignore: avoid_print
     print('firestoreProvider. Using emulator $localHostString');
     _connectToFirebaseEmulator(instance, localHostString);
+    await instance.clearPersistence();
   } else {
     // ignore: avoid_print
     print('firestoreProvider.using firestore without emulator');

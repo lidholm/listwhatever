@@ -16,7 +16,7 @@ Iterable<MapEntry<int, T>> mapIndexed<T>(
   }
 }
 
-const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+const _chars = 'AaBbCcDdEeFfGgHhiJjKkLMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
 Random _rnd = Random();
 
 String getRandomString(int length) => String.fromCharCodes(

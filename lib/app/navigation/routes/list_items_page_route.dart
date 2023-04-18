@@ -4,11 +4,11 @@ import 'package:listanything/app/pages/list_items/list_items_page.dart';
 
 @immutable
 class ListItemsPageRoute extends GoRouteData {
-  const ListItemsPageRoute({required this.shareCode});
+  const ListItemsPageRoute({required this.publicListId});
 
-  final String shareCode;
+  final String publicListId;
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return ListItemsPage(shareCode: shareCode);
+    return ListItemsPage(publicListId: publicListId);
   }
 }

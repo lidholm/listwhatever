@@ -18,7 +18,22 @@ final listRepositoryProvider = FutureProvider<BaseRepository<ListOfThings>>((ref
     firestore.lists,
     firestore.list,
     {'userId': currentUser?.uid},
-    (data, id) => ListOfThings.fromJson(data).copyWith(id: id),
-    (list) => list.toJson(),
+    (data, id) {
+      final viewers = data['viewers'] as Map<String, dynamic>;
+      final editors = data['editors'] as Map<String, dynamic>;
+      final hasEditor = (editors[currentUser?.uid] as bool?) ?? false;
+      final hasViewer = (viewers[currentUser?.uid] as bool?) ?? false;
+      return ListOfThings.fromJson(data).copyWith(
+        id: id,
+        shared: editors.keys.length > 1 || viewers.keys.isNotEmpty,
+        isViewer: hasEditor || hasViewer,
+        isEditor: hasEditor,
+      );
+    },
+    (list) {
+      return list.toJson()
+        ..remove('isEditor')
+        ..remove('isViewer');
+    },
   );
 });

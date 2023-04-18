@@ -5,6 +5,8 @@ cache:
     - node_modules/
     - test/firestore/node_modules/
     - $CI_PROJECT_DIR/.pub-cache/
+    - /root/.cache/firebase/emulators
+    - ~/.cache/firebase/emulators/
 
 stages:
   - pre_setup
@@ -74,33 +76,34 @@ unit_tests:
     - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
     - flutter test # --machine --coverage
 
-# firestore_rules_tests:
-#   stage: verify
-#   script:
-#     - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
-#     - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
-#     - cd test/firestore
-#     - chmod +x runtest.sh
-#     - npm i
-#     - ./node_modules/.bin/firebase emulators:exec --only firestore "./runtest.sh"
-#   artifacts:
-#     paths:
-#       - test/firestore/firestore-debug.log
-#     expire_in: 2700 seconds #45 minutes
+firestore_rules_tests:
+  stage: verify
+  script:
+    - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
+    - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
+    - cd test/firestore
+    - chmod +x runtest.sh
+    - cat package.json
+    - npm i
+    - ./node_modules/.bin/firebase emulators:exec --only firestore "./runtest.sh"
+  artifacts:
+    paths:
+      - test/firestore/firestore-debug.log
+    expire_in: 2700 seconds #45 minutes
 
-# firebase_functions_tests:
-#   stage: verify
-#   script:
-#     - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
-#     - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
-#     - cd functions
-#     - chmod +x runtest.sh
-#     - npm i
-#     - ./node_modules/.bin/firebase emulators:exec --only firestore "./runtest.sh"
-#   artifacts:
-#     paths:
-#       - test/firestore/firestore-debug.log
-#     expire_in: 2700 seconds #45 minutes
+firebase_functions_tests:
+  stage: verify
+  script:
+    - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
+    - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
+    - cd functions
+    - chmod +x runtest.sh
+    - npm i
+    - ./node_modules/.bin/firebase emulators:exec --only firestore --project=fakeproject "./runtest.sh"
+  artifacts:
+    paths:
+      - test/firestore/firestore-debug.log
+    expire_in: 2700 seconds #45 minutes
 
 # buildReleaseBundle:
 #     stage: build
@@ -193,7 +196,7 @@ deployToFirebaseHostingAndRules:
     - /firebase use listanything-2b9b0
     - /firebase --version
     - /firebase deploy --only hosting
-    # - /firebase deploy --only firestore:rules
+    - /firebase deploy --only firestore:rules
 
 deployToFirebaseFunctions:
   stage: deploy
@@ -212,4 +215,7 @@ deployToFirebaseFunctions:
     - /firebase projects:list
     - /firebase use listanything-2b9b0
     - /firebase --version
+    - cd functions
+    - npm i
+    - cd ..
     - /firebase deploy --only functions

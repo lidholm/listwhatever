@@ -4,16 +4,16 @@ import 'package:listanything/app/pages/map/searchLocation/search_location_page.d
 
 @immutable
 class SearchLocationForAddPageRoute extends GoRouteData {
-  const SearchLocationForAddPageRoute({this.searchPhrase, required this.shareCode, this.listItemId});
+  const SearchLocationForAddPageRoute({this.searchPhrase, required this.publicListId, this.listItemId});
   final String? searchPhrase;
-  final String shareCode;
+  final String publicListId;
   final String? listItemId;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return SearchLocationPage(
       searchPhrase,
-      shareCode: shareCode,
+      publicListId: publicListId,
       listItemId: listItemId,
     );
   }

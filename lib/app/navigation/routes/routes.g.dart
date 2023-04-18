@@ -31,19 +31,27 @@ GoRoute get $welcomeRoute => GoRouteData.$route(
           factory: $ListsPageRouteExtension._fromState,
           routes: [
             GoRouteData.$route(
+              path: ':publicListId/share',
+              factory: $ShareListPageRouteExtension._fromState,
+            ),
+            GoRouteData.$route(
+              path: ':publicListId/shareCode/:shareCode',
+              factory: $ShareCodePageRouteExtension._fromState,
+            ),
+            GoRouteData.$route(
               path: 'add',
               factory: $AddListRouteExtension._fromState,
             ),
             GoRouteData.$route(
-              path: ':shareCode/edit',
+              path: ':publicListId/edit',
               factory: $EditListRouteExtension._fromState,
             ),
             GoRouteData.$route(
-              path: ':shareCode/map',
+              path: ':publicListId/map',
               factory: $MapsPageRouteExtension._fromState,
             ),
             GoRouteData.$route(
-              path: ':shareCode/items',
+              path: ':publicListId/items',
               factory: $ListItemsPageRouteExtension._fromState,
               routes: [
                 GoRouteData.$route(
@@ -67,6 +75,10 @@ GoRoute get $welcomeRoute => GoRouteData.$route(
                           $SearchLocationForAddPageRouteExtension._fromState,
                     ),
                   ],
+                ),
+                GoRouteData.$route(
+                  path: ':listItemId/details',
+                  factory: $ListItemDetailsPageRouteExtension._fromState,
                 ),
                 GoRouteData.$route(
                   path: 'filter',
@@ -169,6 +181,43 @@ extension $ListsPageRouteExtension on ListsPageRoute {
       context.pushReplacement(location, extra: this);
 }
 
+extension $ShareListPageRouteExtension on ShareListPageRoute {
+  static ShareListPageRoute _fromState(GoRouterState state) =>
+      ShareListPageRoute(
+        publicListId: state.params['publicListId']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/lists/${Uri.encodeComponent(publicListId)}/share',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: this);
+
+  void push(BuildContext context) => context.push(location, extra: this);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: this);
+}
+
+extension $ShareCodePageRouteExtension on ShareCodePageRoute {
+  static ShareCodePageRoute _fromState(GoRouterState state) =>
+      ShareCodePageRoute(
+        publicListId: state.params['publicListId']!,
+        shareCode: state.params['shareCode']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/lists/${Uri.encodeComponent(publicListId)}/shareCode/${Uri.encodeComponent(shareCode)}',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: this);
+
+  void push(BuildContext context) => context.push(location, extra: this);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: this);
+}
+
 extension $AddListRouteExtension on AddListRoute {
   static AddListRoute _fromState(GoRouterState state) => const AddListRoute();
 
@@ -186,13 +235,13 @@ extension $AddListRouteExtension on AddListRoute {
 
 extension $EditListRouteExtension on EditListRoute {
   static EditListRoute _fromState(GoRouterState state) => EditListRoute(
-        shareCode: state.queryParams['share-code'],
+        publicListId: state.queryParams['public-list-id'],
       );
 
   String get location => GoRouteData.$location(
-        '/lists/${Uri.encodeComponent(shareCode!)}/edit',
+        '/lists/${Uri.encodeComponent(publicListId!)}/edit',
         queryParams: {
-          if (shareCode != null) 'share-code': shareCode!,
+          if (publicListId != null) 'public-list-id': publicListId!,
         },
       );
 
@@ -206,11 +255,11 @@ extension $EditListRouteExtension on EditListRoute {
 
 extension $MapsPageRouteExtension on MapsPageRoute {
   static MapsPageRoute _fromState(GoRouterState state) => MapsPageRoute(
-        shareCode: state.params['shareCode']!,
+        publicListId: state.params['publicListId']!,
       );
 
   String get location => GoRouteData.$location(
-        '/lists/${Uri.encodeComponent(shareCode)}/map',
+        '/lists/${Uri.encodeComponent(publicListId)}/map',
       );
 
   void go(BuildContext context) => context.go(location, extra: this);
@@ -224,11 +273,11 @@ extension $MapsPageRouteExtension on MapsPageRoute {
 extension $ListItemsPageRouteExtension on ListItemsPageRoute {
   static ListItemsPageRoute _fromState(GoRouterState state) =>
       ListItemsPageRoute(
-        shareCode: state.params['shareCode']!,
+        publicListId: state.params['publicListId']!,
       );
 
   String get location => GoRouteData.$location(
-        '/lists/${Uri.encodeComponent(shareCode)}/items',
+        '/lists/${Uri.encodeComponent(publicListId)}/items',
       );
 
   void go(BuildContext context) => context.go(location, extra: this);
@@ -241,12 +290,12 @@ extension $ListItemsPageRouteExtension on ListItemsPageRoute {
 
 extension $EditListItemRouteExtension on EditListItemRoute {
   static EditListItemRoute _fromState(GoRouterState state) => EditListItemRoute(
-        shareCode: state.params['shareCode']!,
+        publicListId: state.params['publicListId']!,
         listItemId: state.queryParams['list-item-id'],
       );
 
   String get location => GoRouteData.$location(
-        '/lists/${Uri.encodeComponent(shareCode)}/items/${Uri.encodeComponent(listItemId!)}/edit',
+        '/lists/${Uri.encodeComponent(publicListId)}/items/${Uri.encodeComponent(listItemId!)}/edit',
         queryParams: {
           if (listItemId != null) 'list-item-id': listItemId!,
         },
@@ -264,13 +313,13 @@ extension $SearchLocationForEditPageRouteExtension
     on SearchLocationForEditPageRoute {
   static SearchLocationForEditPageRoute _fromState(GoRouterState state) =>
       SearchLocationForEditPageRoute(
-        shareCode: state.params['shareCode']!,
+        publicListId: state.params['publicListId']!,
         searchPhrase: state.queryParams['search-phrase'],
         listItemId: state.queryParams['list-item-id'],
       );
 
   String get location => GoRouteData.$location(
-        '/lists/${Uri.encodeComponent(shareCode)}/items/${Uri.encodeComponent(listItemId!)}/edit/searchlocation',
+        '/lists/${Uri.encodeComponent(publicListId)}/items/${Uri.encodeComponent(listItemId!)}/edit/searchlocation',
         queryParams: {
           if (searchPhrase != null) 'search-phrase': searchPhrase!,
           if (listItemId != null) 'list-item-id': listItemId!,
@@ -287,11 +336,11 @@ extension $SearchLocationForEditPageRouteExtension
 
 extension $AddListItemRouteExtension on AddListItemRoute {
   static AddListItemRoute _fromState(GoRouterState state) => AddListItemRoute(
-        shareCode: state.params['shareCode']!,
+        publicListId: state.params['publicListId']!,
       );
 
   String get location => GoRouteData.$location(
-        '/lists/${Uri.encodeComponent(shareCode)}/items/add',
+        '/lists/${Uri.encodeComponent(publicListId)}/items/add',
       );
 
   void go(BuildContext context) => context.go(location, extra: this);
@@ -306,13 +355,13 @@ extension $SearchLocationForAddPageRouteExtension
     on SearchLocationForAddPageRoute {
   static SearchLocationForAddPageRoute _fromState(GoRouterState state) =>
       SearchLocationForAddPageRoute(
-        shareCode: state.params['shareCode']!,
+        publicListId: state.params['publicListId']!,
         searchPhrase: state.queryParams['search-phrase'],
         listItemId: state.queryParams['list-item-id'],
       );
 
   String get location => GoRouteData.$location(
-        '/lists/${Uri.encodeComponent(shareCode)}/items/add/searchlocation',
+        '/lists/${Uri.encodeComponent(publicListId)}/items/add/searchlocation',
         queryParams: {
           if (searchPhrase != null) 'search-phrase': searchPhrase!,
           if (listItemId != null) 'list-item-id': listItemId!,
@@ -327,13 +376,35 @@ extension $SearchLocationForAddPageRouteExtension
       context.pushReplacement(location, extra: this);
 }
 
-extension $FilterPageRouteExtension on FilterPageRoute {
-  static FilterPageRoute _fromState(GoRouterState state) => FilterPageRoute(
-        shareCode: state.params['shareCode']!,
+extension $ListItemDetailsPageRouteExtension on ListItemDetailsPageRoute {
+  static ListItemDetailsPageRoute _fromState(GoRouterState state) =>
+      ListItemDetailsPageRoute(
+        publicListId: state.params['publicListId']!,
+        listItemId: state.queryParams['list-item-id'],
       );
 
   String get location => GoRouteData.$location(
-        '/lists/${Uri.encodeComponent(shareCode)}/items/filter',
+        '/lists/${Uri.encodeComponent(publicListId)}/items/${Uri.encodeComponent(listItemId!)}/details',
+        queryParams: {
+          if (listItemId != null) 'list-item-id': listItemId!,
+        },
+      );
+
+  void go(BuildContext context) => context.go(location, extra: this);
+
+  void push(BuildContext context) => context.push(location, extra: this);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: this);
+}
+
+extension $FilterPageRouteExtension on FilterPageRoute {
+  static FilterPageRoute _fromState(GoRouterState state) => FilterPageRoute(
+        publicListId: state.params['publicListId']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/lists/${Uri.encodeComponent(publicListId)}/items/filter',
       );
 
   void go(BuildContext context) => context.go(location, extra: this);
