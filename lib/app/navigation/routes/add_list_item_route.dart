@@ -4,11 +4,11 @@ import 'package:listanything/app/pages/list_items/addEditListItem/add_edit_list_
 
 @immutable
 class AddListItemRoute extends GoRouteData {
-  const AddListItemRoute({required this.shareCode});
-  final String shareCode;
+  const AddListItemRoute({required this.publicListId});
+  final String publicListId;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return AddEditListItem(shareCode: shareCode, listItemId: null);
+    return AddEditListItem(publicListId: publicListId, listItemId: null);
   }
 }

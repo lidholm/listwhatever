@@ -26,7 +26,7 @@ final emulatorIpAddressProvider = FutureProvider<String>((ref) async {
   if (kIsWeb) return 'localhost';
 
   final localHostString = deviceInfo['isPhysicalDevice'] == true
-      ? '192.168.86.23'
+      ? '192.168.86.51'
       : Platform.isAndroid
           ? '10.0.2.2'
           : 'localhost';

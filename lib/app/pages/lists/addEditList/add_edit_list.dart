@@ -3,6 +3,8 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listanything/app/navigation/current_user_provider.dart';
+import 'package:listanything/app/navigation/selected_user.dart';
 import 'package:listanything/app/pages/lists/list_of_things.dart';
 import 'package:listanything/app/pages/lists/list_repository_provider.dart';
 import 'package:listanything/app/pages/lists/lists_provider.dart';
@@ -43,23 +45,29 @@ extension ListTypeExtension on ListType {
 }
 
 class AddEditList extends ConsumerWidget {
-  const AddEditList({super.key, required this.shareCode});
-  final String? shareCode;
+  const AddEditList({super.key, required this.publicListId});
+  final String? publicListId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    if (shareCode == null) {
-      return const AddEditListInner(list: null);
-    }
-    return AsyncValueWidget<ListOfThings?>(
-      value: ref.watch(listProvider(shareCode!)),
-      data: (list) => AddEditListInner(list: list),
+    return AsyncValueWidget<SelectedUser?>(
+      value: ref.watch(currentUserProvider),
+      data: (user) {
+        if (publicListId == null) {
+          return AddEditListInner(userId: user!.uid, list: null);
+        }
+        return AsyncValueWidget<ListOfThings?>(
+          value: ref.watch(listProvider(publicListId!)),
+          data: (list) => AddEditListInner(userId: user!.uid, list: list),
+        );
+      },
     );
   }
 }
 
 class AddEditListInner extends ConsumerStatefulWidget {
-  const AddEditListInner({Key? key, required this.list}) : super(key: key);
+  const AddEditListInner({Key? key, required this.userId, required this.list}) : super(key: key);
+  final String userId;
   final ListOfThings? list;
 
   @override
@@ -130,7 +138,7 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
                 // enabled: false,
                 onChanged: () {
                   _formKey.currentState!.save();
-                  debugPrint(_formKey.currentState!.value.toString());
+                  // debugPrint(_formKey.currentState!.value.toString());
                 },
                 autovalidateMode: AutovalidateMode.disabled,
                 skipDisabled: true,
@@ -217,7 +225,7 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
                       onPressed: () {
                         if (_formKey.currentState?.saveAndValidate() ?? false) {
                           debugPrint(_formKey.currentState?.value.toString());
-                          saveList(GoRouter.of(context), widget.list);
+                          saveList(GoRouter.of(context), widget.userId, widget.list);
                         } else {
                           debugPrint(_formKey.currentState?.value.toString());
                           debugPrint('validation failed');
@@ -253,7 +261,7 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
     );
   }
 
-  Future<void> saveList(GoRouter router, ListOfThings? list) async {
+  Future<void> saveList(GoRouter router, String userId, ListOfThings? list) async {
     final fields = _formKey.currentState!.fields;
     final repo = await ref.read(listRepositoryProvider.future);
     final name = fields[nameFieldName]!.value as String;
@@ -263,7 +271,15 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
     final withTimes = withDates && (fields[withTimesFieldName]?.value as bool? ?? false);
     if (list == null) {
       print('adding');
-      final list = ListOfThings(name: name, type: type, withMap: withMap, withDates: withDates, withTimes: withTimes);
+      final list = ListOfThings(
+        name: name,
+        type: type,
+        userId: userId,
+        withMap: withMap,
+        withDates: withDates,
+        withTimes: withTimes,
+        editors: {userId: true},
+      );
       final refId = await repo.createItem(item: list);
       print('Added $refId');
     } else {

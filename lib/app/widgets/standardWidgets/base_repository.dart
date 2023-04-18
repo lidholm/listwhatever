@@ -23,14 +23,7 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
     this.identifiers,
     this.itemConverter,
     this.jsonFunction,
-  ) {
-    // if (identifiers.values.take(identifiers.length - 1).any((i) => i == null)) {
-    //   throw CustomException(
-    //     message:
-    //         'Some identifiers are not set: ${identifiers.entries.where((e) => e.value == null).map((e) => e.key).join(', ')}',
-    //   );
-    // }
-  }
+  );
 
   final ErrorMonitor errorMonitor;
   final FirebaseFirestore firestore;
@@ -42,11 +35,13 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
 
   @override
   Stream<List<T>> retrieveItemsStream() async* {
+    print('retrieveItemsStream()');
     try {
       if (identifiers.values.any((element) => element == null)) {
         throw CustomException(message: 'Some null items $identifiers');
       }
       final query = firestoreItemsPath(identifiers);
+      print('query: $query');
       yield* query.snapshots().map(convertCollection);
     } on FirebaseException catch (e, s) {
       await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
@@ -56,6 +51,7 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
 
   @override
   Stream<List<T>> retrieveItemsStreamAtPath(String path) async* {
+    print('retrieveItemsStreamAtPath($path)');
     try {
       yield* firestore.collection(path).snapshots().map(convertCollection);
     } on FirebaseException catch (e, s) {
@@ -66,6 +62,7 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
 
   @override
   Stream<T> retrieveItemStream({required String itemId}) async* {
+    print('retrieveItemStream($itemId)');
     try {
       final query = firestoreItemPath({...identifiers, 'itemId': itemId});
       yield* query.snapshots().where((snapshot) => snapshot.data() != null).map(convertDocument);
@@ -77,6 +74,7 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
 
   @override
   Stream<T> retrieveItemStreamAtPath(String path) async* {
+    print('retrieveItemStreamAtPath($path)');
     try {
       yield* firestore.doc(path).snapshots().where((snapshot) => snapshot.data() != null).map(convertDocument);
     } on FirebaseException catch (e, s) {
@@ -87,6 +85,8 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
 
   T convertDocument(DocumentSnapshot<Map<String, dynamic>> doc) {
     try {
+      print('doc.data: ${doc.data()}');
+      print('doc.id: ${doc.id}');
       final item = itemConverter(doc.data()!, doc.id);
       return item;
     } on FirebaseException catch (e, s) {
@@ -99,8 +99,8 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
   List<T> convertCollection(QuerySnapshot<Map<String, dynamic>> list) {
     try {
       final items = list.docs.map((d) {
-        // final item = ListItem.fromJson(d.data()).copyWith(id: d.id);
         final item = itemConverter(d.data(), d.id);
+        print('converting: $item');
         return item;
       }).toList();
       print('convertCollection.items: ${items.length}');
@@ -115,33 +115,49 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
   Future<String> createItem({required T item}) async {
     try {
       final data = jsonFunction(item);
-      print('data: $data');
-      final ref = await firestoreItemsPath(identifiers).add(data);
+      print('Adding data: $data');
+      final ref = firestoreItemsPath(identifiers).doc();
+      data['id'] = ref.id;
+      await ref.set(data);
+      print('Added at $ref');
       return ref.id;
     } on FirebaseException catch (e, s) {
       await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
       throw CustomException(message: e.message);
+    } catch (e, s) {
+      await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
+      throw CustomException(message: '$e');
     }
   }
 
   @override
   Future<String> updateItem({required String itemId, required T item}) async {
     try {
+      print('Updating $item');
       await firestoreItemPath({...identifiers, 'itemId': itemId}).update(jsonFunction(item));
+      print('Updated $itemId');
       return itemId;
     } on FirebaseException catch (e, s) {
       await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
       throw CustomException(message: e.message);
+    } catch (e, s) {
+      await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
+      throw CustomException(message: '$e');
     }
   }
 
   @override
   Future<void> deleteItem({required String itemId}) async {
     try {
+      print('Deleting $itemId');
       await firestoreItemPath({...identifiers, 'itemId': itemId}).delete();
+      print('Deleted $itemId');
     } on FirebaseException catch (e, s) {
       await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
       throw CustomException(message: e.message);
+    } catch (e, s) {
+      await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
+      throw CustomException(message: '$e');
     }
   }
 }

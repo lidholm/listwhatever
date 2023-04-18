@@ -11,12 +11,16 @@ class ImageButton<T> extends StatelessWidget {
     required this.text,
     required this.callback,
     required this.isLoading,
+    this.topRightIcon,
+    this.topRightIconBorderColor,
   });
   final T item;
   final String image;
   final String text;
   final Function(T item) callback;
   final bool isLoading;
+  final Widget? topRightIcon;
+  final Color? topRightIconBorderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -45,29 +49,54 @@ class ImageButton<T> extends StatelessWidget {
                   ),
                   borderRadius: const BorderRadius.all(Radius.circular(roundedRadius)),
                 ),
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            color: Colors.white.withOpacity(0.85),
-            width: double.infinity,
-            height: 36,
-            child: Center(
-              child: isLoading
-                  ? Container(
-                      width: 250,
-                      height: 24,
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              if (topRightIcon != null)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(4),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.grey,
+                          border: Border.all(color: topRightIconBorderColor!, width: 4),
+                        ),
+                        child: IconButton(
+                          icon: topRightIcon!,
+                          onPressed: () {},
+                        ),
+                        // topRightIcon,
                       ),
                     )
-                  : Text(
-                      text,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText2!
-                          .copyWith(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
-                    ),
-            ),
+                  ],
+                ),
+              Container(
+                color: Colors.white.withOpacity(0.90),
+                width: double.infinity,
+                height: 36,
+                child: Center(
+                  child: isLoading
+                      ? Container(
+                          width: 250,
+                          height: 24,
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                        )
+                      : Text(
+                          text,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText2!
+                              .copyWith(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
+                        ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

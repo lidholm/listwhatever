@@ -19,6 +19,10 @@
       "port": 9199
     }
   },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
   "hosting": {
     "public": "build/web",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
@@ -41,11 +45,6 @@
         ".git",
         "firebase-debug.log",
         "firebase-debug.*.log"
-      ],
-      "predeploy": [
-        "npm --prefix functions install",
-        "npm --prefix functions run lint",
-        "npm --prefix functions run build"
       ]
     }
   ]

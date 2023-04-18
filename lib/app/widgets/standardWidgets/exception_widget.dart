@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:listanything/app/widgets/standardWidgets/common_app_bar.dart';
+import 'package:tuple/tuple.dart';
 
 class ExceptionWidget extends StatelessWidget {
   const ExceptionWidget({super.key, required this.e, required this.st});
@@ -7,10 +9,29 @@ class ExceptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        e.toString(),
-        style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.red),
+    final error = (e is Tuple2) ? (e as Tuple2).item1 as Object : null;
+    final extraInfo = (e is Tuple2) ? (e as Tuple2).item2 as String? : null;
+    return Scaffold(
+      appBar: const CommonAppBar(title: 'Error'),
+      body: Center(
+        child: Column(
+          children: [
+            Text(
+              error.toString(),
+              style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.red),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              extraInfo ?? '',
+              style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.red),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              st.toString(),
+              style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.red),
+            ),
+          ],
+        ),
       ),
     );
   }
