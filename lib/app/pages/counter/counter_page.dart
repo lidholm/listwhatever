@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:listanything/app/widgets/standardWidgets/common_scaffold.dart';
 
 final counterProvider = StateProvider((ref) => 0);
 
@@ -10,7 +11,8 @@ class CounterPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final count = ref.watch(counterProvider);
 
-    return Scaffold(
+    return CommonScaffold(
+      title: 'Counter',
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

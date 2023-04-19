@@ -48,6 +48,7 @@ class ImageButton<T> extends StatelessWidget {
                     fit: BoxFit.fitHeight,
                   ),
                   borderRadius: const BorderRadius.all(Radius.circular(roundedRadius)),
+                  border: Border.all(color: Colors.orangeAccent[700]!, width: 6),
                 ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -62,7 +63,7 @@ class ImageButton<T> extends StatelessWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.grey,
-                          border: Border.all(color: topRightIconBorderColor!, width: 4),
+                          border: Border.all(color: topRightIconBorderColor!, width: 2),
                         ),
                         child: IconButton(
                           icon: topRightIcon!,
@@ -74,7 +75,7 @@ class ImageButton<T> extends StatelessWidget {
                   ],
                 ),
               Container(
-                color: Colors.white.withOpacity(0.90),
+                color: Colors.orangeAccent[700]!.withOpacity(0.8),
                 width: double.infinity,
                 height: 36,
                 child: Center(
@@ -92,7 +93,7 @@ class ImageButton<T> extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .bodyText2!
-                              .copyWith(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
+                              .copyWith(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
                         ),
                 ),
               ),

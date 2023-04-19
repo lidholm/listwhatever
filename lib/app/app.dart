@@ -44,6 +44,69 @@ class App extends ConsumerWidget {
     final router = ref.watch(routerProvider);
     return MaterialApp.router(
       routerConfig: router,
+      theme: ThemeData(
+        splashColor: Colors.orange[800],
+        // Define the default brightness and colors.
+        // brightness: Brightness.dark,
+        primaryColor: Colors.orange[800],
+        appBarTheme: AppBarTheme(
+          color: Colors.orange[800],
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          labelStyle: const TextStyle(color: Colors.black, fontSize: 16),
+          hintStyle: TextStyle(color: Colors.grey.shade800, fontSize: 16),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.orange[800]!),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.orange[800]!,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.orange[800]!,
+            ),
+          ),
+          errorBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.red,
+              width: 2,
+            ),
+          ),
+          errorStyle: const TextStyle(height: 0.7),
+        ),
+        checkboxTheme: CheckboxThemeData(
+          checkColor: MaterialStateProperty.all(Colors.white),
+          fillColor: MaterialStateProperty.all(Colors.orange),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            foregroundColor: Colors.white,
+            backgroundColor: Colors.orange[800],
+            minimumSize: const Size(88, 36),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+          ),
+        ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: OutlinedButton.styleFrom(
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.black87,
+            minimumSize: const Size(88, 36),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+          ),
+        ),
+        // Define the default font family.
+        // fontFamily: 'Georgia',
+
+        // Define the default `TextTheme`. Use this to specify the default
+        // text styling for headlines, titles, bodies of text, and more.
+        // textTheme: const TextTheme(
+        //   displayLarge: TextStyle(fontSize: 72, fontWeight: FontWeight.bold),
+        //   titleLarge: TextStyle(fontSize: 36, fontStyle: FontStyle.italic),
+        //   bodyMedium: TextStyle(fontSize: 14, fontFamily: 'Hind'),
+        // ),
+      ),
     );
   }
 }

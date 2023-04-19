@@ -10,7 +10,7 @@ import 'package:listanything/app/pages/lists/list_repository_provider.dart';
 import 'package:listanything/app/pages/lists/lists_provider.dart';
 import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
 import 'package:listanything/app/widgets/standardWidgets/async_value_widget.dart';
-import 'package:listanything/app/widgets/standardWidgets/common_app_bar.dart';
+import 'package:listanything/app/widgets/standardWidgets/common_scaffold.dart';
 
 extension ListTypeExtension on ListType {
   String get name {
@@ -115,19 +115,17 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
             withTimesFieldName: false,
           };
 
-    return Scaffold(
-      appBar: CommonAppBar(
-        title: widget.list != null ? 'Edit List' : 'Add List',
-        actions: [
-          if (widget.list != null)
-            AppBarAction(
-              title: 'Delete list',
-              icon: Icons.delete,
-              callback: () => deleteList(ref, GoRouter.of(context), widget.list!.id!),
-              overflow: false,
-            ),
-        ],
-      ),
+    return CommonScaffold(
+      title: widget.list != null ? 'Edit List' : 'Add List',
+      actions: [
+        if (widget.list != null)
+          AppBarAction(
+            title: 'Delete list',
+            icon: Icons.delete,
+            callback: () => deleteList(ref, GoRouter.of(context), widget.list!.id!),
+            overflow: false,
+          ),
+      ],
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: SingleChildScrollView(
@@ -168,13 +166,20 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
                       keyboardType: TextInputType.name,
                       textInputAction: TextInputAction.next,
                     ),
+                    const SizedBox(height: 16),
                     FormBuilderDropdown<ListType>(
                       name: typeFieldName,
                       decoration: InputDecoration(
                         labelText: 'List type',
                         suffix: _typeHasError
-                            ? const Icon(Icons.error, color: Colors.red)
-                            : const Icon(Icons.check, color: Colors.green),
+                            ? const Padding(
+                                padding: EdgeInsets.fromLTRB(24, 0, 0, 0),
+                                child: Icon(Icons.error, color: Colors.red),
+                              )
+                            : const Padding(
+                                padding: EdgeInsets.fromLTRB(24, 0, 0, 0),
+                                child: Icon(Icons.check, color: Colors.green),
+                              ),
                         hintText: 'Select Type',
                       ),
                       validator: FormBuilderValidators.compose(
@@ -185,7 +190,10 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
                             (type) => DropdownMenuItem(
                               alignment: AlignmentDirectional.center,
                               value: type,
-                              child: Text(type.name),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(type.name),
+                              ),
                             ),
                           )
                           .toList(),
@@ -196,10 +204,13 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
                       },
                       valueTransformer: (val) => val?.toString(),
                     ),
+                    const SizedBox(height: 16),
                     FormBuilderSwitch(
                       title: const Text('Show on map'),
                       name: withMapFieldName,
+                      activeColor: Colors.orange.shade800,
                     ),
+                    const SizedBox(height: 16),
                     FormBuilderSwitch(
                       title: const Text('Include dates for items'),
                       name: withDatesFieldName,
@@ -213,6 +224,7 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
                       FormBuilderSwitch(
                         title: const Text('Include times for items'),
                         name: withTimesFieldName,
+                        activeColor: Colors.orange.shade800,
                       ),
                   ],
                 ),
@@ -220,6 +232,21 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
               const SizedBox(height: 16),
               Row(
                 children: <Widget>[
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () {
+                        _formKey.currentState?.reset();
+                      },
+                      // color: Theme.of(context).colorScheme.secondary,
+                      child: Text(
+                        'Reset',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 20),
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
@@ -234,21 +261,6 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
                       child: const Text(
                         'Submit',
                         style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () {
-                        _formKey.currentState?.reset();
-                      },
-                      // color: Theme.of(context).colorScheme.secondary,
-                      child: Text(
-                        'Reset',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
                       ),
                     ),
                   ),

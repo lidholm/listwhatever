@@ -12,67 +12,35 @@ class ListItemItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final categoriesToShow =
-        item.categories.entries.length > 4 ? item.categories.entries.take(3) : item.categories.entries;
-
     return ShimmerLoading(
       isLoading: isLoading,
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.blueAccent),
+          color: Colors.orange[800],
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: const Color.fromARGB(255, 249, 171, 37)),
         ),
-        child: ListView(
-          shrinkWrap: true,
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-          children: <Widget>[
-            inHeader(
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 8, 0, 4),
-                    child: Text(
-                      item.name,
-                      style: const TextStyle(fontSize: 24),
-                    ),
+                  Text(
+                    item.name,
+                    style: const TextStyle(fontSize: 24, color: Colors.white),
                   ),
-                  if (item.datetime != null)
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-                      child: Text(
-                        dateFormatter.format(item.datetime!),
-                        style: const TextStyle(fontSize: 18),
-                      ),
-                    ),
+                  Text(
+                    item.datetime != null ? formatReadableDate(item.datetime!) : '',
+                    style: TextStyle(fontSize: 16, color: Colors.white.withAlpha(200)),
+                  ),
                 ],
               ),
-            ),
-            if (item.address?.trim().isNotEmpty ?? false)
-              inHeader(
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 4),
-                  child: Text(
-                    item.address!,
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                ),
-              ),
-            const SizedBox(height: 8),
-            if (isLoading)
-              ...leftPaddings(getCategoriesShimmers())
-            else ...[
-              ...leftPaddings(
-                categoriesToShow
-                    .map(
-                      (c) => Row(
-                        children: getCategories(c),
-                      ),
-                    )
-                    .toList(),
-              ),
-              if (item.categories.entries.length > 4) const Text('...'),
-            ]
-          ],
+              IconButton(onPressed: () {}, icon: const Icon(Icons.keyboard_arrow_right_rounded, color: Colors.white))
+            ],
+          ),
         ),
       ),
     );
@@ -111,20 +79,5 @@ class ListItemItem extends StatelessWidget {
         width: 150,
       )
     ];
-  }
-
-  Widget inHeader(Widget child) {
-    return Container(
-      color: Colors.lightBlue[100],
-      child: leftPadding(child),
-    );
-  }
-
-  Widget leftPadding(Widget child) {
-    return Padding(padding: const EdgeInsets.fromLTRB(8, 0, 0, 0), child: child);
-  }
-
-  List<Widget> leftPaddings(List<Widget> children) {
-    return children.map(leftPadding).toList();
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart'; // hide Page;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:listanything/app/widgets/standardWidgets/common_app_bar.dart';
+import 'package:listanything/app/widgets/standardWidgets/common_scaffold.dart';
 
 class AboutPage extends ConsumerWidget {
   // implements Page {
@@ -9,8 +9,8 @@ class AboutPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SafeArea(
-      child: Scaffold(
-        appBar: const CommonAppBar(title: 'About'),
+      child: CommonScaffold(
+        title: 'About',
         body: Padding(
           padding: const EdgeInsets.all(24),
           child: Column(
