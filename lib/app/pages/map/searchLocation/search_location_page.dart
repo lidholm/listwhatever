@@ -9,6 +9,7 @@ import 'package:listanything/app/geocoder/geocoder.dart';
 import 'package:listanything/app/geocoder/geocoderresult.dart';
 import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/pages/map/searchLocation/selected_address_provider.dart';
+import 'package:listanything/app/widgets/standardWidgets/common_scaffold.dart';
 
 class SearchLocationPage extends ConsumerWidget {
   const SearchLocationPage(this.searchPhrase, {super.key, required this.publicListId, required this.listItemId});
@@ -60,8 +61,8 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
     print('In SearchLocationPage');
     initialValue = <String, dynamic>{searchPhraseName: widget.searchPhrase ?? ''};
 
-    return Scaffold(
-      appBar: AppBar(title: const Text('Search for location')),
+    return CommonScaffold(
+      title: 'Search for location',
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: SingleChildScrollView(
@@ -101,26 +102,24 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                             textInputAction: TextInputAction.next,
                           ),
                         ),
-                        SizedBox(
-                          width: 100,
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              final searchPhrase = _formKey.currentState!.fields[searchPhraseName]!.value as String;
-                              setState(() {
-                                addresses = null;
-                              });
-                              final results = await Geocoder.getDataFromAddress(
-                                address: searchPhrase,
-                                googleMapApiKey: getMapsApiKey(),
-                              );
-                              print('search results: $results');
-                              setState(() {
-                                addresses = results ?? [];
-                                selectedAddress = results?.first;
-                              });
-                            },
-                            child: const Text('Search'),
-                          ),
+                        const SizedBox(width: 16),
+                        ElevatedButton(
+                          onPressed: () async {
+                            final searchPhrase = _formKey.currentState!.fields[searchPhraseName]!.value as String;
+                            setState(() {
+                              addresses = null;
+                            });
+                            final results = await Geocoder.getDataFromAddress(
+                              address: searchPhrase,
+                              googleMapApiKey: getMapsApiKey(),
+                            );
+                            print('search results: $results');
+                            setState(() {
+                              addresses = results ?? [];
+                              selectedAddress = results?.first;
+                            });
+                          },
+                          child: const Text('Search'),
                         ),
                       ],
                     ),
@@ -207,10 +206,25 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
               Row(
                 children: <Widget>[
                   Expanded(
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(selectedAddress == null ? Colors.grey : null),
+                    child: OutlinedButton(
+                      onPressed: () {
+                        _formKey.currentState?.reset();
+                        // TODO: Remove if statement?
+                        if (widget.listItemId == null) {
+                          GoRouter.of(context).pop();
+                        } else {
+                          GoRouter.of(context).pop();
+                        }
+                      },
+                      // color: Theme.of(context).colorScheme.secondary,
+                      child: const Text(
+                        'Skip',
                       ),
+                    ),
+                  ),
+                  const SizedBox(width: 20),
+                  Expanded(
+                    child: ElevatedButton(
                       onPressed: () {
                         if (selectedAddress == null) {
                           return;
@@ -233,27 +247,6 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                       child: const Text(
                         'Submit',
                         style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () {
-                        _formKey.currentState?.reset();
-                        // TODO: Remove if statement?
-                        if (widget.listItemId == null) {
-                          GoRouter.of(context).pop();
-                        } else {
-                          GoRouter.of(context).pop();
-                        }
-                      },
-                      // color: Theme.of(context).colorScheme.secondary,
-                      child: Text(
-                        'Skip',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
                       ),
                     ),
                   ),

@@ -8,8 +8,8 @@ import 'package:listanything/app/navigation/routes/share_code_page_route.dart';
 import 'package:listanything/app/pages/lists/list_of_things.dart';
 import 'package:listanything/app/pages/lists/lists_provider.dart';
 import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
-import 'package:listanything/app/widgets/standardWidgets/common_app_bar.dart';
 import 'package:listanything/app/widgets/standardWidgets/common_drawer.dart';
+import 'package:listanything/app/widgets/standardWidgets/common_scaffold.dart';
 import 'package:listanything/app/widgets/standardWidgets/exception_widget.dart';
 import 'package:listanything/app/widgets/standardWidgets/image_button.dart';
 import 'package:listanything/app/widgets/standardWidgets/shimmer.dart';
@@ -51,25 +51,23 @@ class ListsPageInner extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // print('screen size: ${MediaQuery.of(context).size.width}');
     final crossAxisCount = kIsWeb ? (MediaQuery.of(context).size.width / 350).floor() : 2;
-    return Scaffold(
+    return CommonScaffold(
       drawer: const Drawer(child: CommonDrawer()),
-      appBar: CommonAppBar(
-        title: 'Lists',
-        actions: [
-          AppBarAction(
-            title: 'New item',
-            icon: Icons.playlist_add_outlined,
-            callback: () => addNewList(ref, context),
-            overflow: false,
-          ),
-          AppBarAction(
-            title: 'Go to share code',
-            icon: Icons.add_card,
-            callback: () => shareCodeDialog(context),
-            overflow: true,
-          ),
-        ],
-      ),
+      title: 'Lists',
+      actions: [
+        AppBarAction(
+          title: 'New item',
+          icon: Icons.playlist_add_outlined,
+          callback: () => addNewList(ref, context),
+          overflow: false,
+        ),
+        AppBarAction(
+          title: 'Go to share code',
+          icon: Icons.add_card,
+          callback: () => shareCodeDialog(context),
+          overflow: true,
+        ),
+      ],
       body: Shimmer(
         linearGradient: shimmerGradient,
         child: Padding(
@@ -89,9 +87,9 @@ class ListsPageInner extends ConsumerWidget {
                         callback: (list) => selectList(ref, context, list),
                         isLoading: isLoading,
                         topRightIcon: list.shared
-                            ? const Icon(Icons.supervised_user_circle)
-                            : const Icon(Icons.verified_user_outlined),
-                        topRightIconBorderColor: list.shared ? Colors.blue : Colors.grey,
+                            ? Icon(Icons.supervised_user_circle, color: Colors.orangeAccent[700])
+                            : Icon(Icons.verified_user_outlined, color: Colors.orangeAccent[700]),
+                        topRightIconBorderColor: list.shared ? Colors.yellow : Colors.white,
                       ),
                     )
                     .toList(),

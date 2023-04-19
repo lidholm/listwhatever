@@ -16,47 +16,63 @@ class CommonDrawer extends StatelessWidget {
       padding: EdgeInsets.zero,
       children: [
         DrawerHeader(
-          decoration: const BoxDecoration(
-            color: Colors.blue,
+          decoration: BoxDecoration(
+            color: Colors.orange[800],
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('List Anything'),
-              Consumer(
-                builder: (BuildContext context, WidgetRef ref, Widget? child) {
-                  return IconButton(
-                    onPressed: () async {
-                      final auth = await ref.read(firebaseAuthProvider.future);
-                      await auth.signOut();
-                    },
-                    icon: const Icon(Icons.logout),
-                  );
-                },
+            children: const [
+              Text(
+                'List Anything',
+                style: TextStyle(fontSize: 32, color: Colors.white),
               ),
             ],
           ),
         ),
         ListTile(
-          leading: const Icon(Icons.person),
+          leading: Icon(
+            Icons.person,
+            color: Colors.orange[800],
+          ),
           title: const Text('Profile'),
           onTap: () {
             const ProfilePageRoute().push(context);
           },
         ),
         ListTile(
-          leading: const Icon(Icons.info),
+          leading: Icon(
+            Icons.info,
+            color: Colors.orange[800],
+          ),
           title: const Text('About'),
           onTap: () {
             const AboutPageRoute().push(context);
           },
         ),
         ListTile(
-          leading: const Icon(Icons.text_snippet_outlined),
+          leading: Icon(
+            Icons.text_snippet_outlined,
+            color: Colors.orange[800],
+          ),
           title: const Text('Privacy Policy'),
           onTap: () {
             const PrivacyPolicyPageRoute().push(context);
+          },
+        ),
+        Consumer(
+          builder: (BuildContext context, WidgetRef ref, Widget? child) {
+            return ListTile(
+              leading: Icon(
+                Icons.logout,
+                color: Colors.orange[800],
+              ),
+              title: const Text('Log out'),
+              onTap: () async {
+                final auth = await ref.read(firebaseAuthProvider.future);
+                await auth.signOut();
+              },
+            );
           },
         ),
       ],

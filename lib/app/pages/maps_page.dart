@@ -15,7 +15,7 @@ import 'package:listanything/app/pages/list_items/filtered_list_items_provider.d
 import 'package:listanything/app/pages/list_items/list_item.dart';
 import 'package:listanything/app/pages/lists/list_of_things.dart';
 import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
-import 'package:listanything/app/widgets/standardWidgets/common_app_bar.dart';
+import 'package:listanything/app/widgets/standardWidgets/common_scaffold.dart';
 import 'package:listanything/app/widgets/standardWidgets/exception_widget.dart';
 
 double doubleInRange(Random source, num start, num end) => source.nextDouble() * (end - start) + start;
@@ -65,36 +65,34 @@ class MapsPageInner extends ConsumerWidget {
         )
         .toList();
 
-    return Scaffold(
-      appBar: CommonAppBar(
-        title: 'Items',
-        actions: [
-          AppBarAction(
-            title: 'Show list',
-            icon: Icons.list,
-            callback: () => showListItemPage(ref, context, list.id!),
-            overflow: false,
-          ),
-          AppBarAction(
-            title: 'New item',
-            icon: Icons.playlist_add_outlined,
-            callback: () => addNewListItem(ref, context, list.publicListId!),
-            overflow: false,
-          ),
-          AppBarAction(
-            title: 'Filter',
-            icon: hasFilters ? Icons.filter_alt : Icons.filter_alt_off,
-            callback: () => filterPage(context, list.publicListId!),
-            overflow: false,
-          ),
-          AppBarAction(
-            title: 'Edit list',
-            icon: Icons.edit,
-            callback: () => editList(ref, context, list.publicListId!),
-            overflow: true,
-          ),
-        ],
-      ),
+    return CommonScaffold(
+      title: 'Items',
+      actions: [
+        AppBarAction(
+          title: 'Show list',
+          icon: Icons.list,
+          callback: () => showListItemPage(ref, context, list.id!),
+          overflow: false,
+        ),
+        AppBarAction(
+          title: 'New item',
+          icon: Icons.playlist_add_outlined,
+          callback: () => addNewListItem(ref, context, list.publicListId!),
+          overflow: false,
+        ),
+        AppBarAction(
+          title: 'Filter',
+          icon: hasFilters ? Icons.filter_alt : Icons.filter_alt_off,
+          callback: () => filterPage(context, list.publicListId!),
+          overflow: false,
+        ),
+        AppBarAction(
+          title: 'Edit list',
+          icon: Icons.edit,
+          callback: () => editList(ref, context, list.publicListId!),
+          overflow: true,
+        ),
+      ],
       body: Column(
         children: [
           Flexible(

@@ -18,7 +18,7 @@ import 'package:listanything/app/pages/lists/lists_provider.dart';
 import 'package:listanything/app/pages/map/searchLocation/selected_address_provider.dart';
 import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
 import 'package:listanything/app/widgets/standardWidgets/async_value_widget.dart';
-import 'package:listanything/app/widgets/standardWidgets/common_app_bar.dart';
+import 'package:listanything/app/widgets/standardWidgets/common_scaffold.dart';
 import 'package:listanything/app/widgets/standardWidgets/double_async_value_widget.dart';
 import 'package:tuple/tuple.dart';
 
@@ -106,7 +106,7 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
             dateTimeField: getCurrentDate(),
             addressFieldName: widget.selectedAddress?.formattedAddress ?? '',
             latFieldName: '${widget.selectedAddress?.geometry.location.lat ?? ''}',
-            longFieldName: '${widget.selectedAddress?.geometry.location.lng ?? '0.0'}',
+            longFieldName: '${widget.selectedAddress?.geometry.location.lng ?? ''}',
           };
 
     if (widget.listItem != null) {
@@ -132,20 +132,18 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
     final urlIndices = List.generate(max(widget.listItem?.urls.length ?? 0, _urlHasError.length), (i) => i);
     final categoryIndices =
         List.generate(max(widget.listItem?.categories.length ?? 0, _categoryNameHasError.length), (i) => i);
-    return Scaffold(
-      appBar: CommonAppBar(
-        title: widget.listItem?.id != null ? 'Edit List Item' : 'Add List Item',
-        actions: [
-          if (widget.list?.id != null)
-            AppBarAction(
-              title: 'Delete list',
-              icon: Icons.delete,
-              callback: () =>
-                  deleteListItem(ref, GoRouter.of(context), widget.list!.publicListId!, widget.listItem!.id!),
-              overflow: false,
-            ),
-        ],
-      ),
+
+    return CommonScaffold(
+      title: widget.listItem?.id != null ? 'Edit List Item' : 'Add List Item',
+      actions: [
+        if (widget.list?.id != null)
+          AppBarAction(
+            title: 'Delete list',
+            icon: Icons.delete,
+            callback: () => deleteListItem(ref, GoRouter.of(context), widget.list!.publicListId!, widget.listItem!.id!),
+            overflow: false,
+          ),
+      ],
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: SingleChildScrollView(
@@ -169,10 +167,11 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                       name: nameFieldName,
                       decoration: InputDecoration(
                         labelText: 'Item name',
+                        hintText: 'Required item name',
                         suffixIcon: _nameHasError
                             ? const Icon(Icons.error, color: Colors.red)
                             : const Icon(Icons.check, color: Colors.green),
-                      ),
+                      ).applyDefaults(Theme.of(context).inputDecorationTheme),
                       onChanged: (val) {
                         setState(() {
                           _nameHasError = !(_formKey.currentState?.fields[nameFieldName]?.validate() ?? false);
@@ -185,54 +184,62 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                       keyboardType: TextInputType.name,
                       textInputAction: TextInputAction.next,
                     ),
+                    const SizedBox(height: 16),
                     FormBuilderTextField(
                       autovalidateMode: AutovalidateMode.always,
                       name: infoFieldName,
-                      minLines: 3, maxLines: 6,
+                      minLines: 3,
+                      maxLines: 6,
                       decoration: InputDecoration(
                         labelText: 'Extra info',
+                        hintText: 'Optional extra info',
                         suffixIcon: _infoHasError
                             ? const Icon(Icons.error, color: Colors.red)
                             : const Icon(Icons.check, color: Colors.green),
-                      ),
+                      ).applyDefaults(Theme.of(context).inputDecorationTheme),
                       onChanged: (val) {
                         setState(() {
                           _infoHasError = !(_formKey.currentState?.fields[infoFieldName]?.validate() ?? false);
                         });
                       },
                       // valueTransformer: (text) => num.tryParse(text),
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.maxLength(1000),
-                      ]),
+                      validator: FormBuilderValidators.compose(
+                        [
+                          FormBuilderValidators.maxLength(1000),
+                        ],
+                      ),
                       keyboardType: TextInputType.name,
                       textInputAction: TextInputAction.newline,
                     ),
                     const SizedBox(height: 32),
                     const Text('URLs', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                    ...urlIndices.map(
+                    ...urlIndices.expand(
                       (urlIndex) {
-                        return FormBuilderTextField(
-                          autovalidateMode: AutovalidateMode.always,
-                          name: 'url-$urlIndex',
-                          initialValue: urlInitialValue[urlIndex],
-                          decoration: InputDecoration(
-                            labelText: 'URL',
-                            suffixIcon: _urlHasError[urlIndex]
-                                ? const Icon(Icons.error, color: Colors.red)
-                                : const Icon(Icons.check, color: Colors.green),
+                        return [
+                          FormBuilderTextField(
+                            autovalidateMode: AutovalidateMode.always,
+                            name: 'url-$urlIndex',
+                            initialValue: urlInitialValue[urlIndex],
+                            decoration: InputDecoration(
+                              labelText: 'URL',
+                              suffixIcon: _urlHasError[urlIndex]
+                                  ? const Icon(Icons.error, color: Colors.red)
+                                  : const Icon(Icons.check, color: Colors.green),
+                            ),
+                            onChanged: (val) {
+                              setState(() {
+                                _urlHasError[urlIndex] =
+                                    !(_formKey.currentState?.fields['url-$urlIndex']?.validate() ?? false);
+                              });
+                            },
+                            validator: FormBuilderValidators.compose([
+                              FormBuilderValidators.maxLength(200),
+                            ]),
+                            keyboardType: TextInputType.name,
+                            textInputAction: TextInputAction.next,
                           ),
-                          onChanged: (val) {
-                            setState(() {
-                              _urlHasError[urlIndex] =
-                                  !(_formKey.currentState?.fields['url-$urlIndex']?.validate() ?? false);
-                            });
-                          },
-                          validator: FormBuilderValidators.compose([
-                            FormBuilderValidators.maxLength(200),
-                          ]),
-                          keyboardType: TextInputType.name,
-                          textInputAction: TextInputAction.next,
-                        );
+                          const SizedBox(height: 16),
+                        ];
                       },
                     ).toList(),
                     ElevatedButton(
@@ -241,13 +248,14 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                           _urlHasError = [..._urlHasError, true];
                         });
                       },
-                      child: const Text('Add new category'),
+                      child: const Text('Add new URL'),
                     ),
                     if (widget.list?.withDates ?? false) ...[
                       const SizedBox(height: 32),
                       FormBuilderDateTimePicker(
                         name: dateTimeField,
                         inputType: widget.list!.withTimes ? InputType.both : InputType.date,
+                        format: dateTimeFormatter,
                         decoration: InputDecoration(
                           labelText: widget.list!.withTimes ? 'Date and Time' : 'Date',
                           suffixIcon: IconButton(
@@ -307,6 +315,7 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                         keyboardType: TextInputType.name,
                         textInputAction: TextInputAction.next,
                       ),
+                      const SizedBox(height: 16),
                       Flex(
                         direction: Axis.horizontal,
                         children: [
@@ -333,6 +342,7 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                               textInputAction: TextInputAction.next,
                             ),
                           ),
+                          const SizedBox(width: 16),
                           Flexible(
                             child: FormBuilderTextField(
                               autovalidateMode: AutovalidateMode.always,
@@ -360,67 +370,80 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                       )
                     ],
                     const SizedBox(height: 32),
-                    const Text('Categories and values', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                    ...categoryIndices.map(
+                    const Text('Categories', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 16),
+                    ...categoryIndices.expand(
                       (categoryIndex) {
-                        return Flex(
-                          direction: Axis.horizontal,
-                          children: [
-                            Flexible(
-                              flex: 2,
-                              child: FormBuilderTextField(
-                                autovalidateMode: AutovalidateMode.always,
-                                name: 'categoryName-$categoryIndex',
-                                decoration: InputDecoration(
-                                  labelText: 'Category name',
-                                  suffixIcon: _categoryNameHasError[categoryIndex]
-                                      ? const Icon(Icons.error, color: Colors.red)
-                                      : const Icon(Icons.check, color: Colors.green),
-                                ),
-                                onChanged: (val) {
-                                  setState(() {
-                                    _categoryNameHasError[categoryIndex] =
-                                        !(_formKey.currentState?.fields['categoryName-$categoryIndex']?.validate() ??
+                        return [
+                          Flex(
+                            direction: Axis.horizontal,
+                            children: [
+                              Flexible(
+                                flex: 2,
+                                child: Padding(
+                                  padding: EdgeInsets.fromLTRB(0, _categoryNameHasError[categoryIndex] ? 15 : 0, 0, 0),
+                                  child: FormBuilderTextField(
+                                    autovalidateMode: AutovalidateMode.always,
+                                    name: 'categoryName-$categoryIndex',
+                                    decoration: InputDecoration(
+                                      labelText: 'Category name',
+                                      suffixIcon: _categoryNameHasError[categoryIndex]
+                                          ? const Icon(Icons.error, color: Colors.red)
+                                          : const Icon(Icons.check, color: Colors.green),
+                                    ),
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _categoryNameHasError[categoryIndex] = !(_formKey
+                                                .currentState?.fields['categoryName-$categoryIndex']
+                                                ?.validate() ??
                                             false);
-                                  });
-                                },
-                                validator: FormBuilderValidators.compose([
-                                  FormBuilderValidators.required(),
-                                  FormBuilderValidators.maxLength(32),
-                                ]),
-                                keyboardType: TextInputType.name,
-                                textInputAction: TextInputAction.next,
-                              ),
-                            ),
-                            const SizedBox(width: 16),
-                            Flexible(
-                              flex: 3,
-                              child: FormBuilderTextField(
-                                autovalidateMode: AutovalidateMode.always,
-                                name: 'categoryValues-$categoryIndex',
-                                decoration: InputDecoration(
-                                  labelText: 'Category values',
-                                  suffixIcon: _categoryValuesHasError[categoryIndex]
-                                      ? const Icon(Icons.error, color: Colors.red)
-                                      : const Icon(Icons.check, color: Colors.green),
+                                      });
+                                    },
+                                    validator: FormBuilderValidators.compose([
+                                      FormBuilderValidators.required(),
+                                      FormBuilderValidators.maxLength(32),
+                                    ]),
+                                    keyboardType: TextInputType.name,
+                                    textInputAction: TextInputAction.next,
+                                  ),
                                 ),
-                                onChanged: (val) {
-                                  setState(() {
-                                    _categoryValuesHasError[categoryIndex] =
-                                        !(_formKey.currentState?.fields['categoryValues-$categoryIndex']?.validate() ??
-                                            false);
-                                  });
-                                },
-                                validator: FormBuilderValidators.compose([
-                                  FormBuilderValidators.required(),
-                                  FormBuilderValidators.maxLength(32),
-                                ]),
-                                keyboardType: TextInputType.name,
-                                textInputAction: TextInputAction.next,
                               ),
-                            ),
-                          ],
-                        );
+                              const SizedBox(width: 16),
+                              Flexible(
+                                flex: 3,
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.fromLTRB(0, _categoryValuesHasError[categoryIndex] ? 15 : 0, 0, 0),
+                                  child: FormBuilderTextField(
+                                    autovalidateMode: AutovalidateMode.always,
+                                    name: 'categoryValues-$categoryIndex',
+                                    decoration: InputDecoration(
+                                      labelText: 'Category values',
+                                      suffixIcon: _categoryValuesHasError[categoryIndex]
+                                          ? const Icon(Icons.error, color: Colors.red)
+                                          : const Icon(Icons.check, color: Colors.green),
+                                    ),
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _categoryValuesHasError[categoryIndex] = !(_formKey
+                                                .currentState?.fields['categoryValues-$categoryIndex']
+                                                ?.validate() ??
+                                            false);
+                                      });
+                                    },
+                                    validator: FormBuilderValidators.compose([
+                                      FormBuilderValidators.required(),
+                                      FormBuilderValidators.maxLength(32),
+                                    ]),
+                                    keyboardType: TextInputType.name,
+                                    textInputAction: TextInputAction.next,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: _categoryValuesHasError[categoryIndex] ? 4 : 15),
+                        ];
                       },
                     ).toList(),
                     ElevatedButton(
@@ -439,6 +462,20 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
               Row(
                 children: <Widget>[
                   Expanded(
+                    child: OutlinedButton(
+                      onPressed: () {
+                        _formKey.currentState?.reset();
+                        print('AddEditListItem: pop once');
+                        GoRouter.of(context).pop();
+                      },
+                      // color: Theme.of(context).colorScheme.secondary,
+                      child: const Text(
+                        'Cancel',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 20),
+                  Expanded(
                     child: ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState?.saveAndValidate() ?? false) {
@@ -452,23 +489,6 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                       child: const Text(
                         'Submit',
                         style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () {
-                        _formKey.currentState?.reset();
-                        print('AddEditListItem: pop once');
-                        GoRouter.of(context).pop();
-                      },
-                      // color: Theme.of(context).colorScheme.secondary,
-                      child: Text(
-                        'Cancel',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
                       ),
                     ),
                   ),

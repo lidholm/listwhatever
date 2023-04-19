@@ -38,7 +38,20 @@ DateTime getCurrentTime() {
   return date;
 }
 
+String formatReadableDate(DateTime d) {
+  final diff = d.difference(DateTime.now());
+  print(diff);
+  if (diff > const Duration(days: 365)) {
+    return readableDateFormatterWithYear.format(d);
+  } else {
+    return readableDateFormatter.format(d);
+  }
+}
+
+final dateTimeFormatter = DateFormat('yyyy-MM-dd HH:mm');
 final dateFormatter = DateFormat('yyyy-MM-dd');
+final readableDateFormatter = DateFormat('MMMM d');
+final readableDateFormatterWithYear = DateFormat('MMMM d, yyyy');
 final timeFormatter = DateFormat('HH:mm');
 final readableDateAndTimeFormatter = DateFormat('d MMM HH:mm');
 

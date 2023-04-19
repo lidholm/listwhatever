@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listanything/app/firebase/firebase_auth_provider.dart';
 import 'package:listanything/app/widgets/standardWidgets/async_value_widget.dart';
-import 'package:listanything/app/widgets/standardWidgets/common_app_bar.dart';
+import 'package:listanything/app/widgets/standardWidgets/common_scaffold.dart';
 
 @immutable
 class ProfilePageRoute extends GoRouteData {
@@ -16,8 +16,8 @@ class ProfilePageRoute extends GoRouteData {
     return Consumer(
       builder: (context, ref, child) => AsyncValueWidget<FirebaseAuth>(
         value: ref.watch(firebaseAuthProvider),
-        data: (auth) => Scaffold(
-          appBar: const CommonAppBar(title: 'Profile'),
+        data: (auth) => CommonScaffold(
+          title: 'Profile',
           body: ProfileScreen(auth: auth),
         ),
       ),

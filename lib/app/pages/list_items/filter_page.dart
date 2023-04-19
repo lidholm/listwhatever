@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:listanything/app/pages/list_items/filter_provider.dart';
 import 'package:listanything/app/pages/list_items/list_item.dart';
 import 'package:listanything/app/pages/list_items/list_items_provider.dart';
+import 'package:listanything/app/widgets/standardWidgets/common_scaffold.dart';
 import 'package:listanything/app/widgets/standardWidgets/exception_widget.dart';
 
 class FilterPage extends ConsumerWidget {
@@ -71,8 +72,8 @@ class _FilterPageInnerState extends State<FilterPageInner> {
     final initialValue = widget.filters;
 
     //TODO: Get name of list
-    return Scaffold(
-      appBar: AppBar(title: const Text('Filter for <Restaurants>')),
+    return CommonScaffold(
+      title: 'Filter for <Restaurants>',
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: SingleChildScrollView(
