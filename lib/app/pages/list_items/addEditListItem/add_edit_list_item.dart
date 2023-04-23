@@ -479,10 +479,10 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                     child: ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState?.saveAndValidate() ?? false) {
-                          debugPrint('values: ${_formKey.currentState?.value.toString()}');
+                          // debugPrint('values: ${_formKey.currentState?.value.toString()}');
                           saveListItem(GoRouter.of(context), widget.list!.publicListId!, widget.listItem);
                         } else {
-                          debugPrint('values: ${_formKey.currentState?.value.toString()}');
+                          // debugPrint('values: ${_formKey.currentState?.value.toString()}');
                           debugPrint('validation failed');
                         }
                       },

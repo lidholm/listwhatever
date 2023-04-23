@@ -214,6 +214,7 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
                     FormBuilderSwitch(
                       title: const Text('Include dates for items'),
                       name: withDatesFieldName,
+                      activeColor: Colors.orange.shade800,
                       onChanged: (value) {
                         setState(() {
                           showTimesField = value ?? false;
@@ -251,10 +252,10 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
                     child: ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState?.saveAndValidate() ?? false) {
-                          debugPrint(_formKey.currentState?.value.toString());
+                          // debugPrint(_formKey.currentState?.value.toString());
                           saveList(GoRouter.of(context), widget.userId, widget.list);
                         } else {
-                          debugPrint(_formKey.currentState?.value.toString());
+                          // debugPrint(_formKey.currentState?.value.toString());
                           debugPrint('validation failed');
                         }
                       },

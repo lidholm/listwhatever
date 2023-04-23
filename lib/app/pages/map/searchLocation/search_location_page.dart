@@ -209,12 +209,7 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                     child: OutlinedButton(
                       onPressed: () {
                         _formKey.currentState?.reset();
-                        // TODO: Remove if statement?
-                        if (widget.listItemId == null) {
-                          GoRouter.of(context).pop();
-                        } else {
-                          GoRouter.of(context).pop();
-                        }
+                        GoRouter.of(context).pop();
                       },
                       // color: Theme.of(context).colorScheme.secondary,
                       child: const Text(
@@ -230,7 +225,7 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                           return;
                         }
                         if (_formKey.currentState?.saveAndValidate() ?? false) {
-                          debugPrint(_formKey.currentState?.value.toString());
+                          // debugPrint(_formKey.currentState?.value.toString());
                           final searchPhrase = _formKey.currentState?.fields[searchPhraseName]?.value as String?;
                           saveAddress(
                             GoRouter.of(context),
@@ -240,7 +235,7 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                             widget.listItemId,
                           );
                         } else {
-                          debugPrint(_formKey.currentState?.value.toString());
+                          // debugPrint(_formKey.currentState?.value.toString());
                           debugPrint('validation failed');
                         }
                       },
@@ -269,11 +264,6 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
     ref.read(selectedAddressProvider.notifier).state =
         result.copyWith(searchPhrase: searchPhrase ?? 'No search phrase');
 
-    // TODO: Remove if statement?
-    if (listItemId == null) {
-      router.pop();
-    } else {
-      router.pop();
-    }
+    router.pop();
   }
 }

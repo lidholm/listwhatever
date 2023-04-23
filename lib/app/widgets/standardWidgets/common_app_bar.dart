@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CommonAppBar({super.key, required this.title, this.actions = const <AppBarAction>[]})
+  const CommonAppBar({super.key, required this.title, this.actions = const <AppBarAction>[], this.titleWidget})
       // ignore: avoid_field_initializers_in_const_classes
       : preferredSize = const Size.fromHeight(kToolbarHeight);
 
   final String title;
+  final Widget? titleWidget;
   final List<AppBarAction> actions;
   @override
   final Size preferredSize; // default is 56.0
@@ -42,7 +43,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(title),
+          titleWidget ?? Text(title),
         ],
       ),
       actions: [

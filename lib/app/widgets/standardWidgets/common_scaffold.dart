@@ -6,11 +6,13 @@ class CommonScaffold extends StatelessWidget {
   const CommonScaffold({
     super.key,
     required this.title,
+    this.titleWidget,
     required this.body,
     this.actions,
     this.drawer,
   });
   final String? title;
+  final Widget? titleWidget;
   final Widget body;
   final List<AppBarAction>? actions;
   final Drawer? drawer;
@@ -22,10 +24,12 @@ class CommonScaffold extends StatelessWidget {
           ? null
           : CommonAppBar(
               title: title!,
+              titleWidget: titleWidget,
               actions: actions ?? [],
             ),
       drawer: drawer,
       body: Container(
+        width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
