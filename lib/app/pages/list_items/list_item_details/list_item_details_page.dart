@@ -5,7 +5,7 @@ import 'package:listanything/app/pages/list_items/list_item.dart';
 import 'package:listanything/app/pages/list_items/list_item_provider.dart';
 import 'package:listanything/app/pages/lists/list_of_things.dart';
 import 'package:listanything/app/pages/lists/lists_provider.dart';
-import 'package:listanything/app/widgets/standardWidgets/common_app_bar.dart';
+import 'package:listanything/app/widgets/standardWidgets/common_scaffold.dart';
 import 'package:listanything/app/widgets/standardWidgets/double_async_value_widget.dart';
 import 'package:tuple/tuple.dart';
 
@@ -42,10 +42,8 @@ class _ListItemDetailsInnerState extends ConsumerState<ListItemDetailsInner> {
     if (widget.listItem == null) {
       return const Text('No item');
     }
-    return Scaffold(
-      appBar: CommonAppBar(
-        title: '${widget.listItem!.name} Details',
-      ),
+    return CommonScaffold(
+      title: '${widget.listItem!.name} Details',
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: SingleChildScrollView(

@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listanything/app/pages/list_items/date_filter.dart';
 import 'package:listanything/app/pages/list_items/filter_provider.dart';
+import 'package:listanything/app/pages/list_items/filters.dart';
+import 'package:listanything/app/pages/list_items/list_and_list_items_provider.dart';
 import 'package:listanything/app/pages/list_items/list_item.dart';
-import 'package:listanything/app/pages/list_items/list_items_provider.dart';
+import 'package:listanything/app/pages/lists/list_of_things.dart';
 import 'package:listanything/app/widgets/standardWidgets/common_scaffold.dart';
 import 'package:listanything/app/widgets/standardWidgets/exception_widget.dart';
 
@@ -15,11 +18,26 @@ class FilterPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final filters = ref.watch(filterProvider);
-    return ref.watch(listItemsProvider(publicListId)).when(
+    return ref.watch(listAndListItemsProvider(publicListId)).when(
           error: (e, st) => ExceptionWidget(e: e, st: st),
-          loading: () => FilterPageInner(categories: const {}, isLoading: true, ref: ref, filters: filters),
-          data: (items) =>
-              FilterPageInner(categories: getCategories(items ?? []), isLoading: false, ref: ref, filters: filters),
+          loading: () => FilterPageInner(
+            categories: const {},
+            isLoading: true,
+            ref: ref,
+            filters: filters,
+            list: null,
+          ),
+          data: (tuple) {
+            final list = tuple.item1;
+            final items = tuple.item2;
+            return FilterPageInner(
+              categories: getCategories(items ?? []),
+              isLoading: false,
+              ref: ref,
+              filters: filters,
+              list: list,
+            );
+          },
         );
   }
 
@@ -46,12 +64,14 @@ class FilterPageInner extends StatefulWidget {
     required this.isLoading,
     required this.ref,
     required this.filters,
+    required this.list,
   }) : super(key: key);
 
   final Map<String, Set<String>> categories;
   final bool isLoading;
   final WidgetRef ref;
-  final Map<String, List<String>> filters;
+  final Filters filters;
+  final ListOfThings? list;
 
   @override
   State<FilterPageInner> createState() {
@@ -69,11 +89,18 @@ class _FilterPageInnerState extends State<FilterPageInner> {
 
   @override
   Widget build(BuildContext context) {
-    final initialValue = widget.filters;
+    final other = <String, dynamic>{
+      startDateFieldName: widget.filters.startDate,
+      endDateFieldName: widget.filters.endDate
+    };
+    final initialValue = <String, dynamic>{}
+      ..addAll(widget.filters.categoryFilters)
+      ..addAll(other);
+    final iconTexts = getIconTexts(widget.categories);
+    print('iconTexts: $iconTexts');
 
-    //TODO: Get name of list
     return CommonScaffold(
-      title: 'Filter for <Restaurants>',
+      title: 'Filter for ${widget.list?.name}',
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: SingleChildScrollView(
@@ -91,27 +118,47 @@ class _FilterPageInnerState extends State<FilterPageInner> {
                 child: Column(
                   children: <Widget>[
                     const SizedBox(height: 16),
-                    ...widget.categories.entries.map((e) {
+                    if (widget.list?.withDates ?? false) DateFilter(formKey: _formKey),
+                    const SizedBox(height: 16),
+                    ...widget.categories.entries.expand((e) {
                       final categoryName = e.key;
                       final categoryValues = e.value;
 
-                      return FormBuilderFilterChip<String>(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        decoration: InputDecoration(
-                          labelText: categoryName,
+                      return [
+                        FormBuilderFilterChip<String>(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          decoration: InputDecoration(
+                            labelText: categoryName,
+                          ),
+                          name: categoryName,
+                          selectedColor: Colors.orange.shade800,
+                          backgroundColor: Colors.orange.shade300,
+                          options: categoryValues
+                              .map(
+                                (c) => FormBuilderChipOption<String>(
+                                  value: c,
+                                  avatar: CircleAvatar(
+                                    backgroundColor: Colors.orange.shade800,
+                                    child: Text(isSelected(categoryName, c) ? '' : c[0]),
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                          onChanged: (values) {
+                            print('onChanged');
+                            print('values: $values');
+                            setState(() {
+                              for (final value in values ?? <String>[]) {
+                                iconTexts[categoryName]![value] = '';
+                              }
+                            });
+                            _onChanged(values);
+                          },
                         ),
-                        name: categoryName,
-                        selectedColor: Colors.blue,
-                        options: categoryValues
-                            .map(
-                              (c) => FormBuilderChipOption<String>(
-                                value: c,
-                                avatar: CircleAvatar(child: Text(c[0])),
-                              ),
-                            )
-                            .toList(),
-                        onChanged: _onChanged,
-                      );
+                        const SizedBox(
+                          height: 16,
+                        )
+                      ];
                     })
                   ],
                 ),
@@ -120,34 +167,31 @@ class _FilterPageInnerState extends State<FilterPageInner> {
               Row(
                 children: <Widget>[
                   Expanded(
+                    child: OutlinedButton(
+                      onPressed: () {
+                        _formKey.currentState?.reset();
+                      },
+                      // color: Theme.of(context).colorScheme.secondary,
+                      child: const Text(
+                        'Reset',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 20),
+                  Expanded(
                     child: ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState?.saveAndValidate() ?? false) {
-                          debugPrint(_formKey.currentState?.value.toString());
+                          // debugPrint(_formKey.currentState?.value.toString());
                           updateFilters(GoRouter.of(context));
                         } else {
-                          debugPrint(_formKey.currentState?.value.toString());
+                          // debugPrint(_formKey.currentState?.value.toString());
                           debugPrint('validation failed');
                         }
                       },
                       child: const Text(
                         'Submit',
                         style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () {
-                        _formKey.currentState?.reset();
-                      },
-                      // color: Theme.of(context).colorScheme.secondary,
-                      child: Text(
-                        'Reset',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
                       ),
                     ),
                   ),
@@ -160,20 +204,51 @@ class _FilterPageInnerState extends State<FilterPageInner> {
     );
   }
 
+  bool isSelected(String categoryName, String c) {
+    final filters = _formKey.currentState?.value;
+    final filter = filters?[categoryName] as List<String>?;
+    final isChecked = filter?.contains(c) ?? false;
+    return isChecked;
+  }
+
   void updateFilters(GoRouter router) {
     final fields = _formKey.currentState?.fields;
     print('fields: $fields');
 
-    final filters = <String, List<String>>{};
+    final categoryFilters = <String, List<String>>{};
+    DateTime? startDate;
+    DateTime? endDate;
 
     for (final field in fields!.entries) {
-      final values = field.value.value as List<String>?;
-      if (values != null) {
-        filters[field.key] = values;
+      if (field.key == startDateFieldName) {
+        startDate = field.value.value as DateTime?;
+      } else if (field.key == endDateFieldName) {
+        endDate = field.value.value as DateTime?;
+      } else {
+        final values = field.value.value as List<String>?;
+        if (values != null) {
+          categoryFilters[field.key] = values;
+        }
       }
     }
-    print('filters: $filters');
-    widget.ref.read(filterProvider.notifier).state = filters;
+    print('filters: $categoryFilters');
+    widget.ref.read(filterProvider.notifier).state = Filters(
+      categoryFilters: categoryFilters,
+      startDate: startDate,
+      endDate: endDate,
+    );
     router.pop();
+  }
+
+  Map<String, Map<String, String>> getIconTexts(Map<String, Set<String>> filters) {
+    return {
+      for (var entry in filters.entries) entry.key: getIconLetters(entry.value),
+    };
+  }
+
+  Map<String, String> getIconLetters(Set<String> value) {
+    return {
+      for (var entry in value) entry: entry[0],
+    };
   }
 }

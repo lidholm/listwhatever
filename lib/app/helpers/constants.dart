@@ -1,9 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:listanything/app/geocoder/latlong.dart';
+import 'package:tuple/tuple.dart';
 
 Iterable<MapEntry<int, T>> mapIndexed<T>(
   Iterable<T> items,
@@ -54,6 +56,8 @@ final readableDateFormatter = DateFormat('MMMM d');
 final readableDateFormatterWithYear = DateFormat('MMMM d, yyyy');
 final timeFormatter = DateFormat('HH:mm');
 final readableDateAndTimeFormatter = DateFormat('d MMM HH:mm');
+final DateTime minDateTime = DateTime.utc(1900, 04, 20);
+final DateTime maxDateTime = DateTime.utc(2100, 09, 13);
 
 extension LatLongExtension on LatLong {
   LatLng toLatLng() {
@@ -63,4 +67,37 @@ extension LatLongExtension on LatLong {
 
 extension MyIterable<E> on Iterable<E> {
   Iterable<E> sortedBy(Comparable Function(E e) key) => toList()..sort((a, b) => key(a).compareTo(key(b)));
+}
+
+AsyncValue<Tuple2<S, T>> combineTwoAsyncValues<S, T>(AsyncValue<S> firstValue, AsyncValue<T> secondValue) {
+  return firstValue.when(
+    data: (S s) {
+      return secondValue.when(
+        loading: AsyncValue.loading,
+        error: AsyncValue.error,
+        data: (T t) => AsyncValue.data(
+          Tuple2(
+            s,
+            t,
+          ),
+        ),
+      );
+    },
+    loading: AsyncValue.loading,
+    error: AsyncValue.error,
+  );
+}
+
+AsyncValue<Tuple3<S, T, U>> combineThreeAsyncValues<S, T, U>(
+  AsyncValue<S> firstValue,
+  AsyncValue<T> secondValue,
+  AsyncValue<U> thirddValue,
+) {
+  return combineTwoAsyncValues(firstValue, combineTwoAsyncValues(secondValue, thirddValue)).when(
+    error: AsyncValue.error,
+    loading: AsyncValue.loading,
+    data: (Tuple2<S, Tuple2<T, U>> data) => AsyncValue.data(
+      Tuple3(data.item1, data.item2.item1, data.item2.item2),
+    ),
+  );
 }

@@ -1,11 +1,32 @@
-[x] Edit list  
-[x] Ghost buttons instead of Loading page (https://docs.flutter.dev/cookbook/effects/shimmer-loading)  
-[x] Delete list  
-[x] Delete list item  
-[x] Support for maps  
-[ ] Anonymous account and merge when logging  
-[x] Links and info for items  
-[x] Filter
-[x] Fix FutureProvider that should be StreamProvider or AsyncValueProvider
-[x] Privacy policy page
-[x] Order list item by date
+- [x] Edit list
+- [x] Ghost buttons instead of Loading page (https://docs.flutter.dev/cookbook/effects/shimmer-loading)
+- [x] Delete list
+- [x] Delete list item
+- [x] Support for maps
+- [x] Links and info for items
+- [x] Filter
+- [x] Fix FutureProvider that should be StreamProvider or AsyncValueProvider
+- [x] Privacy policy page
+- [x] Order list item by date
+- [x] Remove participatedList from user when user is removed from viewers/editors
+- [x] Write permissions for shared list
+- [x] Write permissions for items of shared list
+- [x] New layout/colors
+- [x] Filter on dates (if available)
+  - [x] Don't show date if list is set to not have dates
+  - [x] Don't care about filtering on dates if list is set to not have dates
+- [x] Filter in list item view
+  - [x] Make items clickable to edit page
+  - [x] Don't show any filters if nothing is selected
+  - [x] Update colors on chips in Filter view
+  - [x] Fix header in Filter view page
+  - [x] Remove title in app bar for list items page and use SliverAppBar instead
+- [x] Active filters on the list item page at the top
+- [ ] Show current location on map
+- [ ] Filter on map distance (if available)
+  - [ ] From current position
+  - [ ] From selected address
+- [ ] Names and stuff for a profile, that will show when sharing
+- [ ] Add editing capability for sharing
+- [ ] Clean up directories, espectially filters
+- [ ] Anonymous account and merge when logging

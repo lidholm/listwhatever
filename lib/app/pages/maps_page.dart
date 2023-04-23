@@ -49,7 +49,7 @@ class MapsPageInner extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final hasFilters = ref.watch(filterProvider).values.expand((e) => e).isNotEmpty;
+    final filters = ref.watch(filterProvider);
 
     final allMarkers = items
         .where((item) => item.latLong != null)
@@ -82,7 +82,7 @@ class MapsPageInner extends ConsumerWidget {
         ),
         AppBarAction(
           title: 'Filter',
-          icon: hasFilters ? Icons.filter_alt : Icons.filter_alt_off,
+          icon: filters.anySelectedFilters(listHasDates: list.withDates) ? Icons.filter_alt : Icons.filter_alt_off,
           callback: () => filterPage(context, list.publicListId!),
           overflow: false,
         ),

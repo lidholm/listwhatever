@@ -53,8 +53,9 @@ class App extends ConsumerWidget {
           color: Colors.orange[800],
         ),
         inputDecorationTheme: InputDecorationTheme(
-          labelStyle: const TextStyle(color: Colors.black, fontSize: 16),
-          hintStyle: TextStyle(color: Colors.grey.shade800, fontSize: 16),
+          labelStyle: const TextStyle(color: Colors.grey, fontSize: 16),
+          floatingLabelStyle: const TextStyle(color: Colors.black, fontSize: 16),
+          hintStyle: const TextStyle(color: Colors.grey, fontSize: 16),
           border: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.orange[800]!),
           ),
