@@ -18,17 +18,26 @@ class ExceptionWidget extends StatelessWidget {
           children: [
             Text(
               error.toString(),
-              style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.red),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall!
+                  .copyWith(color: Colors.red),
             ),
             const SizedBox(height: 16),
             Text(
               extraInfo ?? '',
-              style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.red),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall!
+                  .copyWith(color: Colors.red),
             ),
             const SizedBox(height: 16),
             Text(
               st.toString(),
-              style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.red),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall!
+                  .copyWith(color: Colors.red),
             ),
           ],
         ),

@@ -12,3 +12,4 @@ alias importProductionData="npx -p node-firestore-import-export firestore-import
 alias importProductionDataToEmulator="export FIRESTORE_EMULATOR_HOST=localhost:8080 && npx -p node-firestore-import-export firestore-import -a firebaseExportCredentials.json -b firestoreData.local.json"
 
 # alias killPortsWindows="netstat -ano | findstr :8085" && taskkill /PID <PID> /F
+# alias killPortsMac="lsof -i :5000" && kill -9 18510

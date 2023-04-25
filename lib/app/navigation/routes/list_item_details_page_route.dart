@@ -4,12 +4,18 @@ import 'package:listanything/app/pages/list_items/list_item_details/list_item_de
 
 @immutable
 class ListItemDetailsPageRoute extends GoRouteData {
-  const ListItemDetailsPageRoute({required this.publicListId, this.listItemId});
+  const ListItemDetailsPageRoute({
+    required this.publicListId,
+    required this.listItemId,
+  });
   final String publicListId;
-  final String? listItemId;
+  final String listItemId;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return ListItemDetailsPage(publicListId: publicListId, listItemId: listItemId);
+    return ListItemDetailsPage(
+      publicListId: publicListId,
+      listItemId: listItemId,
+    );
   }
 }

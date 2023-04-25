@@ -6,11 +6,11 @@ part of 'routes.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<GoRoute> get $appRoutes => [
+List<RouteBase> get $appRoutes => [
       $welcomeRoute,
     ];
 
-GoRoute get $welcomeRoute => GoRouteData.$route(
+RouteBase get $welcomeRoute => GoRouteData.$route(
       path: '/',
       factory: $WelcomeRouteExtension._fromState,
       routes: [
@@ -21,10 +21,6 @@ GoRoute get $welcomeRoute => GoRouteData.$route(
         GoRouteData.$route(
           path: 'sign_in',
           factory: $SignInScreenRouteExtension._fromState,
-        ),
-        GoRouteData.$route(
-          path: 'counter',
-          factory: $CounterPageRouteExtension._fromState,
         ),
         GoRouteData.$route(
           path: 'lists',
@@ -110,12 +106,12 @@ extension $WelcomeRouteExtension on WelcomeRoute {
         '/',
       );
 
-  void go(BuildContext context) => context.go(location, extra: this);
+  void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location, extra: this);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: this);
+      context.pushReplacement(location);
 }
 
 extension $LoadingUserRouteExtension on LoadingUserRoute {
@@ -126,12 +122,12 @@ extension $LoadingUserRouteExtension on LoadingUserRoute {
         '/loading_user',
       );
 
-  void go(BuildContext context) => context.go(location, extra: this);
+  void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location, extra: this);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: this);
+      context.pushReplacement(location);
 }
 
 extension $SignInScreenRouteExtension on SignInScreenRoute {
@@ -142,28 +138,12 @@ extension $SignInScreenRouteExtension on SignInScreenRoute {
         '/sign_in',
       );
 
-  void go(BuildContext context) => context.go(location, extra: this);
+  void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location, extra: this);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: this);
-}
-
-extension $CounterPageRouteExtension on CounterPageRoute {
-  static CounterPageRoute _fromState(GoRouterState state) =>
-      const CounterPageRoute();
-
-  String get location => GoRouteData.$location(
-        '/counter',
-      );
-
-  void go(BuildContext context) => context.go(location, extra: this);
-
-  void push(BuildContext context) => context.push(location, extra: this);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: this);
+      context.pushReplacement(location);
 }
 
 extension $ListsPageRouteExtension on ListsPageRoute {
@@ -173,12 +153,12 @@ extension $ListsPageRouteExtension on ListsPageRoute {
         '/lists',
       );
 
-  void go(BuildContext context) => context.go(location, extra: this);
+  void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location, extra: this);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: this);
+      context.pushReplacement(location);
 }
 
 extension $ShareListPageRouteExtension on ShareListPageRoute {
@@ -191,12 +171,12 @@ extension $ShareListPageRouteExtension on ShareListPageRoute {
         '/lists/${Uri.encodeComponent(publicListId)}/share',
       );
 
-  void go(BuildContext context) => context.go(location, extra: this);
+  void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location, extra: this);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: this);
+      context.pushReplacement(location);
 }
 
 extension $ShareCodePageRouteExtension on ShareCodePageRoute {
@@ -210,12 +190,12 @@ extension $ShareCodePageRouteExtension on ShareCodePageRoute {
         '/lists/${Uri.encodeComponent(publicListId)}/shareCode/${Uri.encodeComponent(shareCode)}',
       );
 
-  void go(BuildContext context) => context.go(location, extra: this);
+  void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location, extra: this);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: this);
+      context.pushReplacement(location);
 }
 
 extension $AddListRouteExtension on AddListRoute {
@@ -225,32 +205,29 @@ extension $AddListRouteExtension on AddListRoute {
         '/lists/add',
       );
 
-  void go(BuildContext context) => context.go(location, extra: this);
+  void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location, extra: this);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: this);
+      context.pushReplacement(location);
 }
 
 extension $EditListRouteExtension on EditListRoute {
   static EditListRoute _fromState(GoRouterState state) => EditListRoute(
-        publicListId: state.queryParams['public-list-id'],
+        publicListId: state.params['publicListId']!,
       );
 
   String get location => GoRouteData.$location(
-        '/lists/${Uri.encodeComponent(publicListId!)}/edit',
-        queryParams: {
-          if (publicListId != null) 'public-list-id': publicListId!,
-        },
+        '/lists/${Uri.encodeComponent(publicListId)}/edit',
       );
 
-  void go(BuildContext context) => context.go(location, extra: this);
+  void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location, extra: this);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: this);
+      context.pushReplacement(location);
 }
 
 extension $MapsPageRouteExtension on MapsPageRoute {
@@ -262,12 +239,12 @@ extension $MapsPageRouteExtension on MapsPageRoute {
         '/lists/${Uri.encodeComponent(publicListId)}/map',
       );
 
-  void go(BuildContext context) => context.go(location, extra: this);
+  void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location, extra: this);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: this);
+      context.pushReplacement(location);
 }
 
 extension $ListItemsPageRouteExtension on ListItemsPageRoute {
@@ -280,33 +257,30 @@ extension $ListItemsPageRouteExtension on ListItemsPageRoute {
         '/lists/${Uri.encodeComponent(publicListId)}/items',
       );
 
-  void go(BuildContext context) => context.go(location, extra: this);
+  void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location, extra: this);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: this);
+      context.pushReplacement(location);
 }
 
 extension $EditListItemRouteExtension on EditListItemRoute {
   static EditListItemRoute _fromState(GoRouterState state) => EditListItemRoute(
         publicListId: state.params['publicListId']!,
-        listItemId: state.queryParams['list-item-id'],
+        listItemId: state.params['listItemId']!,
       );
 
   String get location => GoRouteData.$location(
-        '/lists/${Uri.encodeComponent(publicListId)}/items/${Uri.encodeComponent(listItemId!)}/edit',
-        queryParams: {
-          if (listItemId != null) 'list-item-id': listItemId!,
-        },
+        '/lists/${Uri.encodeComponent(publicListId)}/items/${Uri.encodeComponent(listItemId)}/edit',
       );
 
-  void go(BuildContext context) => context.go(location, extra: this);
+  void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location, extra: this);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: this);
+      context.pushReplacement(location);
 }
 
 extension $SearchLocationForEditPageRouteExtension
@@ -314,24 +288,23 @@ extension $SearchLocationForEditPageRouteExtension
   static SearchLocationForEditPageRoute _fromState(GoRouterState state) =>
       SearchLocationForEditPageRoute(
         publicListId: state.params['publicListId']!,
+        listItemId: state.params['listItemId']!,
         searchPhrase: state.queryParams['search-phrase'],
-        listItemId: state.queryParams['list-item-id'],
       );
 
   String get location => GoRouteData.$location(
-        '/lists/${Uri.encodeComponent(publicListId)}/items/${Uri.encodeComponent(listItemId!)}/edit/searchlocation',
+        '/lists/${Uri.encodeComponent(publicListId)}/items/${Uri.encodeComponent(listItemId)}/edit/searchlocation',
         queryParams: {
-          if (searchPhrase != null) 'search-phrase': searchPhrase!,
-          if (listItemId != null) 'list-item-id': listItemId!,
+          if (searchPhrase != null) 'search-phrase': searchPhrase,
         },
       );
 
-  void go(BuildContext context) => context.go(location, extra: this);
+  void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location, extra: this);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: this);
+      context.pushReplacement(location);
 }
 
 extension $AddListItemRouteExtension on AddListItemRoute {
@@ -343,12 +316,12 @@ extension $AddListItemRouteExtension on AddListItemRoute {
         '/lists/${Uri.encodeComponent(publicListId)}/items/add',
       );
 
-  void go(BuildContext context) => context.go(location, extra: this);
+  void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location, extra: this);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: this);
+      context.pushReplacement(location);
 }
 
 extension $SearchLocationForAddPageRouteExtension
@@ -363,39 +336,36 @@ extension $SearchLocationForAddPageRouteExtension
   String get location => GoRouteData.$location(
         '/lists/${Uri.encodeComponent(publicListId)}/items/add/searchlocation',
         queryParams: {
-          if (searchPhrase != null) 'search-phrase': searchPhrase!,
-          if (listItemId != null) 'list-item-id': listItemId!,
+          if (searchPhrase != null) 'search-phrase': searchPhrase,
+          if (listItemId != null) 'list-item-id': listItemId,
         },
       );
 
-  void go(BuildContext context) => context.go(location, extra: this);
+  void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location, extra: this);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: this);
+      context.pushReplacement(location);
 }
 
 extension $ListItemDetailsPageRouteExtension on ListItemDetailsPageRoute {
   static ListItemDetailsPageRoute _fromState(GoRouterState state) =>
       ListItemDetailsPageRoute(
         publicListId: state.params['publicListId']!,
-        listItemId: state.queryParams['list-item-id'],
+        listItemId: state.params['listItemId']!,
       );
 
   String get location => GoRouteData.$location(
-        '/lists/${Uri.encodeComponent(publicListId)}/items/${Uri.encodeComponent(listItemId!)}/details',
-        queryParams: {
-          if (listItemId != null) 'list-item-id': listItemId!,
-        },
+        '/lists/${Uri.encodeComponent(publicListId)}/items/${Uri.encodeComponent(listItemId)}/details',
       );
 
-  void go(BuildContext context) => context.go(location, extra: this);
+  void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location, extra: this);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: this);
+      context.pushReplacement(location);
 }
 
 extension $FilterPageRouteExtension on FilterPageRoute {
@@ -407,12 +377,12 @@ extension $FilterPageRouteExtension on FilterPageRoute {
         '/lists/${Uri.encodeComponent(publicListId)}/items/filter',
       );
 
-  void go(BuildContext context) => context.go(location, extra: this);
+  void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location, extra: this);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: this);
+      context.pushReplacement(location);
 }
 
 extension $ProfilePageRouteExtension on ProfilePageRoute {
@@ -423,12 +393,12 @@ extension $ProfilePageRouteExtension on ProfilePageRoute {
         '/profile',
       );
 
-  void go(BuildContext context) => context.go(location, extra: this);
+  void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location, extra: this);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: this);
+      context.pushReplacement(location);
 }
 
 extension $AboutPageRouteExtension on AboutPageRoute {
@@ -439,12 +409,12 @@ extension $AboutPageRouteExtension on AboutPageRoute {
         '/about',
       );
 
-  void go(BuildContext context) => context.go(location, extra: this);
+  void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location, extra: this);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: this);
+      context.pushReplacement(location);
 }
 
 extension $PrivacyPolicyPageRouteExtension on PrivacyPolicyPageRoute {
@@ -455,10 +425,10 @@ extension $PrivacyPolicyPageRouteExtension on PrivacyPolicyPageRoute {
         '/privacypolicy',
       );
 
-  void go(BuildContext context) => context.go(location, extra: this);
+  void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location, extra: this);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: this);
+      context.pushReplacement(location);
 }

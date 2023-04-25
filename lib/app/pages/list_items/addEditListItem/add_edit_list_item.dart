@@ -23,30 +23,48 @@ import 'package:listanything/app/widgets/standardWidgets/double_async_value_widg
 import 'package:tuple/tuple.dart';
 
 class AddEditListItem extends ConsumerWidget {
-  const AddEditListItem({super.key, required this.publicListId, required this.listItemId});
+  const AddEditListItem({
+    super.key,
+    required this.publicListId,
+    required this.listItemId,
+  });
   final String publicListId;
   final String? listItemId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedAddress = ref.watch(selectedAddressProvider);
+    print('selectedAddress $selectedAddress');
     if (listItemId == null) {
       return AsyncValueWidget<ListOfThings?>(
         value: ref.watch(listProvider(publicListId)),
-        data: (list) => AddEditListItemInner(listItem: null, list: list, selectedAddress: selectedAddress),
+        data: (list) => AddEditListItemInner(
+          listItem: null,
+          list: list,
+          selectedAddress: selectedAddress,
+        ),
       );
     }
     return DoubleAsyncValueWidget<ListItem?, ListOfThings?>(
-      firstValue: ref.watch(listItemProvider(Tuple2(publicListId, listItemId!))),
+      firstValue:
+          ref.watch(listItemProvider(Tuple2(publicListId, listItemId!))),
       secondValue: ref.watch(listProvider(publicListId)),
-      data: (listItem, list) => AddEditListItemInner(listItem: listItem, list: list, selectedAddress: selectedAddress),
+      data: (listItem, list) => AddEditListItemInner(
+        listItem: listItem,
+        list: list,
+        selectedAddress: selectedAddress,
+      ),
     );
   }
 }
 
 class AddEditListItemInner extends ConsumerStatefulWidget {
-  const AddEditListItemInner({Key? key, required this.listItem, required this.list, this.selectedAddress})
-      : super(key: key);
+  const AddEditListItemInner({
+    Key? key,
+    required this.listItem,
+    required this.list,
+    this.selectedAddress,
+  }) : super(key: key);
   final ListItem? listItem;
   final ListOfThings? list;
   final GeocoderResult? selectedAddress;
@@ -79,38 +97,65 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
   bool _latHasError = false;
   bool _longHasError = false;
   List<String> urlInitialValue = List.generate(100, (index) => 'http://');
-  Map<String, dynamic> initialValue = <String, dynamic>{};
 
+// TODO: Maybe not use init state?
   @override
   void initState() {
     super.initState();
-    _categoryNameHasError = List.generate(widget.listItem?.categories.length ?? 0, (index) => false);
-    _categoryValuesHasError = List.generate(widget.listItem?.categories.length ?? 0, (index) => false);
+    _categoryNameHasError = List.generate(
+      widget.listItem?.categories.length ?? 0,
+      (index) => false,
+    );
+    _categoryValuesHasError = List.generate(
+      widget.listItem?.categories.length ?? 0,
+      (index) => false,
+    );
     _nameHasError = widget.listItem == null;
 
-    initialValue = widget.listItem != null
+    mapIndexed(widget.listItem?.urls ?? <String>[]).forEach((e) {
+      final index = e.key;
+      final url = e.value;
+      urlInitialValue[index] = url;
+    });
+
+    _urlHasError =
+        List<bool>.generate(widget.listItem?.urls.length ?? 0, (index) => true);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final initialValue = widget.listItem != null
         ? <String, dynamic>{
             // TODO: Set name from selectedAddress if value is not already set
-            nameFieldName: widget.listItem!.name,
+            nameFieldName: widget.selectedAddress?.formattedAddress ??
+                widget.listItem!.address,
             urlsFieldName: widget.listItem!.urls,
             infoFieldName: widget.listItem!.info,
             dateTimeField: widget.listItem!.datetime,
-            addressFieldName: widget.selectedAddress?.formattedAddress ?? widget.listItem!.address,
-            latFieldName: '${widget.selectedAddress?.geometry.location.lat ?? widget.listItem!.latLong?.lat ?? ''}',
-            longFieldName: '${widget.selectedAddress?.geometry.location.lng ?? widget.listItem!.latLong?.lng ?? ''}',
+            addressFieldName: widget.selectedAddress?.formattedAddress ??
+                widget.listItem!.address,
+            latFieldName:
+                '${widget.selectedAddress?.geometry.location.lat ?? widget.listItem!.latLong?.lat ?? ''}',
+            longFieldName:
+                '${widget.selectedAddress?.geometry.location.lng ?? widget.listItem!.latLong?.lng ?? ''}',
           }
         : <String, dynamic>{
-            nameFieldName: '',
+            nameFieldName: widget.selectedAddress?.formattedAddress ??
+                widget.listItem!.address,
             urlsFieldName: '',
             infoFieldName: '',
             dateTimeField: getCurrentDate(),
             addressFieldName: widget.selectedAddress?.formattedAddress ?? '',
-            latFieldName: '${widget.selectedAddress?.geometry.location.lat ?? ''}',
-            longFieldName: '${widget.selectedAddress?.geometry.location.lng ?? ''}',
+            latFieldName:
+                '${widget.selectedAddress?.geometry.location.lat ?? ''}',
+            longFieldName:
+                '${widget.selectedAddress?.geometry.location.lng ?? ''}',
           };
-
     if (widget.listItem != null) {
-      mapIndexed(widget.listItem?.categories.entries ?? <MapEntry<String, List<String>>>[]).forEach((e) {
+      mapIndexed(
+        widget.listItem?.categories.entries ??
+            <MapEntry<String, List<String>>>[],
+      ).forEach((e) {
         final index = e.key;
         final key = e.value.key;
         final values = e.value.value;
@@ -118,20 +163,18 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
         initialValue['categoryValues-$index'] = values.join(', ');
       });
     }
-    mapIndexed(widget.listItem?.urls ?? <String>[]).forEach((e) {
-      final index = e.key;
-      final url = e.value;
-      urlInitialValue[index] = url;
-    });
 
-    _urlHasError = List<bool>.generate(widget.listItem?.urls.length ?? 0, (index) => true);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final urlIndices = List.generate(max(widget.listItem?.urls.length ?? 0, _urlHasError.length), (i) => i);
-    final categoryIndices =
-        List.generate(max(widget.listItem?.categories.length ?? 0, _categoryNameHasError.length), (i) => i);
+    final urlIndices = List.generate(
+      max(widget.listItem?.urls.length ?? 0, _urlHasError.length),
+      (i) => i,
+    );
+    final categoryIndices = List.generate(
+      max(
+        widget.listItem?.categories.length ?? 0,
+        _categoryNameHasError.length,
+      ),
+      (i) => i,
+    );
 
     return CommonScaffold(
       title: widget.listItem?.id != null ? 'Edit List Item' : 'Add List Item',
@@ -140,7 +183,12 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
           AppBarAction(
             title: 'Delete list',
             icon: Icons.delete,
-            callback: () => deleteListItem(ref, GoRouter.of(context), widget.list!.publicListId!, widget.listItem!.id!),
+            callback: () => deleteListItem(
+              ref,
+              GoRouter.of(context),
+              widget.list!.publicListId!,
+              widget.listItem!.id!,
+            ),
             overflow: false,
           ),
       ],
@@ -174,7 +222,10 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                       ).applyDefaults(Theme.of(context).inputDecorationTheme),
                       onChanged: (val) {
                         setState(() {
-                          _nameHasError = !(_formKey.currentState?.fields[nameFieldName]?.validate() ?? false);
+                          _nameHasError = !(_formKey
+                                  .currentState?.fields[nameFieldName]
+                                  ?.validate() ??
+                              false);
                         });
                       },
                       validator: FormBuilderValidators.compose([
@@ -199,7 +250,10 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                       ).applyDefaults(Theme.of(context).inputDecorationTheme),
                       onChanged: (val) {
                         setState(() {
-                          _infoHasError = !(_formKey.currentState?.fields[infoFieldName]?.validate() ?? false);
+                          _infoHasError = !(_formKey
+                                  .currentState?.fields[infoFieldName]
+                                  ?.validate() ??
+                              false);
                         });
                       },
                       // valueTransformer: (text) => num.tryParse(text),
@@ -212,7 +266,13 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                       textInputAction: TextInputAction.newline,
                     ),
                     const SizedBox(height: 32),
-                    const Text('URLs', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                    const Text(
+                      'URLs',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     ...urlIndices.expand(
                       (urlIndex) {
                         return [
@@ -224,12 +284,17 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                               labelText: 'URL',
                               suffixIcon: _urlHasError[urlIndex]
                                   ? const Icon(Icons.error, color: Colors.red)
-                                  : const Icon(Icons.check, color: Colors.green),
+                                  : const Icon(
+                                      Icons.check,
+                                      color: Colors.green,
+                                    ),
                             ),
                             onChanged: (val) {
                               setState(() {
-                                _urlHasError[urlIndex] =
-                                    !(_formKey.currentState?.fields['url-$urlIndex']?.validate() ?? false);
+                                _urlHasError[urlIndex] = !(_formKey
+                                        .currentState?.fields['url-$urlIndex']
+                                        ?.validate() ??
+                                    false);
                               });
                             },
                             validator: FormBuilderValidators.compose([
@@ -254,14 +319,18 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                       const SizedBox(height: 32),
                       FormBuilderDateTimePicker(
                         name: dateTimeField,
-                        inputType: widget.list!.withTimes ? InputType.both : InputType.date,
+                        inputType: widget.list!.withTimes
+                            ? InputType.both
+                            : InputType.date,
                         format: dateTimeFormatter,
                         decoration: InputDecoration(
-                          labelText: widget.list!.withTimes ? 'Date and Time' : 'Date',
+                          labelText:
+                              widget.list!.withTimes ? 'Date and Time' : 'Date',
                           suffixIcon: IconButton(
                             icon: const Icon(Icons.close),
                             onPressed: () {
-                              _formKey.currentState!.fields[dateTimeField]?.didChange(null);
+                              _formKey.currentState!.fields[dateTimeField]
+                                  ?.didChange(null);
                             },
                           ),
                         ),
@@ -276,7 +345,10 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                             const Center(
                               child: Text(
                                 'Address information',
-                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                             Positioned(
@@ -306,7 +378,10 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                         ),
                         onChanged: (val) {
                           setState(() {
-                            _addressHasError = !(_formKey.currentState?.fields[addressFieldName]?.validate() ?? false);
+                            _addressHasError = !(_formKey
+                                    .currentState?.fields[addressFieldName]
+                                    ?.validate() ??
+                                false);
                           });
                         },
                         validator: FormBuilderValidators.compose([
@@ -327,11 +402,17 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                                 labelText: 'Latitude',
                                 suffixIcon: _latHasError
                                     ? const Icon(Icons.error, color: Colors.red)
-                                    : const Icon(Icons.check, color: Colors.green),
+                                    : const Icon(
+                                        Icons.check,
+                                        color: Colors.green,
+                                      ),
                               ),
                               onChanged: (val) {
                                 setState(() {
-                                  _latHasError = !(_formKey.currentState?.fields[latFieldName]?.validate() ?? false);
+                                  _latHasError = !(_formKey
+                                          .currentState?.fields[latFieldName]
+                                          ?.validate() ??
+                                      false);
                                 });
                               },
                               validator: FormBuilderValidators.compose([
@@ -351,11 +432,17 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                                 labelText: 'Longitude',
                                 suffixIcon: _longHasError
                                     ? const Icon(Icons.error, color: Colors.red)
-                                    : const Icon(Icons.check, color: Colors.green),
+                                    : const Icon(
+                                        Icons.check,
+                                        color: Colors.green,
+                                      ),
                               ),
                               onChanged: (val) {
                                 setState(() {
-                                  _longHasError = !(_formKey.currentState?.fields[latFieldName]?.validate() ?? false);
+                                  _longHasError = !(_formKey
+                                          .currentState?.fields[latFieldName]
+                                          ?.validate() ??
+                                      false);
                                 });
                               },
                               validator: FormBuilderValidators.compose([
@@ -370,7 +457,13 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                       )
                     ],
                     const SizedBox(height: 32),
-                    const Text('Categories', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                    const Text(
+                      'Categories',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     const SizedBox(height: 16),
                     ...categoryIndices.expand(
                       (categoryIndex) {
@@ -381,20 +474,37 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                               Flexible(
                                 flex: 2,
                                 child: Padding(
-                                  padding: EdgeInsets.fromLTRB(0, _categoryNameHasError[categoryIndex] ? 15 : 0, 0, 0),
+                                  padding: EdgeInsets.fromLTRB(
+                                    0,
+                                    _categoryNameHasError[categoryIndex]
+                                        ? 15
+                                        : 0,
+                                    0,
+                                    0,
+                                  ),
                                   child: FormBuilderTextField(
                                     autovalidateMode: AutovalidateMode.always,
                                     name: 'categoryName-$categoryIndex',
                                     decoration: InputDecoration(
                                       labelText: 'Category name',
-                                      suffixIcon: _categoryNameHasError[categoryIndex]
-                                          ? const Icon(Icons.error, color: Colors.red)
-                                          : const Icon(Icons.check, color: Colors.green),
+                                      suffixIcon:
+                                          _categoryNameHasError[categoryIndex]
+                                              ? const Icon(
+                                                  Icons.error,
+                                                  color: Colors.red,
+                                                )
+                                              : const Icon(
+                                                  Icons.check,
+                                                  color: Colors.green,
+                                                ),
                                     ),
                                     onChanged: (val) {
                                       setState(() {
-                                        _categoryNameHasError[categoryIndex] = !(_formKey
-                                                .currentState?.fields['categoryName-$categoryIndex']
+                                        _categoryNameHasError[
+                                            categoryIndex] = !(_formKey
+                                                .currentState
+                                                ?.fields[
+                                                    'categoryName-$categoryIndex']
                                                 ?.validate() ??
                                             false);
                                       });
@@ -412,21 +522,37 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                               Flexible(
                                 flex: 3,
                                 child: Padding(
-                                  padding:
-                                      EdgeInsets.fromLTRB(0, _categoryValuesHasError[categoryIndex] ? 15 : 0, 0, 0),
+                                  padding: EdgeInsets.fromLTRB(
+                                    0,
+                                    _categoryValuesHasError[categoryIndex]
+                                        ? 15
+                                        : 0,
+                                    0,
+                                    0,
+                                  ),
                                   child: FormBuilderTextField(
                                     autovalidateMode: AutovalidateMode.always,
                                     name: 'categoryValues-$categoryIndex',
                                     decoration: InputDecoration(
                                       labelText: 'Category values',
-                                      suffixIcon: _categoryValuesHasError[categoryIndex]
-                                          ? const Icon(Icons.error, color: Colors.red)
-                                          : const Icon(Icons.check, color: Colors.green),
+                                      suffixIcon:
+                                          _categoryValuesHasError[categoryIndex]
+                                              ? const Icon(
+                                                  Icons.error,
+                                                  color: Colors.red,
+                                                )
+                                              : const Icon(
+                                                  Icons.check,
+                                                  color: Colors.green,
+                                                ),
                                     ),
                                     onChanged: (val) {
                                       setState(() {
-                                        _categoryValuesHasError[categoryIndex] = !(_formKey
-                                                .currentState?.fields['categoryValues-$categoryIndex']
+                                        _categoryValuesHasError[
+                                            categoryIndex] = !(_formKey
+                                                .currentState
+                                                ?.fields[
+                                                    'categoryValues-$categoryIndex']
                                                 ?.validate() ??
                                             false);
                                       });
@@ -442,15 +568,24 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                               ),
                             ],
                           ),
-                          SizedBox(height: _categoryValuesHasError[categoryIndex] ? 4 : 15),
+                          SizedBox(
+                            height:
+                                _categoryValuesHasError[categoryIndex] ? 4 : 15,
+                          ),
                         ];
                       },
                     ).toList(),
                     ElevatedButton(
                       onPressed: () {
                         setState(() {
-                          _categoryNameHasError = [..._categoryNameHasError, true];
-                          _categoryValuesHasError = [..._categoryValuesHasError, true];
+                          _categoryNameHasError = [
+                            ..._categoryNameHasError,
+                            true
+                          ];
+                          _categoryValuesHasError = [
+                            ..._categoryValuesHasError,
+                            true
+                          ];
                         });
                       },
                       child: const Text('Add new category'),
@@ -480,7 +615,11 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                       onPressed: () {
                         if (_formKey.currentState?.saveAndValidate() ?? false) {
                           // debugPrint('values: ${_formKey.currentState?.value.toString()}');
-                          saveListItem(GoRouter.of(context), widget.list!.publicListId!, widget.listItem);
+                          saveListItem(
+                            GoRouter.of(context),
+                            widget.list!.publicListId!,
+                            widget.listItem,
+                          );
                         } else {
                           // debugPrint('values: ${_formKey.currentState?.value.toString()}');
                           debugPrint('validation failed');
@@ -501,9 +640,14 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
     );
   }
 
-  Future<void> saveListItem(GoRouter router, String publicListId, ListItem? listItem) async {
+  Future<void> saveListItem(
+    GoRouter router,
+    String publicListId,
+    ListItem? listItem,
+  ) async {
     final fields = _formKey.currentState!.fields;
-    final repo = await ref.read(listItemsRepositoryProvider(publicListId).future);
+    final repo =
+        await ref.read(listItemsRepositoryProvider(publicListId).future);
     final name = fields[nameFieldName]!.value as String;
     final info = fields[infoFieldName]!.value as String;
     final datetime = fields[dateTimeField]?.value as DateTime?;
@@ -529,10 +673,15 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
     final searchPhrase = widget.selectedAddress?.searchPhrase;
     final lat = nullIfEmpty(fields[latFieldName]?.value as String?);
     final long = nullIfEmpty(fields[longFieldName]?.value as String?);
-    final latLong = lat != null ? LatLong(lat: double.parse(lat), lng: double.parse(long!)) : null;
+    final latLong = lat != null
+        ? LatLong(lat: double.parse(lat), lng: double.parse(long!))
+        : null;
 
     final categories = Map.fromEntries(
-      [for (int i = 0; i < categoryNames.length; i += 1) MapEntry(categoryNames[i], categoryValues[i])],
+      [
+        for (int i = 0; i < categoryNames.length; i += 1)
+          MapEntry(categoryNames[i], categoryValues[i])
+      ],
     );
     print('categories: $categories');
 
@@ -561,7 +710,8 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
         latLong: latLong,
         searchPhrase: searchPhrase,
       );
-      final refId = await repo.updateItem(itemId: newListItem.id!, item: newListItem);
+      final refId =
+          await repo.updateItem(itemId: newListItem.id!, item: newListItem);
       print('Updated $refId');
     }
     print('AddEditListItem: pop once');
@@ -578,14 +728,28 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
     return s;
   }
 
-  void editSearchLocation(BuildContext context, String? searchPhrase, String publicListId, String listItemId) {
-    SearchLocationForEditPageRoute(searchPhrase: searchPhrase, publicListId: publicListId, listItemId: listItemId)
-        .push(context);
+  void editSearchLocation(
+    BuildContext context,
+    String? searchPhrase,
+    String publicListId,
+    String listItemId,
+  ) {
+    SearchLocationForEditPageRoute(
+      searchPhrase: searchPhrase,
+      publicListId: publicListId,
+      listItemId: listItemId,
+    ).push<void>(context);
   }
 
-  Future<void> deleteListItem(WidgetRef ref, GoRouter router, String publicListId, String listItemId) async {
+  Future<void> deleteListItem(
+    WidgetRef ref,
+    GoRouter router,
+    String publicListId,
+    String listItemId,
+  ) async {
     print('delete');
-    final repo = await ref.read(listItemsRepositoryProvider(publicListId).future);
+    final repo =
+        await ref.read(listItemsRepositoryProvider(publicListId).future);
     await repo.deleteItem(itemId: listItemId);
     print('AddEditListItem: pop once');
     router.pop();

@@ -18,7 +18,8 @@ import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
 import 'package:listanything/app/widgets/standardWidgets/common_scaffold.dart';
 import 'package:listanything/app/widgets/standardWidgets/exception_widget.dart';
 
-double doubleInRange(Random source, num start, num end) => source.nextDouble() * (end - start) + start;
+double doubleInRange(Random source, num start, num end) =>
+    source.nextDouble() * (end - start) + start;
 
 class MapsPage extends ConsumerWidget {
   const MapsPage({super.key, required this.publicListId});
@@ -28,9 +29,16 @@ class MapsPage extends ConsumerWidget {
     return ref.watch(filteredListItemsAndListProvider(publicListId)).when(
           error: (e, st) => ExceptionWidget(e: e, st: st),
           loading: () => MapsPageInner(
-            items: List.generate(5, (index) => const ListItem(name: '', categories: {})),
+            items: List.generate(
+              5,
+              (index) => const ListItem(name: '', categories: {}),
+            ),
             isLoading: true,
-            list: const ListOfThings(name: 'Not used', userId: 'Not used since a shimmer', type: ListType.other),
+            list: const ListOfThings(
+              name: 'Not used',
+              userId: 'Not used since a shimmer',
+              type: ListType.other,
+            ),
           ),
           data: (value) {
             final list = value.item2;
@@ -42,7 +50,12 @@ class MapsPage extends ConsumerWidget {
 }
 
 class MapsPageInner extends ConsumerWidget {
-  const MapsPageInner({super.key, required this.items, required this.isLoading, required this.list});
+  const MapsPageInner({
+    super.key,
+    required this.items,
+    required this.isLoading,
+    required this.list,
+  });
   final List<ListItem> items;
   final bool isLoading;
   final ListOfThings list;
@@ -82,7 +95,9 @@ class MapsPageInner extends ConsumerWidget {
         ),
         AppBarAction(
           title: 'Filter',
-          icon: filters.anySelectedFilters(listHasDates: list.withDates) ? Icons.filter_alt : Icons.filter_alt_off,
+          icon: filters.anySelectedFilters(listHasDates: list.withDates)
+              ? Icons.filter_alt
+              : Icons.filter_alt_off,
           callback: () => filterPage(context, list.publicListId!),
           overflow: false,
         ),
@@ -119,22 +134,36 @@ class MapsPageInner extends ConsumerWidget {
   }
 
   void editList(WidgetRef ref, BuildContext context, String publicListId) {
-    EditListRoute(publicListId: publicListId).push(context);
+    EditListRoute(publicListId: publicListId).push<void>(context);
   }
 
-  void editListItem(WidgetRef ref, BuildContext context, ListItem listItem, String publicListId) {
-    EditListItemRoute(publicListId: publicListId, listItemId: listItem.id).push(context);
+  void editListItem(
+    WidgetRef ref,
+    BuildContext context,
+    ListItem listItem,
+    String publicListId,
+  ) {
+    EditListItemRoute(publicListId: publicListId, listItemId: listItem.id!)
+        .push<void>(context);
   }
 
-  void addNewListItem(WidgetRef ref, BuildContext context, String publicListId) {
-    AddListItemRoute(publicListId: publicListId).push(context);
+  void addNewListItem(
+    WidgetRef ref,
+    BuildContext context,
+    String publicListId,
+  ) {
+    AddListItemRoute(publicListId: publicListId).push<void>(context);
   }
 
   void filterPage(BuildContext context, String publicListId) {
-    FilterPageRoute(publicListId: publicListId).push(context);
+    FilterPageRoute(publicListId: publicListId).push<void>(context);
   }
 
-  void showListItemPage(WidgetRef ref, BuildContext context, String publicListId) {
-    ListItemsPageRoute(publicListId: publicListId).push(context);
+  void showListItemPage(
+    WidgetRef ref,
+    BuildContext context,
+    String publicListId,
+  ) {
+    ListItemsPageRoute(publicListId: publicListId).push<void>(context);
   }
 }

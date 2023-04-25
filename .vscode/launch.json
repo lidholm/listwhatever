@@ -31,7 +31,7 @@
         "--web-hostname",
         "localhost",
         "--web-port",
-        "5000"
+        "8088"
       ]
     },
     {
@@ -49,7 +49,7 @@
         "--web-hostname",
         "localhost",
         "--web-port",
-        "5000"
+        "8088"
       ]
     },
     {

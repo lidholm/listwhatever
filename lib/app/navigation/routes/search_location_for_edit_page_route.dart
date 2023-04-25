@@ -4,10 +4,14 @@ import 'package:listanything/app/pages/map/searchLocation/search_location_page.d
 
 @immutable
 class SearchLocationForEditPageRoute extends GoRouteData {
-  const SearchLocationForEditPageRoute({this.searchPhrase, required this.publicListId, this.listItemId});
+  const SearchLocationForEditPageRoute({
+    this.searchPhrase,
+    required this.publicListId,
+    required this.listItemId,
+  });
   final String? searchPhrase;
   final String publicListId;
-  final String? listItemId;
+  final String listItemId;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
