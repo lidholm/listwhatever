@@ -32,7 +32,11 @@ class ListsPage extends ConsumerWidget {
           loading: () => ListsPageInner(
             lists: List.generate(
               8,
-              (index) => const ListOfThings(name: '', userId: 'Not used since a shimmer', type: ListType.other),
+              (index) => const ListOfThings(
+                name: '',
+                userId: 'Not used since a shimmer',
+                type: ListType.other,
+              ),
             ),
             isLoading: true,
           ),
@@ -42,7 +46,11 @@ class ListsPage extends ConsumerWidget {
 }
 
 class ListsPageInner extends ConsumerWidget {
-  const ListsPageInner({super.key, required this.lists, required this.isLoading});
+  const ListsPageInner({
+    super.key,
+    required this.lists,
+    required this.isLoading,
+  });
 
   final List<ListOfThings> lists;
   final bool isLoading;
@@ -50,7 +58,8 @@ class ListsPageInner extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // print('screen size: ${MediaQuery.of(context).size.width}');
-    final crossAxisCount = kIsWeb ? (MediaQuery.of(context).size.width / 350).floor() : 2;
+    final crossAxisCount =
+        kIsWeb ? (MediaQuery.of(context).size.width / 350).floor() : 2;
     return CommonScaffold(
       drawer: const Drawer(child: CommonDrawer()),
       title: 'Lists',
@@ -87,9 +96,16 @@ class ListsPageInner extends ConsumerWidget {
                         callback: (list) => selectList(ref, context, list),
                         isLoading: isLoading,
                         topRightIcon: list.shared
-                            ? Icon(Icons.supervised_user_circle, color: Colors.orangeAccent[700])
-                            : Icon(Icons.verified_user_outlined, color: Colors.orangeAccent[700]),
-                        topRightIconBorderColor: list.shared ? Colors.yellow : Colors.white,
+                            ? Icon(
+                                Icons.supervised_user_circle,
+                                color: Colors.orangeAccent[700],
+                              )
+                            : Icon(
+                                Icons.verified_user_outlined,
+                                color: Colors.orangeAccent[700],
+                              ),
+                        topRightIconBorderColor:
+                            list.shared ? Colors.yellow : Colors.white,
                       ),
                     )
                     .toList(),
@@ -104,12 +120,12 @@ class ListsPageInner extends ConsumerWidget {
   void selectList(WidgetRef ref, BuildContext context, ListOfThings list) {
     // ref.read(selectedListIdProvider.notifier).state = list.publicListId;
     print('clicking ${list.publicListId}');
-    ListItemsPageRoute(publicListId: list.publicListId!).push(context);
+    ListItemsPageRoute(publicListId: list.publicListId!).push<void>(context);
     print('lists_page.selectList: $list');
   }
 
   Future<void> addNewList(WidgetRef ref, BuildContext context) async {
-    const AddListRoute().push(context);
+    await const AddListRoute().push<void>(context);
   }
 
   Future<void> shareCodeDialog(BuildContext context) async {

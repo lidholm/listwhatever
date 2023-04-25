@@ -37,7 +37,7 @@ class CommonDrawer extends StatelessWidget {
           ),
           title: const Text('Profile'),
           onTap: () {
-            const ProfilePageRoute().push(context);
+            const ProfilePageRoute().push<void>(context);
           },
         ),
         ListTile(
@@ -47,7 +47,7 @@ class CommonDrawer extends StatelessWidget {
           ),
           title: const Text('About'),
           onTap: () {
-            const AboutPageRoute().push(context);
+            const AboutPageRoute().push<void>(context);
           },
         ),
         ListTile(
@@ -57,7 +57,7 @@ class CommonDrawer extends StatelessWidget {
           ),
           title: const Text('Privacy Policy'),
           onTap: () {
-            const PrivacyPolicyPageRoute().push(context);
+            const PrivacyPolicyPageRoute().push<void>(context);
           },
         ),
         Consumer(

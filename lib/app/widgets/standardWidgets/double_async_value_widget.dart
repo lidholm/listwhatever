@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DoubleAsyncValueWidget<T, S> extends StatelessWidget {
-  const DoubleAsyncValueWidget({super.key, required this.firstValue, required this.secondValue, required this.data});
+  const DoubleAsyncValueWidget({
+    super.key,
+    required this.firstValue,
+    required this.secondValue,
+    required this.data,
+  });
   final AsyncValue<T> firstValue;
   final AsyncValue<S> secondValue;
   final Widget Function(T, S) data;
@@ -29,7 +34,10 @@ class DoubleAsyncValueWidget<T, S> extends StatelessWidget {
   Widget error(BuildContext context, Object e, StackTrace st) => Center(
         child: Text(
           e.toString(),
-          style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.red),
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge!
+              .copyWith(color: Colors.red),
         ),
       );
 }

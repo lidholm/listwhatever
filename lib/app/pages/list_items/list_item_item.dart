@@ -37,8 +37,14 @@ class ListItemItem extends ConsumerWidget {
           child: InkWell(
             onTap: () {
               isListViewOnly
-                  ? ListItemDetailsPageRoute(publicListId: publicListId, listItemId: item.id).push(context)
-                  : EditListItemRoute(publicListId: publicListId, listItemId: item.id).push(context);
+                  ? ListItemDetailsPageRoute(
+                      publicListId: publicListId,
+                      listItemId: item.id!,
+                    ).push<void>(context)
+                  : EditListItemRoute(
+                      publicListId: publicListId,
+                      listItemId: item.id!,
+                    ).push<void>(context);
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -51,14 +57,22 @@ class ListItemItem extends ConsumerWidget {
                       style: const TextStyle(fontSize: 24, color: Colors.white),
                     ),
                     Text(
-                      item.datetime != null ? formatReadableDate(item.datetime!) : '',
-                      style: TextStyle(fontSize: 16, color: Colors.white.withAlpha(200)),
+                      item.datetime != null
+                          ? formatReadableDate(item.datetime!)
+                          : '',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white.withAlpha(200),
+                      ),
                     ),
                   ],
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: const Icon(Icons.keyboard_arrow_right_rounded, color: Colors.white),
+                  icon: const Icon(
+                    Icons.keyboard_arrow_right_rounded,
+                    color: Colors.white,
+                  ),
                 )
               ],
             ),

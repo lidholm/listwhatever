@@ -40,7 +40,13 @@ class ListItemsPage extends ConsumerWidget {
           loading: () {
             print('ListItemsPage.Loading');
             return ListItemsPageInner(
-              items: List.generate(5, (index) => const ListItem(name: '', categories: {})),
+              items: List.generate(
+                5,
+                (index) => const ListItem(
+                  name: '',
+                  categories: {},
+                ),
+              ),
               isLoading: true,
             );
           },
@@ -50,7 +56,11 @@ class ListItemsPage extends ConsumerWidget {
             final list = value.item2;
             print('ListItemsPage.items: ${items.length}');
             print('ListItemsPage.list: $list');
-            return ListItemsPageInner(items: sortItems(list, items), isLoading: false, list: list);
+            return ListItemsPageInner(
+              items: sortItems(list, items),
+              isLoading: false,
+              list: list,
+            );
           },
         );
   }
@@ -64,7 +74,12 @@ class ListItemsPage extends ConsumerWidget {
 }
 
 class ListItemsPageInner extends HookConsumerWidget {
-  const ListItemsPageInner({super.key, required this.items, required this.isLoading, this.list});
+  const ListItemsPageInner({
+    super.key,
+    required this.items,
+    required this.isLoading,
+    this.list,
+  });
   final List<ListItem> items;
   final bool isLoading;
   final ListOfThings? list;
@@ -82,7 +97,12 @@ class ListItemsPageInner extends HookConsumerWidget {
     return NotificationListener<ScrollNotification>(
       onNotification: (notification) {
         expandedPercentage.value = scrollController.hasClients
-            ? max(1 - (scrollController.offset / (expandedBarHeight - collapsedBarHeight)), 0)
+            ? max(
+                1 -
+                    (scrollController.offset /
+                        (expandedBarHeight - collapsedBarHeight)),
+                0,
+              )
             : 0.0;
 
         return false;
@@ -111,7 +131,9 @@ class ListItemsPageInner extends HookConsumerWidget {
             ),
           AppBarAction(
             title: 'Filter',
-            icon: filters.anySelectedFilters(listHasDates: list?.withDates ?? false)
+            icon: filters.anySelectedFilters(
+              listHasDates: list?.withDates ?? false,
+            )
                 ? Icons.filter_alt
                 : Icons.filter_alt_off,
             callback: () => filterPage(context, list!.publicListId!),
@@ -130,13 +152,16 @@ class ListItemsPageInner extends HookConsumerWidget {
               icon: Icons.share,
               callback: () async {
                 if (list!.shareCodeForEditor == null) {
-                  final newList =
-                      list!.copyWith(shareCodeForEditor: getRandomString(16), shareCodeForViewer: getRandomString(16));
+                  final newList = list!.copyWith(
+                    shareCodeForEditor: getRandomString(16),
+                    shareCodeForViewer: getRandomString(16),
+                  );
                   final repo = await ref.read(listRepositoryProvider.future);
                   await repo.updateItem(itemId: list!.id!, item: newList);
                 }
                 //ignore: use_build_context_synchronously
-                ShareListPageRoute(publicListId: list!.publicListId!).push(context);
+                await ShareListPageRoute(publicListId: list!.publicListId!)
+                    .push<void>(context);
               }, // shareList(ref, context, list!),
               overflow: false,
             ),
@@ -155,7 +180,9 @@ class ListItemsPageInner extends HookConsumerWidget {
                     isLoading: isLoading,
                     expandedPercentage: expandedPercentage.value,
                   ),
-                  if (filters.anySelectedFilters(listHasDates: list?.withDates ?? false)) ...[
+                  if (filters.anySelectedFilters(
+                    listHasDates: list?.withDates ?? false,
+                  )) ...[
                     const Static(title: 'Filters'),
                     SelectedFilters(filters: filters),
                   ],
@@ -175,34 +202,53 @@ class ListItemsPageInner extends HookConsumerWidget {
   }
 
   void editList(WidgetRef ref, BuildContext context, String publicListId) {
-    EditListRoute(publicListId: publicListId).push(context);
+    EditListRoute(publicListId: publicListId).push<void>(context);
   }
 
-  void editListItem(WidgetRef ref, BuildContext context, String publicListId, ListItem listItem) {
-    EditListItemRoute(publicListId: publicListId, listItemId: listItem.id).push(context);
+  void editListItem(
+    WidgetRef ref,
+    BuildContext context,
+    String publicListId,
+    ListItem listItem,
+  ) {
+    EditListItemRoute(publicListId: publicListId, listItemId: listItem.id!)
+        .push<void>(context);
   }
 
-  void showListItemDetails(WidgetRef ref, BuildContext context, String publicListId, ListItem listItem) {
-    ListItemDetailsPageRoute(publicListId: publicListId, listItemId: listItem.id).push(context);
+  void showListItemDetails(
+    WidgetRef ref,
+    BuildContext context,
+    String publicListId,
+    ListItem listItem,
+  ) {
+    ListItemDetailsPageRoute(
+      publicListId: publicListId,
+      listItemId: listItem.id!,
+    ).push<void>(context);
   }
 
-  void addNewListItem(WidgetRef ref, BuildContext context, String publicListId) {
+  void addNewListItem(
+    WidgetRef ref,
+    BuildContext context,
+    String publicListId,
+  ) {
     print('list: $list');
     if (list?.withMap ?? false) {
       print('Routing to SearchLocationPageRoute');
-      AddListItemRoute(publicListId: publicListId).push(context);
-      SearchLocationForAddPageRoute(publicListId: list!.publicListId!).push(context);
+      AddListItemRoute(publicListId: publicListId).push<void>(context);
+      SearchLocationForAddPageRoute(publicListId: list!.publicListId!)
+          .push<void>(context);
     } else {
       print('Routing to AddOrEditListItemRoute');
-      AddListItemRoute(publicListId: publicListId).push(context);
+      AddListItemRoute(publicListId: publicListId).push<void>(context);
     }
   }
 
   void filterPage(BuildContext context, String publicListId) {
-    FilterPageRoute(publicListId: publicListId).push(context);
+    FilterPageRoute(publicListId: publicListId).push<void>(context);
   }
 
   void showMap(WidgetRef ref, BuildContext context, String publicListId) {
-    MapsPageRoute(publicListId: publicListId).push(context);
+    MapsPageRoute(publicListId: publicListId).push<void>(context);
   }
 }
