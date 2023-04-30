@@ -16,10 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Filters {
-  DateTime? get startDate => throw _privateConstructorUsedError;
-  DateTime? get endDate => throw _privateConstructorUsedError;
   Map<String, List<String>> get categoryFilters =>
       throw _privateConstructorUsedError;
+  DateTime? get startDate => throw _privateConstructorUsedError;
+  DateTime? get endDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FiltersCopyWith<Filters> get copyWith => throw _privateConstructorUsedError;
@@ -31,9 +31,9 @@ abstract class $FiltersCopyWith<$Res> {
       _$FiltersCopyWithImpl<$Res, Filters>;
   @useResult
   $Res call(
-      {DateTime? startDate,
-      DateTime? endDate,
-      Map<String, List<String>> categoryFilters});
+      {Map<String, List<String>> categoryFilters,
+      DateTime? startDate,
+      DateTime? endDate});
 }
 
 /// @nodoc
@@ -49,11 +49,15 @@ class _$FiltersCopyWithImpl<$Res, $Val extends Filters>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? categoryFilters = null,
     Object? startDate = freezed,
     Object? endDate = freezed,
-    Object? categoryFilters = null,
   }) {
     return _then(_value.copyWith(
+      categoryFilters: null == categoryFilters
+          ? _value.categoryFilters
+          : categoryFilters // ignore: cast_nullable_to_non_nullable
+              as Map<String, List<String>>,
       startDate: freezed == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -62,10 +66,6 @@ class _$FiltersCopyWithImpl<$Res, $Val extends Filters>
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      categoryFilters: null == categoryFilters
-          ? _value.categoryFilters
-          : categoryFilters // ignore: cast_nullable_to_non_nullable
-              as Map<String, List<String>>,
     ) as $Val);
   }
 }
@@ -78,9 +78,9 @@ abstract class _$$_FiltersCopyWith<$Res> implements $FiltersCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {DateTime? startDate,
-      DateTime? endDate,
-      Map<String, List<String>> categoryFilters});
+      {Map<String, List<String>> categoryFilters,
+      DateTime? startDate,
+      DateTime? endDate});
 }
 
 /// @nodoc
@@ -93,11 +93,15 @@ class __$$_FiltersCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? categoryFilters = null,
     Object? startDate = freezed,
     Object? endDate = freezed,
-    Object? categoryFilters = null,
   }) {
     return _then(_$_Filters(
+      categoryFilters: null == categoryFilters
+          ? _value._categoryFilters
+          : categoryFilters // ignore: cast_nullable_to_non_nullable
+              as Map<String, List<String>>,
       startDate: freezed == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -106,10 +110,6 @@ class __$$_FiltersCopyWithImpl<$Res>
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      categoryFilters: null == categoryFilters
-          ? _value._categoryFilters
-          : categoryFilters // ignore: cast_nullable_to_non_nullable
-              as Map<String, List<String>>,
     ));
   }
 }
@@ -118,16 +118,12 @@ class __$$_FiltersCopyWithImpl<$Res>
 
 class _$_Filters extends _Filters {
   _$_Filters(
-      {this.startDate,
-      this.endDate,
-      required final Map<String, List<String>> categoryFilters})
+      {required final Map<String, List<String>> categoryFilters,
+      this.startDate,
+      this.endDate})
       : _categoryFilters = categoryFilters,
         super._();
 
-  @override
-  final DateTime? startDate;
-  @override
-  final DateTime? endDate;
   final Map<String, List<String>> _categoryFilters;
   @override
   Map<String, List<String>> get categoryFilters {
@@ -137,8 +133,13 @@ class _$_Filters extends _Filters {
   }
 
   @override
+  final DateTime? startDate;
+  @override
+  final DateTime? endDate;
+
+  @override
   String toString() {
-    return 'Filters(startDate: $startDate, endDate: $endDate, categoryFilters: $categoryFilters)';
+    return 'Filters(categoryFilters: $categoryFilters, startDate: $startDate, endDate: $endDate)';
   }
 
   @override
@@ -146,16 +147,19 @@ class _$_Filters extends _Filters {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Filters &&
+            const DeepCollectionEquality()
+                .equals(other._categoryFilters, _categoryFilters) &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
-            (identical(other.endDate, endDate) || other.endDate == endDate) &&
-            const DeepCollectionEquality()
-                .equals(other._categoryFilters, _categoryFilters));
+            (identical(other.endDate, endDate) || other.endDate == endDate));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, startDate, endDate,
-      const DeepCollectionEquality().hash(_categoryFilters));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_categoryFilters),
+      startDate,
+      endDate);
 
   @JsonKey(ignore: true)
   @override
@@ -166,17 +170,17 @@ class _$_Filters extends _Filters {
 
 abstract class _Filters extends Filters {
   factory _Filters(
-      {final DateTime? startDate,
-      final DateTime? endDate,
-      required final Map<String, List<String>> categoryFilters}) = _$_Filters;
+      {required final Map<String, List<String>> categoryFilters,
+      final DateTime? startDate,
+      final DateTime? endDate}) = _$_Filters;
   _Filters._() : super._();
 
+  @override
+  Map<String, List<String>> get categoryFilters;
   @override
   DateTime? get startDate;
   @override
   DateTime? get endDate;
-  @override
-  Map<String, List<String>> get categoryFilters;
   @override
   @JsonKey(ignore: true)
   _$$_FiltersCopyWith<_$_Filters> get copyWith =>
