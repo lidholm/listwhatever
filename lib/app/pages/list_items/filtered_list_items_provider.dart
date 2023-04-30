@@ -48,16 +48,5 @@ final filteredListItemsAndListProvider =
       ref.watch(_filteredListItemsProvider(publicListId));
   final listValue = ref.watch(listProvider(publicListId));
 
-  return filteredListItemsValue.when(
-    data: (filteredListItems) {
-      //print('$publicListId: filteredListItemsValue: $filteredListItemsValue');
-      return listValue.whenData((list) => Tuple2(filteredListItems, list));
-    },
-    error: (e, st) {
-      //print('filteredListIemsProvider error: $e');
-      //print('filteredListIemsProvider error: $st');
-      return AsyncValue.error(e, st);
-    },
-    loading: AsyncValue.loading,
-  );
+  return combineTwoAsyncValues(filteredListItemsValue, listValue);
 });

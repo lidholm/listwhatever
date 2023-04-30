@@ -78,8 +78,15 @@ AsyncValue<Tuple2<S, T>> combineTwoAsyncValues<S, T>(
   return firstValue.when(
     data: (S s) {
       return secondValue.when(
-        loading: AsyncValue.loading,
-        error: AsyncValue.error,
+        loading: () {
+          print('Loading ...');
+          return const AsyncValue.loading();
+        },
+        error: (e, st) {
+          print(e);
+          print(st);
+          return AsyncValue.error(e, st);
+        },
         data: (T t) => AsyncValue.data(
           Tuple2(
             s,
@@ -88,8 +95,15 @@ AsyncValue<Tuple2<S, T>> combineTwoAsyncValues<S, T>(
         ),
       );
     },
-    loading: AsyncValue.loading,
-    error: AsyncValue.error,
+    loading: () {
+      print('Loading...');
+      return const AsyncValue.loading();
+    },
+    error: (e, st) {
+      print(e);
+      print(st);
+      return AsyncValue.error(e, st);
+    },
   );
 }
 
