@@ -43,10 +43,6 @@ RouteBase get $welcomeRoute => GoRouteData.$route(
               factory: $EditListRouteExtension._fromState,
             ),
             GoRouteData.$route(
-              path: ':publicListId/map',
-              factory: $MapsPageRouteExtension._fromState,
-            ),
-            GoRouteData.$route(
               path: ':publicListId/items',
               factory: $ListItemsPageRouteExtension._fromState,
               routes: [
@@ -230,23 +226,6 @@ extension $EditListRouteExtension on EditListRoute {
       context.pushReplacement(location);
 }
 
-extension $MapsPageRouteExtension on MapsPageRoute {
-  static MapsPageRoute _fromState(GoRouterState state) => MapsPageRoute(
-        publicListId: state.params['publicListId']!,
-      );
-
-  String get location => GoRouteData.$location(
-        '/lists/${Uri.encodeComponent(publicListId)}/map',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-}
-
 extension $ListItemsPageRouteExtension on ListItemsPageRoute {
   static ListItemsPageRoute _fromState(GoRouterState state) =>
       ListItemsPageRoute(
@@ -329,15 +308,15 @@ extension $SearchLocationForAddPageRouteExtension
   static SearchLocationForAddPageRoute _fromState(GoRouterState state) =>
       SearchLocationForAddPageRoute(
         publicListId: state.params['publicListId']!,
-        searchPhrase: state.queryParams['search-phrase'],
         listItemId: state.queryParams['list-item-id'],
+        searchPhrase: state.queryParams['search-phrase'],
       );
 
   String get location => GoRouteData.$location(
         '/lists/${Uri.encodeComponent(publicListId)}/items/add/searchlocation',
         queryParams: {
-          if (searchPhrase != null) 'search-phrase': searchPhrase,
           if (listItemId != null) 'list-item-id': listItemId,
+          if (searchPhrase != null) 'search-phrase': searchPhrase,
         },
       );
 

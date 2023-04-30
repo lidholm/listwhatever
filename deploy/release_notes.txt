@@ -1,3 +1,6 @@
+0.0.15
+* Make ListItemsListView and MapsView as sub Widgets instead of pages
+
 0.0.14
 * Some small improvements
 

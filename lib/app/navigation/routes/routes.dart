@@ -10,7 +10,6 @@ import 'package:listanything/app/navigation/routes/list_item_details_page_route.
 import 'package:listanything/app/navigation/routes/list_items_page_route.dart';
 import 'package:listanything/app/navigation/routes/list_page_route.dart';
 import 'package:listanything/app/navigation/routes/loading_user_route.dart';
-import 'package:listanything/app/navigation/routes/maps_page_route.dart';
 import 'package:listanything/app/navigation/routes/privacy_policy_page_route.dart';
 import 'package:listanything/app/navigation/routes/profile_page_route.dart';
 import 'package:listanything/app/navigation/routes/search_location_for_add_page_route.dart';
@@ -44,9 +43,6 @@ part 'routes.g.dart';
         ),
         TypedGoRoute<EditListRoute>(
           path: ':publicListId/edit',
-        ),
-        TypedGoRoute<MapsPageRoute>(
-          path: ':publicListId/map',
         ),
         TypedGoRoute<ListItemsPageRoute>(
           path: ':publicListId/items',
