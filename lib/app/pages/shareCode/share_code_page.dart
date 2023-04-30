@@ -10,9 +10,13 @@ import 'package:listanything/app/navigation/routes/routes.dart';
 // Once done, return something
 // and the page can now also get the list from the provider
 
-Future<String> callAddUserToSharedList(String userId, String publicListId, String shareCode) async {
+Future<String> callAddUserToSharedList(
+  String userId,
+  String publicListId,
+  String shareCode,
+) async {
   try {
-    final _queryParameters = <String, String>{
+    final queryParameters = <String, String>{
       'userId': userId,
       'publicListId': publicListId,
       'shareCode': shareCode,
@@ -20,33 +24,42 @@ Future<String> callAddUserToSharedList(String userId, String publicListId, Strin
     final uri = Uri.http(
       '127.0.0.1:5001',
       '/listanything-2b9b0/us-central1/addUserToSharedList',
-      _queryParameters,
+      queryParameters,
     );
-    print('uri: $uri');
+    //print('uri: $uri');
     final response = await http.get(
       uri,
-      headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'plain/text', 'Accept': '*/*'},
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'plain/text',
+        'Accept': '*/*'
+      },
     );
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      print('Got data');
+      //print('Got data');
       return response.body;
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
-      print('Failed to add user to list');
+      //print('Failed to add user to list');
       throw Exception('Failed to add user to list');
     }
   } catch (e) {
-    print(e);
+    //print(e);
     return '$e';
   }
 }
 
 class ShareCodePage extends StatefulWidget {
-  const ShareCodePage({super.key, required this.publicListId, required this.shareCode, required this.userId});
+  const ShareCodePage({
+    required this.publicListId,
+    required this.shareCode,
+    required this.userId,
+    super.key,
+  });
 
   final String userId;
   final String publicListId;
@@ -62,7 +75,11 @@ class _ShareCodePageState extends State<ShareCodePage> {
   @override
   void initState() {
     super.initState();
-    response = callAddUserToSharedList(widget.userId, widget.publicListId, widget.shareCode);
+    response = callAddUserToSharedList(
+      widget.userId,
+      widget.publicListId,
+      widget.shareCode,
+    );
   }
 
   @override

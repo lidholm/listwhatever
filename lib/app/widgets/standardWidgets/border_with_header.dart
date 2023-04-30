@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class BorderWithHeader extends StatelessWidget {
-  const BorderWithHeader({super.key, required this.title, required this.child});
+  const BorderWithHeader({
+    required this.title,
+    required this.child,
+    super.key,
+  });
   final String title;
   final Widget child;
 

@@ -5,9 +5,9 @@ part 'filters.freezed.dart';
 @freezed
 class Filters with _$Filters {
   factory Filters({
+    required Map<String, List<String>> categoryFilters,
     DateTime? startDate,
     DateTime? endDate,
-    required Map<String, List<String>> categoryFilters,
   }) = _Filters;
   // Added constructor. Must not have any parameter
   const Filters._();

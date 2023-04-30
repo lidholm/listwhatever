@@ -7,7 +7,7 @@ class OutlinedTextStroke {
 }
 
 class OutlinedText extends StatelessWidget {
-  const OutlinedText({Key? key, this.text, this.strokes}) : super(key: key);
+  const OutlinedText({super.key, this.text, this.strokes});
   final Text? text;
   final List<OutlinedTextStroke>? strokes;
 

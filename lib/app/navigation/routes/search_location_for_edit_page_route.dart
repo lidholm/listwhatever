@@ -5,9 +5,9 @@ import 'package:listanything/app/pages/map/searchLocation/search_location_page.d
 @immutable
 class SearchLocationForEditPageRoute extends GoRouteData {
   const SearchLocationForEditPageRoute({
-    this.searchPhrase,
     required this.publicListId,
     required this.listItemId,
+    this.searchPhrase,
   });
   final String? searchPhrase;
   final String publicListId;

@@ -34,7 +34,7 @@ extension DateTimeExtension on DateTime {
   }
 }
 
-DateTime getCurrentTime() {
+DateTime getCurrentDate() {
   final now = DateTime.now();
   final date = DateTime(now.year, now.month, now.day);
   return date;
@@ -42,7 +42,7 @@ DateTime getCurrentTime() {
 
 String formatReadableDate(DateTime d) {
   final diff = d.difference(DateTime.now());
-  print(diff);
+  //print(diff);
   if (diff > const Duration(days: 365)) {
     return readableDateFormatterWithYear.format(d);
   } else {
@@ -66,10 +66,15 @@ extension LatLongExtension on LatLong {
 }
 
 extension MyIterable<E> on Iterable<E> {
-  Iterable<E> sortedBy(Comparable Function(E e) key) => toList()..sort((a, b) => key(a).compareTo(key(b)));
+  // ignore: strict_raw_type
+  Iterable<E> sortedBy(Comparable Function(E e) key) =>
+      toList()..sort((a, b) => key(a).compareTo(key(b)));
 }
 
-AsyncValue<Tuple2<S, T>> combineTwoAsyncValues<S, T>(AsyncValue<S> firstValue, AsyncValue<T> secondValue) {
+AsyncValue<Tuple2<S, T>> combineTwoAsyncValues<S, T>(
+  AsyncValue<S> firstValue,
+  AsyncValue<T> secondValue,
+) {
   return firstValue.when(
     data: (S s) {
       return secondValue.when(
@@ -93,7 +98,10 @@ AsyncValue<Tuple3<S, T, U>> combineThreeAsyncValues<S, T, U>(
   AsyncValue<T> secondValue,
   AsyncValue<U> thirddValue,
 ) {
-  return combineTwoAsyncValues(firstValue, combineTwoAsyncValues(secondValue, thirddValue)).when(
+  return combineTwoAsyncValues(
+    firstValue,
+    combineTwoAsyncValues(secondValue, thirddValue),
+  ).when(
     error: AsyncValue.error,
     loading: AsyncValue.loading,
     data: (Tuple2<S, Tuple2<T, U>> data) => AsyncValue.data(

@@ -13,8 +13,10 @@ final _listsProvider = StreamProvider<List<ListOfThings>>((ref) async* {
   yield* listRepo.retrieveItemsStream();
 });
 
-final _participatedListsProvider = StreamProvider<List<ListOfThings>>((ref) async* {
-  final participatedListRepo = await ref.watch(participatedListRepositoryProvider.future);
+final _participatedListsProvider =
+    StreamProvider<List<ListOfThings>>((ref) async* {
+  final participatedListRepo =
+      await ref.watch(participatedListRepositoryProvider.future);
   yield* participatedListRepo.retrieveItemsStream();
 });
 
@@ -22,28 +24,31 @@ final combinedListsProvider = Provider<AsyncValue<List<ListOfThings>>>((ref) {
   final listsValue = ref.watch(_listsProvider);
   return listsValue.when(
     error: (e, st) {
-      print('filteredListIemsProvider error: $e');
-      print('filteredListIemsProvider error: $st');
+      //print('filteredListIemsProvider error: $e');
+      //print('filteredListIemsProvider error: $st');
       return AsyncValue.error(Tuple2(e, 'in _listsProvider'), st);
     },
     loading: () {
-      print('filteredListIemsProvider loading');
+      //print('filteredListIemsProvider loading');
       return const AsyncValue.loading();
     },
     data: (lists) {
       return ref.watch(_participatedListsProvider).when(
         error: (e, st) {
-          print('filteredListIemsProvider error: $e');
-          print('filteredListIemsProvider error: $st');
-          return AsyncValue.error(Tuple2(e, 'in _participatedListsProvider'), st);
+          //print('filteredListIemsProvider error: $e');
+          //print('filteredListIemsProvider error: $st');
+          return AsyncValue.error(
+            Tuple2(e, 'in _participatedListsProvider'),
+            st,
+          );
         },
         loading: () {
-          print('filteredListIemsProvider loading');
+          //print('filteredListIemsProvider loading');
           return const AsyncValue.loading();
         },
         data: (participatedLists) {
-          print('lists: $lists');
-          print('participatedLists: $participatedLists');
+          //print('lists: $lists');
+          //print('participatedLists: $participatedLists');
           return AsyncValue.data(lists + participatedLists);
         },
       );
@@ -51,8 +56,10 @@ final combinedListsProvider = Provider<AsyncValue<List<ListOfThings>>>((ref) {
   );
 });
 
-final listProvider = StreamProvider.family<ListOfThings, String>((ref, publicListId) async* {
-  final publicListIdRepo = await ref.watch(publicListIdRepositoryProvider.future);
+final listProvider =
+    StreamProvider.family<ListOfThings, String>((ref, publicListId) async* {
+  final publicListIdRepo =
+      await ref.watch(publicListIdRepositoryProvider.future);
   final repo = await ref.watch(listRepositoryProvider.future);
   yield* publicListIdRepo.retrieveItemStream(itemId: publicListId).switchMap(
         (item) => repo.retrieveItemStreamAtPath(item.path),

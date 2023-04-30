@@ -4,12 +4,12 @@ import 'package:listanything/app/widgets/standardWidgets/common_app_bar.dart';
 
 class CommonScaffold extends StatelessWidget {
   const CommonScaffold({
-    super.key,
     required this.title,
-    this.titleWidget,
     required this.body,
+    this.titleWidget,
     this.actions,
     this.drawer,
+    super.key,
   });
   final String? title;
   final Widget? titleWidget;

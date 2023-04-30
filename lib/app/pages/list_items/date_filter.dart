@@ -8,7 +8,10 @@ const startDateFieldName = 'startDate';
 const endDateFieldName = 'endDate';
 
 class DateFilter extends HookWidget {
-  const DateFilter({super.key, required this.formKey});
+  const DateFilter({
+    required this.formKey,
+    super.key,
+  });
   final GlobalKey<FormBuilderState> formKey;
 
   @override
@@ -67,12 +70,18 @@ class DateFilter extends HookWidget {
         firstDate: minDateTime,
         lastDate: maxDateTime,
         onChanged: (val) {
-          dateErrors[0].value = !(formKey.currentState?.fields[startDateFieldName]?.validate() ?? false);
-          dateErrors[1].value = !(formKey.currentState?.fields[endDateFieldName]?.validate() ?? false);
+          dateErrors[0].value =
+              !(formKey.currentState?.fields[startDateFieldName]?.validate() ??
+                  false);
+          dateErrors[1].value =
+              !(formKey.currentState?.fields[endDateFieldName]?.validate() ??
+                  false);
         },
         validator: (val) {
-          final startDate = formKey.currentState?.fields[startDateFieldName]?.value as DateTime?;
-          final endDate = formKey.currentState?.fields[endDateFieldName]?.value as DateTime?;
+          final startDate = formKey
+              .currentState?.fields[startDateFieldName]?.value as DateTime?;
+          final endDate = formKey.currentState?.fields[endDateFieldName]?.value
+              as DateTime?;
           if (startDate != null && endDate != null) {
             if (startDate.compareTo(endDate) > 0) {
               return 'Start date has to be before end date';

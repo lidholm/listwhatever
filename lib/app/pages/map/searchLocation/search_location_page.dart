@@ -1,65 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listanything/app/constants.dart';
 import 'package:listanything/app/geocoder/geocoder.dart';
 import 'package:listanything/app/geocoder/geocoderresult.dart';
 import 'package:listanything/app/helpers/constants.dart';
-import 'package:listanything/app/pages/map/searchLocation/selected_address_provider.dart';
 import 'package:listanything/app/widgets/standardWidgets/common_scaffold.dart';
-
-class SearchLocationPage extends ConsumerWidget {
-  const SearchLocationPage(this.searchPhrase, {super.key, required this.publicListId, required this.listItemId});
-  final String? searchPhrase;
-  final String publicListId;
-  final String? listItemId;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return AddEditListItemInner(publicListId: publicListId, searchPhrase: searchPhrase, listItemId: listItemId);
-  }
-}
-
-class AddEditListItemInner extends ConsumerStatefulWidget {
-  const AddEditListItemInner({Key? key, required this.publicListId, this.searchPhrase, required this.listItemId})
-      : super(key: key);
-  final String publicListId;
-  final String? searchPhrase;
-  final String? listItemId;
-
-  @override
-  ConsumerState<AddEditListItemInner> createState() {
-    return _AddEditListItemInnerState();
-  }
-}
 
 const searchPhraseName = 'searchPhrase';
 const addressSelectionName = 'addressSelection';
 
-class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
-  bool autoValidate = true;
-  bool readOnly = false;
-  bool showSegmentedControl = true;
-  final _formKey = GlobalKey<FormBuilderState>();
-  List<GeocoderResult>? addresses;
-  bool _addressHasError = false;
-  GeocoderResult? selectedAddress;
-  Map<String, dynamic> initialValue = <String, dynamic>{};
-  late final MapController mapController;
-
-  @override
-  void initState() {
-    super.initState();
-    mapController = MapController();
-  }
+class SearchLocationPage extends HookWidget {
+  const SearchLocationPage(
+    this.searchPhrase, {
+    required this.publicListId,
+    required this.listItemId,
+    super.key,
+  });
+  final String? searchPhrase;
+  final String publicListId;
+  final String? listItemId;
 
   @override
   Widget build(BuildContext context) {
-    print('In SearchLocationPage');
-    initialValue = <String, dynamic>{searchPhraseName: widget.searchPhrase ?? ''};
+    final formKey = GlobalKey<FormBuilderState>();
+
+    final mapController = useState(MapController());
+    final addresses = useState<List<GeocoderResult>?>([]);
+    final selectedAddress = useState<GeocoderResult?>(null);
+    final addressHasError = useState(false);
+
+    //print('In SearchLocationPage');
 
     return CommonScaffold(
       title: 'Search for location',
@@ -70,14 +44,13 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               FormBuilder(
-                key: _formKey,
+                key: formKey,
                 onChanged: () {
-                  _formKey.currentState!.save();
+                  formKey.currentState!.save();
                   // debugPrint(_formKey.currentState!.value.toString());
                 },
                 autovalidateMode: AutovalidateMode.disabled,
                 skipDisabled: true,
-                initialValue: initialValue,
                 child: Column(
                   children: <Widget>[
                     const SizedBox(height: 16),
@@ -87,13 +60,14 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                           child: FormBuilderTextField(
                             autovalidateMode: AutovalidateMode.always,
                             name: searchPhraseName,
+                            initialValue: searchPhrase ?? '',
                             decoration: InputDecoration(
                               labelText: 'Search phrase',
                               suffixIcon: IconButton(
                                 onPressed: () {
-                                  setState(() {
-                                    _formKey.currentState!.fields[searchPhraseName]!.didChange('');
-                                  });
+                                  formKey
+                                      .currentState!.fields[searchPhraseName]!
+                                      .didChange('');
                                 },
                                 icon: const Icon(Icons.close),
                               ),
@@ -105,44 +79,44 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                         const SizedBox(width: 16),
                         ElevatedButton(
                           onPressed: () async {
-                            final searchPhrase = _formKey.currentState!.fields[searchPhraseName]!.value as String;
-                            setState(() {
-                              addresses = null;
-                            });
+                            final searchPhrase = formKey.currentState!
+                                .fields[searchPhraseName]!.value as String;
+                            addresses.value = null;
                             final results = await Geocoder.getDataFromAddress(
                               address: searchPhrase,
                               googleMapApiKey: getMapsApiKey(),
                             );
-                            print('search results: $results');
-                            setState(() {
-                              addresses = results ?? [];
-                              selectedAddress = results?.first;
-                            });
+                            //print('search results: $results');
+                            addresses.value = results ?? [];
+                            selectedAddress.value = results?.first;
                           },
                           child: const Text('Search'),
                         ),
                       ],
                     ),
                     const SizedBox(height: 32),
-                    if (addresses == null)
+                    if (addresses.value == null)
                       const Text('Loading...')
                     else
-                      (addresses!.isEmpty)
+                      (addresses.value!.isEmpty)
                           ? const Text('No search results ')
                           : FormBuilderDropdown<GeocoderResult>(
                               name: addressSelectionName,
-                              initialValue: addresses![0],
+                              initialValue: addresses.value![0],
                               decoration: InputDecoration(
                                 labelText: 'Address',
-                                suffix: _addressHasError ? const Icon(Icons.error) : null,
+                                suffix: addressHasError.value
+                                    ? const Icon(Icons.error)
+                                    : null,
                                 hintText: 'Select address',
                               ),
                               validator: FormBuilderValidators.compose(
                                 [FormBuilderValidators.required()],
                               ),
-                              items: addresses!
+                              items: addresses.value!
                                   .map(
-                                    (address) => DropdownMenuItem<GeocoderResult>(
+                                    (address) =>
+                                        DropdownMenuItem<GeocoderResult>(
                                       alignment: AlignmentDirectional.center,
                                       value: address,
                                       child: Text(address.formattedAddress),
@@ -150,40 +124,49 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                                   )
                                   .toList(),
                               onChanged: (val) {
-                                setState(() {
-                                  _addressHasError =
-                                      !(_formKey.currentState?.fields[addressSelectionName]?.validate() ?? false);
-                                  selectedAddress =
-                                      _formKey.currentState?.fields[addressSelectionName]?.value as GeocoderResult?;
+                                addressHasError.value = !(formKey.currentState
+                                        ?.fields[addressSelectionName]
+                                        ?.validate() ??
+                                    false);
+                                selectedAddress.value = formKey
+                                    .currentState
+                                    ?.fields[addressSelectionName]
+                                    ?.value as GeocoderResult?;
 
-                                  mapController.move(
-                                    selectedAddress!.geometry.location.toLatLng(),
-                                    14.5,
-                                  );
-                                });
+                                mapController.value.move(
+                                  selectedAddress.value!.geometry.location
+                                      .toLatLng(),
+                                  14.5,
+                                );
                               },
                               valueTransformer: (val) => val?.toString(),
                             ),
-                    if (selectedAddress != null) ...[
+                    if (selectedAddress.value != null) ...[
                       SizedBox(
                         height: 200,
                         width: 200,
                         child: FlutterMap(
-                          mapController: mapController,
+                          mapController: mapController.value,
                           options: MapOptions(
-                            center: selectedAddress!.geometry.location.toLatLng(),
+                            center: selectedAddress.value!.geometry.location
+                                .toLatLng(),
                             zoom: 14.5,
-                            interactiveFlags: InteractiveFlag.all - InteractiveFlag.rotate,
+                            interactiveFlags:
+                                InteractiveFlag.all - InteractiveFlag.rotate,
                           ),
                           children: [
                             TileLayer(
-                              urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                              userAgentPackageName: 'dev.fleaflet.flutter_map.example',
+                              urlTemplate:
+                                  'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                              userAgentPackageName:
+                                  'dev.fleaflet.flutter_map.example',
                             ),
                             MarkerLayer(
                               markers: [
                                 Marker(
-                                  point: selectedAddress!.geometry.location.toLatLng(),
+                                  point: selectedAddress
+                                      .value!.geometry.location
+                                      .toLatLng(),
                                   builder: (context) => const Icon(
                                     Icons.circle,
                                     color: Colors.red,
@@ -196,8 +179,12 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      Text('Address: ${selectedAddress!.formattedAddress}'),
-                      Text('LatLong: ${selectedAddress!.geometry.location}'),
+                      Text(
+                        'Address: ${selectedAddress.value!.formattedAddress}',
+                      ),
+                      Text(
+                        'LatLong: ${selectedAddress.value!.geometry.location}',
+                      ),
                     ]
                   ],
                 ),
@@ -208,7 +195,7 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                   Expanded(
                     child: OutlinedButton(
                       onPressed: () {
-                        _formKey.currentState?.reset();
+                        formKey.currentState?.reset();
                         GoRouter.of(context).pop();
                       },
                       // color: Theme.of(context).colorScheme.secondary,
@@ -221,22 +208,22 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        if (selectedAddress == null) {
+                        if (selectedAddress.value == null) {
                           return;
                         }
-                        if (_formKey.currentState?.saveAndValidate() ?? false) {
+                        if (formKey.currentState?.saveAndValidate() ?? false) {
                           // debugPrint(_formKey.currentState?.value.toString());
-                          final searchPhrase = _formKey.currentState?.fields[searchPhraseName]?.value as String?;
+                          final searchPhrase = formKey.currentState
+                              ?.fields[searchPhraseName]?.value as String?;
                           saveAddress(
                             GoRouter.of(context),
-                            selectedAddress!,
+                            selectedAddress.value!,
                             searchPhrase,
-                            widget.publicListId,
-                            widget.listItemId,
+                            publicListId,
+                            listItemId,
                           );
                         } else {
-                          // debugPrint(_formKey.currentState?.value.toString());
-                          debugPrint('validation failed');
+                          print('validation failed');
                         }
                       },
                       child: const Text(
@@ -261,9 +248,9 @@ class _AddEditListItemInnerState extends ConsumerState<AddEditListItemInner> {
     String publicListId,
     String? listItemId,
   ) async {
-    ref.read(selectedAddressProvider.notifier).state =
+    final toReturn =
         result.copyWith(searchPhrase: searchPhrase ?? 'No search phrase');
-
-    router.pop();
+    //print('toReturn: $toReturn');
+    router.pop(toReturn);
   }
 }

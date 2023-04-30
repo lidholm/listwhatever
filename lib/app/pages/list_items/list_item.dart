@@ -1,4 +1,4 @@
-// ignore_for_file: invalid_annotation_target
+// ignore_for_file: invalid_annotation_target, always_put_required_named_parameters_first
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -18,13 +18,18 @@ class ListItem with _$ListItem {
     required Map<CategoryName, List<CategoryValue>> categories,
     @Default(null) String? searchPhrase,
     @Default(null) String? address,
-    @Default(null) @JsonKey(fromJson: _fromJsonGeoPoint, toJson: _toJsonGeoPoint) LatLong? latLong,
+    @Default(null)
+    @JsonKey(fromJson: _fromJsonGeoPoint, toJson: _toJsonGeoPoint)
+        LatLong? latLong,
     @Default(<String>[]) List<String> urls,
     @Default('') String info,
-    @Default(null) @JsonKey(fromJson: _fromJsonDateTime, toJson: _toJsonDateTime) DateTime? datetime,
+    @Default(null)
+    @JsonKey(fromJson: _fromJsonDateTime, toJson: _toJsonDateTime)
+        DateTime? datetime,
   }) = _ListItem;
 
-  factory ListItem.fromJson(Map<String, dynamic> json) => _$ListItemFromJson(json);
+  factory ListItem.fromJson(Map<String, dynamic> json) =>
+      _$ListItemFromJson(json);
 }
 
 GeoPoint? _toJsonGeoPoint(LatLong? latLong) {

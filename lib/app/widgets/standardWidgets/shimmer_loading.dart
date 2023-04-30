@@ -18,9 +18,9 @@ const shimmerGradient = LinearGradient(
 
 class ShimmerLoading extends StatefulWidget {
   const ShimmerLoading({
-    super.key,
     required this.isLoading,
     required this.child,
+    super.key,
   });
 
   final bool isLoading;

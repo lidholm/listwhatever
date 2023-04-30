@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listanything/app/pages/list_items/addEditListItem/add_edit_list_item.dart';
+import 'package:listanything/app/pages/list_items/upsertListItem/add_list_item_form.dart';
 
 @immutable
 class AddListItemRoute extends GoRouteData {
@@ -9,6 +9,6 @@ class AddListItemRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return AddEditListItem(publicListId: publicListId, listItemId: null);
+    return AddListItemForm(publicListId: publicListId);
   }
 }

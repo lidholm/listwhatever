@@ -6,11 +6,11 @@ class LoadingUserPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CommonScaffold(
+    return const CommonScaffold(
       title: null,
-      body: Container(
-        decoration: const BoxDecoration(color: Colors.red),
-        child: const Center(
+      body: DecoratedBox(
+        decoration: BoxDecoration(color: Colors.red),
+        child: Center(
           child: Text('Loading!'),
         ),
       ),
