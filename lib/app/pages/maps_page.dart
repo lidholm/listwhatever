@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -18,9 +17,6 @@ import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
 import 'package:listanything/app/widgets/standardWidgets/common_scaffold.dart';
 import 'package:listanything/app/widgets/standardWidgets/exception_widget.dart';
 
-double doubleInRange(Random source, num start, num end) =>
-    source.nextDouble() * (end - start) + start;
-
 class MapsPage extends ConsumerWidget {
   const MapsPage({
     required this.publicListId,
@@ -29,23 +25,31 @@ class MapsPage extends ConsumerWidget {
   final String publicListId;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    print('here mapspage');
     return ref.watch(filteredListItemsAndListProvider(publicListId)).when(
           error: (e, st) => ExceptionWidget(e: e, st: st),
-          loading: () => MapsPageInner(
-            items: List.generate(
-              5,
-              (index) => const ListItem(name: '', categories: {}),
-            ),
-            isLoading: true,
-            list: const ListOfThings(
-              name: 'Not used',
-              userId: 'Not used since a shimmer',
-              type: ListType.other,
-            ),
-          ),
+          loading: () {
+            print('here loading');
+
+            return MapsPageInner(
+              items: List.generate(
+                5,
+                (index) => const ListItem(name: '', categories: {}),
+              ),
+              isLoading: true,
+              list: const ListOfThings(
+                name: 'Not used',
+                userId: 'Not used since a shimmer',
+                type: ListType.other,
+              ),
+            );
+          },
           data: (value) {
+            print('here33');
             final list = value.item2;
             final items = value.item1;
+            print('ListItemsPage.items: ${items.length}');
+            print('ListItemsPage.list: $list');
             return MapsPageInner(items: items, isLoading: false, list: list!);
           },
         );
