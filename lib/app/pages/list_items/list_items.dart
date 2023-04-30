@@ -3,7 +3,12 @@ import 'package:listanything/app/pages/list_items/list_item.dart';
 import 'package:listanything/app/pages/list_items/list_item_item.dart';
 
 class ListItems extends StatelessWidget {
-  const ListItems({super.key, required this.publicListId, required this.isListViewOnly, required this.items});
+  const ListItems({
+    required this.publicListId,
+    required this.isListViewOnly,
+    required this.items,
+    super.key,
+  });
   final String publicListId;
   final List<ListItem> items;
   final bool isListViewOnly;

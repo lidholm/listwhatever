@@ -3,12 +3,12 @@ import 'package:listanything/app/widgets/standardWidgets/outlined_text.dart';
 
 class ExpandedAppBarContent extends StatelessWidget {
   const ExpandedAppBarContent({
-    Key? key,
     required this.background,
     required this.title,
     required this.isLoading,
     required this.expandedPercentage,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String background;
   final String title;

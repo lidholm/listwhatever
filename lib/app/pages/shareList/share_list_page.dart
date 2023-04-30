@@ -11,7 +11,10 @@ import 'package:share_plus/share_plus.dart';
 final shareTypeProvider = StateProvider((ref) => 'Viewer');
 
 class ShareListPage extends ConsumerWidget {
-  const ShareListPage({super.key, required this.publicListId});
+  const ShareListPage({
+    required this.publicListId,
+    super.key,
+  });
   final String publicListId;
 
   @override
@@ -24,13 +27,19 @@ class ShareListPage extends ConsumerWidget {
       body: AsyncValueWidget<ListOfThings>(
         value: ref.watch(listProvider(publicListId)),
         data: (list) {
-          final shareCode = shareType == 'Viewer' ? list.shareCodeForViewer! : list.shareCodeForEditor!;
+          final shareCode = shareType == 'Viewer'
+              ? list.shareCodeForViewer!
+              : list.shareCodeForEditor!;
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
                 'Share list with friends',
-                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 20),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  fontSize: 20,
+                ),
               ),
               SizedBox(
                 width: 250,
@@ -45,10 +54,14 @@ class ShareListPage extends ConsumerWidget {
                   onChanged: (String? value) {
                     ref.read(shareTypeProvider.notifier).state = value!;
                   },
-                  items: shareTypes.map<DropdownMenuItem<String>>((String value) {
+                  items:
+                      shareTypes.map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
-                      child: Align(alignment: Alignment.centerLeft, child: Text(value)),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(value),
+                      ),
                     );
                   }).toList(),
                 ),

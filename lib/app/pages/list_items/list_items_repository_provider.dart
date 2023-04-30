@@ -9,12 +9,17 @@ import 'package:listanything/app/widgets/standardWidgets/base_repository.dart';
 import 'package:listanything/app/widgets/standardWidgets/error_monitor.dart';
 import 'package:rxdart/rxdart.dart';
 
-final listItemsRepositoryProvider = StreamProvider.family<BaseRepository<ListItem>, String>((ref, publicListId) async* {
+final listItemsRepositoryProvider =
+    StreamProvider.family<BaseRepository<ListItem>, String>(
+        (ref, publicListId) async* {
   final firestore = await ref.watch(firestoreProvider.future);
   final errorMonitor = ErrorMonitor.device();
 
-  final publicListIdRepo = await ref.watch(publicListIdRepositoryProvider.future);
-  yield* publicListIdRepo.retrieveItemStream(itemId: publicListId).switchMap((list) {
+  final publicListIdRepo =
+      await ref.watch(publicListIdRepositoryProvider.future);
+  yield* publicListIdRepo
+      .retrieveItemStream(itemId: publicListId)
+      .switchMap((list) {
     return getListItemRepository(firestore, errorMonitor, list);
   });
 });
@@ -24,7 +29,7 @@ Stream<BaseRepositoryImpl<ListItem>> getListItemRepository(
   ErrorMonitor errorMonitor,
   PublicListId list,
 ) {
-  print('ListItem repository for listId: ${list.listId}');
+  //print('ListItem repository for listId: ${list.listId}');
   return Stream.value(
     BaseRepositoryImpl<ListItem>(
       firestore,

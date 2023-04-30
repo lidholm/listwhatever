@@ -10,5 +10,6 @@ class AppBarAction with _$AppBarAction {
     required IconData icon,
     required void Function() callback,
     required bool overflow,
+    required Key key,
   }) = _AppBarAction;
 }

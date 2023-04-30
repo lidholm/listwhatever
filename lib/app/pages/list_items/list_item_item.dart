@@ -10,11 +10,11 @@ import 'package:listanything/app/widgets/standardWidgets/shimmer_loading.dart';
 
 class ListItemItem extends ConsumerWidget {
   const ListItemItem({
-    super.key,
     required this.publicListId,
     required this.isListViewOnly,
     required this.item,
     required this.isLoading,
+    super.key,
   });
 
   final String publicListId;
@@ -26,7 +26,7 @@ class ListItemItem extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ShimmerLoading(
       isLoading: isLoading,
-      child: Container(
+      child: DecoratedBox(
         decoration: BoxDecoration(
           color: Colors.orange[800],
           borderRadius: BorderRadius.circular(16),

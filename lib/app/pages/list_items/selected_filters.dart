@@ -3,7 +3,10 @@ import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/pages/list_items/filters.dart';
 
 class SelectedFilters extends StatelessWidget {
-  const SelectedFilters({super.key, required this.filters});
+  const SelectedFilters({
+    required this.filters,
+    super.key,
+  });
   final Filters filters;
 
   @override
@@ -29,7 +32,9 @@ class SelectedFilters extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.orange[800],
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: const Color.fromARGB(255, 249, 171, 37)),
+                    border: Border.all(
+                      color: const Color.fromARGB(255, 249, 171, 37),
+                    ),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(16),
@@ -75,15 +80,18 @@ class SelectedFilters extends StatelessWidget {
   Map<String, List<String>> removeNonSetFilters(Filters filters) {
     var dateFilter = '';
     if (filters.startDate != null && filters.endDate != null) {
-      dateFilter = '${formatReadableDate(filters.startDate!)} - ${formatReadableDate(filters.endDate!)}';
+      dateFilter =
+          '${formatReadableDate(filters.startDate!)} - ${formatReadableDate(filters.endDate!)}';
     } else if (filters.startDate != null) {
       dateFilter = 'After ${formatReadableDate(filters.startDate!)}';
     } else if (filters.endDate != null) {
       dateFilter = 'Before ${formatReadableDate(filters.endDate!)}';
     }
 
-    return Map.fromEntries(filters.categoryFilters.entries.where((element) => element.value.isNotEmpty))
-      ..addAll(
+    return Map.fromEntries(
+      filters.categoryFilters.entries
+          .where((element) => element.value.isNotEmpty),
+    )..addAll(
         dateFilter == ''
             ? {}
             : {

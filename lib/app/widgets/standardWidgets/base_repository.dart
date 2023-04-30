@@ -28,20 +28,22 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
   final ErrorMonitor errorMonitor;
   final FirebaseFirestore firestore;
   final Map<String, String?> identifiers;
-  final CollectionReference<Map<String, dynamic>> Function(Map<String, String?>) firestoreItemsPath;
-  final DocumentReference<Map<String, dynamic>> Function(Map<String, String?>) firestoreItemPath;
+  final CollectionReference<Map<String, dynamic>> Function(Map<String, String?>)
+      firestoreItemsPath;
+  final DocumentReference<Map<String, dynamic>> Function(Map<String, String?>)
+      firestoreItemPath;
   final T Function(Map<String, dynamic>, String) itemConverter;
   final Map<String, dynamic> Function(T) jsonFunction;
 
   @override
   Stream<List<T>> retrieveItemsStream() async* {
-    print('retrieveItemsStream()');
+    //print('retrieveItemsStream()');
     try {
       if (identifiers.values.any((element) => element == null)) {
         throw CustomException(message: 'Some null items $identifiers');
       }
       final query = firestoreItemsPath(identifiers);
-      print('query: $query');
+      //print('query: $query');
       yield* query.snapshots().map(convertCollection);
     } on FirebaseException catch (e, s) {
       await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
@@ -51,7 +53,7 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
 
   @override
   Stream<List<T>> retrieveItemsStreamAtPath(String path) async* {
-    print('retrieveItemsStreamAtPath($path)');
+    //print('retrieveItemsStreamAtPath($path)');
     try {
       yield* firestore.collection(path).snapshots().map(convertCollection);
     } on FirebaseException catch (e, s) {
@@ -62,10 +64,13 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
 
   @override
   Stream<T> retrieveItemStream({required String itemId}) async* {
-    print('retrieveItemStream($itemId)');
+    //print('retrieveItemStream($itemId)');
     try {
       final query = firestoreItemPath({...identifiers, 'itemId': itemId});
-      yield* query.snapshots().where((snapshot) => snapshot.data() != null).map(convertDocument);
+      yield* query
+          .snapshots()
+          .where((snapshot) => snapshot.data() != null)
+          .map(convertDocument);
     } on FirebaseException catch (e, s) {
       await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
       throw CustomException(message: e.message);
@@ -74,9 +79,13 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
 
   @override
   Stream<T> retrieveItemStreamAtPath(String path) async* {
-    print('retrieveItemStreamAtPath($path)');
+    //print('retrieveItemStreamAtPath($path)');
     try {
-      yield* firestore.doc(path).snapshots().where((snapshot) => snapshot.data() != null).map(convertDocument);
+      yield* firestore
+          .doc(path)
+          .snapshots()
+          .where((snapshot) => snapshot.data() != null)
+          .map(convertDocument);
     } on FirebaseException catch (e, s) {
       await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
       throw CustomException(message: e.message);
@@ -85,13 +94,13 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
 
   T convertDocument(DocumentSnapshot<Map<String, dynamic>> doc) {
     try {
-      print('doc.data: ${doc.data()}');
-      print('doc.id: ${doc.id}');
+      //print('doc.data: ${doc.data()}');
+      //print('doc.id: ${doc.id}');
       final item = itemConverter(doc.data()!, doc.id);
       return item;
     } on FirebaseException catch (e, s) {
       errorMonitor.recordError(e, s, 'as an example of non-fatal error');
-      print('error: e');
+      //print('error: e');
       throw CustomException(message: e.message);
     }
   }
@@ -100,10 +109,10 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
     try {
       final items = list.docs.map((d) {
         final item = itemConverter(d.data(), d.id);
-        print('converting: $item');
+        //print('converting: $item');
         return item;
       }).toList();
-      print('convertCollection.items: ${items.length}');
+      //print('convertCollection.items: ${items.length}');
       return items;
     } on FirebaseException catch (e, s) {
       errorMonitor.recordError(e, s, 'as an example of non-fatal error');
@@ -115,11 +124,11 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
   Future<String> createItem({required T item}) async {
     try {
       final data = jsonFunction(item);
-      print('Adding data: $data');
+      //print('Adding data: $data');
       final ref = firestoreItemsPath(identifiers).doc();
       data['id'] = ref.id;
       await ref.set(data);
-      print('Added at $ref');
+      //print('Added at $ref');
       return ref.id;
     } on FirebaseException catch (e, s) {
       await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
@@ -133,9 +142,10 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
   @override
   Future<String> updateItem({required String itemId, required T item}) async {
     try {
-      print('Updating $item');
-      await firestoreItemPath({...identifiers, 'itemId': itemId}).update(jsonFunction(item));
-      print('Updated $itemId');
+      //print('Updating $item');
+      await firestoreItemPath({...identifiers, 'itemId': itemId})
+          .update(jsonFunction(item));
+      //print('Updated $itemId');
       return itemId;
     } on FirebaseException catch (e, s) {
       await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
@@ -149,9 +159,9 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
   @override
   Future<void> deleteItem({required String itemId}) async {
     try {
-      print('Deleting $itemId');
+      //print('Deleting $itemId');
       await firestoreItemPath({...identifiers, 'itemId': itemId}).delete();
-      print('Deleted $itemId');
+      //print('Deleted $itemId');
     } on FirebaseException catch (e, s) {
       await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
       throw CustomException(message: e.message);

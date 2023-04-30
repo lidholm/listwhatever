@@ -45,7 +45,10 @@ extension ListTypeExtension on ListType {
 }
 
 class AddEditList extends ConsumerWidget {
-  const AddEditList({super.key, required this.publicListId});
+  const AddEditList({
+    required this.publicListId,
+    super.key,
+  });
   final String? publicListId;
 
   @override
@@ -66,7 +69,11 @@ class AddEditList extends ConsumerWidget {
 }
 
 class AddEditListInner extends ConsumerStatefulWidget {
-  const AddEditListInner({Key? key, required this.userId, required this.list}) : super(key: key);
+  const AddEditListInner({
+    required this.userId,
+    required this.list,
+    super.key,
+  });
   final String userId;
   final ListOfThings? list;
 
@@ -120,9 +127,11 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
       actions: [
         if (widget.list != null)
           AppBarAction(
+            key: const Key('deletelist'),
             title: 'Delete list',
             icon: Icons.delete,
-            callback: () => deleteList(ref, GoRouter.of(context), widget.list!.id!),
+            callback: () =>
+                deleteList(ref, GoRouter.of(context), widget.list!.id!),
             overflow: false,
           ),
       ],
@@ -155,7 +164,10 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
                       ),
                       onChanged: (val) {
                         setState(() {
-                          _nameHasError = !(_formKey.currentState?.fields[nameFieldName]?.validate() ?? false);
+                          _nameHasError = !(_formKey
+                                  .currentState?.fields[nameFieldName]
+                                  ?.validate() ??
+                              false);
                         });
                       },
                       // valueTransformer: (text) => num.tryParse(text),
@@ -199,7 +211,10 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
                           .toList(),
                       onChanged: (val) {
                         setState(() {
-                          _typeHasError = !(_formKey.currentState?.fields[typeFieldName]?.validate() ?? false);
+                          _typeHasError = !(_formKey
+                                  .currentState?.fields[typeFieldName]
+                                  ?.validate() ??
+                              false);
                         });
                       },
                       valueTransformer: (val) => val?.toString(),
@@ -253,7 +268,11 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
                       onPressed: () {
                         if (_formKey.currentState?.saveAndValidate() ?? false) {
                           // debugPrint(_formKey.currentState?.value.toString());
-                          saveList(GoRouter.of(context), widget.userId, widget.list);
+                          saveList(
+                            GoRouter.of(context),
+                            widget.userId,
+                            widget.list,
+                          );
                         } else {
                           // debugPrint(_formKey.currentState?.value.toString());
                           debugPrint('validation failed');
@@ -274,16 +293,21 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
     );
   }
 
-  Future<void> saveList(GoRouter router, String userId, ListOfThings? list) async {
+  Future<void> saveList(
+    GoRouter router,
+    String userId,
+    ListOfThings? list,
+  ) async {
     final fields = _formKey.currentState!.fields;
     final repo = await ref.read(listRepositoryProvider.future);
     final name = fields[nameFieldName]!.value as String;
     final type = fields[typeFieldName]!.value as ListType;
     final withMap = fields[withMapFieldName]!.value as bool;
     final withDates = fields[withDatesFieldName]!.value as bool;
-    final withTimes = withDates && (fields[withTimesFieldName]?.value as bool? ?? false);
+    final withTimes =
+        withDates && (fields[withTimesFieldName]?.value as bool? ?? false);
     if (list == null) {
-      print('adding');
+      //print('adding');
       final list = ListOfThings(
         name: name,
         type: type,
@@ -296,8 +320,13 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
       final refId = await repo.createItem(item: list);
       print('Added $refId');
     } else {
-      final newList =
-          list.copyWith(name: name, type: type, withMap: withMap, withDates: withDates, withTimes: withTimes);
+      final newList = list.copyWith(
+        name: name,
+        type: type,
+        withMap: withMap,
+        withDates: withDates,
+        withTimes: withTimes,
+      );
       final refId = await repo.updateItem(itemId: newList.id!, item: newList);
       print('Updated $refId');
     }
@@ -305,7 +334,7 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
   }
 
   Future<void> deleteList(WidgetRef ref, GoRouter router, String listId) async {
-    print('delete');
+    //print('delete');
     final repo = await ref.read(listRepositoryProvider.future);
     await repo.deleteItem(itemId: listId);
     router.pop();

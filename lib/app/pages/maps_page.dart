@@ -22,7 +22,10 @@ double doubleInRange(Random source, num start, num end) =>
     source.nextDouble() * (end - start) + start;
 
 class MapsPage extends ConsumerWidget {
-  const MapsPage({super.key, required this.publicListId});
+  const MapsPage({
+    required this.publicListId,
+    super.key,
+  });
   final String publicListId;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,10 +54,10 @@ class MapsPage extends ConsumerWidget {
 
 class MapsPageInner extends ConsumerWidget {
   const MapsPageInner({
-    super.key,
     required this.items,
     required this.isLoading,
     required this.list,
+    super.key,
   });
   final List<ListItem> items;
   final bool isLoading;
@@ -82,18 +85,21 @@ class MapsPageInner extends ConsumerWidget {
       title: 'Items',
       actions: [
         AppBarAction(
+          key: const Key('showlist'),
           title: 'Show list',
           icon: Icons.list,
           callback: () => showListItemPage(ref, context, list.id!),
           overflow: false,
         ),
         AppBarAction(
+          key: const Key('newitem'),
           title: 'New item',
           icon: Icons.playlist_add_outlined,
           callback: () => addNewListItem(ref, context, list.publicListId!),
           overflow: false,
         ),
         AppBarAction(
+          key: const Key('showfilters'),
           title: 'Filter',
           icon: filters.anySelectedFilters(listHasDates: list.withDates)
               ? Icons.filter_alt
@@ -102,6 +108,7 @@ class MapsPageInner extends ConsumerWidget {
           overflow: false,
         ),
         AppBarAction(
+          key: const Key('editlist'),
           title: 'Edit list',
           icon: Icons.edit,
           callback: () => editList(ref, context, list.publicListId!),

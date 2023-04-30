@@ -18,8 +18,8 @@ class Recommendations extends StatelessWidget {
 
 class Recommendation extends StatelessWidget {
   const Recommendation({
-    super.key,
     required this.index,
+    super.key,
   });
 
   final int index;

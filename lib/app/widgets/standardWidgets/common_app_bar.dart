@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CommonAppBar({super.key, required this.title, this.actions = const <AppBarAction>[], this.titleWidget})
-      // ignore: avoid_field_initializers_in_const_classes
-      : preferredSize = const Size.fromHeight(kToolbarHeight);
+  const CommonAppBar({
+    required this.title,
+    this.actions = const <AppBarAction>[],
+    this.titleWidget,
+    super.key,
+  })
+  // ignore: avoid_field_initializers_in_const_classes
+  : preferredSize = const Size.fromHeight(kToolbarHeight);
 
   final String title;
   final Widget? titleWidget;
@@ -23,6 +28,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
         return actions.where((e) => e.overflow).map((AppBarAction action) {
           return PopupMenuItem<AppBarAction>(
             value: action,
+            key: action.key,
             child: Row(
               children: [
                 Icon(
@@ -47,16 +53,14 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
       actions: [
-        ...actions
-            .where((element) => !element.overflow)
-            .map(
+        ...actions.where((element) => !element.overflow).map(
               (e) => IconButton(
+                key: e.key,
                 icon: Icon(e.icon),
                 tooltip: e.title,
                 onPressed: e.callback,
               ),
-            )
-            .toList(),
+            ),
         if (actions.where((e) => e.overflow).isNotEmpty) popupMenuButtons
       ],
     );

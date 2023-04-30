@@ -10,7 +10,11 @@ import 'package:listanything/app/widgets/standardWidgets/double_async_value_widg
 import 'package:tuple/tuple.dart';
 
 class ListItemDetailsPage extends ConsumerWidget {
-  const ListItemDetailsPage({super.key, required this.publicListId, this.listItemId});
+  const ListItemDetailsPage({
+    required this.publicListId,
+    this.listItemId,
+    super.key,
+  });
 
   final String publicListId;
   final String? listItemId;
@@ -18,15 +22,21 @@ class ListItemDetailsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return DoubleAsyncValueWidget<ListItem?, ListOfThings?>(
-      firstValue: ref.watch(listItemProvider(Tuple2(publicListId, listItemId!))),
+      firstValue:
+          ref.watch(listItemProvider(Tuple2(publicListId, listItemId!))),
       secondValue: ref.watch(listProvider(publicListId)),
-      data: (listItem, list) => ListItemDetailsInner(listItem: listItem, list: list),
+      data: (listItem, list) =>
+          ListItemDetailsInner(listItem: listItem, list: list),
     );
   }
 }
 
 class ListItemDetailsInner extends ConsumerStatefulWidget {
-  const ListItemDetailsInner({Key? key, required this.listItem, required this.list}) : super(key: key);
+  const ListItemDetailsInner({
+    required this.listItem,
+    required this.list,
+    super.key,
+  });
   final ListItem? listItem;
   final ListOfThings? list;
 
@@ -51,54 +61,72 @@ class _ListItemDetailsInnerState extends ConsumerState<ListItemDetailsInner> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               const SizedBox(height: 16),
-              const Text('Item name', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              const Text(
+                'Item name',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
               Text('  ${widget.listItem!.name}'),
               const SizedBox(height: 16),
-              const Text('Categories', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-              ...widget.listItem!.categories.entries
-                  .map(
-                    (entry) => Row(
-                      children: [
-                        Text('   ${entry.key}: ', style: const TextStyle(fontWeight: FontWeight.bold)),
-                        Text(entry.value.join(', '))
-                      ],
+              const Text(
+                'Categories',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              ...widget.listItem!.categories.entries.map(
+                (entry) => Row(
+                  children: [
+                    Text(
+                      '   ${entry.key}: ',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                  )
-                  .toList(),
+                    Text(entry.value.join(', '))
+                  ],
+                ),
+              ),
               const SizedBox(height: 16),
-              const Text('Address', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              const Text(
+                'Address',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
               Text('  ${widget.listItem?.address ?? ''}'),
               const SizedBox(height: 16),
-              const Text('Position', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-              Text('  ${widget.listItem?.latLong?.lat}x${widget.listItem?.latLong?.lng} '),
+              const Text(
+                'Position',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                '  ${widget.listItem?.latLong?.lat}x${widget.listItem?.latLong?.lng} ',
+              ),
               const SizedBox(height: 16),
-              const Text('URLs', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-              ...widget.listItem!.urls
-                  .map(
-                    (url) => Row(
-                      children: [
-                        Text('   $url: '),
-                      ],
-                    ),
-                  )
-                  .toList(),
+              const Text(
+                'URLs',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              ...widget.listItem!.urls.map(
+                (url) => Row(
+                  children: [
+                    Text('   $url: '),
+                  ],
+                ),
+              ),
               const SizedBox(height: 16),
-              const Text('Extra info', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              const Text(
+                'Extra info',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
               Text('  ${widget.listItem?.info ?? ''}'),
               const SizedBox(height: 16),
-              const Text('Date', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-              Text('  ${widget.listItem?.datetime != null ? dateFormatter.format(widget.listItem!.datetime!) : ''}'),
+              const Text(
+                'Date',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                '  ${widget.listItem?.datetime != null ? dateFormatter.format(widget.listItem!.datetime!) : ''}',
+              ),
             ],
           ),
         ),
       ),
     );
-  }
-
-  String? nullIfEmpty(String? s) {
-    if (s == null) return null;
-    if (s.trim().isEmpty) return null;
-    return s;
   }
 
   DateTime getCurrentDate() {

@@ -9,15 +9,16 @@ bool? override;
 
 final useFirebaseEmulatorProvider = FutureProvider<bool>((ref) async {
   final deviceInfo = await ref.watch(deviceInfoProvider.future);
-  print('isPhysicalDevice: ${deviceInfo['isPhysicalDevice']}');
-  print('foundation.kDebugMode: ${foundation.kDebugMode}');
-  final useEmulator = deviceInfo['isPhysicalDevice'] == false || foundation.kDebugMode;
+  //print('isPhysicalDevice: ${deviceInfo['isPhysicalDevice']}');
+  //print('foundation.kDebugMode: ${foundation.kDebugMode}');
+  final useEmulator =
+      deviceInfo['isPhysicalDevice'] == false || foundation.kDebugMode;
   if (override != null) {
-    print('useEmaulator: $override');
+    //print('useEmaulator: $override');
     return override!;
   }
   // ignore: avoid_print
-  print('useEmulator: $useEmulator');
+  //print('useEmulator: $useEmulator');
   return useEmulator;
 });
 

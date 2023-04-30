@@ -11,7 +11,6 @@ import 'package:listanything/app/navigation/routes/filter_page_route.dart';
 import 'package:listanything/app/navigation/routes/list_item_details_page_route.dart';
 import 'package:listanything/app/navigation/routes/maps_page_route.dart';
 import 'package:listanything/app/navigation/routes/routes.dart';
-import 'package:listanything/app/navigation/routes/search_location_for_add_page_route.dart';
 import 'package:listanything/app/navigation/routes/share_list_page_route.dart';
 import 'package:listanything/app/pages/list_items/filter_provider.dart';
 import 'package:listanything/app/pages/list_items/filtered_list_items_provider.dart';
@@ -29,16 +28,19 @@ import 'package:listanything/app/widgets/standardWidgets/shimmer.dart';
 import 'package:listanything/app/widgets/standardWidgets/shimmer_loading.dart';
 
 class ListItemsPage extends ConsumerWidget {
-  const ListItemsPage({super.key, required this.publicListId});
+  const ListItemsPage({
+    required this.publicListId,
+    super.key,
+  });
   final String publicListId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    print('ListItemsPage: getting items for $publicListId');
+    //print('ListItemsPage: getting items for $publicListId');
     return ref.watch(filteredListItemsAndListProvider(publicListId)).when(
           error: (e, st) => ExceptionWidget(e: e, st: st),
           loading: () {
-            print('ListItemsPage.Loading');
+            //print('ListItemsPage.Loading');
             return ListItemsPageInner(
               items: List.generate(
                 5,
@@ -51,11 +53,11 @@ class ListItemsPage extends ConsumerWidget {
             );
           },
           data: (value) {
-            print('here22');
+            //print('here22');
             final items = value.item1;
             final list = value.item2;
-            print('ListItemsPage.items: ${items.length}');
-            print('ListItemsPage.list: $list');
+            //print('ListItemsPage.items: ${items.length}');
+            //print('ListItemsPage.list: $list');
             return ListItemsPageInner(
               items: sortItems(list, items),
               isLoading: false,
@@ -75,10 +77,10 @@ class ListItemsPage extends ConsumerWidget {
 
 class ListItemsPageInner extends HookConsumerWidget {
   const ListItemsPageInner({
-    super.key,
     required this.items,
     required this.isLoading,
     this.list,
+    super.key,
   });
   final List<ListItem> items;
   final bool isLoading;
@@ -87,9 +89,9 @@ class ListItemsPageInner extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final filters = ref.watch(filterProvider);
-    print('ListItemsPageInner.isLoading: $isLoading');
-    print('ListItemsPageInner.list: $list');
-    print('ListItemsPageInner.items: ${items.length}');
+    //print('ListItemsPageInner.isLoading: $isLoading');
+    //print('ListItemsPageInner.list: $list');
+    //print('ListItemsPageInner.items: ${items.length}');
 
     final scrollController = useScrollController();
     final expandedPercentage = useState<double>(1);
@@ -117,6 +119,7 @@ class ListItemsPageInner extends HookConsumerWidget {
         actions: [
           if (list?.withMap ?? false)
             AppBarAction(
+              key: const Key('showmap'),
               title: 'Show map',
               icon: Icons.map_outlined,
               callback: () => showMap(ref, context, list!.id!),
@@ -124,12 +127,14 @@ class ListItemsPageInner extends HookConsumerWidget {
             ),
           if (list?.isEditor ?? false)
             AppBarAction(
+              key: const Key('newitem'),
               title: 'New item',
               icon: Icons.playlist_add_outlined,
               callback: () => addNewListItem(ref, context, list!.publicListId!),
               overflow: false,
             ),
           AppBarAction(
+            key: const Key('showfilters'),
             title: 'Filter',
             icon: filters.anySelectedFilters(
               listHasDates: list?.withDates ?? false,
@@ -141,6 +146,7 @@ class ListItemsPageInner extends HookConsumerWidget {
           ),
           if (list?.isEditor ?? false)
             AppBarAction(
+              key: const Key('editlist'),
               title: 'Edit list',
               icon: Icons.edit,
               callback: () => editList(ref, context, list!.publicListId!),
@@ -148,6 +154,7 @@ class ListItemsPageInner extends HookConsumerWidget {
             ),
           if (list?.isEditor ?? false)
             AppBarAction(
+              key: const Key('sharelist'),
               title: 'Share list',
               icon: Icons.share,
               callback: () async {
@@ -232,16 +239,7 @@ class ListItemsPageInner extends HookConsumerWidget {
     BuildContext context,
     String publicListId,
   ) {
-    print('list: $list');
-    if (list?.withMap ?? false) {
-      print('Routing to SearchLocationPageRoute');
-      AddListItemRoute(publicListId: publicListId).push<void>(context);
-      SearchLocationForAddPageRoute(publicListId: list!.publicListId!)
-          .push<void>(context);
-    } else {
-      print('Routing to AddOrEditListItemRoute');
-      AddListItemRoute(publicListId: publicListId).push<void>(context);
-    }
+    AddListItemRoute(publicListId: publicListId).push<void>(context);
   }
 
   void filterPage(BuildContext context, String publicListId) {

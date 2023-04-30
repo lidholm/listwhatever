@@ -27,7 +27,7 @@ class Geocoder {
         final data = response.body; //.stream.bytesToString();
         final fetch = json.decode(data) as Map<String, dynamic>;
         final results = fetch['results'] as List<dynamic>;
-        print('results: $results');
+        //print('results: $results');
         final geoResults = <GeocoderResult>[];
         for (final result in results) {
           final json = result as Map<String, dynamic>;
@@ -41,18 +41,24 @@ class Geocoder {
       return Future.value([
         GeocoderResult(
           addressComponents: [],
-          formattedAddress: '9999 Mira Mesa Blvd Suite 102, San Diego, CA 92131, USA',
+          formattedAddress:
+              '9999 Mira Mesa Blvd Suite 102, San Diego, CA 92131, USA',
           geometry: Geometry(
             location: const LatLong(lat: 32.9163275, lng: -117.1116371),
             locationType: 'ROOFTOP',
             viewport: Bounds(
-              northeast: const LatLong(lat: 32.9177458802915, lng: -117.1102612697085),
-              southwest: const LatLong(lat: 32.9150479197085, lng: -117.1129592302915),
+              northeast:
+                  const LatLong(lat: 32.9177458802915, lng: -117.1102612697085),
+              southwest:
+                  const LatLong(lat: 32.9150479197085, lng: -117.1129592302915),
             ),
           ),
           partialMatch: true,
           placeId: 'ChIJGyUPeBf524ARRk_U507Ntak',
-          plusCode: PlusCode(compoundCode: 'WV8Q+G8 San Diego, CA', globalCode: '8544WV8Q+G8'),
+          plusCode: PlusCode(
+            compoundCode: 'WV8Q+G8 San Diego, CA',
+            globalCode: '8544WV8Q+G8',
+          ),
           types: [],
         ),
         GeocoderResult(
@@ -62,13 +68,18 @@ class Geocoder {
             location: const LatLong(lat: 32.7989096, lng: -117.2442403),
             locationType: 'ROOFTOP',
             viewport: Bounds(
-              northeast: const LatLong(lat: 32.8003183802915, lng: -117.2429053697085),
-              southwest: const LatLong(lat: 32.7976204197085, lng: -117.2456033302915),
+              northeast:
+                  const LatLong(lat: 32.8003183802915, lng: -117.2429053697085),
+              southwest:
+                  const LatLong(lat: 32.7976204197085, lng: -117.2456033302915),
             ),
           ),
           partialMatch: true,
           placeId: 'ChIJnbMB7KNV2YARG_qkiCnaYcY',
-          plusCode: PlusCode(compoundCode: 'QQX4+H8 San Diego, CA', globalCode: '8544QQX4+H8'),
+          plusCode: PlusCode(
+            compoundCode: 'QQX4+H8 San Diego, CA',
+            globalCode: '8544QQX4+H8',
+          ),
           types: [],
         )
       ]);

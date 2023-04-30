@@ -3,7 +3,11 @@ import 'package:listanything/app/widgets/standardWidgets/common_app_bar.dart';
 import 'package:tuple/tuple.dart';
 
 class ExceptionWidget extends StatelessWidget {
-  const ExceptionWidget({super.key, required this.e, required this.st});
+  const ExceptionWidget({
+    required this.e,
+    required this.st,
+    super.key,
+  });
   final Object e;
   final StackTrace st;
 

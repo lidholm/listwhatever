@@ -11,25 +11,41 @@ List<ListItem> filterListItems({
 }) {
   final filteredItems = <ListItem>[];
   for (final item in allItems) {
-    if (matchesFilter(item: item, filters: filters, listHasDates: listHasDates)) {
+    if (matchesFilter(
+      item: item,
+      filters: filters,
+      listHasDates: listHasDates,
+    )) {
       filteredItems.add(item);
     }
   }
   return filteredItems;
 }
 
-bool matchesFilter({required ListItem item, required Filters filters, required bool listHasDates}) {
-  return matchesDatesFilter(item: item, filters: filters, listHasDates: listHasDates) &&
+bool matchesFilter({
+  required ListItem item,
+  required Filters filters,
+  required bool listHasDates,
+}) {
+  return matchesDatesFilter(
+        item: item,
+        filters: filters,
+        listHasDates: listHasDates,
+      ) &&
       matchesCategoriesFilter(item, filters);
 }
 
-bool matchesDatesFilter({required ListItem item, required Filters filters, required bool listHasDates}) {
+bool matchesDatesFilter({
+  required ListItem item,
+  required Filters filters,
+  required bool listHasDates,
+}) {
   if (!listHasDates) {
-    print("List doesn't have dates, so a match");
+    //print("List doesn't have dates, so a match");
     return true;
   }
   if (filters.startDate == null && filters.endDate == null) {
-    print('no filters, so a match');
+    //print('no filters, so a match');
     return true;
   }
   if (item.datetime == null) {
@@ -47,19 +63,23 @@ bool matchesCategoriesFilter(ListItem item, Filters filters) {
     and the filter can say, give me either 'italian' food or 'meditarrean' food
     */
   if (filters.categoryFilters.values.expand((e) => e).isEmpty) {
-    print('no filters, so a match');
+    //print('no filters, so a match');
     return true;
   }
-  if (filters.categoryFilters.values.expand((e) => e).isNotEmpty && item.categories.isEmpty) {
-    print("filters but no categories, so can't be a match");
+  if (filters.categoryFilters.values.expand((e) => e).isNotEmpty &&
+      item.categories.isEmpty) {
+    //print("filters but no categories, so can't be a match");
     return false;
   }
   // items without a date set will match even if a start or end date has been set
 
   for (final categoryName in filters.categoryFilters.keys) {
-    final acceptedFilterValues = getFilterValuesForCategory(filters.categoryFilters, categoryName) ?? [];
-    final valuesForCategory =
-        item.categories.entries.where((c) => c.key == categoryName).expand((c) => c.value).toList();
+    final acceptedFilterValues =
+        getFilterValuesForCategory(filters.categoryFilters, categoryName) ?? [];
+    final valuesForCategory = item.categories.entries
+        .where((c) => c.key == categoryName)
+        .expand((c) => c.value)
+        .toList();
     var matches = false;
     if (valuesForCategory.isEmpty) {
       matches = true;
@@ -70,7 +90,8 @@ bool matchesCategoriesFilter(ListItem item, Filters filters) {
       }
     }
     if (filters.startDate != null) {
-      if (item.datetime != null && item.datetime!.compareTo(filters.startDate!) < 0) {
+      if (item.datetime != null &&
+          item.datetime!.compareTo(filters.startDate!) < 0) {
         matches = false;
       }
     }
@@ -85,6 +106,9 @@ bool hasFilterForCategory(CategoryFilters filters, String categoryName) {
   return filters[categoryName] != null && filters[categoryName]!.isNotEmpty;
 }
 
-List<String?>? getFilterValuesForCategory(CategoryFilters filters, String categoryName) {
+List<String?>? getFilterValuesForCategory(
+  CategoryFilters filters,
+  String categoryName,
+) {
   return filters[categoryName];
 }

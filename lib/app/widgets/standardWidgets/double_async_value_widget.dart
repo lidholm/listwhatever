@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DoubleAsyncValueWidget<T, S> extends StatelessWidget {
   const DoubleAsyncValueWidget({
-    super.key,
     required this.firstValue,
     required this.secondValue,
     required this.data,
+    super.key,
   });
   final AsyncValue<T> firstValue;
   final AsyncValue<S> secondValue;

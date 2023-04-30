@@ -12,7 +12,10 @@ import 'package:listanything/app/widgets/standardWidgets/common_scaffold.dart';
 import 'package:listanything/app/widgets/standardWidgets/exception_widget.dart';
 
 class FilterPage extends ConsumerWidget {
-  const FilterPage({Key? key, required this.publicListId}) : super(key: key);
+  const FilterPage({
+    required this.publicListId,
+    super.key,
+  });
   final String publicListId;
 
   @override
@@ -59,13 +62,13 @@ class FilterPage extends ConsumerWidget {
 
 class FilterPageInner extends StatefulWidget {
   const FilterPageInner({
-    Key? key,
     required this.categories,
     required this.isLoading,
     required this.ref,
     required this.filters,
     required this.list,
-  }) : super(key: key);
+    super.key,
+  });
 
   final Map<String, Set<String>> categories;
   final bool isLoading;
@@ -97,7 +100,7 @@ class _FilterPageInnerState extends State<FilterPageInner> {
       ..addAll(widget.filters.categoryFilters)
       ..addAll(other);
     final iconTexts = getIconTexts(widget.categories);
-    print('iconTexts: $iconTexts');
+    //print('iconTexts: $iconTexts');
 
     return CommonScaffold(
       title: 'Filter for ${widget.list?.name}',
@@ -110,7 +113,7 @@ class _FilterPageInnerState extends State<FilterPageInner> {
                 key: _formKey,
                 onChanged: () {
                   _formKey.currentState!.save();
-                  debugPrint(_formKey.currentState!.value.toString());
+                  // debugPrint(_formKey.currentState!.value.toString());
                 },
                 autovalidateMode: AutovalidateMode.disabled,
                 skipDisabled: true,
@@ -118,7 +121,8 @@ class _FilterPageInnerState extends State<FilterPageInner> {
                 child: Column(
                   children: <Widget>[
                     const SizedBox(height: 16),
-                    if (widget.list?.withDates ?? false) DateFilter(formKey: _formKey),
+                    if (widget.list?.withDates ?? false)
+                      DateFilter(formKey: _formKey),
                     const SizedBox(height: 16),
                     ...widget.categories.entries.expand((e) {
                       final categoryName = e.key;
@@ -139,14 +143,16 @@ class _FilterPageInnerState extends State<FilterPageInner> {
                                   value: c,
                                   avatar: CircleAvatar(
                                     backgroundColor: Colors.orange.shade800,
-                                    child: Text(isSelected(categoryName, c) ? '' : c[0]),
+                                    child: Text(
+                                      isSelected(categoryName, c) ? '' : c[0],
+                                    ),
                                   ),
                                 ),
                               )
                               .toList(),
                           onChanged: (values) {
-                            print('onChanged');
-                            print('values: $values');
+                            //print('onChanged');
+                            //print('values: $values');
                             setState(() {
                               for (final value in values ?? <String>[]) {
                                 iconTexts[categoryName]![value] = '';
@@ -213,7 +219,7 @@ class _FilterPageInnerState extends State<FilterPageInner> {
 
   void updateFilters(GoRouter router) {
     final fields = _formKey.currentState?.fields;
-    print('fields: $fields');
+    //print('fields: $fields');
 
     final categoryFilters = <String, List<String>>{};
     DateTime? startDate;
@@ -231,7 +237,7 @@ class _FilterPageInnerState extends State<FilterPageInner> {
         }
       }
     }
-    print('filters: $categoryFilters');
+    //print('filters: $categoryFilters');
     widget.ref.read(filterProvider.notifier).state = Filters(
       categoryFilters: categoryFilters,
       startDate: startDate,
@@ -240,7 +246,9 @@ class _FilterPageInnerState extends State<FilterPageInner> {
     router.pop();
   }
 
-  Map<String, Map<String, String>> getIconTexts(Map<String, Set<String>> filters) {
+  Map<String, Map<String, String>> getIconTexts(
+    Map<String, Set<String>> filters,
+  ) {
     return {
       for (var entry in filters.entries) entry.key: getIconLetters(entry.value),
     };

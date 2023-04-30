@@ -5,7 +5,6 @@ const roundedRadius = 8.0;
 
 class ImageButton<T> extends StatelessWidget {
   const ImageButton({
-    super.key,
     required this.item,
     required this.image,
     required this.text,
@@ -13,11 +12,12 @@ class ImageButton<T> extends StatelessWidget {
     required this.isLoading,
     this.topRightIcon,
     this.topRightIconBorderColor,
+    super.key,
   });
   final T item;
   final String image;
   final String text;
-  final Function(T item) callback;
+  final void Function(T item) callback;
   final bool isLoading;
   final Widget? topRightIcon;
   final Color? topRightIconBorderColor;
@@ -37,7 +37,7 @@ class ImageButton<T> extends StatelessWidget {
         onPressed: () {
           callback.call(item);
         },
-        child: Container(
+        child: DecoratedBox(
           decoration: isLoading
               ? BoxDecoration(
                   color: Colors.black,
@@ -63,7 +63,7 @@ class ImageButton<T> extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(4),
-                      child: Container(
+                      child: DecoratedBox(
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.grey,

@@ -1,4 +1,4 @@
-// ignore_for_file: invalid_annotation_target
+// ignore_for_file: invalid_annotation_target, always_put_required_named_parameters_first
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:listanything/app/helpers/constants.dart';
@@ -26,7 +26,9 @@ class ListOfThings with _$ListOfThings {
     @Default(false) bool withMap,
     @Default(false) bool withDates,
     @Default(false) bool withTimes,
-    @Default(null) @JsonKey(fromJson: _fromJsonPublicListId, toJson: _toJsonPublicListId) String? publicListId,
+    @Default(null)
+    @JsonKey(fromJson: _fromJsonPublicListId, toJson: _toJsonPublicListId)
+        String? publicListId,
     @Default(null) String? shareCodeForViewer,
     @Default(null) String? shareCodeForEditor,
     @Default(<UserId, bool>{}) Map<UserId, bool> viewers,
@@ -36,7 +38,8 @@ class ListOfThings with _$ListOfThings {
     @Default(false) bool isEditor,
   }) = _ListOfThings;
 
-  factory ListOfThings.fromJson(Map<String, dynamic> json) => _$ListOfThingsFromJson(json);
+  factory ListOfThings.fromJson(Map<String, dynamic> json) =>
+      _$ListOfThingsFromJson(json);
 }
 
 String _toJsonPublicListId(String? publicListId) {

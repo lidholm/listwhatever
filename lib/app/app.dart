@@ -16,21 +16,21 @@ final routerProvider = Provider(
     //debugLogDiagnostics: true,
     routes: $appRoutes,
     redirect: (context, state) {
-      print('state.fullpath: ${state.fullpath}');
+      //print('state.fullpath: ${state.fullpath}');
       // and then use userChanges to check for changes to if a user is logged in or not
       final userChanges = ref.watch(userChangesProvider);
 
-      print('userChanges: ${userChanges.asData?.value?.email} - ${userChanges.asData?.value?.uid}');
+      //print('userChanges: ${userChanges.asData?.value?.email} - ${userChanges.asData?.value?.uid}');
 
       final path = userChanges.when(
         error: (e, st) => '/error_loading_user',
         loading: () => const LoadingUserRoute().location,
         data: (user) {
-          print('router: user: $user');
+          //print('router: user: $user');
           return user == null ? const SignInScreenRoute().location : null;
         },
       );
-      print('going to. $path');
+      //print('going to. $path');
       return path;
     },
   ),
@@ -54,7 +54,8 @@ class App extends ConsumerWidget {
         ),
         inputDecorationTheme: InputDecorationTheme(
           labelStyle: const TextStyle(color: Colors.grey, fontSize: 16),
-          floatingLabelStyle: const TextStyle(color: Colors.black, fontSize: 16),
+          floatingLabelStyle:
+              const TextStyle(color: Colors.black, fontSize: 16),
           hintStyle: const TextStyle(color: Colors.grey, fontSize: 16),
           border: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.orange[800]!),

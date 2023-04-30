@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Static extends StatelessWidget {
-  const Static({super.key, required this.title});
+  const Static({
+    required this.title,
+    super.key,
+  });
   final String title;
   @override
   Widget build(BuildContext context) {

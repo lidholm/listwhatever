@@ -7,7 +7,8 @@ final Provider<FirebaseFirestore> baseFirestoreProvider =
     Provider<FirebaseFirestore>((ref) => FirebaseFirestore.instance);
 
 final firestoreProvider = FutureProvider<FirebaseFirestore>((ref) async {
-  final useFirebaseEmulator = await ref.watch(useFirebaseEmulatorProvider.future);
+  final useFirebaseEmulator =
+      await ref.watch(useFirebaseEmulatorProvider.future);
   final localHostString = await ref.watch(emulatorIpAddressProvider.future);
 
   final instance = ref.watch(baseFirestoreProvider);
@@ -28,7 +29,10 @@ final firestoreProvider = FutureProvider<FirebaseFirestore>((ref) async {
   return instance;
 });
 
-void _connectToFirebaseEmulator(FirebaseFirestore instance, String localHostString) {
+void _connectToFirebaseEmulator(
+  FirebaseFirestore instance,
+  String localHostString,
+) {
   // ignore: avoid_print
   print('Using $localHostString for Firestore');
   instance.useFirestoreEmulator(

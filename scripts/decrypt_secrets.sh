@@ -13,7 +13,7 @@ for config in `cat scripts/secrets-configs.txt`
 do
     filename=`echo $config | cut -d "|" -f 1`
     destination=`echo $config | cut -d "|" -f 2`
-    echo "/sops -d secrets/encrypted-$filename > $destination/$filename"
-    /sops -d secrets/encrypted-$filename > $destination/$filename
+    echo "/app/sops -d secrets/encrypted-$filename > $destination/$filename"
+    /app/sops -d secrets/encrypted-$filename > $destination/$filename
 done
 

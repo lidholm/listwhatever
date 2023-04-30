@@ -7,7 +7,12 @@ const collapsedBarHeight = 0.0;
 const expandedBarHeight = 140.0;
 
 class ListItemAppBar extends StatelessWidget {
-  const ListItemAppBar({super.key, required this.list, required this.isLoading, required this.expandedPercentage});
+  const ListItemAppBar({
+    required this.list,
+    required this.isLoading,
+    required this.expandedPercentage,
+    super.key,
+  });
   final ListOfThings? list;
   final bool isLoading;
   final double expandedPercentage;

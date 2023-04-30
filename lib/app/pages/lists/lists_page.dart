@@ -47,9 +47,9 @@ class ListsPage extends ConsumerWidget {
 
 class ListsPageInner extends ConsumerWidget {
   const ListsPageInner({
-    super.key,
     required this.lists,
     required this.isLoading,
+    super.key,
   });
 
   final List<ListOfThings> lists;
@@ -65,12 +65,14 @@ class ListsPageInner extends ConsumerWidget {
       title: 'Lists',
       actions: [
         AppBarAction(
+          key: const Key('newitem'),
           title: 'New item',
           icon: Icons.playlist_add_outlined,
           callback: () => addNewList(ref, context),
           overflow: false,
         ),
         AppBarAction(
+          key: const Key('sharecodedialog'),
           title: 'Go to share code',
           icon: Icons.add_card,
           callback: () => shareCodeDialog(context),
@@ -119,9 +121,9 @@ class ListsPageInner extends ConsumerWidget {
 
   void selectList(WidgetRef ref, BuildContext context, ListOfThings list) {
     // ref.read(selectedListIdProvider.notifier).state = list.publicListId;
-    print('clicking ${list.publicListId}');
+    //print('clicking ${list.publicListId}');
     ListItemsPageRoute(publicListId: list.publicListId!).push<void>(context);
-    print('lists_page.selectList: $list');
+    //print('lists_page.selectList: $list');
   }
 
   Future<void> addNewList(WidgetRef ref, BuildContext context) async {
@@ -129,8 +131,8 @@ class ListsPageInner extends ConsumerWidget {
   }
 
   Future<void> shareCodeDialog(BuildContext context) async {
-    final _publicListIdController = TextEditingController(text: '');
-    final _shareCodeController = TextEditingController(text: '');
+    final publicListIdController = TextEditingController(text: '');
+    final shareCodeController = TextEditingController(text: '');
     return showDialog(
       context: context,
       builder: (context) {
@@ -139,11 +141,11 @@ class ListsPageInner extends ConsumerWidget {
           content: Column(
             children: [
               TextField(
-                controller: _publicListIdController,
+                controller: publicListIdController,
                 decoration: const InputDecoration(hintText: 'Public list id'),
               ),
               TextField(
-                controller: _shareCodeController,
+                controller: shareCodeController,
                 decoration: const InputDecoration(hintText: 'Share code'),
               ),
             ],
@@ -154,10 +156,10 @@ class ListsPageInner extends ConsumerWidget {
               textColor: Colors.white,
               child: const Text('OK'),
               onPressed: () {
-                print(_publicListIdController.value.text);
+                //print(_publicListIdController.value.text);
                 ShareCodePageRoute(
-                  publicListId: _publicListIdController.value.text,
-                  shareCode: _shareCodeController.value.text,
+                  publicListId: publicListIdController.value.text,
+                  shareCode: shareCodeController.value.text,
                 ).go(context);
               },
             ),

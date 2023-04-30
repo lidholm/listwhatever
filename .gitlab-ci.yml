@@ -1,4 +1,4 @@
-image: lidholm/flutter:0.0.17
+image: lidholm/flutter:0.0.18
 
 cache:
   paths:
@@ -30,7 +30,7 @@ flutter-setup:
     - echo "PUB_CACHE"
     - echo $PUB_CACHE
     - flutter pub get
-    - flutter pub global activate junitreport
+    # - flutter pub global activate junitreport
   artifacts:
     paths:
       - .dart_tool
@@ -40,6 +40,8 @@ decrypt-sops:
   stage: setup
   script:
     - sh scripts/gitlabci/decryptSops.sh
+    - cat lib/bootstrap.dart
+    - cat lib/app/firebase/firebase_options.dart
   artifacts:
     paths:
       - android/app/google-services.json
@@ -67,6 +69,8 @@ lint_check:
   script:
     - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
     - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
+    - cat lib/bootstrap.dart
+    - cat lib/app/firebase/firebase_options.dart 
     - flutter analyze
 
 unit_tests:

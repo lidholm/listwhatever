@@ -20,6 +20,7 @@ mixin _$AppBarAction {
   IconData get icon => throw _privateConstructorUsedError;
   void Function() get callback => throw _privateConstructorUsedError;
   bool get overflow => throw _privateConstructorUsedError;
+  Key get key => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AppBarActionCopyWith<AppBarAction> get copyWith =>
@@ -33,7 +34,11 @@ abstract class $AppBarActionCopyWith<$Res> {
       _$AppBarActionCopyWithImpl<$Res, AppBarAction>;
   @useResult
   $Res call(
-      {String title, IconData icon, void Function() callback, bool overflow});
+      {String title,
+      IconData icon,
+      void Function() callback,
+      bool overflow,
+      Key key});
 }
 
 /// @nodoc
@@ -53,6 +58,7 @@ class _$AppBarActionCopyWithImpl<$Res, $Val extends AppBarAction>
     Object? icon = null,
     Object? callback = null,
     Object? overflow = null,
+    Object? key = null,
   }) {
     return _then(_value.copyWith(
       title: null == title
@@ -71,6 +77,10 @@ class _$AppBarActionCopyWithImpl<$Res, $Val extends AppBarAction>
           ? _value.overflow
           : overflow // ignore: cast_nullable_to_non_nullable
               as bool,
+      key: null == key
+          ? _value.key
+          : key // ignore: cast_nullable_to_non_nullable
+              as Key,
     ) as $Val);
   }
 }
@@ -84,7 +94,11 @@ abstract class _$$_AppBarActionCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String title, IconData icon, void Function() callback, bool overflow});
+      {String title,
+      IconData icon,
+      void Function() callback,
+      bool overflow,
+      Key key});
 }
 
 /// @nodoc
@@ -102,6 +116,7 @@ class __$$_AppBarActionCopyWithImpl<$Res>
     Object? icon = null,
     Object? callback = null,
     Object? overflow = null,
+    Object? key = null,
   }) {
     return _then(_$_AppBarAction(
       title: null == title
@@ -120,6 +135,10 @@ class __$$_AppBarActionCopyWithImpl<$Res>
           ? _value.overflow
           : overflow // ignore: cast_nullable_to_non_nullable
               as bool,
+      key: null == key
+          ? _value.key
+          : key // ignore: cast_nullable_to_non_nullable
+              as Key,
     ));
   }
 }
@@ -131,7 +150,8 @@ class _$_AppBarAction implements _AppBarAction {
       {required this.title,
       required this.icon,
       required this.callback,
-      required this.overflow});
+      required this.overflow,
+      required this.key});
 
   @override
   final String title;
@@ -141,10 +161,12 @@ class _$_AppBarAction implements _AppBarAction {
   final void Function() callback;
   @override
   final bool overflow;
+  @override
+  final Key key;
 
   @override
   String toString() {
-    return 'AppBarAction(title: $title, icon: $icon, callback: $callback, overflow: $overflow)';
+    return 'AppBarAction(title: $title, icon: $icon, callback: $callback, overflow: $overflow, key: $key)';
   }
 
   @override
@@ -157,11 +179,13 @@ class _$_AppBarAction implements _AppBarAction {
             (identical(other.callback, callback) ||
                 other.callback == callback) &&
             (identical(other.overflow, overflow) ||
-                other.overflow == overflow));
+                other.overflow == overflow) &&
+            (identical(other.key, key) || other.key == key));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, title, icon, callback, overflow);
+  int get hashCode =>
+      Object.hash(runtimeType, title, icon, callback, overflow, key);
 
   @JsonKey(ignore: true)
   @override
@@ -175,7 +199,8 @@ abstract class _AppBarAction implements AppBarAction {
       {required final String title,
       required final IconData icon,
       required final void Function() callback,
-      required final bool overflow}) = _$_AppBarAction;
+      required final bool overflow,
+      required final Key key}) = _$_AppBarAction;
 
   @override
   String get title;
@@ -185,6 +210,8 @@ abstract class _AppBarAction implements AppBarAction {
   void Function() get callback;
   @override
   bool get overflow;
+  @override
+  Key get key;
   @override
   @JsonKey(ignore: true)
   _$$_AppBarActionCopyWith<_$_AppBarAction> get copyWith =>

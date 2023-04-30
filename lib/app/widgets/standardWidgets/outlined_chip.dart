@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class OutlinedChip extends StatelessWidget {
   const OutlinedChip({
-    Key? key,
     required this.label,
     this.icon,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String label;
   final Widget? icon;
