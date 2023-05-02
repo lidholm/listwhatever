@@ -1,3 +1,5 @@
+import 'package:great_circle_distance_calculator/great_circle_distance_calculator.dart';
+import 'package:listanything/app/geocoder/latlong.dart';
 import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/pages/list_items/filters.dart';
 import 'package:listanything/app/pages/list_items/list_item.dart';
@@ -8,6 +10,8 @@ List<ListItem> filterListItems({
   required List<ListItem> allItems,
   required Filters filters,
   required bool listHasDates,
+  required bool listHasMap,
+  required LatLong? distanceFilterCenter,
 }) {
   final filteredItems = <ListItem>[];
   for (final item in allItems) {
@@ -15,6 +19,8 @@ List<ListItem> filterListItems({
       item: item,
       filters: filters,
       listHasDates: listHasDates,
+      listHasMap: listHasMap,
+      distanceFilterCenter: distanceFilterCenter,
     )) {
       filteredItems.add(item);
     }
@@ -26,13 +32,21 @@ bool matchesFilter({
   required ListItem item,
   required Filters filters,
   required bool listHasDates,
+  required bool listHasMap,
+  required LatLong? distanceFilterCenter,
 }) {
   return matchesDatesFilter(
         item: item,
         filters: filters,
         listHasDates: listHasDates,
       ) &&
-      matchesCategoriesFilter(item, filters);
+      matchesCategoriesFilter(item, filters) &&
+      matchesDistanceFilter(
+        listHasMap: listHasMap,
+        distanceFilterCenter: distanceFilterCenter,
+        item: item,
+        filters: filters,
+      );
 }
 
 bool matchesDatesFilter({
@@ -111,4 +125,24 @@ List<String?>? getFilterValuesForCategory(
   String categoryName,
 ) {
   return filters[categoryName];
+}
+
+bool matchesDistanceFilter({
+  required bool listHasMap,
+  required LatLong? distanceFilterCenter,
+  required ListItem item,
+  required Filters filters,
+}) {
+  if (item.latLong == null ||
+      filters.distance == null ||
+      distanceFilterCenter == null) return true;
+
+  final gcd = GreatCircleDistance.fromDegrees(
+    latitude1: item.latLong?.lat,
+    longitude1: item.latLong?.lng,
+    latitude2: distanceFilterCenter.lat,
+    longitude2: distanceFilterCenter.lng,
+  );
+  print('distance: ${gcd.haversineDistance()}');
+  return gcd.haversineDistance() < filters.distance!;
 }

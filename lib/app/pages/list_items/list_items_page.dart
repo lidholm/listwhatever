@@ -15,12 +15,14 @@ import 'package:listanything/app/pages/list_items/list_item.dart';
 import 'package:listanything/app/pages/list_items/list_items_list_view.dart';
 import 'package:listanything/app/pages/lists/list_of_things.dart';
 import 'package:listanything/app/pages/lists/list_repository_provider.dart';
+import 'package:listanything/app/pages/map/location_provider.dart';
 import 'package:listanything/app/pages/maps_view.dart';
 import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
 import 'package:listanything/app/widgets/standardWidgets/common_scaffold.dart';
 import 'package:listanything/app/widgets/standardWidgets/exception_widget.dart';
 import 'package:listanything/app/widgets/standardWidgets/shimmer.dart';
 import 'package:listanything/app/widgets/standardWidgets/shimmer_loading.dart';
+import 'package:location/location.dart';
 
 class ListItemsPage extends ConsumerWidget {
   const ListItemsPage({
@@ -32,34 +34,42 @@ class ListItemsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //print('ListItemsPage: getting items for $publicListId');
-    return ref.watch(filteredListItemsAndListProvider(publicListId)).when(
-          error: (e, st) => ExceptionWidget(e: e, st: st),
-          loading: () {
-            //print('ListItemsPage.Loading');
-            return ListItemsPageInner(
-              items: List.generate(
-                5,
-                (index) => const ListItem(
-                  name: '',
-                  categories: {},
-                ),
-              ),
-              isLoading: true,
-            );
-          },
-          data: (value) {
-            //print('here22');
-            final items = value.item1;
-            final list = value.item2;
-            //print('ListItemsPage.items: ${items.length}');
-            //print('ListItemsPage.list: $list');
-            return ListItemsPageInner(
-              items: sortItems(list, items),
-              isLoading: false,
-              list: list,
-            );
-          },
+
+    final filteredListItemsAndList =
+        ref.watch(filteredListItemsAndListProvider(publicListId));
+    final locationValue = ref.watch(locationProvider);
+
+    return combineTwoAsyncValues(filteredListItemsAndList, locationValue).when(
+      error: (e, st) => ExceptionWidget(e: e, st: st),
+      loading: () {
+        //print('ListItemsPage.Loading');
+        return ListItemsPageInner(
+          items: List.generate(
+            5,
+            (index) => const ListItem(
+              name: '',
+              categories: {},
+            ),
+          ),
+          isLoading: true,
+          location: null,
         );
+      },
+      data: (value) {
+        //print('here22');
+        final items = value.item1.item1;
+        final list = value.item1.item2;
+        final location = value.item2;
+        //print('ListItemsPage.items: ${items.length}');
+        //print('ListItemsPage.list: $list');
+        return ListItemsPageInner(
+          items: sortItems(list, items),
+          isLoading: false,
+          list: list,
+          location: location,
+        );
+      },
+    );
   }
 
   List<ListItem> sortItems(ListOfThings? list, List<ListItem> items) {
@@ -74,12 +84,14 @@ class ListItemsPageInner extends HookConsumerWidget {
   const ListItemsPageInner({
     required this.items,
     required this.isLoading,
+    required this.location,
     this.list,
     super.key,
   });
   final List<ListItem> items;
   final bool isLoading;
   final ListOfThings? list;
+  final LocationData? location;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -125,6 +137,7 @@ class ListItemsPageInner extends HookConsumerWidget {
           title: 'Filter',
           icon: filters.anySelectedFilters(
             listHasDates: list?.withDates ?? false,
+            listHasMap: list?.withMap ?? false,
           )
               ? Icons.filter_alt
               : Icons.filter_alt_off,
@@ -178,6 +191,7 @@ class ListItemsPageInner extends HookConsumerWidget {
                     isLoading: isLoading,
                     list: list!,
                     items: items,
+                    location: location!,
                   ),
           ),
         ),

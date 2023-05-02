@@ -1,3 +1,7 @@
+import 'package:another_xlider/another_xlider.dart';
+import 'package:another_xlider/models/handler.dart';
+import 'package:another_xlider/models/tooltip/tooltip.dart';
+import 'package:another_xlider/models/trackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,8 +12,15 @@ import 'package:listanything/app/pages/list_items/filters.dart';
 import 'package:listanything/app/pages/list_items/list_and_list_items_provider.dart';
 import 'package:listanything/app/pages/list_items/list_item.dart';
 import 'package:listanything/app/pages/lists/list_of_things.dart';
+import 'package:listanything/app/widgets/standardWidgets/border_with_header.dart';
 import 'package:listanything/app/widgets/standardWidgets/common_scaffold.dart';
 import 'package:listanything/app/widgets/standardWidgets/exception_widget.dart';
+
+const distanceFieldName = 'distance';
+const metersInMile = 1608;
+
+const distanceMin = 0.0;
+const distanceMax = 50.0;
 
 class FilterPage extends ConsumerWidget {
   const FilterPage({
@@ -86,9 +97,14 @@ class _FilterPageInnerState extends State<FilterPageInner> {
   bool autoValidate = true;
   bool readOnly = false;
   bool showSegmentedControl = true;
+  double distanceValue = distanceMax;
   final _formKey = GlobalKey<FormBuilderState>();
 
-  void _onChanged(dynamic val) => debugPrint(val.toString());
+  @override
+  void initState() {
+    super.initState();
+    distanceValue = (widget.filters.distance ?? 0) / metersInMile;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,112 +115,45 @@ class _FilterPageInnerState extends State<FilterPageInner> {
     final initialValue = <String, dynamic>{}
       ..addAll(widget.filters.categoryFilters)
       ..addAll(other);
-    final iconTexts = getIconTexts(widget.categories);
-    //print('iconTexts: $iconTexts');
 
     return CommonScaffold(
       title: 'Filter for ${widget.list?.name}',
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              FormBuilder(
-                key: _formKey,
-                onChanged: () {
-                  _formKey.currentState!.save();
-                  // debugPrint(_formKey.currentState!.value.toString());
-                },
-                autovalidateMode: AutovalidateMode.disabled,
-                skipDisabled: true,
-                initialValue: initialValue,
-                child: Column(
-                  children: <Widget>[
-                    const SizedBox(height: 16),
-                    if (widget.list?.withDates ?? false)
-                      DateFilter(formKey: _formKey),
-                    const SizedBox(height: 16),
-                    ...widget.categories.entries.expand((e) {
-                      final categoryName = e.key;
-                      final categoryValues = e.value;
+      body: getFormBuilderWrapper(initialValue),
+    );
+  }
 
-                      return [
-                        FormBuilderFilterChip<String>(
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          decoration: InputDecoration(
-                            labelText: categoryName,
-                          ),
-                          name: categoryName,
-                          selectedColor: Colors.orange.shade800,
-                          backgroundColor: Colors.orange.shade300,
-                          options: categoryValues
-                              .map(
-                                (c) => FormBuilderChipOption<String>(
-                                  value: c,
-                                  avatar: CircleAvatar(
-                                    backgroundColor: Colors.orange.shade800,
-                                    child: Text(
-                                      isSelected(categoryName, c) ? '' : c[0],
-                                    ),
-                                  ),
-                                ),
-                              )
-                              .toList(),
-                          onChanged: (values) {
-                            //print('onChanged');
-                            //print('values: $values');
-                            setState(() {
-                              for (final value in values ?? <String>[]) {
-                                iconTexts[categoryName]![value] = '';
-                              }
-                            });
-                            _onChanged(values);
-                          },
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        )
-                      ];
-                    })
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
-              Row(
+  Widget getFormBuilderWrapper(Map<String, dynamic> initialValue) {
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            FormBuilder(
+              key: _formKey,
+              onChanged: () {
+                _formKey.currentState!.save();
+                // debugPrint(_formKey.currentState!.value.toString());
+              },
+              autovalidateMode: AutovalidateMode.disabled,
+              skipDisabled: true,
+              initialValue: initialValue,
+              child: Column(
                 children: <Widget>[
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () {
-                        _formKey.currentState?.reset();
-                      },
-                      // color: Theme.of(context).colorScheme.secondary,
-                      child: const Text(
-                        'Reset',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState?.saveAndValidate() ?? false) {
-                          // debugPrint(_formKey.currentState?.value.toString());
-                          updateFilters(GoRouter.of(context));
-                        } else {
-                          // debugPrint(_formKey.currentState?.value.toString());
-                          debugPrint('validation failed');
-                        }
-                      },
-                      child: const Text(
-                        'Submit',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
+                  const SizedBox(height: 16),
+                  if (widget.list?.withDates ?? false)
+                    DateFilter(formKey: _formKey),
+                  if (widget.list?.withMap ?? false) ...[
+                    const SizedBox(height: 16),
+                    getDistanceFilter(),
+                  ],
+                  const SizedBox(height: 16),
+                  ...getCategoriesSections(),
+                  const SizedBox(height: 16),
+                  cancelAndSubmitButtons(),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -224,12 +173,15 @@ class _FilterPageInnerState extends State<FilterPageInner> {
     final categoryFilters = <String, List<String>>{};
     DateTime? startDate;
     DateTime? endDate;
+    double? maxDistance;
 
     for (final field in fields!.entries) {
       if (field.key == startDateFieldName) {
         startDate = field.value.value as DateTime?;
       } else if (field.key == endDateFieldName) {
         endDate = field.value.value as DateTime?;
+      } else if (field.key == distanceFieldName) {
+        maxDistance = (field.value.value as double) * metersInMile;
       } else {
         final values = field.value.value as List<String>?;
         if (values != null) {
@@ -242,21 +194,120 @@ class _FilterPageInnerState extends State<FilterPageInner> {
       categoryFilters: categoryFilters,
       startDate: startDate,
       endDate: endDate,
+      distance: maxDistance,
     );
     router.pop();
   }
 
-  Map<String, Map<String, String>> getIconTexts(
-    Map<String, Set<String>> filters,
-  ) {
-    return {
-      for (var entry in filters.entries) entry.key: getIconLetters(entry.value),
-    };
+  Widget getDistanceFilter() {
+    return BorderWithHeader(
+      title: 'Distance',
+      child: FormBuilderField(
+        name: distanceFieldName,
+        key: const Key(distanceFieldName),
+        builder: (FormFieldState<dynamic> field) {
+          return FlutterSlider(
+            values: [distanceValue],
+            max: distanceMax,
+            min: distanceMin,
+            handler: FlutterSliderHandler(
+              decoration: const BoxDecoration(),
+              child: Icon(
+                Icons.circle,
+                color: Colors.orange.shade800,
+                size: 31,
+              ),
+            ),
+            tooltip: FlutterSliderTooltip(
+              format: (s) => s == '$distanceMax' ? '∞' : s,
+            ),
+            trackBar: FlutterSliderTrackBar(
+              inactiveTrackBar: BoxDecoration(
+                color: Colors.black12,
+                border: Border.all(width: 3, color: Colors.orange.shade200),
+              ),
+              activeTrackBar: const BoxDecoration(color: Colors.orange),
+            ),
+            onDragCompleted: (handlerIndex, lowerValue, upperValue) {
+              setState(() {
+                distanceValue = lowerValue as double;
+                field.didChange(distanceValue);
+              });
+            },
+          );
+        },
+      ),
+    );
   }
 
-  Map<String, String> getIconLetters(Set<String> value) {
-    return {
-      for (var entry in value) entry: entry[0],
-    };
+  List<Widget> getCategoriesSections() {
+    return widget.categories.entries.expand((e) {
+      final categoryName = e.key;
+      final categoryValues = e.value;
+
+      return [
+        FormBuilderFilterChip<String>(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          decoration: InputDecoration(
+            labelText: categoryName,
+          ),
+          name: categoryName,
+          selectedColor: Colors.orange.shade800,
+          backgroundColor: Colors.orange.shade300,
+          options: categoryValues
+              .map(
+                (c) => FormBuilderChipOption<String>(
+                  value: c,
+                  avatar: CircleAvatar(
+                    backgroundColor: Colors.orange.shade800,
+                    child: Text(
+                      isSelected(categoryName, c) ? '' : c[0],
+                    ),
+                  ),
+                ),
+              )
+              .toList(),
+        ),
+        const SizedBox(
+          height: 16,
+        )
+      ];
+    }).toList();
+  }
+
+  Widget cancelAndSubmitButtons() {
+    return Row(
+      children: <Widget>[
+        Expanded(
+          child: OutlinedButton(
+            onPressed: () {
+              _formKey.currentState?.reset();
+            },
+            // color: Theme.of(context).colorScheme.secondary,
+            child: const Text(
+              'Reset',
+            ),
+          ),
+        ),
+        const SizedBox(width: 20),
+        Expanded(
+          child: ElevatedButton(
+            onPressed: () {
+              if (_formKey.currentState?.saveAndValidate() ?? false) {
+                // debugPrint(_formKey.currentState?.value.toString());
+                updateFilters(GoRouter.of(context));
+              } else {
+                // debugPrint(_formKey.currentState?.value.toString());
+                debugPrint('validation failed');
+              }
+            },
+            child: const Text(
+              'Submit',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }

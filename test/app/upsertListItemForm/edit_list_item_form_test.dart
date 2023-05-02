@@ -123,9 +123,13 @@ void main() {
     UpsertTestHelpers.verifyAddressHasText(tester, '321 State street');
     UpsertTestHelpers.verifyLatitudeHasText(tester, '-9.8');
     UpsertTestHelpers.verifyLongitudeHasText(tester, '7.65');
+
+    final now = DateTime.now();
+    final month = now.month < 10 ? '0${now.month}' : '${now.month}';
+    final date = DateTime.tryParse('${now.year}-$month-05 11:22:33');
     UpsertTestHelpers.verifyDateHasText(
       tester,
-      DateTime.tryParse('2023-04-05 11:22:33')!,
+      date!,
     );
     UpsertTestHelpers.verifyUrlsHaveTexts(tester, ['URL-1', '2nd url']);
     UpsertTestHelpers.verifyCategoriesHaveTexts(tester, {
