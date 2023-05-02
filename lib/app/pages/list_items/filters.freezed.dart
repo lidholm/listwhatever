@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Filters {
   Map<String, List<String>> get categoryFilters =>
       throw _privateConstructorUsedError;
+  double? get distance => throw _privateConstructorUsedError;
   DateTime? get startDate => throw _privateConstructorUsedError;
   DateTime? get endDate => throw _privateConstructorUsedError;
 
@@ -32,6 +33,7 @@ abstract class $FiltersCopyWith<$Res> {
   @useResult
   $Res call(
       {Map<String, List<String>> categoryFilters,
+      double? distance,
       DateTime? startDate,
       DateTime? endDate});
 }
@@ -50,6 +52,7 @@ class _$FiltersCopyWithImpl<$Res, $Val extends Filters>
   @override
   $Res call({
     Object? categoryFilters = null,
+    Object? distance = freezed,
     Object? startDate = freezed,
     Object? endDate = freezed,
   }) {
@@ -58,6 +61,10 @@ class _$FiltersCopyWithImpl<$Res, $Val extends Filters>
           ? _value.categoryFilters
           : categoryFilters // ignore: cast_nullable_to_non_nullable
               as Map<String, List<String>>,
+      distance: freezed == distance
+          ? _value.distance
+          : distance // ignore: cast_nullable_to_non_nullable
+              as double?,
       startDate: freezed == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -79,6 +86,7 @@ abstract class _$$_FiltersCopyWith<$Res> implements $FiltersCopyWith<$Res> {
   @useResult
   $Res call(
       {Map<String, List<String>> categoryFilters,
+      double? distance,
       DateTime? startDate,
       DateTime? endDate});
 }
@@ -94,6 +102,7 @@ class __$$_FiltersCopyWithImpl<$Res>
   @override
   $Res call({
     Object? categoryFilters = null,
+    Object? distance = freezed,
     Object? startDate = freezed,
     Object? endDate = freezed,
   }) {
@@ -102,6 +111,10 @@ class __$$_FiltersCopyWithImpl<$Res>
           ? _value._categoryFilters
           : categoryFilters // ignore: cast_nullable_to_non_nullable
               as Map<String, List<String>>,
+      distance: freezed == distance
+          ? _value.distance
+          : distance // ignore: cast_nullable_to_non_nullable
+              as double?,
       startDate: freezed == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -119,6 +132,7 @@ class __$$_FiltersCopyWithImpl<$Res>
 class _$_Filters extends _Filters {
   _$_Filters(
       {required final Map<String, List<String>> categoryFilters,
+      this.distance,
       this.startDate,
       this.endDate})
       : _categoryFilters = categoryFilters,
@@ -133,13 +147,15 @@ class _$_Filters extends _Filters {
   }
 
   @override
+  final double? distance;
+  @override
   final DateTime? startDate;
   @override
   final DateTime? endDate;
 
   @override
   String toString() {
-    return 'Filters(categoryFilters: $categoryFilters, startDate: $startDate, endDate: $endDate)';
+    return 'Filters(categoryFilters: $categoryFilters, distance: $distance, startDate: $startDate, endDate: $endDate)';
   }
 
   @override
@@ -149,6 +165,8 @@ class _$_Filters extends _Filters {
             other is _$_Filters &&
             const DeepCollectionEquality()
                 .equals(other._categoryFilters, _categoryFilters) &&
+            (identical(other.distance, distance) ||
+                other.distance == distance) &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate));
@@ -158,6 +176,7 @@ class _$_Filters extends _Filters {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_categoryFilters),
+      distance,
       startDate,
       endDate);
 
@@ -171,12 +190,15 @@ class _$_Filters extends _Filters {
 abstract class _Filters extends Filters {
   factory _Filters(
       {required final Map<String, List<String>> categoryFilters,
+      final double? distance,
       final DateTime? startDate,
       final DateTime? endDate}) = _$_Filters;
   _Filters._() : super._();
 
   @override
   Map<String, List<String>> get categoryFilters;
+  @override
+  double? get distance;
   @override
   DateTime? get startDate;
   @override

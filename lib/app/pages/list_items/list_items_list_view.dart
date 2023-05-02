@@ -51,6 +51,7 @@ class ListItemsListView extends HookWidget {
           ),
           if (filters.anySelectedFilters(
             listHasDates: list?.withDates ?? false,
+            listHasMap: list?.withMap ?? false,
           )) ...[
             const Static(title: 'Filters'),
             SelectedFilters(filters: filters),

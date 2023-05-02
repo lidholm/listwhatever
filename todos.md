@@ -22,11 +22,16 @@
   - [x] Fix header in Filter view page
   - [x] Remove title in app bar for list items page and use SliverAppBar instead
 - [x] Active filters on the list item page at the top
-- [ ] Show current location on map
-- [ ] Filter on map distance (if available)
-  - [ ] From current position
+- [x] Show current location on map
+- [x] Filter on map distance (if available)
+  - [x] From current position
   - [ ] From selected address
 - [ ] Names and stuff for a profile, that will show when sharing
 - [ ] Add editing capability for sharing
 - [ ] Clean up directories, espectially filters
-- [ ] Anonymous account and merge when logging
+- [ ] Anonymous account and merge when logging in
+- [ ] Deploy to Google play
+- [ ] Deploy to TestFlight (Codemagic)
+- [ ] Deploy to Firebase App Distribution
+- [ ] Settings with distance in km/miles
+

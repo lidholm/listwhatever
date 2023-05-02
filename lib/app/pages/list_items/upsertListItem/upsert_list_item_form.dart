@@ -808,7 +808,6 @@ class UpsertListItemForm extends HookConsumerWidget {
         UpsertListItemFormKeyConstants.formKey.currentState?.reset();
         print('AddEditListItem: pop once');
         getGoRouter(context).pop();
-        print('asd');
       },
       child: const Text(
         'Cancel',

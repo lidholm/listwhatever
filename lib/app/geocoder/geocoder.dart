@@ -44,7 +44,7 @@ class Geocoder {
           formattedAddress:
               '9999 Mira Mesa Blvd Suite 102, San Diego, CA 92131, USA',
           geometry: Geometry(
-            location: const LatLong(lat: 32.9163275, lng: -117.1116371),
+            location: const LatLong(lat: 32.726437, lng: -117.138244),
             locationType: 'ROOFTOP',
             viewport: Bounds(
               northeast:

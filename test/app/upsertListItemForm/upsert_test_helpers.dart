@@ -150,7 +150,7 @@ class UpsertTestHelpers {
       name: 'b',
       type: ListType.other,
       userId: 'c',
-      publicListId: 'asd',
+      publicListId: 'pub123',
       withDates: withDates,
       withTimes: withTimes,
       withMap: withMap,
@@ -162,6 +162,9 @@ class UpsertTestHelpers {
     String? name,
     Map<String, List<String>>? categories,
   }) {
+    final now = DateTime.now();
+    final month = now.month < 10 ? '0${now.month}' : '${now.month}';
+    final date = DateTime.tryParse('${now.year}-$month-05 11:22:33');
     return ListItem(
       id: id,
       name: name ?? 'One list item',
@@ -169,7 +172,7 @@ class UpsertTestHelpers {
       info: 'A little bit of information',
       address: '321 State street',
       latLong: const LatLong(lat: -9.8, lng: 7.65),
-      datetime: DateTime.tryParse('2023-04-05 11:22:33'),
+      datetime: date,
       urls: ['URL-1', '2nd url'],
     );
   }
