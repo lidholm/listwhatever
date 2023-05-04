@@ -138,3 +138,10 @@ test/firestore/node_modules
 test/firestore/*.spec.js
 credentials.json
 firebaseExportCredentials.json
+
+/secrets/*
+!/secrets/encrypted-*
+key.txt
+bundletool-all.jar
+app-production-release.aab
+google_play_store_service_account.json

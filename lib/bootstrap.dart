@@ -5,14 +5,19 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 // import 'package:firebase_ui_oauth_apple/firebase_ui_oauth_apple.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:listanything/app/firebase/firebase_options.dart';
 
+final repaintBoundaryKey = GlobalKey();
+
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
-  FlutterError.onError = (details) {
-    log(details.exceptionAsString(), stackTrace: details.stack);
-  };
+  if (!kIsWeb) {
+    FlutterError.onError = (details) {
+      log(details.exceptionAsString(), stackTrace: details.stack);
+    };
+  }
 
 // Requires that the Firebase Auth emulator is running locally
 // e.g via `melos run firebase:emulator`.
@@ -33,7 +38,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
 
   runApp(
     ProviderScope(
-      child: await builder(),
+      child: RepaintBoundary(key: repaintBoundaryKey, child: await builder()),
     ),
   );
   // await runZonedGuarded(
