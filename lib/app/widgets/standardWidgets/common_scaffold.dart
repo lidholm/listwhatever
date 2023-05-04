@@ -1,8 +1,15 @@
+import 'dart:io';
+import 'dart:ui' as ui;
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
 import 'package:listanything/app/widgets/standardWidgets/common_app_bar.dart';
+import 'package:listanything/bootstrap.dart';
 
-class CommonScaffold extends StatelessWidget {
+class CommonScaffold extends StatefulWidget {
   const CommonScaffold({
     required this.title,
     required this.body,
@@ -18,16 +25,31 @@ class CommonScaffold extends StatelessWidget {
   final Drawer? drawer;
 
   @override
+  State<CommonScaffold> createState() => _CommonScaffoldState();
+}
+
+class _CommonScaffoldState extends State<CommonScaffold> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: title == null
+      appBar: widget.title == null
           ? null
           : CommonAppBar(
-              title: title!,
-              titleWidget: titleWidget,
-              actions: actions ?? [],
+              title: widget.title!,
+              titleWidget: widget.titleWidget,
+              actions: (widget.actions ?? [])
+                ..addAll([
+                  if (Platform.isAndroid && kDebugMode)
+                    AppBarAction(
+                      title: 'Take screenshot',
+                      icon: Icons.screenshot,
+                      key: const Key('takescreenshot'),
+                      overflow: true,
+                      callback: _takeScreenshot,
+                    )
+                ]),
             ),
-      drawer: drawer,
+      drawer: widget.drawer,
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -42,8 +64,41 @@ class CommonScaffold extends StatelessWidget {
             ],
           ),
         ),
-        child: body,
+        child: widget.body,
       ),
     );
+  }
+
+  // This function will be triggered when the button is pressed
+  Future<void> _takeScreenshot() async {
+    final boundary = repaintBoundaryKey.currentContext!.findRenderObject()
+        as RenderRepaintBoundary?;
+
+    final scaffoldMessengerState = ScaffoldMessenger.of(context);
+    // ignore: inference_failure_on_instance_creation
+    await Future.delayed(const Duration(seconds: 1));
+
+    final image = await boundary!.toImage();
+    final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    if (byteData != null) {
+      final pngBytes = byteData.buffer.asUint8List();
+
+      // Saving the screenshot to the gallery
+      final result = await ImageGallerySaver.saveImage(
+        Uint8List.fromList(pngBytes),
+        quality: 90,
+        name: 'screenshot-${DateTime.now()}.png',
+      );
+
+      print(result);
+
+      // Find the ScaffoldMessenger in the widget tree
+      // and use it to show a SnackBar.
+      scaffoldMessengerState.showSnackBar(
+        const SnackBar(
+          content: Text('Took screenshot'),
+        ),
+      );
+    }
   }
 }

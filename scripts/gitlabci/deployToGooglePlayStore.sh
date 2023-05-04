@@ -9,9 +9,9 @@ alias bundletool='java -jar /bundletool-all.jar'
 cd android
 echo "===---===="
 echo "===---===="
-ls -l /app/release.aab
+ls -l /builds/lidholm/listanything/app-production-release.aab
 
-java -jar /bundletool-all.jar dump manifest --bundle /app/release.aab --xpath /manifest/@android:versionCode
+java -jar /bundletool-all.jar dump manifest --bundle /builds/lidholm/listanything/app-production-release.aab --xpath /manifest/@android:versionCode
 
-bundle exec fastlane upload_to_play_store --aab ../release.aab --track internal
+bundle exec fastlane upload_to_play_store --aab /builds/lidholm/listanything/app-production-release.aab --track internal
 echo "===---===="

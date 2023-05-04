@@ -32,6 +32,6 @@
 - [ ] Anonymous account and merge when logging in
 - [ ] Deploy to Google play
 - [ ] Deploy to TestFlight (Codemagic)
-- [ ] Deploy to Firebase App Distribution
+- [x] Deploy to Firebase App Distribution
 - [ ] Settings with distance in km/miles
 

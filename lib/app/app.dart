@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listanything/app/navigation/current_user_provider.dart';
+import 'package:listanything/app/navigation/routes/about_page_route.dart';
 import 'package:listanything/app/navigation/routes/list_page_route.dart';
 import 'package:listanything/app/navigation/routes/loading_user_route.dart';
+import 'package:listanything/app/navigation/routes/privacy_policy_page_route.dart';
 import 'package:listanything/app/navigation/routes/routes.dart';
 import 'package:listanything/app/navigation/routes/sign_in_screen_route.dart';
 
 final providers = [EmailAuthProvider()];
-// GoRouter configuration
+
 final routerProvider = Provider(
   (ref) => GoRouter(
     initialLocation: ListsPageRoute().location,
@@ -21,6 +23,19 @@ final routerProvider = Provider(
       final userChanges = ref.watch(userChangesProvider);
 
       //print('userChanges: ${userChanges.asData?.value?.email} - ${userChanges.asData?.value?.uid}');
+
+      final dontRequireLogin = [
+        const PrivacyPolicyPageRoute().location,
+        const AboutPageRoute().location
+      ];
+
+      if (dontRequireLogin.contains(state.location)) {
+        return null;
+      }
+
+      if (state.location == WelcomeRoute().location) {
+        return ListsPageRoute().location;
+      }
 
       final path = userChanges.when(
         error: (e, st) => '/error_loading_user',

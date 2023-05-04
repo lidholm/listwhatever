@@ -29,6 +29,7 @@ dependencies:
   great_circle_distance_calculator: ^1.0.4
   hooks_riverpod: ^2.3.4
   http: ^0.13.5
+  image_gallery_saver: ^1.7.1
   intl: ^0.17.0
   latlong2: ^0.8.1
   location: ^4.4.0
@@ -46,6 +47,8 @@ dev_dependencies:
     sdk: flutter
   freezed: ^2.2.0
   go_router_builder: ^1.1.1
+  integration_test:
+    sdk: flutter
   json_serializable: ^6.5.4
   mocktail: ^0.3.0
   very_good_analysis: ^4.0.0+1

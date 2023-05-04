@@ -11,5 +11,12 @@ alias exportProductionData="npx -p node-firestore-import-export firestore-export
 alias importProductionData="npx -p node-firestore-import-export firestore-import -a firebaseExportCredentials.json -b firestoreData.json"
 alias importProductionDataToEmulator="export FIRESTORE_EMULATOR_HOST=localhost:8080 && npx -p node-firestore-import-export firestore-import -a firebaseExportCredentials.json -b firestoreData.local.json"
 
+runIntegrationTestsOnWeb () {
+    for src in integration_test/*; do
+        echo $src
+        flutter drive --driver=test_driver/integration_test.dart --target=$src  -d chrome
+    done
+}
+
 # alias killPortsWindows="netstat -ano | findstr :8085" && taskkill /PID <PID> /F
 # alias killPortsMac="lsof -i :5000" && kill -9 18510

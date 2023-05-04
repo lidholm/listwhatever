@@ -56,6 +56,8 @@ decrypt-sops:
       - lib/app/firebase/firebase_options.dart
       - ios/firebase_app_id_file.json
       - .firebase-deploy-service-account.json
+      - android/app/listanything-upload-keystore.jks
+      - android/key.properties
 
     expire_in: 2700 seconds #45 minutes
 
@@ -109,20 +111,24 @@ firebase_functions_tests:
       - test/firestore/firestore-debug.log
     expire_in: 2700 seconds #45 minutes
 
-# buildReleaseBundle:
-#     stage: build
-#     only:
-#         - main
-#     script:
-#         - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
-#         - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
-#         - flutter build appbundle --release --flavor production -t lib/main_production.dart
-#         - java -jar /bundletool-all.jar dump manifest --bundle build/app/outputs/bundle/productionRelease/app-production-release.aab --xpath /manifest/@android:versionCode
-#         - cp build/app/outputs/bundle/productionRelease/app-production-release.aab .
-#     artifacts:
-#         paths:
-#           - "app-production-release.aab"
-#         expire_in: 2 days
+buildReleaseBundle:
+    stage: build
+    only:
+        - main
+    script:
+        - pwd
+        - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
+        - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
+        - grep storeFile android/key.properties
+        - flutter build appbundle --release --flavor production -t lib/main_production.dart
+        - java -jar /bundletool-all.jar dump manifest --bundle build/app/outputs/bundle/productionRelease/app-production-release.aab --xpath /manifest/@android:versionCode
+        - cp build/app/outputs/bundle/productionRelease/app-production-release.aab .
+        - pwd
+        - ls
+    artifacts:
+        paths:
+          - "app-production-release.aab"
+        expire_in: 2 days
 
 # buildDebugApk:
 #     stage: build
@@ -153,8 +159,8 @@ buildWebBundle:
 
 # runIntegrationTest:
 #     stage: build
-#     only:
-#         - main
+#     # only:
+#     #     - main
 #     script:
 #         - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
 #         - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
@@ -172,15 +178,40 @@ buildWebBundle:
 #           - "app-development-debug-androidTest.apk"
 #         expire_in: 2 days
 
-# deployToGooglePlayStore:
-#     stage: deploy
-#     environment:
-#         name: production/google-play-store
-#         url: https://play.google.com/store/apps/details?id=com.anywhostudios.listanything
-#     only:
-#         - main
-#     script:
-#         - sh scripts/gitlabci/deployToGooglePlayStore.sh
+deployToGooglePlayStore:
+    stage: deploy
+    environment:
+        name: production/google-play-store
+        url: https://play.google.com/store/apps/details?id=com.anywhostudios.listanything
+    only:
+        - main
+    script:
+        - sh scripts/gitlabci/deployToGooglePlayStore.sh
+
+
+deployAndroidBundleToFirebase:
+  stage: deploy
+  environment:
+    name: production/web
+  only:
+    - main
+  script:
+    - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
+    - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
+    - pwd
+    - ls
+    - source .prod.env
+    - SDK=`grep mobilesdk_app_id android/app/google-services.json`
+    - FIRST=`echo $SDK | head -1`
+    - APP_ID=`echo $FIRST | cut -d '"' -f 4`
+    - echo $APP_ID | head -c 5
+    - echo "===---===="
+    - head -c  15 /builds/lidholm/listanything/firebase-deploy-service-account.json
+    - export GOOGLE_APPLICATION_CREDENTIALS=/builds/lidholm/listanything/firebase-deploy-service-account.json
+    - echo ""
+    - echo "===---===="
+    - ls -l app-production-release.aab
+    - firebase appdistribution:distribute app-production-release.aab --app $APP_ID  --testers-file deploy/android/testers.txt --release-notes-file "deploy/release_notes.txt"
 
 deployToFirebaseHostingAndRules:
   stage: deploy
@@ -192,7 +223,6 @@ deployToFirebaseHostingAndRules:
   script:
     - pwd
     - source .prod.env
-    - echo $FIREBASE_TOKEN | head -c 10
     - head -c  15 /builds/lidholm/listanything/firebase-deploy-service-account.json
     - export GOOGLE_APPLICATION_CREDENTIALS=/builds/lidholm/listanything/firebase-deploy-service-account.json
     - head -c 100 /builds/lidholm/listanything/firebase-deploy-service-account.json
