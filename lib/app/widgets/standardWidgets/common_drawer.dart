@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:listanything/app/common_theme_data.dart';
 import 'package:listanything/app/firebase/firebase_auth_provider.dart';
 import 'package:listanything/app/navigation/routes/about_page_route.dart';
 import 'package:listanything/app/navigation/routes/privacy_policy_page_route.dart';
@@ -16,8 +17,8 @@ class CommonDrawer extends StatelessWidget {
       padding: EdgeInsets.zero,
       children: [
         DrawerHeader(
-          decoration: BoxDecoration(
-            color: Colors.orange[800],
+          decoration: const BoxDecoration(
+            color: secondaryButtonColor,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -31,9 +32,9 @@ class CommonDrawer extends StatelessWidget {
           ),
         ),
         ListTile(
-          leading: Icon(
+          leading: const Icon(
             Icons.person,
-            color: Colors.orange[800],
+            color: mainColor,
           ),
           title: const Text('Profile'),
           onTap: () {
@@ -41,9 +42,9 @@ class CommonDrawer extends StatelessWidget {
           },
         ),
         ListTile(
-          leading: Icon(
+          leading: const Icon(
             Icons.info,
-            color: Colors.orange[800],
+            color: mainColor,
           ),
           title: const Text('About'),
           onTap: () {
@@ -51,9 +52,9 @@ class CommonDrawer extends StatelessWidget {
           },
         ),
         ListTile(
-          leading: Icon(
+          leading: const Icon(
             Icons.text_snippet_outlined,
-            color: Colors.orange[800],
+            color: mainColor,
           ),
           title: const Text('Privacy Policy'),
           onTap: () {
@@ -63,9 +64,9 @@ class CommonDrawer extends StatelessWidget {
         Consumer(
           builder: (BuildContext context, WidgetRef ref, Widget? child) {
             return ListTile(
-              leading: Icon(
+              leading: const Icon(
                 Icons.logout,
-                color: Colors.orange[800],
+                color: mainColor,
               ),
               title: const Text('Log out'),
               onTap: () async {

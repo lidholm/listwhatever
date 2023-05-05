@@ -5,7 +5,38 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:listanything/app/geocoder/latlong.dart';
+import 'package:logger/logger.dart';
 import 'package:tuple/tuple.dart';
+
+class ConsoleAndFileOutput extends LogOutput {
+  @override
+  void output(OutputEvent event) {
+    for (final line in event.lines) {
+      print(line);
+    }
+  }
+}
+
+class MyPrinter extends LogPrinter {
+  @override
+  List<String> log(LogEvent event) {
+    return ['${event.time} ${event.level}\n  ${event.message}'];
+  }
+}
+
+final logger = Logger(
+  // printer: PrettyPrinter(
+  //     methodCount: 1, // number of method calls to be displayed
+  //     errorMethodCount: 2, // number of method calls if stacktrace is provided
+  //     lineLength: 120, // width of the output
+  //     colors: true, // Colorful log messages
+  //     printEmojis: true, // Print an emoji for each log message
+  //     printTime: true // Should each log print contain a timestamp
+  //     ),
+  printer: MyPrinter(),
+  output: ConsoleAndFileOutput(),
+  level: Level.debug,
+);
 
 Iterable<MapEntry<int, T>> mapIndexed<T>(
   Iterable<T> items,
@@ -42,7 +73,6 @@ DateTime getCurrentDate() {
 
 String formatReadableDate(DateTime d) {
   final diff = d.difference(DateTime.now());
-  //print(diff);
   if (diff > const Duration(days: 365)) {
     return readableDateFormatterWithYear.format(d);
   } else {
@@ -75,35 +105,16 @@ AsyncValue<Tuple2<S, T>> combineTwoAsyncValues<S, T>(
   AsyncValue<S> firstValue,
   AsyncValue<T> secondValue,
 ) {
-  return firstValue.when(
-    data: (S s) {
-      return secondValue.when(
-        loading: () {
-          print('Loading ...');
-          return const AsyncValue.loading();
-        },
-        error: (e, st) {
-          print(e);
-          print(st);
-          return AsyncValue.error(e, st);
-        },
-        data: (T t) => AsyncValue.data(
-          Tuple2(
-            s,
-            t,
-          ),
-        ),
-      );
-    },
-    loading: () {
-      print('Loading...');
-      return const AsyncValue.loading();
-    },
-    error: (e, st) {
-      print(e);
-      print(st);
-      return AsyncValue.error(e, st);
-    },
+  if (firstValue is AsyncError) {
+    return AsyncValue.error(firstValue.error!, firstValue.stackTrace!);
+  } else if (secondValue is AsyncError) {
+    return AsyncValue.error(secondValue.error!, secondValue.stackTrace!);
+  } else if (firstValue is AsyncLoading || secondValue is AsyncLoading) {
+    return const AsyncValue.loading();
+  }
+
+  return AsyncValue.data(
+    Tuple2(firstValue.asData!.value, secondValue.asData!.value),
   );
 }
 

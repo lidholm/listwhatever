@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:great_circle_distance_calculator/great_circle_distance_calculator.dart';
 import 'package:listanything/app/geocoder/latlong.dart';
+import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/pages/list_items/filter_list_items.dart';
 import 'package:listanything/app/pages/list_items/filters.dart';
 import 'package:listanything/app/pages/list_items/list_item.dart';
@@ -320,15 +321,16 @@ void main() {
         longitude2: lon2,
       );
 
-      print(
-        'Distance from location 1 to 2 using the Haversine formula is: ${gcd.haversineDistance()} meters',
-      );
-      print(
-        'Distance from location 1 to 2 using the Spherical Law of Cosines is: ${gcd.sphericalLawOfCosinesDistance()} meters',
-      );
-      print(
-        'Distance from location 1 to 2 using the Vicenty`s formula is: ${gcd.vincentyDistance()} meters',
-      );
+      logger
+        ..d(
+          'Distance from location 1 to 2 using the Haversine formula is: ${gcd.haversineDistance()} meters',
+        )
+        ..d(
+          'Distance from location 1 to 2 using the Spherical Law of Cosines is: ${gcd.sphericalLawOfCosinesDistance()} meters',
+        )
+        ..d(
+          'Distance from location 1 to 2 using the Vicenty`s formula is: ${gcd.vincentyDistance()} meters',
+        );
     });
 
     test('return the item when distance is within filter', () {

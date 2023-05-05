@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:listanything/app/common_theme_data.dart';
 import 'package:listanything/app/widgets/standardWidgets/outlined_text.dart';
 
 class ExpandedAppBarContent extends StatelessWidget {
@@ -48,7 +49,7 @@ class ExpandedAppBarContent extends StatelessWidget {
                   style: const TextStyle(
                     fontSize: 64,
                     fontWeight: FontWeight.bold,
-                    color: Colors.orange,
+                    color: mainColor,
                     letterSpacing: 3,
                   ),
                 ),

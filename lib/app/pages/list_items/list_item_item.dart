@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:listanything/app/common_theme_data.dart';
 import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/navigation/routes/edit_list_item_route.dart';
 import 'package:listanything/app/navigation/routes/list_item_details_page_route.dart';
@@ -28,9 +29,9 @@ class ListItemItem extends ConsumerWidget {
       isLoading: isLoading,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: Colors.orange[800],
+          color: shadedMainColor,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: const Color.fromARGB(255, 249, 171, 37)),
+          border: Border.all(color: secondaryButtonColor, width: 4),
         ),
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -54,7 +55,7 @@ class ListItemItem extends ConsumerWidget {
                   children: [
                     Text(
                       item.name,
-                      style: const TextStyle(fontSize: 24, color: Colors.white),
+                      style: const TextStyle(fontSize: 24, color: textColor),
                     ),
                     Text(
                       item.datetime != null
@@ -62,7 +63,7 @@ class ListItemItem extends ConsumerWidget {
                           : '',
                       style: TextStyle(
                         fontSize: 16,
-                        color: Colors.white.withAlpha(200),
+                        color: textColor.withAlpha(200),
                       ),
                     ),
                   ],
@@ -71,7 +72,7 @@ class ListItemItem extends ConsumerWidget {
                   onPressed: () {},
                   icon: const Icon(
                     Icons.keyboard_arrow_right_rounded,
-                    color: Colors.white,
+                    color: textColor,
                   ),
                 )
               ],

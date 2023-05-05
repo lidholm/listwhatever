@@ -7,6 +7,7 @@ import 'package:listanything/app/geocoder/geocoderresult.dart';
 import 'package:listanything/app/geocoder/geometry.dart';
 import 'package:listanything/app/geocoder/latlong.dart';
 import 'package:listanything/app/geocoder/pluscode.dart';
+import 'package:listanything/app/helpers/constants.dart';
 
 const useRealEndpoint = true;
 
@@ -27,7 +28,7 @@ class Geocoder {
         final data = response.body; //.stream.bytesToString();
         final fetch = json.decode(data) as Map<String, dynamic>;
         final results = fetch['results'] as List<dynamic>;
-        //print('results: $results');
+        logger.d('results: $results');
         final geoResults = <GeocoderResult>[];
         for (final result in results) {
           final json = result as Map<String, dynamic>;

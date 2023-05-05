@@ -350,7 +350,7 @@ class UpsertListItemForm extends HookConsumerWidget {
                       list.publicListId!,
                       listItem?.id ?? '',
                     );
-              print('result: $result');
+              logger.d('result: $result');
 
               UpsertListItemFormKeyConstants
                   .formKey
@@ -561,7 +561,6 @@ class UpsertListItemForm extends HookConsumerWidget {
                   '',
             };
             // urlIndices.value = [...urlIndices.value, urlIndices.value.length];
-            //print('urlIndices: ${urlIndices.value}');
           },
           child: const Text('Add new URL'),
         ),
@@ -806,7 +805,7 @@ class UpsertListItemForm extends HookConsumerWidget {
       key: UpsertListItemFormKeyConstants.cancelButtonKey,
       onPressed: () {
         UpsertListItemFormKeyConstants.formKey.currentState?.reset();
-        print('AddEditListItem: pop once');
+        logger.d('AddEditListItem: pop once');
         getGoRouter(context).pop();
       },
       child: const Text(
@@ -822,7 +821,6 @@ class UpsertListItemForm extends HookConsumerWidget {
         if (UpsertListItemFormKeyConstants.formKey.currentState
                 ?.saveAndValidate() ??
             false) {
-          //print('values: ${_formKey.currentState?.value.toString()}');
           saveListItem(
             getGoRouter(context),
             list.publicListId!,
@@ -834,8 +832,9 @@ class UpsertListItemForm extends HookConsumerWidget {
               .formKey.currentState?.fields.values
               .where((element) => element.hasError)
               .toList();
-          print('errorFields: $errorFields');
-          print('validation failed');
+          logger
+            ..d('errorFields: $errorFields')
+            ..d('validation failed');
         }
       },
       child: const Text(
@@ -875,13 +874,13 @@ class UpsertListItemForm extends HookConsumerWidget {
         .map((e) => e.value)
         .map((e) => e.value as String)
         .toList();
-    //print('categoryNames: $categoryNames');
+    logger.d('categoryNames: $categoryNames');
     final categoryValues = fields.entries
         .where((e) => e.key.startsWith('categoryValue-'))
         .map((e) => e.value)
         .map((e) => (e.value as String).split(', '))
         .toList();
-    //print('categoryValues: $categoryValues');
+    logger.d('categoryValues: $categoryValues');
     final address =
         fields[UpsertListItemFormNameFieldConstants.addressFieldName]?.value
             as String?;
@@ -920,7 +919,7 @@ class UpsertListItemForm extends HookConsumerWidget {
         searchPhrase: searchPhrase,
       );
       final refId = await repo.createItem(item: listItem);
-      print('Added $refId');
+      logger.d('Added $refId');
     } else {
       final newListItem = listItem.copyWith(
         name: name,
@@ -934,13 +933,8 @@ class UpsertListItemForm extends HookConsumerWidget {
       );
       final refId =
           await repo.updateItem(itemId: newListItem.id!, item: newListItem);
-      print('Updated $refId');
+      logger.d('Updated $refId');
     }
-    //print('AddEditListItem: pop once');
-    // if ((list?.withMap ?? false) && listItem == null) {
-    //   ref.read(selectedAddressProvider.notifier).state = null;
-    //   //print('AddEditListItem: pop twice');
-    // }
     router.pop();
   }
 

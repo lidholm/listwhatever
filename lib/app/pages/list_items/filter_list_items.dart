@@ -55,11 +55,11 @@ bool matchesDatesFilter({
   required bool listHasDates,
 }) {
   if (!listHasDates) {
-    //print("List doesn't have dates, so a match");
+    logger.d("List doesn't have dates, so a match");
     return true;
   }
   if (filters.startDate == null && filters.endDate == null) {
-    //print('no filters, so a match');
+    logger.d('no filters, so a match');
     return true;
   }
   if (item.datetime == null) {
@@ -77,12 +77,12 @@ bool matchesCategoriesFilter(ListItem item, Filters filters) {
     and the filter can say, give me either 'italian' food or 'meditarrean' food
     */
   if (filters.categoryFilters.values.expand((e) => e).isEmpty) {
-    //print('no filters, so a match');
+    logger.d('no filters, so a match');
     return true;
   }
   if (filters.categoryFilters.values.expand((e) => e).isNotEmpty &&
       item.categories.isEmpty) {
-    //print("filters but no categories, so can't be a match");
+    logger.d("filters but no categories, so can't be a match");
     return false;
   }
   // items without a date set will match even if a start or end date has been set
@@ -143,6 +143,6 @@ bool matchesDistanceFilter({
     latitude2: distanceFilterCenter.lat,
     longitude2: distanceFilterCenter.lng,
   );
-  print('distance: ${gcd.haversineDistance()}');
+  logger.d('distance: ${gcd.haversineDistance()}');
   return gcd.haversineDistance() < filters.distance!;
 }

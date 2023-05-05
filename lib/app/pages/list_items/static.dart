@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:listanything/app/common_theme_data.dart';
 
 class Static extends StatelessWidget {
   const Static({
@@ -14,8 +15,8 @@ class Static extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
           child: Text(
             title,
-            style: TextStyle(
-              color: Colors.orange.shade800,
+            style: const TextStyle(
+              color: mainColor,
               fontSize: 24,
             ),
           ),

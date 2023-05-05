@@ -5,14 +5,12 @@ import 'package:listanything/app/pages/list_items/filter_list_items.dart';
 import 'package:listanything/app/pages/list_items/filter_provider.dart';
 import 'package:listanything/app/pages/list_items/list_item.dart';
 import 'package:listanything/app/pages/list_items/list_items_provider.dart';
-import 'package:listanything/app/pages/lists/list_of_things.dart';
 import 'package:listanything/app/pages/lists/lists_provider.dart';
 import 'package:listanything/app/pages/map/location_provider.dart';
-import 'package:tuple/tuple.dart';
 
-final _filteredListItemsProvider =
+final filteredListItemsProvider =
     Provider.family<AsyncValue<List<ListItem>>, String>((ref, publicListId) {
-  //print('filteredListIemsProvider: here');
+  logger.d('filteredListIemsProvider: here');
   final listItemsValue = ref.watch(listItemsProvider(publicListId));
   final listValue = ref.watch(listProvider(publicListId));
   final filters = ref.watch(filterProvider);
@@ -20,12 +18,13 @@ final _filteredListItemsProvider =
 
   return combineThreeAsyncValues(listItemsValue, listValue, locationValue).when(
     loading: () {
-      //print('filteredListIemsProvider loading');
+      logger.d('filteredListIemsProvider loading');
       return const AsyncValue.loading();
     },
     error: (e, st) {
-      //print('filteredListIemsProvider error: $e');
-      //print('filteredListIemsProvider error: $st');
+      logger
+        ..d('filteredListIemsProvider error: $e')
+        ..d('filteredListIemsProvider error: $st');
       return AsyncValue.error(e, st);
     },
     data: (tuple) {
@@ -35,7 +34,7 @@ final _filteredListItemsProvider =
       final filterCenter = location.latitude == null
           ? null
           : LatLong(lat: location.latitude!, lng: location.longitude!);
-      //print('$publicListId: listItems: ${listItems?.length}');
+      logger.d('$publicListId: listItems: ${listItems?.length}');
       return AsyncValue.data(
         filterListItems(
           allItems: listItems ?? [],
@@ -47,15 +46,4 @@ final _filteredListItemsProvider =
       );
     },
   );
-});
-
-final filteredListItemsAndListProvider =
-    Provider.family<AsyncValue<Tuple2<List<ListItem>, ListOfThings?>>, String>(
-        (ref, publicListId) {
-  //print('filtededListItemsAndListProvider: here');
-  final filteredListItemsValue =
-      ref.watch(_filteredListItemsProvider(publicListId));
-  final listValue = ref.watch(listProvider(publicListId));
-
-  return combineTwoAsyncValues(filteredListItemsValue, listValue);
 });

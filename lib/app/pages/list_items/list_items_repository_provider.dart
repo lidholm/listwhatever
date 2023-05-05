@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:listanything/app/firebase/firebase_firestore_extensions.dart';
 import 'package:listanything/app/firebase/firestore_provider.dart';
+import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/pages/list_items/list_item.dart';
 import 'package:listanything/app/pages/lists/public_list_id.dart';
 import 'package:listanything/app/pages/lists/public_list_id_repository_provider.dart';
@@ -29,7 +30,7 @@ Stream<BaseRepositoryImpl<ListItem>> getListItemRepository(
   ErrorMonitor errorMonitor,
   PublicListId list,
 ) {
-  //print('ListItem repository for listId: ${list.listId}');
+  logger.d('ListItem repository for listId: ${list.listId}');
   return Stream.value(
     BaseRepositoryImpl<ListItem>(
       firestore,
