@@ -12,6 +12,7 @@ for i in variablesData:
 with open('./scripts/replace_env_vars.config', 'r') as file:
     configs = file.readlines()
 
+count = 0
 for config in configs:
     filename = config.split('|')[0]
     if filename.strip()[0] == "#":
@@ -22,9 +23,12 @@ for config in configs:
         filedata = file.read()
 
     # Replace the target string
-    filedata = filedata.replace('$' + variable,
+    newFiledata = filedata.replace('$' + variable,
                                 variables[variable])
-
+    if newFiledata != filedata:
+        count += 1
     # Write the file out again
     with open(filename, 'w') as file:
-        file.write(filedata)
+        file.write(newFiledata)
+
+print('Replaced ' + count + ' variables')
