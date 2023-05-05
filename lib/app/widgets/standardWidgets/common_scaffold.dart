@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:listanything/app/common_theme_data.dart';
 import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
 import 'package:listanything/app/widgets/standardWidgets/common_app_bar.dart';
 import 'package:listanything/bootstrap.dart';
@@ -53,14 +54,14 @@ class _CommonScaffoldState extends State<CommonScaffold> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: const Alignment(-0.2, -2.5),
-            end: const Alignment(0.1, 3.3),
+            begin: Alignment(-0.5, -4),
+            end: Alignment(0.1, 3.3),
             colors: [
-              const Color.fromARGB(255, 252, 182, 51),
+              secondaryButtonColor,
               Colors.white,
-              Colors.blue[400]!,
+              shadedMainColor,
             ],
           ),
         ),

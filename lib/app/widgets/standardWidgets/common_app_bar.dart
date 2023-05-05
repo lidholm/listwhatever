@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:listanything/app/common_theme_data.dart';
 import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -63,6 +64,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
         if (actions.where((e) => e.overflow).isNotEmpty) popupMenuButtons
       ],
+      backgroundColor: secondaryButtonColor,
     );
   }
 }

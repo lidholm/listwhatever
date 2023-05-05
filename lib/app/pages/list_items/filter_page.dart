@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listanything/app/common_theme_data.dart';
+import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/pages/list_items/date_filter.dart';
 import 'package:listanything/app/pages/list_items/filter_provider.dart';
 import 'package:listanything/app/pages/list_items/filters.dart';
@@ -132,7 +134,7 @@ class _FilterPageInnerState extends State<FilterPageInner> {
               key: _formKey,
               onChanged: () {
                 _formKey.currentState!.save();
-                // debugPrint(_formKey.currentState!.value.toString());
+                logger.d(_formKey.currentState!.value.toString());
               },
               autovalidateMode: AutovalidateMode.disabled,
               skipDisabled: true,
@@ -168,7 +170,7 @@ class _FilterPageInnerState extends State<FilterPageInner> {
 
   void updateFilters(GoRouter router) {
     final fields = _formKey.currentState?.fields;
-    //print('fields: $fields');
+    logger.d('fields: $fields');
 
     final categoryFilters = <String, List<String>>{};
     DateTime? startDate;
@@ -189,7 +191,7 @@ class _FilterPageInnerState extends State<FilterPageInner> {
         }
       }
     }
-    //print('filters: $categoryFilters');
+    logger.d('filters: $categoryFilters');
     widget.ref.read(filterProvider.notifier).state = Filters(
       categoryFilters: categoryFilters,
       startDate: startDate,
@@ -212,9 +214,9 @@ class _FilterPageInnerState extends State<FilterPageInner> {
             min: distanceMin,
             handler: FlutterSliderHandler(
               decoration: const BoxDecoration(),
-              child: Icon(
+              child: const Icon(
                 Icons.circle,
-                color: Colors.orange.shade800,
+                color: mainColor,
                 size: 31,
               ),
             ),
@@ -224,9 +226,9 @@ class _FilterPageInnerState extends State<FilterPageInner> {
             trackBar: FlutterSliderTrackBar(
               inactiveTrackBar: BoxDecoration(
                 color: Colors.black12,
-                border: Border.all(width: 3, color: Colors.orange.shade200),
+                border: Border.all(width: 3, color: shadedMainColor),
               ),
-              activeTrackBar: const BoxDecoration(color: Colors.orange),
+              activeTrackBar: const BoxDecoration(color: mainColor),
             ),
             onDragCompleted: (handlerIndex, lowerValue, upperValue) {
               setState(() {
@@ -252,14 +254,14 @@ class _FilterPageInnerState extends State<FilterPageInner> {
             labelText: categoryName,
           ),
           name: categoryName,
-          selectedColor: Colors.orange.shade800,
-          backgroundColor: Colors.orange.shade300,
+          selectedColor: mainColor,
+          backgroundColor: shadedMainColor,
           options: categoryValues
               .map(
                 (c) => FormBuilderChipOption<String>(
                   value: c,
                   avatar: CircleAvatar(
-                    backgroundColor: Colors.orange.shade800,
+                    backgroundColor: mainColor,
                     child: Text(
                       isSelected(categoryName, c) ? '' : c[0],
                     ),
@@ -294,11 +296,12 @@ class _FilterPageInnerState extends State<FilterPageInner> {
           child: ElevatedButton(
             onPressed: () {
               if (_formKey.currentState?.saveAndValidate() ?? false) {
-                // debugPrint(_formKey.currentState?.value.toString());
+                logger.d(_formKey.currentState?.value.toString());
                 updateFilters(GoRouter.of(context));
               } else {
-                // debugPrint(_formKey.currentState?.value.toString());
-                debugPrint('validation failed');
+                logger
+                  ..d(_formKey.currentState?.value.toString())
+                  ..d('validation failed');
               }
             },
             child: const Text(

@@ -4,21 +4,22 @@ import 'package:flutter/foundation.dart' as foundation;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:listanything/app/firebase/device_info_provider.dart';
+import 'package:listanything/app/helpers/constants.dart';
 
 bool? override;
 
 final useFirebaseEmulatorProvider = FutureProvider<bool>((ref) async {
   final deviceInfo = await ref.watch(deviceInfoProvider.future);
-  //print('isPhysicalDevice: ${deviceInfo['isPhysicalDevice']}');
-  //print('foundation.kDebugMode: ${foundation.kDebugMode}');
+  logger
+    ..d('isPhysicalDevice: ${deviceInfo['isPhysicalDevice']}')
+    ..d('foundation.kDebugMode: ${foundation.kDebugMode}');
   final useEmulator =
       deviceInfo['isPhysicalDevice'] == false || foundation.kDebugMode;
   if (override != null) {
-    //print('useEmaulator: $override');
+    logger.d('useEmaulator: $override');
     return override!;
   }
-  // ignore: avoid_print
-  //print('useEmulator: $useEmulator');
+  logger.d('useEmulator: $useEmulator');
   return useEmulator;
 });
 

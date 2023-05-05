@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/navigation/routes/list_page_route.dart';
 import 'package:listanything/app/navigation/routes/routes.dart';
 
@@ -26,7 +27,7 @@ Future<String> callAddUserToSharedList(
       '/listanything-2b9b0/us-central1/addUserToSharedList',
       queryParameters,
     );
-    //print('uri: $uri');
+    logger.d('uri: $uri');
     final response = await http.get(
       uri,
       headers: {
@@ -39,16 +40,16 @@ Future<String> callAddUserToSharedList(
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      //print('Got data');
+      logger.d('Got data');
       return response.body;
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
-      //print('Failed to add user to list');
+      logger.d('Failed to add user to list');
       throw Exception('Failed to add user to list');
     }
   } catch (e) {
-    //print(e);
+    logger.d(e);
     return '$e';
   }
 }

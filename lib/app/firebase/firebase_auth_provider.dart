@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart' as fire_auth;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:listanything/app/firebase/use_firebase_emulator_provider.dart';
+import 'package:listanything/app/helpers/constants.dart';
 
 final Provider<fire_auth.FirebaseAuth> baseFirebaseAuthProvider =
     Provider<fire_auth.FirebaseAuth>((ref) {
@@ -17,11 +18,13 @@ final firebaseAuthProvider =
     final localHostString = await ref.watch(emulatorIpAddressProvider.future);
     const port = 9099;
     // ignore: avoid_print
-    //print('firebaseAuthProvider.using auth with emulator at ip $localHostString and port $port');
+    logger.d(
+      'firebaseAuthProvider.using auth with emulator at ip $localHostString and port $port',
+    );
     await instance.useAuthEmulator(localHostString, port);
   } else {
     // ignore: avoid_print
-    //print('firebaseAuthProvider.using auth without emulator');
+    logger.d('firebaseAuthProvider.using auth without emulator');
   }
   return instance;
 });

@@ -1,6 +1,6 @@
 name: listanything
 description: List anything, sometimes with a map
-version: 0.0.17+0000001
+version: 0.0.18+0000001
 publish_to: none
 
 environment:
@@ -33,6 +33,7 @@ dependencies:
   intl: ^0.17.0
   latlong2: ^0.8.1
   location: ^4.4.0
+  logger: ^1.3.0
   riverpod: ^2.2.0
   rxdart: ^0.27.7
   share_plus: ^4.1.0

@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:listanything/app/helpers/constants.dart';
 
 extension FirebaseFirestoreExt on FirebaseFirestore {
   CollectionReference<Map<String, dynamic>> lists(
     Map<String, String?> identifiers,
   ) {
     final path = getPathForLists(identifiers['userId']!);
-    //print('lists path: $path');
+    logger.d('lists path: $path');
     return collection(path);
   }
 
@@ -13,7 +14,7 @@ extension FirebaseFirestoreExt on FirebaseFirestore {
     Map<String, String?> identifiers,
   ) {
     final path = getPathForList(identifiers['userId']!, identifiers['itemId']!);
-    //print('list path: $path');
+    logger.d('list path: $path');
     return doc(path);
   }
 
@@ -22,7 +23,7 @@ extension FirebaseFirestoreExt on FirebaseFirestore {
   ) {
     final path =
         getPathForListItems(identifiers['userId']!, identifiers['listId']!);
-    //print('listItems path: $path');
+    logger.d('listItems path: $path');
     return collection(path);
   }
 
@@ -34,7 +35,7 @@ extension FirebaseFirestoreExt on FirebaseFirestore {
       identifiers['listId']!,
       identifiers['itemId']!,
     );
-    //print('listItem path: $path');
+    logger.d('listItem path: $path');
     return doc(path);
   }
 
@@ -42,7 +43,7 @@ extension FirebaseFirestoreExt on FirebaseFirestore {
     Map<String, String?> identifiers,
   ) {
     final path = getPathForPublicListIds();
-    //print('publicListIds path: $path');
+    logger.d('publicListIds path: $path');
     return collection(path);
   }
 
@@ -50,7 +51,7 @@ extension FirebaseFirestoreExt on FirebaseFirestore {
     Map<String, String?> identifiers,
   ) {
     final path = getPathForPublicListId(identifiers['itemId']!);
-    //print('publicListId path: $path');
+    logger.d('publicListId path: $path');
     return doc(path);
   }
 
@@ -58,7 +59,7 @@ extension FirebaseFirestoreExt on FirebaseFirestore {
     Map<String, String?> identifiers,
   ) {
     final path = getPathForParticipatedLists(identifiers['userId']!);
-    //print('lists path: $path');
+    logger.d('lists path: $path');
     return collection(path);
   }
 
@@ -69,7 +70,7 @@ extension FirebaseFirestoreExt on FirebaseFirestore {
       identifiers['userId']!,
       identifiers['itemId']!,
     );
-    //print('participatedList path: $path');
+    logger.d('participatedList path: $path');
     return doc(path);
   }
 }

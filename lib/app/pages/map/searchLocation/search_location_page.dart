@@ -33,7 +33,7 @@ class SearchLocationPage extends HookWidget {
     final selectedAddress = useState<GeocoderResult?>(null);
     final addressHasError = useState(false);
 
-    //print('In SearchLocationPage');
+    logger.d('In SearchLocationPage');
 
     return CommonScaffold(
       title: 'Search for location',
@@ -47,7 +47,6 @@ class SearchLocationPage extends HookWidget {
                 key: formKey,
                 onChanged: () {
                   formKey.currentState!.save();
-                  // debugPrint(_formKey.currentState!.value.toString());
                 },
                 autovalidateMode: AutovalidateMode.disabled,
                 skipDisabled: true,
@@ -86,7 +85,7 @@ class SearchLocationPage extends HookWidget {
                               address: searchPhrase,
                               googleMapApiKey: getMapsApiKey(),
                             );
-                            //print('search results: $results');
+                            logger.d('search results: $results');
                             addresses.value = results ?? [];
                             selectedAddress.value = results?.first;
                           },
@@ -212,7 +211,6 @@ class SearchLocationPage extends HookWidget {
                           return;
                         }
                         if (formKey.currentState?.saveAndValidate() ?? false) {
-                          // debugPrint(_formKey.currentState?.value.toString());
                           final searchPhrase = formKey.currentState
                               ?.fields[searchPhraseName]?.value as String?;
                           saveAddress(
@@ -223,7 +221,7 @@ class SearchLocationPage extends HookWidget {
                             listItemId,
                           );
                         } else {
-                          print('validation failed');
+                          logger.d('validation failed');
                         }
                       },
                       child: const Text(
@@ -250,7 +248,7 @@ class SearchLocationPage extends HookWidget {
   ) async {
     final toReturn =
         result.copyWith(searchPhrase: searchPhrase ?? 'No search phrase');
-    //print('toReturn: $toReturn');
+    logger.d('toReturn: $toReturn');
     router.pop(toReturn);
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:listanything/app/common_theme_data.dart';
+import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/navigation/routes/add_list_route.dart';
 import 'package:listanything/app/navigation/routes/list_items_page_route.dart';
 import 'package:listanything/app/navigation/routes/routes.dart';
@@ -57,7 +59,7 @@ class ListsPageInner extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // print('screen size: ${MediaQuery.of(context).size.width}');
+    logger.d('screen size: ${MediaQuery.of(context).size.width}');
     final crossAxisCount =
         kIsWeb ? (MediaQuery.of(context).size.width / 350).floor() : 2;
     return CommonScaffold(
@@ -98,16 +100,17 @@ class ListsPageInner extends ConsumerWidget {
                         callback: (list) => selectList(ref, context, list),
                         isLoading: isLoading,
                         topRightIcon: list.shared
-                            ? Icon(
+                            ? const Icon(
                                 Icons.supervised_user_circle,
-                                color: Colors.orangeAccent[700],
+                                color: mainColor,
                               )
-                            : Icon(
+                            : const Icon(
                                 Icons.verified_user_outlined,
-                                color: Colors.orangeAccent[700],
+                                color: mainColor,
                               ),
-                        topRightIconBorderColor:
-                            list.shared ? Colors.yellow : Colors.white,
+                        topRightIconBorderColor: list.shared
+                            ? secondaryButtonColor
+                            : primaryButtonColor,
                       ),
                     )
                     .toList(),
@@ -121,9 +124,9 @@ class ListsPageInner extends ConsumerWidget {
 
   void selectList(WidgetRef ref, BuildContext context, ListOfThings list) {
     // ref.read(selectedListIdProvider.notifier).state = list.publicListId;
-    //print('clicking ${list.publicListId}');
+    logger.d('clicking ${list.publicListId}');
     ListItemsPageRoute(publicListId: list.publicListId!).push<void>(context);
-    //print('lists_page.selectList: $list');
+    logger.d('lists_page.selectList: $list');
   }
 
   Future<void> addNewList(WidgetRef ref, BuildContext context) async {
@@ -156,7 +159,6 @@ class ListsPageInner extends ConsumerWidget {
               textColor: Colors.white,
               child: const Text('OK'),
               onPressed: () {
-                //print(_publicListIdController.value.text);
                 ShareCodePageRoute(
                   publicListId: publicListIdController.value.text,
                   shareCode: shareCodeController.value.text,

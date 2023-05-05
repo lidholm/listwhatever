@@ -3,6 +3,8 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listanything/app/common_theme_data.dart';
+import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/navigation/current_user_provider.dart';
 import 'package:listanything/app/navigation/selected_user.dart';
 import 'package:listanything/app/pages/lists/list_of_things.dart';
@@ -145,7 +147,7 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
                 // enabled: false,
                 onChanged: () {
                   _formKey.currentState!.save();
-                  // debugPrint(_formKey.currentState!.value.toString());
+                  logger.d(_formKey.currentState!.value.toString());
                 },
                 autovalidateMode: AutovalidateMode.disabled,
                 skipDisabled: true,
@@ -223,13 +225,13 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
                     FormBuilderSwitch(
                       title: const Text('Show on map'),
                       name: withMapFieldName,
-                      activeColor: Colors.orange.shade800,
+                      activeColor: mainColor,
                     ),
                     const SizedBox(height: 16),
                     FormBuilderSwitch(
                       title: const Text('Include dates for items'),
                       name: withDatesFieldName,
-                      activeColor: Colors.orange.shade800,
+                      activeColor: mainColor,
                       onChanged: (value) {
                         setState(() {
                           showTimesField = value ?? false;
@@ -240,7 +242,7 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
                       FormBuilderSwitch(
                         title: const Text('Include times for items'),
                         name: withTimesFieldName,
-                        activeColor: Colors.orange.shade800,
+                        activeColor: mainColor,
                       ),
                   ],
                 ),
@@ -267,15 +269,16 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
                     child: ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState?.saveAndValidate() ?? false) {
-                          // debugPrint(_formKey.currentState?.value.toString());
+                          logger.d(_formKey.currentState?.value.toString());
                           saveList(
                             GoRouter.of(context),
                             widget.userId,
                             widget.list,
                           );
                         } else {
-                          // debugPrint(_formKey.currentState?.value.toString());
-                          debugPrint('validation failed');
+                          logger
+                            ..d(_formKey.currentState?.value.toString())
+                            ..d('validation failed');
                         }
                       },
                       child: const Text(
@@ -307,7 +310,7 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
     final withTimes =
         withDates && (fields[withTimesFieldName]?.value as bool? ?? false);
     if (list == null) {
-      //print('adding');
+      logger.d('adding');
       final list = ListOfThings(
         name: name,
         type: type,
@@ -318,7 +321,7 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
         editors: {userId: true},
       );
       final refId = await repo.createItem(item: list);
-      print('Added $refId');
+      logger.d('Added $refId');
     } else {
       final newList = list.copyWith(
         name: name,
@@ -328,13 +331,13 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
         withTimes: withTimes,
       );
       final refId = await repo.updateItem(itemId: newList.id!, item: newList);
-      print('Updated $refId');
+      logger.d('Updated $refId');
     }
     router.pop();
   }
 
   Future<void> deleteList(WidgetRef ref, GoRouter router, String listId) async {
-    //print('delete');
+    logger.d('delete');
     final repo = await ref.read(listRepositoryProvider.future);
     await repo.deleteItem(itemId: listId);
     router.pop();

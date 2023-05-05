@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:listanything/app/common_theme_data.dart';
 import 'package:listanything/app/widgets/standardWidgets/shimmer_loading.dart';
 
 const roundedRadius = 8.0;
@@ -51,8 +52,7 @@ class ImageButton<T> extends StatelessWidget {
                   ),
                   borderRadius:
                       const BorderRadius.all(Radius.circular(roundedRadius)),
-                  border:
-                      Border.all(color: Colors.orangeAccent[700]!, width: 6),
+                  border: Border.all(color: mainColor, width: 6),
                 ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,10 +66,10 @@ class ImageButton<T> extends StatelessWidget {
                       child: DecoratedBox(
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.grey,
+                          color: backgroundColor,
                           border: Border.all(
                             color: topRightIconBorderColor!,
-                            width: 2,
+                            width: 4,
                           ),
                         ),
                         child: IconButton(
@@ -82,7 +82,7 @@ class ImageButton<T> extends StatelessWidget {
                   ],
                 ),
               Container(
-                color: Colors.orangeAccent[700]!.withOpacity(0.8),
+                color: mainColor.withOpacity(0.8),
                 width: double.infinity,
                 height: 36,
                 child: Center(

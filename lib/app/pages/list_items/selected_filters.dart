@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:listanything/app/common_theme_data.dart';
 import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/pages/list_items/filters.dart';
 
@@ -30,10 +31,10 @@ class SelectedFilters extends StatelessWidget {
                     minWidth: 140,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.orange[800],
+                    color: mainColor,
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
-                      color: const Color.fromARGB(255, 249, 171, 37),
+                      color: mainColorBorder,
                     ),
                   ),
                   child: Padding(
@@ -48,9 +49,9 @@ class SelectedFilters extends StatelessWidget {
                               padding: const EdgeInsets.fromLTRB(8, 0, 0, 6),
                               child: Text(
                                 filter.key,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 20,
-                                  color: Colors.orange.shade50,
+                                  color: textColor,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
