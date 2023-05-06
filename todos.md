@@ -30,7 +30,7 @@
 - [ ] Add editing capability for sharing
 - [ ] Clean up directories, espectially filters
 - [ ] Anonymous account and merge when logging in
-- [ ] Deploy to Google play
+- [x] Deploy to Google play
 - [ ] Deploy to TestFlight (Codemagic)
 - [x] Deploy to Firebase App Distribution
 - [ ] Settings with distance in km/miles

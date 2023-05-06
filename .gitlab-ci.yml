@@ -1,4 +1,4 @@
-image: lidholm/flutter:0.0.18
+image: lidholm/flutter:0.0.19
 
 cache:
   paths:
@@ -187,7 +187,6 @@ deployToGooglePlayStore:
         - main
     script:
         - sh scripts/gitlabci/deployToGooglePlayStore.sh
-
 
 deployAndroidBundleToFirebase:
   stage: deploy
