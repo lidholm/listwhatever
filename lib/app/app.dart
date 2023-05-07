@@ -6,6 +6,7 @@ import 'package:listanything/app/common_theme_data.dart';
 import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/navigation/current_user_provider.dart';
 import 'package:listanything/app/navigation/routes/about_page_route.dart';
+import 'package:listanything/app/navigation/routes/error_loading_user_route.dart';
 import 'package:listanything/app/navigation/routes/list_page_route.dart';
 import 'package:listanything/app/navigation/routes/loading_user_route.dart';
 import 'package:listanything/app/navigation/routes/privacy_policy_page_route.dart';
@@ -19,7 +20,7 @@ final routerProvider = Provider(
     initialLocation: ListsPageRoute().location,
     //debugLogDiagnostics: true,
     routes: $appRoutes,
-    redirect: (context, state) {
+    redirect: (context, state) async {
       logger.d('state.fullpath: ${state.fullpath}');
       // and then use userChanges to check for changes to if a user is logged in or not
 
@@ -38,7 +39,10 @@ final routerProvider = Provider(
 
       final userChanges = ref.watch(currentUserProvider);
       final path = userChanges.when(
-        error: (e, st) => '/error_loading_user',
+        error: (e, st) {
+          logger.e(e);
+          return const ErrorLoadingUserRoute().location;
+        },
         loading: () => const LoadingUserRoute().location,
         data: (user) {
           logger.d('router: user: $user');

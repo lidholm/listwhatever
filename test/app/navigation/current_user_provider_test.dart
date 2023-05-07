@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:listanything/app/firebase/firebase_auth_provider.dart';
+import 'package:listanything/app/firebase/firestore_user.dart';
 import 'package:listanything/app/navigation/current_user_provider.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:rxdart/rxdart.dart';
@@ -19,19 +20,31 @@ MockUser createMockUser(String uid) {
   return user;
 }
 
+final firestoreUsers = [
+  FirestoreUser(uid: 'uid-1', email: 'user1@email.com'),
+  FirestoreUser(uid: 'uid-2', email: 'user2@email.com'),
+  FirestoreUser(uid: 'uid-3', email: 'user3@email.com'),
+];
+
+final mockFirestoreUserProvider =
+    StreamProvider.family<FirestoreUser?, String>((ref, userId) async* {
+  yield* Stream.value(
+    firestoreUsers.firstWhere((element) => element.uid == userId),
+  );
+});
+
 void main() {
   final mockFirebaseAuth = MockFirebaseAuth();
   final mockUser1 = createMockUser('uid-1');
   final mockUser2 = createMockUser('uid-2');
   final mockUser3 = createMockUser('uid-3');
-  // final mockUser4 = createMockUser('uid-4');
-  // final mockUser5 = createMockUser('uid-5');
-  final dataStreamSubject = BehaviorSubject<User>();
-  final dataStream = dataStreamSubject.stream;
+  final authDataStreamSubject = BehaviorSubject<User>();
+  final authDataStream = authDataStreamSubject.stream;
 
   setUp(() {
     when(() => mockFirebaseAuth.currentUser).thenReturn(mockUser1);
-    when(mockFirebaseAuth.userChanges).thenAnswer((_) => dataStream);
+    when(mockFirebaseAuth.userChanges).thenAnswer((_) => authDataStream);
+    when(mockFirebaseAuth.userChanges).thenAnswer((_) => authDataStream);
   });
 
   List<String?> getTextWidgetTexts(WidgetTester tester) {
@@ -47,6 +60,7 @@ void main() {
         overrides: [
           firebaseAuthProvider
               .overrideWith((ref) => Future.value(mockFirebaseAuth)),
+          userProvider.overrideWithProvider(mockFirestoreUserProvider.call)
         ],
         child: MaterialApp(
           home: Scaffold(
@@ -56,7 +70,7 @@ void main() {
                 print('user: $user');
                 print('user.asData: ${user.asData}');
                 if (user.asData == null) {
-                  return const CircularProgressIndicator();
+                  return const Text('Loading');
                 }
                 print('user.asData!.value?.uid: ${user.asData!.value?.uid}');
                 return Text(user.asData!.value?.uid ?? 'No user');
@@ -67,17 +81,17 @@ void main() {
       ),
     );
 
-    expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    expect(getTextWidgetTexts(tester), ['Loading']);
     await tester.pump(Duration.zero);
-    expect(find.byType(CircularProgressIndicator), findsNothing);
+    await tester.pump(Duration.zero);
     expect(getTextWidgetTexts(tester), ['uid-1']);
 
-    dataStreamSubject.add(mockUser2);
+    authDataStreamSubject.add(mockUser2);
     await tester.pump(Duration.zero);
     await tester.pump(Duration.zero);
     expect(getTextWidgetTexts(tester), ['uid-2']);
 
-    dataStreamSubject.add(mockUser3);
+    authDataStreamSubject.add(mockUser3);
     await tester.pump(Duration.zero);
     await tester.pump(Duration.zero);
     expect(getTextWidgetTexts(tester), ['uid-3']);

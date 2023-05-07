@@ -4,9 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listanything/app/common_theme_data.dart';
+import 'package:listanything/app/firebase/firestore_user.dart';
 import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/navigation/current_user_provider.dart';
-import 'package:listanything/app/navigation/selected_user.dart';
 import 'package:listanything/app/pages/lists/list_of_things.dart';
 import 'package:listanything/app/pages/lists/list_repository_provider.dart';
 import 'package:listanything/app/pages/lists/lists_provider.dart';
@@ -55,7 +55,7 @@ class AddEditList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return AsyncValueWidget<SelectedUser?>(
+    return AsyncValueWidget<FirestoreUser?>(
       value: ref.watch(currentUserProvider),
       data: (user) {
         if (publicListId == null) {

@@ -5,6 +5,7 @@ import 'package:listanything/app/navigation/routes/add_list_item_route.dart';
 import 'package:listanything/app/navigation/routes/add_list_route.dart';
 import 'package:listanything/app/navigation/routes/edit_list_item_route.dart';
 import 'package:listanything/app/navigation/routes/edit_list_route.dart';
+import 'package:listanything/app/navigation/routes/error_loading_user_route.dart';
 import 'package:listanything/app/navigation/routes/filter_page_route.dart';
 import 'package:listanything/app/navigation/routes/list_item_details_page_route.dart';
 import 'package:listanything/app/navigation/routes/list_items_page_route.dart';
@@ -72,6 +73,9 @@ part 'routes.g.dart';
           ],
         ),
       ],
+    ),
+    TypedGoRoute<ErrorLoadingUserRoute>(
+      path: 'errorloadinguser',
     ),
     TypedGoRoute<ProfilePageRoute>(
       path: 'profile',
