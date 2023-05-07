@@ -210,7 +210,7 @@ deployAndroidBundleToFirebase:
     - echo ""
     - echo "===---===="
     - ls -l app-production-release.aab
-    - firebase appdistribution:distribute app-production-release.aab --app $APP_ID  --testers-file deploy/android/testers.txt --release-notes-file "deploy/release_notes.txt"
+    - /firebase appdistribution:distribute app-production-release.aab --app $APP_ID  --testers-file deploy/android/testers.txt --release-notes-file "deploy/release_notes.txt"
 
 deployToFirebaseHostingAndRules:
   stage: deploy

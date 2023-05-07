@@ -73,6 +73,22 @@ extension FirebaseFirestoreExt on FirebaseFirestore {
     logger.d('participatedList path: $path');
     return doc(path);
   }
+
+  CollectionReference<Map<String, dynamic>> users(
+    Map<String, String?> identifiers,
+  ) {
+    final path = getPathForPublicLUsers();
+    logger.d('users path: $path');
+    return collection(path);
+  }
+
+  DocumentReference<Map<String, dynamic>> user(
+    Map<String, String?> identifiers,
+  ) {
+    final path = getPathForPublicLUser(identifiers['itemId']!);
+    logger.d('user path: $path');
+    return doc(path);
+  }
 }
 
 String getPathForLists(String userId) {
@@ -105,4 +121,12 @@ String getPathForParticipatedLists(String userId) {
 
 String getPathForParticipatedList(String userId, String listId) {
   return 'users/$userId/participatedLists/$listId';
+}
+
+String getPathForPublicLUsers() {
+  return 'users/';
+}
+
+String getPathForPublicLUser(String userId) {
+  return 'users/$userId';
 }

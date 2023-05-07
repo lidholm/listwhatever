@@ -99,6 +99,7 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
         ..d('doc.data: ${doc.data()}')
         ..d('doc.id: ${doc.id}');
       final item = itemConverter(doc.data()!, doc.id);
+      logger.d('db item: $item');
       return item;
     } on FirebaseException catch (e, s) {
       errorMonitor.recordError(e, s, 'as an example of non-fatal error');

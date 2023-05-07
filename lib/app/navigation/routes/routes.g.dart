@@ -81,6 +81,10 @@ RouteBase get $welcomeRoute => GoRouteData.$route(
           ],
         ),
         GoRouteData.$route(
+          path: 'errorloadinguser',
+          factory: $ErrorLoadingUserRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
           path: 'profile',
           factory: $ProfilePageRouteExtension._fromState,
         ),
@@ -354,6 +358,22 @@ extension $FilterPageRouteExtension on FilterPageRoute {
 
   String get location => GoRouteData.$location(
         '/lists/${Uri.encodeComponent(publicListId)}/items/filter',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+}
+
+extension $ErrorLoadingUserRouteExtension on ErrorLoadingUserRoute {
+  static ErrorLoadingUserRoute _fromState(GoRouterState state) =>
+      const ErrorLoadingUserRoute();
+
+  String get location => GoRouteData.$location(
+        '/errorloadinguser',
       );
 
   void go(BuildContext context) => context.go(location);

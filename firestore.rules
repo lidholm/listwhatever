@@ -5,9 +5,9 @@ service cloud.firestore {
       allow read: if true;
       allow write: if false;
     }
-    // match /users/{userId}/{document=**} {
-    //    allow read, update, delete, create: if request.auth != null && request.auth.uid == userId;
-    // }
+    match /users/{userId} {
+       allow read, update, delete, create: if request.auth != null && request.auth.uid == userId;
+    }
     match /users/{userId}/lists/{listId} {
       function getListData() {
         return get(/databases/$(database)/documents/users/$(userId)/lists/$(listId)).data;

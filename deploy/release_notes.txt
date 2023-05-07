@@ -1,3 +1,6 @@
+0.0.20
+* Get user data from Firestore when logging in
+
 0.0.19
 * Convert most StreamProvider to Provider<AsyncValue>
 

@@ -1,12 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:listanything/app/geocoder/latlong.dart';
 import 'package:logger/logger.dart';
-import 'package:tuple/tuple.dart';
 
 class ConsoleAndFileOutput extends LogOutput {
   @override
@@ -99,42 +97,4 @@ extension MyIterable<E> on Iterable<E> {
   // ignore: strict_raw_type
   Iterable<E> sortedBy(Comparable Function(E e) key) =>
       toList()..sort((a, b) => key(a).compareTo(key(b)));
-}
-
-AsyncValue<Tuple2<S, T>> combineTwoAsyncValues<S, T>(
-  AsyncValue<S> firstValue,
-  AsyncValue<T> secondValue,
-) {
-  if (firstValue is AsyncError) {
-    return AsyncValue.error(firstValue.error!, firstValue.stackTrace!);
-  } else if (secondValue is AsyncError) {
-    return AsyncValue.error(secondValue.error!, secondValue.stackTrace!);
-  } else if (firstValue is AsyncLoading && secondValue is AsyncLoading) {
-    return const AsyncValue.loading();
-  } else if (firstValue is AsyncLoading) {
-    return const AsyncValue.loading();
-  } else if (secondValue is AsyncLoading) {
-    return const AsyncValue.loading();
-  }
-
-  return AsyncValue.data(
-    Tuple2(firstValue.asData!.value, secondValue.asData!.value),
-  );
-}
-
-AsyncValue<Tuple3<S, T, U>> combineThreeAsyncValues<S, T, U>(
-  AsyncValue<S> firstValue,
-  AsyncValue<T> secondValue,
-  AsyncValue<U> thirddValue,
-) {
-  return combineTwoAsyncValues(
-    firstValue,
-    combineTwoAsyncValues(secondValue, thirddValue),
-  ).when(
-    error: AsyncValue.error,
-    loading: AsyncValue.loading,
-    data: (Tuple2<S, Tuple2<T, U>> data) => AsyncValue.data(
-      Tuple3(data.item1, data.item2.item1, data.item2.item2),
-    ),
-  );
 }
