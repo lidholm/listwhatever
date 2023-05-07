@@ -1,3 +1,6 @@
+0.0.19
+* Convert most StreamProvider to Provider<AsyncValue>
+
 0.0.18
 * New theming and Logger()
 

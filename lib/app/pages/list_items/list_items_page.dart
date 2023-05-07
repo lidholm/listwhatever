@@ -170,8 +170,13 @@ class ListItemsPageInner extends HookConsumerWidget {
                   shareCodeForEditor: getRandomString(16),
                   shareCodeForViewer: getRandomString(16),
                 );
-                final repo = await ref.read(listRepositoryProvider.future);
-                await repo.updateItem(itemId: list!.id!, item: newList);
+                ref.read(listRepositoryProvider).when(
+                      error: (e, st) => print(e),
+                      loading: () {},
+                      data: (repo) {
+                        repo.updateItem(itemId: list!.id!, item: newList);
+                      },
+                    );
               }
               //ignore: use_build_context_synchronously
               await ShareListPageRoute(publicListId: list!.publicListId!)

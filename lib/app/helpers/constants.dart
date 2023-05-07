@@ -20,7 +20,7 @@ class ConsoleAndFileOutput extends LogOutput {
 class MyPrinter extends LogPrinter {
   @override
   List<String> log(LogEvent event) {
-    return ['${event.time} ${event.level}\n  ${event.message}'];
+    return ['${event.time} ${event.level}  ${event.message}'];
   }
 }
 
@@ -109,7 +109,11 @@ AsyncValue<Tuple2<S, T>> combineTwoAsyncValues<S, T>(
     return AsyncValue.error(firstValue.error!, firstValue.stackTrace!);
   } else if (secondValue is AsyncError) {
     return AsyncValue.error(secondValue.error!, secondValue.stackTrace!);
-  } else if (firstValue is AsyncLoading || secondValue is AsyncLoading) {
+  } else if (firstValue is AsyncLoading && secondValue is AsyncLoading) {
+    return const AsyncValue.loading();
+  } else if (firstValue is AsyncLoading) {
+    return const AsyncValue.loading();
+  } else if (secondValue is AsyncLoading) {
     return const AsyncValue.loading();
   }
 

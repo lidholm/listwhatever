@@ -40,7 +40,7 @@ class _CommonScaffoldState extends State<CommonScaffold> {
               titleWidget: widget.titleWidget,
               actions: (widget.actions ?? [])
                 ..addAll([
-                  if (Platform.isAndroid && kDebugMode)
+                  if (!kIsWeb && Platform.isAndroid && kDebugMode)
                     AppBarAction(
                       title: 'Take screenshot',
                       icon: Icons.screenshot,

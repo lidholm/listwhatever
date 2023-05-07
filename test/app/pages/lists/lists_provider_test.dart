@@ -54,9 +54,9 @@ void main() {
       ProviderScope(
         overrides: [
           listRepositoryProvider
-              .overrideWith((ref) => Future.value(listRepository)),
+              .overrideWith((ref) => AsyncValue.data(listRepository)),
           participatedListRepositoryProvider
-              .overrideWith((ref) => Future.value(sharedListRepository))
+              .overrideWith((ref) => AsyncValue.data(sharedListRepository))
         ],
         child: MaterialApp(
           home: Scaffold(

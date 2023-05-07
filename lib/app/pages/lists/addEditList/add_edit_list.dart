@@ -302,44 +302,58 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
     ListOfThings? list,
   ) async {
     final fields = _formKey.currentState!.fields;
-    final repo = await ref.read(listRepositoryProvider.future);
     final name = fields[nameFieldName]!.value as String;
     final type = fields[typeFieldName]!.value as ListType;
     final withMap = fields[withMapFieldName]!.value as bool;
     final withDates = fields[withDatesFieldName]!.value as bool;
     final withTimes =
         withDates && (fields[withTimesFieldName]?.value as bool? ?? false);
-    if (list == null) {
-      logger.d('adding');
-      final list = ListOfThings(
-        name: name,
-        type: type,
-        userId: userId,
-        withMap: withMap,
-        withDates: withDates,
-        withTimes: withTimes,
-        editors: {userId: true},
-      );
-      final refId = await repo.createItem(item: list);
-      logger.d('Added $refId');
-    } else {
-      final newList = list.copyWith(
-        name: name,
-        type: type,
-        withMap: withMap,
-        withDates: withDates,
-        withTimes: withTimes,
-      );
-      final refId = await repo.updateItem(itemId: newList.id!, item: newList);
-      logger.d('Updated $refId');
-    }
-    router.pop();
+
+    await ref.read(listRepositoryProvider).when(
+          error: (e, st) {},
+          loading: () {},
+          data: (repo) async {
+            if (list == null) {
+              logger.d('adding');
+              final list = ListOfThings(
+                name: name,
+                type: type,
+                userId: userId,
+                withMap: withMap,
+                withDates: withDates,
+                withTimes: withTimes,
+                editors: {userId: true},
+              );
+              final refId = await repo.createItem(item: list);
+              logger.d('Added $refId');
+            } else {
+              final newList = list.copyWith(
+                name: name,
+                type: type,
+                withMap: withMap,
+                withDates: withDates,
+                withTimes: withTimes,
+              );
+              final refId =
+                  await repo.updateItem(itemId: newList.id!, item: newList);
+              logger.d('Updated $refId');
+            }
+            router.pop();
+          },
+        );
   }
 
   Future<void> deleteList(WidgetRef ref, GoRouter router, String listId) async {
     logger.d('delete');
-    final repo = await ref.read(listRepositoryProvider.future);
-    await repo.deleteItem(itemId: listId);
-    router.pop();
+    await ref.read(listRepositoryProvider).when(
+          error: (e, st) {
+            print(e);
+          },
+          loading: () {},
+          data: (repo) async {
+            await repo.deleteItem(itemId: listId);
+            router.pop();
+          },
+        );
   }
 }
