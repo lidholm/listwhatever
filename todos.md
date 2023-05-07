@@ -26,12 +26,12 @@
 - [x] Filter on map distance (if available)
   - [x] From current position
   - [ ] From selected address
+- [x] Deploy to Google play
+- [x] Deploy to Firebase App Distribution
 - [ ] Names and stuff for a profile, that will show when sharing
 - [ ] Add editing capability for sharing
 - [ ] Clean up directories, espectially filters
 - [ ] Anonymous account and merge when logging in
-- [x] Deploy to Google play
 - [ ] Deploy to TestFlight (Codemagic)
-- [x] Deploy to Firebase App Distribution
 - [ ] Settings with distance in km/miles
 

@@ -22,11 +22,6 @@ final routerProvider = Provider(
     redirect: (context, state) {
       logger.d('state.fullpath: ${state.fullpath}');
       // and then use userChanges to check for changes to if a user is logged in or not
-      final userChanges = ref.watch(userChangesProvider);
-
-      logger.d(
-        'userChanges: ${userChanges.asData?.value?.email} - ${userChanges.asData?.value?.uid}',
-      );
 
       final dontRequireLogin = [
         const PrivacyPolicyPageRoute().location,
@@ -41,6 +36,7 @@ final routerProvider = Provider(
         return ListsPageRoute().location;
       }
 
+      final userChanges = ref.watch(currentUserProvider);
       final path = userChanges.when(
         error: (e, st) => '/error_loading_user',
         loading: () => const LoadingUserRoute().location,

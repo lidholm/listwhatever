@@ -9,15 +9,29 @@ import 'package:listanything/app/pages/lists/public_list_id_repository_provider.
 import 'package:rxdart/rxdart.dart';
 
 final _listsProvider = StreamProvider<List<ListOfThings>>((ref) async* {
-  final listRepo = await ref.watch(listRepositoryProvider.future);
-  yield* listRepo.retrieveItemsStream();
+  yield* ref.watch(listRepositoryProvider).when(
+    error: (e, st) {
+      print(e);
+      return Stream.value([]);
+    },
+    loading: () {
+      return Stream.value([]);
+    },
+    data: (repo) {
+      return repo.retrieveItemsStream();
+    },
+  );
 });
 
 final _participatedListsProvider =
     StreamProvider<List<ListOfThings>>((ref) async* {
-  final participatedListRepo =
-      await ref.watch(participatedListRepositoryProvider.future);
-  yield* participatedListRepo.retrieveItemsStream();
+  yield* ref.watch(participatedListRepositoryProvider).when(
+        error: (e, st) => Stream.value(<ListOfThings>[]),
+        loading: () => Stream.value(<ListOfThings>[]),
+        data: (repo) {
+          return repo.retrieveItemsStream();
+        },
+      );
 });
 
 final combinedListsProvider = Provider<AsyncValue<List<ListOfThings>>>((ref) {
@@ -34,8 +48,18 @@ final listProvider =
     StreamProvider.family<ListOfThings, String>((ref, publicListId) async* {
   final publicListIdRepo =
       await ref.watch(publicListIdRepositoryProvider.future);
-  final repo = await ref.watch(listRepositoryProvider.future);
-  yield* publicListIdRepo.retrieveItemStream(itemId: publicListId).switchMap(
-        (item) => repo.retrieveItemStreamAtPath(item.path),
+  yield* ref.watch(listRepositoryProvider).when(
+        error: (e, st) {
+          print(e);
+          return const Stream.empty();
+        },
+        loading: Stream.empty,
+        data: (repo) {
+          return publicListIdRepo
+              .retrieveItemStream(itemId: publicListId)
+              .switchMap(
+                (item) => repo.retrieveItemStreamAtPath(item.path),
+              );
+        },
       );
 });
