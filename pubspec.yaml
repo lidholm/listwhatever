@@ -1,6 +1,6 @@
 name: listanything
 description: List anything, sometimes with a map
-version: 0.0.20+0000001
+version: 0.0.21+0000001
 publish_to: none
 
 environment:
@@ -50,6 +50,7 @@ dev_dependencies:
   go_router_builder: ^1.1.1
   integration_test:
     sdk: flutter
+  json_annotation: ^4.8.1
   json_serializable: ^6.5.4
   mocktail: ^0.3.0
   very_good_analysis: ^4.0.0+1

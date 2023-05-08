@@ -13,7 +13,7 @@ class ExceptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final error = (e is Tuple2) ? (e as Tuple2).item1 as Object : null;
+    final error = (e is Tuple2) ? (e as Tuple2).item1 as Object : e;
     final extraInfo = (e is Tuple2) ? (e as Tuple2).item2 as String? : null;
     return Scaffold(
       appBar: const CommonAppBar(title: 'Error'),

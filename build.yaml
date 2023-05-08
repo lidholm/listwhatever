@@ -3,6 +3,9 @@ targets:
     builders:
       freezed|freezed:
         enabled: true
+      json_serializable:
+        options:
+          explicit_to_json: true
 
 builders:
   freezed:

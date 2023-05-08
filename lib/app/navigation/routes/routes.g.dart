@@ -96,6 +96,10 @@ RouteBase get $welcomeRoute => GoRouteData.$route(
           path: 'privacypolicy',
           factory: $PrivacyPolicyPageRouteExtension._fromState,
         ),
+        GoRouteData.$route(
+          path: 'settings',
+          factory: $SettingsPageRouteExtension._fromState,
+        ),
       ],
     );
 
@@ -422,6 +426,22 @@ extension $PrivacyPolicyPageRouteExtension on PrivacyPolicyPageRoute {
 
   String get location => GoRouteData.$location(
         '/privacypolicy',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+}
+
+extension $SettingsPageRouteExtension on SettingsPageRoute {
+  static SettingsPageRoute _fromState(GoRouterState state) =>
+      const SettingsPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/settings',
       );
 
   void go(BuildContext context) => context.go(location);

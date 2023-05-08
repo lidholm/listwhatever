@@ -77,7 +77,7 @@ extension FirebaseFirestoreExt on FirebaseFirestore {
   CollectionReference<Map<String, dynamic>> users(
     Map<String, String?> identifiers,
   ) {
-    final path = getPathForPublicLUsers();
+    final path = getPathForUsers();
     logger.d('users path: $path');
     return collection(path);
   }
@@ -85,7 +85,7 @@ extension FirebaseFirestoreExt on FirebaseFirestore {
   DocumentReference<Map<String, dynamic>> user(
     Map<String, String?> identifiers,
   ) {
-    final path = getPathForPublicLUser(identifiers['itemId']!);
+    final path = getPathForUserId(identifiers['itemId']!);
     logger.d('user path: $path');
     return doc(path);
   }
@@ -123,10 +123,10 @@ String getPathForParticipatedList(String userId, String listId) {
   return 'users/$userId/participatedLists/$listId';
 }
 
-String getPathForPublicLUsers() {
+String getPathForUsers() {
   return 'users/';
 }
 
-String getPathForPublicLUser(String userId) {
+String getPathForUserId(String userId) {
   return 'users/$userId';
 }

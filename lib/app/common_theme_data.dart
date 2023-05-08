@@ -10,6 +10,9 @@ const secondaryButtonColor = Color.fromARGB(255, 43, 89, 195);
 const errorsColor = Colors.red;
 const textColor = Color.fromARGB(255, 0, 7, 45);
 
+const header1style = TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
+const sectionHeaderStyle = TextStyle(fontSize: 16, fontWeight: FontWeight.w600);
+
 final commonThemeData = ThemeData(
   splashColor: mainColor,
   // Define the default brightness and colors.

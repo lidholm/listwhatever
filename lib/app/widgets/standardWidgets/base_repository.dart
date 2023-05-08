@@ -146,8 +146,8 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
   Future<String> updateItem({required String itemId, required T item}) async {
     try {
       logger.d('Updating $item');
-      await firestoreItemPath({...identifiers, 'itemId': itemId})
-          .update(jsonFunction(item));
+      final json = jsonFunction(item);
+      await firestoreItemPath({...identifiers, 'itemId': itemId}).update(json);
       logger.d('Updated $itemId');
       return itemId;
     } on FirebaseException catch (e, s) {

@@ -1,3 +1,6 @@
+0.0.21
+* Settings page
+
 0.0.20
 * Get user data from Firestore when logging in
 

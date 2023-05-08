@@ -14,7 +14,7 @@ _$_Geometry _$$_GeometryFromJson(Map<String, dynamic> json) => _$_Geometry(
 
 Map<String, dynamic> _$$_GeometryToJson(_$_Geometry instance) =>
     <String, dynamic>{
-      'location': instance.location,
+      'location': instance.location.toJson(),
       'location_type': instance.locationType,
-      'viewport': instance.viewport,
+      'viewport': instance.viewport.toJson(),
     };

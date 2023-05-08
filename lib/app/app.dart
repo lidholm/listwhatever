@@ -33,6 +33,11 @@ final routerProvider = Provider(
         return null;
       }
 
+      logger
+        ..d('state.location: ${state.location}')
+        ..d('WelcomeRoute().location: ${WelcomeRoute().location}')
+        ..d('equals: ${state.location == WelcomeRoute().location}');
+
       if (state.location == WelcomeRoute().location) {
         return ListsPageRoute().location;
       }

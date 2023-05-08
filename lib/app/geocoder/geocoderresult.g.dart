@@ -22,12 +22,13 @@ _$_GeocoderResult _$$_GeocoderResultFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_GeocoderResultToJson(_$_GeocoderResult instance) =>
     <String, dynamic>{
-      'address_components': instance.addressComponents,
+      'address_components':
+          instance.addressComponents.map((e) => e.toJson()).toList(),
       'formatted_address': instance.formattedAddress,
-      'geometry': instance.geometry,
+      'geometry': instance.geometry.toJson(),
       'partial_match': instance.partialMatch,
       'place_id': instance.placeId,
-      'plus_code': instance.plusCode,
+      'plus_code': instance.plusCode.toJson(),
       'types': instance.types,
       'searchPhrase': instance.searchPhrase,
     };

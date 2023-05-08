@@ -12,6 +12,6 @@ _$_Bounds _$$_BoundsFromJson(Map<String, dynamic> json) => _$_Bounds(
     );
 
 Map<String, dynamic> _$$_BoundsToJson(_$_Bounds instance) => <String, dynamic>{
-      'northeast': instance.northeast,
-      'southwest': instance.southwest,
+      'northeast': instance.northeast.toJson(),
+      'southwest': instance.southwest.toJson(),
     };

@@ -33,5 +33,8 @@
 - [ ] Clean up directories, espectially filters
 - [ ] Anonymous account and merge when logging in
 - [ ] Deploy to TestFlight (Codemagic)
-- [ ] Settings with distance in km/miles
+- [x] Settings with distance in km/miles
+  - [ ] Handle AM/PM or 24 H
+  - [ ] Handle date format
+  
 

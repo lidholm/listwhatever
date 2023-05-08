@@ -50,7 +50,7 @@ final currentUserProvider = Provider<AsyncValue<FirestoreUser?>>((ref) {
 });
 
 final userProvider =
-    StreamProvider.family<FirestoreUser?, String>((ref, userId) async* {
+    StreamProvider.family<FirestoreUser, String>((ref, userId) async* {
   logger.d('in userProvider');
   final repo = await ref.watch(fiirebaseUserRepositoryProvider.future);
   logger.d('repo: $repo');
