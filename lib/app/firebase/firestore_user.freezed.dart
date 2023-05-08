@@ -21,7 +21,10 @@ FirestoreUser _$FirestoreUserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$FirestoreUser {
   String get uid => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
+  String get email =>
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+  @JsonKey(fromJson: _fromJsonSettings, toJson: _toJsonSettings)
+  Settings get settings => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +38,13 @@ abstract class $FirestoreUserCopyWith<$Res> {
           FirestoreUser value, $Res Function(FirestoreUser) then) =
       _$FirestoreUserCopyWithImpl<$Res, FirestoreUser>;
   @useResult
-  $Res call({String uid, String email});
+  $Res call(
+      {String uid,
+      String email,
+      @JsonKey(fromJson: _fromJsonSettings, toJson: _toJsonSettings)
+          Settings settings});
+
+  $SettingsCopyWith<$Res> get settings;
 }
 
 /// @nodoc
@@ -53,6 +62,7 @@ class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
   $Res call({
     Object? uid = null,
     Object? email = null,
+    Object? settings = null,
   }) {
     return _then(_value.copyWith(
       uid: null == uid
@@ -63,7 +73,19 @@ class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      settings: null == settings
+          ? _value.settings
+          : settings // ignore: cast_nullable_to_non_nullable
+              as Settings,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SettingsCopyWith<$Res> get settings {
+    return $SettingsCopyWith<$Res>(_value.settings, (value) {
+      return _then(_value.copyWith(settings: value) as $Val);
+    });
   }
 }
 
@@ -75,7 +97,14 @@ abstract class _$$_FirestoreUserCopyWith<$Res>
       __$$_FirestoreUserCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String uid, String email});
+  $Res call(
+      {String uid,
+      String email,
+      @JsonKey(fromJson: _fromJsonSettings, toJson: _toJsonSettings)
+          Settings settings});
+
+  @override
+  $SettingsCopyWith<$Res> get settings;
 }
 
 /// @nodoc
@@ -91,6 +120,7 @@ class __$$_FirestoreUserCopyWithImpl<$Res>
   $Res call({
     Object? uid = null,
     Object? email = null,
+    Object? settings = null,
   }) {
     return _then(_$_FirestoreUser(
       uid: null == uid
@@ -101,6 +131,10 @@ class __$$_FirestoreUserCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      settings: null == settings
+          ? _value.settings
+          : settings // ignore: cast_nullable_to_non_nullable
+              as Settings,
     ));
   }
 }
@@ -108,7 +142,11 @@ class __$$_FirestoreUserCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_FirestoreUser implements _FirestoreUser {
-  _$_FirestoreUser({required this.uid, required this.email});
+  _$_FirestoreUser(
+      {required this.uid,
+      required this.email,
+      @JsonKey(fromJson: _fromJsonSettings, toJson: _toJsonSettings)
+          required this.settings});
 
   factory _$_FirestoreUser.fromJson(Map<String, dynamic> json) =>
       _$$_FirestoreUserFromJson(json);
@@ -117,10 +155,14 @@ class _$_FirestoreUser implements _FirestoreUser {
   final String uid;
   @override
   final String email;
+// ignore: invalid_annotation_target
+  @override
+  @JsonKey(fromJson: _fromJsonSettings, toJson: _toJsonSettings)
+  final Settings settings;
 
   @override
   String toString() {
-    return 'FirestoreUser(uid: $uid, email: $email)';
+    return 'FirestoreUser(uid: $uid, email: $email, settings: $settings)';
   }
 
   @override
@@ -129,12 +171,14 @@ class _$_FirestoreUser implements _FirestoreUser {
         (other.runtimeType == runtimeType &&
             other is _$_FirestoreUser &&
             (identical(other.uid, uid) || other.uid == uid) &&
-            (identical(other.email, email) || other.email == email));
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.settings, settings) ||
+                other.settings == settings));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, uid, email);
+  int get hashCode => Object.hash(runtimeType, uid, email, settings);
 
   @JsonKey(ignore: true)
   @override
@@ -153,7 +197,9 @@ class _$_FirestoreUser implements _FirestoreUser {
 abstract class _FirestoreUser implements FirestoreUser {
   factory _FirestoreUser(
       {required final String uid,
-      required final String email}) = _$_FirestoreUser;
+      required final String email,
+      @JsonKey(fromJson: _fromJsonSettings, toJson: _toJsonSettings)
+          required final Settings settings}) = _$_FirestoreUser;
 
   factory _FirestoreUser.fromJson(Map<String, dynamic> json) =
       _$_FirestoreUser.fromJson;
@@ -162,6 +208,9 @@ abstract class _FirestoreUser implements FirestoreUser {
   String get uid;
   @override
   String get email;
+  @override // ignore: invalid_annotation_target
+  @JsonKey(fromJson: _fromJsonSettings, toJson: _toJsonSettings)
+  Settings get settings;
   @override
   @JsonKey(ignore: true)
   _$$_FirestoreUserCopyWith<_$_FirestoreUser> get copyWith =>

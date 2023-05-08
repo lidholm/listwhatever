@@ -6,6 +6,7 @@ import 'package:listanything/app/navigation/routes/about_page_route.dart';
 import 'package:listanything/app/navigation/routes/privacy_policy_page_route.dart';
 import 'package:listanything/app/navigation/routes/profile_page_route.dart';
 import 'package:listanything/app/navigation/routes/routes.dart';
+import 'package:listanything/app/navigation/routes/settings_page_route.dart';
 
 class CommonDrawer extends StatelessWidget {
   const CommonDrawer({super.key});
@@ -59,6 +60,16 @@ class CommonDrawer extends StatelessWidget {
           title: const Text('Privacy Policy'),
           onTap: () {
             const PrivacyPolicyPageRoute().push<void>(context);
+          },
+        ),
+        ListTile(
+          leading: const Icon(
+            Icons.settings,
+            color: mainColor,
+          ),
+          title: const Text('Settings'),
+          onTap: () {
+            const SettingsPageRoute().push<void>(context);
           },
         ),
         Consumer(

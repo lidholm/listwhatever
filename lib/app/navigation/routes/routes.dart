@@ -15,6 +15,7 @@ import 'package:listanything/app/navigation/routes/privacy_policy_page_route.dar
 import 'package:listanything/app/navigation/routes/profile_page_route.dart';
 import 'package:listanything/app/navigation/routes/search_location_for_add_page_route.dart';
 import 'package:listanything/app/navigation/routes/search_location_for_edit_page_route.dart';
+import 'package:listanything/app/navigation/routes/settings_page_route.dart';
 import 'package:listanything/app/navigation/routes/share_code_page_route.dart';
 import 'package:listanything/app/navigation/routes/share_list_page_route.dart';
 import 'package:listanything/app/navigation/routes/sign_in_screen_route.dart';
@@ -85,6 +86,9 @@ part 'routes.g.dart';
     ),
     TypedGoRoute<PrivacyPolicyPageRoute>(
       path: 'privacypolicy',
+    ),
+    TypedGoRoute<SettingsPageRoute>(
+      path: 'settings',
     ),
   ],
 )

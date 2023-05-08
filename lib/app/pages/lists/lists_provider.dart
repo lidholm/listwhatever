@@ -26,7 +26,9 @@ final _listsProvider = StreamProvider<List<ListOfThings>>((ref) async* {
 final _participatedListsProvider =
     StreamProvider<List<ListOfThings>>((ref) async* {
   yield* ref.watch(participatedListRepositoryProvider).when(
-        error: (e, st) => Stream.value(<ListOfThings>[]),
+        error: (e, st) {
+          return Stream.value(<ListOfThings>[]);
+        },
         loading: () => Stream.value(<ListOfThings>[]),
         data: (repo) {
           return repo.retrieveItemsStream();
@@ -39,7 +41,9 @@ final combinedListsProvider = Provider<AsyncValue<List<ListOfThings>>>((ref) {
   final participatedListVlaue = ref.watch(_participatedListsProvider);
   return combineTwoAsyncValues(listsValue, participatedListVlaue).when(
     data: (data) => AsyncValue.data(data.item1 + data.item2),
-    error: AsyncValue.error,
+    error: (e, st) {
+      return AsyncValue.error(e, st);
+    },
     loading: AsyncValue.loading,
   );
 });

@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:listanything/app/firebase/firebase_auth_provider.dart';
 import 'package:listanything/app/firebase/firestore_user.dart';
 import 'package:listanything/app/navigation/current_user_provider.dart';
+import 'package:listanything/app/pages/settings/settings.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -20,14 +21,18 @@ MockUser createMockUser(String uid) {
   return user;
 }
 
+final settings = Settings(
+  distanceUnit: DistanceUnitType.kilometers,
+  clockType: ClockType.TwentyFourHour,
+);
 final firestoreUsers = [
-  FirestoreUser(uid: 'uid-1', email: 'user1@email.com'),
-  FirestoreUser(uid: 'uid-2', email: 'user2@email.com'),
-  FirestoreUser(uid: 'uid-3', email: 'user3@email.com'),
+  FirestoreUser(uid: 'uid-1', email: 'user1@email.com', settings: settings),
+  FirestoreUser(uid: 'uid-2', email: 'user2@email.com', settings: settings),
+  FirestoreUser(uid: 'uid-3', email: 'user3@email.com', settings: settings),
 ];
 
 final mockFirestoreUserProvider =
-    StreamProvider.family<FirestoreUser?, String>((ref, userId) async* {
+    StreamProvider.family<FirestoreUser, String>((ref, userId) async* {
   yield* Stream.value(
     firestoreUsers.firstWhere((element) => element.uid == userId),
   );

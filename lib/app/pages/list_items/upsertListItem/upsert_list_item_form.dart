@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:listanything/app/common_theme_data.dart';
 import 'package:listanything/app/geocoder/geocoderresult.dart';
 import 'package:listanything/app/geocoder/latlong.dart';
 import 'package:listanything/app/helpers/constants.dart';
@@ -75,9 +76,6 @@ class UpsertListItemFormKeyConstants {
   static const Key searchPhraseKey =
       Key(UpsertListItemFormNameFieldConstants.searchPhraseFieldName);
 }
-
-const header1style = TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
-const sectionHeaderStyle = TextStyle(fontSize: 16, fontWeight: FontWeight.w600);
 
 class UpsertListItemForm extends HookConsumerWidget {
   const UpsertListItemForm({
