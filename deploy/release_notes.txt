@@ -1,3 +1,6 @@
+0.0.23
+* Remote config, Crashlytics, and Analytics
+
 0.0.22
 * Date formatter in Settings
 

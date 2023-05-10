@@ -9,6 +9,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:listanything/app/firebase/firebase_options.dart';
+import 'package:listanything/app/widgets/standardWidgets/error_monitor.dart';
 
 final repaintBoundaryKey = GlobalKey();
 
@@ -27,6 +28,24 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   // See related issue: https://github.com/flutter/flutter/issues/96391
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  FlutterError.onError = (errorDetails) {
+    // If you wish to record a "non-fatal" exception, please use `FirebaseCrashlytics.instance.recordFlutterError` instead
+    if (kIsWeb) {
+      ErrorMonitor.web().recordFlutterFatalError(errorDetails);
+    } else {
+      ErrorMonitor.device().recordFlutterFatalError(errorDetails);
+    }
+  };
+  PlatformDispatcher.instance.onError = (error, stack) {
+    // If you wish to record a "non-fatal" exception, please remove the "fatal" parameter
+    if (kIsWeb) {
+      ErrorMonitor.web().recordError(error, stack, '');
+    } else {
+      ErrorMonitor.device().recordError(error, stack, '');
+    }
+    return true;
+  };
 
   FirebaseUIAuth.configureProviders([
     EmailAuthProvider(),

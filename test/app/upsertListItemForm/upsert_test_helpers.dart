@@ -25,6 +25,7 @@ final mockFirestoreUser = FirestoreUser(
     dateFormatType: DateFormatType.ISO_8601,
     readableDateFormatType: DateFormatType.MONTH_AND_DAY,
   ),
+  isAdmin: false,
 );
 
 class MockBaseRepository<ListItem> extends Mock

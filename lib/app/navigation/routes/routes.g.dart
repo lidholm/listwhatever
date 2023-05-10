@@ -100,6 +100,18 @@ RouteBase get $welcomeRoute => GoRouteData.$route(
           path: 'settings',
           factory: $SettingsPageRouteExtension._fromState,
         ),
+        GoRouteData.$route(
+          path: 'crashlytics',
+          factory: $CrashlyticstPageRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
+          path: 'remote_config',
+          factory: $RemoteConfigPageRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
+          path: 'analytics',
+          factory: $AnalyticsPageRouteExtension._fromState,
+        ),
       ],
     );
 
@@ -442,6 +454,54 @@ extension $SettingsPageRouteExtension on SettingsPageRoute {
 
   String get location => GoRouteData.$location(
         '/settings',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+}
+
+extension $CrashlyticstPageRouteExtension on CrashlyticstPageRoute {
+  static CrashlyticstPageRoute _fromState(GoRouterState state) =>
+      const CrashlyticstPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/crashlytics',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+}
+
+extension $RemoteConfigPageRouteExtension on RemoteConfigPageRoute {
+  static RemoteConfigPageRoute _fromState(GoRouterState state) =>
+      const RemoteConfigPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/remote_config',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+}
+
+extension $AnalyticsPageRouteExtension on AnalyticsPageRoute {
+  static AnalyticsPageRoute _fromState(GoRouterState state) =>
+      const AnalyticsPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/analytics',
       );
 
   void go(BuildContext context) => context.go(location);

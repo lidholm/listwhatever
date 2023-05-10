@@ -352,7 +352,7 @@ describe("Test addUserToSharedList", () => {
   it(" User is NOT added when userId doesn't exist", async () => {
     // TODO: Implement
     const date = new Date();
-    const compareDate = new Date(2023, 4, 10);
+    const compareDate = new Date(2023, 5, 10);
     console.log(`current date: ${date}`);
     console.log(`compare date: ${compareDate}`);
     expect(date).to.be.lessThan(compareDate);

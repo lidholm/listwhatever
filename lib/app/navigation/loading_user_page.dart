@@ -25,8 +25,21 @@ class LoadingUserPage extends ConsumerWidget {
       ],
       body: DecoratedBox(
         decoration: BoxDecoration(color: Colors.red.shade100),
-        child: const Center(
-          child: Text('Loading!'),
+        child: Center(
+          child: Column(
+            children: [
+              Consumer(
+                builder: (context, ref, child) => ElevatedButton(
+                  onPressed: () async {
+                    final auth = await ref.read(firebaseAuthProvider.future);
+                    await auth.signOut();
+                  },
+                  child: const Text('Log out'),
+                ),
+              ),
+              const Text('Loading!'),
+            ],
+          ),
         ),
       ),
     );

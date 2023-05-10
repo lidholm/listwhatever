@@ -31,11 +31,12 @@
 - [x] Settings with distance in km/miles
   - [ ] Handle AM/PM or 24 H
   - [x] Handle date format
+- [x] Firebase Crashlytics
+- [ ] Firebase Remote Config
 - [ ] Clean up directories, espectially filters
 - [ ] Anonymous account and merge when logging in
 - [ ] Deploy to TestFlight (Codemagic)
 - [ ] Speed up list item page
-- [ ] Firebase Crashlytics
 - [ ] Google login
 - [ ] Move all texts to localization
 - [ ] Add editing capability for sharing

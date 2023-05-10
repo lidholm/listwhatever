@@ -30,9 +30,24 @@ final settings = Settings(
 );
 
 final firestoreUsers = [
-  FirestoreUser(uid: 'uid-1', email: 'user1@email.com', settings: settings),
-  FirestoreUser(uid: 'uid-2', email: 'user2@email.com', settings: settings),
-  FirestoreUser(uid: 'uid-3', email: 'user3@email.com', settings: settings),
+  FirestoreUser(
+    uid: 'uid-1',
+    email: 'user1@email.com',
+    settings: settings,
+    isAdmin: false,
+  ),
+  FirestoreUser(
+    uid: 'uid-2',
+    email: 'user2@email.com',
+    settings: settings,
+    isAdmin: false,
+  ),
+  FirestoreUser(
+    uid: 'uid-3',
+    email: 'user3@email.com',
+    settings: settings,
+    isAdmin: false,
+  ),
 ];
 
 final mockFirestoreUserProvider =
