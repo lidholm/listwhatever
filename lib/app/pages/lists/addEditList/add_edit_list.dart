@@ -347,7 +347,7 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
     logger.d('delete');
     await ref.read(listRepositoryProvider).when(
           error: (e, st) {
-            print(e);
+            logger.e(e);
           },
           loading: () {},
           data: (repo) async {

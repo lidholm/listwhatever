@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
+import 'package:listanything/app/firebase/firestore_user.dart';
 import 'package:listanything/app/helpers/constants.dart';
+import 'package:listanything/app/navigation/current_user_provider.dart';
+import 'package:listanything/app/pages/settings/settings.dart';
+import 'package:listanything/app/widgets/standardWidgets/async_value_widget.dart';
 import 'package:listanything/app/widgets/standardWidgets/border_with_header.dart';
 
 const startDateFieldName = 'startDate';
 const endDateFieldName = 'endDate';
 
-class DateFilter extends HookWidget {
+class DateFilter extends HookConsumerWidget {
   const DateFilter({
     required this.formKey,
     super.key,
@@ -15,33 +21,49 @@ class DateFilter extends HookWidget {
   final GlobalKey<FormBuilderState> formKey;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final startDate = useState<DateTime?>(null);
     final endDate = useState<DateTime?>(null);
     final startDateError = useState<bool>(false);
     final endDateError = useState<bool>(false);
     final errors = [startDateError, endDateError];
+    final firestoreUserValue = ref.watch(currentUserProvider);
 
-    return BorderWithHeader(
-      title: 'Dates',
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text('Start date: '),
-              getDatePicker(formKey, startDateFieldName, startDate, errors),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text('End date:'),
-              getDatePicker(formKey, endDateFieldName, endDate, errors),
-            ],
-          ),
-        ],
+    return AsyncValueWidget(
+      value: firestoreUserValue,
+      data: (firestoreUser) => BorderWithHeader(
+        title: 'Dates',
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('Start date: '),
+                getDatePicker(
+                  formKey,
+                  startDateFieldName,
+                  startDate,
+                  errors,
+                  firestoreUser,
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('End date:'),
+                getDatePicker(
+                  formKey,
+                  endDateFieldName,
+                  endDate,
+                  errors,
+                  firestoreUser,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -51,6 +73,7 @@ class DateFilter extends HookWidget {
     String name,
     ValueNotifier<DateTime?> date,
     List<ValueNotifier<bool>> dateErrors,
+    FirestoreUser? firestoreUser,
   ) {
     return SizedBox(
       width: 200,
@@ -69,6 +92,7 @@ class DateFilter extends HookWidget {
         inputType: InputType.date,
         firstDate: minDateTime,
         lastDate: maxDateTime,
+        format: getDateFormatter(firestoreUser),
         onChanged: (val) {
           dateErrors[0].value =
               !(formKey.currentState?.fields[startDateFieldName]?.validate() ??
@@ -92,5 +116,11 @@ class DateFilter extends HookWidget {
         },
       ),
     );
+  }
+
+  DateFormat getDateFormatter(FirestoreUser? firestoreUser) {
+    return firestoreUser?.settings.dateFormatType == DateFormatType.ISO_8601
+        ? dateFormatter
+        : usDateFormatter;
   }
 }

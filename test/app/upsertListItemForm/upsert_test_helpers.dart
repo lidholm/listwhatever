@@ -1,12 +1,108 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
+import 'package:listanything/app/firebase/firestore_user.dart';
+import 'package:listanything/app/geocoder/geocoderresult.dart';
+import 'package:listanything/app/geocoder/geometry.dart';
 import 'package:listanything/app/geocoder/latlong.dart';
 import 'package:listanything/app/helpers/constants.dart';
+import 'package:listanything/app/navigation/current_user_provider.dart';
 import 'package:listanything/app/pages/list_items/list_item.dart';
+import 'package:listanything/app/pages/list_items/list_items_repository_provider.dart';
 import 'package:listanything/app/pages/list_items/upsertListItem/upsert_list_item_form.dart';
 import 'package:listanything/app/pages/lists/list_of_things.dart';
+import 'package:listanything/app/pages/settings/settings.dart';
+import 'package:listanything/app/widgets/standardWidgets/base_repository.dart';
+import 'package:mocktail/mocktail.dart';
+
+final mockFirestoreUser = FirestoreUser(
+  uid: 'uid-1',
+  email: 'uid-1-email@email.com',
+  settings: Settings(
+    distanceUnit: DistanceUnitType.miles,
+    clockType: ClockType.TwentyFourHour,
+    dateFormatType: DateFormatType.ISO_8601,
+    readableDateFormatType: DateFormatType.MONTH_AND_DAY,
+  ),
+);
+
+class MockBaseRepository<ListItem> extends Mock
+    implements BaseRepository<ListItem> {}
+
+class MockGoRouter extends Mock implements GoRouter {}
+
+class MockGeocoderResult extends Mock implements GeocoderResult {}
+
+class MockGeometry extends Mock implements Geometry {}
+
+class MockLatLong extends Mock implements LatLong {}
+
+final mockGeocoderResult = MockGeocoderResult();
+final mockGeometry = MockGeometry();
+final mockLatLong = MockLatLong();
+final mockGoRouter = MockGoRouter();
+
+class MockUpsertListItemForm extends UpsertListItemForm {
+  const MockUpsertListItemForm({
+    required super.listItem,
+    required super.list,
+    super.key,
+  });
+
+  @override
+  GoRouter getGoRouter(BuildContext context) {
+    return mockGoRouter;
+  }
+
+  @override
+  Future<MockGeocoderResult> addSearchLocation(
+    BuildContext context,
+    String? searchPhrase,
+    String publicListId,
+    String listItemId,
+  ) {
+    return Future.value(mockGeocoderResult);
+  }
+
+  @override
+  Future<MockGeocoderResult> editSearchLocation(
+    BuildContext context,
+    String? searchPhrase,
+    String publicListId,
+    String listItemId,
+  ) {
+    return Future.value(mockGeocoderResult);
+  }
+}
 
 class UpsertTestHelpers {
+  static MockBaseRepository<ListItem> mockListItemRepo =
+      MockBaseRepository<ListItem>();
+
+  static void setUpMockReturns() {
+    when(mockGoRouter.pop).thenReturn(null);
+
+    when(
+      () => mockListItemRepo.createItem(
+        item: any(named: 'item'),
+      ),
+    ).thenAnswer((_) => Future.value('something'));
+
+    when(
+      () => mockListItemRepo.updateItem(
+        itemId: any(named: 'itemId'),
+        item: any(named: 'item'),
+      ),
+    ).thenAnswer((_) => Future.value('something'));
+
+    when(
+      () => mockListItemRepo.deleteItem(
+        itemId: any(named: 'itemId'),
+      ),
+    ).thenAnswer((_) => Future.value());
+  }
+
   static Future<void> fillInName(WidgetTester tester, String name) async {
     return tester.enterText(
       find.byKey(UpsertListItemFormKeyConstants.nameFieldKey),
@@ -262,5 +358,42 @@ class UpsertTestHelpers {
         categoryValues,
       );
     }
+  }
+
+  static Override getCurrentUserRepoOverride(
+    FirestoreUser user,
+  ) {
+    return currentUserProvider.overrideWith((ref) => AsyncValue.data(user));
+  }
+
+  static Override getListItemRepoOverride(
+    MockBaseRepository<ListItem> mockListItemRepo,
+  ) {
+    return listItemsRepositoryProvider
+        .overrideWith((ref, arg) => Stream.value(mockListItemRepo));
+  }
+
+  static MockUpsertListItemForm getUpsertForm(
+    ListOfThings list,
+    ListItem? item,
+  ) {
+    return MockUpsertListItemForm(
+      list: list,
+      listItem: item,
+    );
+  }
+
+  static ProviderScope getProviderScope(
+    MockBaseRepository<ListItem> mockListItemRepo,
+    MockUpsertListItemForm upsertForm,
+    FirestoreUser user,
+  ) {
+    return ProviderScope(
+      overrides: [
+        getListItemRepoOverride(mockListItemRepo),
+        getCurrentUserRepoOverride(user),
+      ],
+      child: MaterialApp(home: upsertForm),
+    );
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:listanything/app/firebase/firebase_auth_provider.dart';
 import 'package:listanything/app/firebase/firestore_user.dart';
+import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/navigation/current_user_provider.dart';
 import 'package:listanything/app/pages/settings/settings.dart';
 import 'package:mocktail/mocktail.dart';
@@ -24,7 +25,10 @@ MockUser createMockUser(String uid) {
 final settings = Settings(
   distanceUnit: DistanceUnitType.kilometers,
   clockType: ClockType.TwentyFourHour,
+  dateFormatType: DateFormatType.ISO_8601,
+  readableDateFormatType: DateFormatType.MONTH_AND_DAY,
 );
+
 final firestoreUsers = [
   FirestoreUser(uid: 'uid-1', email: 'user1@email.com', settings: settings),
   FirestoreUser(uid: 'uid-2', email: 'user2@email.com', settings: settings),
@@ -72,12 +76,13 @@ void main() {
             body: Consumer(
               builder: (context, ref, _) {
                 final user = ref.watch(currentUserProvider);
-                print('user: $user');
-                print('user.asData: ${user.asData}');
+                logger
+                  ..d('user: $user')
+                  ..d('user.asData: ${user.asData}');
                 if (user.asData == null) {
                   return const Text('Loading');
                 }
-                print('user.asData!.value?.uid: ${user.asData!.value?.uid}');
+                logger.d('user.asData!.value?.uid: ${user.asData!.value?.uid}');
                 return Text(user.asData!.value?.uid ?? 'No user');
               },
             ),

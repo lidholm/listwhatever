@@ -23,7 +23,9 @@ class AsyncValueWidget<T> extends StatelessWidget {
           ],
         ),
       ),
-      error: (e, st) => ExceptionWidget(e: e, st: st),
+      error: (e, st) {
+        return ExceptionWidget(e: e, st: st);
+      },
     );
   }
 }

@@ -1,98 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:listanything/app/geocoder/geocoderresult.dart';
-import 'package:listanything/app/geocoder/geometry.dart';
 import 'package:listanything/app/geocoder/latlong.dart';
 import 'package:listanything/app/pages/list_items/list_item.dart';
 import 'package:listanything/app/pages/list_items/list_items_repository_provider.dart';
-import 'package:listanything/app/pages/list_items/upsertListItem/upsert_list_item_form.dart';
 import 'package:listanything/app/pages/lists/list_of_things.dart';
-import 'package:listanything/app/widgets/standardWidgets/base_repository.dart';
 
 import 'package:mocktail/mocktail.dart';
 
 import 'upsert_test_helpers.dart';
 
-class MockGoRouter extends Mock implements GoRouter {}
-
-class MockBaseRepository<ListItem> extends Mock
-    implements BaseRepository<ListItem> {}
-
-class MockGeocoderResult extends Mock implements GeocoderResult {}
-
-class MockGeometry extends Mock implements Geometry {}
-
-class MockLatLong extends Mock implements LatLong {}
-
-final mockGeocoderResult = MockGeocoderResult();
-final mockGeometry = MockGeometry();
-final mockLatLong = MockLatLong();
-final mockGoRouter = MockGoRouter();
-
-class MockUpsertListItemForm extends UpsertListItemForm {
-  const MockUpsertListItemForm({
-    required super.listItem,
-    required super.list,
-    super.key,
-  });
-
-  @override
-  GoRouter getGoRouter(BuildContext context) {
-    return mockGoRouter;
-  }
-
-  @override
-  Future<MockGeocoderResult> addSearchLocation(
-    BuildContext context,
-    String? searchPhrase,
-    String publicListId,
-    String listItemId,
-  ) {
-    return Future.value(mockGeocoderResult);
-  }
-
-  @override
-  Future<MockGeocoderResult> editSearchLocation(
-    BuildContext context,
-    String? searchPhrase,
-    String publicListId,
-    String listItemId,
-  ) {
-    return Future.value(mockGeocoderResult);
-  }
-}
-
 void main() {
-  late MockBaseRepository<ListItem> mockListItemRepo;
-
   setUpAll(() {
     registerFallbackValue(const ListItem(categories: {}, name: 't', id: 'y'));
   });
 
   setUp(() {
-    mockListItemRepo = MockBaseRepository<ListItem>();
-    when(mockGoRouter.pop).thenReturn(null);
-
-    when(
-      () => mockListItemRepo.createItem(
-        item: any(named: 'item'),
-      ),
-    ).thenAnswer((_) => Future.value('something'));
-
-    when(
-      () => mockListItemRepo.updateItem(
-        itemId: any(named: 'itemId'),
-        item: any(named: 'item'),
-      ),
-    ).thenAnswer((_) => Future.value('something'));
-
-    when(
-      () => mockListItemRepo.deleteItem(
-        itemId: any(named: 'itemId'),
-      ),
-    ).thenAnswer((_) => Future.value());
+    print('');
+    UpsertTestHelpers.setUpMockReturns();
   });
 
   testWidgets('EditListItemForm shows fields with values of the ListItem',
@@ -101,9 +26,9 @@ void main() {
     tester.binding.window.physicalSizeTestValue = const Size(60000, 42000);
 
     await tester.pumpWidget(
-      getProviderScope(
-        mockListItemRepo,
-        getUpsertForm(
+      UpsertTestHelpers.getProviderScope(
+        UpsertTestHelpers.mockListItemRepo,
+        UpsertTestHelpers.getUpsertForm(
           UpsertTestHelpers.getList(withDates: true, withMap: true),
           UpsertTestHelpers.getListItem(
             categories: {
@@ -112,6 +37,7 @@ void main() {
             },
           ),
         ),
+        mockFirestoreUser,
       ),
     );
 
@@ -143,9 +69,9 @@ void main() {
     tester.binding.window.physicalSizeTestValue = const Size(60000, 42000);
 
     await tester.pumpWidget(
-      getProviderScope(
-        mockListItemRepo,
-        getUpsertForm(
+      UpsertTestHelpers.getProviderScope(
+        UpsertTestHelpers.mockListItemRepo,
+        UpsertTestHelpers.getUpsertForm(
           UpsertTestHelpers.getList(
             withDates: true,
             withTimes: true,
@@ -159,6 +85,7 @@ void main() {
             },
           ),
         ),
+        mockFirestoreUser,
       ),
     );
 
@@ -228,7 +155,7 @@ void main() {
       datetime: DateTime(now.year, now.month, 27, 9, 45),
     );
     final captured = verify(
-      () => mockListItemRepo.updateItem(
+      () => UpsertTestHelpers.mockListItemRepo.updateItem(
         itemId: 'id123',
         item: captureAny(named: 'item'),
       ),
@@ -243,19 +170,20 @@ void main() {
     tester.binding.window.physicalSizeTestValue = const Size(60000, 42000);
 
     await tester.pumpWidget(
-      getProviderScope(
-        mockListItemRepo,
-        getUpsertForm(
+      UpsertTestHelpers.getProviderScope(
+        UpsertTestHelpers.mockListItemRepo,
+        UpsertTestHelpers.getUpsertForm(
           UpsertTestHelpers.getList(),
           UpsertTestHelpers.getListItem(id: 'id123'),
         ),
+        mockFirestoreUser,
       ),
     );
 
     await UpsertTestHelpers.clickDeleteButton(tester);
 
     verify(
-      () => mockListItemRepo.deleteItem(
+      () => UpsertTestHelpers.mockListItemRepo.deleteItem(
         itemId: 'id123',
       ),
     ).called(1);
@@ -275,17 +203,5 @@ MockUpsertListItemForm getUpsertForm(ListOfThings list, ListItem? item) {
   return MockUpsertListItemForm(
     list: list,
     listItem: item,
-  );
-}
-
-ProviderScope getProviderScope(
-  MockBaseRepository<ListItem> mockListItemRepo,
-  MockUpsertListItemForm upsertForm,
-) {
-  return ProviderScope(
-    overrides: [
-      getListItemRepoOverride(mockListItemRepo),
-    ],
-    child: MaterialApp(home: upsertForm),
   );
 }

@@ -1,24 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:listanything/app/common_theme_data.dart';
+import 'package:listanything/app/firebase/firestore_user.dart';
 import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/pages/list_items/filters.dart';
+import 'package:listanything/app/pages/settings/settings.dart';
 
 class SelectedFilters extends StatelessWidget {
   const SelectedFilters({
     required this.filters,
+    required this.firestoreUser,
     super.key,
   });
   final Filters filters;
+  final FirestoreUser? firestoreUser;
 
   @override
   Widget build(BuildContext context) {
-    final filteredFilters = removeNonSetFilters(filters);
+    final filteredFilters =
+        removeNonSetFilters(filters, firestoreUser?.settings.dateFormatType);
 
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
         child: SizedBox(
-          height: 88,
+          height: 100,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: filteredFilters.length,
@@ -78,15 +83,20 @@ class SelectedFilters extends StatelessWidget {
     );
   }
 
-  Map<String, List<String>> removeNonSetFilters(Filters filters) {
+  Map<String, List<String>> removeNonSetFilters(
+    Filters filters,
+    DateFormatType? dateFormatType,
+  ) {
     var dateFilter = '';
     if (filters.startDate != null && filters.endDate != null) {
       dateFilter =
-          '${formatReadableDate(filters.startDate!)} - ${formatReadableDate(filters.endDate!)}';
+          '${formatReadableDate(filters.startDate!, dateFormatType)} - ${formatReadableDate(filters.endDate!, dateFormatType)}';
     } else if (filters.startDate != null) {
-      dateFilter = 'After ${formatReadableDate(filters.startDate!)}';
+      dateFilter =
+          'After ${formatReadableDate(filters.startDate!, dateFormatType)}';
     } else if (filters.endDate != null) {
-      dateFilter = 'Before ${formatReadableDate(filters.endDate!)}';
+      dateFilter =
+          'Before ${formatReadableDate(filters.endDate!, dateFormatType)}';
     }
 
     return Map.fromEntries(

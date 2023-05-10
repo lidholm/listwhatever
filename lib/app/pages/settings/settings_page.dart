@@ -11,6 +11,7 @@ import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/navigation/current_user_provider.dart';
 import 'package:listanything/app/pages/settings/settings.dart';
 import 'package:listanything/app/widgets/standardWidgets/common_scaffold.dart';
+import 'package:listanything/l10n/l10n.dart';
 
 class _SettingsFormNameFieldConstants {
   static const submitKeyName = 'submit';
@@ -18,6 +19,7 @@ class _SettingsFormNameFieldConstants {
   static const scrollerKeyName = 'scroller';
   static const distanceUnitField = 'distanceUnit';
   static const clockTypeField = 'clockType';
+  static const dateFormatTypeField = 'dateFormatType';
 }
 
 class _SettingsFormKeyConstants {
@@ -32,6 +34,8 @@ class _SettingsFormKeyConstants {
       Key(_SettingsFormNameFieldConstants.distanceUnitField);
   static const Key clockTypeFieldKey =
       Key(_SettingsFormNameFieldConstants.clockTypeField);
+  static const Key dateFormatTypeFieldKey =
+      Key(_SettingsFormNameFieldConstants.dateFormatTypeField);
 }
 
 class SettingsPage extends HookConsumerWidget {
@@ -72,6 +76,8 @@ class SettingsPage extends HookConsumerWidget {
         const SizedBox(height: 8),
         getAmPmInput(context, initialValues, errors),
         const SizedBox(height: 8),
+        getDateFormatInput(context, initialValues, errors),
+        const SizedBox(height: 8),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -88,6 +94,8 @@ class SettingsPage extends HookConsumerWidget {
     final values = <String, dynamic>{
       _SettingsFormNameFieldConstants.distanceUnitField: settings.distanceUnit,
       _SettingsFormNameFieldConstants.clockTypeField: settings.clockType,
+      _SettingsFormNameFieldConstants.dateFormatTypeField:
+          settings.dateFormatType,
     };
     return values;
   }
@@ -120,7 +128,8 @@ class SettingsPage extends HookConsumerWidget {
   Map<String, bool> createErrorVars() {
     return {
       _SettingsFormNameFieldConstants.distanceUnitField: false,
-      _SettingsFormNameFieldConstants.clockTypeField: false
+      _SettingsFormNameFieldConstants.clockTypeField: false,
+      _SettingsFormNameFieldConstants.dateFormatTypeField: false,
     };
   }
 
@@ -154,15 +163,17 @@ class SettingsPage extends HookConsumerWidget {
     ValueNotifier<Map<String, dynamic>> initialValues,
     ValueNotifier<Map<String, bool>> errors,
   ) {
-    final dropdownItems = DistanceUnitType.values
-        .map(
-          (unitType) => DropdownMenuItem<DistanceUnitType>(
-            alignment: AlignmentDirectional.center,
-            value: unitType,
-            child: Text(unitType.name),
-          ),
-        )
-        .toList();
+    final dropdownItems = DistanceUnitType.values.map(
+      (unitType) {
+        final text = AppLocalizations.of(context).distanceUnit(unitType.name);
+
+        return DropdownMenuItem<DistanceUnitType>(
+          alignment: AlignmentDirectional.center,
+          value: unitType,
+          child: Text(text),
+        );
+      },
+    ).toList();
     return FormBuilderDropdown<DistanceUnitType>(
       name: _SettingsFormNameFieldConstants.distanceUnitField,
       key: _SettingsFormKeyConstants.distanceUnitFieldKey,
@@ -200,15 +211,16 @@ class SettingsPage extends HookConsumerWidget {
     ValueNotifier<Map<String, dynamic>> initialValues,
     ValueNotifier<Map<String, bool>> errors,
   ) {
-    final dropdownItems = ClockType.values
-        .map(
-          (option) => DropdownMenuItem<ClockType>(
-            alignment: AlignmentDirectional.center,
-            value: option,
-            child: Text(option.name),
-          ),
-        )
-        .toList();
+    final dropdownItems = ClockType.values.map(
+      (option) {
+        final text = AppLocalizations.of(context).ampm(option.name);
+        return DropdownMenuItem<ClockType>(
+          alignment: AlignmentDirectional.center,
+          value: option,
+          child: Text(text),
+        );
+      },
+    ).toList();
     return FormBuilderDropdown<ClockType>(
       name: _SettingsFormNameFieldConstants.clockTypeField,
       key: _SettingsFormKeyConstants.clockTypeFieldKey,
@@ -233,6 +245,53 @@ class SettingsPage extends HookConsumerWidget {
         errors.value = {
           ...errors.value,
           _SettingsFormNameFieldConstants.clockTypeField: !valid
+        };
+      },
+      valueTransformer: (val) => val?.toString(),
+    );
+  }
+
+  Widget getDateFormatInput(
+    BuildContext context,
+    ValueNotifier<Map<String, dynamic>> initialValues,
+    ValueNotifier<Map<String, bool>> errors,
+  ) {
+    final dropdownItems = dateFormatTypesInInputs.map(
+      (option) {
+        final text = AppLocalizations.of(context).dateformat(option.name);
+        return DropdownMenuItem<DateFormatType>(
+          alignment: AlignmentDirectional.center,
+          value: option,
+          child: Text(text),
+        );
+      },
+    ).toList();
+    return FormBuilderDropdown<DateFormatType>(
+      name: _SettingsFormNameFieldConstants.dateFormatTypeField,
+      key: _SettingsFormKeyConstants.dateFormatTypeFieldKey,
+      initialValue: initialValues
+              .value[_SettingsFormNameFieldConstants.dateFormatTypeField]
+          as DateFormatType?,
+      decoration: InputDecoration(
+        labelText: 'Date format',
+        suffix:
+            errors.value[_SettingsFormNameFieldConstants.dateFormatTypeField] ??
+                    true
+                ? const Icon(Icons.error, color: Colors.red)
+                : const Icon(Icons.check, color: Colors.green),
+        hintText: 'Date format',
+      ),
+      validator: FormBuilderValidators.compose(
+        [FormBuilderValidators.required()],
+      ),
+      items: dropdownItems,
+      onChanged: (val) {
+        final field = _SettingsFormKeyConstants.formKey.currentState
+            ?.fields[_SettingsFormNameFieldConstants.dateFormatTypeField];
+        final valid = field?.validate() ?? false;
+        errors.value = {
+          ...errors.value,
+          _SettingsFormNameFieldConstants.dateFormatTypeField: !valid
         };
       },
       valueTransformer: (val) => val?.toString(),
@@ -310,10 +369,15 @@ class SettingsPage extends HookConsumerWidget {
         final clockType =
             fields[_SettingsFormNameFieldConstants.clockTypeField]!.value
                 as ClockType;
+        final dateFormatType =
+            fields[_SettingsFormNameFieldConstants.dateFormatTypeField]!.value
+                as DateFormatType;
 
         final settings = Settings(
           distanceUnit: distanceUnit,
           clockType: clockType,
+          dateFormatType: dateFormatType,
+          readableDateFormatType: firestoreUser.settings.readableDateFormatType,
         );
         final userId = selectedUser!.uid;
         final refId = await repo.updateItem(

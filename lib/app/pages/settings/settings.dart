@@ -3,6 +3,14 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'settings.freezed.dart';
 part 'settings.g.dart';
 
+// ignore: constant_identifier_names
+enum DateFormatType { ISO_8601, US, MONTH_AND_DAY }
+
+const dateFormatTypesInInputs = [DateFormatType.ISO_8601, DateFormatType.US];
+const shortDateFormatTypesInInputs = [
+  DateFormatType.MONTH_AND_DAY,
+];
+
 enum DistanceUnitType {
   miles,
   kilometers,
@@ -20,6 +28,13 @@ class Settings with _$Settings {
     // ignore: invalid_annotation_target
     @JsonKey(fromJson: _fromJsonClockType, toJson: _toJsonClockType)
         required ClockType clockType,
+    // ignore: invalid_annotation_target
+    @JsonKey(fromJson: _fromJsonDateFormatType, toJson: _toJsonDateFormatType)
+        required DateFormatType dateFormatType,
+
+    // ignore: invalid_annotation_target
+    @JsonKey(fromJson: _fromJsonReadableDateFormatType, toJson: _toJsonReadableDateFormatType)
+        required DateFormatType readableDateFormatType,
   }) = _Settings;
 
   factory Settings.fromJson(Map<String, dynamic> json) =>
@@ -41,4 +56,20 @@ String _toJsonClockType(ClockType option) {
 
 ClockType _fromJsonClockType(String option) {
   return ClockType.values.firstWhere((element) => element.name == option);
+}
+
+String _toJsonDateFormatType(DateFormatType option) {
+  return option.name;
+}
+
+DateFormatType _fromJsonDateFormatType(String option) {
+  return DateFormatType.values.firstWhere((element) => element.name == option);
+}
+
+String _toJsonReadableDateFormatType(DateFormatType option) {
+  return option.name;
+}
+
+DateFormatType _fromJsonReadableDateFormatType(String option) {
+  return DateFormatType.values.firstWhere((element) => element.name == option);
 }

@@ -25,7 +25,16 @@ mixin _$Settings {
   DistanceUnitType get distanceUnit =>
       throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(fromJson: _fromJsonClockType, toJson: _toJsonClockType)
-  ClockType get clockType => throw _privateConstructorUsedError;
+  ClockType get clockType =>
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+  @JsonKey(fromJson: _fromJsonDateFormatType, toJson: _toJsonDateFormatType)
+  DateFormatType get dateFormatType =>
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+  @JsonKey(
+      fromJson: _fromJsonReadableDateFormatType,
+      toJson: _toJsonReadableDateFormatType)
+  DateFormatType get readableDateFormatType =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,7 +51,11 @@ abstract class $SettingsCopyWith<$Res> {
       {@JsonKey(fromJson: _fromJsonDistanceUnit, toJson: _toJsonDistanceUnit)
           DistanceUnitType distanceUnit,
       @JsonKey(fromJson: _fromJsonClockType, toJson: _toJsonClockType)
-          ClockType clockType});
+          ClockType clockType,
+      @JsonKey(fromJson: _fromJsonDateFormatType, toJson: _toJsonDateFormatType)
+          DateFormatType dateFormatType,
+      @JsonKey(fromJson: _fromJsonReadableDateFormatType, toJson: _toJsonReadableDateFormatType)
+          DateFormatType readableDateFormatType});
 }
 
 /// @nodoc
@@ -60,6 +73,8 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
   $Res call({
     Object? distanceUnit = null,
     Object? clockType = null,
+    Object? dateFormatType = null,
+    Object? readableDateFormatType = null,
   }) {
     return _then(_value.copyWith(
       distanceUnit: null == distanceUnit
@@ -70,6 +85,14 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
           ? _value.clockType
           : clockType // ignore: cast_nullable_to_non_nullable
               as ClockType,
+      dateFormatType: null == dateFormatType
+          ? _value.dateFormatType
+          : dateFormatType // ignore: cast_nullable_to_non_nullable
+              as DateFormatType,
+      readableDateFormatType: null == readableDateFormatType
+          ? _value.readableDateFormatType
+          : readableDateFormatType // ignore: cast_nullable_to_non_nullable
+              as DateFormatType,
     ) as $Val);
   }
 }
@@ -85,7 +108,11 @@ abstract class _$$_SettingsCopyWith<$Res> implements $SettingsCopyWith<$Res> {
       {@JsonKey(fromJson: _fromJsonDistanceUnit, toJson: _toJsonDistanceUnit)
           DistanceUnitType distanceUnit,
       @JsonKey(fromJson: _fromJsonClockType, toJson: _toJsonClockType)
-          ClockType clockType});
+          ClockType clockType,
+      @JsonKey(fromJson: _fromJsonDateFormatType, toJson: _toJsonDateFormatType)
+          DateFormatType dateFormatType,
+      @JsonKey(fromJson: _fromJsonReadableDateFormatType, toJson: _toJsonReadableDateFormatType)
+          DateFormatType readableDateFormatType});
 }
 
 /// @nodoc
@@ -101,6 +128,8 @@ class __$$_SettingsCopyWithImpl<$Res>
   $Res call({
     Object? distanceUnit = null,
     Object? clockType = null,
+    Object? dateFormatType = null,
+    Object? readableDateFormatType = null,
   }) {
     return _then(_$_Settings(
       distanceUnit: null == distanceUnit
@@ -111,6 +140,14 @@ class __$$_SettingsCopyWithImpl<$Res>
           ? _value.clockType
           : clockType // ignore: cast_nullable_to_non_nullable
               as ClockType,
+      dateFormatType: null == dateFormatType
+          ? _value.dateFormatType
+          : dateFormatType // ignore: cast_nullable_to_non_nullable
+              as DateFormatType,
+      readableDateFormatType: null == readableDateFormatType
+          ? _value.readableDateFormatType
+          : readableDateFormatType // ignore: cast_nullable_to_non_nullable
+              as DateFormatType,
     ));
   }
 }
@@ -122,7 +159,11 @@ class _$_Settings implements _Settings {
       {@JsonKey(fromJson: _fromJsonDistanceUnit, toJson: _toJsonDistanceUnit)
           required this.distanceUnit,
       @JsonKey(fromJson: _fromJsonClockType, toJson: _toJsonClockType)
-          required this.clockType});
+          required this.clockType,
+      @JsonKey(fromJson: _fromJsonDateFormatType, toJson: _toJsonDateFormatType)
+          required this.dateFormatType,
+      @JsonKey(fromJson: _fromJsonReadableDateFormatType, toJson: _toJsonReadableDateFormatType)
+          required this.readableDateFormatType});
 
   factory _$_Settings.fromJson(Map<String, dynamic> json) =>
       _$$_SettingsFromJson(json);
@@ -135,10 +176,20 @@ class _$_Settings implements _Settings {
   @override
   @JsonKey(fromJson: _fromJsonClockType, toJson: _toJsonClockType)
   final ClockType clockType;
+// ignore: invalid_annotation_target
+  @override
+  @JsonKey(fromJson: _fromJsonDateFormatType, toJson: _toJsonDateFormatType)
+  final DateFormatType dateFormatType;
+// ignore: invalid_annotation_target
+  @override
+  @JsonKey(
+      fromJson: _fromJsonReadableDateFormatType,
+      toJson: _toJsonReadableDateFormatType)
+  final DateFormatType readableDateFormatType;
 
   @override
   String toString() {
-    return 'Settings(distanceUnit: $distanceUnit, clockType: $clockType)';
+    return 'Settings(distanceUnit: $distanceUnit, clockType: $clockType, dateFormatType: $dateFormatType, readableDateFormatType: $readableDateFormatType)';
   }
 
   @override
@@ -149,12 +200,17 @@ class _$_Settings implements _Settings {
             (identical(other.distanceUnit, distanceUnit) ||
                 other.distanceUnit == distanceUnit) &&
             (identical(other.clockType, clockType) ||
-                other.clockType == clockType));
+                other.clockType == clockType) &&
+            (identical(other.dateFormatType, dateFormatType) ||
+                other.dateFormatType == dateFormatType) &&
+            (identical(other.readableDateFormatType, readableDateFormatType) ||
+                other.readableDateFormatType == readableDateFormatType));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, distanceUnit, clockType);
+  int get hashCode => Object.hash(runtimeType, distanceUnit, clockType,
+      dateFormatType, readableDateFormatType);
 
   @JsonKey(ignore: true)
   @override
@@ -175,7 +231,11 @@ abstract class _Settings implements Settings {
       {@JsonKey(fromJson: _fromJsonDistanceUnit, toJson: _toJsonDistanceUnit)
           required final DistanceUnitType distanceUnit,
       @JsonKey(fromJson: _fromJsonClockType, toJson: _toJsonClockType)
-          required final ClockType clockType}) = _$_Settings;
+          required final ClockType clockType,
+      @JsonKey(fromJson: _fromJsonDateFormatType, toJson: _toJsonDateFormatType)
+          required final DateFormatType dateFormatType,
+      @JsonKey(fromJson: _fromJsonReadableDateFormatType, toJson: _toJsonReadableDateFormatType)
+          required final DateFormatType readableDateFormatType}) = _$_Settings;
 
   factory _Settings.fromJson(Map<String, dynamic> json) = _$_Settings.fromJson;
 
@@ -185,6 +245,14 @@ abstract class _Settings implements Settings {
   @override // ignore: invalid_annotation_target
   @JsonKey(fromJson: _fromJsonClockType, toJson: _toJsonClockType)
   ClockType get clockType;
+  @override // ignore: invalid_annotation_target
+  @JsonKey(fromJson: _fromJsonDateFormatType, toJson: _toJsonDateFormatType)
+  DateFormatType get dateFormatType;
+  @override // ignore: invalid_annotation_target
+  @JsonKey(
+      fromJson: _fromJsonReadableDateFormatType,
+      toJson: _toJsonReadableDateFormatType)
+  DateFormatType get readableDateFormatType;
   @override
   @JsonKey(ignore: true)
   _$$_SettingsCopyWith<_$_Settings> get copyWith =>

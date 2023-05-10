@@ -28,13 +28,16 @@
   - [ ] From selected address
 - [x] Deploy to Google play
 - [x] Deploy to Firebase App Distribution
-- [ ] Names and stuff for a profile, that will show when sharing
-- [ ] Add editing capability for sharing
+- [x] Settings with distance in km/miles
+  - [ ] Handle AM/PM or 24 H
+  - [x] Handle date format
 - [ ] Clean up directories, espectially filters
 - [ ] Anonymous account and merge when logging in
 - [ ] Deploy to TestFlight (Codemagic)
-- [x] Settings with distance in km/miles
-  - [ ] Handle AM/PM or 24 H
-  - [ ] Handle date format
-  
+- [ ] Speed up list item page
+- [ ] Firebase Crashlytics
+- [ ] Google login
+- [ ] Move all texts to localization
+- [ ] Add editing capability for sharing
+- [ ] Names and stuff for a profile, that will show when sharing
 
