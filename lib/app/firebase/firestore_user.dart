@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:listanything/app/pages/settings/settings.dart';
 
@@ -9,7 +11,8 @@ class FirestoreUser with _$FirestoreUser {
   factory FirestoreUser({
     required String uid,
     required String email,
-    // ignore: invalid_annotation_target
+    @JsonKey(fromJson: _fromJsonIsAdmin, toJson: _toJsonIsAdmin)
+        required bool isAdmin,
     @JsonKey(fromJson: _fromJsonSettings, toJson: _toJsonSettings)
         required Settings settings,
   }) = _FirestoreUser;
@@ -32,4 +35,12 @@ Settings _fromJsonSettings(Map<String, dynamic>? json) {
     );
   }
   return Settings.fromJson(json);
+}
+
+bool _toJsonIsAdmin(bool isAdmin) {
+  return isAdmin;
+}
+
+bool _fromJsonIsAdmin(bool? isAdmin) {
+  return isAdmin ?? false;
 }

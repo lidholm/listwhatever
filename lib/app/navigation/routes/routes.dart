@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:listanything/app/navigation/routes/about_page_route.dart';
 import 'package:listanything/app/navigation/routes/add_list_item_route.dart';
 import 'package:listanything/app/navigation/routes/add_list_route.dart';
+import 'package:listanything/app/navigation/routes/analytics_page_route.dart';
+import 'package:listanything/app/navigation/routes/crashlytics_page_route.dart';
 import 'package:listanything/app/navigation/routes/edit_list_item_route.dart';
 import 'package:listanything/app/navigation/routes/edit_list_route.dart';
 import 'package:listanything/app/navigation/routes/error_loading_user_route.dart';
@@ -13,6 +15,7 @@ import 'package:listanything/app/navigation/routes/list_page_route.dart';
 import 'package:listanything/app/navigation/routes/loading_user_route.dart';
 import 'package:listanything/app/navigation/routes/privacy_policy_page_route.dart';
 import 'package:listanything/app/navigation/routes/profile_page_route.dart';
+import 'package:listanything/app/navigation/routes/remote_config_page_route.dart';
 import 'package:listanything/app/navigation/routes/search_location_for_add_page_route.dart';
 import 'package:listanything/app/navigation/routes/search_location_for_edit_page_route.dart';
 import 'package:listanything/app/navigation/routes/settings_page_route.dart';
@@ -89,6 +92,15 @@ part 'routes.g.dart';
     ),
     TypedGoRoute<SettingsPageRoute>(
       path: 'settings',
+    ),
+    TypedGoRoute<CrashlyticstPageRoute>(
+      path: 'crashlytics',
+    ),
+    TypedGoRoute<RemoteConfigPageRoute>(
+      path: 'remote_config',
+    ),
+    TypedGoRoute<AnalyticsPageRoute>(
+      path: 'analytics',
     ),
   ],
 )

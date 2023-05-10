@@ -1,6 +1,6 @@
 name: listanything
 description: List anything, sometimes with a map
-version: 0.0.22+0000001
+version: 0.0.23+0000001
 publish_to: none
 
 environment:
@@ -10,9 +10,12 @@ dependencies:
   another_xlider: ^3.0.1
   cloud_firestore: ^4.4.3
   device_info_plus: ^8.1.0
+  firebase_analytics: ^10.3.0
   firebase_auth: ^4.2.8
   firebase_core: ^2.6.1
   firebase_core_web: ^2.2.1
+  firebase_crashlytics: ^3.2.0
+  firebase_remote_config: ^4.1.0
   firebase_ui_auth: ^1.1.13
   firebase_ui_oauth_google: ^1.0.21
   flutter:
