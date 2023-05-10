@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:listanything/app/common_theme_data.dart';
+import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
 import 'package:listanything/app/widgets/standardWidgets/common_app_bar.dart';
 import 'package:listanything/bootstrap.dart';
@@ -30,9 +31,11 @@ class CommonScaffold extends StatefulWidget {
 }
 
 class _CommonScaffoldState extends State<CommonScaffold> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: widget.title == null
           ? null
           : CommonAppBar(
@@ -91,7 +94,7 @@ class _CommonScaffoldState extends State<CommonScaffold> {
         name: 'screenshot-${DateTime.now()}.png',
       );
 
-      print(result);
+      logger.d(result);
 
       // Find the ScaffoldMessenger in the widget tree
       // and use it to show a SnackBar.

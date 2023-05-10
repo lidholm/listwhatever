@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:listanything/app/geocoder/latlong.dart';
+import 'package:listanything/app/pages/settings/settings.dart';
+import 'package:listanything/app/widgets/standardWidgets/custom_exception.dart';
 import 'package:logger/logger.dart';
+
+final navKey = GlobalKey<NavigatorState>();
 
 class ConsoleAndFileOutput extends LogOutput {
   @override
@@ -69,19 +73,33 @@ DateTime getCurrentDate() {
   return date;
 }
 
-String formatReadableDate(DateTime d) {
+String formatReadableDate(DateTime d, DateFormatType? type) {
   final diff = d.difference(DateTime.now());
-  if (diff > const Duration(days: 365)) {
-    return readableDateFormatterWithYear.format(d);
-  } else {
-    return readableDateFormatter.format(d);
+  if (type == DateFormatType.ISO_8601) {
+    return dateFormatter.format(d);
   }
+  if (type == DateFormatType.US) {
+    return usDateFormatter.format(d);
+  }
+
+  if (type == DateFormatType.MONTH_AND_DAY) {
+    if (diff > const Duration(days: 365)) {
+      return monthAndDayFormatterWithYear.format(d);
+    } else {
+      return monthAndDayFormatter.format(d);
+    }
+  }
+  throw const CustomException(
+    message: 'Format for DateFormatType is not implemented yet',
+  );
 }
 
 final dateTimeFormatter = DateFormat('yyyy-MM-dd HH:mm');
 final dateFormatter = DateFormat('yyyy-MM-dd');
-final readableDateFormatter = DateFormat('MMMM d');
-final readableDateFormatterWithYear = DateFormat('MMMM d, yyyy');
+final usDateFormatter = DateFormat.yMd();
+final usDateTimeFormatter = DateFormat.yMd().add_jm();
+final monthAndDayFormatter = DateFormat('MMMM d');
+final monthAndDayFormatterWithYear = DateFormat('MMMM d, yyyy');
 final timeFormatter = DateFormat('HH:mm');
 final readableDateAndTimeFormatter = DateFormat('d MMM HH:mm');
 final DateTime minDateTime = DateTime.utc(1900, 04, 20);

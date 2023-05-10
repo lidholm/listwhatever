@@ -1,5 +1,6 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listanything/app/common_theme_data.dart';
@@ -12,6 +13,7 @@ import 'package:listanything/app/navigation/routes/loading_user_route.dart';
 import 'package:listanything/app/navigation/routes/privacy_policy_page_route.dart';
 import 'package:listanything/app/navigation/routes/routes.dart';
 import 'package:listanything/app/navigation/routes/sign_in_screen_route.dart';
+import 'package:listanything/l10n/l10n.dart';
 
 final providers = [EmailAuthProvider()];
 
@@ -20,6 +22,7 @@ final routerProvider = Provider(
     initialLocation: ListsPageRoute().location,
     //debugLogDiagnostics: true,
     routes: $appRoutes,
+    navigatorKey: navKey,
     redirect: (context, state) async {
       logger.d('state.fullpath: ${state.fullpath}');
       // and then use userChanges to check for changes to if a user is logged in or not
@@ -66,6 +69,19 @@ class App extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
-    return MaterialApp.router(routerConfig: router, theme: commonThemeData);
+    return MaterialApp.router(
+      routerConfig: router,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en'), // English
+        Locale('es'), // Spanish
+      ],
+      theme: commonThemeData,
+    );
   }
 }

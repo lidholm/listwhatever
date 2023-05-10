@@ -123,11 +123,14 @@ class _FilterPageInnerState extends State<FilterPageInner> {
   @override
   void initState() {
     super.initState();
-    distanceValue = (widget.filters.distance ?? 0) / metersInMile;
+    final d = widget.filters.distance ?? distanceMax;
+    distanceValue = convertDistanceToMeters(widget.firestoreUser?.settings, d);
   }
 
   @override
   Widget build(BuildContext context) {
+    logger.d('distanceValue: $distanceValue');
+
     final other = <String, dynamic>{
       startDateFieldName: widget.filters.startDate,
       endDateFieldName: widget.filters.endDate
@@ -201,10 +204,8 @@ class _FilterPageInnerState extends State<FilterPageInner> {
       } else if (field.key == endDateFieldName) {
         endDate = field.value.value as DateTime?;
       } else if (field.key == distanceFieldName) {
-        final d = field.value.value as double;
-        maxDistance = (settings!.distanceUnit == DistanceUnitType.miles)
-            ? d * metersInMile
-            : d * 1000;
+        final d = (field.value.value ?? distanceMax) as double;
+        maxDistance = convertDistanceToMeters(settings, d);
       } else {
         final values = field.value.value as List<String>?;
         if (values != null) {
@@ -335,5 +336,11 @@ class _FilterPageInnerState extends State<FilterPageInner> {
         ),
       ],
     );
+  }
+
+  double convertDistanceToMeters(Settings? settings, double d) {
+    return (settings!.distanceUnit == DistanceUnitType.miles)
+        ? d * metersInMile
+        : d * 1000;
   }
 }

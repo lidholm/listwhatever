@@ -27,6 +27,8 @@ Settings _fromJsonSettings(Map<String, dynamic>? json) {
     return Settings(
       distanceUnit: DistanceUnitType.kilometers,
       clockType: ClockType.TwentyFourHour,
+      dateFormatType: DateFormatType.ISO_8601,
+      readableDateFormatType: DateFormatType.MONTH_AND_DAY,
     );
   }
   return Settings.fromJson(json);

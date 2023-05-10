@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:listanything/app/helpers/combine_three_async_values.dart';
+import 'package:listanything/app/firebase/firestore_user.dart';
+import 'package:listanything/app/helpers/combine_four_async_values.dart';
 import 'package:listanything/app/helpers/constants.dart';
+import 'package:listanything/app/navigation/current_user_provider.dart';
 import 'package:listanything/app/navigation/routes/add_list_item_route.dart';
 import 'package:listanything/app/navigation/routes/edit_list_item_route.dart';
 import 'package:listanything/app/navigation/routes/edit_list_route.dart';
@@ -41,11 +43,13 @@ class ListItemsPage extends ConsumerWidget {
         ref.watch(filteredListItemsProvider(publicListId));
     final listValue = ref.watch(listProvider(publicListId));
     final locationValue = ref.watch(locationProvider);
+    final firestoreUserValue = ref.watch(currentUserProvider);
 
-    return combineThreeAsyncValues(
+    return combineFourAsyncValues(
       filteredListItemsValue,
       listValue,
       locationValue,
+      firestoreUserValue,
     ).when(
       error: (e, st) => ExceptionWidget(e: e, st: st),
       loading: () {
@@ -67,6 +71,8 @@ class ListItemsPage extends ConsumerWidget {
         final items = value.item1;
         final list = value.item2;
         final location = value.item3;
+        final firestoreUser = value.item4;
+
         logger
           ..d('ListItemsPage.items: ${items.length}')
           ..d('ListItemsPage.list: $list');
@@ -75,6 +81,7 @@ class ListItemsPage extends ConsumerWidget {
           isLoading: false,
           list: list,
           location: location,
+          firestoreUser: firestoreUser,
         );
       },
     );
@@ -94,12 +101,14 @@ class ListItemsPageInner extends HookConsumerWidget {
     required this.isLoading,
     required this.location,
     this.list,
+    this.firestoreUser,
     super.key,
   });
   final List<ListItem> items;
   final bool isLoading;
   final ListOfThings? list;
   final LocationData? location;
+  final FirestoreUser? firestoreUser;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -172,7 +181,7 @@ class ListItemsPageInner extends HookConsumerWidget {
                   shareCodeForViewer: getRandomString(16),
                 );
                 ref.read(listRepositoryProvider).when(
-                      error: (e, st) => print(e),
+                      error: (e, st) => logger.e(e),
                       loading: () {},
                       data: (repo) {
                         repo.updateItem(itemId: list!.id!, item: newList);
@@ -199,6 +208,7 @@ class ListItemsPageInner extends HookConsumerWidget {
                     filters: filters,
                     expandedPercentage: expandedPercentage,
                     items: items,
+                    firestoreUser: firestoreUser,
                   )
                 : MapsView(
                     isLoading: isLoading,

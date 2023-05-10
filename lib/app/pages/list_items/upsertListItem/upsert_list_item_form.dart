@@ -4,17 +4,22 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:listanything/app/common_theme_data.dart';
+import 'package:listanything/app/firebase/firestore_user.dart';
 import 'package:listanything/app/geocoder/geocoderresult.dart';
 import 'package:listanything/app/geocoder/latlong.dart';
 import 'package:listanything/app/helpers/constants.dart';
+import 'package:listanything/app/navigation/current_user_provider.dart';
 import 'package:listanything/app/navigation/routes/routes.dart';
 import 'package:listanything/app/navigation/routes/search_location_for_add_page_route.dart';
 import 'package:listanything/app/navigation/routes/search_location_for_edit_page_route.dart';
 import 'package:listanything/app/pages/list_items/list_item.dart';
 import 'package:listanything/app/pages/list_items/list_items_repository_provider.dart';
 import 'package:listanything/app/pages/lists/list_of_things.dart';
+import 'package:listanything/app/pages/settings/settings.dart';
 import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
+import 'package:listanything/app/widgets/standardWidgets/async_value_widget.dart';
 import 'package:listanything/app/widgets/standardWidgets/common_scaffold.dart';
 
 class UpsertListItemFormNameFieldConstants {
@@ -91,64 +96,67 @@ class UpsertListItemForm extends HookConsumerWidget {
     final errors = useState<Map<String, bool>>(createErrorVars());
     final initialValues = useState(createInitialValues(listItem));
 
-    return CommonScaffold(
-      title: listItem == null ? 'Add List Item' : 'Edit List Item',
-      actions: [
-        if (listItem != null)
-          AppBarAction(
-            key: UpsertListItemFormKeyConstants.deleteButtonKey,
-            title: 'Delete',
-            icon: Icons.delete,
-            callback: () {
-              deleteListItem(
-                ref,
-                getGoRouter(context),
-                list.publicListId!,
-                listItem!.id!,
-              );
-            },
-            overflow: false,
-          )
-      ],
-      body: getFormBuilderWrapper(
-        children: [
-          pageHeader(
-            listItem == null ? 'Add a new list item' : 'Edit list item',
-          ),
-          const SizedBox(height: 8),
-          sectionHeader('Name'),
-          const SizedBox(height: 8),
-          ...getNameInput(context, initialValues, errors),
-          const SizedBox(height: 8),
-          sectionHeader('Extra information'),
-          const SizedBox(height: 8),
-          getExtraInfoInput(context, initialValues, errors),
-          const SizedBox(height: 24),
-          ...getAddressInputs(context, initialValues, errors),
-          const SizedBox(height: 16),
-          sectionHeader('Date'),
-          const SizedBox(height: 8),
-          getDateInputs(list, initialValues),
-          const SizedBox(height: 16),
-          ...getUrlInputs(
-            initialValues,
-            errors,
-          ),
-          const SizedBox(height: 16),
-          ...getCategoriesWidgets(
-            initialValues,
-            errors,
-          ),
-          const SizedBox(height: 32),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              getCancelButton(context),
-              const SizedBox(width: 20),
-              getSubmitButton(context, ref),
-            ],
-          ),
+    return AsyncValueWidget(
+      value: ref.watch(currentUserProvider),
+      data: (firestoreUser) => CommonScaffold(
+        title: listItem == null ? 'Add List Item' : 'Edit List Item',
+        actions: [
+          if (listItem != null)
+            AppBarAction(
+              key: UpsertListItemFormKeyConstants.deleteButtonKey,
+              title: 'Delete',
+              icon: Icons.delete,
+              callback: () {
+                deleteListItem(
+                  ref,
+                  getGoRouter(context),
+                  list.publicListId!,
+                  listItem!.id!,
+                );
+              },
+              overflow: false,
+            )
         ],
+        body: getFormBuilderWrapper(
+          children: [
+            pageHeader(
+              listItem == null ? 'Add a new list item' : 'Edit list item',
+            ),
+            const SizedBox(height: 8),
+            sectionHeader('Name'),
+            const SizedBox(height: 8),
+            ...getNameInput(context, initialValues, errors),
+            const SizedBox(height: 8),
+            sectionHeader('Extra information'),
+            const SizedBox(height: 8),
+            getExtraInfoInput(context, initialValues, errors),
+            const SizedBox(height: 24),
+            ...getAddressInputs(context, initialValues, errors),
+            const SizedBox(height: 16),
+            sectionHeader('Date'),
+            const SizedBox(height: 8),
+            getDateInputs(list, initialValues, firestoreUser),
+            const SizedBox(height: 16),
+            ...getUrlInputs(
+              initialValues,
+              errors,
+            ),
+            const SizedBox(height: 16),
+            ...getCategoriesWidgets(
+              initialValues,
+              errors,
+            ),
+            const SizedBox(height: 32),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                getCancelButton(context),
+                const SizedBox(width: 20),
+                getSubmitButton(context, ref),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -510,6 +518,7 @@ class UpsertListItemForm extends HookConsumerWidget {
   Widget getDateInputs(
     ListOfThings list,
     ValueNotifier<Map<String, dynamic>> initialValues,
+    FirestoreUser? firestoreUser,
   ) {
     if (!list.withDates) {
       return Container();
@@ -524,7 +533,7 @@ class UpsertListItemForm extends HookConsumerWidget {
               .value[UpsertListItemFormNameFieldConstants.dateTimeField]
           as DateTime?,
       inputType: list.withTimes ? InputType.both : InputType.date,
-      format: dateTimeFormatter,
+      format: getDateFormatter(firestoreUser, list),
       decoration: InputDecoration(
         labelText: list.withTimes ? 'Date and Time' : 'Date',
         suffixIcon: IconButton(
@@ -983,5 +992,17 @@ class UpsertListItemForm extends HookConsumerWidget {
         await ref.read(listItemsRepositoryProvider(publicListId).future);
     await repo.deleteItem(itemId: listItemId);
     router.pop();
+  }
+
+  DateFormat getDateFormatter(FirestoreUser? firestoreUser, ListOfThings list) {
+    if (list.withTimes) {
+      return firestoreUser?.settings.dateFormatType == DateFormatType.ISO_8601
+          ? dateTimeFormatter
+          : DateFormat.yMd().add_jm();
+    } else {
+      return firestoreUser?.settings.dateFormatType == DateFormatType.ISO_8601
+          ? dateFormatter
+          : usDateFormatter;
+    }
   }
 }
