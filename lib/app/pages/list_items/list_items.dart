@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:listanything/app/firebase/firestore_user.dart';
+import 'package:listanything/app/firebase/current_user.dart';
 import 'package:listanything/app/pages/list_items/list_item.dart';
 import 'package:listanything/app/pages/list_items/list_item_item.dart';
 
@@ -14,7 +14,7 @@ class ListItems extends StatelessWidget {
   final String publicListId;
   final List<ListItem> items;
   final bool isListViewOnly;
-  final FirestoreUser? firestoreUser;
+  final CurrentUser? firestoreUser;
 
   @override
   Widget build(BuildContext context) {

@@ -32,7 +32,7 @@
   - [ ] Handle AM/PM or 24 H
   - [x] Handle date format
 - [x] Firebase Crashlytics
-- [ ] Firebase Remote Config
+- [x] Firebase Remote Config
 - [ ] Clean up directories, espectially filters
 - [ ] Anonymous account and merge when logging in
 - [ ] Deploy to TestFlight (Codemagic)

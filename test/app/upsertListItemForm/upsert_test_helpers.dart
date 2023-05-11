@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listanything/app/firebase/firestore_user.dart';
+import 'package:listanything/app/firebase/current_user.dart';
 import 'package:listanything/app/geocoder/geocoderresult.dart';
 import 'package:listanything/app/geocoder/geometry.dart';
 import 'package:listanything/app/geocoder/latlong.dart';
@@ -16,7 +16,8 @@ import 'package:listanything/app/pages/settings/settings.dart';
 import 'package:listanything/app/widgets/standardWidgets/base_repository.dart';
 import 'package:mocktail/mocktail.dart';
 
-final mockFirestoreUser = FirestoreUser(
+final mockFirestoreUser = CurrentUser(
+  name: 'AA',
   uid: 'uid-1',
   email: 'uid-1-email@email.com',
   settings: Settings(
@@ -362,7 +363,7 @@ class UpsertTestHelpers {
   }
 
   static Override getCurrentUserRepoOverride(
-    FirestoreUser user,
+    CurrentUser user,
   ) {
     return currentUserProvider.overrideWith((ref) => AsyncValue.data(user));
   }
@@ -387,7 +388,7 @@ class UpsertTestHelpers {
   static ProviderScope getProviderScope(
     MockBaseRepository<ListItem> mockListItemRepo,
     MockUpsertListItemForm upsertForm,
-    FirestoreUser user,
+    CurrentUser user,
   ) {
     return ProviderScope(
       overrides: [

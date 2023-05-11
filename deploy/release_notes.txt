@@ -1,3 +1,6 @@
+0.0.24
+* Fix for signing in with google account for first time
+
 0.0.23
 * Remote config, Crashlytics, and Analytics
 

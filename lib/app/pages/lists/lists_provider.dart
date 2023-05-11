@@ -12,7 +12,9 @@ import 'package:rxdart/rxdart.dart';
 final _listsProvider = StreamProvider<List<ListOfThings>>((ref) async* {
   yield* ref.watch(listRepositoryProvider).when(
     error: (e, st) {
-      logger.e(e);
+      logger
+        ..e(e)
+        ..e(st);
       return Stream.value([]);
     },
     loading: () {
@@ -55,7 +57,9 @@ final listProvider =
       await ref.watch(publicListIdRepositoryProvider.future);
   yield* ref.watch(listRepositoryProvider).when(
         error: (e, st) {
-          logger.e(e);
+          logger
+            ..e(e)
+            ..e(st);
           return const Stream.empty();
         },
         loading: Stream.empty,

@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:listanything/app/firebase/current_user.dart';
 import 'package:listanything/app/firebase/firebase_auth_provider.dart';
-import 'package:listanything/app/firebase/firestore_user.dart';
 import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/navigation/current_user_provider.dart';
 import 'package:listanything/app/pages/settings/settings.dart';
@@ -30,19 +30,22 @@ final settings = Settings(
 );
 
 final firestoreUsers = [
-  FirestoreUser(
+  CurrentUser(
+    name: 'AA',
     uid: 'uid-1',
     email: 'user1@email.com',
     settings: settings,
     isAdmin: false,
   ),
-  FirestoreUser(
+  CurrentUser(
+    name: 'BB',
     uid: 'uid-2',
     email: 'user2@email.com',
     settings: settings,
     isAdmin: false,
   ),
-  FirestoreUser(
+  CurrentUser(
+    name: 'CC',
     uid: 'uid-3',
     email: 'user3@email.com',
     settings: settings,
@@ -51,7 +54,7 @@ final firestoreUsers = [
 ];
 
 final mockFirestoreUserProvider =
-    StreamProvider.family<FirestoreUser, String>((ref, userId) async* {
+    StreamProvider.family<CurrentUser, String>((ref, userId) async* {
   yield* Stream.value(
     firestoreUsers.firstWhere((element) => element.uid == userId),
   );

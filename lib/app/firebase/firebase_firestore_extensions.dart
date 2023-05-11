@@ -85,9 +85,11 @@ extension FirebaseFirestoreExt on FirebaseFirestore {
   DocumentReference<Map<String, dynamic>> user(
     Map<String, String?> identifiers,
   ) {
-    final path = getPathForUserId(identifiers['itemId']!);
+    final itemId = identifiers['itemId']!;
+    final path = getPathForUserId(itemId);
     logger.d('user path: $path');
-    return doc(path);
+    final d = doc(path);
+    return d;
   }
 }
 

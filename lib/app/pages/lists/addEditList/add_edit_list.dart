@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listanything/app/common_theme_data.dart';
-import 'package:listanything/app/firebase/firestore_user.dart';
+import 'package:listanything/app/firebase/current_user.dart';
 import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/navigation/current_user_provider.dart';
 import 'package:listanything/app/pages/lists/list_of_things.dart';
@@ -55,7 +55,7 @@ class AddEditList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return AsyncValueWidget<FirestoreUser?>(
+    return AsyncValueWidget<CurrentUser?>(
       value: ref.watch(currentUserProvider),
       data: (user) {
         if (publicListId == null) {
@@ -347,7 +347,9 @@ class _AddEditListInnerState extends ConsumerState<AddEditListInner> {
     logger.d('delete');
     await ref.read(listRepositoryProvider).when(
           error: (e, st) {
-            logger.e(e);
+            logger
+              ..e(e)
+              ..e(st);
           },
           loading: () {},
           data: (repo) async {

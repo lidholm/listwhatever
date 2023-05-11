@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -13,6 +14,7 @@ import 'package:listanything/app/navigation/routes/loading_user_route.dart';
 import 'package:listanything/app/navigation/routes/privacy_policy_page_route.dart';
 import 'package:listanything/app/navigation/routes/routes.dart';
 import 'package:listanything/app/navigation/routes/sign_in_screen_route.dart';
+import 'package:listanything/app/navigation/routes/sign_up_user_page_route.dart';
 import 'package:listanything/l10n/l10n.dart';
 
 final providers = [EmailAuthProvider()];
@@ -48,7 +50,12 @@ final routerProvider = Provider(
       final userChanges = ref.watch(currentUserProvider);
       final path = userChanges.when(
         error: (e, st) {
-          logger.e(e);
+          if (e is FirebaseException && e.code == 'permission-denied') {
+            return const SignUpUserPageRoute().location;
+          }
+          logger
+            ..e(e)
+            ..e(st);
           return const ErrorLoadingUserRoute().location;
         },
         loading: () => const LoadingUserRoute().location,

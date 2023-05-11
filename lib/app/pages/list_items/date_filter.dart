@@ -3,7 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:listanything/app/firebase/firestore_user.dart';
+import 'package:listanything/app/firebase/current_user.dart';
 import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/navigation/current_user_provider.dart';
 import 'package:listanything/app/pages/settings/settings.dart';
@@ -73,7 +73,7 @@ class DateFilter extends HookConsumerWidget {
     String name,
     ValueNotifier<DateTime?> date,
     List<ValueNotifier<bool>> dateErrors,
-    FirestoreUser? firestoreUser,
+    CurrentUser? firestoreUser,
   ) {
     return SizedBox(
       width: 200,
@@ -118,7 +118,7 @@ class DateFilter extends HookConsumerWidget {
     );
   }
 
-  DateFormat getDateFormatter(FirestoreUser? firestoreUser) {
+  DateFormat getDateFormatter(CurrentUser? firestoreUser) {
     return firestoreUser?.settings.dateFormatType == DateFormatType.ISO_8601
         ? dateFormatter
         : usDateFormatter;

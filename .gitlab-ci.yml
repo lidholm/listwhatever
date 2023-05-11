@@ -53,6 +53,7 @@ decrypt-sops:
       - firebase-deploy-service-account.json
       - firebase-adminsdk-google-cloud-service-account.json
       - assets/google_sheets_service_account.json
+      - lib/app/api_keys.dart
       - lib/app/firebase/firebase_options.dart
       - ios/firebase_app_id_file.json
       - .firebase-deploy-service-account.json
