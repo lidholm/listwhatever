@@ -22,6 +22,7 @@ import 'package:listanything/app/navigation/routes/settings_page_route.dart';
 import 'package:listanything/app/navigation/routes/share_code_page_route.dart';
 import 'package:listanything/app/navigation/routes/share_list_page_route.dart';
 import 'package:listanything/app/navigation/routes/sign_in_screen_route.dart';
+import 'package:listanything/app/navigation/routes/sign_up_user_page_route.dart';
 
 part 'routes.g.dart';
 
@@ -37,6 +38,9 @@ part 'routes.g.dart';
     TypedGoRoute<ListsPageRoute>(
       path: 'lists',
       routes: [
+        TypedGoRoute<SignUpUserPageRoute>(
+          path: 'signup',
+        ),
         TypedGoRoute<ShareListPageRoute>(
           path: ':publicListId/share',
         ),

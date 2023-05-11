@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:listanything/app/firebase/firestore_user.dart';
+import 'package:listanything/app/firebase/current_user.dart';
 import 'package:listanything/app/helpers/combine_four_async_values.dart';
 import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/navigation/current_user_provider.dart';
@@ -108,7 +108,7 @@ class ListItemsPageInner extends HookConsumerWidget {
   final bool isLoading;
   final ListOfThings? list;
   final LocationData? location;
-  final FirestoreUser? firestoreUser;
+  final CurrentUser? firestoreUser;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -181,7 +181,11 @@ class ListItemsPageInner extends HookConsumerWidget {
                   shareCodeForViewer: getRandomString(16),
                 );
                 ref.read(listRepositoryProvider).when(
-                      error: (e, st) => logger.e(e),
+                      error: (e, st) {
+                        logger
+                          ..e(e)
+                          ..e(st);
+                      },
                       loading: () {},
                       data: (repo) {
                         repo.updateItem(itemId: list!.id!, item: newList);

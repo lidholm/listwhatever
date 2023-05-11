@@ -7,7 +7,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listanything/app/common_theme_data.dart';
-import 'package:listanything/app/firebase/firestore_user.dart';
+import 'package:listanything/app/firebase/current_user.dart';
 import 'package:listanything/app/helpers/combine_three_async_values.dart';
 import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/navigation/current_user_provider.dart';
@@ -105,7 +105,7 @@ class FilterPageInner extends StatefulWidget {
   final WidgetRef ref;
   final Filters filters;
   final ListOfThings? list;
-  final FirestoreUser? firestoreUser;
+  final CurrentUser? firestoreUser;
 
   @override
   State<FilterPageInner> createState() {

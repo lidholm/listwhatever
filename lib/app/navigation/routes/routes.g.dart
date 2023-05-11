@@ -27,6 +27,10 @@ RouteBase get $welcomeRoute => GoRouteData.$route(
           factory: $ListsPageRouteExtension._fromState,
           routes: [
             GoRouteData.$route(
+              path: 'signup',
+              factory: $SignUpUserPageRouteExtension._fromState,
+            ),
+            GoRouteData.$route(
               path: ':publicListId/share',
               factory: $ShareListPageRouteExtension._fromState,
             ),
@@ -167,6 +171,22 @@ extension $ListsPageRouteExtension on ListsPageRoute {
 
   String get location => GoRouteData.$location(
         '/lists',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+}
+
+extension $SignUpUserPageRouteExtension on SignUpUserPageRoute {
+  static SignUpUserPageRoute _fromState(GoRouterState state) =>
+      const SignUpUserPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/lists/signup',
       );
 
   void go(BuildContext context) => context.go(location);

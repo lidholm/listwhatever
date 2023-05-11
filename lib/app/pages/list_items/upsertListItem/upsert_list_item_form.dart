@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:listanything/app/common_theme_data.dart';
-import 'package:listanything/app/firebase/firestore_user.dart';
+import 'package:listanything/app/firebase/current_user.dart';
 import 'package:listanything/app/geocoder/geocoderresult.dart';
 import 'package:listanything/app/geocoder/latlong.dart';
 import 'package:listanything/app/helpers/constants.dart';
@@ -518,7 +518,7 @@ class UpsertListItemForm extends HookConsumerWidget {
   Widget getDateInputs(
     ListOfThings list,
     ValueNotifier<Map<String, dynamic>> initialValues,
-    FirestoreUser? firestoreUser,
+    CurrentUser? firestoreUser,
   ) {
     if (!list.withDates) {
       return Container();
@@ -994,7 +994,7 @@ class UpsertListItemForm extends HookConsumerWidget {
     router.pop();
   }
 
-  DateFormat getDateFormatter(FirestoreUser? firestoreUser, ListOfThings list) {
+  DateFormat getDateFormatter(CurrentUser? firestoreUser, ListOfThings list) {
     if (list.withTimes) {
       return firestoreUser?.settings.dateFormatType == DateFormatType.ISO_8601
           ? dateTimeFormatter

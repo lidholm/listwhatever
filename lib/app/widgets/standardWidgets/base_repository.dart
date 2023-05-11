@@ -10,7 +10,7 @@ abstract class BaseRepository<T> {
   Stream<List<T>> retrieveItemsStreamAtPath(String path);
   Stream<T> retrieveItemStream({required String itemId});
   Stream<T> retrieveItemStreamAtPath(String path);
-  Future<String> createItem({required T item});
+  Future<String> createItem({required T item, String? itemId});
   Future<String> updateItem({required String itemId, required T item});
   Future<void> deleteItem({required String itemId});
 }
@@ -49,6 +49,9 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
     } on FirebaseException catch (e, s) {
       await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
       throw CustomException(message: e.message);
+    } catch (e, s) {
+      await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
+      throw CustomException(message: '$e');
     }
   }
 
@@ -60,6 +63,9 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
     } on FirebaseException catch (e, s) {
       await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
       throw CustomException(message: e.message);
+    } catch (e, s) {
+      await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
+      throw CustomException(message: '$e');
     }
   }
 
@@ -75,6 +81,9 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
     } on FirebaseException catch (e, s) {
       await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
       throw CustomException(message: e.message);
+    } catch (e, s) {
+      await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
+      throw CustomException(message: '$e');
     }
   }
 
@@ -120,15 +129,22 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
     } on FirebaseException catch (e, s) {
       errorMonitor.recordError(e, s, 'as an example of non-fatal error');
       throw CustomException(message: e.message);
+    } catch (e, s) {
+      errorMonitor.recordError(e, s, 'as an example of non-fatal error');
+      throw CustomException(message: '$e');
     }
   }
 
   @override
-  Future<String> createItem({required T item}) async {
+  Future<String> createItem({required T item, String? itemId}) async {
     try {
       final data = jsonFunction(item);
       logger.d('Adding data: $data');
-      final ref = firestoreItemsPath(identifiers).doc();
+      print('firestoreItemPath: $firestoreItemPath');
+      final ref = (itemId != null)
+          ? firestoreItemPath({'itemId': itemId})
+          : firestoreItemsPath(identifiers).doc();
+
       data['id'] = ref.id;
       await ref.set(data);
       logger.d('Added at $ref');

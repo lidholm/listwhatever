@@ -3,22 +3,23 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:listanything/app/pages/settings/settings.dart';
 
-part 'firestore_user.freezed.dart';
-part 'firestore_user.g.dart';
+part 'current_user.freezed.dart';
+part 'current_user.g.dart';
 
 @freezed
-class FirestoreUser with _$FirestoreUser {
-  factory FirestoreUser({
+class CurrentUser with _$CurrentUser {
+  factory CurrentUser({
     required String uid,
     required String email,
+    required String name,
     @JsonKey(fromJson: _fromJsonIsAdmin, toJson: _toJsonIsAdmin)
         required bool isAdmin,
     @JsonKey(fromJson: _fromJsonSettings, toJson: _toJsonSettings)
         required Settings settings,
-  }) = _FirestoreUser;
+  }) = _CurrentUser;
 
-  factory FirestoreUser.fromJson(Map<String, dynamic> json) =>
-      _$FirestoreUserFromJson(json);
+  factory CurrentUser.fromJson(Map<String, dynamic> json) =>
+      _$CurrentUserFromJson(json);
 }
 
 Map<String, dynamic> _toJsonSettings(Settings settings) {

@@ -19,6 +19,13 @@ enum DistanceUnitType {
 // ignore: constant_identifier_names
 enum ClockType { AM_PM, TwentyFourHour }
 
+final defaultSettings = Settings(
+  clockType: ClockType.TwentyFourHour,
+  dateFormatType: DateFormatType.ISO_8601,
+  distanceUnit: DistanceUnitType.kilometers,
+  readableDateFormatType: DateFormatType.MONTH_AND_DAY,
+);
+
 @freezed
 class Settings with _$Settings {
   factory Settings({

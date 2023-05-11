@@ -5,8 +5,8 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:listanything/app/common_theme_data.dart';
+import 'package:listanything/app/firebase/current_user.dart';
 import 'package:listanything/app/firebase/firebase_user_repository_provider.dart';
-import 'package:listanything/app/firebase/firestore_user.dart';
 import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/navigation/current_user_provider.dart';
 import 'package:listanything/app/pages/settings/settings.dart';
@@ -61,7 +61,7 @@ class SettingsPage extends HookConsumerWidget {
   Widget body(
     BuildContext context,
     WidgetRef ref,
-    FirestoreUser firestoreUser,
+    CurrentUser firestoreUser,
   ) {
     final errors = useState<Map<String, bool>>(createErrorVars());
     final initialValues = useState(createInitialValues(firestoreUser.settings));
@@ -315,7 +315,7 @@ class SettingsPage extends HookConsumerWidget {
   ElevatedButton getSubmitButton(
     BuildContext context,
     WidgetRef ref,
-    FirestoreUser firestoreUser,
+    CurrentUser firestoreUser,
   ) {
     return ElevatedButton(
       key: _SettingsFormKeyConstants.submitButtonKey,
@@ -351,15 +351,17 @@ class SettingsPage extends HookConsumerWidget {
   Future<void> saveListItem(
     GoRouter router,
     WidgetRef ref,
-    FirestoreUser firestoreUser,
+    CurrentUser firestoreUser,
   ) async {
     final fields = _SettingsFormKeyConstants.formKey.currentState!.fields;
-    final repo = await ref.read(fiirebaseUserRepositoryProvider.future);
+    final repo = await ref.read(currentUserRepositoryProvider.future);
     final selectedUserValue = ref.read(currentUserProvider);
 
     await selectedUserValue.when(
       error: (e, st) {
-        logger.e(e);
+        logger
+          ..e(e)
+          ..e(st);
       },
       loading: () {},
       data: (selectedUser) async {

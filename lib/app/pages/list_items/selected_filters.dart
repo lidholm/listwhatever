@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:listanything/app/common_theme_data.dart';
-import 'package:listanything/app/firebase/firestore_user.dart';
+import 'package:listanything/app/firebase/current_user.dart';
 import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/pages/list_items/filters.dart';
 import 'package:listanything/app/pages/settings/settings.dart';
@@ -12,7 +12,7 @@ class SelectedFilters extends StatelessWidget {
     super.key,
   });
   final Filters filters;
-  final FirestoreUser? firestoreUser;
+  final CurrentUser? firestoreUser;
 
   @override
   Widget build(BuildContext context) {

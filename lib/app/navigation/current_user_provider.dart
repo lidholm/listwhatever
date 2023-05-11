@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:listanything/app/firebase/current_user.dart';
 import 'package:listanything/app/firebase/firebase_auth_provider.dart';
 import 'package:listanything/app/firebase/firebase_user_repository_provider.dart';
-import 'package:listanything/app/firebase/firestore_user.dart';
 import 'package:listanything/app/helpers/constants.dart';
 
 // const SelectedUser? userOverride = null;
@@ -14,7 +14,7 @@ import 'package:listanything/app/helpers/constants.dart';
 //   return;
 // }
 
-final _userChangesProvider = StreamProvider<User?>((ref) async* {
+final userChangesProvider = StreamProvider<User?>((ref) async* {
   final auth = await ref.watch(firebaseAuthProvider.future);
   yield* auth.userChanges().distinct((previous, next) {
     return previous?.email == next?.email &&
@@ -22,9 +22,9 @@ final _userChangesProvider = StreamProvider<User?>((ref) async* {
   });
 });
 
-final currentUserProvider = Provider<AsyncValue<FirestoreUser?>>((ref) {
+final currentUserProvider = Provider<AsyncValue<CurrentUser?>>((ref) {
   final authValue = ref.watch(firebaseAuthProvider);
-  final userValue = ref.watch(_userChangesProvider);
+  final userValue = ref.watch(userChangesProvider);
 
   String? uid;
 
@@ -50,9 +50,9 @@ final currentUserProvider = Provider<AsyncValue<FirestoreUser?>>((ref) {
 });
 
 final userProvider =
-    StreamProvider.family<FirestoreUser, String>((ref, userId) async* {
+    StreamProvider.family<CurrentUser, String>((ref, userId) async* {
   logger.d('in userProvider');
-  final repo = await ref.watch(fiirebaseUserRepositoryProvider.future);
+  final repo = await ref.watch(currentUserRepositoryProvider.future);
   logger.d('repo: $repo');
   yield* repo.retrieveItemStream(itemId: userId);
 });

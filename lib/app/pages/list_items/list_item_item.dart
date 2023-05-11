@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:listanything/app/common_theme_data.dart';
-import 'package:listanything/app/firebase/firestore_user.dart';
+import 'package:listanything/app/firebase/current_user.dart';
 import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/navigation/routes/edit_list_item_route.dart';
 import 'package:listanything/app/navigation/routes/list_item_details_page_route.dart';
@@ -24,7 +24,7 @@ class ListItemItem extends ConsumerWidget {
   final bool isListViewOnly;
   final ListItem item;
   final bool isLoading;
-  final FirestoreUser? firestoreUser;
+  final CurrentUser? firestoreUser;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
