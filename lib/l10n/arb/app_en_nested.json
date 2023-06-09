@@ -1,0 +1,35 @@
+{
+  "@GLOBAL TEXTS": {
+    "@@locale": "en",
+    "counterAppBarTitle": "Counter"
+  },
+  "@SETTINGS TEXTS": {
+    "distanceUnit": "{unit, select, miles{Miles} kilometers{Kilometers} other{Should not happen}}",
+    "@distanceUnit": {
+        "description": "Name of the distance",
+        "placeholders": {
+            "unit": {
+                "type": "String"
+            }
+        }
+    },
+    "ampm": "{unit, select, AM_PM{AM/PM format} TwentyFourHour{24 H format} other{Should not happen}}",
+    "@ampm": {
+        "description": "Name of the clock type",
+        "placeholders": {
+            "unit": {
+                "type": "String"
+            }
+        }
+    },
+    "dateformat": "{unit, select, ISO_8601{2001-04-15} US{15/4/2001} other{Should not happen}}",
+    "@dateformat": {
+        "description": "Name of the date format",
+        "placeholders": {
+            "unit": {
+                "type": "String"
+            }
+        }
+    }
+  }
+}

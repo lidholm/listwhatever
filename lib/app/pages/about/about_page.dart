@@ -8,13 +8,13 @@ class AboutPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return SafeArea(
+    return const SafeArea(
       child: CommonScaffold(
         title: 'About',
         body: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: EdgeInsets.all(24),
           child: Column(
-            children: const [
+            children: [
               Text('Version: <version>'),
               Text('Git hash: <git_hash>'),
               Text('Date: <datetime>'),

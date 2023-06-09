@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:listanything/app/geocoder/latlong.dart';
@@ -45,7 +47,6 @@ void main() {
       name: 'Place one',
       info: 'Some information',
       categories: {},
-      urls: [],
     );
     final captured = verify(
       () => UpsertTestHelpers.mockListItemRepo
@@ -255,7 +256,6 @@ void main() {
       name: 'Place one',
       info: 'Some information',
       categories: {},
-      urls: [],
       address: '123 Main street',
       latLong: LatLong(
         lat: 12.3,

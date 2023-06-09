@@ -12,8 +12,8 @@ class CurrentLocationMarkerBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: const [
+    return const Stack(
+      children: [
         Icon(
           Icons.circle,
           color: Color.fromARGB(119, 55, 105, 243),
