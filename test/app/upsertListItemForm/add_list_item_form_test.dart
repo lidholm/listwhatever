@@ -49,8 +49,9 @@ void main() {
       categories: {},
     );
     final captured = verify(
-      () => UpsertTestHelpers.mockListItemRepo
-          .createItem(item: captureAny(named: 'item')),
+      () => UpsertTestHelpers.mockListItemRepo.createItem(
+        item: captureAny(named: 'item'),
+      ),
     ).captured;
     expect(captured.last as ListItem, expectedListItem);
 
@@ -110,8 +111,9 @@ void main() {
       ],
     );
     final captured = verify(
-      () => UpsertTestHelpers.mockListItemRepo
-          .createItem(item: captureAny(named: 'item')),
+      () => UpsertTestHelpers.mockListItemRepo.createItem(
+        item: captureAny(named: 'item'),
+      ),
     ).captured;
     expect(captured.last as ListItem, expectedListItem);
 
@@ -169,8 +171,9 @@ void main() {
       datetime: DateTime(now.year, now.month, 27),
     );
     final captured = verify(
-      () => UpsertTestHelpers.mockListItemRepo
-          .createItem(item: captureAny(named: 'item')),
+      () => UpsertTestHelpers.mockListItemRepo.createItem(
+        item: captureAny(named: 'item'),
+      ),
     ).captured;
     expect(captured.last as ListItem, expectedListItem);
 
@@ -212,8 +215,9 @@ void main() {
       datetime: DateTime(now.year, now.month, 27, 9, 45),
     );
     final captured = verify(
-      () => UpsertTestHelpers.mockListItemRepo
-          .createItem(item: captureAny(named: 'item')),
+      () => UpsertTestHelpers.mockListItemRepo.createItem(
+        item: captureAny(named: 'item'),
+      ),
     ).captured;
     expect(captured.last as ListItem, expectedListItem);
 
@@ -263,8 +267,9 @@ void main() {
       ),
     );
     final captured = verify(
-      () => UpsertTestHelpers.mockListItemRepo
-          .createItem(item: captureAny(named: 'item')),
+      () => UpsertTestHelpers.mockListItemRepo.createItem(
+        item: captureAny(named: 'item'),
+      ),
     ).captured;
     expect(captured.last as ListItem, expectedListItem);
 
@@ -289,8 +294,9 @@ void main() {
     await UpsertTestHelpers.clickCancel(tester);
 
     verifyNever(
-      () => UpsertTestHelpers.mockListItemRepo
-          .createItem(item: captureAny(named: 'item')),
+      () => UpsertTestHelpers.mockListItemRepo.createItem(
+        item: captureAny(named: 'item'),
+      ),
     );
     verify(mockGoRouter.pop).called(1);
   });

@@ -216,7 +216,7 @@ class SignUpUserPageInner extends HookWidget {
         as String;
 
     final repo = await ref.read(currentUserRepositoryProvider.future);
-    await repo.createItem(
+    await repo.updateItem(
       item: CurrentUser(
         email: email,
         isAdmin: false,

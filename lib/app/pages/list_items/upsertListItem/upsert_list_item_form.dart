@@ -925,6 +925,7 @@ class UpsertListItemForm extends HookConsumerWidget {
         latLong: latLong,
         searchPhrase: searchPhrase,
       );
+
       final refId = await repo.createItem(item: listItem);
       logger.d('Added $refId');
     } else {

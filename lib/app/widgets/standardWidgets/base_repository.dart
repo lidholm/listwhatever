@@ -10,9 +10,10 @@ abstract class BaseRepository<T> {
   Stream<List<T>> retrieveItemsStreamAtPath(String path);
   Stream<T> retrieveItemStream({required String itemId});
   Stream<T> retrieveItemStreamAtPath(String path);
-  Future<String> createItem({required T item, String? itemId});
+  Future<String> createItem({required T item});
   Future<String> updateItem({required String itemId, required T item});
   Future<void> deleteItem({required String itemId});
+  DocumentReference<Map<String, dynamic>> getItemRef();
 }
 
 class BaseRepositoryImpl<T> implements BaseRepository<T> {
@@ -29,7 +30,7 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
   final ErrorMonitor errorMonitor;
   final FirebaseFirestore firestore;
   final Map<String, String?> identifiers;
-  final CollectionReference<Map<String, dynamic>> Function(Map<String, String?>)
+  final Query<Map<String, dynamic>> Function(Map<String, String?>)
       firestoreItemsPath;
   final DocumentReference<Map<String, dynamic>> Function(Map<String, String?>)
       firestoreItemPath;
@@ -121,7 +122,7 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
     try {
       final items = list.docs.map((d) {
         final item = itemConverter(d.data(), d.id);
-        logger.d('converting: $item');
+        // logger.d('converting: $item');
         return item;
       }).toList();
       logger.d('convertCollection.items: ${items.length}');
@@ -136,14 +137,12 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
   }
 
   @override
-  Future<String> createItem({required T item, String? itemId}) async {
+  Future<String> createItem({required T item}) async {
     try {
       final data = jsonFunction(item);
       logger.d('Adding data: $data');
-      print('firestoreItemPath: $firestoreItemPath');
-      final ref = (itemId != null)
-          ? firestoreItemPath({'itemId': itemId})
-          : firestoreItemsPath(identifiers).doc();
+
+      final ref = getItemRef();
 
       data['id'] = ref.id;
       await ref.set(data);
@@ -188,5 +187,13 @@ class BaseRepositoryImpl<T> implements BaseRepository<T> {
       await errorMonitor.recordError(e, s, 'as an example of non-fatal error');
       throw CustomException(message: '$e');
     }
+  }
+
+  @override
+  DocumentReference<Map<String, dynamic>> getItemRef() {
+    final tmp = {...identifiers, 'id': 'aa'};
+    final doc = firestoreItemPath(tmp);
+    final ref = doc.parent.doc();
+    return ref;
   }
 }

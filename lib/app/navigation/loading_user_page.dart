@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:listanything/app/firebase/firebase_auth_provider.dart';
 import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
 import 'package:listanything/app/widgets/standardWidgets/common_scaffold.dart';
+import 'package:listanything/l10n/l10n.dart';
 
 class LoadingUserPage extends ConsumerWidget {
   const LoadingUserPage({super.key});
@@ -10,10 +11,10 @@ class LoadingUserPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return CommonScaffold(
-      title: 'Loading',
+      title: AppLocalizations.of(context).loadingText,
       actions: [
         AppBarAction(
-          title: 'Log out',
+          title: AppLocalizations.of(context).logOutText,
           icon: Icons.logout,
           callback: () async {
             final auth = await ref.read(firebaseAuthProvider.future);
@@ -34,10 +35,10 @@ class LoadingUserPage extends ConsumerWidget {
                     final auth = await ref.read(firebaseAuthProvider.future);
                     await auth.signOut();
                   },
-                  child: const Text('Log out'),
+                  child: Text(AppLocalizations.of(context).logOutText),
                 ),
               ),
-              const Text('Loading!'),
+              Text(AppLocalizations.of(context).loadingText),
             ],
           ),
         ),
