@@ -5,11 +5,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:listanything/app/common_theme_data.dart';
 import 'package:listanything/app/helpers/constants.dart';
 import 'package:listanything/app/widgets/standardWidgets/app_bar_action.dart';
 import 'package:listanything/app/widgets/standardWidgets/common_app_bar.dart';
 import 'package:listanything/bootstrap.dart';
+import 'package:listanything/l10n/l10n.dart';
 
 class CommonScaffold extends StatefulWidget {
   const CommonScaffold({
@@ -36,8 +36,12 @@ class _CommonScaffoldState extends State<CommonScaffold> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
+      extendBodyBehindAppBar: true,
       appBar: widget.title == null
-          ? null
+          ? AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+            )
           : CommonAppBar(
               title: widget.title!,
               titleWidget: widget.titleWidget,
@@ -45,7 +49,8 @@ class _CommonScaffoldState extends State<CommonScaffold> {
                 ..addAll([
                   if (!kIsWeb && Platform.isAndroid && kDebugMode)
                     AppBarAction(
-                      title: 'Take screenshot',
+                      title:
+                          AppLocalizations.of(context).takeScreenshotMenuText,
                       icon: Icons.screenshot,
                       key: const Key('takescreenshot'),
                       overflow: true,
@@ -54,20 +59,8 @@ class _CommonScaffoldState extends State<CommonScaffold> {
                 ]),
             ),
       drawer: widget.drawer,
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment(-0.5, -4),
-            end: Alignment(0.1, 3.3),
-            colors: [
-              secondaryButtonColor,
-              Colors.white,
-              shadedMainColor,
-            ],
-          ),
-        ),
+      body: Padding(
+        padding: EdgeInsets.fromLTRB(0, getTopPadding(), 0, 0),
         child: widget.body,
       ),
     );
@@ -75,6 +68,7 @@ class _CommonScaffoldState extends State<CommonScaffold> {
 
   // This function will be triggered when the button is pressed
   Future<void> _takeScreenshot() async {
+    final appLocalizations = AppLocalizations.of(context);
     final boundary = repaintBoundaryKey.currentContext!.findRenderObject()
         as RenderRepaintBoundary?;
 
@@ -99,10 +93,26 @@ class _CommonScaffoldState extends State<CommonScaffold> {
       // Find the ScaffoldMessenger in the widget tree
       // and use it to show a SnackBar.
       scaffoldMessengerState.showSnackBar(
-        const SnackBar(
-          content: Text('Took screenshot'),
+        SnackBar(
+          content: Text(appLocalizations.tookScreenshotSnackbarText),
         ),
       );
     }
+  }
+
+  double getTopPadding() {
+    if (widget.title == null) {
+      return 0;
+    }
+    if (kIsWeb) {
+      return 55;
+    }
+    if (Platform.isAndroid) {
+      return 100;
+    }
+    if (Platform.isIOS) {
+      return 100;
+    }
+    return 55;
   }
 }

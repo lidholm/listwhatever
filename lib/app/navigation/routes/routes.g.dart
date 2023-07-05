@@ -7,12 +7,12 @@ part of 'routes.dart';
 // **************************************************************************
 
 List<RouteBase> get $appRoutes => [
-      $welcomeRoute,
+      $mainPageRoute,
     ];
 
-RouteBase get $welcomeRoute => GoRouteData.$route(
+RouteBase get $mainPageRoute => GoRouteData.$route(
       path: '/',
-      factory: $WelcomeRouteExtension._fromState,
+      factory: $MainPageRouteExtension._fromState,
       routes: [
         GoRouteData.$route(
           path: 'loading_user',
@@ -119,8 +119,8 @@ RouteBase get $welcomeRoute => GoRouteData.$route(
       ],
     );
 
-extension $WelcomeRouteExtension on WelcomeRoute {
-  static WelcomeRoute _fromState(GoRouterState state) => WelcomeRoute();
+extension $MainPageRouteExtension on MainPageRoute {
+  static MainPageRoute _fromState(GoRouterState state) => MainPageRoute();
 
   String get location => GoRouteData.$location(
         '/',

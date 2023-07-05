@@ -23,10 +23,10 @@ import 'package:listanything/app/navigation/routes/share_code_page_route.dart';
 import 'package:listanything/app/navigation/routes/share_list_page_route.dart';
 import 'package:listanything/app/navigation/routes/sign_in_screen_route.dart';
 import 'package:listanything/app/navigation/routes/sign_up_user_page_route.dart';
-
+import 'package:listanything/app/pages/lists/lists_page.dart';
 part 'routes.g.dart';
 
-@TypedGoRoute<WelcomeRoute>(
+@TypedGoRoute<MainPageRoute>(
   path: '/',
   routes: [
     TypedGoRoute<LoadingUserRoute>(
@@ -109,9 +109,9 @@ part 'routes.g.dart';
   ],
 )
 @immutable
-class WelcomeRoute extends GoRouteData {
+class MainPageRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const Text('Welcome');
+    return const ListsPage();
   }
 }

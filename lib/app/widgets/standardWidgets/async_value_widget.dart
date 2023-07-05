@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:listanything/app/widgets/standardWidgets/exception_widget.dart';
+import 'package:listanything/l10n/l10n.dart';
 
 class AsyncValueWidget<T> extends StatelessWidget {
   const AsyncValueWidget({
@@ -15,11 +16,11 @@ class AsyncValueWidget<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return value.when(
       data: data,
-      loading: () => const Center(
+      loading: () => Center(
         child: Column(
           children: [
-            Text('Loading'),
-            CircularProgressIndicator(),
+            Text(AppLocalizations.of(context).loadingText),
+            const CircularProgressIndicator(),
           ],
         ),
       ),
