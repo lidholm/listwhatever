@@ -1,5 +1,5 @@
-import 'package:listanything/app/app.dart';
-import 'package:listanything/bootstrap.dart';
+import '/app/standard/app.dart';
+import '/bootstrap.dart';
 
 void main() {
   bootstrap(() => const App());

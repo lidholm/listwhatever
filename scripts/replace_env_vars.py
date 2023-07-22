@@ -8,9 +8,12 @@ for i in variablesData:
     if i.strip() == "" or i.strip()[0] == "#":
         continue
     variables[i.split('=')[0]] = i.split('=')[1][1:-2]
+print('len(variables): ' + str(len(variables)))
+print('variables.keys(): ' + str(variables.keys()))
 
 with open('./scripts/replace_env_vars.config', 'r') as file:
     configs = file.readlines()
+print(configs)
 
 count = 0
 for config in configs:
@@ -23,7 +26,7 @@ for config in configs:
         filedata = file.read()
 
     # Replace the target string
-    newFiledata = filedata.replace('$' + variable,
+    newFiledata = filedata.replace('<' + variable + '>',
                                 variables[variable])
     if newFiledata != filedata:
         count += 1
@@ -31,4 +34,4 @@ for config in configs:
     with open(filename, 'w') as file:
         file.write(newFiledata)
 
-print('Replaced ' + count + ' variables')
+print(f'Replaced {count} variables')

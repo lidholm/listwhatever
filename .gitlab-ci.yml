@@ -45,7 +45,7 @@ decrypt-sops:
   script:
     - sh scripts/gitlabci/decryptSops.sh
     - cat lib/bootstrap.dart
-    - cat lib/app/firebase/firebase_options.dart
+    - cat lib/app/standard/firebase/firebase_options.dart
   artifacts:
     paths:
       - android/app/google-services.json
@@ -79,8 +79,6 @@ lint_check:
     - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
     - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
     - cat lib/bootstrap.dart
-    - echo "==========="
-    - cat lib/app/firebase/firebase_options.dart 
     - echo "==========="
     - flutter analyze
     - dart run custom_lint

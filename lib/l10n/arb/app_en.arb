@@ -28,6 +28,65 @@
   "loadingText": "Loading",
   "logOutText": "Log out",
   "errorLoadingUserText": "Error loading user",
+  "cancelButtonText": "Cancel",
+  "submitButtonText": "Submit",
+  "closeButtonText": "Close",
+  "resetButtonText": "Reset",
+  "logInText": "Log in",
+  "okButtonText": "OK",
+  "hasToBeANumberErrorText": "Has to be a number",
+  "errorLabel": "Error",
   "takeScreenshotMenuText": "Take screenshot",
-  "tookScreenshotSnackbarText": "Took screenshot"
+  "tookScreenshotSnackbarText": "Took screenshot",
+  "profileMenuText": "Profile",
+  "aboutMenuText": "About",
+  "privacyProfileMenuText": "Privacy policy",
+  "settingsMenuText": "Settings",
+  "crashlyticsMenuText": "Crashlytics",
+  "remoteConfigMenuText": "Remote config",
+  "analyticsMenuText": "Analytics",
+  "crashlyticsTitle": "Crashlytics",
+  "analyticsTitle": "Analytics",
+  "firebaseInAppMessaging": "Firebase In-App Messaging",
+  "deleteAccount": "Delete account",
+  "firebasePerformanceTitle": "Firebase Performance",
+  "remoteConfigTitle": "Remote Config",
+  "privacyPolicyTitle": "Privacy policy",
+  "signUpTitle": "Sign up",
+  "userNameText": "Name",
+  "userNameInputHintText": "Required name",
+  "userEmailText": "Email",
+  "userEmailInputHintText": "Required email",
+  "aboutHeader": "About the app",
+  "versionLabel": "Version: {version}",
+  "@versionLabel": {
+    "description": "Text for 'Version: X'",
+    "placeholders": {
+      "version": {
+        "type": "String",
+        "example": "1.2.3"
+      }
+    }
+  },
+  "gitHashLabel": "Git hash: {hash}",
+  "@gitHashLabel": {
+    "description": "Text for 'Git hash: X'",
+    "placeholders": {
+      "hash": {
+        "type": "String",
+        "example": "Ah734SG"
+      }
+    }
+  },
+  "aboutDateLabel": "Date: {date}",
+  "@aboutDateLabel": {
+    "description": "Text for 'Date: X'",
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "2002-01-21"
+      }
+    }
+  },
+  "profileHeader": "Profile"
 }

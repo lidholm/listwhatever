@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:listanything/app/helpers/constants.dart';
-import 'package:listanything/app/pages/settings/settings.dart';
+import 'package:listanything/app/custom/pages/settings/settings.dart';
+import 'package:listanything/app/standard/helpers/constants.dart';
 
 void main() {
   group('readableDateFormatter', () {

@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:listanything/app/geocoder/latlong.dart';
-import 'package:listanything/app/pages/list_items/list_item.dart';
-import 'package:listanything/app/pages/list_items/upsertListItem/upsert_list_item_form.dart';
+import 'package:listanything/app/custom/geocoder/latlong.dart';
+import 'package:listanything/app/custom/pages/list_items/list_item.dart';
+import 'package:listanything/app/custom/pages/list_items/upsertListItem/upsert_list_item_form.dart';
 
 import 'package:mocktail/mocktail.dart';
 

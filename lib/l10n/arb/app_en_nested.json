@@ -1,37 +1,119 @@
 {
   "@GLOBAL TEXTS": {
-      "@@locale": "en",
-      "counterAppBarTitle": "Counter",
-      "distanceUnit": "{unit, select, miles{Miles} kilometers{Kilometers} other{Should not happen}}",
-      "@distanceUnit": {
-        "placeholders": {
-          "unit": {
-            "type": "String"
-          }
+    "@@locale": "en",
+    "counterAppBarTitle": "Counter",
+    "distanceUnit": "{unit, select, miles{Miles} kilometers{Kilometers} other{Should not happen}}",
+    "@distanceUnit": {
+      "placeholders": {
+        "unit": {
+          "type": "String"
         }
-      },
-      "ampm": "{unit, select, AM_PM{AM/PM format} TwentyFourHour{24 H format} other{Should not happen}}",
-      "@ampm": {
-        "placeholders": {
-          "unit": {
-            "type": "String"
-          }
-        }
-      },
-      "dateformat": "{unit, select, ISO_8601{2001-04-15} US{15/4/2001} other{Should not happen}}",
-      "@dateformat": {
-        "placeholders": {
-          "unit": {
-            "type": "String"
-          }
-        }
-      },
-      "loadingText": "Loading",
-      "logOutText": "Log out",
-      "errorLoadingUserText":"Error loading user",
-      "takeScreenshotMenuText": "Take screenshot",
-      "tookScreenshotSnackbarText": "Took screenshot"
+      }
     },
+    "ampm": "{unit, select, AM_PM{AM/PM format} TwentyFourHour{24 H format} other{Should not happen}}",
+    "@ampm": {
+      "placeholders": {
+        "unit": {
+          "type": "String"
+        }
+      }
+    },
+    "dateformat": "{unit, select, ISO_8601{2001-04-15} US{15/4/2001} other{Should not happen}}",
+    "@dateformat": {
+      "placeholders": {
+        "unit": {
+          "type": "String"
+        }
+      }
+    },
+    "loadingText": "Loading",
+    "logOutText": "Log out",
+    "errorLoadingUserText":"Error loading user",
+
+    "cancelButtonText": "Cancel",
+    "submitButtonText": "Submit",
+    "closeButtonText": "Close",
+    "resetButtonText": "Reset",
+    "logInText": "Log in",
+    "okButtonText": "OK",
+    "hasToBeANumberErrorText": "Has to be a number",
+    "errorLabel": "Error"
+  },
+
+  "@DEVELOPERTEXTS": {
+    "takeScreenshotMenuText": "Take screenshot",
+    "tookScreenshotSnackbarText": "Took screenshot"
+  },
+
+  "@DRAWER": {
+    "profileMenuText": "Profile",
+    "aboutMenuText": "About",
+    "privacyProfileMenuText": "Privacy policy",
+    "settingsMenuText": "Settings",
+    "crashlyticsMenuText": "Crashlytics",
+    "remoteConfigMenuText": "Remote config",
+    "analyticsMenuText": "Analytics",
+    "crashlyticsTitle": "Crashlytics",
+    "analyticsTitle": "Analytics",
+    "firebaseInAppMessaging": "Firebase In-App Messaging",
+    "deleteAccount": "Delete account",
+    "firebasePerformanceTitle": "Firebase Performance",
+    "remoteConfigTitle": "Remote Config"
+  },
+
+  "@PRIVACY POLICY": {
+    "privacyPolicyTitle": "Privacy policy"
+  },
+
+  "@ERRORLOADINGUSER": {
+    "errorLoadingUserText": "Error loading user"
+  },
+
+  "@SIGNUPPAGE": {
+    "signUpTitle": "Sign up",
+    "userNameText": "Name",
+    "userNameInputHintText": "Required name",
+    "userEmailText": "Email",
+    "userEmailInputHintText": "Required email"
+  },
+
+  "@ABOUTPAGE": {
+    "aboutHeader": "About the app",
+    "versionLabel": "Version: {version}",
+    "@versionLabel": {
+      "description": "Text for 'Version: X'",
+      "placeholders": {
+        "version": {
+          "type": "String",
+          "example": "1.2.3"
+        }
+      }
+    },
+    "gitHashLabel": "Git hash: {hash}",
+    "@gitHashLabel": {
+      "description": "Text for 'Git hash: X'",
+      "placeholders": {
+        "hash": {
+          "type": "String",
+          "example": "Ah734SG"
+        }
+      }
+    },
+    "aboutDateLabel": "Date: {date}",
+    "@aboutDateLabel": {
+      "description": "Text for 'Date: X'",
+      "placeholders": {
+        "date": {
+          "type": "String",
+          "example": "2002-01-21"
+        }
+      }
+    }
+  },
+
+  "@PROFILEPAGEROUTE": {
+    "profileHeader": "Profile"
+  },
 
   "@END": {}
 }

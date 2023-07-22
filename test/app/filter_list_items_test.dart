@@ -1,10 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:great_circle_distance_calculator/great_circle_distance_calculator.dart';
-import 'package:listanything/app/geocoder/latlong.dart';
-import 'package:listanything/app/helpers/constants.dart';
-import 'package:listanything/app/pages/list_items/filter_list_items.dart';
-import 'package:listanything/app/pages/list_items/filters.dart';
-import 'package:listanything/app/pages/list_items/list_item.dart';
+import 'package:listanything/app/custom/geocoder/latlong.dart';
+import 'package:listanything/app/custom/pages/list_items/filter_list_items.dart';
+import 'package:listanything/app/custom/pages/list_items/filters.dart';
+import 'package:listanything/app/custom/pages/list_items/list_item.dart';
+import 'package:listanything/app/standard/helpers/constants.dart';
 
 void main() {
   final emptyList = <ListItem>[];
