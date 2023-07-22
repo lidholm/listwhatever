@@ -8,8 +8,10 @@ import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:listanything/app/firebase/firebase_options.dart';
-import 'package:listanything/app/widgets/standardWidgets/error_monitor.dart';
+
+import '/app/standard/firebase/firebase_options.dart';
+import '/app/standard/widgets/error_monitor.dart';
+import 'app/standard/api_keys.dart';
 
 final repaintBoundaryKey = GlobalKey();
 
@@ -51,7 +53,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
     EmailAuthProvider(),
     // emailLinkProviderConfig,
     PhoneAuthProvider(),
-    GoogleProvider(clientId: 'GOOGLE_CLIENT_ID'),
+    GoogleProvider(clientId: getGoogleClientId()),
     // AppleProvider(),
   ]);
 

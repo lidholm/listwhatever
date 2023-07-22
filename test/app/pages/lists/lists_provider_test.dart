@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:listanything/app/pages/lists/list_of_things.dart';
-import 'package:listanything/app/pages/lists/list_repository_provider.dart';
-import 'package:listanything/app/pages/lists/lists_provider.dart';
-import 'package:listanything/app/pages/lists/participated_list_repository_provider.dart';
-import 'package:listanything/app/widgets/standardWidgets/base_repository.dart';
+import 'package:listanything/app/custom/pages/lists/list_of_things.dart';
+import 'package:listanything/app/custom/pages/lists/list_repository_provider.dart';
+import 'package:listanything/app/custom/pages/lists/lists_provider.dart';
+import 'package:listanything/app/custom/pages/lists/participated_list_repository_provider.dart';
+import 'package:listanything/app/standard/widgets/base_repository.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockBaseRepository<T> extends Mock implements BaseRepository<T> {}

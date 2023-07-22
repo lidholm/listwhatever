@@ -3,10 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:listanything/app/geocoder/latlong.dart';
-import 'package:listanything/app/pages/list_items/list_item.dart';
-import 'package:listanything/app/pages/list_items/list_items_repository_provider.dart';
-import 'package:listanything/app/pages/lists/list_of_things.dart';
+import 'package:listanything/app/custom/geocoder/latlong.dart';
+import 'package:listanything/app/custom/pages/list_items/list_item.dart';
+import 'package:listanything/app/custom/pages/list_items/list_items_repository_provider.dart';
+import 'package:listanything/app/custom/pages/lists/list_of_things.dart';
 
 import 'package:mocktail/mocktail.dart';
 

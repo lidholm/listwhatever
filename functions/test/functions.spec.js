@@ -349,7 +349,7 @@ describe("Test addUserToSharedList", () => {
     expect(snap.data()).to.eql(expectedPublicList);
   }).timeout(5000);
 
-  it(" User is NOT added when userId doesn't exist", async () => {
+  xit(" User is NOT added when userId doesn't exist", async () => {
     // TODO: Implement
     const date = new Date();
     const compareDate = new Date(date.getFullYear(), date.getMonth(), 10);

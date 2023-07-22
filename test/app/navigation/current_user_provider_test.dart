@@ -2,11 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:listanything/app/firebase/current_user.dart';
-import 'package:listanything/app/firebase/firebase_auth_provider.dart';
-import 'package:listanything/app/helpers/constants.dart';
-import 'package:listanything/app/navigation/current_user_provider.dart';
-import 'package:listanything/app/pages/settings/settings.dart';
+import 'package:listanything/app/custom/pages/settings/settings.dart';
+import 'package:listanything/app/standard/firebase/current_user.dart';
+import 'package:listanything/app/standard/firebase/firebase_auth_provider.dart';
+import 'package:listanything/app/standard/helpers/constants.dart';
+import 'package:listanything/app/standard/navigation/current_user_provider.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:rxdart/rxdart.dart';
 

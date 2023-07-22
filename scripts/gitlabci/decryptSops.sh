@@ -12,6 +12,7 @@ bash -c './scripts/decrypt_secrets.sh'
 echo "===="
 
 sed -i'' -e 's/\r$//' ./scripts/replace_env_vars.py
+head -c 20 '.prod.env'
 python3 ./scripts/replace_env_vars.py 
 
 echo "===="
