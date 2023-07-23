@@ -57,8 +57,8 @@ decrypt-sops:
       - firebase-deploy-service-account.json
       - firebase-adminsdk-google-cloud-service-account.json
       - assets/google_sheets_service_account.json
-      - lib/app/api_keys.dart
-      - lib/app/firebase/firebase_options.dart
+      - lib/app/standard/api_keys.dart
+      - lib/app/standard/firebase/firebase_options.dart
       - ios/firebase_app_id_file.json
       - .firebase-deploy-service-account.json
       - android/app/listanything-upload-keystore.jks
@@ -69,7 +69,13 @@ decrypt-sops:
 replace_about_screen:
   stage: setup
   script:
-    - sh scripts/gitlabci/replaceAboutScreen.sh
+    - sh scripts/gitlabci/replaceAboutScreen.sh  
+  artifacts:
+    paths:
+      - pubspec.yaml
+      - lib/app/standard/pages/about/about_page.dart
+    expire_in: 2700 seconds #45 minutes
+
 
 lint_check:
   stage: verify
