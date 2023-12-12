@@ -138,11 +138,11 @@ class _$GeocoderResultCopyWithImpl<$Res, $Val extends GeocoderResult>
 }
 
 /// @nodoc
-abstract class _$$_GeocoderResultCopyWith<$Res>
+abstract class _$$GeocoderResultImplCopyWith<$Res>
     implements $GeocoderResultCopyWith<$Res> {
-  factory _$$_GeocoderResultCopyWith(
-          _$_GeocoderResult value, $Res Function(_$_GeocoderResult) then) =
-      __$$_GeocoderResultCopyWithImpl<$Res>;
+  factory _$$GeocoderResultImplCopyWith(_$GeocoderResultImpl value,
+          $Res Function(_$GeocoderResultImpl) then) =
+      __$$GeocoderResultImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -163,11 +163,11 @@ abstract class _$$_GeocoderResultCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_GeocoderResultCopyWithImpl<$Res>
-    extends _$GeocoderResultCopyWithImpl<$Res, _$_GeocoderResult>
-    implements _$$_GeocoderResultCopyWith<$Res> {
-  __$$_GeocoderResultCopyWithImpl(
-      _$_GeocoderResult _value, $Res Function(_$_GeocoderResult) _then)
+class __$$GeocoderResultImplCopyWithImpl<$Res>
+    extends _$GeocoderResultCopyWithImpl<$Res, _$GeocoderResultImpl>
+    implements _$$GeocoderResultImplCopyWith<$Res> {
+  __$$GeocoderResultImplCopyWithImpl(
+      _$GeocoderResultImpl _value, $Res Function(_$GeocoderResultImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -182,7 +182,7 @@ class __$$_GeocoderResultCopyWithImpl<$Res>
     Object? types = null,
     Object? searchPhrase = null,
   }) {
-    return _then(_$_GeocoderResult(
+    return _then(_$GeocoderResultImpl(
       addressComponents: null == addressComponents
           ? _value._addressComponents
           : addressComponents // ignore: cast_nullable_to_non_nullable
@@ -221,8 +221,8 @@ class __$$_GeocoderResultCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_GeocoderResult implements _GeocoderResult {
-  _$_GeocoderResult(
+class _$GeocoderResultImpl implements _GeocoderResult {
+  _$GeocoderResultImpl(
       {@JsonKey(name: 'address_components')
       required final List<AddressComponent> addressComponents,
       @JsonKey(name: 'formatted_address') required this.formattedAddress,
@@ -235,8 +235,8 @@ class _$_GeocoderResult implements _GeocoderResult {
       : _addressComponents = addressComponents,
         _types = types;
 
-  factory _$_GeocoderResult.fromJson(Map<String, dynamic> json) =>
-      _$$_GeocoderResultFromJson(json);
+  factory _$GeocoderResultImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GeocoderResultImplFromJson(json);
 
   final List<AddressComponent> _addressComponents;
   @override
@@ -283,7 +283,7 @@ class _$_GeocoderResult implements _GeocoderResult {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GeocoderResult &&
+            other is _$GeocoderResultImpl &&
             const DeepCollectionEquality()
                 .equals(other._addressComponents, _addressComponents) &&
             (identical(other.formattedAddress, formattedAddress) ||
@@ -316,12 +316,13 @@ class _$_GeocoderResult implements _GeocoderResult {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GeocoderResultCopyWith<_$_GeocoderResult> get copyWith =>
-      __$$_GeocoderResultCopyWithImpl<_$_GeocoderResult>(this, _$identity);
+  _$$GeocoderResultImplCopyWith<_$GeocoderResultImpl> get copyWith =>
+      __$$GeocoderResultImplCopyWithImpl<_$GeocoderResultImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GeocoderResultToJson(
+    return _$$GeocoderResultImplToJson(
       this,
     );
   }
@@ -338,10 +339,10 @@ abstract class _GeocoderResult implements GeocoderResult {
       @JsonKey(name: 'place_id') required final String placeId,
       @JsonKey(name: 'plus_code') required final PlusCode plusCode,
       required final List<String> types,
-      final String searchPhrase}) = _$_GeocoderResult;
+      final String searchPhrase}) = _$GeocoderResultImpl;
 
   factory _GeocoderResult.fromJson(Map<String, dynamic> json) =
-      _$_GeocoderResult.fromJson;
+      _$GeocoderResultImpl.fromJson;
 
   @override
   @JsonKey(name: 'address_components')
@@ -366,6 +367,6 @@ abstract class _GeocoderResult implements GeocoderResult {
   String get searchPhrase;
   @override
   @JsonKey(ignore: true)
-  _$$_GeocoderResultCopyWith<_$_GeocoderResult> get copyWith =>
+  _$$GeocoderResultImplCopyWith<_$GeocoderResultImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

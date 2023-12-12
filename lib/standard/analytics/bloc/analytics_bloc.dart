@@ -1,12 +1,13 @@
 import 'dart:async';
 
-import 'package:analytics_repository/analytics_repository.dart' as analytics;
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:user_repository/user_repository.dart';
+import 'package:listanything/standard/analytics/bloc/analytics_event.dart';
+import 'package:listanything/standard/analyticsRepository/index.dart' as analytics;
+import 'package:listanything/standard/userRepository/models/user.dart';
+import 'package:listanything/standard/userRepository/user_repository.dart';
 
-part 'analytics_event.dart';
-part 'analytics_state.dart';
+import 'analytics_state.dart';
+
 
 class AnalyticsBloc extends Bloc<AnalyticsEvent, AnalyticsState> {
   AnalyticsBloc({
@@ -32,7 +33,7 @@ class AnalyticsBloc extends Bloc<AnalyticsEvent, AnalyticsState> {
   }
 
   Future<void> _onTrackAnalyticsEvent(
-    TrackAnalyticsEvent event,
+      TrackAnalyticsEvent event,
     Emitter<AnalyticsState> emit,
   ) async {
     try {

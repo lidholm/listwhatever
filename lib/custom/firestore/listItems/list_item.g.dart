@@ -6,7 +6,8 @@ part of 'list_item.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ListItem _$$_ListItemFromJson(Map<String, dynamic> json) => _$_ListItem(
+_$ListItemImpl _$$ListItemImplFromJson(Map<String, dynamic> json) =>
+    _$ListItemImpl(
       id: json['id'] as String?,
       name: json['name'] as String,
       info: json['info'] as String? ?? null,
@@ -28,7 +29,7 @@ _$_ListItem _$$_ListItemFromJson(Map<String, dynamic> json) => _$_ListItem(
       latestUpdateUser: json['latestUpdateUser'] as String? ?? null,
     );
 
-Map<String, dynamic> _$$_ListItemToJson(_$_ListItem instance) =>
+Map<String, dynamic> _$$ListItemImplToJson(_$ListItemImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

@@ -1,5 +1,3 @@
-import 'package:analytics_repository/analytics_repository.dart';
-import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -14,13 +12,17 @@ import 'package:listanything/custom/pages/listItems/filters/filter_bloc.dart';
 import 'package:listanything/custom/pages/listItems/filters/filter_view.dart';
 import 'package:listanything/custom/pages/listItems/searchLocation/search_location_bloc.dart';
 import 'package:listanything/l10n/l10n.dart';
-import 'package:listanything/standard/analytics/analytics.dart';
+import 'package:listanything/standard/analytics/bloc/analytics_bloc.dart';
+import 'package:listanything/standard/analyticsRepository/analytics_repository.dart';
 import 'package:listanything/standard/app/app.dart';
+import 'package:listanything/standard/app/bloc/app_event.dart';
 import 'package:listanything/standard/app/widgets/delete_item_redirect_listener.dart';
+import 'package:listanything/standard/appUi/theme/app_theme.dart';
 import 'package:listanything/standard/navigation/redirect_cubit.dart';
 import 'package:listanything/standard/navigation/router.dart';
 import 'package:listanything/standard/theme_selector/theme_selector.dart';
-import 'package:user_repository/user_repository.dart';
+import 'package:listanything/standard/userRepository/models/user.dart';
+import 'package:listanything/standard/userRepository/user_repository.dart';
 
 class App extends StatelessWidget {
   const App({

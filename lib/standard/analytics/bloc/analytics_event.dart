@@ -1,4 +1,5 @@
-part of 'analytics_bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:listanything/standard/analyticsRepository/index.dart' as analytics;
 
 sealed class AnalyticsEvent extends Equatable {
   const AnalyticsEvent();

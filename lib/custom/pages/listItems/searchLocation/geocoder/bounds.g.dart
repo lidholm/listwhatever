@@ -6,12 +6,13 @@ part of 'bounds.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Bounds _$$_BoundsFromJson(Map<String, dynamic> json) => _$_Bounds(
+_$BoundsImpl _$$BoundsImplFromJson(Map<String, dynamic> json) => _$BoundsImpl(
       northeast: LatLong.fromJson(json['northeast'] as Map<String, dynamic>),
       southwest: LatLong.fromJson(json['southwest'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_BoundsToJson(_$_Bounds instance) => <String, dynamic>{
+Map<String, dynamic> _$$BoundsImplToJson(_$BoundsImpl instance) =>
+    <String, dynamic>{
       'northeast': instance.northeast.toJson(),
       'southwest': instance.southwest.toJson(),
     };

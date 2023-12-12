@@ -78,10 +78,10 @@ class _$FiltersCopyWithImpl<$Res, $Val extends Filters>
 }
 
 /// @nodoc
-abstract class _$$_FiltersCopyWith<$Res> implements $FiltersCopyWith<$Res> {
-  factory _$$_FiltersCopyWith(
-          _$_Filters value, $Res Function(_$_Filters) then) =
-      __$$_FiltersCopyWithImpl<$Res>;
+abstract class _$$FiltersImplCopyWith<$Res> implements $FiltersCopyWith<$Res> {
+  factory _$$FiltersImplCopyWith(
+          _$FiltersImpl value, $Res Function(_$FiltersImpl) then) =
+      __$$FiltersImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -92,10 +92,11 @@ abstract class _$$_FiltersCopyWith<$Res> implements $FiltersCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FiltersCopyWithImpl<$Res>
-    extends _$FiltersCopyWithImpl<$Res, _$_Filters>
-    implements _$$_FiltersCopyWith<$Res> {
-  __$$_FiltersCopyWithImpl(_$_Filters _value, $Res Function(_$_Filters) _then)
+class __$$FiltersImplCopyWithImpl<$Res>
+    extends _$FiltersCopyWithImpl<$Res, _$FiltersImpl>
+    implements _$$FiltersImplCopyWith<$Res> {
+  __$$FiltersImplCopyWithImpl(
+      _$FiltersImpl _value, $Res Function(_$FiltersImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -106,7 +107,7 @@ class __$$_FiltersCopyWithImpl<$Res>
     Object? startDate = freezed,
     Object? endDate = freezed,
   }) {
-    return _then(_$_Filters(
+    return _then(_$FiltersImpl(
       categoryFilters: null == categoryFilters
           ? _value._categoryFilters
           : categoryFilters // ignore: cast_nullable_to_non_nullable
@@ -129,8 +130,8 @@ class __$$_FiltersCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Filters extends _Filters {
-  _$_Filters(
+class _$FiltersImpl extends _Filters {
+  _$FiltersImpl(
       {required final Map<String, List<String>> categoryFilters,
       this.distance,
       this.startDate,
@@ -162,7 +163,7 @@ class _$_Filters extends _Filters {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Filters &&
+            other is _$FiltersImpl &&
             const DeepCollectionEquality()
                 .equals(other._categoryFilters, _categoryFilters) &&
             (identical(other.distance, distance) ||
@@ -183,8 +184,8 @@ class _$_Filters extends _Filters {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FiltersCopyWith<_$_Filters> get copyWith =>
-      __$$_FiltersCopyWithImpl<_$_Filters>(this, _$identity);
+  _$$FiltersImplCopyWith<_$FiltersImpl> get copyWith =>
+      __$$FiltersImplCopyWithImpl<_$FiltersImpl>(this, _$identity);
 }
 
 abstract class _Filters extends Filters {
@@ -192,7 +193,7 @@ abstract class _Filters extends Filters {
       {required final Map<String, List<String>> categoryFilters,
       final double? distance,
       final DateTime? startDate,
-      final DateTime? endDate}) = _$_Filters;
+      final DateTime? endDate}) = _$FiltersImpl;
   _Filters._() : super._();
 
   @override
@@ -205,6 +206,6 @@ abstract class _Filters extends Filters {
   DateTime? get endDate;
   @override
   @JsonKey(ignore: true)
-  _$$_FiltersCopyWith<_$_Filters> get copyWith =>
+  _$$FiltersImplCopyWith<_$FiltersImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

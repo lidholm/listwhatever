@@ -1,4 +1,5 @@
-part of 'app_bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:listanything/standard/userRepository/models/user.dart';
 
 enum AppStatus {
   onboardingRequired(),

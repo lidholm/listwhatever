@@ -104,12 +104,12 @@ class _$RouterProviderInformationCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RouterProviderInformationCopyWith<$Res>
+abstract class _$$RouterProviderInformationImplCopyWith<$Res>
     implements $RouterProviderInformationCopyWith<$Res> {
-  factory _$$_RouterProviderInformationCopyWith(
-          _$_RouterProviderInformation value,
-          $Res Function(_$_RouterProviderInformation) then) =
-      __$$_RouterProviderInformationCopyWithImpl<$Res>;
+  factory _$$RouterProviderInformationImplCopyWith(
+          _$RouterProviderInformationImpl value,
+          $Res Function(_$RouterProviderInformationImpl) then) =
+      __$$RouterProviderInformationImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -123,13 +123,13 @@ abstract class _$$_RouterProviderInformationCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_RouterProviderInformationCopyWithImpl<$Res>
+class __$$RouterProviderInformationImplCopyWithImpl<$Res>
     extends _$RouterProviderInformationCopyWithImpl<$Res,
-        _$_RouterProviderInformation>
-    implements _$$_RouterProviderInformationCopyWith<$Res> {
-  __$$_RouterProviderInformationCopyWithImpl(
-      _$_RouterProviderInformation _value,
-      $Res Function(_$_RouterProviderInformation) _then)
+        _$RouterProviderInformationImpl>
+    implements _$$RouterProviderInformationImplCopyWith<$Res> {
+  __$$RouterProviderInformationImplCopyWithImpl(
+      _$RouterProviderInformationImpl _value,
+      $Res Function(_$RouterProviderInformationImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -143,7 +143,7 @@ class __$$_RouterProviderInformationCopyWithImpl<$Res>
     Object? errorLoadingUserRouteLocation = null,
     Object? loadingUserRouteLocation = null,
   }) {
-    return _then(_$_RouterProviderInformation(
+    return _then(_$RouterProviderInformationImpl(
       dontRequireLoginRouteLocations: null == dontRequireLoginRouteLocations
           ? _value._dontRequireLoginRouteLocations
           : dontRequireLoginRouteLocations // ignore: cast_nullable_to_non_nullable
@@ -178,8 +178,8 @@ class __$$_RouterProviderInformationCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RouterProviderInformation implements _RouterProviderInformation {
-  const _$_RouterProviderInformation(
+class _$RouterProviderInformationImpl implements _RouterProviderInformation {
+  const _$RouterProviderInformationImpl(
       {required final List<String> dontRequireLoginRouteLocations,
       required final List<String> requireLoginRouteLocations,
       required this.initialRouteLocation,
@@ -228,7 +228,7 @@ class _$_RouterProviderInformation implements _RouterProviderInformation {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RouterProviderInformation &&
+            other is _$RouterProviderInformationImpl &&
             const DeepCollectionEquality().equals(
                 other._dontRequireLoginRouteLocations,
                 _dontRequireLoginRouteLocations) &&
@@ -264,9 +264,9 @@ class _$_RouterProviderInformation implements _RouterProviderInformation {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RouterProviderInformationCopyWith<_$_RouterProviderInformation>
-      get copyWith => __$$_RouterProviderInformationCopyWithImpl<
-          _$_RouterProviderInformation>(this, _$identity);
+  _$$RouterProviderInformationImplCopyWith<_$RouterProviderInformationImpl>
+      get copyWith => __$$RouterProviderInformationImplCopyWithImpl<
+          _$RouterProviderInformationImpl>(this, _$identity);
 }
 
 abstract class _RouterProviderInformation implements RouterProviderInformation {
@@ -278,7 +278,7 @@ abstract class _RouterProviderInformation implements RouterProviderInformation {
           required final String signInRouteLocation,
           required final String errorLoadingUserRouteLocation,
           required final String loadingUserRouteLocation}) =
-      _$_RouterProviderInformation;
+      _$RouterProviderInformationImpl;
 
   @override
   List<String> get dontRequireLoginRouteLocations;
@@ -296,6 +296,6 @@ abstract class _RouterProviderInformation implements RouterProviderInformation {
   String get loadingUserRouteLocation;
   @override
   @JsonKey(ignore: true)
-  _$$_RouterProviderInformationCopyWith<_$_RouterProviderInformation>
+  _$$RouterProviderInformationImplCopyWith<_$RouterProviderInformationImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

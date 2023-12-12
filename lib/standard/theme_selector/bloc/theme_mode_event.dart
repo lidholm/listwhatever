@@ -1,4 +1,6 @@
-part of 'theme_mode_bloc.dart';
+
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 abstract class ThemeModeEvent extends Equatable {
   const ThemeModeEvent();

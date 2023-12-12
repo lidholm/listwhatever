@@ -75,22 +75,22 @@ class _$AppBarActionIconCopyWithImpl<$Res, $Val extends AppBarActionIcon>
 }
 
 /// @nodoc
-abstract class _$$_AppBarActionIconCopyWith<$Res>
+abstract class _$$AppBarActionIconImplCopyWith<$Res>
     implements $AppBarActionIconCopyWith<$Res> {
-  factory _$$_AppBarActionIconCopyWith(
-          _$_AppBarActionIcon value, $Res Function(_$_AppBarActionIcon) then) =
-      __$$_AppBarActionIconCopyWithImpl<$Res>;
+  factory _$$AppBarActionIconImplCopyWith(_$AppBarActionIconImpl value,
+          $Res Function(_$AppBarActionIconImpl) then) =
+      __$$AppBarActionIconImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String title, IconData icon, void Function() callback, Key key});
 }
 
 /// @nodoc
-class __$$_AppBarActionIconCopyWithImpl<$Res>
-    extends _$AppBarActionIconCopyWithImpl<$Res, _$_AppBarActionIcon>
-    implements _$$_AppBarActionIconCopyWith<$Res> {
-  __$$_AppBarActionIconCopyWithImpl(
-      _$_AppBarActionIcon _value, $Res Function(_$_AppBarActionIcon) _then)
+class __$$AppBarActionIconImplCopyWithImpl<$Res>
+    extends _$AppBarActionIconCopyWithImpl<$Res, _$AppBarActionIconImpl>
+    implements _$$AppBarActionIconImplCopyWith<$Res> {
+  __$$AppBarActionIconImplCopyWithImpl(_$AppBarActionIconImpl _value,
+      $Res Function(_$AppBarActionIconImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -101,7 +101,7 @@ class __$$_AppBarActionIconCopyWithImpl<$Res>
     Object? callback = null,
     Object? key = null,
   }) {
-    return _then(_$_AppBarActionIcon(
+    return _then(_$AppBarActionIconImpl(
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -124,8 +124,8 @@ class __$$_AppBarActionIconCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AppBarActionIcon implements _AppBarActionIcon {
-  _$_AppBarActionIcon(
+class _$AppBarActionIconImpl implements _AppBarActionIcon {
+  _$AppBarActionIconImpl(
       {required this.title,
       required this.icon,
       required this.callback,
@@ -149,7 +149,7 @@ class _$_AppBarActionIcon implements _AppBarActionIcon {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AppBarActionIcon &&
+            other is _$AppBarActionIconImpl &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.icon, icon) || other.icon == icon) &&
             (identical(other.callback, callback) ||
@@ -163,8 +163,9 @@ class _$_AppBarActionIcon implements _AppBarActionIcon {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AppBarActionIconCopyWith<_$_AppBarActionIcon> get copyWith =>
-      __$$_AppBarActionIconCopyWithImpl<_$_AppBarActionIcon>(this, _$identity);
+  _$$AppBarActionIconImplCopyWith<_$AppBarActionIconImpl> get copyWith =>
+      __$$AppBarActionIconImplCopyWithImpl<_$AppBarActionIconImpl>(
+          this, _$identity);
 }
 
 abstract class _AppBarActionIcon implements AppBarActionIcon {
@@ -172,7 +173,7 @@ abstract class _AppBarActionIcon implements AppBarActionIcon {
       {required final String title,
       required final IconData icon,
       required final void Function() callback,
-      required final Key key}) = _$_AppBarActionIcon;
+      required final Key key}) = _$AppBarActionIconImpl;
 
   @override
   String get title;
@@ -184,6 +185,6 @@ abstract class _AppBarActionIcon implements AppBarActionIcon {
   Key get key;
   @override
   @JsonKey(ignore: true)
-  _$$_AppBarActionIconCopyWith<_$_AppBarActionIcon> get copyWith =>
+  _$$AppBarActionIconImplCopyWith<_$AppBarActionIconImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -96,10 +96,11 @@ class _$GeometryCopyWithImpl<$Res, $Val extends Geometry>
 }
 
 /// @nodoc
-abstract class _$$_GeometryCopyWith<$Res> implements $GeometryCopyWith<$Res> {
-  factory _$$_GeometryCopyWith(
-          _$_Geometry value, $Res Function(_$_Geometry) then) =
-      __$$_GeometryCopyWithImpl<$Res>;
+abstract class _$$GeometryImplCopyWith<$Res>
+    implements $GeometryCopyWith<$Res> {
+  factory _$$GeometryImplCopyWith(
+          _$GeometryImpl value, $Res Function(_$GeometryImpl) then) =
+      __$$GeometryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -114,11 +115,11 @@ abstract class _$$_GeometryCopyWith<$Res> implements $GeometryCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_GeometryCopyWithImpl<$Res>
-    extends _$GeometryCopyWithImpl<$Res, _$_Geometry>
-    implements _$$_GeometryCopyWith<$Res> {
-  __$$_GeometryCopyWithImpl(
-      _$_Geometry _value, $Res Function(_$_Geometry) _then)
+class __$$GeometryImplCopyWithImpl<$Res>
+    extends _$GeometryCopyWithImpl<$Res, _$GeometryImpl>
+    implements _$$GeometryImplCopyWith<$Res> {
+  __$$GeometryImplCopyWithImpl(
+      _$GeometryImpl _value, $Res Function(_$GeometryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -128,7 +129,7 @@ class __$$_GeometryCopyWithImpl<$Res>
     Object? locationType = null,
     Object? viewport = null,
   }) {
-    return _then(_$_Geometry(
+    return _then(_$GeometryImpl(
       location: null == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
@@ -147,14 +148,14 @@ class __$$_GeometryCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Geometry implements _Geometry {
-  _$_Geometry(
+class _$GeometryImpl implements _Geometry {
+  _$GeometryImpl(
       {required this.location,
       @JsonKey(name: 'location_type') required this.locationType,
       required this.viewport});
 
-  factory _$_Geometry.fromJson(Map<String, dynamic> json) =>
-      _$$_GeometryFromJson(json);
+  factory _$GeometryImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GeometryImplFromJson(json);
 
   @override
   final LatLong location;
@@ -173,7 +174,7 @@ class _$_Geometry implements _Geometry {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Geometry &&
+            other is _$GeometryImpl &&
             (identical(other.location, location) ||
                 other.location == location) &&
             (identical(other.locationType, locationType) ||
@@ -190,12 +191,12 @@ class _$_Geometry implements _Geometry {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GeometryCopyWith<_$_Geometry> get copyWith =>
-      __$$_GeometryCopyWithImpl<_$_Geometry>(this, _$identity);
+  _$$GeometryImplCopyWith<_$GeometryImpl> get copyWith =>
+      __$$GeometryImplCopyWithImpl<_$GeometryImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GeometryToJson(
+    return _$$GeometryImplToJson(
       this,
     );
   }
@@ -205,9 +206,10 @@ abstract class _Geometry implements Geometry {
   factory _Geometry(
       {required final LatLong location,
       @JsonKey(name: 'location_type') required final String locationType,
-      required final Bounds viewport}) = _$_Geometry;
+      required final Bounds viewport}) = _$GeometryImpl;
 
-  factory _Geometry.fromJson(Map<String, dynamic> json) = _$_Geometry.fromJson;
+  factory _Geometry.fromJson(Map<String, dynamic> json) =
+      _$GeometryImpl.fromJson;
 
   @override
   LatLong get location;
@@ -218,6 +220,6 @@ abstract class _Geometry implements Geometry {
   Bounds get viewport;
   @override
   @JsonKey(ignore: true)
-  _$$_GeometryCopyWith<_$_Geometry> get copyWith =>
+  _$$GeometryImplCopyWith<_$GeometryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

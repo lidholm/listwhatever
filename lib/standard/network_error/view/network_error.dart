@@ -1,6 +1,10 @@
-import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:listanything/l10n/l10n.dart';
+import 'package:listanything/standard/appUi/colors/app_colors.dart';
+import 'package:listanything/standard/appUi/spacing/app_spacing.dart';
+import 'package:listanything/standard/appUi/typography/app_text_styles.dart';
+import 'package:listanything/standard/appUi/widgets/app_button.dart';
+import 'package:listanything/standard/widgets/appBar/common_app_bar.dart';
 
 /// {@template network_error}
 /// A network error alert.
@@ -17,8 +21,8 @@ class NetworkError extends StatelessWidget {
     return PageRouteBuilder<void>(
       pageBuilder: (_, __, ___) => Scaffold(
         backgroundColor: AppColors.background,
-        appBar: AppBar(
-          leading: const AppBackButton(),
+        appBar: const CommonAppBar(
+          title: '',
         ),
         body: Center(
           child: NetworkError(onRetry: onRetry),

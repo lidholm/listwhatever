@@ -1,6 +1,6 @@
 import 'package:listanything/standard/app/app.dart';
 import 'package:listanything/standard/main/bootstrap/bootstrap.dart';
-import 'package:user_repository/user_repository.dart';
+import 'package:listanything/standard/userRepository/user_repository.dart';
 
 void main() {
   bootstrap(
