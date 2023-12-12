@@ -3,7 +3,7 @@ include: package:very_good_analysis/analysis_options.yaml
 analyzer:
   plugins:
     - custom_lint
-  exclude: [build/**, lib/**.freezed.dart, lib/**.g.dart, secrets/*]
+  exclude: [build/**, lib/**.freezed.dart, lib/**.g.dart, secrets/*, packages/**]
 linter:
   rules:
     public_member_api_docs: false

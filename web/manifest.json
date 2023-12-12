@@ -1,6 +1,6 @@
 {
-  "name": "listanything",
-  "short_name": "listanything",
+    "name": "Flutter Template",
+    "short_name": "Flutter Template",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#0175C2",

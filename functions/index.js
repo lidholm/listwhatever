@@ -1,179 +1,158 @@
-const functions = require("firebase-functions");
-const admin = require("firebase-admin");
-admin.initializeApp();
-
 /**
- * Auth-triggered function which writes a user document to Firestore.
+ * Import function triggers from their respective submodules:
+ *
+ * const {onCall} = require("firebase-functions/v2/https");
+ * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
+ *
+ * See a full list of supported triggers at https://firebase.google.com/docs/functions
  */
-exports.userSaver = functions.auth.user().onCreate(async (user, ctx) => {
-  const firestore = admin.firestore();
 
-  // Make a document in the user's collection with everything we know about the user
-  const userId = user.uid;
-  const userRef = firestore.collection("autousers").doc(userId);
-  await userRef.set(user.toJSON());
-});
+const logger = require("firebase-functions/logger");
+const {onRequest} = require("firebase-functions/v2/https");
+const {onDocumentCreated, onDocumentWritten} = require("firebase-functions/v2/firestore");
 
-exports.createPublicListId = functions.firestore
-  .document("/users/{userId}/lists/{listId}")
-  .onCreate(async (doc, ctx) => {
-    // functions.logger.info("createPublicListId");
-    const path = doc.ref.path;
-    const docData = doc.data();
-    const publicListId = docData.publicListId;
-    const userId = ctx.params.userId;
-    const listId = ctx.params.listId;
+// The Firebase Admin SDK to access Firestore.
+const {initializeApp} = require("firebase-admin/app");
+const {getFirestore} = require("firebase-admin/firestore");
 
-    const firestore = admin.firestore();
-    const publicListItem = {
-      listId: listId,
-      path: path,
-      viewers: docData.viewers,
-      shareCodeForViewer: docData.shareCodeForViewer,
-      shareCodeForEditor: docData.shareCodeForEditor,
-      userId: userId,
-      publicListId: publicListId,
-      editors: docData.editors,
-    };
-    await firestore
-      .collection("publicListIds")
-      .doc(publicListId)
-      .set(publicListItem);
-  });
+initializeApp();
 
-exports.updatePublicListId = functions.firestore
-  .document("/users/{userId}/lists/{listId}")
-  .onUpdate(async (change, context) => {
-    functions.logger.info("updatePublicListId");
-    const listId = context.params.listId;
-    const before = change.before;
-    const after = change.after;
-    // functions.logger.info("after: ", after);
+// Create and deploy your first functions
+// https://firebase.google.com/docs/functions/get-started
 
-    const beforeData = before.data();
-    const data = after.data();
-    const publicListId = data.publicListId;
-    functions.logger.info("data: ", data);
+// exports.helloWorld = onRequest((request, response) => {
+//   logger.info("Hello logs!", {structuredData: true});
+//   response.send("Hello from Firebase!");
+// });
 
-    const firestore = admin.firestore();
-
-    for (const user of sharerUsers(beforeData)) {
-      functions.logger.info(`viewer/editor: ${user}`);
-      if (user != data.userId) {
-        const participaterPath = `users/${user}/participatedLists/${listId}`;
-        functions.logger.info("before participaterPath: ", participaterPath);
-        writeResult = await firestore.doc(participaterPath).delete();
-      }
-    }
-
-    functions.logger.info("viewers: ", data.viewers);
-    functions.logger.info("editors: ", data.editors);
-    for (const user of sharerUsers(data)) {
-      functions.logger.info(`viewer/editor: ${user}`);
-      if (user != data.userId) {
-        const participaterPath = `users/${user}/participatedLists/${listId}`;
-        functions.logger.info("participaterPath: ", participaterPath);
-        writeResult = await firestore.doc(participaterPath).set(data);
-      }
-    }
-
-    return firestore.doc(`/publicListIds/${publicListId}/`).update({
-      viewers: data.viewers,
-      editors: data.editors,
-      shareCodeForEditor: data.shareCodeForEditor,
-      shareCodeForViewer: data.shareCodeForViewer,
-    });
-  });
-
-exports.deletePublicListId = functions.firestore
-  .document("/users/{userId}/lists/{listId}")
-  .onDelete(async (snap, context) => {
-    functions.logger.info("deletePublicListId");
-    // Grab the current value of what was written to Firestore.
-    const data = snap.data();
-    const publicListId = data.publicListId;
-    const listId = context.params.listId;
-
-    const firestore = admin.firestore();
-
-    for (const viewer of sharerUsers(data)) {
-      functions.logger.info(`viewer: ${viewer}`);
-      const participaterPath = `users/${viewer}/participatedLists/${listId}`;
-      functions.logger.info("participaterPath: ", participaterPath);
-      writeResult = await firestore.doc(participaterPath).delete();
-    }
-
-    return firestore.doc(`/publicListIds/${publicListId}/`).delete();
-  });
-
-// http://127.0.0.1:5001/listanything-2b9b0/us-central1/addUserToSharedList?userId=someuser&publicListId=anid&shareCode=theCode
-exports.addUserToSharedList = functions.https.onRequest(
-  async (request, response) => {
-    functions.logger.info("addUserToSharedList");
-
-    const userId = request.query.userId;
-    const publicListId = request.query.publicListId;
-    const shareCode = request.query.shareCode;
-
-    functions.logger.info("userId", userId);
-    functions.logger.info("publicListId", publicListId);
-    functions.logger.info("shareCode", shareCode);
-
-    const firestore = admin.firestore();
-
-    const path = `publicListIds/${publicListId}`;
-    functions.logger.info("path: ", path);
-    const publicListRef = await firestore.doc(path).get();
-    const publicListItem = publicListRef.data();
-
-    functions.logger.info("publicListItem", publicListItem);
-    if (publicListItem == undefined) {
-      functions.logger.info("Didn't recognize the publicListId.");
-      response.send("Didn't recognize the publicListId.");
-      return;
-    }
-
-    let writeResult = null;
-    const listPath = publicListItem.path;
-    functions.logger.info("listPath", listPath);
-
-    const listRef = await firestore.doc(listPath).get();
-    const list = listRef.data();
-    functions.logger.info("list", list);
-
-    if (
-      publicListItem.shareCodeForViewer != shareCode &&
-      publicListItem.shareCodeForEditor != shareCode
-    ) {
-      functions.logger.info(
-        "Share code is not matching either viewers or editors."
-      );
-      response.send("Share code is not matching.");
-      return;
-    }
-    if (publicListItem.shareCodeForViewer == shareCode) {
-      functions.logger.info("Writing viewers");
-      list.viewers[userId] = true;
-    } else if (publicListItem.shareCodeForEditor == shareCode) {
-      functions.logger.info("Writing editors");
-      list.editors[userId] = true;
-    }
-    functions.logger.info("list", list);
-    functions.logger.info("listPath", listPath);
-    writeResult = await firestore.doc(listPath).set(list);
-    if (writeResult == null) {
-      response.send("Share code is not matching");
-    } else {
-      // Send back a message that we've successfully written the message
-      response.send("Added user to shared list.");
-    }
-  }
-);
-
-const sharerUsers = (data) => {
-  functions.logger.info("sharerUsers.data:", data);
-  return [
-    ...(data.viewers != null ? Object.keys(data.viewers) : []),
-    ...(data.editors != null ? Object.keys(data.editors) : []),
-  ];
-};
+//
+//exports.shareListItem = onDocumentWritten("/users/{userId}/lists/{listId}/items/{listItemId}", (event) => {
+//  logger.log(event.data.after.data());
+//
+//  const userId = event.params.userId;
+//  const listId = event.params.listId;
+//  const listItemId = event.params.listItemId;
+//
+//  if (event.data.after.data() == undefined) {
+//    deleteSharedListItem(userId, listId, listItemId, event.data.before.data());
+//  } else {
+//    copySharedListItem(userId, listId, listItemId, event.data.after.data());
+//  }
+//  return true;
+//});
+//
+//
+//
+//async function copySharedListItem(userId, listId, listItemId, listItemData)  {
+//  logger.log("userId", userId);
+//  logger.log("listId", listId);
+//  logger.log("listItemId", listItemId);
+//  logger.log("listItemData", listItemData);
+//
+//  const listPath = `/users/${userId}/lists/${listId}`;
+//  logger.log("listPath", listPath);
+//
+//  const listData = (await getFirestore().doc(listPath).get()).data();
+//  if (listData == undefined) {
+//    logger.error('listData == undefined. Should NOT happen');
+//    return;
+//  }
+//  logger.log("listData", listData);
+//
+//  if (listData['shared'] == undefined || listData['shared'] == false) {
+//    logger.log('not shared');
+//    return;
+//  }
+//
+//  const latestUpdateUser = listItemData['latestUpdateUser'];
+//  logger.log(`latestUpdateUser: ${latestUpdateUser}`);
+//  if (latestUpdateUser == undefined) {
+//    logger.error("'latestUpdateUser' should be set");
+//    return;
+//  }
+//  if (latestUpdateUser != userId) {
+//    logger.log('latestUpdateUser != userId');
+//    return;
+//  }
+//
+//  const sharedWith = (listData['viewers'] ?? []).concat((listData['editors'] ?? []));
+//  logger.log("sharedWith", sharedWith);
+//
+//  for (const sharedWithUserId of sharedWith) {
+//    if (sharedWithUserId == userId) {
+//      continue;
+//    }
+//
+//    const path = `/users/${sharedWithUserId}/lists/${listId}/items/${listItemId}`;
+//    logger.log("path", path);
+//    await getFirestore().doc(path).set(listItemData);
+//  }
+//}
+//
+//async function deleteSharedListItem(userId, listId, listItemId, listItemData) {
+//  logger.log("userId", userId);
+//  logger.log("listId", listId);
+//  logger.log("listItemId", listItemId);
+//  logger.log("listItemData", listItemData);
+//
+//  const listPath = `/users/${userId}/lists/${listId}`;
+//  logger.log("listPath", listPath);
+//
+//  const listData = (await getFirestore().doc(listPath).get()).data();
+//  if (listData == undefined) {
+//    logger.error('listData == undefined. Should NOT happen');
+//    return;
+//  }
+//  logger.log("listData", listData);
+//
+//  if (listData['shared'] == undefined || listData['shared'] == false) {
+//    logger.log('not shared');
+//    return;
+//  }
+//
+//  const latestUpdateUser = listItemData['latestUpdateUser'];
+//  logger.log(`latestUpdateUser: ${latestUpdateUser}`);
+//  if (latestUpdateUser == undefined) {
+//    logger.error("'latestUpdateUser' should be set");
+//    return;
+//  }
+//  if (latestUpdateUser != userId) {
+//    logger.log('latestUpdateUser != userId');
+//    return;
+//  }
+//
+//  const sharedWith = (listData['viewers'] ?? []).concat((listData['editors'] ?? []));
+//  logger.log("sharedWith", sharedWith);
+//
+//  for (const sharedWithUserId of sharedWith) {
+//    if (sharedWithUserId == userId) {
+//      continue;
+//    }
+//
+//    const path = `/users/${sharedWithUserId}/lists/${listId}/items/${listItemId}`;
+//    logger.log("path", path);
+//    await getFirestore().doc(path).delete();
+//  }
+//}
+//
+//
+//// Listens for new messages added to /messages/:documentId/original
+//// and saves an uppercased version of the message
+//// to /messages/:documentId/uppercase
+//exports.makeuppercase = onDocumentCreated("/messages/{documentId}", async (event) => {
+//  // Grab the current value of what was written to Firestore.
+//  const original = event.data.data().original;
+//
+//    await getFirestore().doc('/messages/hello').set({name:'cat'});
+//  // Access the parameter `{documentId}` with `event.params`
+//  logger.log("event", event);
+//  logger.log("event.params", event.params);
+//  const uppercase = original.toUpperCase();
+//
+//  // You must return a Promise when performing
+//  // asynchronous tasks inside a function
+//  // such as writing to Firestore.
+//  // Setting an 'uppercase' field in Firestore document returns a Promise.
+//  return event.data.ref.set({uppercase}, {merge: true});
+//});
+//

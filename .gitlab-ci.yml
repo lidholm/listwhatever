@@ -1,4 +1,12 @@
-image: lidholm/flutter:0.0.21
+image: lidholm/flutter:0.0.25
+
+include:
+  - '/.gitlab-ci/pub-get-in-packages.yml'
+#  - '/.gitlab-ci/unit-tests-in-packages.yml'
+#  - '/.gitlab-ci/analyze-in-packages.yml'
+
+#variables:
+#  CI_PROJECT_DIR: "/home/developer"
 
 cache:
   paths:
@@ -21,6 +29,16 @@ release-notes:
   except:
     - main
   script:
+    - flutter --version
+    - pwd
+    - ls -al
+    - ls -lR /builds/lidholm/listanything/scripts
+    - echo "$CI_PROJECT_DIR"
+    - whoami
+    - echo $GITLAB_USER_ID
+    - echo $GITLAB_USER_LOGIN
+    - echo $GITLAB_USER_NAME
+
     - bash scripts/gitlabci/verifyReleaseNotes.sh
 
 flutter-setup:
@@ -32,20 +50,22 @@ flutter-setup:
     - echo $PUB_CACHE
     - flutter pub get
 
-    - jq '. | flatten | add' lib/l10n/arb/app_en_nested.json > lib/l10n/arb/app_en.arb && flutter gen-l10n
+#    - jq '. | flatten | add' lib/l10n/arb/app_en_nested.json > lib/l10n/arb/app_en.arb && flutter gen-l10n
     # - flutter pub global activate junitreport
   artifacts:
     paths:
       - .dart_tool
       - lib/l10n
-    expire_in: 2700 seconds #45 minutes
+    expire_in: 8100 seconds 1 h 15 minutes
 
 decrypt-sops:
   stage: pre_setup
   script:
     - sh scripts/gitlabci/decryptSops.sh
-    - cat lib/bootstrap.dart
-    - cat lib/app/standard/firebase/firebase_options.dart
+    - head -n 10 lib/standard/firebase/firebase_options.dart
+    - grep . .prod.env | cut -d "=" -f 1
+    - source .prod.env
+    - echo $FIREBASE_TOKEN | head -c 10
   artifacts:
     paths:
       - android/app/google-services.json
@@ -57,25 +77,22 @@ decrypt-sops:
       - firebase-deploy-service-account.json
       - firebase-adminsdk-google-cloud-service-account.json
       - assets/google_sheets_service_account.json
-      - lib/app/standard/api_keys.dart
-      - lib/app/standard/firebase/firebase_options.dart
+      - lib/standard/api_keys.dart
+      - lib/standard/firebase/firebase_options.dart
       - ios/firebase_app_id_file.json
       - .firebase-deploy-service-account.json
-      - android/app/listanything-upload-keystore.jks
-      - android/key.properties
 
-    expire_in: 2700 seconds #45 minutes
+    expire_in: 8100 seconds 1 h 15 minutes
 
 replace_about_screen:
   stage: setup
   script:
-    - sh scripts/gitlabci/replaceAboutScreen.sh  
+    - sh scripts/gitlabci/replaceAboutScreen.sh
   artifacts:
     paths:
       - pubspec.yaml
-      - lib/app/standard/pages/about/about_page.dart
-    expire_in: 2700 seconds #45 minutes
-
+      - lib/custom/pages/about/about_page.dart
+    expire_in: 8100 seconds 1 h 15 minutes
 
 lint_check:
   stage: verify
@@ -84,10 +101,10 @@ lint_check:
   script:
     - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
     - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
-    - cat lib/bootstrap.dart
     - echo "==========="
+    - ls lib/standard/firebase/firebase_options.dart
+    - head -n 50 lib/standard/firebase/firebase_options.dart
     - flutter analyze
-    - dart run custom_lint
 
 unit_tests:
   stage: verify
@@ -96,7 +113,7 @@ unit_tests:
   script:
     - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
     - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
-    - flutter test # --machine --coverage
+    - flutter test -r expanded # --machine --coverage
 
 firestore_rules_tests:
   stage: verify
@@ -113,7 +130,7 @@ firestore_rules_tests:
   artifacts:
     paths:
       - test/firestore/firestore-debug.log
-    expire_in: 2700 seconds #45 minutes
+    expire_in: 8100 seconds 1 h 15 minutes
 
 firebase_functions_tests:
   stage: verify
@@ -129,7 +146,7 @@ firebase_functions_tests:
   artifacts:
     paths:
       - test/firestore/firestore-debug.log
-    expire_in: 2700 seconds #45 minutes
+    expire_in: 8100 seconds 1 h 15 minutes
 
 buildReleaseBundle:
     stage: build
@@ -143,8 +160,8 @@ buildReleaseBundle:
         - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
         - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
         - grep storeFile android/key.properties
-        - flutter build appbundle --release --flavor production -t lib/main_production.dart
-        #- flutter build appbundle --release --no-tree-shake-icons --flavor production -t lib/main_production.dart
+        - flutter build appbundle --release --flavor production -t lib/standard/main/main_production.dart
+        #- flutter build appbundle --release --no-tree-shake-icons --flavor production -t lib/standard/main/main_production.dart
         - java -jar /bundletool-all.jar dump manifest --bundle build/app/outputs/bundle/productionRelease/app-production-release.aab --xpath /manifest/@android:versionCode
         - cp build/app/outputs/bundle/productionRelease/app-production-release.aab .
         - pwd
@@ -161,7 +178,7 @@ buildReleaseApk:
     script:
         - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
         - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
-        - flutter build apk --target lib/main_production.dart --flavor production
+        - flutter build apk --target lib/standard/main/main_production.dart --flavor production
         - cp build/app/outputs/flutter-apk/app-production-release.apk .
     artifacts:
         paths:
@@ -175,8 +192,8 @@ buildWebBundle:
   script:
     - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
     - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
-    - flutter build web --release -t lib/main_production.dart
-    #- flutter build web --no-tree-shake-icons --release -t lib/main_production.dart
+    - flutter build web --release -t lib/standard/main/main_production.dart
+    #- flutter build web --no-tree-shake-icons --release -t lib/standard/main/main_production.dart
   artifacts:
     paths:
       - "build/web/"
@@ -184,8 +201,8 @@ buildWebBundle:
 
 .runIntegrationTest:
     stage: build
-    # only:
-    #     - main
+    except:
+        - main
     script:
         - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
         - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
@@ -267,6 +284,7 @@ deployToFirebaseFunctions:
   script:
     - pwd
     - source .prod.env
+    - grep . .prod.env | cut -d "=" -f 1
     - echo $FIREBASE_TOKEN | head -c 10
     - head -c  15 /builds/lidholm/listanything/firebase-deploy-service-account.json
     - export GOOGLE_APPLICATION_CREDENTIALS=/builds/lidholm/listanything/firebase-deploy-service-account.json

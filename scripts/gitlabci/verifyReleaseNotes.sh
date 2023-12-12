@@ -2,7 +2,7 @@
 
 echo "Check release notes"
 #sed -i'' -e 's/\r$//' deploy/release_notes.txt
-
+git config --global --add safe.directory '*'
 echo "============================"
 # Check if any release notes has been added
 git fetch origin main 

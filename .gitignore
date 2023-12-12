@@ -35,7 +35,6 @@
 /dev/integration_tests/**/xcuserdata
 /dev/integration_tests/**/Pods
 /packages/flutter/coverage/
-version
 
 # packages file containing multi-root paths
 .packages.generated
@@ -135,7 +134,6 @@ ios/Runner/GoogleService-Info.plist
 firebase-deploy-service-account.json
 
 test/firestore/node_modules
-test/firestore/*.spec.js
 credentials.json
 firebaseExportCredentials.json
 

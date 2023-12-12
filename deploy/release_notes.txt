@@ -1,3 +1,7 @@
+0.0.29
+* Copy in standard code from fluttertemplate d87dbe9
+* Store lists under users. Future: When sharing, copy data to other user
+
 0.0.28
 * Get Android to compile
 
