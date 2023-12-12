@@ -9,3 +9,4 @@
  - https://github.com/flutter/flutter/issues/36653
 [ ] Share list
 [ ] Firestore rules
+[ ] Create docker containers to be able to test, deploy from local machine

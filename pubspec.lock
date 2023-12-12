@@ -313,6 +313,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.1"
+  dotenv:
+    dependency: transitive
+    description:
+      name: dotenv
+      sha256: dc4c91d8d5e9e361803fc81e8ea7ba0f35be483b656837ea6b9a3c41df308c68
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
+  envify:
+    dependency: "direct main"
+    description:
+      name: envify
+      sha256: "27cc2ef56616c8a0bf0877d524bebfa7c469b4c9ccc6058e1522bcf60f2b0d82"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.3"
+  envify_generator:
+    dependency: "direct dev"
+    description:
+      name: envify_generator
+      sha256: "8475d437da371898ec02274d8c91982c2cfdd731d169712521cc68143fd69e94"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.3"
   equatable:
     dependency: "direct main"
     description:
