@@ -16,7 +16,7 @@ import 'package:listanything/custom/pages/lists/lists.dart';
 import 'package:listanything/custom/pages/maps/maps_page_route.dart';
 import 'package:listanything/custom/pages/privacyPolicy/privacy_policy_page_route.dart';
 import 'package:listanything/custom/pages/remoteConfig/remote_config_page_route.dart';
-import 'package:listanything/standard/login/page/login_with_email_and_password_page_route.dart';
+import 'package:listanything/standard/page/login_with_email_and_password_page_route.dart';
 import 'package:listanything/standard/user_profile/user_profile.dart';
 
 part 'routes.g.dart';

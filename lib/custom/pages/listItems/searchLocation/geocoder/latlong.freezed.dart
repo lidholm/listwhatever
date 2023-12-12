@@ -66,20 +66,21 @@ class _$LatLongCopyWithImpl<$Res, $Val extends LatLong>
 }
 
 /// @nodoc
-abstract class _$$_LatLongCopyWith<$Res> implements $LatLongCopyWith<$Res> {
-  factory _$$_LatLongCopyWith(
-          _$_LatLong value, $Res Function(_$_LatLong) then) =
-      __$$_LatLongCopyWithImpl<$Res>;
+abstract class _$$LatLongImplCopyWith<$Res> implements $LatLongCopyWith<$Res> {
+  factory _$$LatLongImplCopyWith(
+          _$LatLongImpl value, $Res Function(_$LatLongImpl) then) =
+      __$$LatLongImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({double lat, double lng});
 }
 
 /// @nodoc
-class __$$_LatLongCopyWithImpl<$Res>
-    extends _$LatLongCopyWithImpl<$Res, _$_LatLong>
-    implements _$$_LatLongCopyWith<$Res> {
-  __$$_LatLongCopyWithImpl(_$_LatLong _value, $Res Function(_$_LatLong) _then)
+class __$$LatLongImplCopyWithImpl<$Res>
+    extends _$LatLongCopyWithImpl<$Res, _$LatLongImpl>
+    implements _$$LatLongImplCopyWith<$Res> {
+  __$$LatLongImplCopyWithImpl(
+      _$LatLongImpl _value, $Res Function(_$LatLongImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -88,7 +89,7 @@ class __$$_LatLongCopyWithImpl<$Res>
     Object? lat = null,
     Object? lng = null,
   }) {
-    return _then(_$_LatLong(
+    return _then(_$LatLongImpl(
       lat: null == lat
           ? _value.lat
           : lat // ignore: cast_nullable_to_non_nullable
@@ -103,11 +104,11 @@ class __$$_LatLongCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_LatLong extends _LatLong {
-  const _$_LatLong({required this.lat, required this.lng}) : super._();
+class _$LatLongImpl extends _LatLong {
+  const _$LatLongImpl({required this.lat, required this.lng}) : super._();
 
-  factory _$_LatLong.fromJson(Map<String, dynamic> json) =>
-      _$$_LatLongFromJson(json);
+  factory _$LatLongImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LatLongImplFromJson(json);
 
   @override
   final double lat;
@@ -123,7 +124,7 @@ class _$_LatLong extends _LatLong {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LatLong &&
+            other is _$LatLongImpl &&
             (identical(other.lat, lat) || other.lat == lat) &&
             (identical(other.lng, lng) || other.lng == lng));
   }
@@ -135,12 +136,12 @@ class _$_LatLong extends _LatLong {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LatLongCopyWith<_$_LatLong> get copyWith =>
-      __$$_LatLongCopyWithImpl<_$_LatLong>(this, _$identity);
+  _$$LatLongImplCopyWith<_$LatLongImpl> get copyWith =>
+      __$$LatLongImplCopyWithImpl<_$LatLongImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LatLongToJson(
+    return _$$LatLongImplToJson(
       this,
     );
   }
@@ -148,10 +149,10 @@ class _$_LatLong extends _LatLong {
 
 abstract class _LatLong extends LatLong {
   const factory _LatLong(
-      {required final double lat, required final double lng}) = _$_LatLong;
+      {required final double lat, required final double lng}) = _$LatLongImpl;
   const _LatLong._() : super._();
 
-  factory _LatLong.fromJson(Map<String, dynamic> json) = _$_LatLong.fromJson;
+  factory _LatLong.fromJson(Map<String, dynamic> json) = _$LatLongImpl.fromJson;
 
   @override
   double get lat;
@@ -159,6 +160,6 @@ abstract class _LatLong extends LatLong {
   double get lng;
   @override
   @JsonKey(ignore: true)
-  _$$_LatLongCopyWith<_$_LatLong> get copyWith =>
+  _$$LatLongImplCopyWith<_$LatLongImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

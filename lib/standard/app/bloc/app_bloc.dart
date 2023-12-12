@@ -1,11 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:user_repository/user_repository.dart';
-
-part 'app_event.dart';
-part 'app_state.dart';
+import 'package:listanything/standard/app/bloc/app_event.dart';
+import 'package:listanything/standard/app/bloc/app_state.dart';
+import 'package:listanything/standard/userRepository/models/user.dart';
+import 'package:listanything/standard/userRepository/user_repository.dart';
 
 class AppBloc extends Bloc<AppEvent, AppState> {
   AppBloc({

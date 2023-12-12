@@ -63,22 +63,22 @@ class _$EmulatorInfoCopyWithImpl<$Res, $Val extends EmulatorInfo>
 }
 
 /// @nodoc
-abstract class _$$_EmulatorInfoCopyWith<$Res>
+abstract class _$$EmulatorInfoImplCopyWith<$Res>
     implements $EmulatorInfoCopyWith<$Res> {
-  factory _$$_EmulatorInfoCopyWith(
-          _$_EmulatorInfo value, $Res Function(_$_EmulatorInfo) then) =
-      __$$_EmulatorInfoCopyWithImpl<$Res>;
+  factory _$$EmulatorInfoImplCopyWith(
+          _$EmulatorInfoImpl value, $Res Function(_$EmulatorInfoImpl) then) =
+      __$$EmulatorInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({EmulatorType type, String? address});
 }
 
 /// @nodoc
-class __$$_EmulatorInfoCopyWithImpl<$Res>
-    extends _$EmulatorInfoCopyWithImpl<$Res, _$_EmulatorInfo>
-    implements _$$_EmulatorInfoCopyWith<$Res> {
-  __$$_EmulatorInfoCopyWithImpl(
-      _$_EmulatorInfo _value, $Res Function(_$_EmulatorInfo) _then)
+class __$$EmulatorInfoImplCopyWithImpl<$Res>
+    extends _$EmulatorInfoCopyWithImpl<$Res, _$EmulatorInfoImpl>
+    implements _$$EmulatorInfoImplCopyWith<$Res> {
+  __$$EmulatorInfoImplCopyWithImpl(
+      _$EmulatorInfoImpl _value, $Res Function(_$EmulatorInfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_EmulatorInfoCopyWithImpl<$Res>
     Object? type = null,
     Object? address = freezed,
   }) {
-    return _then(_$_EmulatorInfo(
+    return _then(_$EmulatorInfoImpl(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_EmulatorInfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_EmulatorInfo implements _EmulatorInfo {
-  _$_EmulatorInfo({required this.type, required this.address});
+class _$EmulatorInfoImpl implements _EmulatorInfo {
+  _$EmulatorInfoImpl({required this.type, required this.address});
 
   @override
   final EmulatorType type;
@@ -119,7 +119,7 @@ class _$_EmulatorInfo implements _EmulatorInfo {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_EmulatorInfo &&
+            other is _$EmulatorInfoImpl &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.address, address) || other.address == address));
   }
@@ -130,14 +130,14 @@ class _$_EmulatorInfo implements _EmulatorInfo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_EmulatorInfoCopyWith<_$_EmulatorInfo> get copyWith =>
-      __$$_EmulatorInfoCopyWithImpl<_$_EmulatorInfo>(this, _$identity);
+  _$$EmulatorInfoImplCopyWith<_$EmulatorInfoImpl> get copyWith =>
+      __$$EmulatorInfoImplCopyWithImpl<_$EmulatorInfoImpl>(this, _$identity);
 }
 
 abstract class _EmulatorInfo implements EmulatorInfo {
   factory _EmulatorInfo(
       {required final EmulatorType type,
-      required final String? address}) = _$_EmulatorInfo;
+      required final String? address}) = _$EmulatorInfoImpl;
 
   @override
   EmulatorType get type;
@@ -145,6 +145,6 @@ abstract class _EmulatorInfo implements EmulatorInfo {
   String? get address;
   @override
   @JsonKey(ignore: true)
-  _$$_EmulatorInfoCopyWith<_$_EmulatorInfo> get copyWith =>
+  _$$EmulatorInfoImplCopyWith<_$EmulatorInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

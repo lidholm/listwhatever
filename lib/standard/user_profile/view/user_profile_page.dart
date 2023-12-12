@@ -1,12 +1,23 @@
-import 'package:app_ui/app_ui.dart' show AppBackButton, AppButton, AppColors, AppSpacing, AppSwitch, Assets;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listanything/l10n/l10n.dart';
-import 'package:listanything/standard/analytics/analytics.dart';
+import 'package:listanything/standard/analytics/bloc/analytics_bloc.dart';
+import 'package:listanything/standard/analytics/bloc/analytics_event.dart';
+import 'package:listanything/standard/analyticsRepository/models/ntg_event.dart';
 import 'package:listanything/standard/app/app.dart';
+import 'package:listanything/standard/app/bloc/app_event.dart';
+import 'package:listanything/standard/app/bloc/app_state.dart';
+import 'package:listanything/standard/appUi/colors/app_colors.dart';
+import 'package:listanything/standard/appUi/generated/assets.gen.dart';
+import 'package:listanything/standard/appUi/spacing/app_spacing.dart';
+import 'package:listanything/standard/appUi/widgets/app_button.dart';
+import 'package:listanything/standard/appUi/widgets/app_switch.dart';
+import 'package:listanything/standard/userRepository/user_repository.dart';
+import 'package:listanything/standard/user_profile/bloc/user_profile_event.dart';
+import 'package:listanything/standard/user_profile/bloc/user_profile_state.dart';
 import 'package:listanything/standard/user_profile/user_profile.dart';
-import 'package:user_repository/user_repository.dart';
+import 'package:listanything/standard/widgets/appBar/common_app_bar.dart';
 
 class UserProfilePage extends StatelessWidget {
   const UserProfilePage({super.key});
@@ -78,8 +89,8 @@ class _UserProfileViewState extends State<UserProfileView> with WidgetsBindingOb
           }
         },
         child: Scaffold(
-          appBar: AppBar(
-            leading: const AppBackButton(),
+          appBar: const CommonAppBar(
+            title: '',
           ),
           body: CustomScrollView(
             slivers: [

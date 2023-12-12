@@ -6,8 +6,8 @@ part of 'list_of_things.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ListOfThings _$$_ListOfThingsFromJson(Map<String, dynamic> json) =>
-    _$_ListOfThings(
+_$ListOfThingsImpl _$$ListOfThingsImplFromJson(Map<String, dynamic> json) =>
+    _$ListOfThingsImpl(
       id: json['id'] as String?,
       name: json['name'] as String,
       type: $enumDecode(_$ListTypeEnumMap, json['type']),
@@ -17,7 +17,7 @@ _$_ListOfThings _$$_ListOfThingsFromJson(Map<String, dynamic> json) =>
       shared: json['shared'] as bool,
     );
 
-Map<String, dynamic> _$$_ListOfThingsToJson(_$_ListOfThings instance) =>
+Map<String, dynamic> _$$ListOfThingsImplToJson(_$ListOfThingsImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

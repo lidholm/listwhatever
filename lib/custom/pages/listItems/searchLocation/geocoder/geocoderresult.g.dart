@@ -6,8 +6,8 @@ part of 'geocoderresult.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_GeocoderResult _$$_GeocoderResultFromJson(Map<String, dynamic> json) =>
-    _$_GeocoderResult(
+_$GeocoderResultImpl _$$GeocoderResultImplFromJson(Map<String, dynamic> json) =>
+    _$GeocoderResultImpl(
       addressComponents: (json['address_components'] as List<dynamic>)
           .map((e) => AddressComponent.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -20,7 +20,8 @@ _$_GeocoderResult _$$_GeocoderResultFromJson(Map<String, dynamic> json) =>
       searchPhrase: json['searchPhrase'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_GeocoderResultToJson(_$_GeocoderResult instance) =>
+Map<String, dynamic> _$$GeocoderResultImplToJson(
+        _$GeocoderResultImpl instance) =>
     <String, dynamic>{
       'address_components':
           instance.addressComponents.map((e) => e.toJson()).toList(),

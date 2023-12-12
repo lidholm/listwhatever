@@ -1,4 +1,3 @@
-import 'package:app_ui/app_ui.dart' show AppColors, AppSpacing;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
 import 'package:listanything/custom/navigation/routes.dart';
@@ -11,6 +10,8 @@ import 'package:listanything/custom/pages/maps/maps_page_route.dart';
 import 'package:listanything/custom/pages/privacyPolicy/privacy_policy_page_route.dart';
 import 'package:listanything/custom/pages/remoteConfig/remote_config_page_route.dart';
 import 'package:listanything/l10n/l10n.dart';
+import 'package:listanything/standard/appUi/colors/app_colors.dart';
+import 'package:listanything/standard/appUi/spacing/app_spacing.dart';
 
 import '../models/link.dart';
 

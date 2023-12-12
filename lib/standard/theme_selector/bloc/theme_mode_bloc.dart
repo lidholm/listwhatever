@@ -1,8 +1,6 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-
-part 'theme_mode_event.dart';
+import 'package:listanything/standard/theme_selector/bloc/theme_mode_event.dart';
 
 /// Keeps track of and allows changing the application's [ThemeMode].
 class ThemeModeBloc extends HydratedBloc<ThemeModeEvent, ThemeMode> {

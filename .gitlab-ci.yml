@@ -1,10 +1,5 @@
 image: lidholm/flutter:0.0.25
 
-include:
-  - '/.gitlab-ci/pub-get-in-packages.yml'
-#  - '/.gitlab-ci/unit-tests-in-packages.yml'
-#  - '/.gitlab-ci/analyze-in-packages.yml'
-
 #variables:
 #  CI_PROJECT_DIR: "/home/developer"
 
@@ -50,7 +45,7 @@ flutter-setup:
     - echo $PUB_CACHE
     - flutter pub get
 
-#    - jq '. | flatten | add' lib/l10n/arb/app_en_nested.json > lib/l10n/arb/app_en.arb && flutter gen-l10n
+    # - jq '. | flatten | add' lib/l10n/arb/app_en_nested.json > lib/l10n/arb/app_en.arb && flutter gen-l10n
     # - flutter pub global activate junitreport
   artifacts:
     paths:
@@ -80,7 +75,6 @@ decrypt-sops:
       - lib/standard/api_keys.dart
       - lib/standard/firebase/firebase_options.dart
       - ios/firebase_app_id_file.json
-      - .firebase-deploy-service-account.json
 
     expire_in: 8100 seconds 1 h 15 minutes
 

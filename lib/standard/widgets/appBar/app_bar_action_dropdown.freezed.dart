@@ -87,11 +87,12 @@ class _$AppBarActionDropdownCopyWithImpl<T, $Res,
 }
 
 /// @nodoc
-abstract class _$$_AppBarActionDropdownCopyWith<T, $Res>
+abstract class _$$AppBarActionDropdownImplCopyWith<T, $Res>
     implements $AppBarActionDropdownCopyWith<T, $Res> {
-  factory _$$_AppBarActionDropdownCopyWith(_$_AppBarActionDropdown<T> value,
-          $Res Function(_$_AppBarActionDropdown<T>) then) =
-      __$$_AppBarActionDropdownCopyWithImpl<T, $Res>;
+  factory _$$AppBarActionDropdownImplCopyWith(
+          _$AppBarActionDropdownImpl<T> value,
+          $Res Function(_$AppBarActionDropdownImpl<T>) then) =
+      __$$AppBarActionDropdownImplCopyWithImpl<T, $Res>;
   @override
   @useResult
   $Res call(
@@ -103,12 +104,12 @@ abstract class _$$_AppBarActionDropdownCopyWith<T, $Res>
 }
 
 /// @nodoc
-class __$$_AppBarActionDropdownCopyWithImpl<T, $Res>
+class __$$AppBarActionDropdownImplCopyWithImpl<T, $Res>
     extends _$AppBarActionDropdownCopyWithImpl<T, $Res,
-        _$_AppBarActionDropdown<T>>
-    implements _$$_AppBarActionDropdownCopyWith<T, $Res> {
-  __$$_AppBarActionDropdownCopyWithImpl(_$_AppBarActionDropdown<T> _value,
-      $Res Function(_$_AppBarActionDropdown<T>) _then)
+        _$AppBarActionDropdownImpl<T>>
+    implements _$$AppBarActionDropdownImplCopyWith<T, $Res> {
+  __$$AppBarActionDropdownImplCopyWithImpl(_$AppBarActionDropdownImpl<T> _value,
+      $Res Function(_$AppBarActionDropdownImpl<T>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -120,7 +121,7 @@ class __$$_AppBarActionDropdownCopyWithImpl<T, $Res>
     Object? menuItems = null,
     Object? key = null,
   }) {
-    return _then(_$_AppBarActionDropdown<T>(
+    return _then(_$AppBarActionDropdownImpl<T>(
       icon: null == icon
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
@@ -147,8 +148,8 @@ class __$$_AppBarActionDropdownCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$_AppBarActionDropdown<T> implements _AppBarActionDropdown<T> {
-  _$_AppBarActionDropdown(
+class _$AppBarActionDropdownImpl<T> implements _AppBarActionDropdown<T> {
+  _$AppBarActionDropdownImpl(
       {required this.icon,
       required this.tooltip,
       required this.callback,
@@ -182,7 +183,7 @@ class _$_AppBarActionDropdown<T> implements _AppBarActionDropdown<T> {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AppBarActionDropdown<T> &&
+            other is _$AppBarActionDropdownImpl<T> &&
             (identical(other.icon, icon) || other.icon == icon) &&
             (identical(other.tooltip, tooltip) || other.tooltip == tooltip) &&
             (identical(other.callback, callback) ||
@@ -199,10 +200,9 @@ class _$_AppBarActionDropdown<T> implements _AppBarActionDropdown<T> {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AppBarActionDropdownCopyWith<T, _$_AppBarActionDropdown<T>>
-      get copyWith =>
-          __$$_AppBarActionDropdownCopyWithImpl<T, _$_AppBarActionDropdown<T>>(
-              this, _$identity);
+  _$$AppBarActionDropdownImplCopyWith<T, _$AppBarActionDropdownImpl<T>>
+      get copyWith => __$$AppBarActionDropdownImplCopyWithImpl<T,
+          _$AppBarActionDropdownImpl<T>>(this, _$identity);
 }
 
 abstract class _AppBarActionDropdown<T> implements AppBarActionDropdown<T> {
@@ -211,7 +211,7 @@ abstract class _AppBarActionDropdown<T> implements AppBarActionDropdown<T> {
       required final String? tooltip,
       required final void Function(T) callback,
       required final List<(T, Widget)> menuItems,
-      required final Key key}) = _$_AppBarActionDropdown<T>;
+      required final Key key}) = _$AppBarActionDropdownImpl<T>;
 
   @override
   IconData get icon;
@@ -225,6 +225,6 @@ abstract class _AppBarActionDropdown<T> implements AppBarActionDropdown<T> {
   Key get key;
   @override
   @JsonKey(ignore: true)
-  _$$_AppBarActionDropdownCopyWith<T, _$_AppBarActionDropdown<T>>
+  _$$AppBarActionDropdownImplCopyWith<T, _$AppBarActionDropdownImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
 }

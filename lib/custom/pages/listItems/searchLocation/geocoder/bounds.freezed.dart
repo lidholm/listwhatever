@@ -85,9 +85,10 @@ class _$BoundsCopyWithImpl<$Res, $Val extends Bounds>
 }
 
 /// @nodoc
-abstract class _$$_BoundsCopyWith<$Res> implements $BoundsCopyWith<$Res> {
-  factory _$$_BoundsCopyWith(_$_Bounds value, $Res Function(_$_Bounds) then) =
-      __$$_BoundsCopyWithImpl<$Res>;
+abstract class _$$BoundsImplCopyWith<$Res> implements $BoundsCopyWith<$Res> {
+  factory _$$BoundsImplCopyWith(
+          _$BoundsImpl value, $Res Function(_$BoundsImpl) then) =
+      __$$BoundsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({LatLong northeast, LatLong southwest});
@@ -99,10 +100,11 @@ abstract class _$$_BoundsCopyWith<$Res> implements $BoundsCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_BoundsCopyWithImpl<$Res>
-    extends _$BoundsCopyWithImpl<$Res, _$_Bounds>
-    implements _$$_BoundsCopyWith<$Res> {
-  __$$_BoundsCopyWithImpl(_$_Bounds _value, $Res Function(_$_Bounds) _then)
+class __$$BoundsImplCopyWithImpl<$Res>
+    extends _$BoundsCopyWithImpl<$Res, _$BoundsImpl>
+    implements _$$BoundsImplCopyWith<$Res> {
+  __$$BoundsImplCopyWithImpl(
+      _$BoundsImpl _value, $Res Function(_$BoundsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -111,7 +113,7 @@ class __$$_BoundsCopyWithImpl<$Res>
     Object? northeast = null,
     Object? southwest = null,
   }) {
-    return _then(_$_Bounds(
+    return _then(_$BoundsImpl(
       northeast: null == northeast
           ? _value.northeast
           : northeast // ignore: cast_nullable_to_non_nullable
@@ -126,11 +128,11 @@ class __$$_BoundsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Bounds implements _Bounds {
-  _$_Bounds({required this.northeast, required this.southwest});
+class _$BoundsImpl implements _Bounds {
+  _$BoundsImpl({required this.northeast, required this.southwest});
 
-  factory _$_Bounds.fromJson(Map<String, dynamic> json) =>
-      _$$_BoundsFromJson(json);
+  factory _$BoundsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BoundsImplFromJson(json);
 
   @override
   final LatLong northeast;
@@ -146,7 +148,7 @@ class _$_Bounds implements _Bounds {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Bounds &&
+            other is _$BoundsImpl &&
             (identical(other.northeast, northeast) ||
                 other.northeast == northeast) &&
             (identical(other.southwest, southwest) ||
@@ -160,12 +162,12 @@ class _$_Bounds implements _Bounds {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BoundsCopyWith<_$_Bounds> get copyWith =>
-      __$$_BoundsCopyWithImpl<_$_Bounds>(this, _$identity);
+  _$$BoundsImplCopyWith<_$BoundsImpl> get copyWith =>
+      __$$BoundsImplCopyWithImpl<_$BoundsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BoundsToJson(
+    return _$$BoundsImplToJson(
       this,
     );
   }
@@ -174,9 +176,9 @@ class _$_Bounds implements _Bounds {
 abstract class _Bounds implements Bounds {
   factory _Bounds(
       {required final LatLong northeast,
-      required final LatLong southwest}) = _$_Bounds;
+      required final LatLong southwest}) = _$BoundsImpl;
 
-  factory _Bounds.fromJson(Map<String, dynamic> json) = _$_Bounds.fromJson;
+  factory _Bounds.fromJson(Map<String, dynamic> json) = _$BoundsImpl.fromJson;
 
   @override
   LatLong get northeast;
@@ -184,6 +186,6 @@ abstract class _Bounds implements Bounds {
   LatLong get southwest;
   @override
   @JsonKey(ignore: true)
-  _$$_BoundsCopyWith<_$_Bounds> get copyWith =>
+  _$$BoundsImplCopyWith<_$BoundsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

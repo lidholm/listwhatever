@@ -6,13 +6,14 @@ part of 'geometry.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Geometry _$$_GeometryFromJson(Map<String, dynamic> json) => _$_Geometry(
+_$GeometryImpl _$$GeometryImplFromJson(Map<String, dynamic> json) =>
+    _$GeometryImpl(
       location: LatLong.fromJson(json['location'] as Map<String, dynamic>),
       locationType: json['location_type'] as String,
       viewport: Bounds.fromJson(json['viewport'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_GeometryToJson(_$_Geometry instance) =>
+Map<String, dynamic> _$$GeometryImplToJson(_$GeometryImpl instance) =>
     <String, dynamic>{
       'location': instance.location.toJson(),
       'location_type': instance.locationType,

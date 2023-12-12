@@ -82,23 +82,25 @@ class _$SearchLocationResponseCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_SearchLocationResponseCopyWith<$Res>
+abstract class _$$SearchLocationResponseImplCopyWith<$Res>
     implements $SearchLocationResponseCopyWith<$Res> {
-  factory _$$_SearchLocationResponseCopyWith(_$_SearchLocationResponse value,
-          $Res Function(_$_SearchLocationResponse) then) =
-      __$$_SearchLocationResponseCopyWithImpl<$Res>;
+  factory _$$SearchLocationResponseImplCopyWith(
+          _$SearchLocationResponseImpl value,
+          $Res Function(_$SearchLocationResponseImpl) then) =
+      __$$SearchLocationResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String address, double lat, double long, String searchPhrase});
 }
 
 /// @nodoc
-class __$$_SearchLocationResponseCopyWithImpl<$Res>
+class __$$SearchLocationResponseImplCopyWithImpl<$Res>
     extends _$SearchLocationResponseCopyWithImpl<$Res,
-        _$_SearchLocationResponse>
-    implements _$$_SearchLocationResponseCopyWith<$Res> {
-  __$$_SearchLocationResponseCopyWithImpl(_$_SearchLocationResponse _value,
-      $Res Function(_$_SearchLocationResponse) _then)
+        _$SearchLocationResponseImpl>
+    implements _$$SearchLocationResponseImplCopyWith<$Res> {
+  __$$SearchLocationResponseImplCopyWithImpl(
+      _$SearchLocationResponseImpl _value,
+      $Res Function(_$SearchLocationResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -109,7 +111,7 @@ class __$$_SearchLocationResponseCopyWithImpl<$Res>
     Object? long = null,
     Object? searchPhrase = null,
   }) {
-    return _then(_$_SearchLocationResponse(
+    return _then(_$SearchLocationResponseImpl(
       address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
@@ -132,15 +134,15 @@ class __$$_SearchLocationResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SearchLocationResponse implements _SearchLocationResponse {
-  const _$_SearchLocationResponse(
+class _$SearchLocationResponseImpl implements _SearchLocationResponse {
+  const _$SearchLocationResponseImpl(
       {required this.address,
       required this.lat,
       required this.long,
       required this.searchPhrase});
 
-  factory _$_SearchLocationResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_SearchLocationResponseFromJson(json);
+  factory _$SearchLocationResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SearchLocationResponseImplFromJson(json);
 
   @override
   final String address;
@@ -160,7 +162,7 @@ class _$_SearchLocationResponse implements _SearchLocationResponse {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SearchLocationResponse &&
+            other is _$SearchLocationResponseImpl &&
             (identical(other.address, address) || other.address == address) &&
             (identical(other.lat, lat) || other.lat == lat) &&
             (identical(other.long, long) || other.long == long) &&
@@ -176,13 +178,13 @@ class _$_SearchLocationResponse implements _SearchLocationResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchLocationResponseCopyWith<_$_SearchLocationResponse> get copyWith =>
-      __$$_SearchLocationResponseCopyWithImpl<_$_SearchLocationResponse>(
-          this, _$identity);
+  _$$SearchLocationResponseImplCopyWith<_$SearchLocationResponseImpl>
+      get copyWith => __$$SearchLocationResponseImplCopyWithImpl<
+          _$SearchLocationResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SearchLocationResponseToJson(
+    return _$$SearchLocationResponseImplToJson(
       this,
     );
   }
@@ -193,10 +195,10 @@ abstract class _SearchLocationResponse implements SearchLocationResponse {
       {required final String address,
       required final double lat,
       required final double long,
-      required final String searchPhrase}) = _$_SearchLocationResponse;
+      required final String searchPhrase}) = _$SearchLocationResponseImpl;
 
   factory _SearchLocationResponse.fromJson(Map<String, dynamic> json) =
-      _$_SearchLocationResponse.fromJson;
+      _$SearchLocationResponseImpl.fromJson;
 
   @override
   String get address;
@@ -208,6 +210,6 @@ abstract class _SearchLocationResponse implements SearchLocationResponse {
   String get searchPhrase;
   @override
   @JsonKey(ignore: true)
-  _$$_SearchLocationResponseCopyWith<_$_SearchLocationResponse> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$SearchLocationResponseImplCopyWith<_$SearchLocationResponseImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

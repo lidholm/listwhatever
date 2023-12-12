@@ -1,5 +1,7 @@
-import 'package:app_ui/app_ui.dart' show AppColors, AppLogo, AppSpacing;
 import 'package:flutter/material.dart';
+import 'package:listanything/standard/appUi/colors/app_colors.dart';
+import 'package:listanything/standard/appUi/spacing/app_spacing.dart';
+import 'package:listanything/standard/appUi/widgets/app_logo.dart';
 import 'package:listanything/standard/navigation/navigation.dart';
 
 class NavDrawer extends StatelessWidget {

@@ -1,5 +1,5 @@
-import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:listanything/standard/appUi/typography/app_text_styles.dart';
 
 import '/l10n/l10n.dart';
 

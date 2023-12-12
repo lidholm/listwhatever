@@ -71,10 +71,11 @@ class _$PlusCodeCopyWithImpl<$Res, $Val extends PlusCode>
 }
 
 /// @nodoc
-abstract class _$$_PlusCodeCopyWith<$Res> implements $PlusCodeCopyWith<$Res> {
-  factory _$$_PlusCodeCopyWith(
-          _$_PlusCode value, $Res Function(_$_PlusCode) then) =
-      __$$_PlusCodeCopyWithImpl<$Res>;
+abstract class _$$PlusCodeImplCopyWith<$Res>
+    implements $PlusCodeCopyWith<$Res> {
+  factory _$$PlusCodeImplCopyWith(
+          _$PlusCodeImpl value, $Res Function(_$PlusCodeImpl) then) =
+      __$$PlusCodeImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -83,11 +84,11 @@ abstract class _$$_PlusCodeCopyWith<$Res> implements $PlusCodeCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_PlusCodeCopyWithImpl<$Res>
-    extends _$PlusCodeCopyWithImpl<$Res, _$_PlusCode>
-    implements _$$_PlusCodeCopyWith<$Res> {
-  __$$_PlusCodeCopyWithImpl(
-      _$_PlusCode _value, $Res Function(_$_PlusCode) _then)
+class __$$PlusCodeImplCopyWithImpl<$Res>
+    extends _$PlusCodeCopyWithImpl<$Res, _$PlusCodeImpl>
+    implements _$$PlusCodeImplCopyWith<$Res> {
+  __$$PlusCodeImplCopyWithImpl(
+      _$PlusCodeImpl _value, $Res Function(_$PlusCodeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -96,7 +97,7 @@ class __$$_PlusCodeCopyWithImpl<$Res>
     Object? compoundCode = null,
     Object? globalCode = null,
   }) {
-    return _then(_$_PlusCode(
+    return _then(_$PlusCodeImpl(
       compoundCode: null == compoundCode
           ? _value.compoundCode
           : compoundCode // ignore: cast_nullable_to_non_nullable
@@ -111,13 +112,13 @@ class __$$_PlusCodeCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PlusCode implements _PlusCode {
-  _$_PlusCode(
+class _$PlusCodeImpl implements _PlusCode {
+  _$PlusCodeImpl(
       {@JsonKey(name: 'compound_code') required this.compoundCode,
       @JsonKey(name: 'global_code') required this.globalCode});
 
-  factory _$_PlusCode.fromJson(Map<String, dynamic> json) =>
-      _$$_PlusCodeFromJson(json);
+  factory _$PlusCodeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PlusCodeImplFromJson(json);
 
   @override
   @JsonKey(name: 'compound_code')
@@ -135,7 +136,7 @@ class _$_PlusCode implements _PlusCode {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PlusCode &&
+            other is _$PlusCodeImpl &&
             (identical(other.compoundCode, compoundCode) ||
                 other.compoundCode == compoundCode) &&
             (identical(other.globalCode, globalCode) ||
@@ -149,12 +150,12 @@ class _$_PlusCode implements _PlusCode {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PlusCodeCopyWith<_$_PlusCode> get copyWith =>
-      __$$_PlusCodeCopyWithImpl<_$_PlusCode>(this, _$identity);
+  _$$PlusCodeImplCopyWith<_$PlusCodeImpl> get copyWith =>
+      __$$PlusCodeImplCopyWithImpl<_$PlusCodeImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PlusCodeToJson(
+    return _$$PlusCodeImplToJson(
       this,
     );
   }
@@ -164,9 +165,10 @@ abstract class _PlusCode implements PlusCode {
   factory _PlusCode(
           {@JsonKey(name: 'compound_code') required final String compoundCode,
           @JsonKey(name: 'global_code') required final String globalCode}) =
-      _$_PlusCode;
+      _$PlusCodeImpl;
 
-  factory _PlusCode.fromJson(Map<String, dynamic> json) = _$_PlusCode.fromJson;
+  factory _PlusCode.fromJson(Map<String, dynamic> json) =
+      _$PlusCodeImpl.fromJson;
 
   @override
   @JsonKey(name: 'compound_code')
@@ -176,6 +178,6 @@ abstract class _PlusCode implements PlusCode {
   String get globalCode;
   @override
   @JsonKey(ignore: true)
-  _$$_PlusCodeCopyWith<_$_PlusCode> get copyWith =>
+  _$$PlusCodeImplCopyWith<_$PlusCodeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

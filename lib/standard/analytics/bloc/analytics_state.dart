@@ -1,4 +1,5 @@
-part of 'analytics_bloc.dart';
+
+import 'package:equatable/equatable.dart';
 
 abstract class AnalyticsState extends Equatable {
   const AnalyticsState();

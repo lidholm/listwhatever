@@ -1,16 +1,15 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:user_repository/user_repository.dart';
-
-part 'user_profile_event.dart';
-part 'user_profile_state.dart';
+import 'package:listanything/standard/userRepository/models/user.dart';
+import 'package:listanything/standard/userRepository/user_repository.dart';
+import 'package:listanything/standard/user_profile/bloc/user_profile_event.dart';
+import 'package:listanything/standard/user_profile/bloc/user_profile_state.dart';
 
 class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
   UserProfileBloc({
     required UserRepository userRepository,
-  }) : super(const UserProfileState.initial()) {
+  }) : super( const UserProfileState.initial()) {
     on<UserProfileUpdated>(_onUserProfileUpdated);
     on<FetchNotificationsEnabled>(_onFetchNotificationsEnabled);
     on<ToggleNotifications>(_onToggleNotifications);

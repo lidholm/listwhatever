@@ -105,11 +105,11 @@ class _$ListOfThingsCopyWithImpl<$Res, $Val extends ListOfThings>
 }
 
 /// @nodoc
-abstract class _$$_ListOfThingsCopyWith<$Res>
+abstract class _$$ListOfThingsImplCopyWith<$Res>
     implements $ListOfThingsCopyWith<$Res> {
-  factory _$$_ListOfThingsCopyWith(
-          _$_ListOfThings value, $Res Function(_$_ListOfThings) then) =
-      __$$_ListOfThingsCopyWithImpl<$Res>;
+  factory _$$ListOfThingsImplCopyWith(
+          _$ListOfThingsImpl value, $Res Function(_$ListOfThingsImpl) then) =
+      __$$ListOfThingsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -123,11 +123,11 @@ abstract class _$$_ListOfThingsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ListOfThingsCopyWithImpl<$Res>
-    extends _$ListOfThingsCopyWithImpl<$Res, _$_ListOfThings>
-    implements _$$_ListOfThingsCopyWith<$Res> {
-  __$$_ListOfThingsCopyWithImpl(
-      _$_ListOfThings _value, $Res Function(_$_ListOfThings) _then)
+class __$$ListOfThingsImplCopyWithImpl<$Res>
+    extends _$ListOfThingsCopyWithImpl<$Res, _$ListOfThingsImpl>
+    implements _$$ListOfThingsImplCopyWith<$Res> {
+  __$$ListOfThingsImplCopyWithImpl(
+      _$ListOfThingsImpl _value, $Res Function(_$ListOfThingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -141,7 +141,7 @@ class __$$_ListOfThingsCopyWithImpl<$Res>
     Object? withTimes = null,
     Object? shared = null,
   }) {
-    return _then(_$_ListOfThings(
+    return _then(_$ListOfThingsImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -176,8 +176,8 @@ class __$$_ListOfThingsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ListOfThings implements _ListOfThings {
-  const _$_ListOfThings(
+class _$ListOfThingsImpl implements _ListOfThings {
+  const _$ListOfThingsImpl(
       {required this.id,
       required this.name,
       required this.type,
@@ -186,8 +186,8 @@ class _$_ListOfThings implements _ListOfThings {
       required this.withTimes,
       required this.shared});
 
-  factory _$_ListOfThings.fromJson(Map<String, dynamic> json) =>
-      _$$_ListOfThingsFromJson(json);
+  factory _$ListOfThingsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ListOfThingsImplFromJson(json);
 
   @override
   final String? id;
@@ -213,7 +213,7 @@ class _$_ListOfThings implements _ListOfThings {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ListOfThings &&
+            other is _$ListOfThingsImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.type, type) || other.type == type) &&
@@ -233,12 +233,12 @@ class _$_ListOfThings implements _ListOfThings {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ListOfThingsCopyWith<_$_ListOfThings> get copyWith =>
-      __$$_ListOfThingsCopyWithImpl<_$_ListOfThings>(this, _$identity);
+  _$$ListOfThingsImplCopyWith<_$ListOfThingsImpl> get copyWith =>
+      __$$ListOfThingsImplCopyWithImpl<_$ListOfThingsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ListOfThingsToJson(
+    return _$$ListOfThingsImplToJson(
       this,
     );
   }
@@ -252,10 +252,10 @@ abstract class _ListOfThings implements ListOfThings {
       required final bool withMap,
       required final bool withDates,
       required final bool withTimes,
-      required final bool shared}) = _$_ListOfThings;
+      required final bool shared}) = _$ListOfThingsImpl;
 
   factory _ListOfThings.fromJson(Map<String, dynamic> json) =
-      _$_ListOfThings.fromJson;
+      _$ListOfThingsImpl.fromJson;
 
   @override
   String? get id;
@@ -273,6 +273,6 @@ abstract class _ListOfThings implements ListOfThings {
   bool get shared;
   @override
   @JsonKey(ignore: true)
-  _$$_ListOfThingsCopyWith<_$_ListOfThings> get copyWith =>
+  _$$ListOfThingsImplCopyWith<_$ListOfThingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

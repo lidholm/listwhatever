@@ -123,11 +123,11 @@ class _$AppBarActionCopyWithImpl<T, $Res, $Val extends AppBarAction<T>>
 }
 
 /// @nodoc
-abstract class _$$_AppBarActionCopyWith<T, $Res>
+abstract class _$$AppBarActionImplCopyWith<T, $Res>
     implements $AppBarActionCopyWith<T, $Res> {
-  factory _$$_AppBarActionCopyWith(
-          _$_AppBarAction<T> value, $Res Function(_$_AppBarAction<T>) then) =
-      __$$_AppBarActionCopyWithImpl<T, $Res>;
+  factory _$$AppBarActionImplCopyWith(_$AppBarActionImpl<T> value,
+          $Res Function(_$AppBarActionImpl<T>) then) =
+      __$$AppBarActionImplCopyWithImpl<T, $Res>;
   @override
   @useResult
   $Res call(
@@ -145,11 +145,11 @@ abstract class _$$_AppBarActionCopyWith<T, $Res>
 }
 
 /// @nodoc
-class __$$_AppBarActionCopyWithImpl<T, $Res>
-    extends _$AppBarActionCopyWithImpl<T, $Res, _$_AppBarAction<T>>
-    implements _$$_AppBarActionCopyWith<T, $Res> {
-  __$$_AppBarActionCopyWithImpl(
-      _$_AppBarAction<T> _value, $Res Function(_$_AppBarAction<T>) _then)
+class __$$AppBarActionImplCopyWithImpl<T, $Res>
+    extends _$AppBarActionCopyWithImpl<T, $Res, _$AppBarActionImpl<T>>
+    implements _$$AppBarActionImplCopyWith<T, $Res> {
+  __$$AppBarActionImplCopyWithImpl(
+      _$AppBarActionImpl<T> _value, $Res Function(_$AppBarActionImpl<T>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -160,7 +160,7 @@ class __$$_AppBarActionCopyWithImpl<T, $Res>
     Object? dropdownAction = freezed,
     Object? overflowIcon = freezed,
   }) {
-    return _then(_$_AppBarAction<T>(
+    return _then(_$AppBarActionImpl<T>(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -183,8 +183,8 @@ class __$$_AppBarActionCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$_AppBarAction<T> implements _AppBarAction<T> {
-  _$_AppBarAction(
+class _$AppBarActionImpl<T> implements _AppBarAction<T> {
+  _$AppBarActionImpl(
       {required this.type,
       this.iconAction = null,
       this.dropdownAction = null,
@@ -211,7 +211,7 @@ class _$_AppBarAction<T> implements _AppBarAction<T> {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AppBarAction<T> &&
+            other is _$AppBarActionImpl<T> &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.iconAction, iconAction) ||
                 other.iconAction == iconAction) &&
@@ -228,8 +228,9 @@ class _$_AppBarAction<T> implements _AppBarAction<T> {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AppBarActionCopyWith<T, _$_AppBarAction<T>> get copyWith =>
-      __$$_AppBarActionCopyWithImpl<T, _$_AppBarAction<T>>(this, _$identity);
+  _$$AppBarActionImplCopyWith<T, _$AppBarActionImpl<T>> get copyWith =>
+      __$$AppBarActionImplCopyWithImpl<T, _$AppBarActionImpl<T>>(
+          this, _$identity);
 }
 
 abstract class _AppBarAction<T> implements AppBarAction<T> {
@@ -237,7 +238,7 @@ abstract class _AppBarAction<T> implements AppBarAction<T> {
       {required final AppBarActionType type,
       final AppBarActionIcon? iconAction,
       final AppBarActionDropdown<T>? dropdownAction,
-      final AppBarActionOverflowIcon? overflowIcon}) = _$_AppBarAction<T>;
+      final AppBarActionOverflowIcon? overflowIcon}) = _$AppBarActionImpl<T>;
 
   @override
   AppBarActionType get type;
@@ -249,6 +250,6 @@ abstract class _AppBarAction<T> implements AppBarAction<T> {
   AppBarActionOverflowIcon? get overflowIcon;
   @override
   @JsonKey(ignore: true)
-  _$$_AppBarActionCopyWith<T, _$_AppBarAction<T>> get copyWith =>
+  _$$AppBarActionImplCopyWith<T, _$AppBarActionImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

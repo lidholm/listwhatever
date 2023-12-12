@@ -79,11 +79,11 @@ class _$AddressComponentCopyWithImpl<$Res, $Val extends AddressComponent>
 }
 
 /// @nodoc
-abstract class _$$_AddressComponentCopyWith<$Res>
+abstract class _$$AddressComponentImplCopyWith<$Res>
     implements $AddressComponentCopyWith<$Res> {
-  factory _$$_AddressComponentCopyWith(
-          _$_AddressComponent value, $Res Function(_$_AddressComponent) then) =
-      __$$_AddressComponentCopyWithImpl<$Res>;
+  factory _$$AddressComponentImplCopyWith(_$AddressComponentImpl value,
+          $Res Function(_$AddressComponentImpl) then) =
+      __$$AddressComponentImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -93,11 +93,11 @@ abstract class _$$_AddressComponentCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AddressComponentCopyWithImpl<$Res>
-    extends _$AddressComponentCopyWithImpl<$Res, _$_AddressComponent>
-    implements _$$_AddressComponentCopyWith<$Res> {
-  __$$_AddressComponentCopyWithImpl(
-      _$_AddressComponent _value, $Res Function(_$_AddressComponent) _then)
+class __$$AddressComponentImplCopyWithImpl<$Res>
+    extends _$AddressComponentCopyWithImpl<$Res, _$AddressComponentImpl>
+    implements _$$AddressComponentImplCopyWith<$Res> {
+  __$$AddressComponentImplCopyWithImpl(_$AddressComponentImpl _value,
+      $Res Function(_$AddressComponentImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -107,7 +107,7 @@ class __$$_AddressComponentCopyWithImpl<$Res>
     Object? shortName = null,
     Object? types = null,
   }) {
-    return _then(_$_AddressComponent(
+    return _then(_$AddressComponentImpl(
       longName: null == longName
           ? _value.longName
           : longName // ignore: cast_nullable_to_non_nullable
@@ -126,15 +126,15 @@ class __$$_AddressComponentCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AddressComponent implements _AddressComponent {
-  _$_AddressComponent(
+class _$AddressComponentImpl implements _AddressComponent {
+  _$AddressComponentImpl(
       {@JsonKey(name: 'long_name') required this.longName,
       @JsonKey(name: 'short_name') required this.shortName,
       required final List<String> types})
       : _types = types;
 
-  factory _$_AddressComponent.fromJson(Map<String, dynamic> json) =>
-      _$$_AddressComponentFromJson(json);
+  factory _$AddressComponentImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AddressComponentImplFromJson(json);
 
   @override
   @JsonKey(name: 'long_name')
@@ -159,7 +159,7 @@ class _$_AddressComponent implements _AddressComponent {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AddressComponent &&
+            other is _$AddressComponentImpl &&
             (identical(other.longName, longName) ||
                 other.longName == longName) &&
             (identical(other.shortName, shortName) ||
@@ -175,12 +175,13 @@ class _$_AddressComponent implements _AddressComponent {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AddressComponentCopyWith<_$_AddressComponent> get copyWith =>
-      __$$_AddressComponentCopyWithImpl<_$_AddressComponent>(this, _$identity);
+  _$$AddressComponentImplCopyWith<_$AddressComponentImpl> get copyWith =>
+      __$$AddressComponentImplCopyWithImpl<_$AddressComponentImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AddressComponentToJson(
+    return _$$AddressComponentImplToJson(
       this,
     );
   }
@@ -190,10 +191,10 @@ abstract class _AddressComponent implements AddressComponent {
   factory _AddressComponent(
       {@JsonKey(name: 'long_name') required final String longName,
       @JsonKey(name: 'short_name') required final String shortName,
-      required final List<String> types}) = _$_AddressComponent;
+      required final List<String> types}) = _$AddressComponentImpl;
 
   factory _AddressComponent.fromJson(Map<String, dynamic> json) =
-      _$_AddressComponent.fromJson;
+      _$AddressComponentImpl.fromJson;
 
   @override
   @JsonKey(name: 'long_name')
@@ -205,6 +206,6 @@ abstract class _AddressComponent implements AddressComponent {
   List<String> get types;
   @override
   @JsonKey(ignore: true)
-  _$$_AddressComponentCopyWith<_$_AddressComponent> get copyWith =>
+  _$$AddressComponentImplCopyWith<_$AddressComponentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
