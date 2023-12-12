@@ -1,53 +1,16 @@
 rules_version = '2';
+// Allow read/write access on all documents to any user signed in to the application
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /publicListIds/{shareCodeId} {
-      allow read: if true;
-      allow write: if false;
-    }
     match /users/{userId} {
-       allow read, update, delete, create: if request.auth != null && request.auth.uid == userId;
+      match /{document=**} {
+        allow read, write: if request.auth != null;
+      }
     }
-    match /users/{userId}/lists/{listId} {
-      function getListData() {
-        return get(/databases/$(database)/documents/users/$(userId)/lists/$(listId)).data;
+    match /lists/{listId} {
+      match /{document=**} {
+        allow read, write: if request.auth != null;
       }
-      function listHasViewer(viewerId) {
-        return viewerId in getListData().viewers && getListData().viewers[viewerId] == true;
-      }
-      function listHasEditor(editorId) {
-        return editorId in getListData().editors && getListData().editors[editorId] == true;
-      }
-
-      allow get: if listHasViewer(request.auth.uid) || listHasEditor(request.auth.uid);
-      allow list: if userId == request.auth.uid;
-      allow delete, create: if request.auth != null && request.auth.uid == userId;
-      allow update: if listHasEditor(request.auth.uid);
-  
-      match /items/{itemId} {
-        allow get: if listHasViewer(request.auth.uid) || listHasEditor(request.auth.uid);
-        allow list: if true;// userId == request.auth.uid;
-        allow write: if listHasEditor(request.auth.uid);
-      }
-   } 
-    
-   match /users/{userId}/participatedLists/{listId} {
-      function existsParticipatedListData() {
-         return exists(/databases/$(database)/documents/users/$(userId)/participatedLists/$(listId)).data;
-      }
-      function getParticipatedListData() {
-         return get(/databases/$(database)/documents/users/$(userId)/participatedLists/$(listId)).data;
-      }
-      function participatedListHasViewer(viewerId) {
-         return existsParticipatedListData() && viewerId in getParticipatedListData().viewers && getParticipatedListData().viewers[viewerId] == true;
-      }
-      function participatedListHasEditor(editorId) {
-         return existsParticipatedListData() && editorId in getParticipatedListData().editors && getParticipatedListData().editors[editorId] == true;
-      }
-
-      allow get: if participatedListHasViewer(request.auth.uid);// || participatedListHasEditor(request.auth.uid);
-      allow list: if userId == request.auth.uid;
-      allow write :if false;
-    } 
+    }
   }
 }

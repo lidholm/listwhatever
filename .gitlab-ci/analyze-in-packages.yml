@@ -1,0 +1,87 @@
+
+.packages_analyze:
+  stage: verify
+  except:
+    - main
+  script:
+    - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
+    - export PATH="$PATH:$PUB_CACHE/bin:$HOME/.flutter-sdk/.pub-cache/bin"
+    
+    - echo $packageName 
+    - cd $packageName
+    - flutter analyze
+
+packages_analyze 1/14:
+  extends: .packages_analyze
+  variables:
+    packageName: packages/permission_client
+
+packages_analyze 2/14:
+  extends: .packages_analyze
+  variables:
+    packageName: packages/app_ui
+
+packages_analyze 3/14:
+  extends: .packages_analyze
+  variables:
+    packageName: packages/authentication_client/authentication_client
+
+packages_analyze 4/14:
+  extends: .packages_analyze
+  variables:
+    packageName: packages/authentication_client/firebase_authentication_client
+
+packages_analyze 5/14:
+  extends: .packages_analyze
+  variables:
+    packageName: packages/authentication_client/token_storage
+
+packages_analyze 6/14:
+  extends: .packages_analyze
+  variables:
+    packageName: packages/share_launcher
+
+packages_analyze 7/14:
+  extends: .packages_analyze
+  variables:
+    packageName: packages/form_inputs
+
+packages_analyze 8/14:
+  extends: .packages_analyze
+  variables:
+    packageName: packages/storage/storage
+
+packages_analyze 9/14:
+  extends: .packages_analyze
+  variables:
+    packageName: packages/storage/secure_storage
+
+packages_analyze 10/14:
+  extends: .packages_analyze
+  variables:
+    packageName: packages/storage/persistent_storage
+
+packages_analyze 11/14:
+  extends: .packages_analyze
+  variables:
+    packageName: packages/ads_consent_client
+
+packages_analyze 12/14:
+  extends: .packages_analyze
+  variables:
+    packageName: packages/email_launcher
+
+packages_analyze 13/14:
+  extends: .packages_analyze
+  variables:
+    packageName: packages/user_repository
+
+packages_analyze 14/14:
+  extends: .packages_analyze
+  variables:
+    packageName: packages/analytics_repository
+
+#packages_analyze 15/14:
+#   extends: .packages_analyze
+#   variables:
+#     packageName: packages/app_ui/gallery
