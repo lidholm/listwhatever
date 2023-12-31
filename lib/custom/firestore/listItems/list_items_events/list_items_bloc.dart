@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:listanything/custom/firestore/listItems/list_item.dart';
+import 'package:listanything/custom/firestore/lists/user_lists_service.dart';
 import 'package:listanything/standard/constants.dart';
 
 import '../list_items_service.dart';
@@ -7,11 +8,12 @@ import 'list_items_event.dart';
 import 'list_items_state.dart';
 
 class ListItemsBloc extends Bloc<ListItemsEvent, ListItemsState> {
-  ListItemsBloc(this._listItemsService) : super(ListItemsInitial()) {
+  ListItemsBloc(this._userListsService, this._listItemsService) : super(ListItemsInitial()) {
     on<ChangeUserForListItems>(_onChangeUser);
     on<AddListItem>(_onAddListItem);
     on<WatchListItems>(_onWatchListItems);
   }
+  final UserListsService _userListsService;
   final ListItemsService _listItemsService;
 
   Future<void> _onChangeUser(ChangeUserForListItems event, Emitter<ListItemsState> emit) async {
@@ -26,7 +28,8 @@ class ListItemsBloc extends Bloc<ListItemsEvent, ListItemsState> {
   }
 
   Future<void> _onWatchListItems(WatchListItems event, Emitter<ListItemsState> emit) async {
-    await emit.forEach(_listItemsService.getListItems(event.listId),
+    final userList = await _userListsService.getList(event.listId);
+    await emit.forEach(_listItemsService.getListItems(userList.listId),
         onData: (List<ListItem> listItems) {
           return ListItemsLoaded(listItems);
         },);

@@ -42,6 +42,7 @@ class AuthenticatedUserListener extends StatelessWidget {
             state.user.id,
           ),
         );
+
         if (state.status.isLoggedIn) {
           context.read<AnalyticsBloc>().add(
                 TrackAnalyticsEvent(

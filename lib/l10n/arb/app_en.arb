@@ -788,5 +788,45 @@
     "description": "Text for 'Filter'",
     "type": "text",
     "placeholders": {}
+  },
+  "shareListMenuText": "Share list",
+  "@shareListMenuText": {
+    "description": "Text for 'Share list'",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sharedListsHeader": "Shared lists",
+  "@sharedListsHeader": {
+    "description": "Text for 'Shared lists'",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sharedListsText": "A list has been shared with you from {name}",
+  "@sharedListsText": {
+    "description": "Text for 'A list has been shared with you from 'name'",
+    "type": "text",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Joe"
+      }}
+  },
+  "sharedListsAcceptQuestionText": "Do you want to accept?",
+  "@sharedListsAcceptQuestionText": {
+    "description": "Text for 'Do you want to accept?'",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sharedListsAcceptButtonText": "Accept",
+  "@sharedListsAcceptButtonText": {
+    "description": "Text for 'Accept'",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sharedListsCancelButtonText": "Cancel",
+  "@sharedListsCancelButtonText": {
+    "description": "Text for 'Cancel'",
+    "type": "text",
+    "placeholders": {}
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:listanything/custom/firestore/lists/list_of_things.dart';
+import 'package:listanything/custom/firestore/lists/user_list.dart';
 
 @immutable
 sealed class ListsState {}
@@ -10,7 +10,7 @@ class ListsLoading extends ListsState {}
 
 class ListsLoaded extends ListsState {
   ListsLoaded(this.lists);
-  final List<ListOfThings> lists;
+  final List<UserList> lists;
 }
 
 class ListsOperationSuccess extends ListsState {
