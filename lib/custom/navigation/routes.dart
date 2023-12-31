@@ -16,6 +16,9 @@ import 'package:listanything/custom/pages/lists/lists.dart';
 import 'package:listanything/custom/pages/maps/maps_page_route.dart';
 import 'package:listanything/custom/pages/privacyPolicy/privacy_policy_page_route.dart';
 import 'package:listanything/custom/pages/remoteConfig/remote_config_page_route.dart';
+import 'package:listanything/custom/pages/shareList/share_list_page_route.dart';
+import 'package:listanything/custom/pages/subscribeList/subscribe_list_page_route.dart';
+import 'package:listanything/standard/page/login_page_route.dart';
 import 'package:listanything/standard/page/login_with_email_and_password_page_route.dart';
 import 'package:listanything/standard/user_profile/user_profile.dart';
 
@@ -32,6 +35,10 @@ part 'routes.g.dart';
       path: 'lists',
       name: 'lists',
       routes: [
+        TypedGoRoute<SubscribeListPageRoute>(
+          path: 'subscribe/:code',
+          name: 'subscribe',
+        ),
         TypedGoRoute<ListItemsPageRoute>(
           path: ':listId/items',
           name: 'items',
@@ -54,6 +61,10 @@ part 'routes.g.dart';
           path: ':listId/edit',
           name: 'editList',
         ),
+        TypedGoRoute<ShareListPageRoute>(
+          path: ':listId/share',
+          name: 'share',
+        ),
       ],
     ),
     TypedGoRoute<SearchLocationPageRoute>(
@@ -64,9 +75,15 @@ part 'routes.g.dart';
       path: 'user_profile',
       name: 'user_profile',
     ),
-    TypedGoRoute<LoginWithEmailAndPasswordPageRoute>(
-      path: 'login/email',
-      name: 'login/email',
+    TypedGoRoute<LoginPageRoute>(
+      path: 'login',
+      name: 'login',
+      routes: [
+        TypedGoRoute<LoginWithEmailAndPasswordPageRoute>(
+          path: 'email',
+          name: 'login_email',
+        ),
+      ],
     ),
     TypedGoRoute<RemoteConfigPageRoute>(
       path: 'remoteconfig',

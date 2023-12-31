@@ -15,7 +15,7 @@ enum AddListValues {
   withMap,
   withDates,
   withTimes,
-  share
+  // share
 }
 
 class AddListPage extends StatefulWidget {
@@ -63,11 +63,11 @@ class _AddListPageState extends State<AddListPage> {
 
     final initialValue = {
       AddListValues.name.toString(): list?.name,
-      AddListValues.type.toString(): list?.type ?? ListType.other,
+      AddListValues.type.toString(): list?.listType ?? ListType.other,
       AddListValues.withMap.toString(): list?.withMap ?? false,
       AddListValues.withDates.toString(): list?.withDates ?? false,
       AddListValues.withTimes.toString(): list?.withTimes ?? false,
-      AddListValues.share.toString(): list?.shared ?? false,
+      // AddListValues.share.toString(): list?.shared ?? false,
     };
     return Scaffold(
       appBar: const CommonAppBar(title: 'Add list'),
@@ -144,11 +144,11 @@ class _AddListPageState extends State<AddListPage> {
                       },
                       valueTransformer: (val) => val?.toString(),
                     ),
-                    FormBuilderCheckbox(
-                      name: AddListValues.share.toString(),
-                      onChanged: _onChanged,
-                      title: const Text('Share list'),
-                    ),
+                    // FormBuilderCheckbox(
+                    //   name: AddListValues.share.toString(),
+                    //   onChanged: _onChanged,
+                    //   title: const Text('Share list'),
+                    // ),
                     FormBuilderCheckbox(
                       name: AddListValues.withMap.toString(),
                       onChanged: _onChanged,
@@ -219,11 +219,15 @@ class _AddListPageState extends State<AddListPage> {
     final list = ListOfThings(
       id: widget.listId,
       name: values[AddListValues.name.toString()]! as String,
-      type: values[AddListValues.type.toString()] as ListType,
+      listType: values[AddListValues.type.toString()] as ListType,
       withMap: values[AddListValues.withMap.toString()] as bool,
       withDates: values[AddListValues.withDates.toString()] as bool,
       withTimes: values[AddListValues.withTimes.toString()] as bool,
-      shared: values[AddListValues.share.toString()] as bool,
+      shared: false, //values[AddListValues.share.toString()] as bool,
+      shareCodeForViewer: null,
+      shareCodeForEditor: null,
+      sharedWith: {},
+      ownerId: null,
     );
     if (widget.listId == null) {
       BlocProvider.of<ListsBloc>(context).add(AddList(list));

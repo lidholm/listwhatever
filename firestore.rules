@@ -1,16 +1,62 @@
 rules_version = '2';
-// Allow read/write access on all documents to any user signed in to the application
+
 service cloud.firestore {
   match /databases/{database}/documents {
+
+    function getListData(listId) {
+      return get(/databases/$(database)/documents/lists/$(listId)).data;
+    }
+    function listHasViewer(listId, sharedUserId) {
+      return sharedUserId in getListData(listId).sharedWith && getListData(listId).sharedWith[sharedUserId] == 'viewer';
+    }
+    function listHasEditor(listId, sharedUserId) {
+      return sharedUserId in getListData(listId).sharedWith && getListData(listId).sharedWith[sharedUserId] == 'editor';
+    }
+    function isListOwner(listId, userId) {
+      return userId == getListData(listId).ownerId;
+    }
+
     match /users/{userId} {
-      match /{document=**} {
-        allow read, write: if request.auth != null;
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+
+      match /lists/{listId} {
+        allow get, list: if request.auth != null && request.auth.uid == userId;
+        allow delete, create, update: if request.auth != null && request.auth.uid == userId;
       }
     }
+
     match /lists/{listId} {
-      match /{document=**} {
-        allow read, write: if request.auth != null;
+      allow get: if request.auth != null && (
+        listHasViewer(listId, request.auth.uid) ||
+          listHasEditor(listId, request.auth.uid) ||
+            isListOwner(listId, request.auth.uid));
+      allow list: if request.auth != null && (
+        listHasViewer(listId, request.auth.uid) ||
+          listHasEditor(listId, request.auth.uid) ||
+          isListOwner(listId, request.auth.uid));
+      allow create: if request.auth != null && request.resource.data.ownerId == request.auth.uid;
+      allow delete: if request.auth != null && isListOwner(listId, request.auth.uid);
+      allow update: if request.auth != null &&
+          (isListOwner(listId, request.auth.uid)
+            || listHasEditor(listId, request.auth.uid));
+
+      match /items/{itemId} {
+        allow get, list: if request.auth != null && (
+            listHasViewer(listId, request.auth.uid) ||
+            listHasEditor(listId, request.auth.uid) ||
+            isListOwner(listId, request.auth.uid));
+        allow delete, create: if request.auth != null && (isListOwner(listId, request.auth.uid) || listHasEditor(listId, request.auth.uid));
+        allow update: if request.auth != null && (isListOwner(listId, request.auth.uid) || listHasEditor(listId, request.auth.uid));
       }
+    }
+
+    match /sharedLists/{shareCode} {
+      allow read, write: if request.auth != null && true;
+
+      match /users/{userId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+
     }
   }
 }

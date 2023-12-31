@@ -116,7 +116,7 @@ class _$EmulatorInfoImpl implements _EmulatorInfo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$EmulatorInfoImpl &&
