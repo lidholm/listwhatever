@@ -25,6 +25,11 @@ RouteBase get $mainPageRoute => GoRouteData.$route(
           factory: $ListsPageRouteExtension._fromState,
           routes: [
             GoRouteData.$route(
+              path: 'subscribe/:code',
+              name: 'subscribe',
+              factory: $SubscribeListPageRouteExtension._fromState,
+            ),
+            GoRouteData.$route(
               path: ':listId/items',
               name: 'items',
               factory: $ListItemsPageRouteExtension._fromState,
@@ -51,6 +56,11 @@ RouteBase get $mainPageRoute => GoRouteData.$route(
               name: 'editList',
               factory: $EditListPageRouteExtension._fromState,
             ),
+            GoRouteData.$route(
+              path: ':listId/share',
+              name: 'share',
+              factory: $ShareListPageRouteExtension._fromState,
+            ),
           ],
         ),
         GoRouteData.$route(
@@ -64,9 +74,16 @@ RouteBase get $mainPageRoute => GoRouteData.$route(
           factory: $UserProfilePageRouteExtension._fromState,
         ),
         GoRouteData.$route(
-          path: 'login/email',
-          name: 'login/email',
-          factory: $LoginWithEmailAndPasswordPageRouteExtension._fromState,
+          path: 'login',
+          name: 'login',
+          factory: $LoginPageRouteExtension._fromState,
+          routes: [
+            GoRouteData.$route(
+              path: 'email',
+              name: 'login_email',
+              factory: $LoginWithEmailAndPasswordPageRouteExtension._fromState,
+            ),
+          ],
         ),
         GoRouteData.$route(
           path: 'remoteconfig',
@@ -146,6 +163,26 @@ extension $ListsPageRouteExtension on ListsPageRoute {
 
   String get location => GoRouteData.$location(
         '/lists',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $SubscribeListPageRouteExtension on SubscribeListPageRoute {
+  static SubscribeListPageRoute _fromState(GoRouterState state) =>
+      SubscribeListPageRoute(
+        state.pathParameters['code']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/lists/subscribe/${Uri.encodeComponent(code)}',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -256,6 +293,26 @@ extension $EditListPageRouteExtension on EditListPageRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
+extension $ShareListPageRouteExtension on ShareListPageRoute {
+  static ShareListPageRoute _fromState(GoRouterState state) =>
+      ShareListPageRoute(
+        state.pathParameters['listId']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/lists/${Uri.encodeComponent(listId)}/share',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
 extension $SearchLocationPageRouteExtension on SearchLocationPageRoute {
   static SearchLocationPageRoute _fromState(GoRouterState state) =>
       const SearchLocationPageRoute();
@@ -280,6 +337,24 @@ extension $UserProfilePageRouteExtension on UserProfilePageRoute {
 
   String get location => GoRouteData.$location(
         '/user_profile',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $LoginPageRouteExtension on LoginPageRoute {
+  static LoginPageRoute _fromState(GoRouterState state) =>
+      const LoginPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/login',
       );
 
   void go(BuildContext context) => context.go(location);

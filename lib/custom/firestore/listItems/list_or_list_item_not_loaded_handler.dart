@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:listanything/custom/firestore/listItems/list_item_events/list_item_state.dart';
 import 'package:listanything/custom/firestore/listItems/list_items.dart';
 import 'package:listanything/custom/firestore/lists/lists.dart';
+import 'package:listanything/custom/firestore/sharedList/bloc/shared_list_state.dart';
+import 'package:listanything/standard/constants.dart';
 
 class ListOrListItemNotLoadedHandler {
   static Widget? handleListAndListItemsState(ListState listState, ListItemsState listItemsState) {
@@ -28,11 +30,11 @@ class ListOrListItemNotLoadedHandler {
     return null;
   }
 
-  static Widget? handleListsState(ListsState listsState) {
+  static Widget? handleUserListsState(ListsState listsState) {
     return switch (listsState) {
       ListsError() => getErrorWidget(listsState.errorMessage),
-      ListsInitial() => const Center(child: CircularProgressIndicator()),
-      ListsLoading() => const Center(child: CircularProgressIndicator()),
+      ListsInitial() => initialListsView(),
+      ListsLoading() => loadingListsView(),
       ListsOperationSuccess() => const Center(child: CircularProgressIndicator()),
       ListsLoaded() => null,
     };
@@ -41,8 +43,8 @@ class ListOrListItemNotLoadedHandler {
   static Widget? handleListState(ListState listState) {
     return switch (listState) {
       ListError() => getErrorWidget(listState.errorMessage),
-      ListInitial() => const Center(child: CircularProgressIndicator()),
-      ListLoading() => const Center(child: CircularProgressIndicator()),
+      ListInitial() => initialListView(),
+      ListLoading() => loadingListView(),
       ListOperationSuccess() => const Center(child: CircularProgressIndicator()),
       ListLoaded() => null,
       ListDeleted() => Container(),
@@ -70,7 +72,38 @@ class ListOrListItemNotLoadedHandler {
     };
   }
 
+  static Widget? handleSharedListState(SharedListState listState) {
+    return switch (listState) {
+      SharedListError() => getErrorWidget(listState.errorMessage),
+      SharedListInitial() => initialListView(),
+      SharedListLoading() => loadingListView(),
+      SharedListOperationSuccess() => const Center(child: CircularProgressIndicator()),
+      SharedListLoaded() => null,
+    };
+  }
+
   static Widget getErrorWidget(String errorMessage) {
     return Center(child: Text(errorMessage));
   }
+
+  static Widget initialListView() {
+    logger.i('initialListView');
+    return const Center(child: CircularProgressIndicator());
+  }
+
+  static Widget loadingListView() {
+    logger.i('loadingListView');
+    return const Center(child: CircularProgressIndicator());
+  }
+
+  static Widget initialListsView() {
+    logger.i('initialListsView');
+    return const Center(child: CircularProgressIndicator());
+  }
+
+  static Widget loadingListsView() {
+    logger.i('loadingListsView');
+    return const Center(child: CircularProgressIndicator());
+  }
+
 }

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listanything/custom/navigation/routes.dart';
 import 'package:listanything/standard/app/app.dart';
 import 'package:listanything/standard/app/bloc/app_state.dart';
 import 'package:listanything/standard/constants.dart';
 import 'package:listanything/standard/navigation/redirect_cubit.dart';
-import 'package:listanything/standard/page/login_with_email_and_password_page_route.dart';
 
 import 'navigation.dart';
 
@@ -29,7 +27,7 @@ class AppRedirect {
       final fromParam = context.read<RedirectCubit>().state ?? state.uri.path;
       // logger.d('fromParam: $fromParam');
       context.read<RedirectCubit>().setRedirect(fromParam);
-      final redirectUri = const LoginWithEmailAndPasswordPageRoute().location;
+      final redirectUri = routerProviderInformation.signInRouteLocation;
       logger.d('$this.redirectUri: $redirectUri');
       return redirectUri;
     }
@@ -72,6 +70,5 @@ class AppRedirect {
       logger.d('$this.notRequired: $notRequired');
       return notRequired;
     }
-    return false;
   }
 }

@@ -14,7 +14,7 @@ class ListsService {
   }
 
   Future<CollectionReference<Map<String, dynamic>>> getCollection() async {
-    final path = '/users/$userId/lists';
+    const path = '/lists';
     // logger.d('path: $path');
     return (await getFirestore()).collection(path);
   }
@@ -24,23 +24,31 @@ class ListsService {
     yield* listsCollection.snapshots().map((snapshot) {
       // logger.d('snapshot.docs: ${snapshot.docs.length}');
       return snapshot.docs.map((doc) {
-        final data = doc.data();
-        return ListOfThings.fromJson(data);
+        return convertToListOfThings(doc.id, doc.data());
       }).toList();
     });
+  }
+
+  ListOfThings convertToListOfThings(String id, Map<String, dynamic> data) {
+    final list = ListOfThings.fromJson(data);
+    return list.copyWith(
+      id: id,
+      shareType: list.ownerId == userId ? ShareType.editor : list.sharedWith[userId]!,
+      isOwnList: list.ownerId == userId,
+    );
   }
 
   Future<ListOfThings> getList(String id) async {
     final listsCollection = await getCollection();
     final snapshot = await listsCollection.doc(id).get();
-    final data = snapshot.data()!;
-    return ListOfThings.fromJson(data);
+    return convertToListOfThings(snapshot.id, snapshot.data()!);
   }
 
-  Future<void> addList(ListOfThings list) async {
+  Future<String> addList(ListOfThings list) async {
     final listsCollection = await getCollection();
-    final docId=listsCollection.doc().id;
-    return listsCollection.doc(docId).set(list.copyWith(id: docId).toJson());
+    final docId = listsCollection.doc().id;
+    await listsCollection.doc(docId).set(list.copyWith(id: docId, ownerId: userId).toJson());
+    return docId;
   }
 
   Future<void> updateList(ListOfThings list) async {

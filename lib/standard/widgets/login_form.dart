@@ -12,7 +12,6 @@ import 'package:listanything/standard/bloc/login_event.dart';
 import 'package:listanything/standard/bloc/login_state.dart';
 import 'package:listanything/standard/page/login_with_email_and_password_page_route.dart';
 
-
 class LoginForm extends StatelessWidget {
   const LoginForm({super.key});
 
@@ -126,9 +125,9 @@ class _AppleLoginButton extends StatelessWidget {
         children: [
           Assets.icons.apple.svg(),
           const SizedBox(width: AppSpacing.lg),
-          Padding(
-            padding: const EdgeInsets.only(top: AppSpacing.xs),
-            child: Assets.images.continueWithApple.svg(),
+          const Padding(
+            padding: EdgeInsets.only(top: AppSpacing.xs),
+            child: Text('Continue with Apple'),
           ),
         ],
       ),
@@ -147,10 +146,7 @@ class _GoogleLoginButton extends StatelessWidget {
         children: [
           Assets.icons.google.svg(),
           const SizedBox(width: AppSpacing.lg),
-          Padding(
-            padding: const EdgeInsets.only(top: AppSpacing.xxs),
-            child: Assets.images.continueWithGoogle.svg(),
-          ),
+          const Padding(padding: EdgeInsets.only(top: AppSpacing.xxs), child: Text('Continue with Google')),
         ],
       ),
     );
@@ -168,7 +164,7 @@ class _FacebookLoginButton extends StatelessWidget {
         children: [
           Assets.icons.facebook.svg(),
           const SizedBox(width: AppSpacing.lg),
-          Assets.images.continueWithFacebook.svg(),
+          const Text('Continue with Facebook')
         ],
       ),
     );
@@ -186,7 +182,7 @@ class _TwitterLoginButton extends StatelessWidget {
         children: [
           Assets.icons.twitter.svg(),
           const SizedBox(width: AppSpacing.lg),
-          Assets.images.continueWithTwitter.svg(),
+          const Text('Continue with Twitter')
         ],
       ),
     );

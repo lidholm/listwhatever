@@ -2,20 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:listanything/standard/constants.dart';
 
 class VStack extends StatelessWidget {
+
   const VStack({
     required this.children,
-    this.alignment = HorizontalAlignment.center,
+    this.horizontalAlignment = HorizontalAlignment.center,
+    this.verticalAlignment = VerticalAlignment.center,
     this.spacing = 10,
     super.key,
   });
   final List<Widget> children;
-  final HorizontalAlignment alignment;
+  final VerticalAlignment verticalAlignment;
+  final HorizontalAlignment horizontalAlignment;
   final double spacing;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: alignment.columnAlignment,
+      crossAxisAlignment: verticalAlignment.alignmentForColumn,
+      mainAxisAlignment: horizontalAlignment.alignmentForColumn,
       mainAxisSize: MainAxisSize.min,
       children: mapIndexed(children).expand((c) {
         return [
@@ -31,12 +35,47 @@ class VStack extends StatelessWidget {
 }
 
 enum HorizontalAlignment {
-  leading(CrossAxisAlignment.start),
-  center(CrossAxisAlignment.center),
-  trailing(CrossAxisAlignment.end);
+  leading,
+  center,
+  trailing;
+}
 
-  const HorizontalAlignment(
-      this.columnAlignment,
-      );
-  final CrossAxisAlignment columnAlignment;
+extension HorizontalAlignmentExtension on HorizontalAlignment {
+  MainAxisAlignment get alignmentForColumn {
+    return switch (this) {
+      HorizontalAlignment.leading => MainAxisAlignment.start,
+      HorizontalAlignment.center => MainAxisAlignment.center,
+      HorizontalAlignment.trailing => MainAxisAlignment.end,
+    };
+  }
+  CrossAxisAlignment get alignmentForRow {
+    return switch (this) {
+      HorizontalAlignment.leading => CrossAxisAlignment.start,
+      HorizontalAlignment.center => CrossAxisAlignment.center,
+      HorizontalAlignment.trailing => CrossAxisAlignment.end,
+    };
+  }
+}
+
+enum VerticalAlignment {
+  leading,
+  center,
+  trailing;
+}
+
+extension VerticalAlignmentExtension on VerticalAlignment {
+  CrossAxisAlignment get alignmentForColumn {
+    return switch (this) {
+      VerticalAlignment.leading => CrossAxisAlignment.start,
+      VerticalAlignment.center => CrossAxisAlignment.center,
+      VerticalAlignment.trailing => CrossAxisAlignment.end,
+    };
+  }
+  MainAxisAlignment get alignmentForRow {
+    return switch (this) {
+      VerticalAlignment.leading => MainAxisAlignment.start,
+      VerticalAlignment.center => MainAxisAlignment.center,
+      VerticalAlignment.trailing => MainAxisAlignment.end,
+    };
+  }
 }
