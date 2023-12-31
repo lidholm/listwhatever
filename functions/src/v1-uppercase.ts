@@ -10,13 +10,10 @@ export const upperCaseV1 = functions.firestore.document('messages/{messageId}').
     const docId: string = change.after.id;
 
     if (originalMessage) {
-
       const docRef = firestore.collection('messages').doc(docId);
-
       const upper = originalMessage.toUpperCase();
-
       await docRef.set({
-        uppercase: upper
+        uppercase: upper,
       });
     }
   });

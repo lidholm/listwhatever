@@ -1,20 +1,19 @@
 
-const { onDocumentWritten } = require("firebase-functions/v2/firestore");
-const {getFirestore} = require("firebase-admin/firestore");
+import {onDocumentWritten} from 'firebase-functions/v2/firestore';
+import {getFirestore} from 'firebase-admin/firestore';
 
 
-export const upperCase = onDocumentWritten("messages/{messageId}", async (event:  any): Promise<void> => {
-    const message = event.data.after.data();
-    const originalMessage: string | undefined = message.original;
-    const docId: string = event.data.after.id;
+export const upperCase = onDocumentWritten('messages/{messageId}', async (event: any): Promise<void> => {
+  const message = event.data.after.data();
+  const originalMessage: string | undefined = message.original;
+  const docId: string = event.data.after.id;
 
-    if (originalMessage) {
-      const docRef = getFirestore().collection('messages').doc(docId);
+  if (originalMessage) {
+    const docRef = getFirestore().collection('messages').doc(docId);
+    const upper = originalMessage.toUpperCase();
 
-      const upper = originalMessage.toUpperCase();
-
-      await docRef.set({
-        uppercase: upper
-      }, {merge: true});
-    }
-  });
+    await docRef.set({
+      uppercase: upper,
+    }, {merge: true});
+  }
+});

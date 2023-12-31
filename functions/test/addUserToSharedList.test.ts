@@ -1,24 +1,18 @@
 import 'mocha';
 import * as functionsTest from 'firebase-functions-test';
 import * as sinon from 'sinon';
-import * as admin from 'firebase-admin';
 import {expect} from 'chai';
-import {FeaturesList} from 'firebase-functions-test/lib/features';
-const {getFirestore} = require("firebase-admin/firestore");
-
-import * as firestoreUtils from '../src/firestoreUtils';
-
+import {getFirestore} from 'firebase-admin/firestore';
 
 describe('when signing up for a shared list', () => {
-  const docId = 'card-1234';
   let addUserToSharedList;
   let test;
 
   before(async () => {
-    test = require("firebase-functions-test")({
-      projectId: 'listanything-2b9b0', //process.env.GCLOUD_PROJECT,
+    test = functionsTest({
+      projectId: 'listanything-2b9b0', // process.env.GCLOUD_PROJECT,
     });
-    process.env.GCLOUD_PROJECT = JSON.parse(process.env.FIREBASE_CONFIG).projectId
+    process.env.GCLOUD_PROJECT = JSON.parse(process.env.FIREBASE_CONFIG).projectId;
 
     addUserToSharedList = (await import('../src/index')).addUserToSharedList;
   });
@@ -31,39 +25,37 @@ describe('when signing up for a shared list', () => {
     test.cleanup();
   });
 
-  it.only('as viewer the userId is added to the list data', async () => {
+  it('as viewer the userId is added to the list data', async () => {
     const listPath = 'users/otheruser/lists/onelist';
     await getFirestore().doc(listPath).set({
-        name: 'List of fun',
-        shared: true,
-        shareCodeForViewer: 'abc',
-        shareCodeForEditor: 'def'
-        });
+      name: 'List of fun',
+      shared: true,
+      shareCodeForViewer: 'abc',
+      shareCodeForEditor: 'def',
+    });
 
     const sharedPath = '/sharedList/abc';
     await getFirestore().doc(sharedPath).set({
-        ownerUserId: 'otheruser',
-        ownerListId: 'onelist',
-        ownerName: 'Bobby',
-        listName: 'List of fun',
-        type: 'viewer'
-
+      ownerUserId: 'otheruser',
+      ownerListId: 'onelist',
+      ownerName: 'Bobby',
+      listName: 'List of fun',
+      type: 'viewer',
     });
 
     const viewerPath = '/sharedList/abc/users/firstuser';
     const before = null;
-    const after = test.firestore.makeDocumentSnapshot({ id: 'firstuser' }, viewerPath)
+    const after = test.firestore.makeDocumentSnapshot({id: 'firstuser'}, viewerPath);
 
     const params = {
       userId: 'firstuser',
-      shareCode: 'abc'
-    }
+      shareCode: 'abc',
+    };
 
-    const event = { data: {before: before, after: after}, params: params };
+    const event = {data: {before: before, after: after}, params: params};
 
     const wrapped = test.wrap(addUserToSharedList);
     await wrapped(event);
-
 
     let snap = await getFirestore().doc(listPath).get();
     expect(snap.data()).to.eql({
@@ -71,10 +63,8 @@ describe('when signing up for a shared list', () => {
       shared: true,
       shareCodeForViewer: 'abc',
       shareCodeForEditor: 'def',
-      viewers: ['firstuser']
+      viewers: ['firstuser'],
     });
-
-
 
     const sharedListAtUserPath = '/users/firstuser/sharedLists/onelist';
     snap = await getFirestore().doc(sharedListAtUserPath).get();
@@ -83,8 +73,7 @@ describe('when signing up for a shared list', () => {
       ownerListId: 'onelist',
       ownerName: 'Bobby',
       listName: 'List of fun',
-      path: `users/otheruser/lists/onelist`
+      path: 'users/otheruser/lists/onelist',
     });
   }).timeout(5000);
-
 });

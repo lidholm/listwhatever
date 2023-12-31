@@ -77,12 +77,8 @@ describe('(Offline) uppercase', () => {
     await wrapped(change());
 
     expect(docStub.calledWith(docId)).to.be.true;
-//     expect(getStub.calledOnce).to.be.true;
     expect(setStub.calledOnce).to.be.true;
-
-    sinon.assert.calledWith(setStub, { uppercase: 'HELLO THERE' });
-
+    sinon.assert.calledWith(setStub, {uppercase: 'HELLO THERE'});
     expect(updateStub.notCalled).to.be.true;
   });
-
 });
