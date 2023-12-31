@@ -180,7 +180,7 @@ class _$AppBarActionDropdownImpl<T> implements _AppBarActionDropdown<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AppBarActionDropdownImpl<T> &&

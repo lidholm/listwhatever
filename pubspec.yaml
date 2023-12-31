@@ -1,6 +1,6 @@
 name: listanything
 description: A starter template for Flutter projects
-version: 0.0.30+0000001
+version: 0.0.31+0000001
 publish_to: none
 
 environment:

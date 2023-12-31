@@ -1,3 +1,6 @@
+0.0.31
+* Share lists (and big refactor)
+
 0.0.30
 * Copy in standard code from fluttertemplate 4e2fdf5
 

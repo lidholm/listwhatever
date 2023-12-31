@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:listanything/standard/constants.dart';
 import 'package:listanything/standard/firebase/firestore/firestore.dart';
 
 import 'list_item.dart';
@@ -14,8 +15,8 @@ class ListItemsService {
   }
 
   Future<CollectionReference<Map<String, dynamic>>> getCollection(String listId) async {
-    final path = '/users/$userId/lists/$listId/items';
-    // logger.d('ListItemsService.path: $path');
+    final path = '/lists/$listId/items';
+    logger.d('ListItemsService.path: $path');
     return (await getFirestore()).collection(path);
   }
 

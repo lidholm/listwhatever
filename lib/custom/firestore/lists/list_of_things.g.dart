@@ -10,22 +10,38 @@ _$ListOfThingsImpl _$$ListOfThingsImplFromJson(Map<String, dynamic> json) =>
     _$ListOfThingsImpl(
       id: json['id'] as String?,
       name: json['name'] as String,
-      type: $enumDecode(_$ListTypeEnumMap, json['type']),
+      listType: $enumDecode(_$ListTypeEnumMap, json['listType']),
       withMap: json['withMap'] as bool,
       withDates: json['withDates'] as bool,
       withTimes: json['withTimes'] as bool,
       shared: json['shared'] as bool,
+      shareCodeForViewer: json['shareCodeForViewer'] as String?,
+      shareCodeForEditor: json['shareCodeForEditor'] as String?,
+      sharedWith: (json['sharedWith'] as Map<String, dynamic>).map(
+        (k, e) => MapEntry(k, $enumDecode(_$ShareTypeEnumMap, e)),
+      ),
+      ownerId: json['ownerId'] as String?,
+      isOwnList: json['isOwnList'] as bool? ?? false,
+      shareType: $enumDecodeNullable(_$ShareTypeEnumMap, json['shareType']) ??
+          ShareType.viewer,
     );
 
 Map<String, dynamic> _$$ListOfThingsImplToJson(_$ListOfThingsImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'type': _$ListTypeEnumMap[instance.type]!,
+      'listType': _$ListTypeEnumMap[instance.listType]!,
       'withMap': instance.withMap,
       'withDates': instance.withDates,
       'withTimes': instance.withTimes,
       'shared': instance.shared,
+      'shareCodeForViewer': instance.shareCodeForViewer,
+      'shareCodeForEditor': instance.shareCodeForEditor,
+      'sharedWith': instance.sharedWith
+          .map((k, e) => MapEntry(k, _$ShareTypeEnumMap[e]!)),
+      'ownerId': instance.ownerId,
+      'isOwnList': instance.isOwnList,
+      'shareType': _$ShareTypeEnumMap[instance.shareType]!,
     };
 
 const _$ListTypeEnumMap = {
@@ -34,4 +50,9 @@ const _$ListTypeEnumMap = {
   ListType.activities: 'activities',
   ListType.movies: 'movies',
   ListType.other: 'other',
+};
+
+const _$ShareTypeEnumMap = {
+  ShareType.viewer: 'viewer',
+  ShareType.editor: 'editor',
 };

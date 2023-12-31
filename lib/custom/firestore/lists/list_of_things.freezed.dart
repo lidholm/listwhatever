@@ -22,11 +22,17 @@ ListOfThings _$ListOfThingsFromJson(Map<String, dynamic> json) {
 mixin _$ListOfThings {
   String? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  ListType get type => throw _privateConstructorUsedError;
+  ListType get listType => throw _privateConstructorUsedError;
   bool get withMap => throw _privateConstructorUsedError;
   bool get withDates => throw _privateConstructorUsedError;
   bool get withTimes => throw _privateConstructorUsedError;
   bool get shared => throw _privateConstructorUsedError;
+  String? get shareCodeForViewer => throw _privateConstructorUsedError;
+  String? get shareCodeForEditor => throw _privateConstructorUsedError;
+  Map<String, ShareType> get sharedWith => throw _privateConstructorUsedError;
+  String? get ownerId => throw _privateConstructorUsedError;
+  bool get isOwnList => throw _privateConstructorUsedError;
+  ShareType get shareType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,11 +49,17 @@ abstract class $ListOfThingsCopyWith<$Res> {
   $Res call(
       {String? id,
       String name,
-      ListType type,
+      ListType listType,
       bool withMap,
       bool withDates,
       bool withTimes,
-      bool shared});
+      bool shared,
+      String? shareCodeForViewer,
+      String? shareCodeForEditor,
+      Map<String, ShareType> sharedWith,
+      String? ownerId,
+      bool isOwnList,
+      ShareType shareType});
 }
 
 /// @nodoc
@@ -65,11 +77,17 @@ class _$ListOfThingsCopyWithImpl<$Res, $Val extends ListOfThings>
   $Res call({
     Object? id = freezed,
     Object? name = null,
-    Object? type = null,
+    Object? listType = null,
     Object? withMap = null,
     Object? withDates = null,
     Object? withTimes = null,
     Object? shared = null,
+    Object? shareCodeForViewer = freezed,
+    Object? shareCodeForEditor = freezed,
+    Object? sharedWith = null,
+    Object? ownerId = freezed,
+    Object? isOwnList = null,
+    Object? shareType = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -80,9 +98,9 @@ class _$ListOfThingsCopyWithImpl<$Res, $Val extends ListOfThings>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
+      listType: null == listType
+          ? _value.listType
+          : listType // ignore: cast_nullable_to_non_nullable
               as ListType,
       withMap: null == withMap
           ? _value.withMap
@@ -100,6 +118,30 @@ class _$ListOfThingsCopyWithImpl<$Res, $Val extends ListOfThings>
           ? _value.shared
           : shared // ignore: cast_nullable_to_non_nullable
               as bool,
+      shareCodeForViewer: freezed == shareCodeForViewer
+          ? _value.shareCodeForViewer
+          : shareCodeForViewer // ignore: cast_nullable_to_non_nullable
+              as String?,
+      shareCodeForEditor: freezed == shareCodeForEditor
+          ? _value.shareCodeForEditor
+          : shareCodeForEditor // ignore: cast_nullable_to_non_nullable
+              as String?,
+      sharedWith: null == sharedWith
+          ? _value.sharedWith
+          : sharedWith // ignore: cast_nullable_to_non_nullable
+              as Map<String, ShareType>,
+      ownerId: freezed == ownerId
+          ? _value.ownerId
+          : ownerId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isOwnList: null == isOwnList
+          ? _value.isOwnList
+          : isOwnList // ignore: cast_nullable_to_non_nullable
+              as bool,
+      shareType: null == shareType
+          ? _value.shareType
+          : shareType // ignore: cast_nullable_to_non_nullable
+              as ShareType,
     ) as $Val);
   }
 }
@@ -115,11 +157,17 @@ abstract class _$$ListOfThingsImplCopyWith<$Res>
   $Res call(
       {String? id,
       String name,
-      ListType type,
+      ListType listType,
       bool withMap,
       bool withDates,
       bool withTimes,
-      bool shared});
+      bool shared,
+      String? shareCodeForViewer,
+      String? shareCodeForEditor,
+      Map<String, ShareType> sharedWith,
+      String? ownerId,
+      bool isOwnList,
+      ShareType shareType});
 }
 
 /// @nodoc
@@ -135,11 +183,17 @@ class __$$ListOfThingsImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = null,
-    Object? type = null,
+    Object? listType = null,
     Object? withMap = null,
     Object? withDates = null,
     Object? withTimes = null,
     Object? shared = null,
+    Object? shareCodeForViewer = freezed,
+    Object? shareCodeForEditor = freezed,
+    Object? sharedWith = null,
+    Object? ownerId = freezed,
+    Object? isOwnList = null,
+    Object? shareType = null,
   }) {
     return _then(_$ListOfThingsImpl(
       id: freezed == id
@@ -150,9 +204,9 @@ class __$$ListOfThingsImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
+      listType: null == listType
+          ? _value.listType
+          : listType // ignore: cast_nullable_to_non_nullable
               as ListType,
       withMap: null == withMap
           ? _value.withMap
@@ -170,6 +224,30 @@ class __$$ListOfThingsImplCopyWithImpl<$Res>
           ? _value.shared
           : shared // ignore: cast_nullable_to_non_nullable
               as bool,
+      shareCodeForViewer: freezed == shareCodeForViewer
+          ? _value.shareCodeForViewer
+          : shareCodeForViewer // ignore: cast_nullable_to_non_nullable
+              as String?,
+      shareCodeForEditor: freezed == shareCodeForEditor
+          ? _value.shareCodeForEditor
+          : shareCodeForEditor // ignore: cast_nullable_to_non_nullable
+              as String?,
+      sharedWith: null == sharedWith
+          ? _value._sharedWith
+          : sharedWith // ignore: cast_nullable_to_non_nullable
+              as Map<String, ShareType>,
+      ownerId: freezed == ownerId
+          ? _value.ownerId
+          : ownerId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isOwnList: null == isOwnList
+          ? _value.isOwnList
+          : isOwnList // ignore: cast_nullable_to_non_nullable
+              as bool,
+      shareType: null == shareType
+          ? _value.shareType
+          : shareType // ignore: cast_nullable_to_non_nullable
+              as ShareType,
     ));
   }
 }
@@ -180,11 +258,18 @@ class _$ListOfThingsImpl implements _ListOfThings {
   const _$ListOfThingsImpl(
       {required this.id,
       required this.name,
-      required this.type,
+      required this.listType,
       required this.withMap,
       required this.withDates,
       required this.withTimes,
-      required this.shared});
+      required this.shared,
+      required this.shareCodeForViewer,
+      required this.shareCodeForEditor,
+      required final Map<String, ShareType> sharedWith,
+      required this.ownerId,
+      this.isOwnList = false,
+      this.shareType = ShareType.viewer})
+      : _sharedWith = sharedWith;
 
   factory _$ListOfThingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$ListOfThingsImplFromJson(json);
@@ -194,7 +279,7 @@ class _$ListOfThingsImpl implements _ListOfThings {
   @override
   final String name;
   @override
-  final ListType type;
+  final ListType listType;
   @override
   final bool withMap;
   @override
@@ -203,32 +288,77 @@ class _$ListOfThingsImpl implements _ListOfThings {
   final bool withTimes;
   @override
   final bool shared;
-
   @override
-  String toString() {
-    return 'ListOfThings(id: $id, name: $name, type: $type, withMap: $withMap, withDates: $withDates, withTimes: $withTimes, shared: $shared)';
+  final String? shareCodeForViewer;
+  @override
+  final String? shareCodeForEditor;
+  final Map<String, ShareType> _sharedWith;
+  @override
+  Map<String, ShareType> get sharedWith {
+    if (_sharedWith is EqualUnmodifiableMapView) return _sharedWith;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_sharedWith);
   }
 
   @override
-  bool operator ==(dynamic other) {
+  final String? ownerId;
+  @override
+  @JsonKey()
+  final bool isOwnList;
+  @override
+  @JsonKey()
+  final ShareType shareType;
+
+  @override
+  String toString() {
+    return 'ListOfThings(id: $id, name: $name, listType: $listType, withMap: $withMap, withDates: $withDates, withTimes: $withTimes, shared: $shared, shareCodeForViewer: $shareCodeForViewer, shareCodeForEditor: $shareCodeForEditor, sharedWith: $sharedWith, ownerId: $ownerId, isOwnList: $isOwnList, shareType: $shareType)';
+  }
+
+  @override
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ListOfThingsImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.type, type) || other.type == type) &&
+            (identical(other.listType, listType) ||
+                other.listType == listType) &&
             (identical(other.withMap, withMap) || other.withMap == withMap) &&
             (identical(other.withDates, withDates) ||
                 other.withDates == withDates) &&
             (identical(other.withTimes, withTimes) ||
                 other.withTimes == withTimes) &&
-            (identical(other.shared, shared) || other.shared == shared));
+            (identical(other.shared, shared) || other.shared == shared) &&
+            (identical(other.shareCodeForViewer, shareCodeForViewer) ||
+                other.shareCodeForViewer == shareCodeForViewer) &&
+            (identical(other.shareCodeForEditor, shareCodeForEditor) ||
+                other.shareCodeForEditor == shareCodeForEditor) &&
+            const DeepCollectionEquality()
+                .equals(other._sharedWith, _sharedWith) &&
+            (identical(other.ownerId, ownerId) || other.ownerId == ownerId) &&
+            (identical(other.isOwnList, isOwnList) ||
+                other.isOwnList == isOwnList) &&
+            (identical(other.shareType, shareType) ||
+                other.shareType == shareType));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, name, type, withMap, withDates, withTimes, shared);
+      runtimeType,
+      id,
+      name,
+      listType,
+      withMap,
+      withDates,
+      withTimes,
+      shared,
+      shareCodeForViewer,
+      shareCodeForEditor,
+      const DeepCollectionEquality().hash(_sharedWith),
+      ownerId,
+      isOwnList,
+      shareType);
 
   @JsonKey(ignore: true)
   @override
@@ -248,11 +378,17 @@ abstract class _ListOfThings implements ListOfThings {
   const factory _ListOfThings(
       {required final String? id,
       required final String name,
-      required final ListType type,
+      required final ListType listType,
       required final bool withMap,
       required final bool withDates,
       required final bool withTimes,
-      required final bool shared}) = _$ListOfThingsImpl;
+      required final bool shared,
+      required final String? shareCodeForViewer,
+      required final String? shareCodeForEditor,
+      required final Map<String, ShareType> sharedWith,
+      required final String? ownerId,
+      final bool isOwnList,
+      final ShareType shareType}) = _$ListOfThingsImpl;
 
   factory _ListOfThings.fromJson(Map<String, dynamic> json) =
       _$ListOfThingsImpl.fromJson;
@@ -262,7 +398,7 @@ abstract class _ListOfThings implements ListOfThings {
   @override
   String get name;
   @override
-  ListType get type;
+  ListType get listType;
   @override
   bool get withMap;
   @override
@@ -271,6 +407,18 @@ abstract class _ListOfThings implements ListOfThings {
   bool get withTimes;
   @override
   bool get shared;
+  @override
+  String? get shareCodeForViewer;
+  @override
+  String? get shareCodeForEditor;
+  @override
+  Map<String, ShareType> get sharedWith;
+  @override
+  String? get ownerId;
+  @override
+  bool get isOwnList;
+  @override
+  ShareType get shareType;
   @override
   @JsonKey(ignore: true)
   _$$ListOfThingsImplCopyWith<_$ListOfThingsImpl> get copyWith =>
