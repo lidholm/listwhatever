@@ -1,4 +1,4 @@
-Privacy Policy for ListAnything
+Privacy Policy for allmylists
 
 Privacy Policy
 Last updated: May 01, 2023
@@ -18,9 +18,9 @@ Account means a unique account created for You to access our Service or parts of
 
 Affiliate means an entity that controls, is controlled by or is under common control with a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.
 
-Application refers to ListAnything, the software program provided by the Company.
+Application refers to allmylists, the software program provided by the Company.
 
-Company (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to ListAnything.
+Company (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to allmylists.
 
 Country refers to: California, United States
 
@@ -171,6 +171,6 @@ If you have any questions about this Privacy Policy, You can contact us:
 
 By email: info@anywhostudios.com
 
-By visiting this page on our website: https://listanything-2b9b0.web.app/privacypolicy
+By visiting this page on our website: https://allmylists-fde43a.web.app/privacypolicy
 
 Generated using TermsFeed Privacy Policy Generator

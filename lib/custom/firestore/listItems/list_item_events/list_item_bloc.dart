@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:listanything/standard/constants.dart';
+import 'package:allmylists/standard/constants.dart';
 
 import '../list_items_service.dart';
 import 'list_item_event.dart';

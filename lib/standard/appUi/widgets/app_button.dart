@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:listanything/standard/appUi/colors/app_colors.dart';
-import 'package:listanything/standard/appUi/spacing/app_spacing.dart';
+import 'package:allmylists/standard/appUi/colors/app_colors.dart';
+import 'package:allmylists/standard/appUi/spacing/app_spacing.dart';
 
 /// {@template app_button}
 /// Button with text displayed in the application.

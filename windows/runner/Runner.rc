@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.anywhostudios.listanything" "\0"
-            VALUE "FileDescription", "listanything" "\0"
+            VALUE "CompanyName", "com.anywhostudios.allmylists" "\0"
+            VALUE "FileDescription", "allmylists" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "listanything" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2022 com.anywhostudios.listanything. All rights reserved." "\0"
-            VALUE "OriginalFilename", "listanything.exe" "\0"
-            VALUE "ProductName", "listanything" "\0"
+            VALUE "InternalName", "allmylists" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2022 com.anywhostudios.allmylists. All rights reserved." "\0"
+            VALUE "OriginalFilename", "allmylists.exe" "\0"
+            VALUE "ProductName", "allmylists" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

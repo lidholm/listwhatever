@@ -11,7 +11,7 @@ echo "==="
 flutter build apk --flavor development
 chmod +x ./gradlew
 ./gradlew app:assembleAndroidTest
-./gradlew app:assembleDebug -Ptarget=/builds/lidholm/listanything/integration_test/main_test.dart
+./gradlew app:assembleDebug -Ptarget=/builds/lidholm/allmylists/integration_test/main_test.dart
 cd ..
 echo "==="
 cp build/app/outputs/apk/development/debug/app-development-debug.apk .

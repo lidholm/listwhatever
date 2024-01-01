@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:listanything/custom/firestore/listItems/list_item_events/list_item_bloc.dart';
-import 'package:listanything/custom/firestore/listItems/list_item_events/list_item_event.dart';
-import 'package:listanything/custom/firestore/listItems/list_item_events/list_item_state.dart';
-import 'package:listanything/custom/firestore/listItems/list_or_list_item_not_loaded_handler.dart';
-import 'package:listanything/custom/firestore/lists/lists.dart';
-import 'package:listanything/custom/navigation/routes.dart';
-import 'package:listanything/custom/pages/listItems/addListItem/edit_list_item_page_route.dart';
-import 'package:listanything/l10n/l10n.dart';
-import 'package:listanything/standard/constants.dart';
-import 'package:listanything/standard/widgets/appBar/app_bar_action.dart';
-import 'package:listanything/standard/widgets/appBar/app_bar_action_icon.dart';
-import 'package:listanything/standard/widgets/appBar/common_app_bar.dart';
+import 'package:allmylists/custom/firestore/listItems/list_item_events/list_item_bloc.dart';
+import 'package:allmylists/custom/firestore/listItems/list_item_events/list_item_event.dart';
+import 'package:allmylists/custom/firestore/listItems/list_item_events/list_item_state.dart';
+import 'package:allmylists/custom/firestore/listItems/list_or_list_item_not_loaded_handler.dart';
+import 'package:allmylists/custom/firestore/lists/lists.dart';
+import 'package:allmylists/custom/navigation/routes.dart';
+import 'package:allmylists/custom/pages/listItems/addListItem/edit_list_item_page_route.dart';
+import 'package:allmylists/l10n/l10n.dart';
+import 'package:allmylists/standard/constants.dart';
+import 'package:allmylists/standard/widgets/appBar/app_bar_action.dart';
+import 'package:allmylists/standard/widgets/appBar/app_bar_action_icon.dart';
+import 'package:allmylists/standard/widgets/appBar/common_app_bar.dart';
 
 class ListItemInfoView extends StatefulWidget {
   const ListItemInfoView({required this.listId, required this.itemId, super.key});

@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.anywhostudios.listanything">
+    package="com.anywhostudios.allmylists">
     <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
    <application
         android:label="${appName}"
@@ -34,6 +34,6 @@
             android:name="flutterEmbedding"
             android:value="2" />
         <meta-data android:name="com.google.android.geo.API_KEY"
-        android:value="<GOOGLE_MAPS_API_ANDROID>"/>
+        android:value="AIzaSyDCKm_5WrpJBbre-270rz9krFtim_1X4TE"/>
     </application>
 </manifest>

@@ -128,7 +128,7 @@ app.*.map.json
 key.txt
 android/app/google-services.json
 ios/firebase_app_id_file.json
-lib/app/firebase/firebase_options.dart
+lib/standard/firebase/firebase_options.dart
 ios/Runner/GoogleService-Info.plist
 .prod.env
 firebase-deploy-service-account.json
@@ -143,3 +143,8 @@ key.txt
 bundletool-all.jar
 app-production-release.aab
 google_play_store_service_account.json
+terraform/.terraform/providers
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+
+.firebase/hosting.*

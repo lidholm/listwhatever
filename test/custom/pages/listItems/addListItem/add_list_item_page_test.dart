@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:listanything/custom/pages/listItems/addListItem/add_list_item.dart';
+import 'package:allmylists/custom/pages/listItems/addListItem/add_list_item.dart';
 
 void main() {
   group('AddListItemPage', () {

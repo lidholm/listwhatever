@@ -13,7 +13,7 @@ class DeleteAccountPage extends StatelessWidget {
       ),
       body: const Center(
         child: Text(
-          'Delete account.\nContact deleteaccountlistanything@anywhostudios.com',
+          'Delete account.\nContact deleteaccountallmylists@anywhostudios.com',
         ),
       ),
     );

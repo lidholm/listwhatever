@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:listanything/standard/userRepository/models/user.dart';
+import 'package:allmylists/standard/userRepository/models/user.dart';
 
 enum AppStatus {
   onboardingRequired(),

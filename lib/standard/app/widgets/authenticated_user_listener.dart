@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:listanything/custom/firestore/listItems/list_item_events/list_item_bloc.dart';
-import 'package:listanything/custom/firestore/listItems/list_item_events/list_item_event.dart';
-import 'package:listanything/custom/firestore/listItems/list_items.dart';
-import 'package:listanything/custom/firestore/lists/lists.dart';
-import 'package:listanything/standard/analytics/bloc/analytics_bloc.dart';
-import 'package:listanything/standard/analytics/bloc/analytics_event.dart';
-import 'package:listanything/standard/analyticsRepository/models/ntg_event.dart';
-import 'package:listanything/standard/app/app.dart';
-import 'package:listanything/standard/app/bloc/app_state.dart';
+import 'package:allmylists/custom/firestore/listItems/list_item_events/list_item_bloc.dart';
+import 'package:allmylists/custom/firestore/listItems/list_item_events/list_item_event.dart';
+import 'package:allmylists/custom/firestore/listItems/list_items.dart';
+import 'package:allmylists/custom/firestore/lists/lists.dart';
+import 'package:allmylists/standard/analytics/bloc/analytics_bloc.dart';
+import 'package:allmylists/standard/analytics/bloc/analytics_event.dart';
+import 'package:allmylists/standard/analyticsRepository/models/ntg_event.dart';
+import 'package:allmylists/standard/app/app.dart';
+import 'package:allmylists/standard/app/bloc/app_state.dart';
 
 class AuthenticatedUserListener extends StatelessWidget {
   const AuthenticatedUserListener({

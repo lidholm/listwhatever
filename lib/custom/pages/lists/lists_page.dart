@@ -1,16 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:listanything/custom/firestore/listItems/list_or_list_item_not_loaded_handler.dart';
-import 'package:listanything/custom/firestore/lists/lists.dart';
-import 'package:listanything/custom/firestore/lists/user_list.dart';
-import 'package:listanything/custom/navigation/routes.dart';
-import 'package:listanything/custom/pages/listItems/list_items_page_route.dart';
-import 'package:listanything/custom/pages/lists/addList/add_list.dart';
-import 'package:listanything/l10n/l10n.dart';
-import 'package:listanything/standard/appUi/theme/app_theme.dart';
-import 'package:listanything/standard/widgets/appBar/common_app_bar.dart';
-import 'package:listanything/standard/widgets/imageButton/image_button.dart';
+import 'package:allmylists/custom/firestore/listItems/list_or_list_item_not_loaded_handler.dart';
+import 'package:allmylists/custom/firestore/lists/lists.dart';
+import 'package:allmylists/custom/firestore/lists/user_list.dart';
+import 'package:allmylists/custom/navigation/routes.dart';
+import 'package:allmylists/custom/pages/listItems/list_items_page_route.dart';
+import 'package:allmylists/custom/pages/lists/addList/add_list.dart';
+import 'package:allmylists/l10n/l10n.dart';
+import 'package:allmylists/standard/appUi/theme/app_theme.dart';
+import 'package:allmylists/standard/widgets/appBar/common_app_bar.dart';
+import 'package:allmylists/standard/widgets/imageButton/image_button.dart';
 
 class ListsPage extends StatefulWidget {
   const ListsPage({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:listanything/custom/firestore/listItems/list_item.dart';
+import 'package:allmylists/custom/firestore/listItems/list_item.dart';
 // ignore: unused_import
-import 'package:listanything/custom/firestore/lists/list_of_things.dart';
+import 'package:allmylists/custom/firestore/lists/list_of_things.dart';
 
 @immutable
 abstract class ListItemsEvent {}

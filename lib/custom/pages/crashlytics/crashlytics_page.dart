@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:listanything/standard/constants.dart';
+import 'package:allmylists/standard/constants.dart';
 
 class CrashlyticsPage extends StatelessWidget {
   const CrashlyticsPage({super.key});

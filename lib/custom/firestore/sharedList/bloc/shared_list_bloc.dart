@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:listanything/custom/firestore/sharedList/shared_lists_service.dart';
-import 'package:listanything/standard/constants.dart';
+import 'package:allmylists/custom/firestore/sharedList/shared_lists_service.dart';
+import 'package:allmylists/standard/constants.dart';
 
 import 'shared_list_event.dart';
 import 'shared_list_state.dart';

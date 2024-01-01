@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:listanything/custom/pages/listItems/filters/filters.dart';
+import 'package:allmylists/custom/pages/listItems/filters/filters.dart';
 
 @immutable
 sealed class FilterState {}

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:listanything/custom/pages/listItems/searchLocation/geocoder/geocoderresult.dart';
+import 'package:allmylists/custom/pages/listItems/searchLocation/geocoder/geocoderresult.dart';
 
 @immutable
 sealed class SearchState {}

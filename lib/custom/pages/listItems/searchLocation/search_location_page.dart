@@ -4,15 +4,15 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:listanything/custom/pages/listItems/searchLocation/geocoder/geocoderresult.dart';
-import 'package:listanything/custom/pages/listItems/searchLocation/search_location_bloc.dart';
-import 'package:listanything/custom/pages/listItems/searchLocation/search_location_event.dart';
-import 'package:listanything/custom/pages/listItems/searchLocation/search_location_response.dart';
-import 'package:listanything/custom/pages/listItems/searchLocation/search_location_state.dart';
-import 'package:listanything/l10n/l10n.dart';
-import 'package:listanything/standard/constants.dart';
-import 'package:listanything/standard/widgets/appBar/common_app_bar.dart';
-import 'package:listanything/standard/widgets/vStack/v_stack.dart';
+import 'package:allmylists/custom/pages/listItems/searchLocation/geocoder/geocoderresult.dart';
+import 'package:allmylists/custom/pages/listItems/searchLocation/search_location_bloc.dart';
+import 'package:allmylists/custom/pages/listItems/searchLocation/search_location_event.dart';
+import 'package:allmylists/custom/pages/listItems/searchLocation/search_location_response.dart';
+import 'package:allmylists/custom/pages/listItems/searchLocation/search_location_state.dart';
+import 'package:allmylists/l10n/l10n.dart';
+import 'package:allmylists/standard/constants.dart';
+import 'package:allmylists/standard/widgets/appBar/common_app_bar.dart';
+import 'package:allmylists/standard/widgets/vStack/v_stack.dart';
 
 enum SearchLocationValues { searchPhrase, results, address, latlong }
 

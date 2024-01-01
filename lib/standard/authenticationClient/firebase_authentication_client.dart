@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:listanything/standard/authenticationClient/authentication_client.dart';
-import 'package:listanything/standard/authenticationClient/models/authentication_user.dart';
-import 'package:listanything/standard/authenticationClient/token_storage.dart';
+import 'package:allmylists/standard/authenticationClient/authentication_client.dart';
+import 'package:allmylists/standard/authenticationClient/models/authentication_user.dart';
+import 'package:allmylists/standard/authenticationClient/token_storage.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:twitter_login/twitter_login.dart';
 
