@@ -20,6 +20,7 @@
   terraform show > terraform-show
 
 # Full apply
+AGE_KEY="<age-key>" \
   terraform plan -out terraform.plan && terraform apply "terraform.plan" \
-    && sops -e --age <age-key> terraform.tfstate > encrypted-terraform.tfstate \
-    && sops -e --age <age-key> terraform.tfstate.backup > encrypted-terraform.tfstate.backup
+    && sops -e --age $AGE_KEY terraform.tfstate > encrypted-terraform.tfstate \
+    && sops -e --age $AGE_KEY terraform.tfstate.backup > encrypted-terraform.tfstate.backup
