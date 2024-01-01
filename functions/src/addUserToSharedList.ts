@@ -3,8 +3,8 @@ import {onDocumentWritten} from 'firebase-functions/v2/firestore';
 import {getFirestore} from 'firebase-admin/firestore';
 import * as logger from 'firebase-functions/logger';
 
-export const addUserToSharedList = onDocumentWritten('sharedLists/{shareCode}/users/{userId}', async (event: any): Promise<void> => {
-  logger.log('addUserToSharedList');
+export const addingUserToSharedList = onDocumentWritten('sharedLists/{shareCode}/users/{userId}', async (event: any): Promise<void> => {
+  logger.log('addingUserToSharedList');
 
   const apre = event.data.after.data();
   const userId = event.params.userId;

@@ -4,6 +4,7 @@
 
 [Functionality](docs/functionality.md)
 [Firestore structure](docs/firestore_structure.md)
+[Deploy from local machine](docs/deploy_from_local.md)
 
 
 

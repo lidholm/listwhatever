@@ -4,6 +4,7 @@
 
 ## Flutter setup
 
+`git stash`
 `flutter pub get`  
 `dart run build_runner build --delete-conflicting-outputs`
 `flutter gen-l10n`
@@ -11,7 +12,7 @@
 ## Decrypt sops
 
 `cat key.txt`
-`$SOPS_AGE_KEY="XXXXXXX" sh scripts/gitlabci/decryptSops.sh`  
+`SOPS_AGE_KEY="XXXXXXX" sh scripts/gitlabci/decryptSops.sh`  
 `source .prod.env`  
 
 ## Replace `About` page
@@ -49,7 +50,6 @@ In `functions`, run `./node_modules/.bin/firebase emulators:exec --only firestor
 
 ### Rules and functions
 
-
 `export GOOGLE_APPLICATION_CREDENTIALS=/builds/lidholm/listanything/firebase-deploy-service-account.json`  
 `firebase use listanything-2b9b0`  
 `firebase deploy --only firestore:rules`
@@ -61,9 +61,9 @@ In `functions`, run `./node_modules/.bin/firebase emulators:exec --only firestor
 
 ### Android to Firebase 
 
-`APP_ID=\`grep mobilesdk_app_id android/app/google-services.json | head -1 | cut -d '"' -f 4\` `
+```APP_ID=`grep mobilesdk_app_id android/app/google-services.json | head -1 | cut -d '"' -f 4` ```
 `export GOOGLE_APPLICATION_CREDENTIALS=/builds/lidholm/listanything/firebase-deploy-service-account.json`  
-`/firebase appdistribution:distribute app-production-release.aab --app $APP_ID  --testers-file deploy/android/testers.txt --release-notes-file "deploy/release_notes.txt"`  
+`firebase appdistribution:distribute build/app/outputs/bundle/productionRelease/app-production-release.aab --app $APP_ID  --testers-file deploy/android/testers.txt --release-notes-file "deploy/release_notes.txt"`  
 
 ### Hosting 
 

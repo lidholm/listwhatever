@@ -124,22 +124,6 @@ class $AssetsImagesGen {
   AssetGenImage get background =>
       const AssetGenImage('assets/images/background.webp');
 
-  /// File path: assets/images/continue_with_apple.svg
-  SvgGenImage get continueWithApple =>
-      const SvgGenImage('assets/images/continue_with_apple.svg');
-
-  /// File path: assets/images/continue_with_facebook.svg
-  SvgGenImage get continueWithFacebook =>
-      const SvgGenImage('assets/images/continue_with_facebook.svg');
-
-  /// File path: assets/images/continue_with_google.svg
-  SvgGenImage get continueWithGoogle =>
-      const SvgGenImage('assets/images/continue_with_google.svg');
-
-  /// File path: assets/images/continue_with_twitter.svg
-  SvgGenImage get continueWithTwitter =>
-      const SvgGenImage('assets/images/continue_with_twitter.svg');
-
   /// File path: assets/images/food.webp
   AssetGenImage get food => const AssetGenImage('assets/images/food.webp');
 
@@ -181,13 +165,9 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/signup_top.png');
 
   /// List of all assets
-  List<dynamic> get values => [
+  List<AssetGenImage> get values => [
         activities,
         background,
-        continueWithApple,
-        continueWithFacebook,
-        continueWithGoogle,
-        continueWithTwitter,
         food,
         generic,
         loginBottom,
