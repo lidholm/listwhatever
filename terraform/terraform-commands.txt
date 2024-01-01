@@ -1,0 +1,25 @@
+# Start terraform project
+  terraform init
+
+# See what changes will be applied
+  terraform plan
+
+# Store terraform plan to text file
+  terraform plan > terraform-plan.txt
+
+# View readable terraform plan file with colors
+   less -R terraform-plan.txt
+
+# Save binary plan
+  terraform plan -out terraform.plan
+
+# Apply saved plan
+  terraform apply "terraform.plan"
+
+# Show what is currently applied
+  terraform show > terraform-show
+
+# Full apply
+  terraform plan -out terraform.plan && terraform apply "terraform.plan" \
+    && sops -e --age <age-key> terraform.tfstate > encrypted-terraform.tfstate \
+    && sops -e --age <age-key> terraform.tfstate.backup > encrypted-terraform.tfstate.backup

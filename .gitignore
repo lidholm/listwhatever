@@ -143,3 +143,4 @@ key.txt
 bundletool-all.jar
 app-production-release.aab
 google_play_store_service_account.json
+terraform/.terraform/providers
