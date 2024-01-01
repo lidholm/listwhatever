@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:listanything/standard/firebase/firestore/firestore.dart';
+import 'package:allmylists/standard/firebase/firestore/firestore.dart';
 
 import 'list_of_things.dart';
 

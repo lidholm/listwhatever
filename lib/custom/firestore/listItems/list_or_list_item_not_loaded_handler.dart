@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:listanything/custom/firestore/listItems/list_item_events/list_item_state.dart';
-import 'package:listanything/custom/firestore/listItems/list_items.dart';
-import 'package:listanything/custom/firestore/lists/lists.dart';
-import 'package:listanything/custom/firestore/sharedList/bloc/shared_list_state.dart';
-import 'package:listanything/standard/constants.dart';
+import 'package:allmylists/custom/firestore/listItems/list_item_events/list_item_state.dart';
+import 'package:allmylists/custom/firestore/listItems/list_items.dart';
+import 'package:allmylists/custom/firestore/lists/lists.dart';
+import 'package:allmylists/custom/firestore/sharedList/bloc/shared_list_state.dart';
+import 'package:allmylists/standard/constants.dart';
 
 class ListOrListItemNotLoadedHandler {
   static Widget? handleListAndListItemsState(ListState listState, ListItemsState listItemsState) {

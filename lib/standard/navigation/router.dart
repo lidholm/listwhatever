@@ -4,12 +4,12 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listanything/custom/firestore/listItems/list_item_events/list_item_bloc.dart';
-import 'package:listanything/custom/firestore/listItems/list_item_events/list_item_state.dart';
-import 'package:listanything/custom/firestore/lists/lists.dart';
-import 'package:listanything/standard/app/app.dart';
-import 'package:listanything/standard/constants.dart';
-import 'package:listanything/standard/navigation/app_redirect.dart';
+import 'package:allmylists/custom/firestore/listItems/list_item_events/list_item_bloc.dart';
+import 'package:allmylists/custom/firestore/listItems/list_item_events/list_item_state.dart';
+import 'package:allmylists/custom/firestore/lists/lists.dart';
+import 'package:allmylists/standard/app/app.dart';
+import 'package:allmylists/standard/constants.dart';
+import 'package:allmylists/standard/navigation/app_redirect.dart';
 
 import 'models/router_provider_information.dart';
 

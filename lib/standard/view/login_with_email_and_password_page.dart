@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listanything/standard/bloc/login_bloc.dart';
-import 'package:listanything/standard/userRepository/user_repository.dart';
-import 'package:listanything/standard/widgets/appBar/app_bar_action.dart';
-import 'package:listanything/standard/widgets/appBar/app_bar_action_icon.dart';
-import 'package:listanything/standard/widgets/appBar/common_app_bar.dart';
-import 'package:listanything/standard/widgets/login_with_email_and_password_form.dart';
+import 'package:allmylists/standard/bloc/login_bloc.dart';
+import 'package:allmylists/standard/userRepository/user_repository.dart';
+import 'package:allmylists/standard/widgets/appBar/app_bar_action.dart';
+import 'package:allmylists/standard/widgets/appBar/app_bar_action_icon.dart';
+import 'package:allmylists/standard/widgets/appBar/common_app_bar.dart';
+import 'package:allmylists/standard/widgets/login_with_email_and_password_form.dart';
 
 class LoginWithEmailAndPasswordPage extends StatelessWidget {
   const LoginWithEmailAndPasswordPage({super.key});

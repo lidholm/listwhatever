@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listanything/standard/app/app.dart';
-import 'package:listanything/standard/app/bloc/app_state.dart';
-import 'package:listanything/standard/constants.dart';
-import 'package:listanything/standard/navigation/redirect_cubit.dart';
+import 'package:allmylists/standard/app/app.dart';
+import 'package:allmylists/standard/app/bloc/app_state.dart';
+import 'package:allmylists/standard/constants.dart';
+import 'package:allmylists/standard/navigation/redirect_cubit.dart';
 
 import 'navigation.dart';
 

@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:listanything/standard/authenticationClient/authentication_client.dart';
-import 'package:listanything/standard/bloc/login_event.dart';
-import 'package:listanything/standard/bloc/login_state.dart';
-import 'package:listanything/standard/formsInputs/email.dart';
-import 'package:listanything/standard/formsInputs/password.dart';
-import 'package:listanything/standard/userRepository/user_repository.dart';
+import 'package:allmylists/standard/authenticationClient/authentication_client.dart';
+import 'package:allmylists/standard/bloc/login_event.dart';
+import 'package:allmylists/standard/bloc/login_state.dart';
+import 'package:allmylists/standard/formsInputs/email.dart';
+import 'package:allmylists/standard/formsInputs/password.dart';
+import 'package:allmylists/standard/userRepository/user_repository.dart';
 
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {

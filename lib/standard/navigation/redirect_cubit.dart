@@ -1,6 +1,6 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:listanything/standard/constants.dart';
+import 'package:allmylists/standard/constants.dart';
 
 
 class RedirectCubit extends Cubit<String?> {

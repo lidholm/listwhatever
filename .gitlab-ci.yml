@@ -27,7 +27,7 @@ release-notes:
     - flutter --version
     - pwd
     - ls -al
-    - ls -lR /builds/lidholm/listanything/scripts
+    - ls -lR /builds/lidholm/allmylists/scripts
     - echo "$CI_PROJECT_DIR"
     - whoami
     - echo $GITLAB_USER_ID
@@ -64,7 +64,7 @@ decrypt-sops:
   artifacts:
     paths:
       - android/app/google-services.json
-      - android/app/listanything-upload-keystore.jks
+      - android/app/allmylists-upload-keystore.jks
       - android/key.properties
       - .prod.env
       - android/google_play_store_service_account.json
@@ -218,7 +218,7 @@ deployToGooglePlayStore:
     stage: deploy
     environment:
         name: production/google-play-store
-        url: https://play.google.com/store/apps/details?id=com.anywhostudios.listanything
+        url: https://play.google.com/store/apps/details?id=com.anywhostudios.allmylists
     only:
         - main
     script:
@@ -242,8 +242,8 @@ deployToGooglePlayStore:
     - echo $APP_ID | head -c 5
     - echo $APP_ID | tail -c 10
     - echo "===---===="
-    - head -c  15 /builds/lidholm/listanything/firebase-deploy-service-account.json
-    - export GOOGLE_APPLICATION_CREDENTIALS=/builds/lidholm/listanything/firebase-deploy-service-account.json
+    - head -c  15 /builds/lidholm/allmylists/firebase-deploy-service-account.json
+    - export GOOGLE_APPLICATION_CREDENTIALS=/builds/lidholm/allmylists/firebase-deploy-service-account.json
     - echo ""
     - echo "===---===="
     - ls -l app-production-release.aab
@@ -253,17 +253,17 @@ deployToFirebaseHostingAndRules:
   stage: deploy
   environment:
     name: production/web
-    url: https://listanything-2b9b0.web.app/
+    url: https://allmylists-fde43a.web.app/
   only:
     - main
   script:
     - pwd
     - source .prod.env
-    - head -c  15 /builds/lidholm/listanything/firebase-deploy-service-account.json
-    - export GOOGLE_APPLICATION_CREDENTIALS=/builds/lidholm/listanything/firebase-deploy-service-account.json
-    - head -c 100 /builds/lidholm/listanything/firebase-deploy-service-account.json
+    - head -c  15 /builds/lidholm/allmylists/firebase-deploy-service-account.json
+    - export GOOGLE_APPLICATION_CREDENTIALS=/builds/lidholm/allmylists/firebase-deploy-service-account.json
+    - head -c 100 /builds/lidholm/allmylists/firebase-deploy-service-account.json
     - /firebase projects:list
-    - /firebase use listanything-2b9b0
+    - /firebase use allmylists-fde43a
     - /firebase --version
     - /firebase deploy --only hosting
     - /firebase deploy --only firestore:rules
@@ -272,7 +272,7 @@ deployToFirebaseFunctions:
   stage: deploy
   environment:
     name: production/web
-    url: https://listanything-2b9b0.web.app/
+    url: https://allmylists-fde43a.web.app/
   only:
     - main
   script:
@@ -280,11 +280,11 @@ deployToFirebaseFunctions:
     - source .prod.env
     - grep . .prod.env | cut -d "=" -f 1
     - echo $FIREBASE_TOKEN | head -c 10
-    - head -c  15 /builds/lidholm/listanything/firebase-deploy-service-account.json
-    - export GOOGLE_APPLICATION_CREDENTIALS=/builds/lidholm/listanything/firebase-deploy-service-account.json
-    - head -c 100 /builds/lidholm/listanything/firebase-deploy-service-account.json
+    - head -c  15 /builds/lidholm/allmylists/firebase-deploy-service-account.json
+    - export GOOGLE_APPLICATION_CREDENTIALS=/builds/lidholm/allmylists/firebase-deploy-service-account.json
+    - head -c 100 /builds/lidholm/allmylists/firebase-deploy-service-account.json
     - /firebase projects:list
-    - /firebase use listanything-2b9b0
+    - /firebase use allmylists-fde43a
     - /firebase --version
     - cd functions
     - npm i

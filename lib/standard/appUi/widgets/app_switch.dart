@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:listanything/standard/appUi/colors/app_colors.dart';
-import 'package:listanything/standard/appUi/spacing/app_spacing.dart';
-import 'package:listanything/standard/appUi/widgets/content_theme_override_builder.dart';
+import 'package:allmylists/standard/appUi/colors/app_colors.dart';
+import 'package:allmylists/standard/appUi/spacing/app_spacing.dart';
+import 'package:allmylists/standard/appUi/widgets/content_theme_override_builder.dart';
 
 /// {@template app_switch}
 /// Switch with optional leading text displayed in the application.

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:listanything/standard/appUi/colors/app_colors.dart';
-import 'package:listanything/standard/appUi/spacing/app_spacing.dart';
-import 'package:listanything/standard/appUi/widgets/app_text_field.dart';
+import 'package:allmylists/standard/appUi/colors/app_colors.dart';
+import 'package:allmylists/standard/appUi/spacing/app_spacing.dart';
+import 'package:allmylists/standard/appUi/widgets/app_text_field.dart';
 
 /// {@template app_email_text_field}
 /// An email text field component.

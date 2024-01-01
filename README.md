@@ -1,4 +1,4 @@
-# listanything
+# allmylists
 
 ## Sections
 
@@ -40,7 +40,7 @@ $ flutter run --flavor staging --target lib/main_staging.dart
 $ flutter run --flavor production --target lib/main_production.dart
 ```
 
-_\*listanything works on iOS, Android, Web, and Windows._
+_\*allmylists works on iOS, Android, Web, and Windows._
 
 ---
 
@@ -101,7 +101,7 @@ This project relies on [flutter_localizations][flutter_localizations_link] and f
 3. Use the new string
 
 ```dart
-import 'package:listanything/l10n/l10n.dart';
+import 'package:allmylists/l10n/l10n.dart';
 
 @override
 Widget build(BuildContext context) {

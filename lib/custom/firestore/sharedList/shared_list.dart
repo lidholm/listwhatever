@@ -1,7 +1,7 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:listanything/custom/firestore/lists/list_of_things.dart';
-import 'package:listanything/custom/firestore/lists/list_type.dart';
+import 'package:allmylists/custom/firestore/lists/list_of_things.dart';
+import 'package:allmylists/custom/firestore/lists/list_type.dart';
 
 part 'shared_list.freezed.dart';
 part 'shared_list.g.dart';

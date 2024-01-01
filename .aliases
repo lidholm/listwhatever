@@ -1,5 +1,5 @@
-alias startEmulators="firebase emulators:start --import ./emulatorData --project listanything-2b9b0 --inspect-functions"
-alias exportEmulatorData="firebase emulators:export ./emulatorData --project listanything-2b9b0"
+alias startEmulators="firebase emulators:start --import ./emulatorData --project allmylists-fde43a --inspect-functions"
+alias exportEmulatorData="firebase emulators:export ./emulatorData --project allmylists-fde43a"
 alias buildImage="docker build -t lidholm/flutter:0.0.25 ."
 alias uploadImage="docker push lidholm/flutter:0.0.25"
 alias runImage="docker run -it lidholm/flutter:0.0.25"

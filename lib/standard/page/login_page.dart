@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:listanything/standard/widgets/appBar/common_app_bar.dart';
-import 'package:listanything/standard/widgets/login_form.dart';
+import 'package:allmylists/standard/widgets/appBar/common_app_bar.dart';
+import 'package:allmylists/standard/widgets/login_form.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});

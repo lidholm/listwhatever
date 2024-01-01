@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:listanything/standard/appUi/typography/app_text_styles.dart';
+import 'package:allmylists/standard/appUi/typography/app_text_styles.dart';
 
 import '/l10n/l10n.dart';
 
@@ -337,7 +337,7 @@ If you have any questions about this Privacy Policy, You can contact us:
 
 By email: info@anywhostudios.com
 
-By visiting this page on our website: https://listanything-2b9b0.web.app/#/privacypolicy
+By visiting this page on our website: https://allmylists-fde43a.web.app/#/privacypolicy
 
 Generated using TermsFeed Privacy Policy Generator\n''',
       ),

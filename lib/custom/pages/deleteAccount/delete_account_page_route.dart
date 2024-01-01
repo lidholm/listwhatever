@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listanything/custom/pages/deleteAccount/delete_account.dart';
+import 'package:allmylists/custom/pages/deleteAccount/delete_account.dart';
 
 @immutable
 class DeleteAccountPageRoute extends GoRouteData {

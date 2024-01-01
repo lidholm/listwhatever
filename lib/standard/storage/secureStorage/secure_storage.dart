@@ -1,5 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:listanything/standard/storage/storage.dart';
+import 'package:allmylists/standard/storage/storage.dart';
 
 /// {@template secure_storage}
 /// A Secure Storage client which implements the base [Storage] interface.

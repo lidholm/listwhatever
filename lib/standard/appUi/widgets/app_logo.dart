@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:listanything/standard/appUi/generated/assets.gen.dart';
+import 'package:allmylists/standard/appUi/generated/assets.gen.dart';
 
 /// {@template app_logo}
 /// A default app logo.

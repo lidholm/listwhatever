@@ -1,4 +1,4 @@
-import 'package:listanything/standard/storage/storage.dart';
+import 'package:allmylists/standard/storage/storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// {@template persistent_storage}

@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:listanything/custom/firestore/lists/lists_service.dart';
-import 'package:listanything/custom/firestore/lists/user_list.dart';
-import 'package:listanything/custom/firestore/lists/user_lists_service.dart';
-import 'package:listanything/standard/constants.dart';
+import 'package:allmylists/custom/firestore/lists/lists_service.dart';
+import 'package:allmylists/custom/firestore/lists/user_list.dart';
+import 'package:allmylists/custom/firestore/lists/user_lists_service.dart';
+import 'package:allmylists/standard/constants.dart';
 
 import 'lists_event.dart';
 import 'lists_state.dart';

@@ -1,6 +1,6 @@
 
 import 'package:equatable/equatable.dart';
-import 'package:listanything/standard/analyticsRepository/models/analytics_event.dart';
+import 'package:allmylists/standard/analyticsRepository/models/analytics_event.dart';
 
 abstract class LoginEvent extends Equatable {
   const LoginEvent();
