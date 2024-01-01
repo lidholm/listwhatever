@@ -128,7 +128,7 @@ app.*.map.json
 key.txt
 android/app/google-services.json
 ios/firebase_app_id_file.json
-lib/app/firebase/firebase_options.dart
+lib/standard/firebase/firebase_options.dart
 ios/Runner/GoogleService-Info.plist
 .prod.env
 firebase-deploy-service-account.json
