@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:allmylists/custom/pages/listItems/searchLocation/geocoder/geocoder.dart';
-import 'package:allmylists/standard/api_keys.dart';
-import 'package:allmylists/standard/constants.dart';
+import '/custom/pages/listItems/searchLocation/geocoder/geocoder.dart';
+import '/standard/api_keys.dart';
+import '/standard/constants.dart';
 
 import 'search_location_event.dart';
 import 'search_location_state.dart';

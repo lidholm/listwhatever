@@ -9,7 +9,7 @@ describe('uppercase', () => {
 
   before(async () => {
     test = functionsTest({
-      projectId: 'allmylists-fde43a', // process.env.GCLOUD_PROJECT,
+      projectId: 'listwhatever-ad43ed', // process.env.GCLOUD_PROJECT,
     });
     process.env.GCLOUD_PROJECT = JSON.parse(process.env.FIREBASE_CONFIG).projectId;
 

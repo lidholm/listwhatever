@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:allmylists/standard/constants.dart';
-import 'package:allmylists/standard/emulator/emulator_info.dart';
-import 'package:allmylists/standard/emulator/get_emulator_info.dart';
+import '/standard/constants.dart';
+import '/standard/emulator/emulator_info.dart';
+import '/standard/emulator/get_emulator_info.dart';
 
 const port = 9099;
 

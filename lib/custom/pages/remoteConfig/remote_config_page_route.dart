@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:allmylists/custom/pages/remoteConfig/remote_config_page.dart';
+import '/custom/pages/remoteConfig/remote_config_page.dart';
 
 @immutable
 class RemoteConfigPageRoute extends GoRouteData {

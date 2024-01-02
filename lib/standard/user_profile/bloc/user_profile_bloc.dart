@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:allmylists/standard/userRepository/models/user.dart';
-import 'package:allmylists/standard/userRepository/user_repository.dart';
-import 'package:allmylists/standard/user_profile/bloc/user_profile_event.dart';
-import 'package:allmylists/standard/user_profile/bloc/user_profile_state.dart';
+import '/standard/userRepository/models/user.dart';
+import '/standard/userRepository/user_repository.dart';
+import '/standard/user_profile/bloc/user_profile_event.dart';
+import '/standard/user_profile/bloc/user_profile_state.dart';
 
 class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
   UserProfileBloc({

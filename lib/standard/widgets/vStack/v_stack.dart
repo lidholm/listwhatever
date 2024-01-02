@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:allmylists/standard/constants.dart';
+import '/standard/constants.dart';
 
 class VStack extends StatelessWidget {
 

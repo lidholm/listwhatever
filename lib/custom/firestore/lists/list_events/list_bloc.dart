@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:allmylists/custom/firestore/lists/user_lists_service.dart';
-import 'package:allmylists/standard/constants.dart';
 
+import '/custom/firestore/lists/user_lists_service.dart';
+import '/standard/constants.dart';
 import '../lists_service.dart';
 import 'list_event.dart';
 import 'list_state.dart';

@@ -7,17 +7,18 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:allmylists/standard/analyticsRepository/analytics_repository.dart';
-import 'package:allmylists/standard/authenticationClient/authentication_client.dart';
-import 'package:allmylists/standard/authenticationClient/firebase_authentication_client.dart';
-import 'package:allmylists/standard/authenticationClient/token_storage.dart';
-import 'package:allmylists/standard/firebase/firebase_options.dart';
-import 'package:allmylists/standard/firebase/firestore/firebase_auth.dart';
-import 'package:allmylists/standard/main/bootstrap/app_bloc_observer.dart';
-import 'package:allmylists/standard/storage/persistentStorage/persistent_storage.dart';
-import 'package:allmylists/standard/userRepository/user_storage.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '/standard/analyticsRepository/analytics_repository.dart';
+import '/standard/authenticationClient/authentication_client.dart';
+import '/standard/authenticationClient/firebase_authentication_client.dart';
+import '/standard/authenticationClient/token_storage.dart';
+import '/standard/firebase/firebase_options.dart';
+import '/standard/firebase/firestore/firebase_auth.dart';
+import '/standard/main/bootstrap/app_bloc_observer.dart';
+import '/standard/storage/persistentStorage/persistent_storage.dart';
+import '/standard/userRepository/user_storage.dart';
 
 typedef AppBuilder = Future<Widget> Function(
   FirebaseMessaging firebaseMessaging,
@@ -56,6 +57,10 @@ Future<void> bootstrap(AppBuilder builder) async {
   final authenticationClient = FirebaseAuthenticationClient(
     tokenStorage: tokenStorage,
     firebaseAuth: await getFirebaseAuth(),
+    // googleSignIn: GoogleSignIn(
+    //   clientId: kIsWeb ? getGoogleClientId() : null,
+    //   scopes: ['email', 'openid'],
+    // ),
   );
 
   runApp(

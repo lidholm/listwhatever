@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:allmylists/standard/emulator/emulator_info.dart';
-import 'package:allmylists/standard/emulator/get_emulator_info.dart';
+import '/standard/emulator/emulator_info.dart';
+import '/standard/emulator/get_emulator_info.dart';
 
 const port = 8080;
 

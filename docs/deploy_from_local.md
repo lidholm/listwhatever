@@ -50,8 +50,8 @@ In `functions`, run `./node_modules/.bin/firebase emulators:exec --only firestor
 
 ### Rules and functions
 
-`export GOOGLE_APPLICATION_CREDENTIALS=/builds/lidholm/listanything/firebase-deploy-service-account.json`  
-`firebase use listanything-2b9b0`  
+`export GOOGLE_APPLICATION_CREDENTIALS=/builds/lidholm/listwhatever/firebase-deploy-service-account.json`  
+`firebase use listwhatever-ad43ed`  
 `firebase deploy --only firestore:rules`
 `firebase deploy --only functions`
 
@@ -62,12 +62,12 @@ In `functions`, run `./node_modules/.bin/firebase emulators:exec --only firestor
 ### Android to Firebase 
 
 ```APP_ID=`grep mobilesdk_app_id android/app/google-services.json | head -1 | cut -d '"' -f 4` ```
-`export GOOGLE_APPLICATION_CREDENTIALS=/builds/lidholm/listanything/firebase-deploy-service-account.json`  
+`export GOOGLE_APPLICATION_CREDENTIALS=/builds/lidholm/listwhatever/firebase-deploy-service-account.json`  
 `firebase appdistribution:distribute build/app/outputs/bundle/productionRelease/app-production-release.aab --app $APP_ID  --testers-file deploy/android/testers.txt --release-notes-file "deploy/release_notes.txt"`  
 
 ### Hosting 
 
-`export GOOGLE_APPLICATION_CREDENTIALS=/builds/lidholm/listanything/firebase-deploy-service-account.json`  
-`firebase use listanything-2b9b0`  
+`export GOOGLE_APPLICATION_CREDENTIALS=/builds/lidholm/listwhatever/firebase-deploy-service-account.json`  
+`firebase use listwhatever-ad43ed`  
 `firebase deploy --only hosting`  
 

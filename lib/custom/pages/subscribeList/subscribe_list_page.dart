@@ -4,16 +4,16 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:allmylists/custom/firestore/listItems/list_or_list_item_not_loaded_handler.dart';
-import 'package:allmylists/custom/firestore/sharedList/bloc/shared_list_bloc.dart';
-import 'package:allmylists/custom/firestore/sharedList/bloc/shared_list_event.dart';
-import 'package:allmylists/custom/firestore/sharedList/bloc/shared_list_state.dart';
-import 'package:allmylists/custom/pages/subscribeList/bloc/subscribe_list_bloc.dart';
-import 'package:allmylists/custom/pages/subscribeList/bloc/subscribe_list_event.dart';
-import 'package:allmylists/l10n/l10n.dart';
-import 'package:allmylists/standard/widgets/appBar/common_app_bar.dart';
-import 'package:allmylists/standard/widgets/vStack/h_stack.dart';
-import 'package:allmylists/standard/widgets/vStack/v_stack.dart';
+import '/custom/firestore/listItems/list_or_list_item_not_loaded_handler.dart';
+import '/custom/firestore/sharedList/bloc/shared_list_bloc.dart';
+import '/custom/firestore/sharedList/bloc/shared_list_event.dart';
+import '/custom/firestore/sharedList/bloc/shared_list_state.dart';
+import '/custom/pages/subscribeList/bloc/subscribe_list_bloc.dart';
+import '/custom/pages/subscribeList/bloc/subscribe_list_event.dart';
+import '/l10n/l10n.dart';
+import '/standard/widgets/appBar/common_app_bar.dart';
+import '/standard/widgets/vStack/h_stack.dart';
+import '/standard/widgets/vStack/v_stack.dart';
 
 class SubscribeListPage extends StatefulWidget {
   const SubscribeListPage({

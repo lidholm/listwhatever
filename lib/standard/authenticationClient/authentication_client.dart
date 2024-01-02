@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:allmylists/standard/authenticationClient/models/authentication_user.dart';
+import '/standard/authenticationClient/models/authentication_user.dart';
 
 /// {@template authentication_exception}
 /// Exceptions from the authentication client.

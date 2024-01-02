@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:allmylists/standard/appUi/theme/app_theme.dart';
-import 'package:allmylists/standard/appUi/typography/app_font_weight.dart';
-import 'package:allmylists/standard/appUi/widgets/content_theme_override_builder.dart';
+import '/standard/appUi/theme/app_theme.dart';
+import '/standard/appUi/typography/app_font_weight.dart';
+import '/standard/appUi/widgets/content_theme_override_builder.dart';
 
 /// The app consists of two main text style definitions: UI and Content.
 ///

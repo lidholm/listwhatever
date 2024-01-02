@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:allmylists/standard/constants.dart';
+import '/standard/constants.dart';
 
 class FirebasePerformancePage extends StatefulWidget {
   const FirebasePerformancePage({super.key});

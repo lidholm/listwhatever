@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:allmylists/custom/navigation/routes.dart';
-import 'package:allmylists/l10n/l10n.dart';
-import 'package:allmylists/standard/app/app.dart';
-import 'package:allmylists/standard/appUi/generated/assets.gen.dart';
-import 'package:allmylists/standard/appUi/spacing/app_spacing.dart';
-import 'package:allmylists/standard/appUi/widgets/show_app_modal.dart';
-import 'package:allmylists/standard/user_profile/user_profile.dart';
-import 'package:allmylists/standard/view/login_modal.dart';
+import '/custom/navigation/routes.dart';
+import '/l10n/l10n.dart';
+import '/standard/app/app.dart';
+import '/standard/appUi/generated/assets.gen.dart';
+import '/standard/appUi/spacing/app_spacing.dart';
+import '/standard/appUi/widgets/show_app_modal.dart';
+import '/standard/user_profile/user_profile.dart';
+import '/standard/view/login_modal.dart';
 
 /// A user profile button which displays a [LoginButton]
 /// for the unauthenticated user or an [OpenProfileButton]

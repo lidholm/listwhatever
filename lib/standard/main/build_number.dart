@@ -1,4 +1,4 @@
-import 'package:allmylists/standard/version/version.dart';
+import '/standard/version/version.dart';
 
 int buildNumber([String version = packageVersion]) {
   final versionSegments = version.split('+');

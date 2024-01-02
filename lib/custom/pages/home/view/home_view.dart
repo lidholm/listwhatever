@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:allmylists/standard/app/app.dart';
-import 'package:allmylists/standard/app/bloc/app_state.dart';
-import 'package:allmylists/standard/appUi/widgets/app_logo.dart';
-import 'package:allmylists/standard/appUi/widgets/show_app_modal.dart';
-import 'package:allmylists/standard/navigation/navigation.dart';
-import 'package:allmylists/standard/user_profile/user_profile.dart';
-import 'package:allmylists/standard/view/login_modal.dart';
+import '/standard/app/app.dart';
+import '/standard/app/bloc/app_state.dart';
+import '/standard/appUi/widgets/app_logo.dart';
+import '/standard/appUi/widgets/show_app_modal.dart';
+import '/standard/navigation/navigation.dart';
+import '/standard/user_profile/user_profile.dart';
+import '/standard/view/login_modal.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

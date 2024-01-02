@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:allmylists/standard/appUi/typography/app_text_styles.dart';
 
 import '/l10n/l10n.dart';
+import '/standard/appUi/typography/app_text_styles.dart';
 
 // TODO: Create multiple pages, one for each language
 
@@ -337,7 +337,7 @@ If you have any questions about this Privacy Policy, You can contact us:
 
 By email: info@anywhostudios.com
 
-By visiting this page on our website: https://allmylists-fde43a.web.app/#/privacypolicy
+By visiting this page on our website: https://listwhatever-ad43e.web.app/#/privacypolicy
 
 Generated using TermsFeed Privacy Policy Generator\n''',
       ),

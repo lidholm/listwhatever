@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
-import 'package:allmylists/custom/firestore/listItems/list_or_list_item_not_loaded_handler.dart';
-import 'package:allmylists/custom/firestore/lists/lists.dart';
-import 'package:allmylists/standard/constants.dart';
-import 'package:allmylists/standard/widgets/appBar/common_app_bar.dart';
-import 'package:allmylists/standard/widgets/vStack/v_stack.dart';
+import '/custom/firestore/listItems/list_or_list_item_not_loaded_handler.dart';
+import '/custom/firestore/lists/lists.dart';
+import '/standard/constants.dart';
+import '/standard/widgets/appBar/common_app_bar.dart';
+import '/standard/widgets/vStack/v_stack.dart';
 
 enum AddListValues {
   name,

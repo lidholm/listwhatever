@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:allmylists/l10n/l10n.dart';
-import 'package:allmylists/standard/appUi/colors/app_colors.dart';
-import 'package:allmylists/standard/appUi/spacing/app_spacing.dart';
-import 'package:allmylists/standard/appUi/typography/app_text_styles.dart';
-import 'package:allmylists/standard/appUi/widgets/app_button.dart';
-import 'package:allmylists/standard/widgets/appBar/common_app_bar.dart';
+import '/l10n/l10n.dart';
+import '/standard/appUi/colors/app_colors.dart';
+import '/standard/appUi/spacing/app_spacing.dart';
+import '/standard/appUi/typography/app_text_styles.dart';
+import '/standard/appUi/widgets/app_button.dart';
+import '/standard/widgets/appBar/common_app_bar.dart';
 
 /// {@template network_error}
 /// A network error alert.

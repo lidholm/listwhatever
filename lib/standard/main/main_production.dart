@@ -1,6 +1,6 @@
-import 'package:allmylists/standard/app/app.dart';
-import 'package:allmylists/standard/main/bootstrap/bootstrap.dart';
-import 'package:allmylists/standard/userRepository/user_repository.dart';
+import '/standard/app/app.dart';
+import '/standard/main/bootstrap/bootstrap.dart';
+import '/standard/userRepository/user_repository.dart';
 
 void main() {
   bootstrap(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:allmylists/standard/constants.dart';
 
+import '/standard/constants.dart';
 import 'list_item.dart';
 
 class ListItemsListView extends StatelessWidget {

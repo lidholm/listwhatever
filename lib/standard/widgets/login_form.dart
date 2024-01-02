@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
-import 'package:allmylists/custom/navigation/routes.dart';
-import 'package:allmylists/l10n/l10n.dart';
-import 'package:allmylists/standard/appUi/generated/assets.gen.dart';
-import 'package:allmylists/standard/appUi/spacing/app_spacing.dart';
-import 'package:allmylists/standard/appUi/widgets/app_button.dart';
-import 'package:allmylists/standard/bloc/login_bloc.dart';
-import 'package:allmylists/standard/bloc/login_event.dart';
-import 'package:allmylists/standard/bloc/login_state.dart';
-import 'package:allmylists/standard/page/login_with_email_and_password_page_route.dart';
+import '/custom/navigation/routes.dart';
+import '/l10n/l10n.dart';
+import '/standard/appUi/generated/assets.gen.dart';
+import '/standard/appUi/spacing/app_spacing.dart';
+import '/standard/appUi/widgets/app_button.dart';
+import '/standard/bloc/login_bloc.dart';
+import '/standard/bloc/login_event.dart';
+import '/standard/bloc/login_state.dart';
+import '/standard/page/login_with_email_and_password_page_route.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({super.key});
@@ -164,7 +164,7 @@ class _FacebookLoginButton extends StatelessWidget {
         children: [
           Assets.icons.facebook.svg(),
           const SizedBox(width: AppSpacing.lg),
-          const Text('Continue with Facebook')
+          const Text('Continue with Facebook'),
         ],
       ),
     );
@@ -182,7 +182,7 @@ class _TwitterLoginButton extends StatelessWidget {
         children: [
           Assets.icons.twitter.svg(),
           const SizedBox(width: AppSpacing.lg),
-          const Text('Continue with Twitter')
+          const Text('Continue with Twitter'),
         ],
       ),
     );

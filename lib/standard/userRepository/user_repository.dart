@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
-import 'package:allmylists/standard/authenticationClient/authentication_client.dart';
-import 'package:allmylists/standard/userRepository/models/user.dart';
-import 'package:allmylists/standard/userRepository/user_storage.dart';
+import '/standard/authenticationClient/authentication_client.dart';
+import '/standard/userRepository/models/user.dart';
+import '/standard/userRepository/user_storage.dart';
 
 /// {@template user_failure}
 /// A base failure for the user repository failures.

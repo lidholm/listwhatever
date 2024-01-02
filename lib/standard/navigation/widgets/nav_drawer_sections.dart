@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
-import 'package:allmylists/custom/navigation/routes.dart';
-import 'package:allmylists/custom/pages/about/about_page_route.dart';
-import 'package:allmylists/custom/pages/crashlytics/crashlytics.dart';
-import 'package:allmylists/custom/pages/deleteAccount/delete_account_page_route.dart';
-import 'package:allmylists/custom/pages/firebase_performance/firebase_performance.dart';
-import 'package:allmylists/custom/pages/lists/lists.dart';
-import 'package:allmylists/custom/pages/maps/maps_page_route.dart';
-import 'package:allmylists/custom/pages/privacyPolicy/privacy_policy_page_route.dart';
-import 'package:allmylists/custom/pages/remoteConfig/remote_config_page_route.dart';
-import 'package:allmylists/l10n/l10n.dart';
-import 'package:allmylists/standard/appUi/colors/app_colors.dart';
-import 'package:allmylists/standard/appUi/spacing/app_spacing.dart';
+import '/custom/navigation/routes.dart';
+import '/custom/pages/about/about_page_route.dart';
+import '/custom/pages/crashlytics/crashlytics.dart';
+import '/custom/pages/deleteAccount/delete_account_page_route.dart';
+import '/custom/pages/firebase_performance/firebase_performance.dart';
+import '/custom/pages/lists/lists.dart';
+import '/custom/pages/maps/maps_page_route.dart';
+import '/custom/pages/privacyPolicy/privacy_policy_page_route.dart';
+import '/custom/pages/remoteConfig/remote_config_page_route.dart';
+import '/l10n/l10n.dart';
+import '/standard/appUi/colors/app_colors.dart';
+import '/standard/appUi/spacing/app_spacing.dart';
 
 import '../models/link.dart';
 

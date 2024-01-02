@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:allmylists/custom/firestore/listItems/list_item_events/list_item_state.dart';
-import 'package:allmylists/custom/firestore/listItems/list_items.dart';
-import 'package:allmylists/custom/firestore/lists/lists.dart';
-import 'package:allmylists/custom/navigation/routes.dart';
-import 'package:allmylists/custom/pages/listItems/list_items.dart';
-import 'package:allmylists/custom/pages/lists/lists.dart';
-import 'package:allmylists/standard/navigation/redirect_cubit.dart';
+import '/custom/firestore/listItems/list_item_events/list_item_state.dart';
+import '/custom/firestore/listItems/list_items.dart';
+import '/custom/firestore/lists/lists.dart';
+import '/custom/navigation/routes.dart';
+import '/custom/pages/listItems/list_items.dart';
+import '/custom/pages/lists/lists.dart';
+import '/standard/navigation/redirect_cubit.dart';
 
 class DeleteItemRedirectListener extends StatelessWidget {
   const DeleteItemRedirectListener({

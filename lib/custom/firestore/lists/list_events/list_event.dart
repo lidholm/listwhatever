@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:allmylists/custom/firestore/lists/lists.dart';
+
+import '/custom/firestore/lists/lists.dart';
 
 @immutable
 sealed class ListEvent {}

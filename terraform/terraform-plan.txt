@@ -9,7 +9,7 @@ Terraform will perform the following actions:
 [0m  [32m+[0m[0m resource "google_firebase_project" "default" {
       [32m+[0m[0m display_name   = (known after apply)
       [32m+[0m[0m id             = (known after apply)
-      [32m+[0m[0m project        = "allmylists-2b9b0"
+      [32m+[0m[0m project        = "listwhatever-2b9b0"
       [32m+[0m[0m project_number = (known after apply)
     }
 
@@ -20,9 +20,9 @@ Terraform will perform the following actions:
       [32m+[0m[0m labels              = {
           [32m+[0m[0m "firebase" = "enabled"
         }
-      [32m+[0m[0m name                = "allmylists"
+      [32m+[0m[0m name                = "listwhatever"
       [32m+[0m[0m number              = (known after apply)
-      [32m+[0m[0m project_id          = "allmylists-2b9b0"
+      [32m+[0m[0m project_id          = "listwhatever-2b9b0"
       [32m+[0m[0m skip_delete         = (known after apply)
     }
 
@@ -30,7 +30,7 @@ Terraform will perform the following actions:
 [0m  [32m+[0m[0m resource "google_project_service" "firebase" {
       [32m+[0m[0m disable_on_destroy = false
       [32m+[0m[0m id                 = (known after apply)
-      [32m+[0m[0m project            = "allmylists-2b9b0"
+      [32m+[0m[0m project            = "listwhatever-2b9b0"
       [32m+[0m[0m service            = "firebase.googleapis.com"
     }
 
@@ -38,7 +38,7 @@ Terraform will perform the following actions:
 [0m  [32m+[0m[0m resource "google_project_service" "serviceusage" {
       [32m+[0m[0m disable_on_destroy = false
       [32m+[0m[0m id                 = (known after apply)
-      [32m+[0m[0m project            = "allmylists-2b9b0"
+      [32m+[0m[0m project            = "listwhatever-2b9b0"
       [32m+[0m[0m service            = "serviceusage.googleapis.com"
     }
 

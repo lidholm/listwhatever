@@ -1,7 +1,7 @@
 import 'package:great_circle_distance_calculator/great_circle_distance_calculator.dart';
-import 'package:allmylists/custom/firestore/listItems/list_item.dart';
-import 'package:allmylists/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
-import 'package:allmylists/standard/constants.dart';
+import '/custom/firestore/listItems/list_item.dart';
+import '/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
+import '/standard/constants.dart';
 
 import 'filters.dart';
 

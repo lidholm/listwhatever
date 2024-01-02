@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:allmylists/custom/firestore/listItems/list_item_events/list_item_bloc.dart';
-import 'package:allmylists/custom/firestore/listItems/list_item_events/list_item_event.dart';
-import 'package:allmylists/custom/firestore/listItems/list_item_events/list_item_state.dart';
-import 'package:allmylists/custom/firestore/listItems/list_or_list_item_not_loaded_handler.dart';
-import 'package:allmylists/custom/firestore/lists/lists.dart';
-import 'package:allmylists/custom/navigation/routes.dart';
-import 'package:allmylists/custom/pages/listItems/addListItem/edit_list_item_page_route.dart';
-import 'package:allmylists/l10n/l10n.dart';
-import 'package:allmylists/standard/constants.dart';
-import 'package:allmylists/standard/widgets/appBar/app_bar_action.dart';
-import 'package:allmylists/standard/widgets/appBar/app_bar_action_icon.dart';
-import 'package:allmylists/standard/widgets/appBar/common_app_bar.dart';
+import '/custom/firestore/listItems/list_item_events/list_item_bloc.dart';
+import '/custom/firestore/listItems/list_item_events/list_item_event.dart';
+import '/custom/firestore/listItems/list_item_events/list_item_state.dart';
+import '/custom/firestore/listItems/list_or_list_item_not_loaded_handler.dart';
+import '/custom/firestore/lists/lists.dart';
+import '/custom/navigation/routes.dart';
+import '/custom/pages/listItems/addListItem/edit_list_item_page_route.dart';
+import '/l10n/l10n.dart';
+import '/standard/constants.dart';
+import '/standard/widgets/appBar/app_bar_action.dart';
+import '/standard/widgets/appBar/app_bar_action_icon.dart';
+import '/standard/widgets/appBar/common_app_bar.dart';
 
 class ListItemInfoView extends StatefulWidget {
   const ListItemInfoView({required this.listId, required this.itemId, super.key});

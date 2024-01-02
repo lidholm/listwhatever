@@ -24,3 +24,9 @@ AGE_KEY="<age-key>" \
   terraform plan -out terraform.plan && terraform apply "terraform.plan" \
     && sops -e --age $AGE_KEY terraform.tfstate > encrypted-terraform.tfstate \
     && sops -e --age $AGE_KEY terraform.tfstate.backup > encrypted-terraform.tfstate.backup
+
+
+### Extra steps
+
+* Set up Firebase authentication in Firebase console
+

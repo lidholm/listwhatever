@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:allmylists/standard/appUi/colors/app_colors.dart';
-import 'package:allmylists/standard/appUi/spacing/app_spacing.dart';
-import 'package:allmylists/standard/appUi/typography/app_font_weight.dart';
-import 'package:allmylists/standard/appUi/typography/app_text_styles.dart';
+import '/standard/appUi/colors/app_colors.dart';
+import '/standard/appUi/spacing/app_spacing.dart';
+import '/standard/appUi/typography/app_font_weight.dart';
+import '/standard/appUi/typography/app_text_styles.dart';
 
 /// {@template app_theme}
 /// The Default App [ThemeData].

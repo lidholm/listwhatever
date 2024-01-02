@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart' as foundation;
 import 'package:flutter/foundation.dart';
-import 'package:allmylists/standard/emulator/device_info.dart';
+import '/standard/emulator/device_info.dart';
 
 import 'emulator_info.dart';
 

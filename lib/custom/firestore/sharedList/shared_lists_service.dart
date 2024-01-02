@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:allmylists/custom/firestore/sharedList/shared_list.dart';
-import 'package:allmylists/standard/firebase/firestore/firestore.dart';
+import '/custom/firestore/sharedList/shared_list.dart';
+import '/standard/firebase/firestore/firestore.dart';
 
 class SharedListsService {
   SharedListsService();

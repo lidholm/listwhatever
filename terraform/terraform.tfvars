@@ -1,21 +1,21 @@
 
-create_only_project = true
+create_only_project = false
 
 # https://console.cloud.google.com/billing/
 billing_account_id = "01CF33-40FE66-2D6E9F"
 
-project_name = "allmylists"
-project_id = "allmylists-fde43a"
+project_name = "listwhatever"
+project_id = "listwhatever-ad43ed"
 # See available locations:
 # https://firebase.google.com/docs/firestore/locations
 # https://firebase.google.com/docs/projects/locations#default-cloud-location
 firebase_location = "us-west2"
-use_firestore = false
-use_web_app = false
+use_firestore = true
+use_web_app = true
 android_package_names = {
-        "prod" = "com.anywhostudios.allmylists"
-        "stg"  = "com.anywhostudios.allmylists.stg"
-        "dev"  = "com.anywhostudios.allmylists.dev"
+        "prod" = "com.anywhostudios.listwhatever"
+        "stg"  = "com.anywhostudios.listwhatever.stg"
+        "dev"  = "com.anywhostudios.listwhatever.dev"
 }
 android_sha1_hashes = [
         "cd:60:0e:d3:59:58:af:53:ba:95:5a:c6:49:da:64:c8:0b:8a:e8:9d",
@@ -27,8 +27,8 @@ android_sha256_hashes = [
         "79:b1:60:6d:81:e4:9b:85:c3:d1:86:0e:7d:49:f3:7a:47:83:19:7c:fc:f9:53:df:8f:d9:41:96:72:e4:90:38"
 ]
 
-use_ios_app = false
-ios_bundle_id = "com.anywhostudioes.allmylists"
-use_hosting = false
-use_cloud_storage = false
-use_authentication = false
+use_ios_app = true
+ios_bundle_id = "com.anywhostudios.listwhatever"
+use_hosting = true
+use_cloud_storage = true
+use_authentication = true

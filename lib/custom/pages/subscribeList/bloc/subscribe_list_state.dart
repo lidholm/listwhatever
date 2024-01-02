@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:allmylists/custom/firestore/sharedList/shared_list.dart';
+import '/custom/firestore/sharedList/shared_list.dart';
 
 @immutable
 sealed class SubscribeListState {}

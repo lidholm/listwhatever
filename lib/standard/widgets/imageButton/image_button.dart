@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:allmylists/standard/navigation/widgets/shimmer/shimmer_loading.dart';
+import '/standard/navigation/widgets/shimmer/shimmer_loading.dart';
 
 const roundedRadius = 8.0;
 

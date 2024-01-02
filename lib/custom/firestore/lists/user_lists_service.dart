@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:allmylists/custom/firestore/lists/user_list.dart';
-import 'package:allmylists/standard/firebase/firestore/firestore.dart';
+
+import '/custom/firestore/lists/user_list.dart';
+import '/standard/firebase/firestore/firestore.dart';
 
 
 class UserListsService {
@@ -30,7 +31,6 @@ class UserListsService {
   }
 
   UserList convertToUserList(String id, Map<String, dynamic> data) {
-    final list = UserList.fromJson(data);
     final tmp = UserList.fromJson(data);
     return tmp.copyWith(id: id, isOwnList: tmp.ownerId == userId);
   }

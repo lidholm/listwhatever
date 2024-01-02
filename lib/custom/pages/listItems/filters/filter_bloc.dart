@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:allmylists/standard/constants.dart';
+import '/standard/constants.dart';
 
 import 'filter_event.dart';
 import 'filter_state.dart';

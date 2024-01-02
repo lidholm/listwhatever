@@ -1,5 +1,6 @@
-import 'package:allmylists/standard/storage/storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '/standard/storage/storage.dart';
 
 /// {@template persistent_storage}
 /// Storage that saves data in the device's persistent memory.

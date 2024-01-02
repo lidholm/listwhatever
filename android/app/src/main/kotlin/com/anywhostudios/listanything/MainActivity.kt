@@ -1,4 +1,4 @@
-package com.anywhostudios.allmylists
+package com.anywhostudios.listwhatever
 
 import io.flutter.embedding.android.FlutterActivity
 

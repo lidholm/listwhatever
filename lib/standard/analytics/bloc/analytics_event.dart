@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:allmylists/standard/analyticsRepository/index.dart' as analytics;
+import '/standard/analyticsRepository/index.dart' as analytics;
 
 sealed class AnalyticsEvent extends Equatable {
   const AnalyticsEvent();

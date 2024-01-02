@@ -8,14 +8,14 @@ grep "version: " pubspec.yaml
 cd android
 echo "===---===="
 echo "===---===="
-ls -l /builds/lidholm/allmylists/app-production-release.aab
+ls -l /builds/lidholm/listwhatever/app-production-release.aab
 
-java -jar /bundletool-all.jar dump manifest --bundle /builds/lidholm/allmylists/app-production-release.aab --xpath /manifest/@android:versionCode
+java -jar /bundletool-all.jar dump manifest --bundle /builds/lidholm/listwhatever/app-production-release.aab --xpath /manifest/@android:versionCode
 
 if [ "$IS_DRAFT" = true ] ; then
     echo "Deploying draft app"
-    bundle exec fastlane upload_to_play_store --aab /builds/lidholm/allmylists/app-production-release.aab --track alpha   --release_status draft
+    bundle exec fastlane upload_to_play_store --aab /builds/lidholm/listwhatever/app-production-release.aab --track alpha   --release_status draft
 else
     echo "Deploying non draft app"
-    bundle exec fastlane upload_to_play_store --aab /builds/lidholm/allmylists/app-production-release.aab --track alpha
+    bundle exec fastlane upload_to_play_store --aab /builds/lidholm/listwhatever/app-production-release.aab --track alpha
 fi
