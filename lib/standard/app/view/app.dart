@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listwhatever/standard/onScreenLog/on_screen_log_bloc.dart';
+import 'package:listwhatever/standard/onScreenLog/on_screen_log_cubit.dart';
 import '/custom/firestore/listItems/list_item_events/list_item_bloc.dart';
 import '/custom/firestore/listItems/list_items.dart';
 import '/custom/firestore/listItems/list_items_page_view_cubit.dart';
@@ -71,7 +71,7 @@ class App extends StatelessWidget {
                 )..add(const AppOpened()),
               ),
               BlocProvider(create: (_) => ThemeModeBloc()),
-              BlocProvider<DataBloc>(create: (context) => DataBloc()),
+              BlocProvider<OnScreenLogsCubit>(create: (context) => OnScreenLogsCubit()),
               BlocProvider<SearchLocationBloc>(create: (context) => SearchLocationBloc()),
               BlocProvider<FilterBloc>(create: (context) => FilterBloc()),
               BlocProvider<SharedListBloc>(create: (context) => SharedListBloc(sharedListsService)),

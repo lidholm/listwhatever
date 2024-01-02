@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:listwhatever/standard/onScreenLog/on_screen_log_bloc.dart';
-import 'package:listwhatever/standard/onScreenLog/on_screen_log_event.dart';
-import 'package:listwhatever/standard/onScreenLog/on_screen_log_state.dart';
+import 'package:listwhatever/standard/onScreenLog/on_screen_log_cubit.dart';
 import 'package:listwhatever/standard/widgets/appBar/common_app_bar.dart';
 
 class OnScreenLogsPage extends StatefulWidget {
@@ -15,27 +13,22 @@ class OnScreenLogsPage extends StatefulWidget {
 class _OnScreenLogsPageState extends State<OnScreenLogsPage> {
   @override
   Widget build(BuildContext context) {
-    final dataBloc = BlocProvider.of<DataBloc>(context);
-    return  Scaffold(
+    return Scaffold(
       appBar: const CommonAppBar(title: 'Logs'),
-      body: BlocBuilder<DataBloc, DataState>(
+      body: BlocBuilder<OnScreenLogsCubit, List<String>>(
         builder: (context, state) {
-          return switch (state) {
-            Initial() => const Center(child: Text('Press the Button')),
-            Loading() => const Center(child: Text('Press the Button')),
-            Success() => const Center(child: Text('Success')),
-          };
+          return Text('$state');
         },
       ),
+
       floatingActionButton: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
           FloatingActionButton(
-            child: const Icon(Icons.play_arrow),
-            onPressed: () {
-              dataBloc.add(FetchData());
-            },
+            key: const Key('counterView_increment_floatingActionButton'),
+            child: const Icon(Icons.add),
+            onPressed: () => context.read<OnScreenLogsCubit>().log('Testing'),
           ),
         ],
       ),
