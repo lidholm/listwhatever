@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/standard/onScreenLog/on_screen_logs_page_route.dart';
 import '/custom/pages/about/about_page_route.dart';
 import '/custom/pages/crashlytics/crashlytics.dart';
 import '/custom/pages/deleteAccount/delete_account_page_route.dart';
@@ -30,6 +31,10 @@ part 'routes.g.dart';
     TypedGoRoute<MapsPageRoute>(
       path: 'maps',
       name: 'maps',
+    ),
+    TypedGoRoute<OnScreenLogsPageRoute>(
+      path: 'logs',
+      name: 'logs',
     ),
     TypedGoRoute<ListsPageRoute>(
       path: 'lists',

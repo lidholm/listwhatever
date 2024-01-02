@@ -1,3 +1,5 @@
+import 'package:listwhatever/standard/onScreenLog/on_screen_logs_page_route.dart';
+
 import '/custom/navigation/routes.dart';
 import '/custom/pages/lists/lists.dart';
 import '/standard/navigation/models/router_provider_information.dart';
@@ -8,6 +10,7 @@ RouterProviderInformation getRouterProviderInformation() {
   return RouterProviderInformation(
     dontRequireLoginRouteLocations: [
       MainPageRoute().location,
+      const OnScreenLogsPageRoute().location,
       const LoginPageRoute().location,
       const LoginWithEmailAndPasswordPageRoute().location,
     ],

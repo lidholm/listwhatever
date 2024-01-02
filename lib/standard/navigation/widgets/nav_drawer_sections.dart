@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
+import 'package:listwhatever/standard/onScreenLog/on_screen_logs_page_route.dart';
 import '/custom/navigation/routes.dart';
 import '/custom/pages/about/about_page_route.dart';
 import '/custom/pages/crashlytics/crashlytics.dart';
@@ -24,6 +25,7 @@ class NavDrawerSections extends StatelessWidget {
       context.l10n.functionalitySectionHeader: [
         Link('maps', 'Maps', () => const MapsPageRoute().push<void>(context)),
         Link('lists', 'Lists', () => const ListsPageRoute().push<void>(context)),
+        Link('logs', 'Logs', () => const OnScreenLogsPageRoute().push<void>(context)),
       ],
       context.l10n.firebaseSectionHeader: [
         Link('remoteConfig', 'Remote Config', () => const RemoteConfigPageRoute().push<void>(context)),
