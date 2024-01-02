@@ -15,7 +15,7 @@ Future<firebase_auth.FirebaseAuth> getFirebaseAuth() async {
     await instance.useAuthEmulator(emulatorInfo.address!, port);
     // await instance.clearPersistence();
   } else {
-    // logger.d('firestoreProvider.using firestore without emulator');
+    logger.d('firestoreProvider.using firestore without emulator');
   }
 
   return instance;

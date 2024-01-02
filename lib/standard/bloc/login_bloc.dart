@@ -76,7 +76,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(state.copyWith(status: FormzSubmissionStatus.canceled));
     } catch (error, stackTrace) {
       final errorMessage = switch(error) {
-          LogInWithGoogleFailure(error: final e) => e.toString(),
+          LogInWithGoogleFailure() => error.extraMessage,
         _ => error.toString()
       };
       emit(state.copyWith(status: FormzSubmissionStatus.failure, errorMessage: errorMessage ));

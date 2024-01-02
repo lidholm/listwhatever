@@ -77,7 +77,7 @@ class UserRepository {
     } on LogInWithAppleFailure {
       rethrow;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithAppleFailure(error), stackTrace);
+      Error.throwWithStackTrace(LogInWithAppleFailure(error, null), stackTrace);
     }
   }
 
@@ -93,7 +93,7 @@ class UserRepository {
     } on LogInWithGoogleCanceled {
       rethrow;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithGoogleFailure(error), stackTrace);
+      Error.throwWithStackTrace(LogInWithGoogleFailure(error, null), stackTrace);
     }
   }
 
@@ -109,7 +109,7 @@ class UserRepository {
     } on LogInWithTwitterCanceled {
       rethrow;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithTwitterFailure(error), stackTrace);
+      Error.throwWithStackTrace(LogInWithTwitterFailure(error, null), stackTrace);
     }
   }
 
@@ -125,7 +125,7 @@ class UserRepository {
     } on LogInWithFacebookCanceled {
       rethrow;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithFacebookFailure(error), stackTrace);
+      Error.throwWithStackTrace(LogInWithFacebookFailure(error, null), stackTrace);
     }
   }
 
@@ -141,7 +141,7 @@ class UserRepository {
     } on LogInWithEmailAndPasswordFailure {
       rethrow;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithEmailAndPasswordFailure(error), stackTrace);
+      Error.throwWithStackTrace(LogInWithEmailAndPasswordFailure(error, null), stackTrace);
     }
   }
 
@@ -155,7 +155,7 @@ class UserRepository {
     } on LogOutFailure {
       rethrow;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogOutFailure(error), stackTrace);
+      Error.throwWithStackTrace(LogOutFailure(error, null), stackTrace);
     }
   }
 

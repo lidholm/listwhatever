@@ -68,7 +68,7 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithEmailAndPasswordFailure(error), stackTrace);
+      Error.throwWithStackTrace(LogInWithEmailAndPasswordFailure(error, null), stackTrace);
     }
   }
 
@@ -91,7 +91,7 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
       );
       await _firebaseAuth.signInWithCredential(credential);
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithAppleFailure(error), stackTrace);
+      Error.throwWithStackTrace(LogInWithAppleFailure(error, null), stackTrace);
     }
   }
 
@@ -105,7 +105,7 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
       final googleUser = await _googleSignIn.signIn();
       if (googleUser == null) {
         throw LogInWithGoogleCanceled(
-          Exception('Sign in with Google canceled'),
+          Exception('Sign in with Google canceled'), null,
         );
       }
       final googleAuth = await googleUser.authentication;
@@ -117,7 +117,8 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
     } on LogInWithGoogleCanceled {
       rethrow;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithGoogleFailure(error), stackTrace);
+      final extraMessage = (error is AssertionError) ?  error.message.toString() :  error.runtimeType.toString();
+      Error.throwWithStackTrace(LogInWithGoogleFailure(error, extraMessage), stackTrace);
     }
   }
 
@@ -131,11 +132,11 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
       final loginResult = await _facebookAuth.login();
       if (loginResult.status == LoginStatus.cancelled) {
         throw LogInWithFacebookCanceled(
-          Exception('Sign in with Facebook canceled'),
+          Exception('Sign in with Facebook canceled'), null,
         );
       } else if (loginResult.status == LoginStatus.failed) {
         throw LogInWithFacebookFailure(
-          Exception(loginResult.message),
+          Exception(loginResult.message), null,
         );
       }
 
@@ -144,7 +145,7 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
         throw LogInWithFacebookFailure(
           Exception(
             'Sign in with Facebook failed due to an empty access token',
-          ),
+          ), null,
         );
       }
 
@@ -154,7 +155,7 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
     } on LogInWithFacebookCanceled {
       rethrow;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithFacebookFailure(error), stackTrace);
+      Error.throwWithStackTrace(LogInWithFacebookFailure(error, null), stackTrace);
     }
   }
 
@@ -168,11 +169,11 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
       final loginResult = await _twitterLogin.loginV2();
       if (loginResult.status == TwitterLoginStatus.cancelledByUser) {
         throw LogInWithTwitterCanceled(
-          Exception('Sign in with Twitter canceled'),
+          Exception('Sign in with Twitter canceled'), null,
         );
       } else if (loginResult.status == TwitterLoginStatus.error) {
         throw LogInWithTwitterFailure(
-          Exception(loginResult.errorMessage),
+          Exception(loginResult.errorMessage), null,
         );
       }
 
@@ -182,7 +183,7 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
         throw LogInWithTwitterFailure(
           Exception(
             'Sign in with Twitter failed due to invalid auth token or secret',
-          ),
+          ), null,
         );
       }
 
@@ -195,7 +196,7 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
     } on LogInWithTwitterCanceled {
       rethrow;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithTwitterFailure(error), stackTrace);
+      Error.throwWithStackTrace(LogInWithTwitterFailure(error, null), stackTrace);
     }
   }
 
@@ -211,7 +212,7 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
         _googleSignIn.signOut(),
       ]);
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogOutFailure(error), stackTrace);
+      Error.throwWithStackTrace(LogOutFailure(error, null), stackTrace);
     }
   }
 
