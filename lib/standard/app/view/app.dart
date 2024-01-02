@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/standard/app/widgets/to_onscreen_logs_listener.dart';
 import 'package:listwhatever/standard/onScreenLog/on_screen_log_cubit.dart';
 import '/custom/firestore/listItems/list_item_events/list_item_bloc.dart';
 import '/custom/firestore/listItems/list_items.dart';
@@ -99,7 +100,9 @@ class App extends StatelessWidget {
             ],
             child: AuthenticatedUserListener(
               child: DeleteItemRedirectListener(
-                child: child,
+                child: ToOnScreenLogsListener(
+                  child: child,
+                ),
               ),
             ),
           ),

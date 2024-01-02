@@ -10,12 +10,14 @@ class LoginState extends Equatable {
     this.password = const Password.pure(),
     this.status = FormzSubmissionStatus.initial,
     this.valid = false,
+    this.errorMessage,
   });
 
   final Email email;
   final Password password;
   final FormzSubmissionStatus status;
   final bool valid;
+  final String? errorMessage;
 
   @override
   List<Object> get props => [email, password, status, valid];
@@ -25,12 +27,14 @@ class LoginState extends Equatable {
     Password? password,
     FormzSubmissionStatus? status,
     bool? valid,
+    String? errorMessage,
   }) {
     return LoginState(
       email: email ?? this.email,
       password: password ?? this.password,
       status: status ?? this.status,
       valid: valid ?? this.valid,
+      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 }

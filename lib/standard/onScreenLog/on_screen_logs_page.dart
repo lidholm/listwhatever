@@ -17,20 +17,12 @@ class _OnScreenLogsPageState extends State<OnScreenLogsPage> {
       appBar: const CommonAppBar(title: 'Logs'),
       body: BlocBuilder<OnScreenLogsCubit, List<String>>(
         builder: (context, state) {
-          return Text('$state');
+          return SingleChildScrollView(
+            child: Column(
+              children: state.map(Text.new).toList(),
+            ),
+          );
         },
-      ),
-
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: <Widget>[
-          FloatingActionButton(
-            key: const Key('counterView_increment_floatingActionButton'),
-            child: const Icon(Icons.add),
-            onPressed: () => context.read<OnScreenLogsCubit>().log('Testing'),
-          ),
-        ],
       ),
     );
   }
