@@ -51,12 +51,12 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     logger.d('starting app');
-    const String? initialUser = null;
+    final initialUserId = _user.id;
 
     final sharedListsService = SharedListsService();
-    final userListsService = UserListsService(userId: initialUser);
-    final listsService = ListsService(userId: initialUser);
-    final listItemsService = ListItemsService(userId: initialUser);
+    final userListsService = UserListsService(userId: initialUserId);
+    final listsService = ListsService(userId: initialUserId);
+    final listItemsService = ListItemsService(userId: initialUserId);
 
     Widget blocAndProviders(Widget child) => MultiRepositoryProvider(
           providers: [

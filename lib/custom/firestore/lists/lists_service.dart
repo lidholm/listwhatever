@@ -16,12 +16,17 @@ class ListsService {
 
   Future<CollectionReference<Map<String, dynamic>>> getCollection() async {
     const path = '/lists';
-    // logger.d('path: $path');
+    logger.d('actual lists path: $path');
     return (await getFirestore()).collection(path);
   }
 
   Stream<List<ListOfThings>> getLists() async* {
     logger.d('getting actual lists');
+    if (userId == null)  {
+      logger.d('no user yet');
+      yield* Stream.value([]);
+      return;
+    }
     final listsCollection = await getCollection();
     yield* listsCollection.snapshots().map((snapshot) {
       // logger.d('snapshot.docs: ${snapshot.docs.length}');
