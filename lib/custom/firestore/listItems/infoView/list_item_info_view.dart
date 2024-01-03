@@ -15,6 +15,7 @@ import '/standard/widgets/appBar/common_app_bar.dart';
 
 class ListItemInfoView extends StatefulWidget {
   const ListItemInfoView({required this.listId, required this.itemId, super.key});
+
   final String? listId;
   final String? itemId;
 
@@ -99,14 +100,16 @@ class _ListItemInfoViewState extends State<ListItemInfoView> {
               ),
               Text('  ${listItem.address ?? ''}'),
               const SizedBox(height: 16),
-              const Text(
-                'Position',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                '  ${listItem.latLong?.lat}x${listItem.latLong?.lng} ',
-              ),
-              const SizedBox(height: 16),
+                const Text(
+                  'Position',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              if (listItem.latLong != null) ...[
+                Text(
+                  '  ${listItem.latLong?.lat}x${listItem.latLong?.lng} ',
+                ),
+              ],
+                const SizedBox(height: 16),
               const Text(
                 'URLs',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),

@@ -152,7 +152,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
           body: switch (listItemState) {
             ListItemsLoading() => const Center(child: CircularProgressIndicator()),
             ListItemsInitial() => Container(),
-            ListItemsLoaded() => showLoadedItems(list, listItemState, viewToShow, filters, sortOrder),
+            ListItemsLoaded() => showLoadedItems(list, listItemState, viewToShow, filters, sortOrder, widget.listId),
             ListItemsOperationSuccess() => Container(),
             ListItemsError() => Center(child: Text(listItemState.errorMessage)),
           },
@@ -175,6 +175,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
     ListItemsPageView viewToShow,
     Filters filters,
     (ListItemsSortOrder, SortOrder) sortOrder,
+    String userListId,
   ) {
     final items = state.listItems;
     // logger.d('number of items: ${items.length}');
@@ -196,12 +197,12 @@ class _ListItemsPageState extends State<ListItemsPage> {
       return ListItemsListView(
         listId: list?.id,
         items: sortedItems,
-        onTap: (itemId) => showDetailsView(list?.id, itemId),
+        onTap: (itemId) => showDetailsView(userListId, itemId),
       );
     } else {
       return MapsView(
         items: filteredItems,
-        onTap: (itemId) => showDetailsView(list!.id, itemId),
+        onTap: (itemId) => showDetailsView(userListId, itemId),
       );
     }
   }
