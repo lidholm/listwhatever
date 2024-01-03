@@ -10,11 +10,13 @@ import '/standard/widgets/appBar/common_app_bar.dart';
 import '/standard/widgets/vStack/v_stack.dart';
 
 enum AddListValues {
+  id,
   name,
   type,
   withMap,
   withDates,
   withTimes,
+  ownerId,
   // share
 }
 
@@ -35,6 +37,7 @@ class _AddListPageState extends State<AddListPage> {
   bool _typeHasError = false;
 
   final _typeOptions = ListType.values;
+  late Map<String, dynamic> initialValue;
 
   void _onChanged(dynamic val) => logger.d(val.toString());
 
@@ -61,12 +64,14 @@ class _AddListPageState extends State<AddListPage> {
       list = (listState as ListLoaded).list;
     }
 
-    final initialValue = {
+    initialValue = {
+      AddListValues.id.toString(): list?.id,
       AddListValues.name.toString(): list?.name,
       AddListValues.type.toString(): list?.listType ?? ListType.other,
       AddListValues.withMap.toString(): list?.withMap ?? false,
       AddListValues.withDates.toString(): list?.withDates ?? false,
       AddListValues.withTimes.toString(): list?.withTimes ?? false,
+      AddListValues.ownerId.toString(): list?.ownerId ?? null,
       // AddListValues.share.toString(): list?.shared ?? false,
     };
     return Scaffold(
@@ -217,7 +222,7 @@ class _AddListPageState extends State<AddListPage> {
     }
     // logger.d('values: $values');
     final list = ListOfThings(
-      id: widget.listId,
+      id: initialValue[AddListValues.id.toString()] as String?,
       name: values[AddListValues.name.toString()]! as String,
       listType: values[AddListValues.type.toString()] as ListType,
       withMap: values[AddListValues.withMap.toString()] as bool,
@@ -227,7 +232,7 @@ class _AddListPageState extends State<AddListPage> {
       shareCodeForViewer: null,
       shareCodeForEditor: null,
       sharedWith: {},
-      ownerId: null,
+      ownerId: initialValue[AddListValues.ownerId.toString()] as String?,
     );
     if (widget.listId == null) {
       BlocProvider.of<ListsBloc>(context).add(AddList(list));

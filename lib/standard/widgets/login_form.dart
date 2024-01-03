@@ -20,7 +20,13 @@ class LoginForm extends StatelessWidget {
     final l10n = context.l10n;
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
-        if (state.status.isFailure) {
+        if (state.errorMessage != null) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(content: Text(state.errorMessage!)),
+            );
+        } else if (state.status.isFailure) {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(

@@ -60,13 +60,15 @@ class UserRepository {
   /// Stream of [User] which will emit the current user when
   /// the authentication state or the subscription plan changes.
   ///
-  Stream<User> get user => _authenticationClient.user
-      .map(
-        (authenticationUser) => User.fromAuthenticationUser(
-          authenticationUser: authenticationUser,
-        ),
-      )
-      .asBroadcastStream();
+  Stream<User> get user => _authenticationClient.user.map(
+        (authenticationUser) {
+          print('authenticationUser: $authenticationUser');
+          print('authenticationUser.email: ${authenticationUser.email}');
+          return User.fromAuthenticationUser(
+            authenticationUser: authenticationUser,
+          );
+        },
+      ).asBroadcastStream();
 
   /// Starts the Sign In with Apple Flow.
   ///

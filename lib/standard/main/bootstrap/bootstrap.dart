@@ -8,7 +8,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:listwhatever/standard/api_keys.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -56,14 +55,10 @@ Future<void> bootstrap(AppBuilder builder) async {
 
   final userStorage = UserStorage(storage: persistentStorage);
 
-  final clientId = kIsWeb ? getGoogleClientId() : null;
   final authenticationClient = FirebaseAuthenticationClient(
     tokenStorage: tokenStorage,
     firebaseAuth: await getFirebaseAuth(),
-    googleSignIn: GoogleSignIn(
-      clientId: clientId,
-      scopes: ['email', 'openid'],
-    ),
+    googleSignIn: GoogleSignIn(),
   );
 
   runApp(

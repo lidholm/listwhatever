@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:listwhatever/standard/constants.dart';
 
 import '/custom/firestore/lists/user_list.dart';
 import '/standard/firebase/firestore/firestore.dart';
@@ -21,6 +22,7 @@ class UserListsService {
   }
 
   Stream<List<UserList>> getLists() async* {
+    logger.d('getting user lists');
     final listsCollection = await getCollection();
     yield* listsCollection.snapshots().map((snapshot) {
       // logger.d('snapshot.docs: ${snapshot.docs.length}');
@@ -36,23 +38,27 @@ class UserListsService {
   }
 
   Future<UserList> getList(String id) async {
+    logger.d('getting user list: $id');
     final listsCollection = await getCollection();
     final snapshot = await listsCollection.doc(id).get();
     return convertToUserList(snapshot.id, snapshot.data()!);
   }
 
   Future<void> addList(UserList list) async {
+    logger.d('adding user list: $list');
     final listsCollection = await getCollection();
     final docId=listsCollection.doc().id;
     return listsCollection.doc(docId).set(list.copyWith(id: docId).toJson());
   }
 
   Future<void> updateList(UserList list) async {
+    logger.d('updaing user list: $list');
     final listsCollection = await getCollection();
     return listsCollection.doc(list.id).update(list.toJson());
   }
 
   Future<void> deleteList(String listId) async {
+    logger.d('deleting user list: $listId');
     final listsCollection = await getCollection();
     return listsCollection.doc(listId).delete();
   }

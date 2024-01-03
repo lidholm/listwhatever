@@ -134,17 +134,28 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
   }
 
   Future<UserCredential> logInWithGoogleWeb() async {
-    // Create a new provider
-    final googleProvider = GoogleAuthProvider()
-      ..addScope('https://www.googleapis.com/auth/contacts.readonly')
-      ..setCustomParameters({'login_hint': 'user@example.com'});
+    try {
+      // Create a new provider
+      final googleProvider = GoogleAuthProvider()
+        ..addScope('https://www.googleapis.com/auth/contacts.readonly')
+        ..setCustomParameters({'login_hint': 'user@example.com'});
 
-    // Once signed in, return the UserCredential
-    final userCredentials = await FirebaseAuth.instance.signInWithPopup(googleProvider);
-    return userCredentials;
+      // Once signed in, return the UserCredential
+      final userCredentials = await FirebaseAuth.instance.signInWithPopup(googleProvider);
+      return userCredentials;
 
-    // Or use signInWithRedirect
-    // return await FirebaseAuth.instance.signInWithRedirect(googleProvider);
+      // Or use signInWithRedirect
+      // return await FirebaseAuth.instance.signInWithRedirect(googleProvider);
+    } catch (error, stackTrace) {
+      var extraMessage =  error.runtimeType.toString();
+      if (error is AssertionError) {
+        extraMessage= error.message.toString();
+      }
+      if (error is firebase_auth.FirebaseAuthException) {
+        extraMessage= '${error.code} - ${error.message}';
+      }
+      Error.throwWithStackTrace(LogInWithGoogleFailure(error, extraMessage), stackTrace);
+    }
   }
 
   /// Starts the Sign In with Facebook Flow.

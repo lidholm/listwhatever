@@ -126,8 +126,8 @@ class _ListItemsPageState extends State<ListItemsPage> {
                       icon: Icons.edit,
                       callback: () async {
                         final listBloc = context.read<ListBloc>();
-                        await EditListPageRoute(listId).push<void>(context);
-                        listBloc.add(LoadList(listId));
+                        await EditListPageRoute(widget.listId).push<void>(context);
+                        listBloc.add(LoadList(widget.listId));
                       },
                       key: const Key('editList'),
                     ),
@@ -141,7 +141,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
                       context
                           .read<RedirectCubit>()
                           .setRedirect('${const ListsPageRoute().location}?t=${DateTime.now()}');
-                      context.read<ListBloc>().add(DeleteList(listId));
+                      context.read<ListBloc>().add(DeleteList(widget.listId));
                     },
                     key: const Key('deleteList'),
                   ),
