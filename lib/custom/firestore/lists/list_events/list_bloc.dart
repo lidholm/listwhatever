@@ -29,7 +29,7 @@ class ListBloc extends Bloc<ListEvent, ListState> {
   }
 
   Future<void> _onLoadList(LoadList event, Emitter<ListState> emit) async {
-    // logger.i('_onLoadList');
+    logger.i('getting list  ${event.listId}');
     try {
       emit(ListLoading());
       final userList = await _userListsService.getList(event.listId);

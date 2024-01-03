@@ -78,7 +78,7 @@ class App extends StatelessWidget {
               BlocProvider<SharedListBloc>(create: (context) => SharedListBloc(sharedListsService)),
               BlocProvider<ListBloc>(create: (context) => ListBloc(userListsService, listsService)),
               BlocProvider<ListsBloc>(create: (context) => ListsBloc(listsService, userListsService)),
-              BlocProvider<ListItemBloc>(create: (context) => ListItemBloc(listItemsService)),
+              BlocProvider<ListItemBloc>(create: (context) => ListItemBloc(userListsService, listItemsService)),
               BlocProvider<SubscribeListBloc>(create: (context) => SubscribeListBloc(sharedListsService, listsService)),
               BlocProvider<ListItemsBloc>(create: (context) => ListItemsBloc(userListsService, listItemsService)),
               BlocProvider<ListItemsPageViewCubit>(create: (context) => ListItemsPageViewCubit()),

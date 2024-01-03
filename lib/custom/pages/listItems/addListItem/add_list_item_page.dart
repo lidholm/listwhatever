@@ -88,19 +88,23 @@ class _AddListItemPageState extends State<AddListItemPage> {
 
   @override
   Widget build(BuildContext context) {
+    logger.d('in AddListItemPage');
     final listState = context.watch<ListBloc>().state;
     final listStateView = ListOrListItemNotLoadedHandler.handleListState(listState);
     if (listStateView != null) {
       return listStateView;
     }
     list = (listState as ListLoaded).list;
-
-    final listItemState = context.watch<ListItemBloc>().state;
-    final listItemStateView = ListOrListItemNotLoadedHandler.handleListItemState(listItemState);
-    if (listItemStateView != null) {
-      return listItemStateView;
+    if (widget.listItemId != null) {
+      final listItemState = context
+          .watch<ListItemBloc>()
+          .state;
+      final listItemStateView = ListOrListItemNotLoadedHandler.handleListItemState(listItemState);
+      if (listItemStateView != null) {
+        return listItemStateView;
+      }
+      listItem = (listItemState as ListItemLoaded).listItem;
     }
-    listItem = (listItemState as ListItemLoaded).listItem;
 
     return Scaffold(
       appBar: CommonAppBar(

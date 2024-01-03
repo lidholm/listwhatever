@@ -71,7 +71,7 @@ class _AddListPageState extends State<AddListPage> {
       AddListValues.withMap.toString(): list?.withMap ?? false,
       AddListValues.withDates.toString(): list?.withDates ?? false,
       AddListValues.withTimes.toString(): list?.withTimes ?? false,
-      AddListValues.ownerId.toString(): list?.ownerId ?? null,
+      AddListValues.ownerId.toString(): list?.ownerId,
       // AddListValues.share.toString(): list?.shared ?? false,
     };
     return Scaffold(
