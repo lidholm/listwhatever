@@ -1,4 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -101,11 +103,20 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
   /// Throws a [LogInWithGoogleFailure] if an exception occurs.
   @override
   Future<void> logInWithGoogle() async {
+    if (kIsWeb) {
+      await logInWithGoogleWeb();
+    } else {
+      await logInWithGoogleOther();
+    }
+  }
+
+  Future<void> logInWithGoogleOther() async {
     try {
       final googleUser = await _googleSignIn.signIn();
       if (googleUser == null) {
         throw LogInWithGoogleCanceled(
-          Exception('Sign in with Google canceled'), null,
+          Exception('Sign in with Google canceled'),
+          null,
         );
       }
       final googleAuth = await googleUser.authentication;
@@ -117,9 +128,23 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
     } on LogInWithGoogleCanceled {
       rethrow;
     } catch (error, stackTrace) {
-      final extraMessage = (error is AssertionError) ?  error.message.toString() :  error.runtimeType.toString();
+      final extraMessage = (error is AssertionError) ? error.message.toString() : error.runtimeType.toString();
       Error.throwWithStackTrace(LogInWithGoogleFailure(error, extraMessage), stackTrace);
     }
+  }
+
+  Future<UserCredential> logInWithGoogleWeb() async {
+    // Create a new provider
+    final googleProvider = GoogleAuthProvider()
+      ..addScope('https://www.googleapis.com/auth/contacts.readonly')
+      ..setCustomParameters({'login_hint': 'user@example.com'});
+
+    // Once signed in, return the UserCredential
+    final userCredentials = await FirebaseAuth.instance.signInWithPopup(googleProvider);
+    return userCredentials;
+
+    // Or use signInWithRedirect
+    // return await FirebaseAuth.instance.signInWithRedirect(googleProvider);
   }
 
   /// Starts the Sign In with Facebook Flow.
@@ -132,11 +157,13 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
       final loginResult = await _facebookAuth.login();
       if (loginResult.status == LoginStatus.cancelled) {
         throw LogInWithFacebookCanceled(
-          Exception('Sign in with Facebook canceled'), null,
+          Exception('Sign in with Facebook canceled'),
+          null,
         );
       } else if (loginResult.status == LoginStatus.failed) {
         throw LogInWithFacebookFailure(
-          Exception(loginResult.message), null,
+          Exception(loginResult.message),
+          null,
         );
       }
 
@@ -145,7 +172,8 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
         throw LogInWithFacebookFailure(
           Exception(
             'Sign in with Facebook failed due to an empty access token',
-          ), null,
+          ),
+          null,
         );
       }
 
@@ -169,11 +197,13 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
       final loginResult = await _twitterLogin.loginV2();
       if (loginResult.status == TwitterLoginStatus.cancelledByUser) {
         throw LogInWithTwitterCanceled(
-          Exception('Sign in with Twitter canceled'), null,
+          Exception('Sign in with Twitter canceled'),
+          null,
         );
       } else if (loginResult.status == TwitterLoginStatus.error) {
         throw LogInWithTwitterFailure(
-          Exception(loginResult.errorMessage), null,
+          Exception(loginResult.errorMessage),
+          null,
         );
       }
 
@@ -183,7 +213,8 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
         throw LogInWithTwitterFailure(
           Exception(
             'Sign in with Twitter failed due to invalid auth token or secret',
-          ), null,
+          ),
+          null,
         );
       }
 
