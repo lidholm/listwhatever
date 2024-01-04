@@ -10,4 +10,10 @@
 [ ] Share list
 [X] Firestore rules
 [ ] Create docker containers to be able to test, deploy from local machine
+ - [x] Write steps for locally deploying
 [ ] (Free) Other map than Google maps
+[ ] Import from other source
+ - [ ] Google sheets
+ - [ ] CSV
+
+

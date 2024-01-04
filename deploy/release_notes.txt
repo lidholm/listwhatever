@@ -1,3 +1,6 @@
+0.0.32
+* Rename project, terraform, documentation for deploying from local
+
 0.0.31
 * Share lists (and big refactor)
 
