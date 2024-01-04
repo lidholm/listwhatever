@@ -7,6 +7,7 @@ import '/custom/pages/deleteAccount/delete_account_page_route.dart';
 import '/custom/pages/firebase_in_app_messaging/firebase_in_app_messaging.dart';
 import '/custom/pages/firebase_performance/firebase_performance.dart';
 import '/custom/pages/home/home.dart';
+import '/custom/pages/import/csv/import_csv_page_route.dart';
 import '/custom/pages/listItems/addListItem/add_list_item_page_route.dart';
 import '/custom/pages/listItems/addListItem/edit_list_item_page_route.dart';
 import '/custom/pages/listItems/list_items_page_route.dart';
@@ -58,6 +59,10 @@ part 'routes.g.dart';
               name: 'editListItem',
             ),
           ],
+        ),
+          TypedGoRoute<ImportCsvPageRoute>(
+          path: ':listId/import/csv',
+          name: 'items',
         ),
         TypedGoRoute<AddListPageRoute>(
           path: 'add',

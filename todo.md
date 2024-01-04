@@ -7,13 +7,14 @@
 [x] Center map around filtered list items
  - https://stackoverflow.com/questions/55989773/how-to-zoom-between-two-google-map-markers-in-flutter
  - https://github.com/flutter/flutter/issues/36653
-[ ] Share list
-[X] Firestore rules
+[x] Share list
+[x] Firestore rules
 [ ] Create docker containers to be able to test, deploy from local machine
  - [x] Write steps for locally deploying
 [ ] (Free) Other map than Google maps
 [ ] Import from other source
  - [ ] Google sheets
  - [ ] CSV
+- [ ] Fix fastlane
 
 
