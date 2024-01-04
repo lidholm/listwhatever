@@ -80,8 +80,11 @@ class CsvConverter {
     final categories = <String, List<String>>{};
 
     for (final header in otherHeaders.entries) {
-      final categoryValues = (row[header.value] as String).split(',');
-        categories[header.key] = categoryValues.map((e) => e.trim()).toList();
+      final value = row[header.value];
+      final stringValue = value.toString();
+      final splits = stringValue.split(',');
+      final categoryValues = splits;
+      categories[header.key] = categoryValues.map((e) => e.trim()).toList();
     }
 
     return categories;

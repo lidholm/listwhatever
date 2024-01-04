@@ -105,9 +105,9 @@ void main() {
     final csvConverter = CsvConverter();
 
     const csv = '''
-      Name, Info, Color, Size
-      First item, Some info, red, small
-      Second item, Some other info, blue, ""large,XL""
+info,name,Color,difficulty
+"Info, with a comma",Coronado Golf Course,"black, white",hard
+"Sea N Air Golf Course, Coronado, CA",Sea N Air Golf Course,"red, blue, yellow",easy
     ''';
 
     final listItems = csvConverter.convert(csv);
@@ -115,15 +115,15 @@ void main() {
     final expected = [
       const ListItem(
         id: null,
-        name: 'First item',
-        info: 'Some info',
-        categories: {'Color': ['red'], 'Size': ['small']},
+        name: 'Coronado Golf Course',
+        info: 'Info, with a comma',
+        categories: {'Color': ['black', 'white'], 'difficulty': ['hard']},
       ),
       const ListItem(
         id: null,
-        name: 'Second item',
-        info: 'Some other info',
-        categories: {'Color': ['blue'], 'Size': ['large', 'XL']},
+        name: 'Sea N Air Golf Course',
+        info: 'Sea N Air Golf Course, Coronado, CA',
+        categories: {'Color': ['red','blue','yellow'], 'difficulty': ['easy']},
       ),
     ];
     expect(listItems, expected);
