@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listanything/standard/app/app.dart';
-import 'package:listanything/standard/app/bloc/app_state.dart';
-import 'package:listanything/standard/constants.dart';
-import 'package:listanything/standard/navigation/redirect_cubit.dart';
+import '/standard/app/app.dart';
+import '/standard/app/bloc/app_state.dart';
+import '/standard/constants.dart';
+import '/standard/navigation/redirect_cubit.dart';
 
 import 'navigation.dart';
 
@@ -17,7 +17,10 @@ class AppRedirect {
     logger.d('===================\n');
     final appBloc = BlocProvider.of<AppBloc>(context);
     final currentUser = appBloc.state;
+    print('state.uri.path: ${state.uri.path}');
     logger.d('$this.currentUser: $currentUser');
+    print('$this.currentUser: ${currentUser.user.id}');
+    print('$this.currentUser: ${currentUser.user.email}');
 
     if (currentUser.status != AppStatus.authenticated) {
       if (routerProviderInformation.dontRequireLoginRouteLocations
@@ -29,6 +32,7 @@ class AppRedirect {
       context.read<RedirectCubit>().setRedirect(fromParam);
       final redirectUri = routerProviderInformation.signInRouteLocation;
       logger.d('$this.redirectUri: $redirectUri');
+      print('$this.redirectUri: $redirectUri');
       return redirectUri;
     }
     // no other redirects, check if 'from' is set and if so, redirect to it
@@ -38,10 +42,12 @@ class AppRedirect {
     if (fromParam != null) {
       context.read<RedirectCubit>().clear();
       logger.d('$this.fromParam: $fromParam');
+      print('$this.fromParam: $fromParam');
       return fromParam;
     }
 
     logger.d('$this.returns null');
+    print('$this.returns null');
     return null;
   }
 

@@ -1,0 +1,50 @@
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [32m+[0m create[0m
+
+Terraform will perform the following actions:
+
+[1m  # google_firebase_project.default[0m will be created
+[0m  [32m+[0m[0m resource "google_firebase_project" "default" {
+      [32m+[0m[0m display_name   = (known after apply)
+      [32m+[0m[0m id             = (known after apply)
+      [32m+[0m[0m project        = "listwhatever-2b9b0"
+      [32m+[0m[0m project_number = (known after apply)
+    }
+
+[1m  # google_project.default[0m will be created
+[0m  [32m+[0m[0m resource "google_project" "default" {
+      [32m+[0m[0m auto_create_network = true
+      [32m+[0m[0m id                  = (known after apply)
+      [32m+[0m[0m labels              = {
+          [32m+[0m[0m "firebase" = "enabled"
+        }
+      [32m+[0m[0m name                = "listwhatever"
+      [32m+[0m[0m number              = (known after apply)
+      [32m+[0m[0m project_id          = "listwhatever-2b9b0"
+      [32m+[0m[0m skip_delete         = (known after apply)
+    }
+
+[1m  # google_project_service.firebase[0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "firebase" {
+      [32m+[0m[0m disable_on_destroy = false
+      [32m+[0m[0m id                 = (known after apply)
+      [32m+[0m[0m project            = "listwhatever-2b9b0"
+      [32m+[0m[0m service            = "firebase.googleapis.com"
+    }
+
+[1m  # google_project_service.serviceusage[0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "serviceusage" {
+      [32m+[0m[0m disable_on_destroy = false
+      [32m+[0m[0m id                 = (known after apply)
+      [32m+[0m[0m project            = "listwhatever-2b9b0"
+      [32m+[0m[0m service            = "serviceusage.googleapis.com"
+    }
+
+[1mPlan:[0m 4 to add, 0 to change, 0 to destroy.
+[0m[90m
+─────────────────────────────────────────────────────────────────────────────[0m
+
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run "terraform apply" now.

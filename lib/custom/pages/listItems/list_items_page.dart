@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:listanything/custom/firestore/listItems/infoView/list_item_info_view.dart';
-import 'package:listanything/custom/firestore/listItems/list_item.dart';
-import 'package:listanything/custom/firestore/listItems/list_items.dart';
-import 'package:listanything/custom/firestore/listItems/list_items_list_view.dart';
-import 'package:listanything/custom/firestore/listItems/list_items_page_view_cubit.dart';
-import 'package:listanything/custom/firestore/listItems/list_items_sort_order_cubit.dart';
-import 'package:listanything/custom/firestore/listItems/list_or_list_item_not_loaded_handler.dart';
-import 'package:listanything/custom/firestore/listItems/map/maps_view.dart';
-import 'package:listanything/custom/firestore/lists/lists.dart';
-import 'package:listanything/custom/navigation/routes.dart';
-import 'package:listanything/custom/pages/listItems/addListItem/add_list_item_page_route.dart';
-import 'package:listanything/custom/pages/listItems/filters/filter_bloc.dart';
-import 'package:listanything/custom/pages/listItems/filters/filter_list_items.dart';
-import 'package:listanything/custom/pages/listItems/filters/filters.dart';
-import 'package:listanything/custom/pages/lists/addList/edit_list_page_route.dart';
-import 'package:listanything/custom/pages/lists/lists_page_route.dart';
-import 'package:listanything/custom/pages/shareList/share_list_page_route.dart';
-import 'package:listanything/l10n/l10n.dart';
-import 'package:listanything/standard/navigation/redirect_cubit.dart';
-import 'package:listanything/standard/widgets/appBar/app_bar_action.dart';
-import 'package:listanything/standard/widgets/appBar/app_bar_action_dropdown.dart';
-import 'package:listanything/standard/widgets/appBar/app_bar_action_icon.dart';
-import 'package:listanything/standard/widgets/appBar/app_bar_action_overflow_icon.dart';
-import 'package:listanything/standard/widgets/appBar/common_app_bar.dart';
+import '/custom/firestore/listItems/infoView/list_item_info_view.dart';
+import '/custom/firestore/listItems/list_item.dart';
+import '/custom/firestore/listItems/list_items.dart';
+import '/custom/firestore/listItems/list_items_list_view.dart';
+import '/custom/firestore/listItems/list_items_page_view_cubit.dart';
+import '/custom/firestore/listItems/list_items_sort_order_cubit.dart';
+import '/custom/firestore/listItems/list_or_list_item_not_loaded_handler.dart';
+import '/custom/firestore/listItems/map/maps_view.dart';
+import '/custom/firestore/lists/lists.dart';
+import '/custom/navigation/routes.dart';
+import '/custom/pages/listItems/addListItem/add_list_item_page_route.dart';
+import '/custom/pages/listItems/filters/filter_bloc.dart';
+import '/custom/pages/listItems/filters/filter_list_items.dart';
+import '/custom/pages/listItems/filters/filters.dart';
+import '/custom/pages/lists/addList/edit_list_page_route.dart';
+import '/custom/pages/lists/lists_page_route.dart';
+import '/custom/pages/shareList/share_list_page_route.dart';
+import '/l10n/l10n.dart';
+import '/standard/navigation/redirect_cubit.dart';
+import '/standard/widgets/appBar/app_bar_action.dart';
+import '/standard/widgets/appBar/app_bar_action_dropdown.dart';
+import '/standard/widgets/appBar/app_bar_action_icon.dart';
+import '/standard/widgets/appBar/app_bar_action_overflow_icon.dart';
+import '/standard/widgets/appBar/common_app_bar.dart';
 
 import 'filters/filter_state.dart';
 import 'filters/filter_view.dart';
@@ -91,7 +91,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
                   iconAction: AppBarActionIcon(
                     title: context.l10n.filterMenuText,
                     icon: filters.anySelectedFilters(
-                            listHasDates: list?.withDates ?? false, listHasMap: list?.withMap ?? false)
+                            listHasDates: list?.withDates ?? false, listHasMap: list?.withMap ?? false,)
                         ? Icons.filter_alt
                         : Icons.filter_alt_outlined,
                     callback: () {
@@ -126,8 +126,8 @@ class _ListItemsPageState extends State<ListItemsPage> {
                       icon: Icons.edit,
                       callback: () async {
                         final listBloc = context.read<ListBloc>();
-                        await EditListPageRoute(listId).push<void>(context);
-                        listBloc.add(LoadList(listId));
+                        await EditListPageRoute(widget.listId).push<void>(context);
+                        listBloc.add(LoadList(widget.listId));
                       },
                       key: const Key('editList'),
                     ),
@@ -141,7 +141,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
                       context
                           .read<RedirectCubit>()
                           .setRedirect('${const ListsPageRoute().location}?t=${DateTime.now()}');
-                      context.read<ListBloc>().add(DeleteList(listId));
+                      context.read<ListBloc>().add(DeleteList(widget.listId));
                     },
                     key: const Key('deleteList'),
                   ),
@@ -152,7 +152,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
           body: switch (listItemState) {
             ListItemsLoading() => const Center(child: CircularProgressIndicator()),
             ListItemsInitial() => Container(),
-            ListItemsLoaded() => showLoadedItems(list, listItemState, viewToShow, filters, sortOrder),
+            ListItemsLoaded() => showLoadedItems(list, listItemState, viewToShow, filters, sortOrder, widget.listId),
             ListItemsOperationSuccess() => Container(),
             ListItemsError() => Center(child: Text(listItemState.errorMessage)),
           },
@@ -175,6 +175,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
     ListItemsPageView viewToShow,
     Filters filters,
     (ListItemsSortOrder, SortOrder) sortOrder,
+    String userListId,
   ) {
     final items = state.listItems;
     // logger.d('number of items: ${items.length}');
@@ -196,12 +197,12 @@ class _ListItemsPageState extends State<ListItemsPage> {
       return ListItemsListView(
         listId: list?.id,
         items: sortedItems,
-        onTap: (itemId) => showDetailsView(list?.id, itemId),
+        onTap: (itemId) => showDetailsView(userListId, itemId),
       );
     } else {
       return MapsView(
         items: filteredItems,
-        onTap: (itemId) => showDetailsView(list!.id, itemId),
+        onTap: (itemId) => showDetailsView(userListId, itemId),
       );
     }
   }

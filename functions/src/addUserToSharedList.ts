@@ -1,49 +1,53 @@
 
-const { onDocumentWritten } = require("firebase-functions/v2/firestore");
-const {getFirestore} = require("firebase-admin/firestore");
-const logger = require("firebase-functions/logger");
+import {onDocumentWritten} from 'firebase-functions/v2/firestore';
+import {getFirestore} from 'firebase-admin/firestore';
+import * as logger from 'firebase-functions/logger';
 
-export const addUserToSharedList = onDocumentWritten("sharedLists/{shareCode}/users/{userId}", async (event:  any): Promise<void> => {
-    logger.log('addUserToSharedList');
+export const addingUserToSharedList = onDocumentWritten('sharedLists/{shareCode}/users/{userId}', async (event: any): Promise<void> => {
+  logger.log('addingUserToSharedList');
 
-    const apre = event.data.after.data();
-    const userId = event.params.userId;
-    const shareCode = event.params.shareCode;
+  const apre = event.data.after.data();
+  const userId = event.params.userId;
+  const shareCode = event.params.shareCode;
 
-    if (apre == null) {
-      logger.log('User is deleted');
-      return;
-    }
+  if (apre == null) {
+    logger.log('User is deleted');
+    return;
+  }
 
-    const shareInfoPath = `sharedLists/${shareCode}`;
-    logger.log('shareInfoPath', shareInfoPath);
-    const shareInfo = (await getFirestore().doc(shareInfoPath).get()).data();
-    logger.log('shareInfo', shareInfo);
+  const shareInfoPath = `sharedLists/${shareCode}`;
+  logger.log('shareInfoPath', shareInfoPath);
+  const shareInfo = (await getFirestore().doc(shareInfoPath).get()).data();
+  if (shareInfo == undefined) {
+    logger.log('Could not get data from shareInfo');
+    return;
+  }
 
-    const type = shareInfo.shareType;
+  logger.log('shareInfo', shareInfo);
 
-    const listPath = `lists/${shareInfo.ownerListId}`;
-    logger.log(listPath);
-    let docRef = getFirestore().doc(listPath);
+  const type = shareInfo.shareType;
+  const listPath = `lists/${shareInfo.ownerListId}`;
+  logger.log(listPath);
 
-    const data = {sharedWith: {}};
-    data['sharedWith'][userId] = type;
+  const sharedWith: { [key: string]: string } = {};
+  sharedWith[userId] = type;
+  const data = {sharedWith: sharedWith};
 
-    await docRef.set(data, {merge: true});
+  const docRef = getFirestore().doc(listPath);
+  await docRef.set(data, {merge: true});
 
-    const list = (await docRef.get()).data();
-    logger.log('list:', list);
+  const list = (await docRef.get()).data();
+  logger.log('list:', list);
 
-    const sharedListsPath = `users/${userId}/lists`;
-    const collRef = getFirestore().collection(sharedListsPath);
+  const sharedListsPath = `users/${userId}/lists`;
+  const collRef = getFirestore().collection(sharedListsPath);
 
-    const userList = {
-                           listId: shareInfo.ownerListId,
-                           listName: shareInfo.listName,
-                           listType: shareInfo.listType,
-                           ownerId: shareInfo.ownerUserId,
-                         };
-                         logger.log('userList', userList);
-    await collRef.add(userList);
-
+  const userList = {
+    listId: shareInfo.ownerListId,
+    listName: shareInfo.listName,
+    listType: shareInfo.listType,
+    ownerId: shareInfo.ownerUserId,
+  };
+  logger.log('userList', userList);
+  await collRef.add(userList);
 });

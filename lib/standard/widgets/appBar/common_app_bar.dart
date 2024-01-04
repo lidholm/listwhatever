@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:listanything/standard/widgets/appBar/app_bar_action_dropdown.dart';
-import 'package:listanything/standard/widgets/appBar/app_bar_action_icon.dart';
-import 'package:listanything/standard/widgets/appBar/app_bar_action_overflow_icon.dart';
+import '/standard/widgets/appBar/app_bar_action_dropdown.dart';
+import '/standard/widgets/appBar/app_bar_action_icon.dart';
+import '/standard/widgets/appBar/app_bar_action_overflow_icon.dart';
 
 import 'app_bar_action.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:listanything/standard/bloc/login_bloc.dart';
-import 'package:listanything/standard/userRepository/user_repository.dart';
-import 'package:listanything/standard/widgets/login_form.dart';
+import '/standard/bloc/login_bloc.dart';
+import '/standard/userRepository/user_repository.dart';
+import '/standard/widgets/login_form.dart';
 
 class LoginModal extends StatelessWidget {
   const LoginModal({super.key});

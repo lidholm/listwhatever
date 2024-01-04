@@ -1,8 +1,8 @@
 
 import 'package:bloc/bloc.dart';
-import 'package:listanything/standard/analyticsRepository/analytics_repository.dart';
-import 'package:listanything/standard/analyticsRepository/models/analytics_event.dart';
-import 'package:listanything/standard/constants.dart';
+import '/standard/analyticsRepository/analytics_repository.dart';
+import '/standard/analyticsRepository/models/analytics_event.dart';
+import '/standard/constants.dart';
 
 class AppBlocObserver extends BlocObserver {
   AppBlocObserver({

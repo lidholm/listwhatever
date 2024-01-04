@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:listanything/standard/appUi/colors/app_colors.dart';
-import 'package:listanything/standard/appUi/spacing/app_spacing.dart';
-import 'package:listanything/standard/appUi/widgets/app_text_field.dart';
+import '/standard/appUi/colors/app_colors.dart';
+import '/standard/appUi/spacing/app_spacing.dart';
+import '/standard/appUi/widgets/app_text_field.dart';
 
 /// {@template app_password_text_field}
 /// An password text field component.

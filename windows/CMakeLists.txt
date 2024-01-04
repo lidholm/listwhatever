@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(listanything LANGUAGES CXX)
+project(listwhatever LANGUAGES CXX)
 
-set(BINARY_NAME "listanything")
+set(BINARY_NAME "listwhatever")
 
 cmake_policy(SET CMP0063 NEW)
 

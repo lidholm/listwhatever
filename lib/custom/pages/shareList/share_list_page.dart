@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listanything/custom/firestore/listItems/list_or_list_item_not_loaded_handler.dart';
-import 'package:listanything/custom/firestore/lists/list_events/list_bloc.dart';
-import 'package:listanything/custom/firestore/lists/list_events/list_event.dart';
-import 'package:listanything/custom/firestore/lists/list_events/list_state.dart';
-import 'package:listanything/standard/widgets/appBar/common_app_bar.dart';
 import 'package:share_plus/share_plus.dart';
+
+import '/custom/firestore/listItems/list_or_list_item_not_loaded_handler.dart';
+import '/custom/firestore/lists/list_events/list_bloc.dart';
+import '/custom/firestore/lists/list_events/list_event.dart';
+import '/custom/firestore/lists/list_events/list_state.dart';
+import '/standard/widgets/appBar/common_app_bar.dart';
 
 class ShareListPage extends StatefulWidget {
   const ShareListPage({

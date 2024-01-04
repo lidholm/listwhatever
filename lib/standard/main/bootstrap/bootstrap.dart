@@ -6,18 +6,20 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:listanything/standard/analyticsRepository/analytics_repository.dart';
-import 'package:listanything/standard/authenticationClient/authentication_client.dart';
-import 'package:listanything/standard/authenticationClient/firebase_authentication_client.dart';
-import 'package:listanything/standard/authenticationClient/token_storage.dart';
-import 'package:listanything/standard/firebase/firebase_options.dart';
-import 'package:listanything/standard/firebase/firestore/firebase_auth.dart';
-import 'package:listanything/standard/main/bootstrap/app_bloc_observer.dart';
-import 'package:listanything/standard/storage/persistentStorage/persistent_storage.dart';
-import 'package:listanything/standard/userRepository/user_storage.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '/standard/analyticsRepository/analytics_repository.dart';
+import '/standard/authenticationClient/authentication_client.dart';
+import '/standard/authenticationClient/firebase_authentication_client.dart';
+import '/standard/authenticationClient/token_storage.dart';
+import '/standard/firebase/firebase_options.dart';
+import '/standard/firebase/firestore/firebase_auth.dart';
+import '/standard/main/bootstrap/app_bloc_observer.dart';
+import '/standard/storage/persistentStorage/persistent_storage.dart';
+import '/standard/userRepository/user_storage.dart';
 
 typedef AppBuilder = Future<Widget> Function(
   FirebaseMessaging firebaseMessaging,
@@ -56,6 +58,7 @@ Future<void> bootstrap(AppBuilder builder) async {
   final authenticationClient = FirebaseAuthenticationClient(
     tokenStorage: tokenStorage,
     firebaseAuth: await getFirebaseAuth(),
+    googleSignIn: GoogleSignIn(),
   );
 
   runApp(

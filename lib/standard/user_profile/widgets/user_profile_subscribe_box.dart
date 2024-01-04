@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:listanything/l10n/l10n.dart';
-import 'package:listanything/standard/appUi/colors/app_colors.dart';
-import 'package:listanything/standard/appUi/spacing/app_spacing.dart';
-import 'package:listanything/standard/appUi/typography/app_font_weight.dart';
-import 'package:listanything/standard/appUi/widgets/app_button.dart';
+import '/l10n/l10n.dart';
+import '/standard/appUi/colors/app_colors.dart';
+import '/standard/appUi/spacing/app_spacing.dart';
+import '/standard/appUi/typography/app_font_weight.dart';
+import '/standard/appUi/widgets/app_button.dart';
 
 class UserProfileSubscribeBox extends StatelessWidget {
   const UserProfileSubscribeBox({required this.onSubscribePressed, super.key});

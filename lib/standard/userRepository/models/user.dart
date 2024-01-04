@@ -1,5 +1,5 @@
 
-import 'package:listanything/standard/authenticationClient/models/authentication_user.dart';
+import '/standard/authenticationClient/models/authentication_user.dart';
 
 /// {@template user}
 /// User model represents the current user with subscription plan.

@@ -1,4 +1,4 @@
-name: listanything
+name: listwhatever
 
 on: [pull_request, push]
 

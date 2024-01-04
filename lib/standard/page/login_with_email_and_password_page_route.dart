@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listanything/standard/view/login_with_email_and_password_page.dart';
+import '/standard/view/login_with_email_and_password_page.dart';
 
 @immutable
 class LoginWithEmailAndPasswordPageRoute extends GoRouteData {

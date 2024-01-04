@@ -2,7 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:listanything/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
+import '/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
 
 part 'list_item.freezed.dart';
 part 'list_item.g.dart';

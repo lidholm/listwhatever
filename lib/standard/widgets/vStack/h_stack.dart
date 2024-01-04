@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:listanything/standard/constants.dart';
+import '/standard/constants.dart';
 
 import 'v_stack.dart';
 

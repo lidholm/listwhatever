@@ -1,4 +1,4 @@
-import 'package:listanything/standard/analyticsRepository/models/analytics_event.dart';
+import '/standard/analyticsRepository/models/analytics_event.dart';
 
 /// {@template ntg_event}
 /// An analytics event following News Tagging Guidelines event taxonomy.

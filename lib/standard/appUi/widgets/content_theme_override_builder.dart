@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:listanything/standard/appUi/theme/app_theme.dart';
+import '/standard/appUi/theme/app_theme.dart';
 
 /// {@template content_theme_override_builder}
 /// The builder widget that overrides the default [TextTheme]

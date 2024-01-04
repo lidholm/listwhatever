@@ -1,6 +1,6 @@
 
-import 'package:listanything/standard/storage/storage.dart';
-import 'package:listanything/standard/userRepository/user_repository.dart';
+import '/standard/storage/storage.dart';
+import '/standard/userRepository/user_repository.dart';
 
 /// Storage keys for the [UserStorage].
 abstract class UserStorageKeys {

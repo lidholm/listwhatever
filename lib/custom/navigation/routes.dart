@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listanything/custom/pages/about/about_page_route.dart';
-import 'package:listanything/custom/pages/crashlytics/crashlytics.dart';
-import 'package:listanything/custom/pages/deleteAccount/delete_account_page_route.dart';
-import 'package:listanything/custom/pages/firebase_in_app_messaging/firebase_in_app_messaging.dart';
-import 'package:listanything/custom/pages/firebase_performance/firebase_performance.dart';
-import 'package:listanything/custom/pages/home/home.dart';
-import 'package:listanything/custom/pages/listItems/addListItem/add_list_item_page_route.dart';
-import 'package:listanything/custom/pages/listItems/addListItem/edit_list_item_page_route.dart';
-import 'package:listanything/custom/pages/listItems/list_items_page_route.dart';
-import 'package:listanything/custom/pages/listItems/searchLocation/search_location_page_route.dart';
-import 'package:listanything/custom/pages/lists/addList/add_list.dart';
-import 'package:listanything/custom/pages/lists/addList/edit_list_page_route.dart';
-import 'package:listanything/custom/pages/lists/lists.dart';
-import 'package:listanything/custom/pages/maps/maps_page_route.dart';
-import 'package:listanything/custom/pages/privacyPolicy/privacy_policy_page_route.dart';
-import 'package:listanything/custom/pages/remoteConfig/remote_config_page_route.dart';
-import 'package:listanything/custom/pages/shareList/share_list_page_route.dart';
-import 'package:listanything/custom/pages/subscribeList/subscribe_list_page_route.dart';
-import 'package:listanything/standard/page/login_page_route.dart';
-import 'package:listanything/standard/page/login_with_email_and_password_page_route.dart';
-import 'package:listanything/standard/user_profile/user_profile.dart';
+
+import '/custom/pages/about/about_page_route.dart';
+import '/custom/pages/crashlytics/crashlytics.dart';
+import '/custom/pages/deleteAccount/delete_account_page_route.dart';
+import '/custom/pages/firebase_in_app_messaging/firebase_in_app_messaging.dart';
+import '/custom/pages/firebase_performance/firebase_performance.dart';
+import '/custom/pages/home/home.dart';
+import '/custom/pages/listItems/addListItem/add_list_item_page_route.dart';
+import '/custom/pages/listItems/addListItem/edit_list_item_page_route.dart';
+import '/custom/pages/listItems/list_items_page_route.dart';
+import '/custom/pages/listItems/searchLocation/search_location_page_route.dart';
+import '/custom/pages/lists/addList/add_list.dart';
+import '/custom/pages/lists/addList/edit_list_page_route.dart';
+import '/custom/pages/lists/lists.dart';
+import '/custom/pages/maps/maps_page_route.dart';
+import '/custom/pages/privacyPolicy/privacy_policy_page_route.dart';
+import '/custom/pages/remoteConfig/remote_config_page_route.dart';
+import '/custom/pages/shareList/share_list_page_route.dart';
+import '/custom/pages/subscribeList/subscribe_list_page_route.dart';
+import '/standard/onScreenLog/on_screen_logs_page_route.dart';
+import '/standard/page/login_page_route.dart';
+import '/standard/page/login_with_email_and_password_page_route.dart';
+import '/standard/user_profile/user_profile.dart';
 
 part 'routes.g.dart';
 
@@ -30,6 +32,10 @@ part 'routes.g.dart';
     TypedGoRoute<MapsPageRoute>(
       path: 'maps',
       name: 'maps',
+    ),
+    TypedGoRoute<OnScreenLogsPageRoute>(
+      path: 'logs',
+      name: 'logs',
     ),
     TypedGoRoute<ListsPageRoute>(
       path: 'lists',

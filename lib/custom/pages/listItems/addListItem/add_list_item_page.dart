@@ -4,25 +4,25 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listanything/custom/firestore/listItems/list_item.dart';
-import 'package:listanything/custom/firestore/listItems/list_item_events/list_item_bloc.dart';
-import 'package:listanything/custom/firestore/listItems/list_item_events/list_item_event.dart';
-import 'package:listanything/custom/firestore/listItems/list_item_events/list_item_state.dart';
-import 'package:listanything/custom/firestore/listItems/list_items.dart';
-import 'package:listanything/custom/firestore/listItems/list_or_list_item_not_loaded_handler.dart';
-import 'package:listanything/custom/firestore/lists/lists.dart';
-import 'package:listanything/custom/navigation/routes.dart';
-import 'package:listanything/custom/pages/listItems/list_items.dart';
-import 'package:listanything/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
-import 'package:listanything/custom/pages/listItems/searchLocation/search_location_page_route.dart';
-import 'package:listanything/custom/pages/listItems/searchLocation/search_location_response.dart';
-import 'package:listanything/l10n/l10n.dart';
-import 'package:listanything/standard/constants.dart';
-import 'package:listanything/standard/navigation/redirect_cubit.dart';
-import 'package:listanything/standard/widgets/appBar/app_bar_action.dart';
-import 'package:listanything/standard/widgets/appBar/app_bar_action_icon.dart';
-import 'package:listanything/standard/widgets/appBar/common_app_bar.dart';
-import 'package:listanything/standard/widgets/vStack/v_stack.dart';
+import '/custom/firestore/listItems/list_item.dart';
+import '/custom/firestore/listItems/list_item_events/list_item_bloc.dart';
+import '/custom/firestore/listItems/list_item_events/list_item_event.dart';
+import '/custom/firestore/listItems/list_item_events/list_item_state.dart';
+import '/custom/firestore/listItems/list_items.dart';
+import '/custom/firestore/listItems/list_or_list_item_not_loaded_handler.dart';
+import '/custom/firestore/lists/lists.dart';
+import '/custom/navigation/routes.dart';
+import '/custom/pages/listItems/list_items.dart';
+import '/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
+import '/custom/pages/listItems/searchLocation/search_location_page_route.dart';
+import '/custom/pages/listItems/searchLocation/search_location_response.dart';
+import '/l10n/l10n.dart';
+import '/standard/constants.dart';
+import '/standard/navigation/redirect_cubit.dart';
+import '/standard/widgets/appBar/app_bar_action.dart';
+import '/standard/widgets/appBar/app_bar_action_icon.dart';
+import '/standard/widgets/appBar/common_app_bar.dart';
+import '/standard/widgets/vStack/v_stack.dart';
 
 enum AddListItemValues {
   name,
@@ -88,19 +88,23 @@ class _AddListItemPageState extends State<AddListItemPage> {
 
   @override
   Widget build(BuildContext context) {
+    logger.d('in AddListItemPage');
     final listState = context.watch<ListBloc>().state;
     final listStateView = ListOrListItemNotLoadedHandler.handleListState(listState);
     if (listStateView != null) {
       return listStateView;
     }
     list = (listState as ListLoaded).list;
-
-    final listItemState = context.watch<ListItemBloc>().state;
-    final listItemStateView = ListOrListItemNotLoadedHandler.handleListItemState(listItemState);
-    if (listItemStateView != null) {
-      return listItemStateView;
+    if (widget.listItemId != null) {
+      final listItemState = context
+          .watch<ListItemBloc>()
+          .state;
+      final listItemStateView = ListOrListItemNotLoadedHandler.handleListItemState(listItemState);
+      if (listItemStateView != null) {
+        return listItemStateView;
+      }
+      listItem = (listItemState as ListItemLoaded).listItem;
     }
-    listItem = (listItemState as ListItemLoaded).listItem;
 
     return Scaffold(
       appBar: CommonAppBar(

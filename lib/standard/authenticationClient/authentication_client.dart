@@ -1,16 +1,17 @@
 import 'dart:async';
 
-import 'package:listanything/standard/authenticationClient/models/authentication_user.dart';
+import '/standard/authenticationClient/models/authentication_user.dart';
 
 /// {@template authentication_exception}
 /// Exceptions from the authentication client.
 /// {@endtemplate}
 abstract class AuthenticationException implements Exception {
   /// {@macro authentication_exception}
-  const AuthenticationException(this.error);
+  const AuthenticationException(this.error, this.extraMessage);
 
   /// The error which was caught.
   final Object error;
+  final String? extraMessage;
 }
 
 /// {@template send_login_email_and_password_failure}
@@ -18,7 +19,7 @@ abstract class AuthenticationException implements Exception {
 /// {@endtemplate}
 class SendLoginEmailAndPasswordFailure extends AuthenticationException {
   /// {@macro send_login_email_and_password_failure}
-  const SendLoginEmailAndPasswordFailure(super.error);
+  const SendLoginEmailAndPasswordFailure(super.error, super.extraMessage);
 }
 
 /// {@template is_log_in_email_and_password_failure}
@@ -26,7 +27,7 @@ class SendLoginEmailAndPasswordFailure extends AuthenticationException {
 /// {@endtemplate}
 class IsLogInWithEmailAndPasswordFailure extends AuthenticationException {
   /// {@macro is_log_in_email_and_password_failure}
-  const IsLogInWithEmailAndPasswordFailure(super.error);
+  const IsLogInWithEmailAndPasswordFailure(super.error, super.extraMessage);
 }
 
 /// {@template log_in_with_email_and_password_failure}
@@ -34,7 +35,7 @@ class IsLogInWithEmailAndPasswordFailure extends AuthenticationException {
 /// {@endtemplate}
 class LogInWithEmailAndPasswordFailure extends AuthenticationException {
   /// {@macro log_in_with_email_and_password_failure}
-  const LogInWithEmailAndPasswordFailure(super.error);
+  const LogInWithEmailAndPasswordFailure(super.error, super.extraMessage);
 }
 
 /// {@template log_in_with_apple_failure}
@@ -42,7 +43,7 @@ class LogInWithEmailAndPasswordFailure extends AuthenticationException {
 /// {@endtemplate}
 class LogInWithAppleFailure extends AuthenticationException {
   /// {@macro log_in_with_apple_failure}
-  const LogInWithAppleFailure(super.error);
+  const LogInWithAppleFailure(super.error, super.extraMessage);
 }
 
 /// {@template log_in_with_google_failure}
@@ -50,7 +51,7 @@ class LogInWithAppleFailure extends AuthenticationException {
 /// {@endtemplate}
 class LogInWithGoogleFailure extends AuthenticationException {
   /// {@macro log_in_with_google_failure}
-  const LogInWithGoogleFailure(super.error);
+  const LogInWithGoogleFailure(super.error, super.extraMessage);
 }
 
 /// {@template log_in_with_google_canceled}
@@ -58,7 +59,7 @@ class LogInWithGoogleFailure extends AuthenticationException {
 /// {@endtemplate}
 class LogInWithGoogleCanceled extends AuthenticationException {
   /// {@macro log_in_with_google_canceled}
-  const LogInWithGoogleCanceled(super.error);
+  const LogInWithGoogleCanceled(super.error, super.extraMessage);
 }
 
 /// {@template log_in_with_facebook_failure}
@@ -66,7 +67,7 @@ class LogInWithGoogleCanceled extends AuthenticationException {
 /// {@endtemplate}
 class LogInWithFacebookFailure extends AuthenticationException {
   /// {@macro log_in_with_facebook_failure}
-  const LogInWithFacebookFailure(super.error);
+  const LogInWithFacebookFailure(super.error, super.extraMessage);
 }
 
 /// {@template log_in_with_facebook_canceled}
@@ -74,7 +75,7 @@ class LogInWithFacebookFailure extends AuthenticationException {
 /// {@endtemplate}
 class LogInWithFacebookCanceled extends AuthenticationException {
   /// {@macro log_in_with_facebook_canceled}
-  const LogInWithFacebookCanceled(super.error);
+  const LogInWithFacebookCanceled(super.error, super.extraMessage);
 }
 
 /// {@template log_in_with_twitter_failure}
@@ -82,7 +83,7 @@ class LogInWithFacebookCanceled extends AuthenticationException {
 /// {@endtemplate}
 class LogInWithTwitterFailure extends AuthenticationException {
   /// {@macro log_in_with_twitter_failure}
-  const LogInWithTwitterFailure(super.error);
+  const LogInWithTwitterFailure(super.error, super.extraMessage);
 }
 
 /// {@template log_in_with_twitter_canceled}
@@ -90,7 +91,7 @@ class LogInWithTwitterFailure extends AuthenticationException {
 /// {@endtemplate}
 class LogInWithTwitterCanceled extends AuthenticationException {
   /// {@macro log_in_with_twitter_canceled}
-  const LogInWithTwitterCanceled(super.error);
+  const LogInWithTwitterCanceled(super.error, super.extraMessage);
 }
 
 /// {@template log_out_failure}
@@ -98,7 +99,7 @@ class LogInWithTwitterCanceled extends AuthenticationException {
 /// {@endtemplate}
 class LogOutFailure extends AuthenticationException {
   /// {@macro log_out_failure}
-  const LogOutFailure(super.error);
+  const LogOutFailure(super.error, super.extraMessage);
 }
 
 /// A generic Authentication Client Interface.

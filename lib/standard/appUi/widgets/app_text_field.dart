@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:listanything/standard/appUi/colors/app_colors.dart';
+import '/standard/appUi/colors/app_colors.dart';
 
 /// {@template app_text_field}
 /// A text field component based on material [TextFormField] widget with a

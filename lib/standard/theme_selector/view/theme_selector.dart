@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:listanything/l10n/l10n.dart';
-import 'package:listanything/standard/theme_selector/bloc/theme_mode_event.dart';
-import 'package:listanything/standard/theme_selector/theme_selector.dart';
+import '/l10n/l10n.dart';
+import '/standard/theme_selector/bloc/theme_mode_event.dart';
+import '/standard/theme_selector/theme_selector.dart';
 
 /// A drop down menu to select a new [ThemeMode]
 ///

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:listanything/l10n/l10n.dart';
-import 'package:listanything/standard/appUi/generated/assets.gen.dart';
-import 'package:listanything/standard/appUi/spacing/app_spacing.dart';
-import 'package:listanything/standard/appUi/widgets/app_button.dart';
-import 'package:listanything/standard/appUi/widgets/app_email_text_field.dart';
-import 'package:listanything/standard/appUi/widgets/app_password_text_field.dart';
-import 'package:listanything/standard/bloc/login_bloc.dart';
-import 'package:listanything/standard/bloc/login_event.dart';
-import 'package:listanything/standard/bloc/login_state.dart';
+import '/l10n/l10n.dart';
+import '/standard/appUi/generated/assets.gen.dart';
+import '/standard/appUi/spacing/app_spacing.dart';
+import '/standard/appUi/widgets/app_button.dart';
+import '/standard/appUi/widgets/app_email_text_field.dart';
+import '/standard/appUi/widgets/app_password_text_field.dart';
+import '/standard/bloc/login_bloc.dart';
+import '/standard/bloc/login_event.dart';
+import '/standard/bloc/login_state.dart';
 
 class LoginWithEmailAndPasswordForm extends StatelessWidget {
   const LoginWithEmailAndPasswordForm({super.key});

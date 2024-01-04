@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
-import 'package:listanything/standard/authenticationClient/authentication_client.dart';
-import 'package:listanything/standard/userRepository/models/user.dart';
-import 'package:listanything/standard/userRepository/user_storage.dart';
+import '/standard/authenticationClient/authentication_client.dart';
+import '/standard/userRepository/models/user.dart';
+import '/standard/userRepository/user_storage.dart';
 
 /// {@template user_failure}
 /// A base failure for the user repository failures.
@@ -60,13 +60,15 @@ class UserRepository {
   /// Stream of [User] which will emit the current user when
   /// the authentication state or the subscription plan changes.
   ///
-  Stream<User> get user => _authenticationClient.user
-      .map(
-        (authenticationUser) => User.fromAuthenticationUser(
-          authenticationUser: authenticationUser,
-        ),
-      )
-      .asBroadcastStream();
+  Stream<User> get user => _authenticationClient.user.map(
+        (authenticationUser) {
+          print('authenticationUser: $authenticationUser');
+          print('authenticationUser.email: ${authenticationUser.email}');
+          return User.fromAuthenticationUser(
+            authenticationUser: authenticationUser,
+          );
+        },
+      ).asBroadcastStream();
 
   /// Starts the Sign In with Apple Flow.
   ///
@@ -77,7 +79,7 @@ class UserRepository {
     } on LogInWithAppleFailure {
       rethrow;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithAppleFailure(error), stackTrace);
+      Error.throwWithStackTrace(LogInWithAppleFailure(error, null), stackTrace);
     }
   }
 
@@ -93,7 +95,7 @@ class UserRepository {
     } on LogInWithGoogleCanceled {
       rethrow;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithGoogleFailure(error), stackTrace);
+      Error.throwWithStackTrace(LogInWithGoogleFailure(error, null), stackTrace);
     }
   }
 
@@ -109,7 +111,7 @@ class UserRepository {
     } on LogInWithTwitterCanceled {
       rethrow;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithTwitterFailure(error), stackTrace);
+      Error.throwWithStackTrace(LogInWithTwitterFailure(error, null), stackTrace);
     }
   }
 
@@ -125,7 +127,7 @@ class UserRepository {
     } on LogInWithFacebookCanceled {
       rethrow;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithFacebookFailure(error), stackTrace);
+      Error.throwWithStackTrace(LogInWithFacebookFailure(error, null), stackTrace);
     }
   }
 
@@ -141,7 +143,7 @@ class UserRepository {
     } on LogInWithEmailAndPasswordFailure {
       rethrow;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithEmailAndPasswordFailure(error), stackTrace);
+      Error.throwWithStackTrace(LogInWithEmailAndPasswordFailure(error, null), stackTrace);
     }
   }
 
@@ -155,7 +157,7 @@ class UserRepository {
     } on LogOutFailure {
       rethrow;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogOutFailure(error), stackTrace);
+      Error.throwWithStackTrace(LogOutFailure(error, null), stackTrace);
     }
   }
 

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:listanything/custom/firestore/lists/user_lists_service.dart';
-import 'package:listanything/standard/constants.dart';
 
+import '/custom/firestore/lists/user_lists_service.dart';
+import '/standard/constants.dart';
 import '../lists_service.dart';
 import 'list_event.dart';
 import 'list_state.dart';
@@ -29,7 +29,7 @@ class ListBloc extends Bloc<ListEvent, ListState> {
   }
 
   Future<void> _onLoadList(LoadList event, Emitter<ListState> emit) async {
-    // logger.i('_onLoadList');
+    logger.i('getting list  ${event.listId}');
     try {
       emit(ListLoading());
       final userList = await _userListsService.getList(event.listId);

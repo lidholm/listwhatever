@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listanything/standard/page/login_page.dart';
+import '/standard/page/login_page.dart';
 
 @immutable
 class LoginPageRoute extends GoRouteData {

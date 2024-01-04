@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:listanything/standard/analytics/bloc/analytics_event.dart';
-import 'package:listanything/standard/analyticsRepository/index.dart' as analytics;
-import 'package:listanything/standard/userRepository/models/user.dart';
-import 'package:listanything/standard/userRepository/user_repository.dart';
+import '/standard/analytics/bloc/analytics_event.dart';
+import '/standard/analyticsRepository/index.dart' as analytics;
+import '/standard/userRepository/models/user.dart';
+import '/standard/userRepository/user_repository.dart';
 
 import 'analytics_state.dart';
 

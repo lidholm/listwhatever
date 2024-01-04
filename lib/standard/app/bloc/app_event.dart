@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:listanything/standard/userRepository/models/user.dart';
+import '/standard/userRepository/models/user.dart';
 
 abstract class AppEvent extends Equatable {
   const AppEvent();
