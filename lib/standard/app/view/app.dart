@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listwhatever/standard/app/widgets/to_onscreen_logs_listener.dart';
-import 'package:listwhatever/standard/onScreenLog/on_screen_log_cubit.dart';
+
 import '/custom/firestore/listItems/list_item_events/list_item_bloc.dart';
 import '/custom/firestore/listItems/list_items.dart';
 import '/custom/firestore/listItems/list_items_page_view_cubit.dart';
@@ -23,11 +22,13 @@ import '/standard/analyticsRepository/analytics_repository.dart';
 import '/standard/app/app.dart';
 import '/standard/app/bloc/app_event.dart';
 import '/standard/app/widgets/delete_item_redirect_listener.dart';
+import '/standard/app/widgets/to_onscreen_logs_listener.dart';
 import '/standard/appUi/theme/app_theme.dart';
 import '/standard/bloc/login_bloc.dart';
 import '/standard/constants.dart';
 import '/standard/navigation/redirect_cubit.dart';
 import '/standard/navigation/router.dart';
+import '/standard/onScreenLog/on_screen_log_cubit.dart';
 import '/standard/theme_selector/theme_selector.dart';
 import '/standard/userRepository/models/user.dart';
 import '/standard/userRepository/user_repository.dart';

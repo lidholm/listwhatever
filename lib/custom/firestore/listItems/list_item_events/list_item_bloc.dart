@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:listwhatever/custom/firestore/lists/user_lists_service.dart';
+import '/custom/firestore/lists/user_lists_service.dart';
 
 import '/standard/constants.dart';
 import '../list_items_service.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:listwhatever/standard/bloc/login_bloc.dart';
-import 'package:listwhatever/standard/bloc/login_state.dart';
-import 'package:listwhatever/standard/onScreenLog/on_screen_log_cubit.dart';
+import '/standard/bloc/login_bloc.dart';
+import '/standard/bloc/login_state.dart';
+import '/standard/onScreenLog/on_screen_log_cubit.dart';
 
 class ToOnScreenLogsListener extends StatelessWidget {
   const ToOnScreenLogsListener({

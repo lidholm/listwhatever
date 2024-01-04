@@ -2,7 +2,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:listwhatever/standard/constants.dart';
+import '/standard/constants.dart';
 import 'bounds.dart';
 import 'geocoderresult.dart';
 import 'geometry.dart';

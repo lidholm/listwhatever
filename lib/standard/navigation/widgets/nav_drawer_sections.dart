@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
-import 'package:listwhatever/standard/onScreenLog/on_screen_logs_page_route.dart';
+
 import '/custom/navigation/routes.dart';
 import '/custom/pages/about/about_page_route.dart';
 import '/custom/pages/crashlytics/crashlytics.dart';
@@ -13,7 +13,7 @@ import '/custom/pages/remoteConfig/remote_config_page_route.dart';
 import '/l10n/l10n.dart';
 import '/standard/appUi/colors/app_colors.dart';
 import '/standard/appUi/spacing/app_spacing.dart';
-
+import '/standard/onScreenLog/on_screen_logs_page_route.dart';
 import '../models/link.dart';
 
 class NavDrawerSections extends StatelessWidget {
