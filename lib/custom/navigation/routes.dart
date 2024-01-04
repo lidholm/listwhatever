@@ -60,10 +60,6 @@ part 'routes.g.dart';
             ),
           ],
         ),
-          TypedGoRoute<ImportCsvPageRoute>(
-          path: ':listId/import/csv',
-          name: 'items',
-        ),
         TypedGoRoute<AddListPageRoute>(
           path: 'add',
           name: 'addList',
@@ -75,6 +71,10 @@ part 'routes.g.dart';
         TypedGoRoute<ShareListPageRoute>(
           path: ':listId/share',
           name: 'share',
+        ),
+        TypedGoRoute<ImportCsvPageRoute>(
+          path: ':listId/import/csv',
+          name: 'importcsv',
         ),
       ],
     ),

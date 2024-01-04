@@ -747,6 +747,12 @@
     "type": "text",
     "placeholders": {}
   },
+  "importListItems": "Import list items",
+  "@importListItems": {
+    "description": "Text for 'Import list items'",
+    "type": "text",
+    "placeholders": {}
+  },
   "editListItem": "Edit list item",
   "@editListItem": {
     "description": "Text for 'Edit list item'",

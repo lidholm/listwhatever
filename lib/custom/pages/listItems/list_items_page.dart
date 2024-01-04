@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:listwhatever/custom/pages/import/csv/import_csv_page_route.dart';
 import '/custom/firestore/listItems/infoView/list_item_info_view.dart';
 import '/custom/firestore/listItems/list_item.dart';
 import '/custom/firestore/listItems/list_items.dart';
@@ -165,6 +166,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
       getShowShareListAction(list, filters),
       getShowEditAction(list),
       getShowDeleteAction(list),
+      getShowImportAction(),
     ].nonNulls.toList();
 
     return actions;
@@ -348,6 +350,20 @@ class _ListItemsPageState extends State<ListItemsPage> {
         callback: () async {
           context.read<RedirectCubit>().setRedirect('${const ListsPageRoute().location}?t=${DateTime.now()}');
           context.read<ListBloc>().add(DeleteList(widget.listId));
+        },
+        key: const Key('deleteList'),
+      ),
+    );
+  }
+
+  AppBarAction<dynamic> getShowImportAction() {
+    return AppBarAction(
+      type: AppBarActionType.overflowIcon,
+      overflowIcon: AppBarActionOverflowIcon(
+        title: context.l10n.importListItems,
+        icon: Icons.import_export,
+        callback: () async {
+          await ImportCsvPageRoute(widget.listId).push<void>(context);
         },
         key: const Key('deleteList'),
       ),

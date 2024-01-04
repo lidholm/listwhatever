@@ -4,8 +4,8 @@ import '/custom/pages/import/csv/import_csv_page.dart';
 
 @immutable
 class ImportCsvPageRoute extends GoRouteData {
-  const ImportCsvPageRoute();
-
+  const ImportCsvPageRoute(this.listId);
+final String listId;
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const ImportCsvPage();
