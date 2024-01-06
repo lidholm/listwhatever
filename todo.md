@@ -16,5 +16,7 @@
  - [ ] Google sheets
  - [ ] CSV
 - [ ] Fix fastlane
-
+- [ ] Upload image for list
+- [ ] Better colors/styling
+- [ ] Set up Google Play
 

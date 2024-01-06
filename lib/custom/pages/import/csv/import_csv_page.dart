@@ -189,7 +189,7 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
 
     for (final listItem in listItems) {
       final existingListItem = originalListItems.firstWhereOrNull((element) => element.name == listItem.name);
-      if (existingListItem != null) {
+      if (existingListItem != null) { // TODO: Should probably have an event for Import instead?
         BlocProvider.of<ListItemBloc>(context).add(UpdateListItem(listId, listItem.copyWith(id: existingListItem.id)));
       } else {
         BlocProvider.of<ListItemsBloc>(context).add(AddListItem(listId, listItem));
