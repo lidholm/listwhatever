@@ -291,7 +291,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
           showModalBottomSheet<void>(
             context: context,
             builder: (BuildContext context) {
-              return FilterView(listId: list.id!);
+              return FilterView(listId: widget.listId);
             },
           );
         },

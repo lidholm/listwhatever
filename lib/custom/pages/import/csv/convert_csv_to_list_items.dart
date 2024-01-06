@@ -1,12 +1,16 @@
 import 'package:csv/csv.dart';
 import 'package:listwhatever/custom/firestore/listItems/list_item.dart';
+import 'package:listwhatever/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
+import 'package:listwhatever/standard/constants.dart';
 
 enum Keywords {
   name,
   info,
   datetime,
   address,
-  latlong,
+  lat,
+  long,
+  urls,
 }
 
 class CsvConverter {
@@ -14,7 +18,7 @@ class CsvConverter {
     final rows = const CsvToListConverter(
         eol: '\n',
       textEndDelimiter: '"',
-    ).convert(csv);
+    ).convert(csv.trim());
     final listItems = <ListItem>[];
 
     final headers = rows[0].map((x) => (x as String).trim()).toList();
@@ -26,10 +30,24 @@ class CsvConverter {
       if (row.isEmpty || (row.length == 1 && (row[0] as String).trim() == '')) {
         continue;
       }
+      LatLong? latlong;
+      final lat = getRowValue(row, headerPositions, Keywords.lat);
+      final lng = getRowValue(row, headerPositions, Keywords.long);
+      if (lat != null && lng != null) {
+        try {
+          latlong = LatLong(lat: double.parse(lat), lng: double.parse(lng));
+        } catch (e) {
+          logger.e("Can't parse latlong $lat, $lng");
+        }
+      }
       final listItem = ListItem(
         id: null,
         name: getRowValue(row, headerPositions, Keywords.name)!,
         info: getRowValue(row, headerPositions, Keywords.info),
+        datetime: DateTime.tryParse(getRowValue(row, headerPositions, Keywords.datetime) ?? ''),
+        address: getRowValue(row, headerPositions, Keywords.address),
+        latLong: latlong,
+        urls: getUrls(row, headerPositions),
         categories: getCategories(row, headerPositions),
       );
 
@@ -44,7 +62,7 @@ class CsvConverter {
       return null;
     }
     final index = headerPositions[keyword.name];
-    final value = row[index!] as String;
+    final value = row[index!].toString();
     return value.trim();
   }
 
@@ -88,6 +106,21 @@ class CsvConverter {
     }
 
     return categories;
+  }
+
+  List<String> getUrls(List<dynamic> row, Map<String, int> headerPositions) {
+    if (!headerPositions.containsKey(Keywords.urls.name)) {
+      return List.empty();
+    }
+
+    final value = row[headerPositions[Keywords.urls.name]!];
+    final stringValue = value.toString().trim();
+    if (stringValue == '') {
+      return List.empty();
+    }
+
+    final splits = stringValue.split(',');
+    return splits.map((e) => e.trim()).toList();
   }
 
   Map<String, int> getCategoryHeaders(Map<String, int> headerPositions) {

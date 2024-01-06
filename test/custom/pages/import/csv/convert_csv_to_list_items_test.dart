@@ -1,5 +1,6 @@
 import 'package:listwhatever/custom/firestore/listItems/list_item.dart';
 import 'package:listwhatever/custom/pages/import/csv/convert_csv_to_list_items.dart';
+import 'package:listwhatever/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -124,6 +125,37 @@ info,name,Color,difficulty
         name: 'Sea N Air Golf Course',
         info: 'Sea N Air Golf Course, Coronado, CA',
         categories: {'Color': ['red','blue','yellow'], 'difficulty': ['easy']},
+      ),
+    ];
+    expect(listItems, expected);
+  });
+
+  test('Convert csv with only datetime, address, latLong,urls', () {
+    final csvConverter = CsvConverter();
+
+    const csv = '''
+name,lat,long,address,datetime,urls
+First item, 12.2,43.1,"2000 Visalia Row, CA 92118",2012-01-12,"http://url1.com, https://url2.com"
+Second item, 65.3,65.8,"123 Main Street, CA 92260",2021-02-03 14:15:16,
+    ''';
+
+    final listItems = csvConverter.convert(csv);
+
+    final expected = [
+      ListItem(
+        id: null,
+        name: 'First item',
+        datetime: DateTime(2012,01,12),
+        address: '2000 Visalia Row, CA 92118',
+        latLong: const LatLong(lat: 12.2, lng: 43.1),
+        urls: ['http://url1.com', 'https://url2.com'],
+      ),
+      ListItem(
+        id: null,
+        name: 'Second item',
+        datetime: DateTime(2021,02,03,14,15,16),
+        address: '123 Main Street, CA 92260',
+        latLong: const LatLong(lat: 65.3, lng: 65.8),
       ),
     ];
     expect(listItems, expected);

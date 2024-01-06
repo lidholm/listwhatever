@@ -8,6 +8,6 @@ class ImportCsvPageRoute extends GoRouteData {
 final String listId;
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const ImportCsvPage();
+    return ImportCsvPage(listId: listId);
   }
 }

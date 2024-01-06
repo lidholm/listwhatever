@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:listwhatever/custom/firestore/listItems/list_item.dart';
-import 'package:listwhatever/custom/firestore/lists/list_of_things.dart';
+import 'package:listwhatever/custom/firestore/listItems/list_items_events/list_items_bloc.dart';
+import 'package:listwhatever/custom/firestore/listItems/list_items_events/list_items_event.dart';
 import 'package:listwhatever/custom/pages/import/csv/convert_csv_to_list_items.dart';
 import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/widgets/appBar/common_app_bar.dart';
@@ -14,7 +15,9 @@ enum ImportCsvValues {
 
 
 class ImportCsvPage extends StatefulWidget {
-  const ImportCsvPage({super.key});
+  const ImportCsvPage({required this.listId, super.key});
+
+  final String listId;
 
   @override
   State<ImportCsvPage> createState() => _ImportCsvPageState();
@@ -23,7 +26,7 @@ class ImportCsvPage extends StatefulWidget {
 class _ImportCsvPageState extends State<ImportCsvPage> {
 
   final _formKey = GlobalKey<FormBuilderState>();
-  bool _infoHasError = false;
+  bool _csvHasError = false;
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +40,13 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
           padding: const EdgeInsets.all(24),
           child: createForm(
             [
-              createInfoField(),
+              createCsvField(),
               const SizedBox(height: 40),
               Row(
                 children: <Widget>[
                   createResetButton(context),
                   const SizedBox(width: 20),
-                  createSaveButton(),
+                  createSaveButton(widget.listId),
                 ],
               ),
             ],
@@ -70,7 +73,7 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
     );
   }
 
-  FormBuilderTextField createInfoField() {
+  FormBuilderTextField createCsvField() {
     return FormBuilderTextField(
       autovalidateMode: AutovalidateMode.always,
       minLines: 3,
@@ -79,11 +82,11 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
       decoration: InputDecoration(
         labelText: 'Extra info',
         suffixIcon:
-        _infoHasError ? const Icon(Icons.error, color: Colors.red) : const Icon(Icons.check, color: Colors.green),
+        _csvHasError ? const Icon(Icons.error, color: Colors.red) : const Icon(Icons.check, color: Colors.green),
       ),
       onChanged: (val) {
         setState(() {
-          _infoHasError = !(_formKey.currentState?.fields[ImportCsvValues.csv.toString()]?.validate() ?? false);
+          _csvHasError = !(_formKey.currentState?.fields[ImportCsvValues.csv.toString()]?.validate() ?? false);
         });
       },
       validator: FormBuilderValidators.compose([
@@ -94,13 +97,13 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
     );
   }
 
-  Expanded createSaveButton() {
+  Expanded createSaveButton(String listId) {
     return Expanded(
       child: ElevatedButton(
         onPressed: () {
           if (_formKey.currentState?.saveAndValidate() ?? false) {
             // logger.d(_formKey.currentState?.value.toString());
-            save(_formKey.currentState);
+            save(listId, _formKey.currentState);
           } else {
             logger
               ..d(_formKey.currentState?.value.toString())
@@ -141,7 +144,7 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
     );
   }
 
-  void save( FormBuilderState? currentState) {
+  void save(String listId, FormBuilderState? currentState) {
     final values = <String, dynamic>{};
     for (final entry in currentState!.fields.entries) {
       values[entry.key] = entry.value.value;
@@ -152,14 +155,12 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
 
     logger.d('csv: $csv');
 
-    final converted = CsvConverter().convert(csv);
-    logger.d('converted: $converted');
+    final listItems = CsvConverter().convert(csv);
+    logger.d('listItems: $listItems');
 
-    // if (widget.listItemId == null) {
-    //   BlocProvider.of<ListItemsBloc>(context).add(AddListItem(listId, listItem));
-    // } else {
-    //   BlocProvider.of<ListItemBloc>(context).add(UpdateListItem(listId, listItem));
-    // }
+    for (final listItem in listItems) {
+      BlocProvider.of<ListItemsBloc>(context).add(AddListItem(listId, listItem));
+    }
     // GoRouter.of(context).pop();
   }
 

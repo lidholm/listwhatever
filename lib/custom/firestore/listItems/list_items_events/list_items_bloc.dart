@@ -37,7 +37,8 @@ class ListItemsBloc extends Bloc<ListItemsEvent, ListItemsState> {
 
   Future<void> _onAddListItem(AddListItem event, Emitter<ListItemsState> emit) async {
     try {
-      await _listItemsService.addListItem(event.listId, event.item);
+      final userList = await _userListsService.getList(event.listId);
+      await _listItemsService.addListItem(userList.listId, event.item);
     } catch (e) {
       logger.e('Error: $e');
       emit(ListItemsError('Failed to add listItem.\n$e'));
