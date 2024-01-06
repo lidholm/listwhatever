@@ -40,6 +40,7 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
           padding: const EdgeInsets.all(24),
           child: createForm(
             [
+              createDescription(),
               createCsvField(),
               const SizedBox(height: 40),
               Row(
@@ -73,6 +74,13 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
     );
   }
 
+  Text createDescription() {
+    return const Text('Csv file with first row being the names of the headers.\n'
+        "'name', 'info', 'lat', 'long', 'urls', 'address' are reserved header names that will be mapped to fields of the ListItems\n"
+        'Any other header names will be name for categories\n'
+        "For 'urls' and 'categories', values can be comma separated");
+  }
+
   FormBuilderTextField createCsvField() {
     return FormBuilderTextField(
       autovalidateMode: AutovalidateMode.always,
@@ -80,7 +88,7 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
       maxLines: 6,
       name: ImportCsvValues.csv.name,
       decoration: InputDecoration(
-        labelText: 'Extra info',
+        labelText: 'Paste CSV here',
         suffixIcon:
         _csvHasError ? const Icon(Icons.error, color: Colors.red) : const Icon(Icons.check, color: Colors.green),
       ),
