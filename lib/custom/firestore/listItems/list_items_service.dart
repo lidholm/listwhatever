@@ -52,14 +52,14 @@ class ListItemsService {
     return itemsCollection.doc(docId).set(updatedListItem);
   }
 
-  Future<void> updateListItem(String listId, ListItem list) async {
+  Future<void> updateListItem(String listId, ListItem listItem) async {
     final itemsCollection = await getCollection(listId);
 
-    final updatedListItem = list.copyWith(
+    final updatedListItem = listItem.copyWith(
       latestUpdateUser: userId,
     ).toJson();
 
-    return itemsCollection.doc(list.id).update(updatedListItem);
+    return itemsCollection.doc(listItem.id).update(updatedListItem);
   }
 
   Future<void> deleteListItem(String listId, String itemId) async {

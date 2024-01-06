@@ -23,8 +23,8 @@ class ListsPage extends StatefulWidget {
 class _ListsPageState extends State<ListsPage> {
   @override
   void initState() {
-    BlocProvider.of<ListsBloc>(context).add(WatchLists());
     super.initState();
+    BlocProvider.of<ListsBloc>(context).add(WatchLists());
   }
 
   @override

@@ -1,9 +1,15 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:listwhatever/custom/firestore/listItems/list_item.dart';
+import 'package:listwhatever/custom/firestore/listItems/list_item_events/list_item_bloc.dart';
+import 'package:listwhatever/custom/firestore/listItems/list_item_events/list_item_event.dart';
 import 'package:listwhatever/custom/firestore/listItems/list_items_events/list_items_bloc.dart';
 import 'package:listwhatever/custom/firestore/listItems/list_items_events/list_items_event.dart';
+import 'package:listwhatever/custom/firestore/listItems/list_items_events/list_items_state.dart';
+import 'package:listwhatever/custom/firestore/listItems/list_or_list_item_not_loaded_handler.dart';
 import 'package:listwhatever/custom/pages/import/csv/convert_csv_to_list_items.dart';
 import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/widgets/appBar/common_app_bar.dart';
@@ -12,7 +18,6 @@ import 'package:listwhatever/standard/widgets/vStack/v_stack.dart';
 enum ImportCsvValues {
   csv,
 }
-
 
 class ImportCsvPage extends StatefulWidget {
   const ImportCsvPage({required this.listId, super.key});
@@ -24,40 +29,56 @@ class ImportCsvPage extends StatefulWidget {
 }
 
 class _ImportCsvPageState extends State<ImportCsvPage> {
-
   final _formKey = GlobalKey<FormBuilderState>();
   bool _csvHasError = false;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+    BlocProvider.of<ListItemsBloc>(context).add(LoadListItems(widget.listId));
+  }
 
-    return Scaffold(
-      appBar: const CommonAppBar(
-        title: 'Import from CSV',
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: createForm(
-            [
-              createDescription(),
-              createCsvField(),
-              const SizedBox(height: 40),
-              Row(
-                children: <Widget>[
-                  createResetButton(context),
-                  const SizedBox(width: 20),
-                  createSaveButton(widget.listId),
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ListItemsBloc, ListItemsState>(
+      builder: (listItemsContext, listItemsState) {
+
+        final listItemsView = ListOrListItemNotLoadedHandler.handleListItemsState(listItemsState);
+        if (listItemsView != null) {
+          return listItemsView;
+        }
+        final listItems = (listItemsState as ListItemsLoaded).listItems;
+
+
+        return Scaffold(
+          appBar: const CommonAppBar(
+            title: 'Import from CSV',
+          ),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: createForm(
+                [
+                  createDescription(),
+                  createCsvField(),
+                  const SizedBox(height: 40),
+                  Row(
+                    children: <Widget>[
+                      createResetButton(context),
+                      const SizedBox(width: 20),
+                      createSaveButton(widget.listId, listItems),
+                    ],
+                  ),
                 ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
-  FormBuilder createForm( List<Widget> children) {
+  FormBuilder createForm(List<Widget> children) {
     final initialValue = {
       ImportCsvValues.csv.toString(): '',
     };
@@ -90,7 +111,7 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
       decoration: InputDecoration(
         labelText: 'Paste CSV here',
         suffixIcon:
-        _csvHasError ? const Icon(Icons.error, color: Colors.red) : const Icon(Icons.check, color: Colors.green),
+            _csvHasError ? const Icon(Icons.error, color: Colors.red) : const Icon(Icons.check, color: Colors.green),
       ),
       onChanged: (val) {
         setState(() {
@@ -105,13 +126,13 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
     );
   }
 
-  Expanded createSaveButton(String listId) {
+  Expanded createSaveButton(String listId, List<ListItem> listItems) {
     return Expanded(
       child: ElevatedButton(
         onPressed: () {
           if (_formKey.currentState?.saveAndValidate() ?? false) {
             // logger.d(_formKey.currentState?.value.toString());
-            save(listId, _formKey.currentState);
+            save(listId, listItems, _formKey.currentState);
           } else {
             logger
               ..d(_formKey.currentState?.value.toString())
@@ -152,7 +173,7 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
     );
   }
 
-  void save(String listId, FormBuilderState? currentState) {
+  void save(String listId, List<ListItem> originalListItems, FormBuilderState? currentState) {
     final values = <String, dynamic>{};
     for (final entry in currentState!.fields.entries) {
       values[entry.key] = entry.value.value;
@@ -167,9 +188,13 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
     logger.d('listItems: $listItems');
 
     for (final listItem in listItems) {
-      BlocProvider.of<ListItemsBloc>(context).add(AddListItem(listId, listItem));
+      final existingListItem = originalListItems.firstWhereOrNull((element) => element.name == listItem.name);
+      if (existingListItem != null) {
+        BlocProvider.of<ListItemBloc>(context).add(UpdateListItem(listId, listItem.copyWith(id: existingListItem.id)));
+      } else {
+        BlocProvider.of<ListItemsBloc>(context).add(AddListItem(listId, listItem));
+      }
     }
     // GoRouter.of(context).pop();
   }
-
 }

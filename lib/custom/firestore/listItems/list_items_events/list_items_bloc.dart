@@ -12,6 +12,7 @@ class ListItemsBloc extends Bloc<ListItemsEvent, ListItemsState> {
     on<ChangeUserForListItems>(_onChangeUser);
     on<AddListItem>(_onAddListItem);
     on<WatchListItems>(_onWatchListItems);
+    on<LoadListItems>(_onLoadListItems);
   }
   final UserListsService _userListsService;
   final ListItemsService _listItemsService;
@@ -33,6 +34,13 @@ class ListItemsBloc extends Bloc<ListItemsEvent, ListItemsState> {
         onData: (List<ListItem> listItems) {
           return ListItemsLoaded(listItems);
         },);
+  }
+
+  Future<void> _onLoadListItems(LoadListItems event, Emitter<ListItemsState> emit) async {
+    final userList = await _userListsService.getList(event.listId);
+    final listItems = await _listItemsService.getListItems(userList.listId).first;
+
+    emit(ListItemsLoaded(listItems));
   }
 
   Future<void> _onAddListItem(AddListItem event, Emitter<ListItemsState> emit) async {
