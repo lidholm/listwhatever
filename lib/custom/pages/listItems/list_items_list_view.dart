@@ -23,14 +23,21 @@ class ListItemsListView extends StatelessWidget {
         children: items.map((item) {
           final subtitle = item.datetime != null ? formatReadableDate(item.datetime!, DateFormatType.iso8601) : null;
           return Padding(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.only(left: 16, top: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(item.name),
+                    Text(
+                      item.name,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black.withAlpha(200),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     if (subtitle != null)
                       Text(
                         subtitle,
