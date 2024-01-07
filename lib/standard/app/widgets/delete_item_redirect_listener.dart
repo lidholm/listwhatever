@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:listwhatever/custom/firestore/listItems/list_item_events/list_item_bloc.dart';
 import '/custom/firestore/listItems/list_item_events/list_item_state.dart';
 import '/custom/firestore/listItems/list_items.dart';
 import '/custom/firestore/lists/lists.dart';
@@ -35,6 +36,15 @@ class DeleteItemRedirectListener extends StatelessWidget {
               context
                   .read<RedirectCubit>()
                   .setRedirect('${ListItemsPageRoute(listId: deletedState.listId).location}?t=${DateTime.now()}');
+            }
+          },
+          listenWhen: (previous, current) => previous != current,
+        ),
+        BlocListener<ListItemBloc, ListItemState>(
+          listener: (context, state) {
+            if (state is ListItemsImported) {
+              final userListId = (state).listId;
+              context.read<RedirectCubit>().setRedirect('${ListItemsPageRoute(listId: userListId).location}?t=${DateTime.now()}');
             }
           },
           listenWhen: (previous, current) => previous != current,

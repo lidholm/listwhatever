@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -187,14 +186,7 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
     final listItems = CsvConverter().convert(csv);
     logger.d('listItems: $listItems');
 
-    for (final listItem in listItems) {
-      final existingListItem = originalListItems.firstWhereOrNull((element) => element.name == listItem.name);
-      if (existingListItem != null) { // TODO: Should probably have an event for Import instead?
-        BlocProvider.of<ListItemBloc>(context).add(UpdateListItem(listId, listItem.copyWith(id: existingListItem.id)));
-      } else {
-        BlocProvider.of<ListItemsBloc>(context).add(AddListItem(listId, listItem));
-      }
-    }
+    BlocProvider.of<ListItemBloc>(context).add(ImportListItems(listId, listItems));
     // GoRouter.of(context).pop();
   }
 }

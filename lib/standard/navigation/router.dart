@@ -26,6 +26,7 @@ GoRouter getRouter({
       BlocProvider.of<AppBloc>(context).stream,
       BlocProvider.of<ListBloc>(context).stream.where((event) => event is ListDeleted),
       BlocProvider.of<ListItemBloc>(context).stream.where((event) => event is ListItemDeleted),
+      BlocProvider.of<ListItemBloc>(context).stream.where((event) => event is ListItemsImported),
     ]),
     debugLogDiagnostics: true,
     initialLocation: initialLocation ?? routerProviderInformation.initialRouteLocation,

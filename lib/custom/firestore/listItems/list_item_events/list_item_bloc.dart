@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
+import 'package:collection/collection.dart';
 import '/custom/firestore/lists/user_lists_service.dart';
 
 import '/standard/constants.dart';
@@ -12,6 +15,7 @@ class ListItemBloc extends Bloc<ListItemEvent, ListItemState> {
     on<LoadListItem>(_onLoadListItem);
     on<UpdateListItem>(_onUpdateListItem);
     on<DeleteListItem>(_onDeleteListItem);
+    on<ImportListItems>(_onImportListItems);
   }
   final UserListsService _userListsService;
   final ListItemsService _listItemsService;
@@ -39,6 +43,7 @@ class ListItemBloc extends Bloc<ListItemEvent, ListItemState> {
       emit(ListItemError('Failed to load listItem.\n$e'));
     }
   }
+
   Future<void> _onUpdateListItem(UpdateListItem event, Emitter<ListItemState> emit) async {
     logger.i('updating list item for list ${event.listId}');
     try {
@@ -59,6 +64,29 @@ class ListItemBloc extends Bloc<ListItemEvent, ListItemState> {
     } catch (e) {
       logger.e('Error: $e');
       emit(ListItemError('Failed to delete listItem.\n$e'));
+    }
+  }
+
+  Future<void> _onImportListItems(ImportListItems event, Emitter<ListItemState> emit) async {
+    logger.i('import list items for list ${event.listId}');
+    try {
+      emit(ListItemLoading());
+      final userList = await _userListsService.getList(event.listId);
+      final originalListItems = await _listItemsService.getListItems(userList.listId).first;
+
+      for (final listItem in event.listItems) {
+        final existingListItem = originalListItems.firstWhereOrNull((element) => element.name == listItem.name);
+        if (existingListItem != null) { // TODO: Should probably have an event for Import instead?
+          await _listItemsService.updateListItem(userList.listId, listItem.copyWith(id: existingListItem.id));
+        } else {
+          await _listItemsService.addListItem(userList.listId, listItem);
+        }
+      }
+      emit(ListItemsImported(event.listId));
+      // emit(ListItemLoading());
+    } catch (e) {
+      logger.e('Error: $e');
+      emit(ListItemError('Failed to load listItem.\n$e'));
     }
   }
 }
