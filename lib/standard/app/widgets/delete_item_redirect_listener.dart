@@ -43,7 +43,7 @@ class DeleteItemRedirectListener extends StatelessWidget {
         BlocListener<ListItemBloc, ListItemState>(
           listener: (context, state) {
             if (state is ListItemsImported) {
-              final userListId = (state).listId;
+              final userListId = state.listId;
               context.read<RedirectCubit>().setRedirect('${ListItemsPageRoute(listId: userListId).location}?t=${DateTime.now()}');
             }
           },
