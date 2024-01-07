@@ -1,3 +1,5 @@
+import 'package:listwhatever/custom/pages/import/csv/import_csv_page_route.dart';
+
 import '/custom/navigation/routes.dart';
 import '/custom/pages/lists/lists.dart';
 import '/standard/navigation/models/router_provider_information.dart';
@@ -16,8 +18,8 @@ RouterProviderInformation getRouterProviderInformation() {
     requireLoginRouteLocations: [],
     initialRouteLocation: const ListsPageRoute().location,
     signUpRouteLocation: 'notyet',
-    // signInRouteLocation:  const LoginWithEmailAndPasswordPageRoute().location, // const LoginPageRoute().location,
-    signInRouteLocation:  const LoginPageRoute().location,
+    signInRouteLocation:  const ImportCsvPageRoute('asd').location,
+    // signInRouteLocation:  const LoginPageRoute().location,
     errorLoadingUserRouteLocation: MainPageRoute().location,
     loadingUserRouteLocation: MainPageRoute().location,
   );

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:listwhatever/standard/constants.dart';
 import '/custom/firestore/listItems/list_or_list_item_not_loaded_handler.dart';
 import '/custom/firestore/lists/lists.dart';
 import '/custom/firestore/lists/user_list.dart';
@@ -22,16 +23,13 @@ class ListsPage extends StatefulWidget {
 class _ListsPageState extends State<ListsPage> {
   @override
   void initState() {
-    BlocProvider.of<ListsBloc>(context).add(WatchLists());
     super.initState();
+    BlocProvider.of<ListsBloc>(context).add(WatchLists());
   }
 
   @override
   Widget build(BuildContext context) {
-    final crossAxisCount = kIsWeb ? (MediaQuery
-        .of(context)
-        .size
-        .width / 240).floor() : 2;
+    final crossAxisCount = kIsWeb ? (MediaQuery.of(context).size.width / 240).floor() : 2;
 
     return Scaffold(
       appBar: CommonAppBar(
@@ -39,55 +37,55 @@ class _ListsPageState extends State<ListsPage> {
       ),
       body: BlocBuilder<ListsBloc, ListsState>(
         builder: (userListContext, userListState) {
-              final userListStateView = ListOrListItemNotLoadedHandler.handleUserListsState(userListState);
-              if (userListStateView != null) {
-                return userListStateView;
-              }
-              final lists = (userListState as ListsLoaded).lists;
+          logger.d('userListState: $userListState');
+          final userListStateView = ListOrListItemNotLoadedHandler.handleUserListsState(userListState);
+          if (userListStateView != null) {
+            return userListStateView;
+          }
+          final lists = (userListState as ListsLoaded).lists;
 
-              // logger.d('lists: ${lists.length}');
-              return Padding(
-                padding: const EdgeInsets.all(16),
-                child: CustomScrollView(
-                  slivers: [
-                    SliverGrid.count(
-                      mainAxisSpacing: 20,
-                      crossAxisSpacing: 20,
-                      crossAxisCount: crossAxisCount,
-                      children: lists.map(
-                            (list) {
-                          return ImageButton<Object>(
-                            item: list,
-                            image:list.listType.getImagePath(),
-                            text: list.listName,
-                            callback: (list) {
-                              if (list is UserList) {
-                                ListItemsPageRoute(listId: list.id!).push<void>(userListContext);
-                              }
-                              else {
-                                print('SHARED LIST CLICKED');
-                              }
-                            },
-                            isLoading: false,
-                            topRightIcon: list.isOwnList!
-                                ? const Icon(
-                              Icons.verified_user_outlined,
-                              color: mainColor,
-                            )
-                                : const Icon(
-                              Icons.supervised_user_circle,
-                              color: mainColor,
-                            ),
-                            topRightIconBorderColor:
-                            list.isOwnList! ? const AppTheme().themeData.primaryColor : Colors.brown,
-                          );
+          // logger.d('lists: ${lists.length}');
+          return Padding(
+            padding: const EdgeInsets.all(16),
+            child: CustomScrollView(
+              slivers: [
+                SliverGrid.count(
+                  mainAxisSpacing: 20,
+                  crossAxisSpacing: 20,
+                  crossAxisCount: crossAxisCount,
+                  children: lists.map(
+                    (list) {
+                      return ImageButton<Object>(
+                        item: list,
+                        image: list.listType.getImagePath(),
+                        text: list.listName,
+                        callback: (list) {
+                          if (list is UserList) {
+                            ListItemsPageRoute(listId: list.id!).push<void>(userListContext);
+                          } else {
+                            print('SHARED LIST CLICKED');
+                          }
                         },
-                      ).toList(),
-                    ),
-                  ],
+                        isLoading: false,
+                        topRightIcon: list.isOwnList!
+                            ? const Icon(
+                                Icons.verified_user_outlined,
+                                color: mainColor,
+                              )
+                            : const Icon(
+                                Icons.supervised_user_circle,
+                                color: mainColor,
+                              ),
+                        topRightIconBorderColor:
+                            list.isOwnList! ? const AppTheme().themeData.primaryColor : Colors.brown,
+                      );
+                    },
+                  ).toList(),
                 ),
-              );
-            },
+              ],
+            ),
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

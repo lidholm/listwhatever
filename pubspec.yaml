@@ -1,6 +1,6 @@
 name: listwhatever
 description: A starter template for Flutter projects
-version: 0.0.32+0
+version: 0.0.33+0000001
 publish_to: none
 
 environment:
@@ -13,6 +13,7 @@ dependencies:
   bloc_concurrency: ^0.2.2
   cloud_firestore: ^4.9.3
   collection: ^1.17.2
+  csv: ^5.1.1
   device_info_plus: ^9.1.1
   envify: ^2.0.3
   equatable: ^2.0.3

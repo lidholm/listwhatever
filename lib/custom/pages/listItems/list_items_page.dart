@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:listwhatever/custom/pages/import/csv/import_csv_page_route.dart';
 import '/custom/firestore/listItems/infoView/list_item_info_view.dart';
 import '/custom/firestore/listItems/list_item.dart';
 import '/custom/firestore/listItems/list_items.dart';
@@ -70,84 +71,13 @@ class _ListItemsPageState extends State<ListItemsPage> {
           return listStateView;
         }
 
-        final showListViewAction = getShowListViewAction(listState, viewToShow);
-        final showMapViewAction = getShowMapViewAction(listState, viewToShow);
-        final showSortAction = getShowSortAction(listState, viewToShow, sortOrder);
-
         final list = (listState is ListLoaded) ? listState.list : null;
-        final listId = list?.id;
         final listName = (listState is ListLoaded) ? listState.list?.name ?? '' : '';
 
         return Scaffold(
           appBar: CommonAppBar(
             title: context.l10n.listItemsHeader(listName),
-            actions: [
-              if (showListViewAction != null) showListViewAction,
-              if (showMapViewAction != null) showMapViewAction,
-              if (showSortAction != null) showSortAction,
-              if (listId != null)
-                AppBarAction(
-                  type: AppBarActionType.icon,
-                  iconAction: AppBarActionIcon(
-                    title: context.l10n.filterMenuText,
-                    icon: filters.anySelectedFilters(
-                            listHasDates: list?.withDates ?? false, listHasMap: list?.withMap ?? false,)
-                        ? Icons.filter_alt
-                        : Icons.filter_alt_outlined,
-                    callback: () {
-                      showModalBottomSheet<void>(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return FilterView(listId: listId);
-                        },
-                      );
-                    },
-                    key: const Key('filterListItems'),
-                  ),
-                ),
-              if (list?.isOwnList ?? false)
-                AppBarAction(
-                  type: AppBarActionType.icon,
-                  iconAction: AppBarActionIcon(
-                    title: context.l10n.shareListMenuText,
-                    icon: Icons.share,
-                    callback: () {
-                      ShareListPageRoute(widget.listId).push<void>(context);
-                    },
-                    key: const Key('shareListMenuItem'),
-                  ),
-                ),
-              if (listId != null) ...[
-                if (list?.shareType == ShareType.editor)
-                  AppBarAction(
-                    type: AppBarActionType.overflowIcon,
-                    overflowIcon: AppBarActionOverflowIcon(
-                      title: context.l10n.editList,
-                      icon: Icons.edit,
-                      callback: () async {
-                        final listBloc = context.read<ListBloc>();
-                        await EditListPageRoute(widget.listId).push<void>(context);
-                        listBloc.add(LoadList(widget.listId));
-                      },
-                      key: const Key('editList'),
-                    ),
-                  ),
-                AppBarAction(
-                  type: AppBarActionType.overflowIcon,
-                  overflowIcon: AppBarActionOverflowIcon(
-                    title: context.l10n.deleteList,
-                    icon: Icons.delete,
-                    callback: () async {
-                      context
-                          .read<RedirectCubit>()
-                          .setRedirect('${const ListsPageRoute().location}?t=${DateTime.now()}');
-                      context.read<ListBloc>().add(DeleteList(widget.listId));
-                    },
-                    key: const Key('deleteList'),
-                  ),
-                ),
-              ],
-            ],
+            actions: getAppBarActions(listState, viewToShow, sortOrder, filters),
           ),
           body: switch (listItemState) {
             ListItemsLoading() => const Center(child: CircularProgressIndicator()),
@@ -207,7 +137,42 @@ class _ListItemsPageState extends State<ListItemsPage> {
     }
   }
 
-  AppBarAction<String>? getShowListViewAction(
+  List<ListItem> filterItems(ListOfThings? list, List<ListItem> items, Filters filters) {
+    return filterListItems(
+      allItems: items,
+      filters: filters,
+      listHasDates: list?.withDates ?? false,
+      listHasMap: list?.withMap ?? false,
+      distanceFilterCenter: null, // TODO
+    );
+  }
+
+  void showDetailsView(String? listId, String itemId) {
+    showModalBottomSheet<ListItemInfoView>(
+      context: context,
+      builder: (context) => ListItemInfoView(listId: listId, itemId: itemId),
+    );
+  }
+
+  List<AppBarAction<dynamic>> getAppBarActions(
+      ListState listState, ListItemsPageView viewToShow, (ListItemsSortOrder, SortOrder) sortOrder, Filters filters,) {
+    final list = (listState is ListLoaded) ? listState.list : null;
+
+    final actions = [
+      getShowListViewAction(listState, viewToShow),
+      getShowMapViewAction(listState, viewToShow),
+      getShowSortAction(listState, viewToShow, sortOrder),
+      getShowFilterAction(list, filters),
+      getShowShareListAction(list, filters),
+      getShowEditAction(list),
+      getShowDeleteAction(list),
+      getShowImportAction(),
+    ].nonNulls.toList();
+
+    return actions;
+  }
+
+  AppBarAction<AppBarActionIcon>? getShowListViewAction(
     ListState state,
     ListItemsPageView viewToShow,
   ) {
@@ -308,20 +273,100 @@ class _ListItemsPageState extends State<ListItemsPage> {
     return withMap ?? false;
   }
 
-  List<ListItem> filterItems(ListOfThings? list, List<ListItem> items, Filters filters) {
-    return filterListItems(
-      allItems: items,
-      filters: filters,
-      listHasDates: list?.withDates ?? false,
-      listHasMap: list?.withMap ?? false,
-      distanceFilterCenter: null, // TODO
+  AppBarAction<AppBarActionIcon>? getShowFilterAction(ListOfThings? list, Filters filters) {
+    if (list == null || list.id == null) {
+      return null;
+    }
+    return AppBarAction(
+      type: AppBarActionType.icon,
+      iconAction: AppBarActionIcon(
+        title: context.l10n.filterMenuText,
+        icon: filters.anySelectedFilters(
+          listHasDates: list.withDates,
+          listHasMap: list.withMap,
+        )
+            ? Icons.filter_alt
+            : Icons.filter_alt_outlined,
+        callback: () {
+          showModalBottomSheet<void>(
+            context: context,
+            builder: (BuildContext context) {
+              return FilterView(listId: widget.listId);
+            },
+          );
+        },
+        key: const Key('filterListItems'),
+      ),
     );
   }
 
-  void showDetailsView(String? listId, String itemId) {
-    showModalBottomSheet<ListItemInfoView>(
-      context: context,
-      builder: (context) => ListItemInfoView(listId: listId, itemId: itemId),
+  AppBarAction<AppBarActionIcon>? getShowShareListAction(ListOfThings? list, Filters filters) {
+    if (list == null) {
+      return null;
+    }
+
+    return AppBarAction(
+      type: AppBarActionType.icon,
+      iconAction: AppBarActionIcon(
+        title: context.l10n.shareListMenuText,
+        icon: Icons.share,
+        callback: () {
+          ShareListPageRoute(widget.listId).push<void>(context);
+        },
+        key: const Key('shareListMenuItem'),
+      ),
+    );
+  }
+
+  AppBarAction<AppBarActionOverflowIcon>? getShowEditAction(ListOfThings? list) {
+    if (list == null || list.id == null) {
+      return null;
+    }
+
+    return AppBarAction(
+      type: AppBarActionType.overflowIcon,
+      overflowIcon: AppBarActionOverflowIcon(
+        title: context.l10n.editList,
+        icon: Icons.edit,
+        callback: () async {
+          final listBloc = context.read<ListBloc>();
+          await EditListPageRoute(widget.listId).push<void>(context);
+          listBloc.add(LoadList(widget.listId));
+        },
+        key: const Key('editList'),
+      ),
+    );
+  }
+
+  AppBarAction<AppBarActionOverflowIcon>? getShowDeleteAction(ListOfThings? list) {
+    if (list == null || list.id == null) {
+      return null;
+    }
+    return AppBarAction(
+      type: AppBarActionType.overflowIcon,
+      overflowIcon: AppBarActionOverflowIcon(
+        title: context.l10n.deleteList,
+        icon: Icons.delete,
+        callback: () async {
+          context.read<RedirectCubit>().setRedirect('${const ListsPageRoute().location}?t=${DateTime.now()}');
+          context.read<ListBloc>().add(DeleteList(widget.listId));
+        },
+        key: const Key('deleteList'),
+      ),
+    );
+  }
+
+  AppBarAction<dynamic> getShowImportAction() {
+    return AppBarAction(
+      type: AppBarActionType.overflowIcon,
+      overflowIcon: AppBarActionOverflowIcon(
+        title: context.l10n.importListItems,
+        icon: Icons.import_export,
+        callback: () async {
+          await ImportCsvPageRoute(widget.listId).push<void>(context);
+        },
+        key: const Key('deleteList'),
+      ),
     );
   }
 }

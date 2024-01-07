@@ -66,6 +66,11 @@ RouteBase get $mainPageRoute => GoRouteData.$route(
               name: 'share',
               factory: $ShareListPageRouteExtension._fromState,
             ),
+            GoRouteData.$route(
+              path: ':listId/import/csv',
+              name: 'importcsv',
+              factory: $ImportCsvPageRouteExtension._fromState,
+            ),
           ],
         ),
         GoRouteData.$route(
@@ -324,6 +329,26 @@ extension $ShareListPageRouteExtension on ShareListPageRoute {
 
   String get location => GoRouteData.$location(
         '/lists/${Uri.encodeComponent(listId)}/share',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $ImportCsvPageRouteExtension on ImportCsvPageRoute {
+  static ImportCsvPageRoute _fromState(GoRouterState state) =>
+      ImportCsvPageRoute(
+        state.pathParameters['listId']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/lists/${Uri.encodeComponent(listId)}/import/csv',
       );
 
   void go(BuildContext context) => context.go(location);

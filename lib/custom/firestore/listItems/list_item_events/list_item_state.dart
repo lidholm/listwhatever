@@ -29,3 +29,8 @@ class ListItemDeleted extends ListItemState {
   final String listId;
   final String listItemId;
 }
+
+class ListItemsImported extends ListItemState {
+  ListItemsImported(this.listId);
+  final String listId;
+}

@@ -12,6 +12,7 @@ class ListItemsBloc extends Bloc<ListItemsEvent, ListItemsState> {
     on<ChangeUserForListItems>(_onChangeUser);
     on<AddListItem>(_onAddListItem);
     on<WatchListItems>(_onWatchListItems);
+    on<LoadListItems>(_onLoadListItems);
   }
   final UserListsService _userListsService;
   final ListItemsService _listItemsService;
@@ -35,9 +36,17 @@ class ListItemsBloc extends Bloc<ListItemsEvent, ListItemsState> {
         },);
   }
 
+  Future<void> _onLoadListItems(LoadListItems event, Emitter<ListItemsState> emit) async {
+    final userList = await _userListsService.getList(event.listId);
+    final listItems = await _listItemsService.getListItems(userList.listId).first;
+
+    emit(ListItemsLoaded(listItems));
+  }
+
   Future<void> _onAddListItem(AddListItem event, Emitter<ListItemsState> emit) async {
     try {
-      await _listItemsService.addListItem(event.listId, event.item);
+      final userList = await _userListsService.getList(event.listId);
+      await _listItemsService.addListItem(userList.listId, event.item);
     } catch (e) {
       logger.e('Error: $e');
       emit(ListItemsError('Failed to add listItem.\n$e'));

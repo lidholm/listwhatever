@@ -76,7 +76,7 @@ class MapsViewState extends State<MapsView> {
   }
 
   LatLngBounds getBounds() {
-    final latLngList = widget.items.map((e) => e.latLong!.toLatLng()).toList();
+    final latLngList = widget.items.where((e) => e.latLong != null).map((e) => e.latLong!.toLatLng()).toList();
     assert(latLngList.isNotEmpty, 'List is empty');
     double? x0;
     double? x1;

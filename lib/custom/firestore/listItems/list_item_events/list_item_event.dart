@@ -29,3 +29,9 @@ class DeleteListItem extends ListItemEvent {
   final String listId;
   final String listItemId;
 }
+
+class ImportListItems extends ListItemEvent {
+  ImportListItems(this.listId, this.listItems);
+  final String listId;
+  final List<ListItem> listItems;
+}
