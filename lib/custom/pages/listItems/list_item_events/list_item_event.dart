@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '/custom/firestore/listItems/list_item.dart';
+import '/custom/pages/listItems/list_item.dart';
 
 @immutable
 abstract class ListItemEvent {}

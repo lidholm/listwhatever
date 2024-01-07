@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:listwhatever/custom/pages/import/csv/import_csv_page_route.dart';
-import '/custom/firestore/listItems/infoView/list_item_info_view.dart';
-import '/custom/firestore/listItems/list_item.dart';
-import '/custom/firestore/listItems/list_items.dart';
-import '/custom/firestore/listItems/list_items_list_view.dart';
-import '/custom/firestore/listItems/list_items_page_view_cubit.dart';
-import '/custom/firestore/listItems/list_items_sort_order_cubit.dart';
-import '/custom/firestore/listItems/list_or_list_item_not_loaded_handler.dart';
-import '/custom/firestore/listItems/map/maps_view.dart';
-import '/custom/firestore/lists/lists.dart';
+
 import '/custom/navigation/routes.dart';
+import '/custom/pages/import/csv/import_csv_page_route.dart';
 import '/custom/pages/listItems/addListItem/add_list_item_page_route.dart';
 import '/custom/pages/listItems/filters/filter_bloc.dart';
 import '/custom/pages/listItems/filters/filter_list_items.dart';
 import '/custom/pages/listItems/filters/filters.dart';
+import '/custom/pages/listItems/infoView/list_item_info_view.dart';
+import '/custom/pages/listItems/list_items_events/list_items_bloc.dart';
+import '/custom/pages/listItems/list_items_events/list_items_event.dart';
+import '/custom/pages/listItems/list_items_events/list_items_state.dart';
+import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
+import '/custom/pages/listItems/map/maps_view.dart';
 import '/custom/pages/lists/addList/edit_list_page_route.dart';
+import '/custom/pages/lists/list_events/list_bloc.dart';
+import '/custom/pages/lists/list_events/list_event.dart';
+import '/custom/pages/lists/list_events/list_state.dart';
+import '/custom/pages/lists/list_of_things.dart';
 import '/custom/pages/lists/lists_page_route.dart';
 import '/custom/pages/shareList/share_list_page_route.dart';
 import '/l10n/l10n.dart';
@@ -25,9 +27,12 @@ import '/standard/widgets/appBar/app_bar_action_dropdown.dart';
 import '/standard/widgets/appBar/app_bar_action_icon.dart';
 import '/standard/widgets/appBar/app_bar_action_overflow_icon.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
-
 import 'filters/filter_state.dart';
 import 'filters/filter_view.dart';
+import 'list_item.dart';
+import 'list_items_list_view.dart';
+import 'list_items_page_view_cubit.dart';
+import 'list_items_sort_order_cubit.dart';
 
 class ListItemsPage extends StatefulWidget {
   const ListItemsPage({required this.listId, super.key});

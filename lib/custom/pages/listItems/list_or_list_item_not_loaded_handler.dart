@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import '/custom/firestore/listItems/list_item_events/list_item_state.dart';
-import '/custom/firestore/listItems/list_items.dart';
-import '/custom/firestore/lists/lists.dart';
-import '/custom/firestore/sharedList/bloc/shared_list_state.dart';
+import '/custom/pages/listItems/list_item_events/list_item_state.dart';
+import '/custom/pages/listItems/list_items_events/list_items_state.dart';
+import '/custom/pages/lists/list_events/list_state.dart';
+import '/custom/pages/lists/lists_events/lists_state.dart';
+import '/custom/pages/shareList/bloc/shared_list_state.dart';
 import '/standard/constants.dart';
 
 class ListOrListItemNotLoadedHandler {

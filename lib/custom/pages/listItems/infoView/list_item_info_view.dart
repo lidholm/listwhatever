@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '/custom/firestore/listItems/list_item_events/list_item_bloc.dart';
-import '/custom/firestore/listItems/list_item_events/list_item_event.dart';
-import '/custom/firestore/listItems/list_item_events/list_item_state.dart';
-import '/custom/firestore/listItems/list_or_list_item_not_loaded_handler.dart';
-import '/custom/firestore/lists/lists.dart';
+
 import '/custom/navigation/routes.dart';
 import '/custom/pages/listItems/addListItem/edit_list_item_page_route.dart';
+import '/custom/pages/listItems/list_item_events/list_item_bloc.dart';
+import '/custom/pages/listItems/list_item_events/list_item_event.dart';
+import '/custom/pages/listItems/list_item_events/list_item_state.dart';
+import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
+import '/custom/pages/lists/list_events/list_bloc.dart';
 import '/l10n/l10n.dart';
 import '/standard/constants.dart';
 import '/standard/widgets/appBar/app_bar_action.dart';

@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '/custom/firestore/listItems/list_item.dart';
 import '/standard/constants.dart';
+import '../list_item.dart';
 
 class MapsView extends StatefulWidget {
   const MapsView({required this.items, required this.onTap, super.key});
