@@ -15,7 +15,7 @@ class AppTheme {
   /// Default `ThemeData` for App UI.
   ThemeData get themeData {
     return ThemeData(
-      primaryColor: _backgroundColor,
+      primaryColor: AppColors.darkPurple,
       canvasColor: _backgroundColor,
       scaffoldBackgroundColor: _backgroundColor,
       iconTheme: _iconTheme,
@@ -61,7 +61,7 @@ class AppTheme {
     );
   }
 
-  Color get _backgroundColor => AppColors.white;
+  Color get _backgroundColor => AppColors.lavender;
 
   AppBarTheme get _appBarTheme {
     return AppBarTheme(
@@ -69,7 +69,7 @@ class AppTheme {
       titleTextStyle: _textTheme.titleLarge,
       elevation: 0,
       toolbarHeight: 64,
-      backgroundColor: AppColors.transparent,
+      backgroundColor: AppColors.lavender,
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarIconBrightness: Brightness.dark,
         statusBarBrightness: Brightness.light,
@@ -175,7 +175,7 @@ class AppTheme {
         ),
         padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
         textStyle: _textTheme.labelLarge,
-        backgroundColor: AppColors.blue,
+        backgroundColor: AppColors.transparent,
       ),
     );
   }

@@ -1,10 +1,11 @@
-
 import 'package:flutter/material.dart';
+import 'package:listwhatever/standard/appUi/colors/app_colors.dart';
 import '/standard/navigation/widgets/shimmer/shimmer_loading.dart';
 
-const roundedRadius = 8.0;
+const imageRadius = 16.0;
+const roundedRadius = 20.0;
 
-const mainColor = Colors.red; // TODO: Replace
+const mainColor = AppColors.darkPurple; // TODO: Replace
 const background = Colors.white; // TODO: Replace
 
 class ImageButton<T> extends StatelessWidget {
@@ -16,8 +17,10 @@ class ImageButton<T> extends StatelessWidget {
     required this.isLoading,
     this.topRightIcon,
     this.topRightIconBorderColor,
+    this.chipText,
     super.key,
   });
+
   final T item;
   final String image;
   final String text;
@@ -25,6 +28,7 @@ class ImageButton<T> extends StatelessWidget {
   final bool isLoading;
   final Widget? topRightIcon;
   final Color? topRightIconBorderColor;
+  final String? chipText;
 
   @override
   Widget build(BuildContext context) {
@@ -37,81 +41,92 @@ class ImageButton<T> extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(roundedRadius),
           ),
+          backgroundColor: Colors.white,
         ),
         onPressed: () {
           callback.call(item);
         },
-        child: DecoratedBox(
-          decoration: isLoading
-              ? BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.circular(16),
-          )
-              : BoxDecoration(
-            image: DecorationImage(
-              opacity: 0.95,
-              image: AssetImage(image),
-              fit: BoxFit.fitHeight,
-            ),
-            borderRadius:
-            const BorderRadius.all(Radius.circular(roundedRadius)),
-            border: Border.all(color: mainColor, width: 6),
-          ),
+        child: backgroundWidget(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              if (topRightIcon != null)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+              imageWidget(),
+              headerWidget(),
+              Padding(
+                padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(4),
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: background,
-                          border: Border.all(
-                            color: topRightIconBorderColor!,
-                            width: 4,
-                          ),
-                        ),
-                        child: IconButton(
-                          icon: topRightIcon!,
-                          onPressed: () {},
-                        ),
-                        // topRightIcon,
-                      ),
-                    ),
+                    if (chipText != null) typeWidget()!,
+                    sharedInfoWidget(),
                   ],
-                ),
-              Container(
-                color: mainColor.withOpacity(0.8),
-                width: double.infinity,
-                height: 36,
-                child: Center(
-                  child: isLoading
-                      ? Container(
-                    width: 250,
-                    height: 24,
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  )
-                      : Text(
-                    text,
-                    style:
-                    Theme.of(context).textTheme.bodySmall!.copyWith(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
                 ),
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  DecoratedBox backgroundWidget({required Widget child}) {
+    return DecoratedBox(
+        decoration: BoxDecoration(
+          color: background,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: child,);
+  }
+
+  Widget imageWidget() {
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+      print('constraints: $constraints');
+      return Padding(
+        padding: const EdgeInsets.only(left: 8, right: 8, top: 16, bottom: 8),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(imageRadius),
+          child: SizedBox(
+              width: constraints.maxWidth * 0.9,
+            height: constraints.maxWidth * 0.6,
+            child: Image.asset(image, fit: BoxFit.cover),
+          ),
+        ),
+      );
+    },);
+  }
+
+  Text headerWidget() {
+    return Text(text, style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold));
+  }
+
+  Widget? typeWidget() {
+    if (chipText == null) {
+      return null;
+    }
+
+    return DecoratedBox(
+        decoration: BoxDecoration(
+          color: mainColor,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child:  Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+          child: Text(chipText!, style: const TextStyle(color: Colors.white)),
+        ),);
+  }
+
+  Widget sharedInfoWidget() {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: background,
+        border: Border.all(
+          color: topRightIconBorderColor!,
+          width: 4,
+        ),
+      ),
+      child: IconButton(
+        icon: topRightIcon!,
+        onPressed: () {},
       ),
     );
   }

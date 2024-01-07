@@ -156,4 +156,10 @@ abstract class AppColors {
 
   /// The orange color.
   static const Color orange = Color(0xFFFB8B24);
+
+  static const Color lavender = Color(0xFFF7E7FB);
+  static const Color darkPurple = Color(0xFFA47888);
+  static const Color casablanca = Color(0xFFF5AE52);
+  static const Color salmon = Color(0xFFFC7869);
+  static const Color quartz = Color(0xFFE0C2F2);
 }

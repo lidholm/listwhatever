@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/list_type.dart';
+import 'package:listwhatever/standard/appUi/colors/app_colors.dart';
 
 import '/custom/navigation/routes.dart';
 import '/custom/pages/listItems/list_items_page_route.dart';
@@ -63,6 +64,7 @@ class _ListsPageState extends State<ListsPage> {
                         item: list,
                         image: list.listType.getImagePath(),
                         text: list.listName,
+                        chipText: list.listType.readable(),
                         callback: (list) {
                           if (list is UserList) {
                             ListItemsPageRoute(listId: list.id!).push<void>(userListContext);
@@ -78,10 +80,10 @@ class _ListsPageState extends State<ListsPage> {
                               )
                             : const Icon(
                                 Icons.supervised_user_circle,
-                                color: mainColor,
+                                color: AppColors.casablanca,
                               ),
                         topRightIconBorderColor:
-                            list.isOwnList! ? const AppTheme().themeData.primaryColor : Colors.brown,
+                            list.isOwnList! ? const AppTheme().themeData.primaryColor : AppColors.casablanca,
                       );
                     },
                   ).toList(),

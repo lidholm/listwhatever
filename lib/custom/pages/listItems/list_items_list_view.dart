@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:listwhatever/standard/widgets/vStack/v_stack.dart';
 
 import '/standard/constants.dart';
 import 'list_item.dart';
 
 class ListItemsListView extends StatelessWidget {
   const ListItemsListView({required this.listId, required this.items, required this.onTap, super.key});
+
   final String? listId;
   final List<ListItem> items;
   final void Function(String itemId) onTap;
@@ -16,24 +18,38 @@ class ListItemsListView extends StatelessWidget {
     }
 
     return SingleChildScrollView(
-      child: Column(
+      child: VStack(
+        spacing: 0,
         children: items.map((item) {
-          return ListTile(
-            title: Text(item.name),
-            subtitle: Text(
-              item.datetime != null ? formatReadableDate(item.datetime!, DateFormatType.iso8601) : '',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.black.withAlpha(200),
-              ),
-            ),
-            trailing: IconButton(
-              onPressed: () {
-                onTap(item.id!);
-              },
-              icon: const Icon(
-                Icons.keyboard_arrow_right_rounded,
-              ),
+          final subtitle = item.datetime != null ? formatReadableDate(item.datetime!, DateFormatType.iso8601) : null;
+          return Padding(
+            padding: const EdgeInsets.all(8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(item.name),
+                    if (subtitle != null)
+                      Text(
+                        subtitle,
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.black.withAlpha(200),
+                        ),
+                      ),
+                  ],
+                ),
+                IconButton(
+                  onPressed: () {
+                    onTap(item.id!);
+                  },
+                  icon: const Icon(
+                    Icons.keyboard_arrow_right_rounded,
+                  ),
+                ),
+              ],
             ),
           );
         }).toList(),
