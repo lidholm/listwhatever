@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
+import '/custom/pages/lists/lists_service.dart';
+import '/custom/pages/lists/user_list.dart';
+import '/custom/pages/lists/user_lists_service.dart';
 
-import '/custom/firestore/lists/lists_service.dart';
-import '/custom/firestore/lists/user_list.dart';
-import '/custom/firestore/lists/user_lists_service.dart';
 import '/standard/constants.dart';
 import 'lists_event.dart';
 import 'lists_state.dart';

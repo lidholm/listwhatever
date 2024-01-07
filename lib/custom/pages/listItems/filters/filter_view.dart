@@ -6,15 +6,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
-import '/custom/firestore/listItems/list_item.dart';
-import '/custom/firestore/listItems/list_items.dart';
-import '/custom/firestore/listItems/list_or_list_item_not_loaded_handler.dart';
-import '/custom/firestore/lists/lists.dart';
+
 import '/custom/pages/listItems/filters/filter_bloc.dart';
 import '/custom/pages/listItems/filters/filters.dart';
+import '/custom/pages/listItems/list_item.dart';
 import '/custom/pages/listItems/list_items.dart';
+import '/custom/pages/listItems/list_items_events/list_items_bloc.dart';
+import '/custom/pages/listItems/list_items_events/list_items_state.dart';
+import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
+import '/custom/pages/lists/list_events/list_bloc.dart';
+import '/custom/pages/lists/list_events/list_event.dart';
+import '/custom/pages/lists/list_events/list_state.dart';
+import '/custom/pages/lists/list_of_things.dart';
 import '/standard/widgets/border_with_header.dart';
-
 import 'date_filter.dart';
 import 'filter_event.dart';
 import 'filter_state.dart';

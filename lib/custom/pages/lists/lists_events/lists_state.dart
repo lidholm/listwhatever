@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/custom/firestore/lists/user_list.dart';
+import '/custom/pages/lists/user_list.dart';
 
 @immutable
 sealed class ListsState {}

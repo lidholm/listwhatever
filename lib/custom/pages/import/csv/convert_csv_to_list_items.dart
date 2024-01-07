@@ -1,7 +1,7 @@
 import 'package:csv/csv.dart';
-import 'package:listwhatever/custom/firestore/listItems/list_item.dart';
-import 'package:listwhatever/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
-import 'package:listwhatever/standard/constants.dart';
+import '/custom/pages/listItems/list_item.dart';
+import '/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
+import '/standard/constants.dart';
 
 enum Keywords {
   name,

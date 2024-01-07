@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:listwhatever/custom/firestore/listItems/list_item.dart';
-import 'package:listwhatever/custom/firestore/listItems/list_item_events/list_item_bloc.dart';
-import 'package:listwhatever/custom/firestore/listItems/list_item_events/list_item_event.dart';
-import 'package:listwhatever/custom/firestore/listItems/list_items_events/list_items_bloc.dart';
-import 'package:listwhatever/custom/firestore/listItems/list_items_events/list_items_event.dart';
-import 'package:listwhatever/custom/firestore/listItems/list_items_events/list_items_state.dart';
-import 'package:listwhatever/custom/firestore/listItems/list_or_list_item_not_loaded_handler.dart';
-import 'package:listwhatever/custom/pages/import/csv/convert_csv_to_list_items.dart';
-import 'package:listwhatever/standard/constants.dart';
-import 'package:listwhatever/standard/widgets/appBar/common_app_bar.dart';
-import 'package:listwhatever/standard/widgets/vStack/v_stack.dart';
+import '/custom/pages/import/csv/convert_csv_to_list_items.dart';
+import '/custom/pages/listItems/list_item.dart';
+import '/custom/pages/listItems/list_item_events/list_item_bloc.dart';
+import '/custom/pages/listItems/list_item_events/list_item_event.dart';
+import '/custom/pages/listItems/list_items_events/list_items_bloc.dart';
+import '/custom/pages/listItems/list_items_events/list_items_event.dart';
+import '/custom/pages/listItems/list_items_events/list_items_state.dart';
+import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
+import '/standard/constants.dart';
+import '/standard/widgets/appBar/common_app_bar.dart';
+import '/standard/widgets/vStack/v_stack.dart';
 
 enum ImportCsvValues {
   csv,

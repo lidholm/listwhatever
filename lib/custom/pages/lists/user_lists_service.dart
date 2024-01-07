@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '/custom/pages/lists/user_list.dart';
 
-import '/custom/firestore/lists/user_list.dart';
 import '/standard/constants.dart';
 import '/standard/firebase/firestore/firestore.dart';
 
