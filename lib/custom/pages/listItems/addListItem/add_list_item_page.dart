@@ -140,18 +140,17 @@ class _AddListItemPageState extends State<AddListItemPage> {
               padLeft(createNameField()),
               padLeft(createInfoField()),
               createDivider(),
-              header('Categories'),
+              header('Categories', addCategoryButton()),
               ...createCategoryFields(),
               createDivider(),
-              header('Urls'),
+              header('Urls', addUrlButton()),
               ...createUrlFields(),
-              if (list?.withDates ?? false) ...[createDivider(), header('Date'), createDateField(list)],
+              if (list?.withDates ?? false) ...[createDivider(), header('Date'), padLeft(createDateField(list))],
               if (list?.withMap ?? false) ...[
-                header('Location'),
                 createDivider(),
-                createSearchLocationButton(context),
-                createAddressField(),
-                createLatLongFields(),
+                header('Location', createSearchLocationButton(context)),
+                padLeft(createAddressField()),
+                padLeft(createLatLongFields()),
               ],
               const SizedBox(height: 40),
               Row(
@@ -197,11 +196,19 @@ class _AddListItemPageState extends State<AddListItemPage> {
     );
   }
 
-  Widget header(String header) {
-    return Text(
+  Widget header(String header, [Widget? button]) {
+    final text = Text(
       header,
       style: UITextStyle.subtitle1,
     );
+    if (button != null) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [text, button],
+      );
+    } else {
+      return text;
+    }
   }
 
   Map<String, dynamic> getCategoryKeysMap(ListItem? listItem) {
@@ -350,7 +357,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
         });
       },
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+        padding: const EdgeInsets.fromLTRB(8, 2, 8, 2),
         child: Text(context.l10n.searchForLocationButton),
       ),
     );
@@ -382,41 +389,58 @@ class _AddListItemPageState extends State<AddListItemPage> {
     );
   }
 
+  Widget addUrlButton() {
+    return IconButton(
+      onPressed: () {
+        setState(() {
+          urls = [...urls, ''];
+        });
+      },
+      icon: const Icon(Icons.add),
+    );
+  }
+
   List<Widget> createUrlFields() {
     return [
       for (final urlMap in mapIndexed(urls))
-        FormBuilderTextField(
-          autovalidateMode: AutovalidateMode.always,
-          name: '${AddListItemValues.urls}-${[urlMap.$1]}',
-          decoration: InputDecoration(
-            labelText: 'URL',
-            suffixIcon: _infoHasError
-                ? const Icon(Icons.error, color: Colors.red)
-                : const Icon(Icons.check, color: Colors.green),
+        padLeft(
+          FormBuilderTextField(
+            autovalidateMode: AutovalidateMode.always,
+            name: '${AddListItemValues.urls}-${[urlMap.$1]}',
+            decoration: InputDecoration(
+              labelText: 'URL',
+              suffixIcon: _infoHasError
+                  ? const Icon(Icons.error, color: Colors.red)
+                  : const Icon(Icons.check, color: Colors.green),
+            ),
+            onChanged: (val) {
+              setState(() {
+                _infoHasError =
+                    !(_formKey.currentState?.fields[AddListItemValues.info.toString()]?.validate() ?? false);
+              });
+            },
+            validator: FormBuilderValidators.compose([
+              FormBuilderValidators.max(1200),
+            ]),
+            keyboardType: TextInputType.url,
+            textInputAction: TextInputAction.next,
           ),
-          onChanged: (val) {
-            setState(() {
-              _infoHasError = !(_formKey.currentState?.fields[AddListItemValues.info.toString()]?.validate() ?? false);
-            });
-          },
-          validator: FormBuilderValidators.compose([
-            FormBuilderValidators.max(1200),
-          ]),
-          keyboardType: TextInputType.url,
-          textInputAction: TextInputAction.next,
         ),
-      ElevatedButton(
-        onPressed: () {
-          setState(() {
-            urls = [...urls, ''];
-          });
-        },
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-          child: Text(context.l10n.addUrlButton),
-        ),
-      ),
     ];
+  }
+
+  Widget addCategoryButton() {
+    return IconButton(
+      onPressed: () {
+        setState(() {
+          categoryKeys = [...categoryKeys, ''];
+          categoryValues = [...categoryValues, ''];
+          _categoryHasError = [..._categoryHasError, false];
+          _categoryValueHasError = [..._categoryValueHasError, false];
+        });
+      },
+      icon: const Icon(Icons.add),
+    );
   }
 
   List<Widget> createCategoryFields() {
@@ -425,72 +449,62 @@ class _AddListItemPageState extends State<AddListItemPage> {
         Row(
           children: [
             Expanded(
-              child: FormBuilderTextField(
-                autovalidateMode: AutovalidateMode.always,
-                name: '${AddListItemValues.categoryKeys}-${categoryMap.$1}',
-                decoration: InputDecoration(
-                  labelText: 'Category',
-                  suffixIcon: _nameHasError
-                      ? const Icon(Icons.error, color: Colors.red)
-                      : const Icon(Icons.check, color: Colors.green),
+              child: padLeft(
+                FormBuilderTextField(
+                  autovalidateMode: AutovalidateMode.always,
+                  name: '${AddListItemValues.categoryKeys}-${categoryMap.$1}',
+                  decoration: InputDecoration(
+                    labelText: 'Category',
+                    suffixIcon: _nameHasError
+                        ? const Icon(Icons.error, color: Colors.red)
+                        : const Icon(Icons.check, color: Colors.green),
+                  ),
+                  onChanged: (val) {
+                    setState(() {
+                      _categoryHasError[categoryMap.$1] =
+                          !(_formKey.currentState?.fields[AddListItemValues.categoryKeys.toString()]?.validate() ??
+                              false);
+                    });
+                  },
+                  validator: FormBuilderValidators.compose([
+                    FormBuilderValidators.required(),
+                    FormBuilderValidators.max(70),
+                  ]),
+                  keyboardType: TextInputType.name,
+                  textInputAction: TextInputAction.next,
                 ),
-                onChanged: (val) {
-                  setState(() {
-                    _categoryHasError[categoryMap.$1] =
-                        !(_formKey.currentState?.fields[AddListItemValues.categoryKeys.toString()]?.validate() ??
-                            false);
-                  });
-                },
-                validator: FormBuilderValidators.compose([
-                  FormBuilderValidators.required(),
-                  FormBuilderValidators.max(70),
-                ]),
-                keyboardType: TextInputType.name,
-                textInputAction: TextInputAction.next,
               ),
             ),
             const SizedBox(width: 8),
             Expanded(
-              child: FormBuilderTextField(
-                autovalidateMode: AutovalidateMode.always,
-                name: '${AddListItemValues.categoryValues}-${categoryMap.$1}',
-                decoration: InputDecoration(
-                  labelText: 'Value(s):',
-                  suffixIcon: _nameHasError
-                      ? const Icon(Icons.error, color: Colors.red)
-                      : const Icon(Icons.check, color: Colors.green),
+              child: padLeft(
+                FormBuilderTextField(
+                  autovalidateMode: AutovalidateMode.always,
+                  name: '${AddListItemValues.categoryValues}-${categoryMap.$1}',
+                  decoration: InputDecoration(
+                    labelText: 'Value(s):',
+                    suffixIcon: _nameHasError
+                        ? const Icon(Icons.error, color: Colors.red)
+                        : const Icon(Icons.check, color: Colors.green),
+                  ),
+                  onChanged: (val) {
+                    setState(() {
+                      _categoryValueHasError[categoryMap.$1] =
+                          !(_formKey.currentState?.fields[AddListItemValues.categoryValues.toString()]?.validate() ??
+                              false);
+                    });
+                  },
+                  validator: FormBuilderValidators.compose([
+                    FormBuilderValidators.required(),
+                    FormBuilderValidators.max(150),
+                  ]),
+                  keyboardType: TextInputType.name,
+                  textInputAction: TextInputAction.next,
                 ),
-                onChanged: (val) {
-                  setState(() {
-                    _categoryValueHasError[categoryMap.$1] =
-                        !(_formKey.currentState?.fields[AddListItemValues.categoryValues.toString()]?.validate() ??
-                            false);
-                  });
-                },
-                validator: FormBuilderValidators.compose([
-                  FormBuilderValidators.required(),
-                  FormBuilderValidators.max(150),
-                ]),
-                keyboardType: TextInputType.name,
-                textInputAction: TextInputAction.next,
               ),
             ),
           ],
         ),
-      ElevatedButton(
-        onPressed: () {
-          setState(() {
-            categoryKeys = [...categoryKeys, ''];
-            categoryValues = [...categoryValues, ''];
-            _categoryHasError = [..._categoryHasError, false];
-            _categoryValueHasError = [..._categoryValueHasError, false];
-          });
-        },
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-          child: Text(context.l10n.addCategoryButton),
-        ),
-      ),
     ];
   }
 
