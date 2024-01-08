@@ -54,13 +54,13 @@ abstract class AppColors {
   static const Color paleSky = Color(0xFF73777F);
 
   /// The input hover color.
-  static const Color inputHover = Color(0xFFE4E4E4);
+  static const Color inputHover = Colors.white;
 
   /// The input focused color.
-  static const Color inputFocused = Color(0xFFD1D1D1);
+  static const Color inputFocused = Colors.white;
 
   /// The input enabled color.
-  static const Color inputEnabled = Color(0xFFEDEDED);
+  static const Color inputEnabled = Colors.white;
 
   /// The pastel grey color.
   static const Color pastelGrey = Color(0xFFCCCCCC);
@@ -157,6 +157,7 @@ abstract class AppColors {
   /// The orange color.
   static const Color orange = Color(0xFFFB8B24);
 
+  static const Color purple = Color.fromARGB(255, 192, 1, 147);
   static const Color lavender = Color(0xFFF7E7FB);
   static const Color darkPurple = Color(0xFFA47888);
   static const Color casablanca = Color(0xFFF5AE52);

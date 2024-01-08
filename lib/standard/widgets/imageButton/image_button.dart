@@ -5,8 +5,8 @@ import '/standard/navigation/widgets/shimmer/shimmer_loading.dart';
 const imageRadius = 16.0;
 const roundedRadius = 20.0;
 
-const mainColor = AppColors.darkPurple; // TODO: Replace
-const background = Colors.white; // TODO: Replace
+const mainColor = AppColors.darkPurple;
+const background = Colors.white;
 
 class ImageButton<T> extends StatelessWidget {
   const ImageButton({
@@ -70,28 +70,31 @@ class ImageButton<T> extends StatelessWidget {
 
   DecoratedBox backgroundWidget({required Widget child}) {
     return DecoratedBox(
-        decoration: BoxDecoration(
-          color: background,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: child,);
+      decoration: BoxDecoration(
+        color: background,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: child,
+    );
   }
 
   Widget imageWidget() {
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
-      print('constraints: $constraints');
-      return Padding(
-        padding: const EdgeInsets.only(left: 8, right: 8, top: 16, bottom: 8),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(imageRadius),
-          child: SizedBox(
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        print('constraints: $constraints');
+        return Padding(
+          padding: const EdgeInsets.only(left: 8, right: 8, top: 16, bottom: 8),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(imageRadius),
+            child: SizedBox(
               width: constraints.maxWidth * 0.9,
-            height: constraints.maxWidth * 0.6,
-            child: Image.asset(image, fit: BoxFit.cover),
+              height: constraints.maxWidth * 0.6,
+              child: Image.asset(image, fit: BoxFit.cover),
+            ),
           ),
-        ),
-      );
-    },);
+        );
+      },
+    );
   }
 
   Text headerWidget() {
@@ -104,14 +107,15 @@ class ImageButton<T> extends StatelessWidget {
     }
 
     return DecoratedBox(
-        decoration: BoxDecoration(
-          color: mainColor,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child:  Padding(
-          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-          child: Text(chipText!, style: const TextStyle(color: Colors.white)),
-        ),);
+      decoration: BoxDecoration(
+        color: mainColor,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+        child: Text(chipText!, style: const TextStyle(color: Colors.white)),
+      ),
+    );
   }
 
   Widget sharedInfoWidget() {
