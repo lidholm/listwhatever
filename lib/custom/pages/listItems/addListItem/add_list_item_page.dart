@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/standard/appUi/typography/app_text_styles.dart';
 
 import '/custom/navigation/routes.dart';
 import '/custom/pages/listItems/list_item.dart';
@@ -101,9 +102,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
     }
     list = (listState as ListLoaded).list;
     if (widget.listItemId != null) {
-      final listItemState = context
-          .watch<ListItemBloc>()
-          .state;
+      final listItemState = context.watch<ListItemBloc>().state;
       final listItemStateView = ListOrListItemNotLoadedHandler.handleListItemState(listItemState);
       if (listItemStateView != null) {
         return listItemStateView;
@@ -137,13 +136,18 @@ class _AddListItemPageState extends State<AddListItemPage> {
             list,
             listItem,
             [
-              createNameField(),
-              createInfoField(),
+              header('Main info'),
+              padLeft(createNameField()),
+              padLeft(createInfoField()),
+              createDivider(),
+              header('Categories'),
               ...createCategoryFields(),
               createDivider(),
+              header('Urls'),
               ...createUrlFields(),
-              if (list?.withDates ?? false) createDateField(list),
+              if (list?.withDates ?? false) ...[createDivider(), header('Date'), createDateField(list)],
               if (list?.withMap ?? false) ...[
+                header('Location'),
                 createDivider(),
                 createSearchLocationButton(context),
                 createAddressField(),
@@ -186,7 +190,17 @@ class _AddListItemPageState extends State<AddListItemPage> {
       autovalidateMode: AutovalidateMode.disabled,
       initialValue: initialValue,
       skipDisabled: true,
-      child: VStack(children: children),
+      child: VStack(
+        verticalAlignment: VerticalAlignment.leading,
+        children: children,
+      ),
+    );
+  }
+
+  Widget header(String header) {
+    return Text(
+      header,
+      style: UITextStyle.subtitle1,
     );
   }
 
@@ -361,9 +375,9 @@ class _AddListItemPageState extends State<AddListItemPage> {
   Divider createDivider() {
     return const Divider(
       height: 20,
-      thickness: 5,
-      indent: 20,
-      endIndent: 0,
+      thickness: 2,
+      indent: 24,
+      endIndent: 24,
       color: Colors.black,
     );
   }
@@ -563,5 +577,12 @@ class _AddListItemPageState extends State<AddListItemPage> {
       BlocProvider.of<ListItemBloc>(context).add(UpdateListItem(listId, listItem));
     }
     GoRouter.of(context).pop();
+  }
+
+  Widget padLeft(Widget child) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 8),
+      child: child,
+    );
   }
 }
