@@ -80,6 +80,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
   List<String> categoryValues = [];
   List<bool> _categoryHasError = [];
   List<bool> _categoryValueHasError = [];
+  List<bool> _urlHasError = [];
 
   ListOfThings? list;
   ListItem? listItem;
@@ -394,6 +395,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
     return addButton(() {
       setState(() {
         urls = [...urls, ''];
+        _urlHasError = [..._urlHasError, false];
       });
     });
   }
@@ -402,26 +404,43 @@ class _AddListItemPageState extends State<AddListItemPage> {
     return [
       for (final urlMap in mapIndexed(urls))
         padLeft(
-          FormBuilderTextField(
-            autovalidateMode: AutovalidateMode.always,
-            name: '${AddListItemValues.urls}-${[urlMap.$1]}',
-            decoration: InputDecoration(
-              labelText: 'URL',
-              suffixIcon: _infoHasError
-                  ? const Icon(Icons.error, color: Colors.red)
-                  : const Icon(Icons.check, color: Colors.green),
-            ),
-            onChanged: (val) {
-              setState(() {
-                _infoHasError =
-                    !(_formKey.currentState?.fields[AddListItemValues.info.toString()]?.validate() ?? false);
-              });
-            },
-            validator: FormBuilderValidators.compose([
-              FormBuilderValidators.max(1200),
-            ]),
-            keyboardType: TextInputType.url,
-            textInputAction: TextInputAction.next,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: FormBuilderTextField(
+                  autovalidateMode: AutovalidateMode.always,
+                  name: '${AddListItemValues.urls}-${[urlMap.$1]}',
+                  decoration: InputDecoration(
+                    labelText: 'URL',
+                    suffixIcon: _urlHasError[urlMap.$1]
+                        ? const Icon(Icons.error, color: Colors.red)
+                        : const Icon(Icons.check, color: Colors.green),
+                  ),
+                  onChanged: (val) {
+                    setState(() {
+                      _urlHasError[urlMap.$1] =
+                          !(_formKey.currentState?.fields[AddListItemValues.info.toString()]?.validate() ?? false);
+                    });
+                  },
+                  validator: FormBuilderValidators.compose([
+                    FormBuilderValidators.max(1200),
+                  ]),
+                  keyboardType: TextInputType.url,
+                  textInputAction: TextInputAction.next,
+                ),
+              ),
+              padLeft(
+                circleButton(
+                  Icons.delete,
+                  () {
+                    setState(() {
+                      print('not doing anything yet');
+                    });
+                  },
+                ),
+              ),
+            ],
           ),
         ),
     ];
@@ -439,13 +458,17 @@ class _AddListItemPageState extends State<AddListItemPage> {
   }
 
   Widget addButton(void Function() onPressed) {
+    return circleButton(Icons.add, onPressed);
+  }
+
+  Widget circleButton(IconData icon, void Function() onPressed) {
     return CircleAvatar(
       radius: 16,
       backgroundColor: AppColors.darkPurple,
       child: IconButton(
         onPressed: onPressed,
         iconSize: 16,
-        icon: const Icon(Icons.add),
+        icon: Icon(icon),
       ),
     );
   }
