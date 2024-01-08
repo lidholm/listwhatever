@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/standard/appUi/colors/app_colors.dart';
 import 'package:listwhatever/standard/appUi/typography/app_text_styles.dart';
 
 import '/custom/navigation/routes.dart';
@@ -390,14 +391,11 @@ class _AddListItemPageState extends State<AddListItemPage> {
   }
 
   Widget addUrlButton() {
-    return IconButton(
-      onPressed: () {
-        setState(() {
-          urls = [...urls, ''];
-        });
-      },
-      icon: const Icon(Icons.add),
-    );
+    return addButton(() {
+      setState(() {
+        urls = [...urls, ''];
+      });
+    });
   }
 
   List<Widget> createUrlFields() {
@@ -430,16 +428,25 @@ class _AddListItemPageState extends State<AddListItemPage> {
   }
 
   Widget addCategoryButton() {
-    return IconButton(
-      onPressed: () {
-        setState(() {
-          categoryKeys = [...categoryKeys, ''];
-          categoryValues = [...categoryValues, ''];
-          _categoryHasError = [..._categoryHasError, false];
-          _categoryValueHasError = [..._categoryValueHasError, false];
-        });
-      },
-      icon: const Icon(Icons.add),
+    return addButton(() {
+      setState(() {
+        categoryKeys = [...categoryKeys, ''];
+        categoryValues = [...categoryValues, ''];
+        _categoryHasError = [..._categoryHasError, false];
+        _categoryValueHasError = [..._categoryValueHasError, false];
+      });
+    });
+  }
+
+  Widget addButton(void Function() onPressed) {
+    return CircleAvatar(
+      radius: 16,
+      backgroundColor: AppColors.darkPurple,
+      child: IconButton(
+        onPressed: onPressed,
+        iconSize: 16,
+        icon: const Icon(Icons.add),
+      ),
     );
   }
 
