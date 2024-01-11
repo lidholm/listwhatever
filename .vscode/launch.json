@@ -8,24 +8,24 @@
       "name": "Launch development",
       "request": "launch",
       "type": "dart",
-      "program": "lib/main_development.dart",
+      "program": "lib/standard/main/main_development.dart",
       "args": [
         "--flavor",
         "development",
         "--target",
-        "lib/main_development.dart"
+        "lib/standard/main/main_development.dart"
       ]
     },
     {
       "name": "Launch development (web)",
       "request": "launch",
       "type": "dart",
-      "program": "lib/main_development.dart",
+      "program": "lib/standard/main/main_development.dart",
       "args": [
         "--flavor",
         "development",
         "--target",
-        "lib/main_development.dart",
+        "lib/standard/main/main_development.dart",
         "-d",
         "chrome",
         "--web-hostname",
@@ -38,12 +38,12 @@
       "name": "Launch development (web) (web-renderer html)",
       "request": "launch",
       "type": "dart",
-      "program": "lib/main_development.dart",
+      "program": "lib/standard/main/main_development.dart",
       "args": [
         "--flavor",
         "development",
         "--target",
-        "lib/main_development.dart",
+        "lib/standard/main/main_development.dart",
         "-d",
         "chrome",
         "--web-hostname",

@@ -148,7 +148,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
       filters: filters,
       listHasDates: list?.withDates ?? false,
       listHasMap: list?.withMap ?? false,
-      distanceFilterCenter: null, // TODO
+      distanceFilterCenter: null, // TODO: Implement
     );
   }
 
@@ -160,7 +160,11 @@ class _ListItemsPageState extends State<ListItemsPage> {
   }
 
   List<AppBarAction<dynamic>> getAppBarActions(
-      ListState listState, ListItemsPageView viewToShow, (ListItemsSortOrder, SortOrder) sortOrder, Filters filters,) {
+    ListState listState,
+    ListItemsPageView viewToShow,
+    (ListItemsSortOrder, SortOrder) sortOrder,
+    Filters filters,
+  ) {
     final list = (listState is ListLoaded) ? listState.list : null;
 
     final actions = [
