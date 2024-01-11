@@ -34,7 +34,7 @@ class _ListsPageState extends State<ListsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final crossAxisCount = kIsWeb ? (MediaQuery.of(context).size.width / 240).floor() : 2;
+    final crossAxisCount = kIsWeb ? (MediaQuery.of(context).size.width / 360).floor() : 2;
 
     return Scaffold(
       appBar: CommonAppBar(
@@ -60,17 +60,13 @@ class _ListsPageState extends State<ListsPage> {
                   crossAxisCount: crossAxisCount,
                   children: lists.map(
                     (list) {
-                      return ImageButton<Object>(
+                      return ImageButton<UserList>(
                         item: list,
                         image: list.listType.getImagePath(),
                         text: list.listName,
                         chipText: list.listType.readable(),
                         callback: (list) {
-                          if (list is UserList) {
-                            ListItemsPageRoute(listId: list.id!).push<void>(userListContext);
-                          } else {
-                            print('SHARED LIST CLICKED');
-                          }
+                          ListItemsPageRoute(listId: list.id!).push<void>(userListContext);
                         },
                         isLoading: false,
                         topRightIcon: list.isOwnList!
