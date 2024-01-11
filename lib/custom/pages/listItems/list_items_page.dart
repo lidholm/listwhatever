@@ -55,7 +55,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        final listItemState = context.watch<ListItemsBloc>().state;
+        final listItemsState = context.watch<ListItemsBloc>().state;
         // logger.d('listItemState: $listItemState');
         final filtersState = context.watch<FilterBloc>().state;
 
@@ -70,7 +70,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
         final sortOrder = context.watch<ListItemsSortOrderCubit>().state;
         final listState = context.watch<ListBloc>().state;
 
-        final listStateView = ListOrListItemNotLoadedHandler.handleListAndListItemsState(listState, listItemState);
+        final listStateView = ListOrListItemNotLoadedHandler.handleListAndListItemsState(listState, listItemsState);
         // logger.i('listState: $listState');
         if (listStateView != null) {
           return listStateView;
@@ -78,19 +78,14 @@ class _ListItemsPageState extends State<ListItemsPage> {
 
         final list = (listState is ListLoaded) ? listState.list : null;
         final listName = (listState is ListLoaded) ? listState.list?.name ?? '' : '';
+        final listItems = (listItemsState as ListItemsLoaded).listItems;
 
         return Scaffold(
           appBar: CommonAppBar(
             title: context.l10n.listItemsHeader(listName),
             actions: getAppBarActions(listState, viewToShow, sortOrder, filters),
           ),
-          body: switch (listItemState) {
-            ListItemsLoading() => const Center(child: CircularProgressIndicator()),
-            ListItemsInitial() => Container(),
-            ListItemsLoaded() => showLoadedItems(list, listItemState, viewToShow, filters, sortOrder, widget.listId),
-            ListItemsOperationSuccess() => Container(),
-            ListItemsError() => Center(child: Text(listItemState.errorMessage)),
-          },
+          body: showLoadedItems(list, listItems, viewToShow, filters, sortOrder, widget.listId),
           floatingActionButton: list?.shareType == ShareType.editor
               ? FloatingActionButton(
                   onPressed: () {
@@ -106,18 +101,17 @@ class _ListItemsPageState extends State<ListItemsPage> {
 
   Widget showLoadedItems(
     ListOfThings? list,
-    ListItemsLoaded state,
+    List<ListItem> listItems,
     ListItemsPageView viewToShow,
     Filters filters,
     (ListItemsSortOrder, SortOrder) sortOrder,
     String userListId,
   ) {
-    final items = state.listItems;
     // logger.d('number of items: ${items.length}');
     // logger.d('items: $items');
     // logger.d('items:\n${items.map((i) => '${i.latLong} - ${i.name} ').join('\n')}');
 
-    final filteredItems = filterItems(list, items, filters);
+    final filteredItems = filterItems(list, listItems, filters);
 
     if (viewToShow == ListItemsPageView.listView) {
       final multiplier = sortOrder.$2 == SortOrder.ascending ? 1 : -1;

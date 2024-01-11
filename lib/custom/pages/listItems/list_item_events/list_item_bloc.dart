@@ -1,4 +1,3 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:collection/collection.dart';
 
@@ -75,7 +74,7 @@ class ListItemBloc extends Bloc<ListItemEvent, ListItemState> {
 
       for (final listItem in event.listItems) {
         final existingListItem = originalListItems.firstWhereOrNull((element) => element.name == listItem.name);
-        if (existingListItem != null) { // TODO: Should probably have an event for Import instead?
+        if (existingListItem != null) {
           await _listItemsService.updateListItem(userList.listId, listItem.copyWith(id: existingListItem.id));
         } else {
           await _listItemsService.addListItem(userList.listId, listItem);
