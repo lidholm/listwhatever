@@ -159,7 +159,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
                 children: <Widget>[
                   createResetButton(context),
                   const SizedBox(width: 20),
-                  createSaveButton(list),
+                  createSaveButton(widget.listId, list),
                 ],
               ),
             ],
@@ -255,13 +255,13 @@ class _AddListItemPageState extends State<AddListItemPage> {
     return values;
   }
 
-  Expanded createSaveButton(ListOfThings? list) {
+  Expanded createSaveButton(String userListId, ListOfThings? list) {
     return Expanded(
       child: ElevatedButton(
         onPressed: () {
           if (_formKey.currentState?.saveAndValidate() ?? false) {
             // logger.d(_formKey.currentState?.value.toString());
-            save(list!.id!, _formKey.currentState);
+            save(userListId, _formKey.currentState);
           } else {
             logger
               ..d(_formKey.currentState?.value.toString())

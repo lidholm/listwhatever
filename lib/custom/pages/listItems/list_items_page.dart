@@ -135,10 +135,10 @@ class _ListItemsPageState extends State<ListItemsPage> {
         onTap: (itemId) => showDetailsView(userListId, itemId),
       );
     } else {
-      return const FlutterMapsView(
-          // items: filteredItems,
-          // onTap: (itemId) => showDetailsView(userListId, itemId),
-          );
+      return FlutterMapsView(
+        items: filteredItems,
+        onTap: (itemId) => showDetailsView(userListId, itemId),
+      );
       //  return GoogleMapsView(
       //   items: filteredItems,
       //   onTap: (itemId) => showDetailsView(userListId, itemId),

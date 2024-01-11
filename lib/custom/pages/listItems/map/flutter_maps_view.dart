@@ -4,17 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_cancellable_tile_provider/flutter_map_cancellable_tile_provider.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:listwhatever/custom/pages/listItems/list_item.dart';
+import 'package:listwhatever/custom/pages/listItems/map/custom_marker.dart';
 
-const circlesCount = 4;
-
-/// On this page, [maxCirclesCount] circles are randomly generated
-/// across europe, and then you can limit them with a slider
-///
-/// This way, you can test how map performs under a lot of circles
 class FlutterMapsView extends StatefulWidget {
-  const FlutterMapsView({super.key});
-
-  static const String route = '/many_circles';
+  const FlutterMapsView({required this.items, required this.onTap, super.key});
+  final List<ListItem> items;
+  final void Function(String itemId) onTap;
 
   @override
   FlutterMapsViewState createState() => FlutterMapsViewState();
@@ -22,24 +18,27 @@ class FlutterMapsView extends StatefulWidget {
 
 class FlutterMapsViewState extends State<FlutterMapsView> {
   double doubleInRange(Random source, num start, num end) => source.nextDouble() * (end - start) + start;
-  List<CircleMarker> allCircles = [];
+  List<Marker> allCircles = [];
 
   @override
   void initState() {
     super.initState();
     Future.microtask(() {
-      final r = Random();
-      for (var x = 0; x < circlesCount; x++) {
-        allCircles.add(
-          CircleMarker(
-            point: LatLng(
-              doubleInRange(r, 37, 55),
-              doubleInRange(r, -9, 30),
+      for (final item in widget.items) {
+        if (item.latLong != null) {
+          allCircles.add(
+            Marker(
+              point: LatLng(
+                item.latLong!.lat,
+                item.latLong!.lng,
+              ),
+              child: CustomMarker(
+                color: Colors.red,
+                onPressed: () {},
+              ),
             ),
-            color: Colors.red,
-            radius: 5,
-          ),
-        );
+          );
+        }
       }
       setState(() {});
     });
@@ -47,22 +46,24 @@ class FlutterMapsViewState extends State<FlutterMapsView> {
 
   @override
   Widget build(BuildContext context) {
+    final initialCenter = getCenter();
+
     return Scaffold(
       appBar: AppBar(title: const Text('A lot of circles')),
       body: Column(
         children: [
           Flexible(
             child: FlutterMap(
-              options: const MapOptions(
-                initialCenter: LatLng(50, 20),
-                initialZoom: 5,
+              options: MapOptions(
+                initialCenter: initialCenter,
+                initialZoom: 11,
                 // interactionOptions: InteractionOptions(
                 //   flags: InteractiveFlag.all - InteractiveFlag.rotate,
                 // ),
               ),
               children: [
                 openStreetMapTileLayer,
-                CircleLayer(circles: allCircles.sublist(0, min(allCircles.length, circlesCount))),
+                MarkerLayer(markers: allCircles),
               ],
             ),
           ),
@@ -70,11 +71,40 @@ class FlutterMapsViewState extends State<FlutterMapsView> {
       ),
     );
   }
+
+  (LatLng, LatLng) getBounds() {
+    final latLngList = widget.items.where((e) => e.latLong != null).map((e) => e.latLong!.toLatLng()).toList();
+    assert(latLngList.isNotEmpty, 'List is empty');
+    double? x0;
+    double? x1;
+    double? y0;
+    double? y1;
+    for (final latLng in latLngList) {
+      if (x0 == null) {
+        x0 = x1 = latLng.latitude;
+        y0 = y1 = latLng.longitude;
+      } else {
+        if (latLng.latitude > x1!) x1 = latLng.latitude;
+        if (latLng.latitude < x0) x0 = latLng.latitude;
+        if (latLng.longitude > y1!) y1 = latLng.longitude;
+        if (latLng.longitude < y0!) y0 = latLng.longitude;
+      }
+    }
+    return (LatLng(x1!, y1!), LatLng(x0!, y0!));
+  }
+
+  LatLng getCenter() {
+    final bounds = getBounds();
+    return LatLng(
+      (bounds.$1.latitude - bounds.$2.latitude) / 2 + bounds.$2.latitude,
+      (bounds.$1.longitude - bounds.$2.longitude) / 2 + bounds.$2.longitude,
+    );
+  }
 }
 
 TileLayer get openStreetMapTileLayer => TileLayer(
       urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-      userAgentPackageName: 'dev.fleaflet.flutter_map.example',
+      userAgentPackageName: 'com.anywhostudios.listwhatever',
       // Use the recommended flutter_map_cancellable_tile_provider package to
       // support the cancellation of loading tiles.
       tileProvider: CancellableNetworkTileProvider(),
