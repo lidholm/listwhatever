@@ -9,7 +9,6 @@ import '/standard/page/login_with_email_and_password_page_route.dart';
 RouterProviderInformation getRouterProviderInformation() {
   return RouterProviderInformation(
     dontRequireLoginRouteLocations: [
-      MainPageRoute().location,
       const OnScreenLogsPageRoute().location,
       const LoginPageRoute().location,
       const LoginWithEmailAndPasswordPageRoute().location,
@@ -17,7 +16,7 @@ RouterProviderInformation getRouterProviderInformation() {
     requireLoginRouteLocations: [],
     initialRouteLocation: const ListsPageRoute().location,
     signUpRouteLocation: 'notyet',
-    signInRouteLocation:  const ImportCsvPageRoute('asd').location,
+    signInRouteLocation: const ImportCsvPageRoute('asd').location,
     // signInRouteLocation:  const LoginPageRoute().location,
     errorLoadingUserRouteLocation: MainPageRoute().location,
     loadingUserRouteLocation: MainPageRoute().location,
