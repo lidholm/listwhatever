@@ -34,7 +34,9 @@ class FlutterMapsViewState extends State<FlutterMapsView> {
               ),
               child: CustomMarker(
                 color: Colors.red,
-                onPressed: () {},
+                onPressed: () {
+                  widget.onTap(item.id!);
+                },
               ),
             ),
           );
@@ -48,27 +50,21 @@ class FlutterMapsViewState extends State<FlutterMapsView> {
   Widget build(BuildContext context) {
     final initialCenter = getCenter();
 
-    return Scaffold(
-      appBar: AppBar(title: const Text('A lot of circles')),
-      body: Column(
-        children: [
-          Flexible(
-            child: FlutterMap(
-              options: MapOptions(
-                initialCenter: initialCenter,
-                initialZoom: 11,
-                // interactionOptions: InteractionOptions(
-                //   flags: InteractiveFlag.all - InteractiveFlag.rotate,
-                // ),
-              ),
-              children: [
-                openStreetMapTileLayer,
-                MarkerLayer(markers: allCircles),
-              ],
+    return Column(
+      children: [
+        Flexible(
+          child: FlutterMap(
+            options: MapOptions(
+              initialCenter: initialCenter,
+              initialZoom: 11,
             ),
+            children: [
+              openStreetMapTileLayer,
+              MarkerLayer(markers: allCircles),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
