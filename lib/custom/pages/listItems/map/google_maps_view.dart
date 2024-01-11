@@ -5,16 +5,16 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '/standard/constants.dart';
 import '../list_item.dart';
 
-class MapsView extends StatefulWidget {
-  const MapsView({required this.items, required this.onTap, super.key});
+class GoogleMapsView extends StatefulWidget {
+  const GoogleMapsView({required this.items, required this.onTap, super.key});
   final List<ListItem> items;
   final void Function(String itemId) onTap;
 
   @override
-  State<MapsView> createState() => MapsViewState();
+  State<GoogleMapsView> createState() => GoogleMapsViewState();
 }
 
-class MapsViewState extends State<MapsView> {
+class GoogleMapsViewState extends State<GoogleMapsView> {
   GoogleMapController? mapController;
 
   CameraPosition getCameraPosition() {
@@ -38,7 +38,7 @@ class MapsViewState extends State<MapsView> {
   }
 
   @override
-  void didUpdateWidget(covariant MapsView oldWidget) {
+  void didUpdateWidget(covariant GoogleMapsView oldWidget) {
     super.didUpdateWidget(oldWidget);
     moveCamera();
   }

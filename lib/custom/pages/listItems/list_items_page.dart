@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:listwhatever/custom/pages/listItems/map/flutter_maps_view.dart';
 
 import '/custom/navigation/routes.dart';
 import '/custom/pages/import/csv/import_csv_page_route.dart';
@@ -12,7 +13,6 @@ import '/custom/pages/listItems/list_items_events/list_items_bloc.dart';
 import '/custom/pages/listItems/list_items_events/list_items_event.dart';
 import '/custom/pages/listItems/list_items_events/list_items_state.dart';
 import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
-import '/custom/pages/listItems/map/maps_view.dart';
 import '/custom/pages/lists/addList/edit_list_page_route.dart';
 import '/custom/pages/lists/list_events/list_bloc.dart';
 import '/custom/pages/lists/list_events/list_event.dart';
@@ -135,10 +135,14 @@ class _ListItemsPageState extends State<ListItemsPage> {
         onTap: (itemId) => showDetailsView(userListId, itemId),
       );
     } else {
-      return MapsView(
-        items: filteredItems,
-        onTap: (itemId) => showDetailsView(userListId, itemId),
-      );
+      return const FlutterMapsView(
+          // items: filteredItems,
+          // onTap: (itemId) => showDetailsView(userListId, itemId),
+          );
+      //  return GoogleMapsView(
+      //   items: filteredItems,
+      //   onTap: (itemId) => showDetailsView(userListId, itemId),
+      // );
     }
   }
 
