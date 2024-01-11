@@ -18,9 +18,8 @@ class ListItemsListView extends StatelessWidget {
     }
 
     return SingleChildScrollView(
-      child: VStack(
-        spacing: 0,
-        children: items.map((item) {
+      child: VStack(spacing: 0, children: [
+        ...items.map((item) {
           final subtitle = item.datetime != null ? formatReadableDate(item.datetime!, DateFormatType.iso8601) : null;
           return Padding(
             padding: const EdgeInsets.only(left: 16, top: 8),
@@ -59,8 +58,11 @@ class ListItemsListView extends StatelessWidget {
               ],
             ),
           );
-        }).toList(),
-      ),
+        }),
+        const SizedBox(
+          height: 80,
+        ),
+      ]),
     );
   }
 }
