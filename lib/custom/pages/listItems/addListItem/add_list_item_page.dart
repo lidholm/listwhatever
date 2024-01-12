@@ -9,12 +9,7 @@ import 'package:listwhatever/standard/appUi/typography/app_text_styles.dart';
 
 import '/custom/navigation/routes.dart';
 import '/custom/pages/listItems/list_item.dart';
-import '/custom/pages/listItems/list_item_events/list_item_bloc.dart';
-import '/custom/pages/listItems/list_item_events/list_item_event.dart';
-import '/custom/pages/listItems/list_item_events/list_item_state.dart';
 import '/custom/pages/listItems/list_items.dart';
-import '/custom/pages/listItems/list_items_events/list_items_bloc.dart';
-import '/custom/pages/listItems/list_items_events/list_items_event.dart';
 import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
 import '/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
 import '/custom/pages/listItems/searchLocation/search_location_page_route.dart';
@@ -30,6 +25,11 @@ import '/standard/widgets/appBar/app_bar_action.dart';
 import '/standard/widgets/appBar/app_bar_action_icon.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
 import '/standard/widgets/vStack/v_stack.dart';
+import '../list_item_crud_bloc/list_item_crud_bloc.dart';
+import '../list_item_crud_bloc/list_item_crud_event.dart';
+import '../list_item_load_bloc/list_item_load_bloc.dart';
+import '../list_item_load_bloc/list_item_load_event.dart';
+import '../list_item_load_bloc/list_item_load_state.dart';
 
 enum AddListItemValues {
   name,
@@ -89,7 +89,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
   void initState() {
     BlocProvider.of<ListBloc>(context).add(LoadList(widget.listId));
     if (widget.listItemId != null) {
-      BlocProvider.of<ListItemBloc>(context).add(LoadListItem(widget.listId, widget.listItemId!));
+      BlocProvider.of<ListItemLoadBloc>(context).add(LoadListItem(widget.listId, widget.listItemId!));
     }
     super.initState();
   }
@@ -104,7 +104,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
     }
     list = (listState as ListLoaded).list;
     if (widget.listItemId != null) {
-      final listItemState = context.watch<ListItemBloc>().state;
+      final listItemState = context.watch<ListItemLoadBloc>().state;
       final listItemStateView = ListOrListItemNotLoadedHandler.handleListItemState(listItemState);
       if (listItemStateView != null) {
         return listItemStateView;
@@ -124,7 +124,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
                 icon: Icons.delete,
                 key: const Key('deleteListItemAction'),
                 callback: () async {
-                  context.read<ListItemBloc>().add(DeleteListItem(widget.listId, listItem!.id!));
+                  context.read<ListItemCrudBloc>().add(DeleteListItem(widget.listId, listItem!.id!));
                   context.read<RedirectCubit>().setRedirect(ListItemsPageRoute(listId: widget.listId).location);
                 },
               ),
@@ -616,9 +616,9 @@ class _AddListItemPageState extends State<AddListItemPage> {
     );
 
     if (widget.listItemId == null) {
-      BlocProvider.of<ListItemsBloc>(context).add(AddListItem(listId, listItem));
+      BlocProvider.of<ListItemCrudBloc>(context).add(AddListItem(listId, listItem));
     } else {
-      BlocProvider.of<ListItemBloc>(context).add(UpdateListItem(listId, listItem));
+      BlocProvider.of<ListItemCrudBloc>(context).add(UpdateListItem(listId, listItem));
     }
     GoRouter.of(context).pop();
   }

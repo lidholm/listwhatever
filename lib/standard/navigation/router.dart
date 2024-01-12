@@ -4,8 +4,6 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '/custom/pages/listItems/list_item_events/list_item_bloc.dart';
-import '/custom/pages/listItems/list_item_events/list_item_state.dart';
 import '/custom/pages/lists/list_events/list_bloc.dart';
 import '/custom/pages/lists/list_events/list_state.dart';
 import '/standard/app/app.dart';
@@ -26,8 +24,6 @@ GoRouter getRouter({
     refreshListenable: GoRouterRefreshStream([
       BlocProvider.of<AppBloc>(context).stream,
       BlocProvider.of<ListBloc>(context).stream.where((event) => event is ListDeleted),
-      BlocProvider.of<ListItemBloc>(context).stream.where((event) => event is ListItemDeleted),
-      BlocProvider.of<ListItemBloc>(context).stream.where((event) => event is ListItemsImported),
     ]),
     debugLogDiagnostics: true,
     initialLocation: initialLocation ?? routerProviderInformation.initialRouteLocation,

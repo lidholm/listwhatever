@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_bloc.dart';
+import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_event.dart';
+import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
 import 'package:listwhatever/custom/pages/listItems/map/flutter_maps_view.dart';
 
 import '/custom/navigation/routes.dart';
@@ -9,9 +12,6 @@ import '/custom/pages/listItems/filters/filter_bloc.dart';
 import '/custom/pages/listItems/filters/filter_list_items.dart';
 import '/custom/pages/listItems/filters/filters.dart';
 import '/custom/pages/listItems/infoView/list_item_info_view.dart';
-import '/custom/pages/listItems/list_items_events/list_items_bloc.dart';
-import '/custom/pages/listItems/list_items_events/list_items_event.dart';
-import '/custom/pages/listItems/list_items_events/list_items_state.dart';
 import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
 import '/custom/pages/lists/addList/edit_list_page_route.dart';
 import '/custom/pages/lists/list_events/list_bloc.dart';
@@ -46,7 +46,7 @@ class ListItemsPage extends StatefulWidget {
 class _ListItemsPageState extends State<ListItemsPage> {
   @override
   void initState() {
-    BlocProvider.of<ListItemsBloc>(context).add(WatchListItems(widget.listId));
+    BlocProvider.of<ListItemsLoadBloc>(context).add(WatchListItems(widget.listId));
     BlocProvider.of<ListBloc>(context).add(LoadList(widget.listId));
     super.initState();
   }
@@ -55,7 +55,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        final listItemsState = context.watch<ListItemsBloc>().state;
+        final listItemsState = context.watch<ListItemsLoadBloc>().state;
         // logger.d('listItemState: $listItemState');
         final filtersState = context.watch<FilterBloc>().state;
 
@@ -78,7 +78,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
 
         final list = (listState is ListLoaded) ? listState.list : null;
         final listName = (listState is ListLoaded) ? listState.list?.name ?? '' : '';
-        final listItems = (listItemsState as ListItemsLoaded).listItems;
+        final listItems = (listItemsState as ListItemsLoadLoaded).listItems;
 
         return Scaffold(
           appBar: CommonAppBar(

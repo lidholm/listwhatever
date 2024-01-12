@@ -14,23 +14,7 @@ class ListItemLoaded extends ListItemState {
   final ListItem? listItem;
 }
 
-class ListItemOperationSuccess extends ListItemState {
-  ListItemOperationSuccess(this.message);
-  final String message;
-}
-
 class ListItemError extends ListItemState {
   ListItemError(this.errorMessage);
   final String errorMessage;
-}
-
-class ListItemDeleted extends ListItemState {
-  ListItemDeleted(this.listId, this.listItemId);
-  final String listId;
-  final String listItemId;
-}
-
-class ListItemsImported extends ListItemState {
-  ListItemsImported(this.listId);
-  final String listId;
 }
