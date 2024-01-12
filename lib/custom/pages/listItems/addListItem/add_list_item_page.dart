@@ -633,16 +633,16 @@ class _AddListItemPageState extends State<AddListItemPage> {
     );
   }
 
-  ListItem? getMaybeListItem(ListItemState listItemState) {
+  ListItem? getMaybeListItem(ListItemLoadState listItemState) {
     if (widget.listItemId != null) {
-      if (listItemState is ListItemLoaded) {
+      if (listItemState is ListItemLoadLoaded) {
         return listItemState.listItem;
       }
     }
     return null;
   }
 
-  Widget? getNotLoadedView(ListLoadState listState, ListItemState listItemState) {
+  Widget? getNotLoadedView(ListLoadState listState, ListItemLoadState listItemState) {
     final listStateView = ListOrListItemNotLoadedHandler.handleListState(listState);
     if (listStateView != null) {
       return listStateView;

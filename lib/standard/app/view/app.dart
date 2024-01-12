@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_bloc.dart';
+import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_bloc.dart';
+import 'package:listwhatever/custom/pages/lists/lists_load_events/lists_bloc.dart';
 
 import '/custom/navigation/get_router_provider_information.dart';
 import '/custom/navigation/routes.dart';
@@ -80,10 +82,8 @@ class App extends StatelessWidget {
               BlocProvider<FilterBloc>(create: (context) => FilterBloc()),
               BlocProvider<SharedListBloc>(create: (context) => SharedListBloc(sharedListsService)),
               BlocProvider<ListCrudBloc>(create: (context) => ListCrudBloc(userListsService, listsService)),
-
-              // BlocProvider<ListBloc>(create: (context) => ListBloc(userListsService, listsService)),
-              // BlocProvider<ListsBloc>(create: (context) => ListsBloc(), userListsService)),
-
+              BlocProvider<ListLoadBloc>(create: (context) => ListLoadBloc(userListsService, listsService)),
+              BlocProvider<ListsLoadBloc>(create: (context) => ListsLoadBloc(userListsService)),
               BlocProvider<SubscribeListBloc>(create: (context) => SubscribeListBloc(sharedListsService, listsService)),
               BlocProvider<ListItemsLoadBloc>(
                 create: (context) => ListItemsLoadBloc(userListsService, listItemsService),

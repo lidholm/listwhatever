@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import '../list_item.dart';
 
 @immutable
-sealed class ListItemState {}
+sealed class ListItemLoadState {}
 
-class ListItemInitial extends ListItemState {}
+class ListItemLoadInitial extends ListItemLoadState {}
 
-class ListItemLoading extends ListItemState {}
+class ListItemLoadLoading extends ListItemLoadState {}
 
-class ListItemLoaded extends ListItemState {
-  ListItemLoaded(this.listItem);
+class ListItemLoadLoaded extends ListItemLoadState {
+  ListItemLoadLoaded(this.listItem);
   final ListItem? listItem;
 }
 
-class ListItemError extends ListItemState {
-  ListItemError(this.errorMessage);
+class ListItemLoadError extends ListItemLoadState {
+  ListItemLoadError(this.errorMessage);
   final String errorMessage;
 }

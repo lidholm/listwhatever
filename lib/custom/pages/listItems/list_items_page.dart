@@ -64,15 +64,15 @@ class _ListItemsPageState extends State<ListItemsPage> {
         final sortOrder = context.watch<ListItemsSortOrderCubit>().state;
         final listState = context.watch<ListLoadBloc>().state;
 
-        final filters = (filtersState as FiltersUpdated).filters;
-        final list = (listState is ListLoadLoaded) ? listState.list : null;
-        final listName = (listState is ListLoadLoaded) ? listState.list?.name ?? '' : '';
-        final listItems = (listItemsState as ListItemsLoadLoaded).listItems;
-
         final notLoadedView = getNotLoadedView(listState, listItemsState, filtersState);
         if (notLoadedView != null) {
           return notLoadedView;
         }
+
+        final filters = (filtersState as FiltersUpdated).filters;
+        final list = (listState is ListLoadLoaded) ? listState.list : null;
+        final listName = (listState is ListLoadLoaded) ? listState.list?.name ?? '' : '';
+        final listItems = (listItemsState as ListItemsLoadLoaded).listItems;
 
         return BlocListener<ListCrudBloc, ListCrudState>(
           listener: (context, state) {
@@ -378,7 +378,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
     );
   }
 
-  Widget? getNotLoadedView(ListLoadState listState, ListItemsLoadLoaded listItemsState, FiltersUpdated filtersState) {
+  Widget? getNotLoadedView(ListLoadState listState, ListItemsLoadState listItemsState, FilterState filtersState) {
     final filtersNotLoadedView = handleFiltersNotLoaded(filtersState);
     if (filtersNotLoadedView != null) {
       return filtersNotLoadedView;

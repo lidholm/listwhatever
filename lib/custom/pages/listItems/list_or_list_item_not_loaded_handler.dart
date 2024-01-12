@@ -20,7 +20,7 @@ class ListOrListItemNotLoadedHandler {
     return null;
   }
 
-  static Widget? handleListAndListItemState(ListLoadState listState, ListItemState listItemState) {
+  static Widget? handleListAndListItemState(ListLoadState listState, ListItemLoadState listItemState) {
     final listView = handleListState(listState);
     if (listView != null) {
       return listView;
@@ -53,18 +53,18 @@ class ListOrListItemNotLoadedHandler {
   static Widget? handleListItemsState(ListItemsLoadState listItemsState) {
     return switch (listItemsState) {
       ListItemsLoadError() => getErrorWidget(listItemsState.errorMessage),
-      ListItemsLoadInitial() => const Center(child: CircularProgressIndicator()),
-      ListItemsLoadLoading() => const Center(child: CircularProgressIndicator()),
+      ListItemsLoadInitial() => circularProgressIndicatorView(),
+      ListItemsLoadLoading() => circularProgressIndicatorView(),
       ListItemsLoadLoaded() => null,
     };
   }
 
-  static Widget? handleListItemState(ListItemState listItemState) {
+  static Widget? handleListItemState(ListItemLoadState listItemState) {
     return switch (listItemState) {
-      ListItemError() => getErrorWidget(listItemState.errorMessage),
-      ListItemInitial() => const Center(child: CircularProgressIndicator()),
-      ListItemLoading() => const Center(child: CircularProgressIndicator()),
-      ListItemLoaded() => null,
+      ListItemLoadError() => getErrorWidget(listItemState.errorMessage),
+      ListItemLoadInitial() => circularProgressIndicatorView(),
+      ListItemLoadLoading() => circularProgressIndicatorView(),
+      ListItemLoadLoaded() => null,
     };
   }
 
@@ -73,7 +73,7 @@ class ListOrListItemNotLoadedHandler {
       SharedListError() => getErrorWidget(listState.errorMessage),
       SharedListInitial() => initialListView(),
       SharedListLoading() => loadingListView(),
-      SharedListOperationSuccess() => const Center(child: CircularProgressIndicator()),
+      SharedListOperationSuccess() => circularProgressIndicatorView(),
       SharedListLoaded() => null,
     };
   }
@@ -84,21 +84,26 @@ class ListOrListItemNotLoadedHandler {
 
   static Widget initialListView() {
     logger.i('initialListView');
-    return const Center(child: CircularProgressIndicator());
+    return circularProgressIndicatorView();
   }
 
   static Widget loadingListView() {
     logger.i('loadingListView');
-    return const Center(child: CircularProgressIndicator());
+    return circularProgressIndicatorView();
   }
 
   static Widget initialListsView() {
     logger.i('initialListsView');
-    return const Center(child: CircularProgressIndicator());
+    return circularProgressIndicatorView();
   }
 
   static Widget loadingListsView() {
     logger.i('loadingListsView');
-    return const Center(child: CircularProgressIndicator());
+    return circularProgressIndicatorView();
+  }
+
+  static Widget circularProgressIndicatorView() {
+    logger.i('loadingListsView');
+    return const Scaffold(body: Center(child: CircularProgressIndicator()));
   }
 }

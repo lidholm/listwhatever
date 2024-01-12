@@ -43,7 +43,7 @@ class _ListItemInfoViewState extends State<ListItemInfoView> {
       return listStateView;
     }
 
-    final listItem = (listItemState as ListItemLoaded).listItem;
+    final listItem = (listItemState as ListItemLoadLoaded).listItem;
     if (listItem == null) {
       return const CircularProgressIndicator();
     }

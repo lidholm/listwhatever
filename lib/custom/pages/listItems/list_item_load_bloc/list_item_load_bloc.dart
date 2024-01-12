@@ -5,35 +5,35 @@ import '/standard/constants.dart';
 import 'list_item_load_event.dart';
 import 'list_item_load_state.dart';
 
-class ListItemLoadBloc extends Bloc<ListItemLoadEvent, ListItemState> {
-  ListItemLoadBloc(this._userListsService, this._listItemsService) : super(ListItemInitial()) {
+class ListItemLoadBloc extends Bloc<ListItemLoadEvent, ListItemLoadState> {
+  ListItemLoadBloc(this._userListsService, this._listItemsService) : super(ListItemLoadInitial()) {
     on<ChangeUserForListItemLoad>(_onChangeUser);
     on<LoadListItem>(_onLoadListItem);
   }
   final UserListsService _userListsService;
   final ListItemsService _listItemsService;
 
-  Future<void> _onChangeUser(ChangeUserForListItemLoad event, Emitter<ListItemState> emit) async {
+  Future<void> _onChangeUser(ChangeUserForListItemLoad event, Emitter<ListItemLoadState> emit) async {
     try {
-      emit(ListItemLoading());
+      emit(ListItemLoadLoading());
       _listItemsService.changeUser(event.userId);
-      emit(ListItemLoaded(null));
+      emit(ListItemLoadLoaded(null));
     } catch (e) {
       logger.e('Error: $e');
-      emit(ListItemError('Failed to change user.\n$e'));
+      emit(ListItemLoadError('Failed to change user.\n$e'));
     }
   }
 
-  Future<void> _onLoadListItem(LoadListItem event, Emitter<ListItemState> emit) async {
+  Future<void> _onLoadListItem(LoadListItem event, Emitter<ListItemLoadState> emit) async {
     logger.i('loading list item for list ${event.listId}');
     try {
-      emit(ListItemLoading());
+      emit(ListItemLoadLoading());
       final userList = await _userListsService.getList(event.listId);
       final listItem = await _listItemsService.getListItem(userList.listId, event.listItemId);
-      emit(ListItemLoaded(listItem));
+      emit(ListItemLoadLoaded(listItem));
     } catch (e) {
       logger.e('Error: $e');
-      emit(ListItemError('Failed to load listItem.\n$e'));
+      emit(ListItemLoadError('Failed to load listItem.\n$e'));
     }
   }
 }

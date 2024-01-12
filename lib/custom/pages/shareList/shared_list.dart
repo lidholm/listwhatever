@@ -3,6 +3,7 @@ import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
 import 'package:listwhatever/custom/pages/lists/models/list_type.dart';
 
 part 'shared_list.freezed.dart';
+part 'shared_list.g.dart';
 
 @freezed
 class SharedList with _$SharedList {
