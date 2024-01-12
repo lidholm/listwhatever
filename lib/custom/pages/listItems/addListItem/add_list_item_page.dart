@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/custom/pages/listItems/list_item_crud_bloc/list_item_crud_state.dart';
 import 'package:listwhatever/standard/appUi/colors/app_colors.dart';
 import 'package:listwhatever/standard/appUi/typography/app_text_styles.dart';
 
@@ -102,7 +103,6 @@ class _AddListItemPageState extends State<AddListItemPage> {
     if (listStateView != null) {
       return listStateView;
     }
-    list = (listState as ListLoaded).list;
     if (widget.listItemId != null) {
       final listItemState = context.watch<ListItemLoadBloc>().state;
       final listItemStateView = ListOrListItemNotLoadedHandler.handleListItemState(listItemState);
@@ -112,57 +112,66 @@ class _AddListItemPageState extends State<AddListItemPage> {
       listItem = (listItemState as ListItemLoaded).listItem;
     }
 
-    return Scaffold(
-      appBar: CommonAppBar(
-        title: listItem == null ? 'Add item' : 'Edit item',
-        actions: [
-          if (listItem != null)
-            AppBarAction(
-              type: AppBarActionType.icon,
-              iconAction: AppBarActionIcon(
-                title: context.l10n.deleteListItem,
-                icon: Icons.delete,
-                key: const Key('deleteListItemAction'),
-                callback: () async {
-                  context.read<ListItemCrudBloc>().add(DeleteListItem(widget.listId, listItem!.id!));
-                  context.read<RedirectCubit>().setRedirect(ListItemsPageRoute(listId: widget.listId).location);
-                },
+    list = (listState as ListLoaded).list;
+    return BlocListener<ListItemCrudBloc, ListItemCrudState>(
+      listener: (context, state) {
+        print('state: $state');
+        if (state is ListItemCrudOperationSuccess) {
+          GoRouter.of(context).pop();
+        }
+      },
+      child: Scaffold(
+        appBar: CommonAppBar(
+          title: listItem == null ? 'Add item' : 'Edit item',
+          actions: [
+            if (listItem != null)
+              AppBarAction(
+                type: AppBarActionType.icon,
+                iconAction: AppBarActionIcon(
+                  title: context.l10n.deleteListItem,
+                  icon: Icons.delete,
+                  key: const Key('deleteListItemAction'),
+                  callback: () async {
+                    context.read<ListItemCrudBloc>().add(DeleteListItem(widget.listId, listItem!.id!));
+                    context.read<RedirectCubit>().setRedirect(ListItemsPageRoute(listId: widget.listId).location);
+                  },
+                ),
               ),
-            ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: createForm(
-            list,
-            listItem,
-            [
-              header('Main info'),
-              padLeft(createNameField()),
-              padLeft(createInfoField()),
-              createDivider(),
-              header('Categories', addCategoryButton()),
-              ...createCategoryFields(),
-              createDivider(),
-              header('Urls', addUrlButton()),
-              ...createUrlFields(),
-              if (list?.withDates ?? false) ...[createDivider(), header('Date'), padLeft(createDateField(list))],
-              if (list?.withMap ?? false) ...[
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: createForm(
+              list,
+              listItem,
+              [
+                header('Main info'),
+                padLeft(createNameField()),
+                padLeft(createInfoField()),
                 createDivider(),
-                header('Location', createSearchLocationButton(context)),
-                padLeft(createAddressField()),
-                padLeft(createLatLongFields()),
-              ],
-              const SizedBox(height: 40),
-              Row(
-                children: <Widget>[
-                  createResetButton(context),
-                  const SizedBox(width: 20),
-                  createSaveButton(widget.listId, list),
+                header('Categories', addCategoryButton()),
+                ...createCategoryFields(),
+                createDivider(),
+                header('Urls', addUrlButton()),
+                ...createUrlFields(),
+                if (list?.withDates ?? false) ...[createDivider(), header('Date'), padLeft(createDateField(list))],
+                if (list?.withMap ?? false) ...[
+                  createDivider(),
+                  header('Location', createSearchLocationButton(context)),
+                  padLeft(createAddressField()),
+                  padLeft(createLatLongFields()),
                 ],
-              ),
-            ],
+                const SizedBox(height: 40),
+                Row(
+                  children: <Widget>[
+                    createResetButton(context),
+                    const SizedBox(width: 20),
+                    createSaveButton(widget.listId, list),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -620,7 +629,6 @@ class _AddListItemPageState extends State<AddListItemPage> {
     } else {
       BlocProvider.of<ListItemCrudBloc>(context).add(UpdateListItem(listId, listItem));
     }
-    GoRouter.of(context).pop();
   }
 
   Widget padLeft(Widget child) {
