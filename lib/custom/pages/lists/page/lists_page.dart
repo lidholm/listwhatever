@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:listwhatever/custom/pages/lists/list_type.dart';
+import 'package:listwhatever/custom/pages/lists/models/list_type.dart';
+import 'package:listwhatever/custom/pages/lists/models/user_list.dart';
 import 'package:listwhatever/standard/appUi/colors/app_colors.dart';
 
 import '/custom/navigation/routes.dart';
@@ -11,7 +12,6 @@ import '/custom/pages/lists/addList/add_list.dart';
 import '/custom/pages/lists/lists_events/lists_bloc.dart';
 import '/custom/pages/lists/lists_events/lists_event.dart';
 import '/custom/pages/lists/lists_events/lists_state.dart';
-import '/custom/pages/lists/user_list.dart';
 import '/l10n/l10n.dart';
 import '/standard/appUi/theme/app_theme.dart';
 import '/standard/constants.dart';

@@ -5,6 +5,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listwhatever/custom/pages/listItems/list_item_crud_bloc/list_item_crud_state.dart';
+import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
 import 'package:listwhatever/standard/appUi/colors/app_colors.dart';
 import 'package:listwhatever/standard/appUi/typography/app_text_styles.dart';
 
@@ -18,7 +19,6 @@ import '/custom/pages/listItems/searchLocation/search_location_response.dart';
 import '/custom/pages/lists/list_events/list_bloc.dart';
 import '/custom/pages/lists/list_events/list_event.dart';
 import '/custom/pages/lists/list_events/list_state.dart';
-import '/custom/pages/lists/list_of_things.dart';
 import '/l10n/l10n.dart';
 import '/standard/constants.dart';
 import '/standard/navigation/redirect_cubit.dart';
@@ -100,7 +100,6 @@ class _AddListItemPageState extends State<AddListItemPage> {
     logger.d('in AddListItemPage');
     final listState = context.watch<ListBloc>().state;
     final listItemState = context.watch<ListItemLoadBloc>().state;
-    print('listItemState: $listItemState');
     final listItem = getMaybeListItem(listItemState);
 
     final notLoadedView = getNotLoadedView(listState, listItemState);
@@ -128,7 +127,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
                   icon: Icons.delete,
                   key: const Key('deleteListItemAction'),
                   callback: () async {
-                    context.read<ListItemCrudBloc>().add(DeleteListItem(widget.listId, listItem!.id!));
+                    context.read<ListItemCrudBloc>().add(DeleteListItem(widget.listId, listItem.id!));
                     context.read<RedirectCubit>().setRedirect(ListItemsPageRoute(listId: widget.listId).location);
                   },
                 ),

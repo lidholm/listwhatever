@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:listwhatever/custom/pages/lists/page/lists_page_route.dart';
 
 import '/custom/navigation/routes.dart';
 import '/custom/pages/lists/list_events/list_state.dart';
-import '/custom/pages/lists/lists.dart';
 import '/custom/pages/lists/lists_events/lists_bloc.dart';
 import '/custom/pages/lists/lists_events/lists_state.dart';
 import '/standard/navigation/redirect_cubit.dart';

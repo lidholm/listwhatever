@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/custom/pages/lists/page/lists_page_route.dart';
 
 import '/custom/pages/about/about_page_route.dart';
 import '/custom/pages/crashlytics/crashlytics.dart';
@@ -14,7 +15,6 @@ import '/custom/pages/listItems/list_items_page_route.dart';
 import '/custom/pages/listItems/searchLocation/search_location_page_route.dart';
 import '/custom/pages/lists/addList/add_list.dart';
 import '/custom/pages/lists/addList/edit_list_page_route.dart';
-import '/custom/pages/lists/lists.dart';
 import '/custom/pages/privacyPolicy/privacy_policy_page_route.dart';
 import '/custom/pages/remoteConfig/remote_config_page_route.dart';
 import '/custom/pages/shareList/share_list_page_route.dart';

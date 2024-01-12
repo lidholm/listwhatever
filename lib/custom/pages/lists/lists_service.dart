@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
 import '/standard/constants.dart';
 import '/standard/firebase/firestore/firestore.dart';
-
-import 'list_of_things.dart';
 
 class ListsService {
   ListsService({required this.userId});
@@ -22,7 +21,7 @@ class ListsService {
 
   Stream<List<ListOfThings>> getLists() async* {
     logger.d('getting actual lists');
-    if (userId == null)  {
+    if (userId == null) {
       logger.d('no user yet');
       yield* Stream.value([]);
       return;

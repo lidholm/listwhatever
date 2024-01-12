@@ -4,6 +4,8 @@ import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_it
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_event.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
 import 'package:listwhatever/custom/pages/listItems/map/flutter_maps_view.dart';
+import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
+import 'package:listwhatever/custom/pages/lists/page/lists_page_route.dart';
 
 import '/custom/navigation/routes.dart';
 import '/custom/pages/import/csv/import_csv_page_route.dart';
@@ -17,8 +19,6 @@ import '/custom/pages/lists/addList/edit_list_page_route.dart';
 import '/custom/pages/lists/list_events/list_bloc.dart';
 import '/custom/pages/lists/list_events/list_event.dart';
 import '/custom/pages/lists/list_events/list_state.dart';
-import '/custom/pages/lists/list_of_things.dart';
-import '/custom/pages/lists/lists_page_route.dart';
 import '/custom/pages/shareList/share_list_page_route.dart';
 import '/l10n/l10n.dart';
 import '/standard/navigation/redirect_cubit.dart';
