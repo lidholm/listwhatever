@@ -14,9 +14,11 @@
 [ ] (Free) Other map than Google maps
 [ ] Import from other source
  - [ ] Google sheets
- - [ ] CSV
+ - [x] CSV
 - [ ] Fix fastlane
 - [ ] Upload image for list
 - [ ] Better colors/styling
 - [ ] Set up Google Play
-
+- [ ] Firestore function to update users lists when data in list is changed
+- [ ] User settings (e.g. use Google Maps or flutter_map)
+- [ ] Current location and distance

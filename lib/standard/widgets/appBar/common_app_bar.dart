@@ -38,7 +38,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
         ...actionButtons,
         if (overflowMenu != null) overflowMenu,
       ],
-      backgroundColor: theme.primaryColor,
+      backgroundColor: theme.primaryColor.withAlpha(50),
     );
   }
 

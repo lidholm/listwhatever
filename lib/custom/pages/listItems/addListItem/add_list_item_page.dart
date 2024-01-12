@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/standard/appUi/colors/app_colors.dart';
+import 'package:listwhatever/standard/appUi/typography/app_text_styles.dart';
 
 import '/custom/navigation/routes.dart';
 import '/custom/pages/listItems/list_item.dart';
@@ -78,6 +80,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
   List<String> categoryValues = [];
   List<bool> _categoryHasError = [];
   List<bool> _categoryValueHasError = [];
+  List<bool> _urlHasError = [];
 
   ListOfThings? list;
   ListItem? listItem;
@@ -101,9 +104,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
     }
     list = (listState as ListLoaded).list;
     if (widget.listItemId != null) {
-      final listItemState = context
-          .watch<ListItemBloc>()
-          .state;
+      final listItemState = context.watch<ListItemBloc>().state;
       final listItemStateView = ListOrListItemNotLoadedHandler.handleListItemState(listItemState);
       if (listItemStateView != null) {
         return listItemStateView;
@@ -137,24 +138,28 @@ class _AddListItemPageState extends State<AddListItemPage> {
             list,
             listItem,
             [
-              createNameField(),
-              createInfoField(),
+              header('Main info'),
+              padLeft(createNameField()),
+              padLeft(createInfoField()),
+              createDivider(),
+              header('Categories', addCategoryButton()),
               ...createCategoryFields(),
               createDivider(),
+              header('Urls', addUrlButton()),
               ...createUrlFields(),
-              if (list?.withDates ?? false) createDateField(list),
+              if (list?.withDates ?? false) ...[createDivider(), header('Date'), padLeft(createDateField(list))],
               if (list?.withMap ?? false) ...[
                 createDivider(),
-                createSearchLocationButton(context),
-                createAddressField(),
-                createLatLongFields(),
+                header('Location', createSearchLocationButton(context)),
+                padLeft(createAddressField()),
+                padLeft(createLatLongFields()),
               ],
               const SizedBox(height: 40),
               Row(
                 children: <Widget>[
                   createResetButton(context),
                   const SizedBox(width: 20),
-                  createSaveButton(list),
+                  createSaveButton(widget.listId, list),
                 ],
               ),
             ],
@@ -186,8 +191,26 @@ class _AddListItemPageState extends State<AddListItemPage> {
       autovalidateMode: AutovalidateMode.disabled,
       initialValue: initialValue,
       skipDisabled: true,
-      child: VStack(children: children),
+      child: VStack(
+        verticalAlignment: VerticalAlignment.leading,
+        children: children,
+      ),
     );
+  }
+
+  Widget header(String header, [Widget? button]) {
+    final text = Text(
+      header,
+      style: UITextStyle.subtitle1,
+    );
+    if (button != null) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [text, button],
+      );
+    } else {
+      return text;
+    }
   }
 
   Map<String, dynamic> getCategoryKeysMap(ListItem? listItem) {
@@ -232,13 +255,13 @@ class _AddListItemPageState extends State<AddListItemPage> {
     return values;
   }
 
-  Expanded createSaveButton(ListOfThings? list) {
+  Expanded createSaveButton(String userListId, ListOfThings? list) {
     return Expanded(
       child: ElevatedButton(
         onPressed: () {
           if (_formKey.currentState?.saveAndValidate() ?? false) {
             // logger.d(_formKey.currentState?.value.toString());
-            save(list!.id!, _formKey.currentState);
+            save(userListId, _formKey.currentState);
           } else {
             logger
               ..d(_formKey.currentState?.value.toString())
@@ -336,7 +359,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
         });
       },
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+        padding: const EdgeInsets.fromLTRB(8, 2, 8, 2),
         child: Text(context.l10n.searchForLocationButton),
       ),
     );
@@ -361,48 +384,93 @@ class _AddListItemPageState extends State<AddListItemPage> {
   Divider createDivider() {
     return const Divider(
       height: 20,
-      thickness: 5,
-      indent: 20,
-      endIndent: 0,
+      thickness: 2,
+      indent: 24,
+      endIndent: 24,
       color: Colors.black,
     );
+  }
+
+  Widget addUrlButton() {
+    return addButton(() {
+      setState(() {
+        urls = [...urls, ''];
+        _urlHasError = [..._urlHasError, false];
+      });
+    });
   }
 
   List<Widget> createUrlFields() {
     return [
       for (final urlMap in mapIndexed(urls))
-        FormBuilderTextField(
-          autovalidateMode: AutovalidateMode.always,
-          name: '${AddListItemValues.urls}-${[urlMap.$1]}',
-          decoration: InputDecoration(
-            labelText: 'URL',
-            suffixIcon: _infoHasError
-                ? const Icon(Icons.error, color: Colors.red)
-                : const Icon(Icons.check, color: Colors.green),
+        padLeft(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: FormBuilderTextField(
+                  autovalidateMode: AutovalidateMode.always,
+                  name: '${AddListItemValues.urls}-${[urlMap.$1]}',
+                  decoration: InputDecoration(
+                    labelText: 'URL',
+                    suffixIcon: _urlHasError[urlMap.$1]
+                        ? const Icon(Icons.error, color: Colors.red)
+                        : const Icon(Icons.check, color: Colors.green),
+                  ),
+                  onChanged: (val) {
+                    setState(() {
+                      _urlHasError[urlMap.$1] =
+                          !(_formKey.currentState?.fields[AddListItemValues.info.toString()]?.validate() ?? false);
+                    });
+                  },
+                  validator: FormBuilderValidators.compose([
+                    FormBuilderValidators.max(1200),
+                  ]),
+                  keyboardType: TextInputType.url,
+                  textInputAction: TextInputAction.next,
+                ),
+              ),
+              padLeft(
+                circleButton(
+                  Icons.delete,
+                  () {
+                    setState(() {
+                      print('not doing anything yet');
+                    });
+                  },
+                ),
+              ),
+            ],
           ),
-          onChanged: (val) {
-            setState(() {
-              _infoHasError = !(_formKey.currentState?.fields[AddListItemValues.info.toString()]?.validate() ?? false);
-            });
-          },
-          validator: FormBuilderValidators.compose([
-            FormBuilderValidators.max(1200),
-          ]),
-          keyboardType: TextInputType.url,
-          textInputAction: TextInputAction.next,
         ),
-      ElevatedButton(
-        onPressed: () {
-          setState(() {
-            urls = [...urls, ''];
-          });
-        },
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-          child: Text(context.l10n.addUrlButton),
-        ),
-      ),
     ];
+  }
+
+  Widget addCategoryButton() {
+    return addButton(() {
+      setState(() {
+        categoryKeys = [...categoryKeys, ''];
+        categoryValues = [...categoryValues, ''];
+        _categoryHasError = [..._categoryHasError, false];
+        _categoryValueHasError = [..._categoryValueHasError, false];
+      });
+    });
+  }
+
+  Widget addButton(void Function() onPressed) {
+    return circleButton(Icons.add, onPressed);
+  }
+
+  Widget circleButton(IconData icon, void Function() onPressed) {
+    return CircleAvatar(
+      radius: 16,
+      backgroundColor: AppColors.darkPurple,
+      child: IconButton(
+        onPressed: onPressed,
+        iconSize: 16,
+        icon: Icon(icon),
+      ),
+    );
   }
 
   List<Widget> createCategoryFields() {
@@ -411,72 +479,62 @@ class _AddListItemPageState extends State<AddListItemPage> {
         Row(
           children: [
             Expanded(
-              child: FormBuilderTextField(
-                autovalidateMode: AutovalidateMode.always,
-                name: '${AddListItemValues.categoryKeys}-${categoryMap.$1}',
-                decoration: InputDecoration(
-                  labelText: 'Category',
-                  suffixIcon: _nameHasError
-                      ? const Icon(Icons.error, color: Colors.red)
-                      : const Icon(Icons.check, color: Colors.green),
+              child: padLeft(
+                FormBuilderTextField(
+                  autovalidateMode: AutovalidateMode.always,
+                  name: '${AddListItemValues.categoryKeys}-${categoryMap.$1}',
+                  decoration: InputDecoration(
+                    labelText: 'Category',
+                    suffixIcon: _nameHasError
+                        ? const Icon(Icons.error, color: Colors.red)
+                        : const Icon(Icons.check, color: Colors.green),
+                  ),
+                  onChanged: (val) {
+                    setState(() {
+                      _categoryHasError[categoryMap.$1] =
+                          !(_formKey.currentState?.fields[AddListItemValues.categoryKeys.toString()]?.validate() ??
+                              false);
+                    });
+                  },
+                  validator: FormBuilderValidators.compose([
+                    FormBuilderValidators.required(),
+                    FormBuilderValidators.max(70),
+                  ]),
+                  keyboardType: TextInputType.name,
+                  textInputAction: TextInputAction.next,
                 ),
-                onChanged: (val) {
-                  setState(() {
-                    _categoryHasError[categoryMap.$1] =
-                        !(_formKey.currentState?.fields[AddListItemValues.categoryKeys.toString()]?.validate() ??
-                            false);
-                  });
-                },
-                validator: FormBuilderValidators.compose([
-                  FormBuilderValidators.required(),
-                  FormBuilderValidators.max(70),
-                ]),
-                keyboardType: TextInputType.name,
-                textInputAction: TextInputAction.next,
               ),
             ),
             const SizedBox(width: 8),
             Expanded(
-              child: FormBuilderTextField(
-                autovalidateMode: AutovalidateMode.always,
-                name: '${AddListItemValues.categoryValues}-${categoryMap.$1}',
-                decoration: InputDecoration(
-                  labelText: 'Value(s):',
-                  suffixIcon: _nameHasError
-                      ? const Icon(Icons.error, color: Colors.red)
-                      : const Icon(Icons.check, color: Colors.green),
+              child: padLeft(
+                FormBuilderTextField(
+                  autovalidateMode: AutovalidateMode.always,
+                  name: '${AddListItemValues.categoryValues}-${categoryMap.$1}',
+                  decoration: InputDecoration(
+                    labelText: 'Value(s):',
+                    suffixIcon: _nameHasError
+                        ? const Icon(Icons.error, color: Colors.red)
+                        : const Icon(Icons.check, color: Colors.green),
+                  ),
+                  onChanged: (val) {
+                    setState(() {
+                      _categoryValueHasError[categoryMap.$1] =
+                          !(_formKey.currentState?.fields[AddListItemValues.categoryValues.toString()]?.validate() ??
+                              false);
+                    });
+                  },
+                  validator: FormBuilderValidators.compose([
+                    FormBuilderValidators.required(),
+                    FormBuilderValidators.max(150),
+                  ]),
+                  keyboardType: TextInputType.name,
+                  textInputAction: TextInputAction.next,
                 ),
-                onChanged: (val) {
-                  setState(() {
-                    _categoryValueHasError[categoryMap.$1] =
-                        !(_formKey.currentState?.fields[AddListItemValues.categoryValues.toString()]?.validate() ??
-                            false);
-                  });
-                },
-                validator: FormBuilderValidators.compose([
-                  FormBuilderValidators.required(),
-                  FormBuilderValidators.max(150),
-                ]),
-                keyboardType: TextInputType.name,
-                textInputAction: TextInputAction.next,
               ),
             ),
           ],
         ),
-      ElevatedButton(
-        onPressed: () {
-          setState(() {
-            categoryKeys = [...categoryKeys, ''];
-            categoryValues = [...categoryValues, ''];
-            _categoryHasError = [..._categoryHasError, false];
-            _categoryValueHasError = [..._categoryValueHasError, false];
-          });
-        },
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-          child: Text(context.l10n.addCategoryButton),
-        ),
-      ),
     ];
   }
 
@@ -563,5 +621,12 @@ class _AddListItemPageState extends State<AddListItemPage> {
       BlocProvider.of<ListItemBloc>(context).add(UpdateListItem(listId, listItem));
     }
     GoRouter.of(context).pop();
+  }
+
+  Widget padLeft(Widget child) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 8),
+      child: child,
+    );
   }
 }

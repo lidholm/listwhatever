@@ -15,11 +15,6 @@ RouteBase get $mainPageRoute => GoRouteData.$route(
       factory: $MainPageRouteExtension._fromState,
       routes: [
         GoRouteData.$route(
-          path: 'maps',
-          name: 'maps',
-          factory: $MapsPageRouteExtension._fromState,
-        ),
-        GoRouteData.$route(
           path: 'logs',
           name: 'logs',
           factory: $OnScreenLogsPageRouteExtension._fromState,
@@ -138,23 +133,6 @@ extension $MainPageRouteExtension on MainPageRoute {
 
   String get location => GoRouteData.$location(
         '/',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-extension $MapsPageRouteExtension on MapsPageRoute {
-  static MapsPageRoute _fromState(GoRouterState state) => const MapsPageRoute();
-
-  String get location => GoRouteData.$location(
-        '/maps',
       );
 
   void go(BuildContext context) => context.go(location);

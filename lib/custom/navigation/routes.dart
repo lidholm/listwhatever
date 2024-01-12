@@ -15,7 +15,6 @@ import '/custom/pages/listItems/searchLocation/search_location_page_route.dart';
 import '/custom/pages/lists/addList/add_list.dart';
 import '/custom/pages/lists/addList/edit_list_page_route.dart';
 import '/custom/pages/lists/lists.dart';
-import '/custom/pages/maps/maps_page_route.dart';
 import '/custom/pages/privacyPolicy/privacy_policy_page_route.dart';
 import '/custom/pages/remoteConfig/remote_config_page_route.dart';
 import '/custom/pages/shareList/share_list_page_route.dart';
@@ -30,10 +29,6 @@ part 'routes.g.dart';
 @TypedGoRoute<MainPageRoute>(
   path: '/',
   routes: [
-    TypedGoRoute<MapsPageRoute>(
-      path: 'maps',
-      name: 'maps',
-    ),
     TypedGoRoute<OnScreenLogsPageRoute>(
       path: 'logs',
       name: 'logs',

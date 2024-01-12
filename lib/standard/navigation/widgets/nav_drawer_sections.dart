@@ -7,7 +7,6 @@ import '/custom/pages/crashlytics/crashlytics.dart';
 import '/custom/pages/deleteAccount/delete_account_page_route.dart';
 import '/custom/pages/firebase_performance/firebase_performance.dart';
 import '/custom/pages/lists/lists.dart';
-import '/custom/pages/maps/maps_page_route.dart';
 import '/custom/pages/privacyPolicy/privacy_policy_page_route.dart';
 import '/custom/pages/remoteConfig/remote_config_page_route.dart';
 import '/l10n/l10n.dart';
@@ -23,7 +22,6 @@ class NavDrawerSections extends StatelessWidget {
   Widget build(BuildContext context) {
     final sections = {
       context.l10n.functionalitySectionHeader: [
-        Link('maps', 'Maps', () => const MapsPageRoute().push<void>(context)),
         Link('lists', 'Lists', () => const ListsPageRoute().push<void>(context)),
         Link('logs', 'Logs', () => const OnScreenLogsPageRoute().push<void>(context)),
       ],

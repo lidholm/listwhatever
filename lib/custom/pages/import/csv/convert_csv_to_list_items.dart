@@ -16,7 +16,7 @@ enum Keywords {
 class CsvConverter {
   List<ListItem> convert(String csv) {
     final rows = const CsvToListConverter(
-        eol: '\n',
+      eol: '\n',
       textEndDelimiter: '"',
     ).convert(csv.trim());
     final listItems = <ListItem>[];
@@ -37,7 +37,8 @@ class CsvConverter {
         try {
           latlong = LatLong(lat: double.parse(lat), lng: double.parse(lng));
         } catch (e) {
-          logger.e("Can't parse latlong $lat, $lng");
+          logger.e("Can't parse latlong: $e, $row");
+          print("Can't parse latlong: $e, $row");
         }
       }
       final listItem = ListItem(

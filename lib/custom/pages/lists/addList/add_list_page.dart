@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/standard/appUi/theme/app_theme.dart';
 import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
 import '/custom/pages/lists/list_events/list_bloc.dart';
 import '/custom/pages/lists/list_events/list_event.dart';
@@ -59,9 +60,7 @@ class _AddListPageState extends State<AddListPage> {
   Widget build(BuildContext context) {
     ListOfThings? list;
     if (widget.listId != null) {
-      final listState = context
-          .watch<ListBloc>()
-          .state;
+      final listState = context.watch<ListBloc>().state;
 
       final listStateView = ListOrListItemNotLoadedHandler.handleListState(listState);
       if (listStateView != null) {
@@ -85,137 +84,135 @@ class _AddListPageState extends State<AddListPage> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(24),
-          child: Column(
-            children: <Widget>[
-              FormBuilder(
-                key: _formKey,
-                onChanged: () {
-                  _formKey.currentState!.save();
-                  // logger.d(_formKey.currentState!.value.toString());
-                },
-                autovalidateMode: AutovalidateMode.disabled,
-                initialValue:  initialValue,
-                skipDisabled: true,
-                child: VStack(
+          child: FormBuilder(
+            key: _formKey,
+            onChanged: () {
+              _formKey.currentState!.save();
+              // logger.d(_formKey.currentState!.value.toString());
+            },
+            autovalidateMode: AutovalidateMode.disabled,
+            initialValue: initialValue,
+            skipDisabled: true,
+            child: VStack(
+              children: <Widget>[
+                const SizedBox(height: 15),
+                getListNameField(),
+                getListTypeField(),
+                getWithMapCheckbox(),
+                getWithDatesCheckbox(),
+                getWithTimesCheckbox(),
+                Row(
                   children: <Widget>[
-                    const SizedBox(height: 15),
-                    FormBuilderTextField(
-                      autovalidateMode: AutovalidateMode.always,
-                      name: AddListValues.name.toString(),
-                      decoration: InputDecoration(
-                        labelText: 'List name',
-                        suffixIcon: _nameHasError
-                            ? const Icon(Icons.error, color: Colors.red)
-                            : const Icon(Icons.check, color: Colors.green),
-                      ),
-                      onChanged: (val) {
-                        setState(() {
-                          _nameHasError = !(_formKey
-                                  .currentState?.fields[AddListValues.name.toString()]
-                                  ?.validate() ??
-                              false);
-                        });
-                      },
-                      // valueTransformer: (text) => num.tryParse(text),
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(),
-                        FormBuilderValidators.max(70),
-                      ]),
-                      keyboardType: TextInputType.name,
-                      textInputAction: TextInputAction.next,
-                    ),
-                    FormBuilderDropdown<ListType>(
-                      name: AddListValues.type.toString(),
-                      decoration: InputDecoration(
-                        labelText: 'Type',
-                        suffix: _typeHasError
-                            ? const Icon(Icons.error)
-                            : const Icon(Icons.check),
-                        hintText: 'Select Type',
-                      ),
-                      validator: FormBuilderValidators.compose(
-                        [FormBuilderValidators.required()],
-                      ),
-                      items: _typeOptions
-                          .map(
-                            (type) => DropdownMenuItem(
-                              alignment: AlignmentDirectional.center,
-                              value: type,
-                              child: Text(type.readable()),
-                            ),
-                          )
-                          .toList(),
-                      onChanged: (val) {
-                        setState(() {
-                          _typeHasError = !(_formKey
-                                  .currentState?.fields[AddListValues.type.toString()]
-                                  ?.validate() ??
-                              false);
-                        });
-                      },
-                      valueTransformer: (val) => val?.toString(),
-                    ),
-                    // FormBuilderCheckbox(
-                    //   name: AddListValues.share.toString(),
-                    //   onChanged: _onChanged,
-                    //   title: const Text('Share list'),
-                    // ),
-                    FormBuilderCheckbox(
-                      name: AddListValues.withMap.toString(),
-                      onChanged: _onChanged,
-                      title: const Text('With Map'),
-                    ),
-                    FormBuilderCheckbox(
-                      name: AddListValues.withDates.toString(),
-                      onChanged: _onChanged,
-                      title: const Text('With Dates'),
-                    ),
-                    FormBuilderCheckbox(
-                      name: AddListValues.withTimes.toString(),
-                      onChanged: _onChanged,
-                      title: const Text('With Times'),
-                    ),
+                    getCancelButton(),
+                    const SizedBox(width: 20),
+                    getSubmitButton(),
                   ],
                 ),
-              ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () {
-                        _formKey.currentState?.reset();
-                      },
-                      // color: Theme.of(context).colorScheme.secondary,
-                      child: Text(
-                        'Reset',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState?.saveAndValidate() ?? false) {
-                          // logger.d(_formKey.currentState?.value.toString());
-                          save(_formKey.currentState);
-                        } else {
-                          logger..d(_formKey.currentState?.value.toString())
-                          ..d('validation failed');
-                        }
-                      },
-                      child: const Text(
-                        'Save',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
+        ),
+      ),
+    );
+  }
+
+  FormBuilderTextField getListNameField() {
+    return FormBuilderTextField(
+      autovalidateMode: AutovalidateMode.always,
+      name: AddListValues.name.toString(),
+      decoration: InputDecoration(
+        labelText: 'List name',
+        suffixIcon:
+            _nameHasError ? const Icon(Icons.error, color: Colors.red) : const Icon(Icons.check, color: Colors.green),
+      ),
+      onChanged: (val) {
+        setState(() {
+          _nameHasError = !(_formKey.currentState?.fields[AddListValues.name.toString()]?.validate() ?? false);
+        });
+      },
+      // valueTransformer: (text) => num.tryParse(text),
+      validator: FormBuilderValidators.compose([
+        FormBuilderValidators.required(),
+        FormBuilderValidators.max(70),
+      ]),
+      keyboardType: TextInputType.name,
+      textInputAction: TextInputAction.next,
+    );
+  }
+
+  Widget getListTypeField() {
+    return FormBuilderDropdown<ListType>(
+      name: AddListValues.type.toString(),
+      decoration: InputDecoration(
+        labelText: 'Type',
+        suffix: _typeHasError ? const Icon(Icons.error) : const Icon(Icons.check),
+        hintText: 'Select Type',
+      ),
+      validator: FormBuilderValidators.compose(
+        [FormBuilderValidators.required()],
+      ),
+      items: _typeOptions
+          .map(
+            (type) => DropdownMenuItem(
+              alignment: AlignmentDirectional.center,
+              value: type,
+              child: Text(type.readable()),
+            ),
+          )
+          .toList(),
+      onChanged: (val) {
+        setState(() {
+          _typeHasError = !(_formKey.currentState?.fields[AddListValues.type.toString()]?.validate() ?? false);
+        });
+      },
+      valueTransformer: (val) => val?.toString(),
+    );
+  }
+
+  Widget getWithMapCheckbox() {
+    return AppTheme.getCheckbox(AddListValues.withMap.toString(), 'With Map', _onChanged);
+  }
+
+  Widget getWithDatesCheckbox() {
+    return AppTheme.getCheckbox(AddListValues.withDates.toString(), 'With Dates', _onChanged);
+  }
+
+  Widget getWithTimesCheckbox() {
+    return AppTheme.getCheckbox(AddListValues.withTimes.toString(), 'With Times', _onChanged);
+  }
+
+  Widget getCancelButton() {
+    return Expanded(
+      child: OutlinedButton(
+        onPressed: () {
+          _formKey.currentState?.reset();
+        },
+        // color: Theme.of(context).colorScheme.secondary,
+        child: Text(
+          'Reset',
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.secondary,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget getSubmitButton() {
+    return Expanded(
+      child: ElevatedButton(
+        onPressed: () {
+          if (_formKey.currentState?.saveAndValidate() ?? false) {
+            // logger.d(_formKey.currentState?.value.toString());
+            save(_formKey.currentState);
+          } else {
+            logger
+              ..d(_formKey.currentState?.value.toString())
+              ..d('validation failed');
+          }
+        },
+        child: const Text(
+          'Save',
         ),
       ),
     );

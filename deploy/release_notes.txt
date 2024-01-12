@@ -1,3 +1,6 @@
+0.0.35
+* Use flutter_map
+
 0.0.34
 * Refactor
 

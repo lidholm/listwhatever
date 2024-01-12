@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import '/standard/appUi/colors/app_colors.dart';
 import '/standard/appUi/spacing/app_spacing.dart';
 import '/standard/appUi/typography/app_font_weight.dart';
@@ -15,7 +16,7 @@ class AppTheme {
   /// Default `ThemeData` for App UI.
   ThemeData get themeData {
     return ThemeData(
-      primaryColor: _backgroundColor,
+      primaryColor: AppColors.darkPurple,
       canvasColor: _backgroundColor,
       scaffoldBackgroundColor: _backgroundColor,
       iconTheme: _iconTheme,
@@ -27,6 +28,7 @@ class AppTheme {
       splashColor: AppColors.transparent,
       snackBarTheme: _snackBarTheme,
       elevatedButtonTheme: _elevatedButtonTheme,
+      outlinedButtonTheme: _outlinedButtonTheme,
       textButtonTheme: _textButtonTheme,
       colorScheme: _colorScheme,
       bottomSheetTheme: _bottomSheetTheme,
@@ -36,6 +38,7 @@ class AppTheme {
       tabBarTheme: _tabBarTheme,
       bottomNavigationBarTheme: _bottomAppBarTheme,
       chipTheme: _chipTheme,
+      floatingActionButtonTheme: _floatingActionButtonTheme,
     );
   }
 
@@ -61,7 +64,7 @@ class AppTheme {
     );
   }
 
-  Color get _backgroundColor => AppColors.white;
+  Color get _backgroundColor => AppColors.lavender;
 
   AppBarTheme get _appBarTheme {
     return AppBarTheme(
@@ -69,7 +72,7 @@ class AppTheme {
       titleTextStyle: _textTheme.titleLarge,
       elevation: 0,
       toolbarHeight: 64,
-      backgroundColor: AppColors.transparent,
+      backgroundColor: AppColors.lavender,
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarIconBrightness: Brightness.dark,
         statusBarBrightness: Brightness.light,
@@ -144,17 +147,19 @@ class AppTheme {
       hoverColor: AppColors.inputHover,
       focusColor: AppColors.inputFocused,
       fillColor: AppColors.inputEnabled,
-      enabledBorder: _textFieldBorder,
-      focusedBorder: _textFieldBorder,
-      disabledBorder: _textFieldBorder,
+      disabledBorder: _buildOutlineInputBorder(Colors.blueGrey),
+      enabledBorder: _buildOutlineInputBorder(AppColors.darkPurple),
+      focusedBorder: _buildOutlineInputBorder(AppColors.purple),
+      errorBorder: _buildOutlineInputBorder(Colors.red.withAlpha(220)),
+      focusedErrorBorder: _buildOutlineInputBorder(Colors.red),
       hintStyle: UITextStyle.bodyText1.copyWith(
         color: AppColors.mediumEmphasisSurface,
       ),
       contentPadding: const EdgeInsets.all(AppSpacing.lg),
-      border: const UnderlineInputBorder(),
+      border: const OutlineInputBorder(),
       filled: true,
       isDense: true,
-      errorStyle: UITextStyle.caption,
+      errorStyle: _buildTextStyle(Colors.red),
     );
   }
 
@@ -175,7 +180,20 @@ class AppTheme {
         ),
         padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
         textStyle: _textTheme.labelLarge,
-        backgroundColor: AppColors.blue,
+        backgroundColor: AppColors.darkPurple,
+      ),
+    );
+  }
+
+  OutlinedButtonThemeData get _outlinedButtonTheme {
+    return OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(30)),
+        ),
+        padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
+        textStyle: _textTheme.labelLarge,
+        backgroundColor: AppColors.transparent,
       ),
     );
   }
@@ -188,6 +206,14 @@ class AppTheme {
         ),
         foregroundColor: AppColors.black,
       ),
+    );
+  }
+
+  FloatingActionButtonThemeData get _floatingActionButtonTheme {
+    return const FloatingActionButtonThemeData(
+      backgroundColor: AppColors.darkPurple,
+      foregroundColor: Colors.white,
+      splashColor: Colors.white,
     );
   }
 
@@ -213,15 +239,13 @@ class AppTheme {
 
   SwitchThemeData get _switchTheme {
     return SwitchThemeData(
-      thumbColor:
-          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+      thumbColor: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.selected)) {
           return AppColors.darkAqua;
         }
         return AppColors.eerieBlack;
       }),
-      trackColor:
-          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+      trackColor: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.selected)) {
           return AppColors.primaryContainer;
         }
@@ -256,15 +280,33 @@ class AppTheme {
       indicatorSize: TabBarIndicatorSize.label,
     );
   }
+
+  // ignore: avoid_positional_boolean_parameters
+  static FormBuilderCheckbox getCheckbox(String name, String text, void Function(bool? val)? onChanged) {
+    return FormBuilderCheckbox(
+      name: name,
+      onChanged: onChanged,
+      title: Text(text),
+      decoration: const InputDecoration(
+        border: OutlineInputBorder(),
+        filled: true,
+        fillColor: AppColors.inputEnabled,
+      ),
+    );
+  }
 }
 
-InputBorder get _textFieldBorder => const UnderlineInputBorder(
+OutlineInputBorder _buildOutlineInputBorder(Color color) => OutlineInputBorder(
+      borderRadius: BorderRadius.circular(20),
       borderSide: BorderSide(
-        width: 1.5,
-        color: AppColors.darkAqua,
+        color: color,
       ),
     );
 
+TextStyle _buildTextStyle(Color color, {double fontSize = 16}) => TextStyle(
+      color: color,
+      fontSize: fontSize,
+    );
 BottomNavigationBarThemeData get _bottomAppBarTheme {
   return BottomNavigationBarThemeData(
     backgroundColor: AppColors.darkBackground,

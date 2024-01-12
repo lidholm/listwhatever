@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:listwhatever/custom/pages/listItems/map/flutter_maps_view.dart';
 
 import '/custom/navigation/routes.dart';
 import '/custom/pages/import/csv/import_csv_page_route.dart';
@@ -12,7 +13,6 @@ import '/custom/pages/listItems/list_items_events/list_items_bloc.dart';
 import '/custom/pages/listItems/list_items_events/list_items_event.dart';
 import '/custom/pages/listItems/list_items_events/list_items_state.dart';
 import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
-import '/custom/pages/listItems/map/maps_view.dart';
 import '/custom/pages/lists/addList/edit_list_page_route.dart';
 import '/custom/pages/lists/list_events/list_bloc.dart';
 import '/custom/pages/lists/list_events/list_event.dart';
@@ -55,7 +55,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        final listItemState = context.watch<ListItemsBloc>().state;
+        final listItemsState = context.watch<ListItemsBloc>().state;
         // logger.d('listItemState: $listItemState');
         final filtersState = context.watch<FilterBloc>().state;
 
@@ -70,7 +70,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
         final sortOrder = context.watch<ListItemsSortOrderCubit>().state;
         final listState = context.watch<ListBloc>().state;
 
-        final listStateView = ListOrListItemNotLoadedHandler.handleListAndListItemsState(listState, listItemState);
+        final listStateView = ListOrListItemNotLoadedHandler.handleListAndListItemsState(listState, listItemsState);
         // logger.i('listState: $listState');
         if (listStateView != null) {
           return listStateView;
@@ -78,19 +78,14 @@ class _ListItemsPageState extends State<ListItemsPage> {
 
         final list = (listState is ListLoaded) ? listState.list : null;
         final listName = (listState is ListLoaded) ? listState.list?.name ?? '' : '';
+        final listItems = (listItemsState as ListItemsLoaded).listItems;
 
         return Scaffold(
           appBar: CommonAppBar(
             title: context.l10n.listItemsHeader(listName),
             actions: getAppBarActions(listState, viewToShow, sortOrder, filters),
           ),
-          body: switch (listItemState) {
-            ListItemsLoading() => const Center(child: CircularProgressIndicator()),
-            ListItemsInitial() => Container(),
-            ListItemsLoaded() => showLoadedItems(list, listItemState, viewToShow, filters, sortOrder, widget.listId),
-            ListItemsOperationSuccess() => Container(),
-            ListItemsError() => Center(child: Text(listItemState.errorMessage)),
-          },
+          body: showLoadedItems(list, listItems, viewToShow, filters, sortOrder, widget.listId),
           floatingActionButton: list?.shareType == ShareType.editor
               ? FloatingActionButton(
                   onPressed: () {
@@ -106,18 +101,17 @@ class _ListItemsPageState extends State<ListItemsPage> {
 
   Widget showLoadedItems(
     ListOfThings? list,
-    ListItemsLoaded state,
+    List<ListItem> listItems,
     ListItemsPageView viewToShow,
     Filters filters,
     (ListItemsSortOrder, SortOrder) sortOrder,
     String userListId,
   ) {
-    final items = state.listItems;
     // logger.d('number of items: ${items.length}');
     // logger.d('items: $items');
     // logger.d('items:\n${items.map((i) => '${i.latLong} - ${i.name} ').join('\n')}');
 
-    final filteredItems = filterItems(list, items, filters);
+    final filteredItems = filterItems(list, listItems, filters);
 
     if (viewToShow == ListItemsPageView.listView) {
       final multiplier = sortOrder.$2 == SortOrder.ascending ? 1 : -1;
@@ -135,10 +129,14 @@ class _ListItemsPageState extends State<ListItemsPage> {
         onTap: (itemId) => showDetailsView(userListId, itemId),
       );
     } else {
-      return MapsView(
+      return FlutterMapsView(
         items: filteredItems,
         onTap: (itemId) => showDetailsView(userListId, itemId),
       );
+      //  return GoogleMapsView(
+      //   items: filteredItems,
+      //   onTap: (itemId) => showDetailsView(userListId, itemId),
+      // );
     }
   }
 
@@ -148,7 +146,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
       filters: filters,
       listHasDates: list?.withDates ?? false,
       listHasMap: list?.withMap ?? false,
-      distanceFilterCenter: null, // TODO
+      distanceFilterCenter: null, // TODO: Implement
     );
   }
 
@@ -160,7 +158,11 @@ class _ListItemsPageState extends State<ListItemsPage> {
   }
 
   List<AppBarAction<dynamic>> getAppBarActions(
-      ListState listState, ListItemsPageView viewToShow, (ListItemsSortOrder, SortOrder) sortOrder, Filters filters,) {
+    ListState listState,
+    ListItemsPageView viewToShow,
+    (ListItemsSortOrder, SortOrder) sortOrder,
+    Filters filters,
+  ) {
     final list = (listState is ListLoaded) ? listState.list : null;
 
     final actions = [
