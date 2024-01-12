@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
 
-import '/custom/pages/lists/list_events/list_state.dart';
-import '/custom/pages/lists/lists_events/lists_state.dart';
 import '/custom/pages/shareList/bloc/shared_list_state.dart';
 import '/standard/constants.dart';
+import '../lists/list_load_events/list_load_state.dart';
+import '../lists/lists_load_events/lists_state.dart';
 import 'list_item_load_bloc/list_item_load_state.dart';
 
 class ListOrListItemNotLoadedHandler {
-  static Widget? handleListAndListItemsState(ListState listState, ListItemsLoadState listItemsState) {
+  static Widget? handleListAndListItemsState(ListLoadState listState, ListItemsLoadState listItemsState) {
     final listView = handleListState(listState);
     if (listView != null) {
       return listView;
@@ -20,7 +20,7 @@ class ListOrListItemNotLoadedHandler {
     return null;
   }
 
-  static Widget? handleListAndListItemState(ListState listState, ListItemState listItemState) {
+  static Widget? handleListAndListItemState(ListLoadState listState, ListItemState listItemState) {
     final listView = handleListState(listState);
     if (listView != null) {
       return listView;
@@ -32,24 +32,21 @@ class ListOrListItemNotLoadedHandler {
     return null;
   }
 
-  static Widget? handleUserListsState(ListsState listsState) {
+  static Widget? handleUserListsState(ListsLoadState listsState) {
     return switch (listsState) {
-      ListsError() => getErrorWidget(listsState.errorMessage),
-      ListsInitial() => initialListsView(),
-      ListsLoading() => loadingListsView(),
-      ListsOperationSuccess() => const Center(child: CircularProgressIndicator()),
-      ListsLoaded() => null,
+      ListsLoadError() => getErrorWidget(listsState.errorMessage),
+      ListsLoadInitial() => initialListsView(),
+      ListsLoadLoading() => loadingListsView(),
+      ListsLoadLoaded() => null,
     };
   }
 
-  static Widget? handleListState(ListState listState) {
+  static Widget? handleListState(ListLoadState listState) {
     return switch (listState) {
-      ListError() => getErrorWidget(listState.errorMessage),
-      ListInitial() => initialListView(),
-      ListLoading() => loadingListView(),
-      ListOperationSuccess() => const Center(child: CircularProgressIndicator()),
-      ListLoaded() => null,
-      ListDeleted() => Container(),
+      ListLoadError() => getErrorWidget(listState.errorMessage),
+      ListLoadInitial() => initialListView(),
+      ListLoadLoading() => loadingListView(),
+      ListLoadLoaded() => null,
     };
   }
 

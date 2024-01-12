@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_bloc.dart';
+import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_bloc.dart';
 
 import '/custom/navigation/get_router_provider_information.dart';
 import '/custom/navigation/routes.dart';
@@ -11,8 +12,6 @@ import '/custom/pages/listItems/list_items_page_view_cubit.dart';
 import '/custom/pages/listItems/list_items_service.dart';
 import '/custom/pages/listItems/list_items_sort_order_cubit.dart';
 import '/custom/pages/listItems/searchLocation/search_location_bloc.dart';
-import '/custom/pages/lists/list_events/list_bloc.dart';
-import '/custom/pages/lists/lists_events/lists_bloc.dart';
 import '/custom/pages/lists/lists_service.dart';
 import '/custom/pages/lists/user_lists_service.dart';
 import '/custom/pages/shareList/bloc/shared_list_bloc.dart';
@@ -23,7 +22,6 @@ import '/standard/analytics/bloc/analytics_bloc.dart';
 import '/standard/analyticsRepository/analytics_repository.dart';
 import '/standard/app/app.dart';
 import '/standard/app/bloc/app_event.dart';
-import '/standard/app/widgets/delete_item_redirect_listener.dart';
 import '/standard/app/widgets/to_onscreen_logs_listener.dart';
 import '/standard/appUi/theme/app_theme.dart';
 import '/standard/bloc/login_bloc.dart';
@@ -81,8 +79,11 @@ class App extends StatelessWidget {
               BlocProvider<SearchLocationBloc>(create: (context) => SearchLocationBloc()),
               BlocProvider<FilterBloc>(create: (context) => FilterBloc()),
               BlocProvider<SharedListBloc>(create: (context) => SharedListBloc(sharedListsService)),
-              BlocProvider<ListBloc>(create: (context) => ListBloc(userListsService, listsService)),
-              BlocProvider<ListsBloc>(create: (context) => ListsBloc(listsService, userListsService)),
+              BlocProvider<ListCrudBloc>(create: (context) => ListCrudBloc(userListsService, listsService)),
+
+              // BlocProvider<ListBloc>(create: (context) => ListBloc(userListsService, listsService)),
+              // BlocProvider<ListsBloc>(create: (context) => ListsBloc(), userListsService)),
+
               BlocProvider<SubscribeListBloc>(create: (context) => SubscribeListBloc(sharedListsService, listsService)),
               BlocProvider<ListItemsLoadBloc>(
                 create: (context) => ListItemsLoadBloc(userListsService, listItemsService),
@@ -107,10 +108,8 @@ class App extends StatelessWidget {
               ),
             ],
             child: AuthenticatedUserListener(
-              child: DeleteItemRedirectListener(
-                child: ToOnScreenLogsListener(
-                  child: child,
-                ),
+              child: ToOnScreenLogsListener(
+                child: child,
               ),
             ),
           ),

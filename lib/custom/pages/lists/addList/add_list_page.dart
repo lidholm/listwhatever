@@ -3,18 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_bloc.dart';
+import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_event.dart';
 import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
 import 'package:listwhatever/standard/appUi/theme/app_theme.dart';
 
 import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
-import '/custom/pages/lists/list_events/list_bloc.dart';
-import '/custom/pages/lists/list_events/list_event.dart';
-import '/custom/pages/lists/list_events/list_state.dart';
-import '/custom/pages/lists/lists_events/lists_bloc.dart';
-import '/custom/pages/lists/lists_events/lists_event.dart';
 import '/standard/constants.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
 import '/standard/widgets/vStack/v_stack.dart';
+import '../list_load_events/list_load_bloc.dart';
+import '../list_load_events/list_load_event.dart';
+import '../list_load_events/list_load_state.dart';
 import '../models/list_type.dart';
 
 enum AddListValues {
@@ -52,7 +52,7 @@ class _AddListPageState extends State<AddListPage> {
   @override
   void initState() {
     if (widget.listId != null) {
-      BlocProvider.of<ListBloc>(context).add(LoadList(widget.listId!));
+      BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.listId!));
     }
     super.initState();
   }
@@ -61,13 +61,13 @@ class _AddListPageState extends State<AddListPage> {
   Widget build(BuildContext context) {
     ListOfThings? list;
     if (widget.listId != null) {
-      final listState = context.watch<ListBloc>().state;
+      final listState = context.watch<ListLoadBloc>().state;
 
       final listStateView = ListOrListItemNotLoadedHandler.handleListState(listState);
       if (listStateView != null) {
         return listStateView;
       }
-      list = (listState as ListLoaded).list;
+      list = (listState as ListLoadLoaded).list;
     }
 
     initialValue = {
@@ -239,9 +239,9 @@ class _AddListPageState extends State<AddListPage> {
       ownerId: initialValue[AddListValues.ownerId.toString()] as String?,
     );
     if (widget.listId == null) {
-      BlocProvider.of<ListsBloc>(context).add(AddList(list));
+      BlocProvider.of<ListCrudBloc>(context).add(AddList(list));
     } else {
-      BlocProvider.of<ListBloc>(context).add(UpdateList(list));
+      BlocProvider.of<ListCrudBloc>(context).add(UpdateList(list));
     }
     GoRouter.of(context).pop();
   }

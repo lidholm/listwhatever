@@ -1,0 +1,75 @@
+import 'package:bloc/bloc.dart';
+import 'package:listwhatever/custom/pages/lists/models/user_list.dart';
+import '/custom/pages/lists/lists_service.dart';
+import '/custom/pages/lists/user_lists_service.dart';
+
+import '/standard/constants.dart';
+import 'list_crud_event.dart';
+import 'list_crud_state.dart';
+
+class ListCrudBloc extends Bloc<ListCrudEvent, ListCrudState> {
+  ListCrudBloc(this._userListsService, this._listsService) : super(ListCrudInitial()) {
+    on<ChangeUserForListCrud>(_onChangeUser);
+    on<AddList>(_onAddList);
+    on<UpdateList>(_onUpdateList);
+    on<DeleteList>(_onDeleteList);
+  }
+  final UserListsService _userListsService;
+  final ListsService _listsService;
+
+  Future<void> _onChangeUser(ChangeUserForListCrud event, Emitter<ListCrudState> emit) async {
+    try {
+      emit(ListCrudLoading());
+      _listsService.changeUser(event.userId);
+      emit(ListCrudOperationSuccess('Changed user for ListCrud'));
+    } catch (e) {
+      logger.e('Error: $e');
+      emit(ListCrudError('Failed to change user.\n$e'));
+    }
+  }
+
+  Future<void> _onAddList(AddList event, Emitter<ListCrudState> emit) async {
+    try {
+      emit(ListCrudLoading());
+      final list = event.list.copyWith(ownerId: _listsService.userId);
+      final listId = await _listsService.addList(event.list);
+      final userList = UserList(
+        id: '',
+        listId: listId,
+        listName: list.name,
+        listType: list.listType,
+        ownerId: list.ownerId!,
+        isOwnList: true,
+      );
+      await _userListsService.addList(userList);
+      emit(ListCrudOperationSuccess('Added list'));
+    } catch (e) {
+      logger.e('Error: $e');
+      emit(ListCrudError('Failed to add list.\n$e'));
+    }
+  }
+
+  Future<void> _onUpdateList(UpdateList event, Emitter<ListCrudState> emit) async {
+    // logger.i('_onUpdateList');
+    try {
+      emit(ListCrudLoading());
+      await _listsService.updateList(event.list);
+      emit(ListCrudOperationSuccess('Updated list'));
+    } catch (e) {
+      logger.e('Error: $e');
+      emit(ListCrudError('Failed to update list.\n$e'));
+    }
+  }
+
+  Future<void> _onDeleteList(DeleteList event, Emitter<ListCrudState> emit) async {
+    // logger.i('_onDeleteList');
+    try {
+      emit(ListCrudLoading());
+      await _listsService.deleteList(event.listId);
+      emit(ListCrudOperationSuccess('Deleted list'));
+    } catch (e) {
+      logger.e('Error: $e');
+      emit(ListCrudError('Failed to delete list.\n$e'));
+    }
+  }
+}

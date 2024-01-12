@@ -16,9 +16,6 @@ import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
 import '/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
 import '/custom/pages/listItems/searchLocation/search_location_page_route.dart';
 import '/custom/pages/listItems/searchLocation/search_location_response.dart';
-import '/custom/pages/lists/list_events/list_bloc.dart';
-import '/custom/pages/lists/list_events/list_event.dart';
-import '/custom/pages/lists/list_events/list_state.dart';
 import '/l10n/l10n.dart';
 import '/standard/constants.dart';
 import '/standard/navigation/redirect_cubit.dart';
@@ -26,6 +23,9 @@ import '/standard/widgets/appBar/app_bar_action.dart';
 import '/standard/widgets/appBar/app_bar_action_icon.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
 import '/standard/widgets/vStack/v_stack.dart';
+import '../../lists/list_load_events/list_load_bloc.dart';
+import '../../lists/list_load_events/list_load_event.dart';
+import '../../lists/list_load_events/list_load_state.dart';
 import '../list_item_crud_bloc/list_item_crud_bloc.dart';
 import '../list_item_crud_bloc/list_item_crud_event.dart';
 import '../list_item_load_bloc/list_item_load_bloc.dart';
@@ -88,7 +88,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
 
   @override
   void initState() {
-    BlocProvider.of<ListBloc>(context).add(LoadList(widget.listId));
+    BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.listId));
     if (widget.listItemId != null) {
       BlocProvider.of<ListItemLoadBloc>(context).add(LoadListItem(widget.listId, widget.listItemId!));
     }
@@ -98,7 +98,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
   @override
   Widget build(BuildContext context) {
     logger.d('in AddListItemPage');
-    final listState = context.watch<ListBloc>().state;
+    final listState = context.watch<ListLoadBloc>().state;
     final listItemState = context.watch<ListItemLoadBloc>().state;
     final listItem = getMaybeListItem(listItemState);
 
@@ -107,7 +107,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
       return notLoadedView;
     }
 
-    list = (listState as ListLoaded).list;
+    list = (listState as ListLoadLoaded).list;
     return BlocListener<ListItemCrudBloc, ListItemCrudState>(
       listener: (context, state) {
         print('state: $state');
@@ -642,7 +642,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
     return null;
   }
 
-  Widget? getNotLoadedView(ListState listState, ListItemState listItemState) {
+  Widget? getNotLoadedView(ListLoadState listState, ListItemState listItemState) {
     final listStateView = ListOrListItemNotLoadedHandler.handleListState(listState);
     if (listStateView != null) {
       return listStateView;

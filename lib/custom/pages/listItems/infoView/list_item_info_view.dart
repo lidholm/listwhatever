@@ -4,12 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '/custom/navigation/routes.dart';
 import '/custom/pages/listItems/addListItem/edit_list_item_page_route.dart';
 import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
-import '/custom/pages/lists/list_events/list_bloc.dart';
 import '/l10n/l10n.dart';
 import '/standard/constants.dart';
 import '/standard/widgets/appBar/app_bar_action.dart';
 import '/standard/widgets/appBar/app_bar_action_icon.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
+import '../../lists/list_load_events/list_load_bloc.dart';
 import '../list_item_load_bloc/list_item_load_bloc.dart';
 import '../list_item_load_bloc/list_item_load_event.dart';
 import '../list_item_load_bloc/list_item_load_state.dart';
@@ -35,7 +35,7 @@ class _ListItemInfoViewState extends State<ListItemInfoView> {
 
   @override
   Widget build(BuildContext context) {
-    final listState = context.watch<ListBloc>().state;
+    final listState = context.watch<ListLoadBloc>().state;
     final listItemState = context.watch<ListItemLoadBloc>().state;
 
     final listStateView = ListOrListItemNotLoadedHandler.handleListAndListItemState(listState, listItemState);

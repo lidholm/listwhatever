@@ -15,10 +15,10 @@ import '/custom/pages/listItems/filters/filters.dart';
 import '/custom/pages/listItems/list_item.dart';
 import '/custom/pages/listItems/list_items.dart';
 import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
-import '/custom/pages/lists/list_events/list_bloc.dart';
-import '/custom/pages/lists/list_events/list_event.dart';
-import '/custom/pages/lists/list_events/list_state.dart';
 import '/standard/widgets/border_with_header.dart';
+import '../../lists/list_load_events/list_load_bloc.dart';
+import '../../lists/list_load_events/list_load_event.dart';
+import '../../lists/list_load_events/list_load_state.dart';
 import 'date_filter.dart';
 import 'filter_event.dart';
 import 'filter_state.dart';
@@ -48,13 +48,13 @@ class _FilterViewState extends State<FilterView> {
 
   @override
   void initState() {
-    BlocProvider.of<ListBloc>(context).add(LoadList(widget.listId));
+    BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.listId));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final listState = context.watch<ListBloc>().state;
+    final listState = context.watch<ListLoadBloc>().state;
     final listItemsState = context.watch<ListItemsLoadBloc>().state;
 
     final filtersState = context.watch<FilterBloc>().state;
@@ -71,7 +71,7 @@ class _FilterViewState extends State<FilterView> {
       return listStateView;
     }
 
-    final list = (listState as ListLoaded).list!;
+    final list = (listState as ListLoadLoaded).list!;
     final listItems = (listItemsState as ListItemsLoadLoaded).listItems;
 
     final initialValues = {
