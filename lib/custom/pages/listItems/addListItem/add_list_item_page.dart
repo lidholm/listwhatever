@@ -99,17 +99,13 @@ class _AddListItemPageState extends State<AddListItemPage> {
   Widget build(BuildContext context) {
     logger.d('in AddListItemPage');
     final listState = context.watch<ListBloc>().state;
-    final listStateView = ListOrListItemNotLoadedHandler.handleListState(listState);
-    if (listStateView != null) {
-      return listStateView;
-    }
-    if (widget.listItemId != null) {
-      final listItemState = context.watch<ListItemLoadBloc>().state;
-      final listItemStateView = ListOrListItemNotLoadedHandler.handleListItemState(listItemState);
-      if (listItemStateView != null) {
-        return listItemStateView;
-      }
-      listItem = (listItemState as ListItemLoaded).listItem;
+    final listItemState = context.watch<ListItemLoadBloc>().state;
+    print('listItemState: $listItemState');
+    final listItem = getMaybeListItem(listItemState);
+
+    final notLoadedView = getNotLoadedView(listState, listItemState);
+    if (notLoadedView != null) {
+      return notLoadedView;
     }
 
     list = (listState as ListLoaded).list;
@@ -636,5 +632,28 @@ class _AddListItemPageState extends State<AddListItemPage> {
       padding: const EdgeInsets.only(left: 8),
       child: child,
     );
+  }
+
+  ListItem? getMaybeListItem(ListItemState listItemState) {
+    if (widget.listItemId != null) {
+      if (listItemState is ListItemLoaded) {
+        return listItemState.listItem;
+      }
+    }
+    return null;
+  }
+
+  Widget? getNotLoadedView(ListState listState, ListItemState listItemState) {
+    final listStateView = ListOrListItemNotLoadedHandler.handleListState(listState);
+    if (listStateView != null) {
+      return listStateView;
+    }
+    if (widget.listItemId != null) {
+      final listItemStateView = ListOrListItemNotLoadedHandler.handleListItemState(listItemState);
+      if (listItemStateView != null) {
+        return listItemStateView;
+      }
+    }
+    return null;
   }
 }
