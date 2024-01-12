@@ -5,6 +5,7 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_event.dart';
+import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_state.dart';
 import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
 import 'package:listwhatever/standard/appUi/theme/app_theme.dart';
 
@@ -46,6 +47,7 @@ class _AddListPageState extends State<AddListPage> {
 
   final _typeOptions = ListType.values;
   late Map<String, dynamic> initialValue;
+  ListOfThings? list;
 
   void _onChanged(dynamic val) => logger.d(val.toString());
 
@@ -59,7 +61,6 @@ class _AddListPageState extends State<AddListPage> {
 
   @override
   Widget build(BuildContext context) {
-    ListOfThings? list;
     if (widget.listId != null) {
       final listState = context.watch<ListLoadBloc>().state;
 
@@ -80,36 +81,44 @@ class _AddListPageState extends State<AddListPage> {
       AddListValues.ownerId.toString(): list?.ownerId,
       // AddListValues.share.toString(): list?.shared ?? false,
     };
-    return Scaffold(
-      appBar: const CommonAppBar(title: 'Add list'),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: FormBuilder(
-            key: _formKey,
-            onChanged: () {
-              _formKey.currentState!.save();
-              // logger.d(_formKey.currentState!.value.toString());
-            },
-            autovalidateMode: AutovalidateMode.disabled,
-            initialValue: initialValue,
-            skipDisabled: true,
-            child: VStack(
-              children: <Widget>[
-                const SizedBox(height: 15),
-                getListNameField(),
-                getListTypeField(),
-                getWithMapCheckbox(),
-                getWithDatesCheckbox(),
-                getWithTimesCheckbox(),
-                Row(
-                  children: <Widget>[
-                    getCancelButton(),
-                    const SizedBox(width: 20),
-                    getSubmitButton(),
-                  ],
-                ),
-              ],
+    return BlocListener<ListCrudBloc, ListCrudState>(
+      listener: (context, state) {
+        print('state: $state');
+        if (state is ListCrudOperationSuccess) {
+          GoRouter.of(context).pop();
+        }
+      },
+      child: Scaffold(
+        appBar: const CommonAppBar(title: 'Add list'),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: FormBuilder(
+              key: _formKey,
+              onChanged: () {
+                _formKey.currentState!.save();
+                // logger.d(_formKey.currentState!.value.toString());
+              },
+              autovalidateMode: AutovalidateMode.disabled,
+              initialValue: initialValue,
+              skipDisabled: true,
+              child: VStack(
+                children: <Widget>[
+                  const SizedBox(height: 15),
+                  getListNameField(),
+                  getListTypeField(),
+                  getWithMapCheckbox(),
+                  getWithDatesCheckbox(),
+                  getWithTimesCheckbox(),
+                  Row(
+                    children: <Widget>[
+                      getCancelButton(),
+                      const SizedBox(width: 20),
+                      getSubmitButton(),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -243,6 +252,5 @@ class _AddListPageState extends State<AddListPage> {
     } else {
       BlocProvider.of<ListCrudBloc>(context).add(UpdateList(list));
     }
-    GoRouter.of(context).pop();
   }
 }
