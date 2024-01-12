@@ -18,51 +18,54 @@ class ListItemsListView extends StatelessWidget {
     }
 
     return SingleChildScrollView(
-      child: VStack(spacing: 0, children: [
-        ...items.map((item) {
-          final subtitle = item.datetime != null ? formatReadableDate(item.datetime!, DateFormatType.iso8601) : null;
-          return Padding(
-            padding: const EdgeInsets.only(left: 16, top: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      item.name,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black.withAlpha(200),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    if (subtitle != null)
+      child: VStack(
+        spacing: 0,
+        children: [
+          ...items.map((item) {
+            final subtitle = item.datetime != null ? formatReadableDate(item.datetime!, DateFormatType.iso8601) : null;
+            return Padding(
+              padding: const EdgeInsets.only(left: 16, top: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                       Text(
-                        subtitle,
+                        item.name,
                         style: TextStyle(
                           fontSize: 16,
                           color: Colors.black.withAlpha(200),
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                  ],
-                ),
-                IconButton(
-                  onPressed: () {
-                    onTap(item.id!);
-                  },
-                  icon: const Icon(
-                    Icons.keyboard_arrow_right_rounded,
+                      if (subtitle != null)
+                        Text(
+                          subtitle,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black.withAlpha(200),
+                          ),
+                        ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-          );
-        }),
-        const SizedBox(
-          height: 80,
-        ),
-      ]),
+                  IconButton(
+                    onPressed: () {
+                      onTap(item.id!);
+                    },
+                    icon: const Icon(
+                      Icons.keyboard_arrow_right_rounded,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
+          const SizedBox(
+            height: 80,
+          ),
+        ],
+      ),
     );
   }
 }
