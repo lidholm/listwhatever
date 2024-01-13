@@ -44,7 +44,7 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
     return BlocListener<ListItemCrudBloc, ListItemCrudState>(
       listener: (context, state) {
         print('state: $state');
-        if (state is ListItemCrudOperationSuccess) {
+        if (state is ListItemCrudImported) {
           GoRouter.of(context).pop();
         }
       },

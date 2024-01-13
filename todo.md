@@ -15,10 +15,13 @@
 [ ] Import from other source
  - [ ] Google sheets
  - [x] CSV
+- [ ] Firestore function to update users lists when data in list is changed
+- [x] Delete list item 
+- [ ] Delete list
+- [ ] User settings (e.g. use Google Maps or flutter_map)
+- [ ] Current location and distance
 - [ ] Fix fastlane
 - [ ] Upload image for list
 - [ ] Better colors/styling
 - [ ] Set up Google Play
-- [ ] Firestore function to update users lists when data in list is changed
-- [ ] User settings (e.g. use Google Maps or flutter_map)
-- [ ] Current location and distance
+- [ ] View a list without logging in if you have the code

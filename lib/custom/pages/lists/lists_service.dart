@@ -4,9 +4,16 @@ import '/standard/constants.dart';
 import '/standard/firebase/firestore/firestore.dart';
 
 class ListsService {
-  ListsService({required this.userId});
+  ListsService({required this.userId}) {
+    _initFirestore();
+  }
 
   String? userId;
+  late final FirebaseFirestore firestore;
+
+  Future<void> _initFirestore() async {
+    firestore = await getFirestore();
+  }
 
   // ignore: use_setters_to_change_properties
   void changeUser(String? userId) {
@@ -16,7 +23,7 @@ class ListsService {
   Future<CollectionReference<Map<String, dynamic>>> getCollection() async {
     const path = '/lists';
     logger.d('actual lists path: $path');
-    return (await getFirestore()).collection(path);
+    return firestore.collection(path);
   }
 
   Stream<List<ListOfThings>> getLists() async* {

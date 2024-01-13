@@ -22,7 +22,7 @@ class ListItemCrudBloc extends Bloc<ListItemCrudEvent, ListItemCrudState> {
     try {
       emit(ListItemCrudLoading());
       _listItemsService.changeUser(event.userId);
-      emit(ListItemCrudOperationSuccess('Changed user'));
+      emit(ListItemCrudChangedUser('Changed user'));
     } catch (e) {
       logger.e('Error: $e');
       emit(ListItemCrudError('Failed to change user.\n$e'));
@@ -34,7 +34,7 @@ class ListItemCrudBloc extends Bloc<ListItemCrudEvent, ListItemCrudState> {
       emit(ListItemCrudLoading());
       final userList = await _userListsService.getList(event.listId);
       await _listItemsService.addListItem(userList.listId, event.listItem);
-      emit(ListItemCrudOperationSuccess('Changed user'));
+      emit(ListItemCrudAdded(event.listItem));
     } catch (e) {
       logger.e('Error: $e');
       emit(ListItemCrudError('Failed to add listItem.\n$e'));
@@ -47,7 +47,7 @@ class ListItemCrudBloc extends Bloc<ListItemCrudEvent, ListItemCrudState> {
       emit(ListItemCrudLoading());
       final userList = await _userListsService.getList(event.listId);
       await _listItemsService.updateListItem(userList.listId, event.listItem);
-      emit(ListItemCrudOperationSuccess('Changed user'));
+      emit(ListItemCrudUpdated(event.listItem));
     } catch (e) {
       logger.e('Error: $e');
       emit(ListItemCrudError('Failed to update listItem.\n$e'));
@@ -61,7 +61,7 @@ class ListItemCrudBloc extends Bloc<ListItemCrudEvent, ListItemCrudState> {
 
       final userList = await _userListsService.getList(event.listId);
       await _listItemsService.deleteListItem(userList.listId, event.listItemId);
-      emit(ListItemCrudOperationSuccess('Changed user'));
+      emit(ListItemCrudDeleted(event.listItemId));
     } catch (e) {
       logger.e('Error: $e');
       emit(ListItemCrudError('Failed to delete listItem.\n$e'));
@@ -84,7 +84,7 @@ class ListItemCrudBloc extends Bloc<ListItemCrudEvent, ListItemCrudState> {
           await _listItemsService.addListItem(userList.listId, listItem);
         }
       }
-      emit(ListItemCrudOperationSuccess('Changed user'));
+      emit(ListItemCrudImported(event.listItems));
       // emit(ListItemLoading());
     } catch (e) {
       logger.e('Error: $e');

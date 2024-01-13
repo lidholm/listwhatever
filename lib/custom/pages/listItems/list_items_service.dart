@@ -5,9 +5,15 @@ import '/standard/firebase/firestore/firestore.dart';
 import '../../pages/listItems/list_item.dart';
 
 class ListItemsService {
-  ListItemsService({required this.userId});
-
+  ListItemsService({required this.userId}) {
+    _initFirestore();
+  }
   String? userId;
+  late final FirebaseFirestore firestore;
+
+  Future<void> _initFirestore() async {
+    firestore = await getFirestore();
+  }
 
   // ignore: use_setters_to_change_properties
   void changeUser(String? userId) {
@@ -17,7 +23,7 @@ class ListItemsService {
   Future<CollectionReference<Map<String, dynamic>>> getCollection(String listId) async {
     final path = '/lists/$listId/items';
     logger.d('ListItemsService.path: $path');
-    return (await getFirestore()).collection(path);
+    return firestore.collection(path);
   }
 
   Stream<List<ListItem>> getListItems(String listId) async* {
@@ -32,11 +38,14 @@ class ListItemsService {
     });
   }
 
-  Future<ListItem> getListItem(String listId, String itemId) async {
+  Future<ListItem?> getListItem(String listId, String itemId) async {
     // logger.d('getListItem($listId, $itemId)');
     final itemsCollection = await getCollection(listId);
     final snapshot = await itemsCollection.doc(itemId).get();
-    final data = snapshot.data()!;
+    final data = snapshot.data();
+    if (data == null) {
+      return null;
+    }
     return ListItem.fromJson(data);
   }
 
@@ -44,10 +53,12 @@ class ListItemsService {
     final itemsCollection = await getCollection(listId);
     final docId = itemsCollection.doc().id;
 
-    final updatedListItem = list.copyWith(
-        id: docId,
-        latestUpdateUser: userId,
-    ).toJson();
+    final updatedListItem = list
+        .copyWith(
+          id: docId,
+          latestUpdateUser: userId,
+        )
+        .toJson();
 
     return itemsCollection.doc(docId).set(updatedListItem);
   }
@@ -55,9 +66,11 @@ class ListItemsService {
   Future<void> updateListItem(String listId, ListItem listItem) async {
     final itemsCollection = await getCollection(listId);
 
-    final updatedListItem = listItem.copyWith(
-      latestUpdateUser: userId,
-    ).toJson();
+    final updatedListItem = listItem
+        .copyWith(
+          latestUpdateUser: userId,
+        )
+        .toJson();
 
     return itemsCollection.doc(listItem.id).update(updatedListItem);
   }

@@ -3,12 +3,19 @@ import '/custom/pages/shareList/shared_list.dart';
 import '/standard/firebase/firestore/firestore.dart';
 
 class SharedListsService {
-  SharedListsService();
+  SharedListsService() {
+    _initFirestore();
+  }
+  late final FirebaseFirestore firestore;
+
+  Future<void> _initFirestore() async {
+    firestore = await getFirestore();
+  }
 
   Future<CollectionReference<Map<String, dynamic>>> getCollection() async {
     const path = '/sharedLists';
     // logger.d('path: $path');
-    return (await getFirestore()).collection(path);
+    return firestore.collection(path);
   }
 
   Future<SharedList> getSharedList(String id) async {
@@ -20,7 +27,7 @@ class SharedListsService {
 
   Future<void> addUser(String id, String userId) async {
     final sharedListsCollection = await getCollection();
-     return sharedListsCollection.doc(id).collection('users').doc(userId).set({'userId': userId});
+    return sharedListsCollection.doc(id).collection('users').doc(userId).set({'userId': userId});
   }
 
   // TODO:

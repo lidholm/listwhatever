@@ -68,6 +68,7 @@ class AddListItemPage extends StatefulWidget {
 }
 
 class _AddListItemPageState extends State<AddListItemPage> {
+  String? listItemId;
   bool autoValidate = true;
   bool readOnly = false;
   bool showSegmentedControl = true;
@@ -89,8 +90,9 @@ class _AddListItemPageState extends State<AddListItemPage> {
   @override
   void initState() {
     BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.listId));
-    if (widget.listItemId != null) {
-      BlocProvider.of<ListItemLoadBloc>(context).add(LoadListItem(widget.listId, widget.listItemId!));
+    listItemId = widget.listItemId;
+    if (listItemId != null) {
+      BlocProvider.of<ListItemLoadBloc>(context).add(LoadListItem(widget.listId, listItemId!));
     }
     super.initState();
   }
@@ -111,7 +113,11 @@ class _AddListItemPageState extends State<AddListItemPage> {
     return BlocListener<ListItemCrudBloc, ListItemCrudState>(
       listener: (context, state) {
         print('state: $state');
-        if (state is ListItemCrudOperationSuccess) {
+        if (state is ListItemCrudDeleted) {
+          setState(() {
+            listItemId = null;
+          });
+          GoRouter.of(context).pop();
           GoRouter.of(context).pop();
         }
       },
@@ -604,7 +610,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
 
     // logger.d('values: $values');
     final listItem = ListItem(
-      id: widget.listItemId,
+      id: listItemId,
       name: values[AddListItemValues.name.toString()]! as String,
       info: values[AddListItemValues.info.toString()] as String?,
       urls: values.entries
@@ -619,7 +625,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
       categories: categories,
     );
 
-    if (widget.listItemId == null) {
+    if (listItemId == null) {
       BlocProvider.of<ListItemCrudBloc>(context).add(AddListItem(listId, listItem));
     } else {
       BlocProvider.of<ListItemCrudBloc>(context).add(UpdateListItem(listId, listItem));
@@ -634,7 +640,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
   }
 
   ListItem? getMaybeListItem(ListItemLoadState listItemState) {
-    if (widget.listItemId != null) {
+    if (listItemId != null) {
       if (listItemState is ListItemLoadLoaded) {
         return listItemState.listItem;
       }
@@ -647,7 +653,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
     if (listStateView != null) {
       return listStateView;
     }
-    if (widget.listItemId != null) {
+    if (listItemId != null) {
       final listItemStateView = ListOrListItemNotLoadedHandler.handleListItemState(listItemState);
       if (listItemStateView != null) {
         return listItemStateView;
