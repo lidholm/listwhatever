@@ -4,25 +4,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/custom/pages/listItems/list_item_crud_bloc/list_item_crud_state.dart';
+import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
 import 'package:listwhatever/standard/appUi/colors/app_colors.dart';
 import 'package:listwhatever/standard/appUi/typography/app_text_styles.dart';
 
 import '/custom/navigation/routes.dart';
 import '/custom/pages/listItems/list_item.dart';
-import '/custom/pages/listItems/list_item_events/list_item_bloc.dart';
-import '/custom/pages/listItems/list_item_events/list_item_event.dart';
-import '/custom/pages/listItems/list_item_events/list_item_state.dart';
 import '/custom/pages/listItems/list_items.dart';
-import '/custom/pages/listItems/list_items_events/list_items_bloc.dart';
-import '/custom/pages/listItems/list_items_events/list_items_event.dart';
 import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
 import '/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
 import '/custom/pages/listItems/searchLocation/search_location_page_route.dart';
 import '/custom/pages/listItems/searchLocation/search_location_response.dart';
-import '/custom/pages/lists/list_events/list_bloc.dart';
-import '/custom/pages/lists/list_events/list_event.dart';
-import '/custom/pages/lists/list_events/list_state.dart';
-import '/custom/pages/lists/list_of_things.dart';
 import '/l10n/l10n.dart';
 import '/standard/constants.dart';
 import '/standard/navigation/redirect_cubit.dart';
@@ -30,6 +23,14 @@ import '/standard/widgets/appBar/app_bar_action.dart';
 import '/standard/widgets/appBar/app_bar_action_icon.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
 import '/standard/widgets/vStack/v_stack.dart';
+import '../../lists/list_load_events/list_load_bloc.dart';
+import '../../lists/list_load_events/list_load_event.dart';
+import '../../lists/list_load_events/list_load_state.dart';
+import '../list_item_crud_bloc/list_item_crud_bloc.dart';
+import '../list_item_crud_bloc/list_item_crud_event.dart';
+import '../list_item_load_bloc/list_item_load_bloc.dart';
+import '../list_item_load_bloc/list_item_load_event.dart';
+import '../list_item_load_bloc/list_item_load_state.dart';
 
 enum AddListItemValues {
   name,
@@ -67,6 +68,7 @@ class AddListItemPage extends StatefulWidget {
 }
 
 class _AddListItemPageState extends State<AddListItemPage> {
+  String? listItemId;
   bool autoValidate = true;
   bool readOnly = false;
   bool showSegmentedControl = true;
@@ -87,9 +89,10 @@ class _AddListItemPageState extends State<AddListItemPage> {
 
   @override
   void initState() {
-    BlocProvider.of<ListBloc>(context).add(LoadList(widget.listId));
-    if (widget.listItemId != null) {
-      BlocProvider.of<ListItemBloc>(context).add(LoadListItem(widget.listId, widget.listItemId!));
+    BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.listId));
+    listItemId = widget.listItemId;
+    if (listItemId != null) {
+      BlocProvider.of<ListItemLoadBloc>(context).add(LoadListItem(widget.listId, listItemId!));
     }
     super.initState();
   }
@@ -97,72 +100,79 @@ class _AddListItemPageState extends State<AddListItemPage> {
   @override
   Widget build(BuildContext context) {
     logger.d('in AddListItemPage');
-    final listState = context.watch<ListBloc>().state;
-    final listStateView = ListOrListItemNotLoadedHandler.handleListState(listState);
-    if (listStateView != null) {
-      return listStateView;
-    }
-    list = (listState as ListLoaded).list;
-    if (widget.listItemId != null) {
-      final listItemState = context.watch<ListItemBloc>().state;
-      final listItemStateView = ListOrListItemNotLoadedHandler.handleListItemState(listItemState);
-      if (listItemStateView != null) {
-        return listItemStateView;
-      }
-      listItem = (listItemState as ListItemLoaded).listItem;
+    final listState = context.watch<ListLoadBloc>().state;
+    final listItemState = context.watch<ListItemLoadBloc>().state;
+    final listItem = getMaybeListItem(listItemState);
+
+    final notLoadedView = getNotLoadedView(listState, listItemState);
+    if (notLoadedView != null) {
+      return notLoadedView;
     }
 
-    return Scaffold(
-      appBar: CommonAppBar(
-        title: listItem == null ? 'Add item' : 'Edit item',
-        actions: [
-          if (listItem != null)
-            AppBarAction(
-              type: AppBarActionType.icon,
-              iconAction: AppBarActionIcon(
-                title: context.l10n.deleteListItem,
-                icon: Icons.delete,
-                key: const Key('deleteListItemAction'),
-                callback: () async {
-                  context.read<ListItemBloc>().add(DeleteListItem(widget.listId, listItem!.id!));
-                  context.read<RedirectCubit>().setRedirect(ListItemsPageRoute(listId: widget.listId).location);
-                },
+    list = (listState as ListLoadLoaded).list;
+    return BlocListener<ListItemCrudBloc, ListItemCrudState>(
+      listener: (context, state) {
+        print('state: $state');
+        if (state is ListItemCrudDeleted) {
+          setState(() {
+            listItemId = null;
+          });
+          GoRouter.of(context).pop();
+          GoRouter.of(context).pop();
+        }
+      },
+      child: Scaffold(
+        appBar: CommonAppBar(
+          title: listItem == null ? 'Add item' : 'Edit item',
+          actions: [
+            if (listItem != null)
+              AppBarAction(
+                type: AppBarActionType.icon,
+                iconAction: AppBarActionIcon(
+                  title: context.l10n.deleteListItem,
+                  icon: Icons.delete,
+                  key: const Key('deleteListItemAction'),
+                  callback: () async {
+                    context.read<ListItemCrudBloc>().add(DeleteListItem(widget.listId, listItem.id!));
+                    context.read<RedirectCubit>().setRedirect(ListItemsPageRoute(listId: widget.listId).location);
+                  },
+                ),
               ),
-            ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: createForm(
-            list,
-            listItem,
-            [
-              header('Main info'),
-              padLeft(createNameField()),
-              padLeft(createInfoField()),
-              createDivider(),
-              header('Categories', addCategoryButton()),
-              ...createCategoryFields(),
-              createDivider(),
-              header('Urls', addUrlButton()),
-              ...createUrlFields(),
-              if (list?.withDates ?? false) ...[createDivider(), header('Date'), padLeft(createDateField(list))],
-              if (list?.withMap ?? false) ...[
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: createForm(
+              list,
+              listItem,
+              [
+                header('Main info'),
+                padLeft(createNameField()),
+                padLeft(createInfoField()),
                 createDivider(),
-                header('Location', createSearchLocationButton(context)),
-                padLeft(createAddressField()),
-                padLeft(createLatLongFields()),
-              ],
-              const SizedBox(height: 40),
-              Row(
-                children: <Widget>[
-                  createResetButton(context),
-                  const SizedBox(width: 20),
-                  createSaveButton(widget.listId, list),
+                header('Categories', addCategoryButton()),
+                ...createCategoryFields(),
+                createDivider(),
+                header('Urls', addUrlButton()),
+                ...createUrlFields(),
+                if (list?.withDates ?? false) ...[createDivider(), header('Date'), padLeft(createDateField(list))],
+                if (list?.withMap ?? false) ...[
+                  createDivider(),
+                  header('Location', createSearchLocationButton(context)),
+                  padLeft(createAddressField()),
+                  padLeft(createLatLongFields()),
                 ],
-              ),
-            ],
+                const SizedBox(height: 40),
+                Row(
+                  children: <Widget>[
+                    createResetButton(context),
+                    const SizedBox(width: 20),
+                    createSaveButton(widget.listId, list),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -600,7 +610,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
 
     // logger.d('values: $values');
     final listItem = ListItem(
-      id: widget.listItemId,
+      id: listItemId,
       name: values[AddListItemValues.name.toString()]! as String,
       info: values[AddListItemValues.info.toString()] as String?,
       urls: values.entries
@@ -615,12 +625,11 @@ class _AddListItemPageState extends State<AddListItemPage> {
       categories: categories,
     );
 
-    if (widget.listItemId == null) {
-      BlocProvider.of<ListItemsBloc>(context).add(AddListItem(listId, listItem));
+    if (listItemId == null) {
+      BlocProvider.of<ListItemCrudBloc>(context).add(AddListItem(listId, listItem));
     } else {
-      BlocProvider.of<ListItemBloc>(context).add(UpdateListItem(listId, listItem));
+      BlocProvider.of<ListItemCrudBloc>(context).add(UpdateListItem(listId, listItem));
     }
-    GoRouter.of(context).pop();
   }
 
   Widget padLeft(Widget child) {
@@ -628,5 +637,28 @@ class _AddListItemPageState extends State<AddListItemPage> {
       padding: const EdgeInsets.only(left: 8),
       child: child,
     );
+  }
+
+  ListItem? getMaybeListItem(ListItemLoadState listItemState) {
+    if (listItemId != null) {
+      if (listItemState is ListItemLoadLoaded) {
+        return listItemState.listItem;
+      }
+    }
+    return null;
+  }
+
+  Widget? getNotLoadedView(ListLoadState listState, ListItemLoadState listItemState) {
+    final listStateView = ListOrListItemNotLoadedHandler.handleListState(listState);
+    if (listStateView != null) {
+      return listStateView;
+    }
+    if (listItemId != null) {
+      final listItemStateView = ListOrListItemNotLoadedHandler.handleListItemState(listItemState);
+      if (listItemStateView != null) {
+        return listItemStateView;
+      }
+    }
+    return null;
   }
 }

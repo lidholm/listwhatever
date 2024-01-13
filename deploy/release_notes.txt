@@ -1,3 +1,6 @@
+0.0.36
+* Improve bloc setups and delete list and list items
+
 0.0.35
 * Use flutter_map
 

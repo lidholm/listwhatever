@@ -1,22 +1,22 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:listwhatever/custom/pages/lists/list_type.dart';
+import 'package:listwhatever/custom/pages/lists/models/list_type.dart';
+import 'package:listwhatever/custom/pages/lists/models/user_list.dart';
 import 'package:listwhatever/standard/appUi/colors/app_colors.dart';
 
 import '/custom/navigation/routes.dart';
 import '/custom/pages/listItems/list_items_page_route.dart';
 import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
 import '/custom/pages/lists/addList/add_list.dart';
-import '/custom/pages/lists/lists_events/lists_bloc.dart';
-import '/custom/pages/lists/lists_events/lists_event.dart';
-import '/custom/pages/lists/lists_events/lists_state.dart';
-import '/custom/pages/lists/user_list.dart';
 import '/l10n/l10n.dart';
 import '/standard/appUi/theme/app_theme.dart';
 import '/standard/constants.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
 import '/standard/widgets/imageButton/image_button.dart';
+import '../lists_load_events/lists_bloc.dart';
+import '../lists_load_events/lists_event.dart';
+import '../lists_load_events/lists_state.dart';
 
 class ListsPage extends StatefulWidget {
   const ListsPage({super.key});
@@ -29,7 +29,7 @@ class _ListsPageState extends State<ListsPage> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<ListsBloc>(context).add(WatchLists());
+    BlocProvider.of<ListsLoadBloc>(context).add(WatchLists());
   }
 
   @override
@@ -40,14 +40,14 @@ class _ListsPageState extends State<ListsPage> {
       appBar: CommonAppBar(
         title: context.l10n.listsHeader,
       ),
-      body: BlocBuilder<ListsBloc, ListsState>(
+      body: BlocBuilder<ListsLoadBloc, ListsLoadState>(
         builder: (userListContext, userListState) {
           logger.d('userListState: $userListState');
           final userListStateView = ListOrListItemNotLoadedHandler.handleUserListsState(userListState);
           if (userListStateView != null) {
             return userListStateView;
           }
-          final lists = (userListState as ListsLoaded).lists;
+          final lists = (userListState as ListsLoadLoaded).lists;
 
           // logger.d('lists: ${lists.length}');
           return Padding(

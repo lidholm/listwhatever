@@ -1,13 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
 import '/standard/constants.dart';
 import '/standard/firebase/firestore/firestore.dart';
 
-import 'list_of_things.dart';
-
 class ListsService {
-  ListsService({required this.userId});
+  ListsService({required this.userId}) {
+    _initFirestore();
+  }
 
   String? userId;
+  late final FirebaseFirestore firestore;
+
+  Future<void> _initFirestore() async {
+    firestore = await getFirestore();
+  }
 
   // ignore: use_setters_to_change_properties
   void changeUser(String? userId) {
@@ -17,12 +23,12 @@ class ListsService {
   Future<CollectionReference<Map<String, dynamic>>> getCollection() async {
     const path = '/lists';
     logger.d('actual lists path: $path');
-    return (await getFirestore()).collection(path);
+    return firestore.collection(path);
   }
 
   Stream<List<ListOfThings>> getLists() async* {
     logger.d('getting actual lists');
-    if (userId == null)  {
+    if (userId == null) {
       logger.d('no user yet');
       yield* Stream.value([]);
       return;

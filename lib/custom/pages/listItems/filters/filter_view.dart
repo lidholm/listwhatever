@@ -6,19 +6,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_bloc.dart';
+import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
+import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
 
 import '/custom/pages/listItems/filters/filter_bloc.dart';
 import '/custom/pages/listItems/filters/filters.dart';
 import '/custom/pages/listItems/list_item.dart';
 import '/custom/pages/listItems/list_items.dart';
-import '/custom/pages/listItems/list_items_events/list_items_bloc.dart';
-import '/custom/pages/listItems/list_items_events/list_items_state.dart';
 import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
-import '/custom/pages/lists/list_events/list_bloc.dart';
-import '/custom/pages/lists/list_events/list_event.dart';
-import '/custom/pages/lists/list_events/list_state.dart';
-import '/custom/pages/lists/list_of_things.dart';
 import '/standard/widgets/border_with_header.dart';
+import '../../lists/list_load_events/list_load_bloc.dart';
+import '../../lists/list_load_events/list_load_event.dart';
+import '../../lists/list_load_events/list_load_state.dart';
 import 'date_filter.dart';
 import 'filter_event.dart';
 import 'filter_state.dart';
@@ -48,14 +48,14 @@ class _FilterViewState extends State<FilterView> {
 
   @override
   void initState() {
-    BlocProvider.of<ListBloc>(context).add(LoadList(widget.listId));
+    BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.listId));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final listState = context.watch<ListBloc>().state;
-    final listItemsState = context.watch<ListItemsBloc>().state;
+    final listState = context.watch<ListLoadBloc>().state;
+    final listItemsState = context.watch<ListItemsLoadBloc>().state;
 
     final filtersState = context.watch<FilterBloc>().state;
 
@@ -71,8 +71,8 @@ class _FilterViewState extends State<FilterView> {
       return listStateView;
     }
 
-    final list = (listState as ListLoaded).list!;
-    final listItems = (listItemsState as ListItemsLoaded).listItems;
+    final list = (listState as ListLoadLoaded).list!;
+    final listItems = (listItemsState as ListItemsLoadLoaded).listItems;
 
     final initialValues = {
       ...filters.categoryFilters,
@@ -262,9 +262,9 @@ class _FilterViewState extends State<FilterView> {
         startDate = field.value.value as DateTime?;
       } else if (field.key == endDateFieldName) {
         endDate = field.value.value as DateTime?;
-        } else if (field.key == distanceFieldName) {
-          final d = (field.value.value ?? distanceMax) as double;
-          maxDistance = convertDistanceToMeters(/*settings,*/ d);
+      } else if (field.key == distanceFieldName) {
+        final d = (field.value.value ?? distanceMax) as double;
+        maxDistance = convertDistanceToMeters(/*settings,*/ d);
       } else {
         final values = field.value.value as List<String>?;
         if (values != null && values.isNotEmpty) {

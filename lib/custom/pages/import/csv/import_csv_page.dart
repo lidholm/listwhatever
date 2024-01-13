@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:go_router/go_router.dart';
+import 'package:listwhatever/custom/pages/listItems/list_item_crud_bloc/list_item_crud_bloc.dart';
+import 'package:listwhatever/custom/pages/listItems/list_item_crud_bloc/list_item_crud_event.dart';
+import 'package:listwhatever/custom/pages/listItems/list_item_crud_bloc/list_item_crud_state.dart';
+import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_bloc.dart';
+import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_event.dart';
+import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
 import '/custom/pages/import/csv/convert_csv_to_list_items.dart';
 import '/custom/pages/listItems/list_item.dart';
-import '/custom/pages/listItems/list_item_events/list_item_bloc.dart';
-import '/custom/pages/listItems/list_item_events/list_item_event.dart';
-import '/custom/pages/listItems/list_items_events/list_items_bloc.dart';
-import '/custom/pages/listItems/list_items_events/list_items_event.dart';
-import '/custom/pages/listItems/list_items_events/list_items_state.dart';
 import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
 import '/standard/constants.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
@@ -34,46 +36,52 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<ListItemsBloc>(context).add(LoadListItems(widget.listId));
+    BlocProvider.of<ListItemsLoadBloc>(context).add(LoadListItems(widget.listId));
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ListItemsBloc, ListItemsState>(
-      builder: (listItemsContext, listItemsState) {
-
-        final listItemsView = ListOrListItemNotLoadedHandler.handleListItemsState(listItemsState);
-        if (listItemsView != null) {
-          return listItemsView;
+    return BlocListener<ListItemCrudBloc, ListItemCrudState>(
+      listener: (context, state) {
+        print('state: $state');
+        if (state is ListItemCrudImported) {
+          GoRouter.of(context).pop();
         }
-        final listItems = (listItemsState as ListItemsLoaded).listItems;
+      },
+      child: BlocBuilder<ListItemsLoadBloc, ListItemsLoadState>(
+        builder: (listItemsContext, listItemsState) {
+          final listItemsView = ListOrListItemNotLoadedHandler.handleListItemsState(listItemsState);
+          if (listItemsView != null) {
+            return listItemsView;
+          }
+          final listItems = (listItemsState as ListItemsLoadLoaded).listItems;
 
-
-        return Scaffold(
-          appBar: const CommonAppBar(
-            title: 'Import from CSV',
-          ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(24),
-              child: createForm(
-                [
-                  createDescription(),
-                  createCsvField(),
-                  const SizedBox(height: 40),
-                  Row(
-                    children: <Widget>[
-                      createResetButton(context),
-                      const SizedBox(width: 20),
-                      createSaveButton(widget.listId, listItems),
-                    ],
-                  ),
-                ],
+          return Scaffold(
+            appBar: const CommonAppBar(
+              title: 'Import from CSV',
+            ),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: createForm(
+                  [
+                    createDescription(),
+                    createCsvField(),
+                    const SizedBox(height: 40),
+                    Row(
+                      children: <Widget>[
+                        createResetButton(context),
+                        const SizedBox(width: 20),
+                        createSaveButton(widget.listId, listItems),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 
@@ -186,7 +194,6 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
     final listItems = CsvConverter().convert(csv);
     logger.d('listItems: $listItems');
 
-    BlocProvider.of<ListItemBloc>(context).add(ImportListItems(listId, listItems));
-    // GoRouter.of(context).pop();
+    BlocProvider.of<ListItemCrudBloc>(context).add(ImportListItems(listId, listItems));
   }
 }

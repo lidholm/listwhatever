@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_bloc.dart';
+import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_bloc.dart';
+import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_bloc.dart';
+import 'package:listwhatever/custom/pages/lists/lists_load_events/lists_bloc.dart';
 
 import '/custom/navigation/get_router_provider_information.dart';
 import '/custom/navigation/routes.dart';
 import '/custom/pages/listItems/filters/filter_bloc.dart';
 import '/custom/pages/listItems/filters/filter_view.dart';
-import '/custom/pages/listItems/list_item_events/list_item_bloc.dart';
-import '/custom/pages/listItems/list_items_events/list_items_bloc.dart';
 import '/custom/pages/listItems/list_items_page_view_cubit.dart';
 import '/custom/pages/listItems/list_items_service.dart';
 import '/custom/pages/listItems/list_items_sort_order_cubit.dart';
 import '/custom/pages/listItems/searchLocation/search_location_bloc.dart';
-import '/custom/pages/lists/list_events/list_bloc.dart';
-import '/custom/pages/lists/lists_events/lists_bloc.dart';
 import '/custom/pages/lists/lists_service.dart';
 import '/custom/pages/lists/user_lists_service.dart';
 import '/custom/pages/shareList/bloc/shared_list_bloc.dart';
@@ -24,7 +24,6 @@ import '/standard/analytics/bloc/analytics_bloc.dart';
 import '/standard/analyticsRepository/analytics_repository.dart';
 import '/standard/app/app.dart';
 import '/standard/app/bloc/app_event.dart';
-import '/standard/app/widgets/delete_item_redirect_listener.dart';
 import '/standard/app/widgets/to_onscreen_logs_listener.dart';
 import '/standard/appUi/theme/app_theme.dart';
 import '/standard/bloc/login_bloc.dart';
@@ -35,6 +34,8 @@ import '/standard/onScreenLog/on_screen_log_cubit.dart';
 import '/standard/theme_selector/theme_selector.dart';
 import '/standard/userRepository/models/user.dart';
 import '/standard/userRepository/user_repository.dart';
+import '../../../custom/pages/listItems/list_item_crud_bloc/list_item_crud_bloc.dart';
+import '../../../custom/pages/listItems/list_item_load_bloc/list_item_load_bloc.dart';
 
 class App extends StatelessWidget {
   const App({
@@ -80,11 +81,15 @@ class App extends StatelessWidget {
               BlocProvider<SearchLocationBloc>(create: (context) => SearchLocationBloc()),
               BlocProvider<FilterBloc>(create: (context) => FilterBloc()),
               BlocProvider<SharedListBloc>(create: (context) => SharedListBloc(sharedListsService)),
-              BlocProvider<ListBloc>(create: (context) => ListBloc(userListsService, listsService)),
-              BlocProvider<ListsBloc>(create: (context) => ListsBloc(listsService, userListsService)),
-              BlocProvider<ListItemBloc>(create: (context) => ListItemBloc(userListsService, listItemsService)),
+              BlocProvider<ListCrudBloc>(create: (context) => ListCrudBloc(userListsService, listsService)),
+              BlocProvider<ListLoadBloc>(create: (context) => ListLoadBloc(userListsService, listsService)),
+              BlocProvider<ListsLoadBloc>(create: (context) => ListsLoadBloc(userListsService)),
               BlocProvider<SubscribeListBloc>(create: (context) => SubscribeListBloc(sharedListsService, listsService)),
-              BlocProvider<ListItemsBloc>(create: (context) => ListItemsBloc(userListsService, listItemsService)),
+              BlocProvider<ListItemsLoadBloc>(
+                create: (context) => ListItemsLoadBloc(userListsService, listItemsService),
+              ),
+              BlocProvider<ListItemCrudBloc>(create: (context) => ListItemCrudBloc(userListsService, listItemsService)),
+              BlocProvider<ListItemLoadBloc>(create: (context) => ListItemLoadBloc(userListsService, listItemsService)),
               BlocProvider<ListItemsPageViewCubit>(create: (context) => ListItemsPageViewCubit()),
               BlocProvider<ListItemsSortOrderCubit>(create: (context) => ListItemsSortOrderCubit()),
               BlocProvider<SelectedChipsCubit>(create: (context) => SelectedChipsCubit()),
@@ -103,10 +108,8 @@ class App extends StatelessWidget {
               ),
             ],
             child: AuthenticatedUserListener(
-              child: DeleteItemRedirectListener(
-                child: ToOnScreenLogsListener(
-                  child: child,
-                ),
+              child: ToOnScreenLogsListener(
+                child: child,
               ),
             ),
           ),

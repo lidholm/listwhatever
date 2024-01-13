@@ -1,14 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '/custom/pages/lists/user_list.dart';
+import 'package:listwhatever/custom/pages/lists/models/user_list.dart';
 
 import '/standard/constants.dart';
 import '/standard/firebase/firestore/firestore.dart';
 
-
 class UserListsService {
-  UserListsService({required this.userId});
+  UserListsService({required this.userId}) {
+    _initFirestore();
+  }
 
   String? userId;
+  late final FirebaseFirestore firestore;
+
+  Future<void> _initFirestore() async {
+    firestore = await getFirestore();
+  }
 
   // ignore: use_setters_to_change_properties
   void changeUser(String? userId) {
@@ -18,12 +24,12 @@ class UserListsService {
   Future<CollectionReference<Map<String, dynamic>>> getCollection() async {
     final path = '/users/$userId/lists';
     logger.d('user lists path: $path');
-    return (await getFirestore()).collection(path);
+    return firestore.collection(path);
   }
 
   Stream<List<UserList>> getLists() async* {
     logger.d('getting user lists');
-    if (userId == null)  {
+    if (userId == null) {
       logger.d('no user yet');
       yield* Stream.value([]);
       return;
@@ -52,7 +58,7 @@ class UserListsService {
   Future<void> addList(UserList list) async {
     logger.d('adding user list: $list');
     final listsCollection = await getCollection();
-    final docId=listsCollection.doc().id;
+    final docId = listsCollection.doc().id;
     return listsCollection.doc(docId).set(list.copyWith(id: docId).toJson());
   }
 

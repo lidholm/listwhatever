@@ -1,7 +1,6 @@
-
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '/custom/pages/lists/list_of_things.dart';
-import '/custom/pages/lists/list_type.dart';
+import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
+import 'package:listwhatever/custom/pages/lists/models/list_type.dart';
 
 part 'shared_list.freezed.dart';
 part 'shared_list.g.dart';
@@ -18,6 +17,5 @@ class SharedList with _$SharedList {
     required ListType listType,
   }) = _SharedList;
 
-  factory SharedList.fromJson(Map<String, Object?> json)
-  => _$SharedListFromJson(json);
+  factory SharedList.fromJson(Map<String, Object?> json) => _$SharedListFromJson(json);
 }

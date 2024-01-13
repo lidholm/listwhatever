@@ -3,16 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '/custom/navigation/routes.dart';
 import '/custom/pages/listItems/addListItem/edit_list_item_page_route.dart';
-import '/custom/pages/listItems/list_item_events/list_item_bloc.dart';
-import '/custom/pages/listItems/list_item_events/list_item_event.dart';
-import '/custom/pages/listItems/list_item_events/list_item_state.dart';
 import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
-import '/custom/pages/lists/list_events/list_bloc.dart';
 import '/l10n/l10n.dart';
 import '/standard/constants.dart';
 import '/standard/widgets/appBar/app_bar_action.dart';
 import '/standard/widgets/appBar/app_bar_action_icon.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
+import '../../lists/list_load_events/list_load_bloc.dart';
+import '../list_item_load_bloc/list_item_load_bloc.dart';
+import '../list_item_load_bloc/list_item_load_event.dart';
+import '../list_item_load_bloc/list_item_load_state.dart';
 
 class ListItemInfoView extends StatefulWidget {
   const ListItemInfoView({required this.listId, required this.itemId, super.key});
@@ -29,21 +29,21 @@ class _ListItemInfoViewState extends State<ListItemInfoView> {
   void initState() {
     super.initState();
     if (widget.listId != null && widget.itemId != null) {
-      BlocProvider.of<ListItemBloc>(context).add(LoadListItem(widget.listId!, widget.itemId!));
+      BlocProvider.of<ListItemLoadBloc>(context).add(LoadListItem(widget.listId!, widget.itemId!));
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final listState = context.watch<ListBloc>().state;
-    final listItemState = context.watch<ListItemBloc>().state;
+    final listState = context.watch<ListLoadBloc>().state;
+    final listItemState = context.watch<ListItemLoadBloc>().state;
 
     final listStateView = ListOrListItemNotLoadedHandler.handleListAndListItemState(listState, listItemState);
     if (listStateView != null) {
       return listStateView;
     }
 
-    final listItem = (listItemState as ListItemLoaded).listItem;
+    final listItem = (listItemState as ListItemLoadLoaded).listItem;
     if (listItem == null) {
       return const CircularProgressIndicator();
     }
@@ -58,7 +58,7 @@ class _ListItemInfoViewState extends State<ListItemInfoView> {
               icon: Icons.edit,
               key: const Key('editListItemAction'),
               callback: () async {
-                final listItemBloc = context.read<ListItemBloc>();
+                final listItemBloc = context.read<ListItemLoadBloc>();
                 await EditListItemPageRoute(widget.listId!, listItem.id!).push<void>(context);
                 listItemBloc.add(LoadListItem(widget.listId!, listItem.id!));
               },
@@ -101,16 +101,16 @@ class _ListItemInfoViewState extends State<ListItemInfoView> {
               ),
               Text('  ${listItem.address ?? ''}'),
               const SizedBox(height: 16),
-                const Text(
-                  'Position',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
+              const Text(
+                'Position',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
               if (listItem.latLong != null) ...[
                 Text(
                   '  ${listItem.latLong?.lat}x${listItem.latLong?.lng} ',
                 ),
               ],
-                const SizedBox(height: 16),
+              const SizedBox(height: 16),
               const Text(
                 'URLs',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),

@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_bloc.dart';
+import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_event.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
-import '/custom/pages/lists/list_events/list_bloc.dart';
-import '/custom/pages/lists/list_events/list_event.dart';
-import '/custom/pages/lists/list_events/list_state.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
+import '../lists/list_load_events/list_load_bloc.dart';
+import '../lists/list_load_events/list_load_event.dart';
+import '../lists/list_load_events/list_load_state.dart';
 
 class ShareListPage extends StatefulWidget {
   const ShareListPage({
@@ -25,20 +27,20 @@ class ShareListPage extends StatefulWidget {
 class _ShareListPageState extends State<ShareListPage> {
   @override
   void initState() {
-    BlocProvider.of<ListBloc>(context).add(LoadList(widget.listId));
+    BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.listId));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final listState = context.watch<ListBloc>().state;
+    final listState = context.watch<ListLoadBloc>().state;
 
     final listStateView = ListOrListItemNotLoadedHandler.handleListState(listState);
     // logger.i('listState: $listState');
     if (listStateView != null) {
       return listStateView;
     }
-    final list = (listState as ListLoaded).list!;
+    final list = (listState as ListLoadLoaded).list!;
 
     const headerStyle = TextStyle(
       fontWeight: FontWeight.bold,
@@ -61,7 +63,7 @@ class _ShareListPageState extends State<ShareListPage> {
               const Text('Enable'),
               OutlinedButton(
                 onPressed: () {
-                  BlocProvider.of<ListBloc>(context).add(UpdateList(list.copyWith(shared: true)));
+                  BlocProvider.of<ListCrudBloc>(context).add(UpdateList(list.copyWith(shared: true)));
                 },
                 child: Row(
                   children: [
@@ -72,7 +74,7 @@ class _ShareListPageState extends State<ShareListPage> {
               ),
               OutlinedButton(
                 onPressed: () {
-                  BlocProvider.of<ListBloc>(context).add(UpdateList(list.copyWith(shared: false)));
+                  BlocProvider.of<ListCrudBloc>(context).add(UpdateList(list.copyWith(shared: false)));
                 },
                 child: Row(
                   children: [

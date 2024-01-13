@@ -3,18 +3,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_bloc.dart';
+import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_event.dart';
+import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_state.dart';
+import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
 import 'package:listwhatever/standard/appUi/theme/app_theme.dart';
+
 import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
-import '/custom/pages/lists/list_events/list_bloc.dart';
-import '/custom/pages/lists/list_events/list_event.dart';
-import '/custom/pages/lists/list_events/list_state.dart';
-import '/custom/pages/lists/list_of_things.dart';
-import '/custom/pages/lists/list_type.dart';
-import '/custom/pages/lists/lists_events/lists_bloc.dart';
-import '/custom/pages/lists/lists_events/lists_event.dart';
 import '/standard/constants.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
 import '/standard/widgets/vStack/v_stack.dart';
+import '../list_load_events/list_load_bloc.dart';
+import '../list_load_events/list_load_event.dart';
+import '../list_load_events/list_load_state.dart';
+import '../models/list_type.dart';
 
 enum AddListValues {
   id,
@@ -45,28 +47,28 @@ class _AddListPageState extends State<AddListPage> {
 
   final _typeOptions = ListType.values;
   late Map<String, dynamic> initialValue;
+  ListOfThings? list;
 
   void _onChanged(dynamic val) => logger.d(val.toString());
 
   @override
   void initState() {
     if (widget.listId != null) {
-      BlocProvider.of<ListBloc>(context).add(LoadList(widget.listId!));
+      BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.listId!));
     }
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    ListOfThings? list;
     if (widget.listId != null) {
-      final listState = context.watch<ListBloc>().state;
+      final listState = context.watch<ListLoadBloc>().state;
 
       final listStateView = ListOrListItemNotLoadedHandler.handleListState(listState);
       if (listStateView != null) {
         return listStateView;
       }
-      list = (listState as ListLoaded).list;
+      list = (listState as ListLoadLoaded).list;
     }
 
     initialValue = {
@@ -79,36 +81,44 @@ class _AddListPageState extends State<AddListPage> {
       AddListValues.ownerId.toString(): list?.ownerId,
       // AddListValues.share.toString(): list?.shared ?? false,
     };
-    return Scaffold(
-      appBar: const CommonAppBar(title: 'Add list'),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: FormBuilder(
-            key: _formKey,
-            onChanged: () {
-              _formKey.currentState!.save();
-              // logger.d(_formKey.currentState!.value.toString());
-            },
-            autovalidateMode: AutovalidateMode.disabled,
-            initialValue: initialValue,
-            skipDisabled: true,
-            child: VStack(
-              children: <Widget>[
-                const SizedBox(height: 15),
-                getListNameField(),
-                getListTypeField(),
-                getWithMapCheckbox(),
-                getWithDatesCheckbox(),
-                getWithTimesCheckbox(),
-                Row(
-                  children: <Widget>[
-                    getCancelButton(),
-                    const SizedBox(width: 20),
-                    getSubmitButton(),
-                  ],
-                ),
-              ],
+    return BlocListener<ListCrudBloc, ListCrudState>(
+      listener: (context, state) {
+        print('state: $state');
+        if (state is ListCrudAdded) {
+          GoRouter.of(context).pop();
+        }
+      },
+      child: Scaffold(
+        appBar: const CommonAppBar(title: 'Add list'),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: FormBuilder(
+              key: _formKey,
+              onChanged: () {
+                _formKey.currentState!.save();
+                // logger.d(_formKey.currentState!.value.toString());
+              },
+              autovalidateMode: AutovalidateMode.disabled,
+              initialValue: initialValue,
+              skipDisabled: true,
+              child: VStack(
+                children: <Widget>[
+                  const SizedBox(height: 15),
+                  getListNameField(),
+                  getListTypeField(),
+                  getWithMapCheckbox(),
+                  getWithDatesCheckbox(),
+                  getWithTimesCheckbox(),
+                  Row(
+                    children: <Widget>[
+                      getCancelButton(),
+                      const SizedBox(width: 20),
+                      getSubmitButton(),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -238,10 +248,9 @@ class _AddListPageState extends State<AddListPage> {
       ownerId: initialValue[AddListValues.ownerId.toString()] as String?,
     );
     if (widget.listId == null) {
-      BlocProvider.of<ListsBloc>(context).add(AddList(list));
+      BlocProvider.of<ListCrudBloc>(context).add(AddList(list));
     } else {
-      BlocProvider.of<ListBloc>(context).add(UpdateList(list));
+      BlocProvider.of<ListCrudBloc>(context).add(UpdateList(list));
     }
-    GoRouter.of(context).pop();
   }
 }

@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_bloc.dart';
+import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_event.dart';
+import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
 import 'package:listwhatever/custom/pages/listItems/map/flutter_maps_view.dart';
+import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_bloc.dart';
+import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_event.dart';
+import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_state.dart';
+import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
 
 import '/custom/navigation/routes.dart';
 import '/custom/pages/import/csv/import_csv_page_route.dart';
@@ -9,24 +17,18 @@ import '/custom/pages/listItems/filters/filter_bloc.dart';
 import '/custom/pages/listItems/filters/filter_list_items.dart';
 import '/custom/pages/listItems/filters/filters.dart';
 import '/custom/pages/listItems/infoView/list_item_info_view.dart';
-import '/custom/pages/listItems/list_items_events/list_items_bloc.dart';
-import '/custom/pages/listItems/list_items_events/list_items_event.dart';
-import '/custom/pages/listItems/list_items_events/list_items_state.dart';
 import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
 import '/custom/pages/lists/addList/edit_list_page_route.dart';
-import '/custom/pages/lists/list_events/list_bloc.dart';
-import '/custom/pages/lists/list_events/list_event.dart';
-import '/custom/pages/lists/list_events/list_state.dart';
-import '/custom/pages/lists/list_of_things.dart';
-import '/custom/pages/lists/lists_page_route.dart';
 import '/custom/pages/shareList/share_list_page_route.dart';
 import '/l10n/l10n.dart';
-import '/standard/navigation/redirect_cubit.dart';
 import '/standard/widgets/appBar/app_bar_action.dart';
 import '/standard/widgets/appBar/app_bar_action_dropdown.dart';
 import '/standard/widgets/appBar/app_bar_action_icon.dart';
 import '/standard/widgets/appBar/app_bar_action_overflow_icon.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
+import '../lists/list_load_events/list_load_bloc.dart';
+import '../lists/list_load_events/list_load_event.dart';
+import '../lists/list_load_events/list_load_state.dart';
 import 'filters/filter_state.dart';
 import 'filters/filter_view.dart';
 import 'list_item.dart';
@@ -46,8 +48,8 @@ class ListItemsPage extends StatefulWidget {
 class _ListItemsPageState extends State<ListItemsPage> {
   @override
   void initState() {
-    BlocProvider.of<ListItemsBloc>(context).add(WatchListItems(widget.listId));
-    BlocProvider.of<ListBloc>(context).add(LoadList(widget.listId));
+    BlocProvider.of<ListItemsLoadBloc>(context).add(WatchListItems(widget.listId));
+    BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.listId));
     super.initState();
   }
 
@@ -55,45 +57,45 @@ class _ListItemsPageState extends State<ListItemsPage> {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        final listItemsState = context.watch<ListItemsBloc>().state;
-        // logger.d('listItemState: $listItemState');
+        final listItemsState = context.watch<ListItemsLoadBloc>().state;
         final filtersState = context.watch<FilterBloc>().state;
-
-        final filtersNotLoadedView = handleFiltersNotLoaded(filtersState);
-        if (filtersNotLoadedView != null) {
-          return filtersNotLoadedView;
-        }
-        final filters = (filtersState as FiltersUpdated).filters;
-        // logger.d('filters: $filters');
 
         final viewToShow = context.watch<ListItemsPageViewCubit>().state;
         final sortOrder = context.watch<ListItemsSortOrderCubit>().state;
-        final listState = context.watch<ListBloc>().state;
+        final listState = context.watch<ListLoadBloc>().state;
 
-        final listStateView = ListOrListItemNotLoadedHandler.handleListAndListItemsState(listState, listItemsState);
-        // logger.i('listState: $listState');
-        if (listStateView != null) {
-          return listStateView;
+        final notLoadedView = getNotLoadedView(listState, listItemsState, filtersState);
+        if (notLoadedView != null) {
+          return notLoadedView;
         }
 
-        final list = (listState is ListLoaded) ? listState.list : null;
-        final listName = (listState is ListLoaded) ? listState.list?.name ?? '' : '';
-        final listItems = (listItemsState as ListItemsLoaded).listItems;
+        final filters = (filtersState as FiltersUpdated).filters;
+        final list = (listState is ListLoadLoaded) ? listState.list : null;
+        final listName = (listState is ListLoadLoaded) ? listState.list?.name ?? '' : '';
+        final listItems = (listItemsState as ListItemsLoadLoaded).listItems;
 
-        return Scaffold(
-          appBar: CommonAppBar(
-            title: context.l10n.listItemsHeader(listName),
-            actions: getAppBarActions(listState, viewToShow, sortOrder, filters),
+        return BlocListener<ListCrudBloc, ListCrudState>(
+          listener: (context, state) {
+            print('state: $state');
+            if (state is ListCrudDeleted) {
+              GoRouter.of(context).pop();
+            }
+          },
+          child: Scaffold(
+            appBar: CommonAppBar(
+              title: context.l10n.listItemsHeader(listName),
+              actions: getAppBarActions(listState, viewToShow, sortOrder, filters),
+            ),
+            body: showLoadedItems(list, listItems, viewToShow, filters, sortOrder, widget.listId),
+            floatingActionButton: list?.shareType == ShareType.editor
+                ? FloatingActionButton(
+                    onPressed: () {
+                      AddListItemPageRoute(widget.listId).push<void>(context);
+                    },
+                    child: const Icon(Icons.add),
+                  )
+                : null,
           ),
-          body: showLoadedItems(list, listItems, viewToShow, filters, sortOrder, widget.listId),
-          floatingActionButton: list?.shareType == ShareType.editor
-              ? FloatingActionButton(
-                  onPressed: () {
-                    AddListItemPageRoute(widget.listId).push<void>(context);
-                  },
-                  child: const Icon(Icons.add),
-                )
-              : null,
         );
       },
     );
@@ -158,12 +160,12 @@ class _ListItemsPageState extends State<ListItemsPage> {
   }
 
   List<AppBarAction<dynamic>> getAppBarActions(
-    ListState listState,
+    ListLoadState listState,
     ListItemsPageView viewToShow,
     (ListItemsSortOrder, SortOrder) sortOrder,
     Filters filters,
   ) {
-    final list = (listState is ListLoaded) ? listState.list : null;
+    final list = (listState is ListLoadLoaded) ? listState.list : null;
 
     final actions = [
       getShowListViewAction(listState, viewToShow),
@@ -180,7 +182,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
   }
 
   AppBarAction<AppBarActionIcon>? getShowListViewAction(
-    ListState state,
+    ListLoadState state,
     ListItemsPageView viewToShow,
   ) {
     if (!shouldShowListOrMapAction(state, viewToShow)) {
@@ -203,7 +205,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
   }
 
   AppBarAction<dynamic>? getShowMapViewAction(
-    ListState state,
+    ListLoadState state,
     ListItemsPageView viewToShow,
   ) {
     if (!shouldShowListOrMapAction(state, viewToShow)) {
@@ -226,7 +228,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
   }
 
   AppBarAction<dynamic>? getShowSortAction(
-    ListState state,
+    ListLoadState state,
     ListItemsPageView viewToShow,
     (ListItemsSortOrder, SortOrder) sortOrder,
   ) {
@@ -269,10 +271,10 @@ class _ListItemsPageState extends State<ListItemsPage> {
   }
 
   bool shouldShowListOrMapAction(
-    ListState state,
+    ListLoadState state,
     ListItemsPageView viewToShow,
   ) {
-    if (state is! ListLoaded) {
+    if (state is! ListLoadLoaded) {
       return false;
     }
     final list = state.list;
@@ -336,7 +338,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
         title: context.l10n.editList,
         icon: Icons.edit,
         callback: () async {
-          final listBloc = context.read<ListBloc>();
+          final listBloc = context.read<ListLoadBloc>();
           await EditListPageRoute(widget.listId).push<void>(context);
           listBloc.add(LoadList(widget.listId));
         },
@@ -355,8 +357,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
         title: context.l10n.deleteList,
         icon: Icons.delete,
         callback: () async {
-          context.read<RedirectCubit>().setRedirect('${const ListsPageRoute().location}?t=${DateTime.now()}');
-          context.read<ListBloc>().add(DeleteList(widget.listId));
+          context.read<ListCrudBloc>().add(DeleteList(widget.listId));
         },
         key: const Key('deleteList'),
       ),
@@ -375,6 +376,19 @@ class _ListItemsPageState extends State<ListItemsPage> {
         key: const Key('deleteList'),
       ),
     );
+  }
+
+  Widget? getNotLoadedView(ListLoadState listState, ListItemsLoadState listItemsState, FilterState filtersState) {
+    final filtersNotLoadedView = handleFiltersNotLoaded(filtersState);
+    if (filtersNotLoadedView != null) {
+      return filtersNotLoadedView;
+    }
+
+    final listStateView = ListOrListItemNotLoadedHandler.handleListAndListItemsState(listState, listItemsState);
+    if (listStateView != null) {
+      return listStateView;
+    }
+    return null;
   }
 }
 

@@ -1,12 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import 'list_type.dart';
+import 'package:listwhatever/custom/pages/lists/models/list_type.dart';
 
 part 'list_of_things.freezed.dart';
 part 'list_of_things.g.dart';
 
 enum ShareType {
-  viewer, editor,
+  viewer,
+  editor,
 }
 
 @freezed
@@ -27,6 +27,5 @@ class ListOfThings with _$ListOfThings {
     @Default(ShareType.viewer) ShareType shareType,
   }) = _ListOfThings;
 
-  factory ListOfThings.fromJson(Map<String, Object?> json)
-  => _$ListOfThingsFromJson(json);
+  factory ListOfThings.fromJson(Map<String, Object?> json) => _$ListOfThingsFromJson(json);
 }
