@@ -4,12 +4,10 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_state.dart';
 
 import '/standard/app/app.dart';
 import '/standard/constants.dart';
 import '/standard/navigation/app_redirect.dart';
-import '../../custom/pages/lists/list_load_events/list_load_bloc.dart';
 import 'models/router_provider_information.dart';
 
 GoRouter getRouter({
@@ -23,7 +21,6 @@ GoRouter getRouter({
   final router = GoRouter(
     refreshListenable: GoRouterRefreshStream([
       BlocProvider.of<AppBloc>(context).stream,
-      BlocProvider.of<ListLoadBloc>(context).stream.where((event) => event is ListCrudOperationSuccess),
     ]),
     debugLogDiagnostics: true,
     initialLocation: initialLocation ?? routerProviderInformation.initialRouteLocation,

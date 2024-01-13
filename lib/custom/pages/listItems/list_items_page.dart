@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_bloc.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_event.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
@@ -8,7 +9,6 @@ import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_bloc.
 import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_event.dart';
 import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_state.dart';
 import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
-import 'package:listwhatever/custom/pages/lists/page/lists_page_route.dart';
 
 import '/custom/navigation/routes.dart';
 import '/custom/pages/import/csv/import_csv_page_route.dart';
@@ -77,8 +77,8 @@ class _ListItemsPageState extends State<ListItemsPage> {
         return BlocListener<ListCrudBloc, ListCrudState>(
           listener: (context, state) {
             print('state: $state');
-            if (state is ListCrudOperationSuccess) {
-              const ListsPageRoute().push<void>(context);
+            if (state is ListCrudDeleted) {
+              GoRouter.of(context).pop();
             }
           },
           child: Scaffold(

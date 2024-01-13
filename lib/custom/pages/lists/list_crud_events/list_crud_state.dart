@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
 
 @immutable
 sealed class ListCrudState {}
@@ -7,9 +8,24 @@ class ListCrudInitial extends ListCrudState {}
 
 class ListCrudLoading extends ListCrudState {}
 
-class ListCrudOperationSuccess extends ListCrudState {
-  ListCrudOperationSuccess(this.message);
-  final String message;
+class ListCrudChangedUser extends ListCrudState {
+  ListCrudChangedUser(this.userId);
+  final String userId;
+}
+
+class ListCrudAdded extends ListCrudState {
+  ListCrudAdded(this.list);
+  final ListOfThings list;
+}
+
+class ListCrudUpdated extends ListCrudState {
+  ListCrudUpdated(this.list);
+  final ListOfThings list;
+}
+
+class ListCrudDeleted extends ListCrudState {
+  ListCrudDeleted(this.listId);
+  final String listId;
 }
 
 class ListCrudError extends ListCrudState {

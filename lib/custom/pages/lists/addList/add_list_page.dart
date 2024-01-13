@@ -84,7 +84,7 @@ class _AddListPageState extends State<AddListPage> {
     return BlocListener<ListCrudBloc, ListCrudState>(
       listener: (context, state) {
         print('state: $state');
-        if (state is ListCrudOperationSuccess) {
+        if (state is ListCrudAdded) {
           GoRouter.of(context).pop();
         }
       },

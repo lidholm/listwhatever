@@ -21,7 +21,7 @@ class ListCrudBloc extends Bloc<ListCrudEvent, ListCrudState> {
     try {
       emit(ListCrudLoading());
       _listsService.changeUser(event.userId);
-      emit(ListCrudOperationSuccess('Changed user for ListCrud'));
+      emit(ListCrudChangedUser('Changed user for ListCrud'));
     } catch (e) {
       logger.e('Error: $e');
       emit(ListCrudError('Failed to change user.\n$e'));
@@ -42,7 +42,7 @@ class ListCrudBloc extends Bloc<ListCrudEvent, ListCrudState> {
         isOwnList: true,
       );
       await _userListsService.addList(userList);
-      emit(ListCrudOperationSuccess('Added list'));
+      emit(ListCrudAdded(event.list));
     } catch (e) {
       logger.e('Error: $e');
       emit(ListCrudError('Failed to add list.\n$e'));
@@ -54,7 +54,7 @@ class ListCrudBloc extends Bloc<ListCrudEvent, ListCrudState> {
     try {
       emit(ListCrudLoading());
       await _listsService.updateList(event.list);
-      emit(ListCrudOperationSuccess('Updated list'));
+      emit(ListCrudUpdated(event.list));
     } catch (e) {
       logger.e('Error: $e');
       emit(ListCrudError('Failed to update list.\n$e'));
@@ -62,11 +62,14 @@ class ListCrudBloc extends Bloc<ListCrudEvent, ListCrudState> {
   }
 
   Future<void> _onDeleteList(DeleteList event, Emitter<ListCrudState> emit) async {
-    // logger.i('_onDeleteList');
+    logger
+      ..i('_onDeleteList')
+      ..i('_listsService.userId: ${_listsService.userId}');
     try {
       emit(ListCrudLoading());
-      await _listsService.deleteList(event.listId);
-      emit(ListCrudOperationSuccess('Deleted list'));
+      await _userListsService.deleteList(event.listId);
+      // TODO: Should the main list be deleted too? How about if it is shared?
+      emit(ListCrudDeleted(event.listId));
     } catch (e) {
       logger.e('Error: $e');
       emit(ListCrudError('Failed to delete list.\n$e'));
