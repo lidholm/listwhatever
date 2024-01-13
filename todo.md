@@ -17,7 +17,7 @@
  - [x] CSV
 - [ ] Firestore function to update users lists when data in list is changed
 - [x] Delete list item 
-- [ ] Delete list
+- [x] Delete list
 - [ ] User settings (e.g. use Google Maps or flutter_map)
 - [ ] Current location and distance
 - [ ] Fix fastlane
