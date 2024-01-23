@@ -119,6 +119,9 @@ class _AddListItemPageState extends State<AddListItemPage> {
           });
           GoRouter.of(context).pop();
           GoRouter.of(context).pop();
+        } else if (state is ListItemCrudUpdated) {
+          GoRouter.of(context).pop();
+          GoRouter.of(context).pop();
         }
       },
       child: Scaffold(

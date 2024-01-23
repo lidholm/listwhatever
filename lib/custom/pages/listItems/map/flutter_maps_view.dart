@@ -6,6 +6,7 @@ import 'package:flutter_map_cancellable_tile_provider/flutter_map_cancellable_ti
 import 'package:latlong2/latlong.dart';
 import 'package:listwhatever/custom/pages/listItems/list_item.dart';
 import 'package:listwhatever/custom/pages/listItems/map/custom_marker.dart';
+import 'package:listwhatever/standard/constants.dart';
 
 class FlutterMapsView extends StatefulWidget {
   const FlutterMapsView({required this.items, required this.onTap, super.key});
@@ -18,49 +19,25 @@ class FlutterMapsView extends StatefulWidget {
 
 class FlutterMapsViewState extends State<FlutterMapsView> {
   double doubleInRange(Random source, num start, num end) => source.nextDouble() * (end - start) + start;
-  List<Marker> allCircles = [];
 
   @override
   void initState() {
     super.initState();
-    Future.microtask(() {
-      for (final item in widget.items) {
-        if (item.latLong != null) {
-          allCircles.add(
-            Marker(
-              point: LatLng(
-                item.latLong!.lat,
-                item.latLong!.lng,
-              ),
-              child: CustomMarker(
-                color: Colors.red,
-                onPressed: () {
-                  widget.onTap(item.id!);
-                },
-              ),
-            ),
-          );
-        }
-      }
-      setState(() {});
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final initialCenter = getCenter();
+    logger.d('rebuilding map view');
+    final options = getMapOptions();
 
     return Column(
       children: [
         Flexible(
           child: FlutterMap(
-            options: MapOptions(
-              initialCenter: initialCenter,
-              initialZoom: 11,
-            ),
+            options: options,
             children: [
               openStreetMapTileLayer,
-              MarkerLayer(markers: allCircles),
+              MarkerLayer(markers: getMarkers()),
             ],
           ),
         ),
@@ -68,9 +45,25 @@ class FlutterMapsViewState extends State<FlutterMapsView> {
     );
   }
 
-  (LatLng, LatLng) getBounds() {
+  MapOptions getMapOptions() {
+    final initialCenter = getCenter();
+    return initialCenter != null
+        ? MapOptions(
+            initialCenter: initialCenter,
+            initialZoom: 11,
+          )
+        : const MapOptions(
+            initialZoom: 11,
+          );
+  }
+
+  (LatLng, LatLng)? getBounds() {
     final latLngList = widget.items.where((e) => e.latLong != null).map((e) => e.latLong!.toLatLng()).toList();
-    assert(latLngList.isNotEmpty, 'List is empty');
+    print('latLngList: $latLngList');
+    if (latLngList.isEmpty) {
+      return null;
+    }
+
     double? x0;
     double? x1;
     double? y0;
@@ -89,12 +82,38 @@ class FlutterMapsViewState extends State<FlutterMapsView> {
     return (LatLng(x1!, y1!), LatLng(x0!, y0!));
   }
 
-  LatLng getCenter() {
+  LatLng? getCenter() {
     final bounds = getBounds();
+    if (bounds == null) {
+      return null;
+    }
     return LatLng(
       (bounds.$1.latitude - bounds.$2.latitude) / 2 + bounds.$2.latitude,
       (bounds.$1.longitude - bounds.$2.longitude) / 2 + bounds.$2.longitude,
     );
+  }
+
+  List<Marker> getMarkers() {
+    final markers = <Marker>[];
+    for (final item in widget.items) {
+      if (item.latLong != null) {
+        markers.add(
+          Marker(
+            point: LatLng(
+              item.latLong!.lat,
+              item.latLong!.lng,
+            ),
+            child: CustomMarker(
+              color: Colors.red,
+              onPressed: () {
+                widget.onTap(item.id!);
+              },
+            ),
+          ),
+        );
+      }
+    }
+    return markers;
   }
 }
 

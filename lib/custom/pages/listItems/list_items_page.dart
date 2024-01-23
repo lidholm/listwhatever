@@ -9,6 +9,7 @@ import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_bloc.
 import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_event.dart';
 import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_state.dart';
 import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
+import 'package:listwhatever/standard/constants.dart';
 
 import '/custom/navigation/routes.dart';
 import '/custom/pages/import/csv/import_csv_page_route.dart';
@@ -109,11 +110,16 @@ class _ListItemsPageState extends State<ListItemsPage> {
     (ListItemsSortOrder, SortOrder) sortOrder,
     String userListId,
   ) {
-    // logger.d('number of items: ${items.length}');
-    // logger.d('items: $items');
-    // logger.d('items:\n${items.map((i) => '${i.latLong} - ${i.name} ').join('\n')}');
-
+    logger
+          ..d('=======================')
+          ..d('number of items: ${listItems.length}')
+        // ..d('items: $listItems')
+        // ..d('items:\n${listItems.map((i) => '${i.latLong} - ${i.name} ').join('\n')}');
+        ;
     final filteredItems = filterItems(list, listItems, filters);
+    logger
+      ..d('filters: $filters')
+      ..d('filteredItems: ${filteredItems.length}');
 
     if (viewToShow == ListItemsPageView.listView) {
       final multiplier = sortOrder.$2 == SortOrder.ascending ? 1 : -1;
