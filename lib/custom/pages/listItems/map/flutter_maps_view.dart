@@ -7,6 +7,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:listwhatever/custom/pages/listItems/list_item.dart';
 import 'package:listwhatever/custom/pages/listItems/map/custom_marker.dart';
 import 'package:listwhatever/standard/constants.dart';
+import 'package:location/location.dart';
 
 class FlutterMapsView extends StatefulWidget {
   const FlutterMapsView({required this.items, required this.onTap, super.key});
@@ -19,10 +20,12 @@ class FlutterMapsView extends StatefulWidget {
 
 class FlutterMapsViewState extends State<FlutterMapsView> {
   double doubleInRange(Random source, num start, num end) => source.nextDouble() * (end - start) + start;
+  LocationData? _locationData;
 
   @override
   void initState() {
     super.initState();
+    checkForLocation();
   }
 
   @override
@@ -113,7 +116,58 @@ class FlutterMapsViewState extends State<FlutterMapsView> {
         );
       }
     }
+
+    print('location: ${(_locationData?.longitude, _locationData?.latitude)}');
+
+    if (_locationData?.longitude != null && _locationData?.latitude != null) {
+      markers.add(
+        Marker(
+          point: LatLng(
+            _locationData!.latitude!,
+            _locationData!.longitude!,
+          ),
+          child: CustomMarker(
+            color: Colors.blue,
+            onPressed: () {},
+          ),
+        ),
+      );
+    }
     return markers;
+  }
+
+  Future<void> checkForLocation() async {
+    final location = Location();
+
+    bool serviceEnabled;
+    PermissionStatus permissionGranted;
+
+    serviceEnabled = await location.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await location.requestService();
+      if (!serviceEnabled) {
+        return;
+      }
+    }
+
+    permissionGranted = await location.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await location.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+    location.onLocationChanged.listen((LocationData currentLocation) {
+      setState(() {
+        _locationData = currentLocation;
+      });
+    });
+
+    final tmp = await location.getLocation();
+    setState(() {
+      _locationData = tmp;
+      print('_locationData: $_locationData');
+    });
   }
 }
 
