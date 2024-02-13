@@ -26,4 +26,6 @@
 - [ ] Better colors/styling
 - [ ] Set up Google Play
 - [ ] Filter on the right on web
-
+- [ ] Randomly select one from the list 
+  - Checkboxes for ones to choose from
+  
