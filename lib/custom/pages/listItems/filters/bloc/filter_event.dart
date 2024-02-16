@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'filters.dart';
+import '../filters.dart';
 
 @immutable
 sealed class FilterEvent {}

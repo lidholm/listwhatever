@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:geolocator/geolocator.dart';
 
-class LocationCubit extends Cubit<Position> {
-  LocationCubit()
+class CurrentLocationCubit extends Cubit<Position> {
+  CurrentLocationCubit()
       : super(
           Position(
             latitude: 0,
