@@ -8,20 +8,20 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_bloc.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
+import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_bloc.dart';
+import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_event.dart';
+import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_state.dart';
 import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
 
-import '/custom/pages/listItems/filters/filter_bloc.dart';
 import '/custom/pages/listItems/filters/filters.dart';
 import '/custom/pages/listItems/list_item.dart';
 import '/custom/pages/listItems/list_items.dart';
 import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
 import '/standard/widgets/border_with_header.dart';
-import '../../lists/list_load_events/list_load_bloc.dart';
-import '../../lists/list_load_events/list_load_event.dart';
-import '../../lists/list_load_events/list_load_state.dart';
+import 'bloc/filter_bloc.dart';
+import 'bloc/filter_event.dart';
+import 'bloc/filter_state.dart';
 import 'date_filter.dart';
-import 'filter_event.dart';
-import 'filter_state.dart';
 
 class SelectedChipsCubit extends Cubit<Set<String>> {
   SelectedChipsCubit() : super({});
@@ -30,6 +30,7 @@ class SelectedChipsCubit extends Cubit<Set<String>> {
 
 const distanceFieldName = 'distance';
 const metersInMile = 1608;
+const metersInKilometer = 1000;
 
 const distanceMin = 0.0;
 const distanceMax = 50.0;
@@ -79,6 +80,9 @@ class _FilterViewState extends State<FilterView> {
       startDateFieldName: filters.startDate,
       endDateFieldName: filters.endDate,
     };
+    if (filters.distance != null) {
+      initialValues[distanceFieldName] = filters.distance! / metersInMile;
+    }
     return getFormBuilderWrapper(list, listItems, initialValues);
   }
 
@@ -103,7 +107,7 @@ class _FilterViewState extends State<FilterView> {
                   if (list.withDates) DateFilter(formKey: _formKey),
                   if (list.withMap) ...[
                     const SizedBox(height: 16),
-                    getDistanceFilter(), //widget.firestoreUser?.settings),
+                    getDistanceFilter(initialValue[distanceFieldName] as double?), //widget.firestoreUser?.settings),
                   ],
                   const SizedBox(height: 16),
                   ...getCategoriesSections(getCategories(listItems), selectedChips),
@@ -137,15 +141,18 @@ class _FilterViewState extends State<FilterView> {
     return selectedChips.contains('$categoryName-$c');
   }
 
-  Widget getDistanceFilter() {
+  Widget getDistanceFilter(double? initialValue) {
+    final values = [initialValue ?? distanceValue];
+    print('values: $values');
     return BorderWithHeader(
-      title: 'Distance ', //(${settings?.distanceUnit.name})',
+      title: 'Distance (miles)', //(${settings?.distanceUnit.name})',
       child: FormBuilderField(
         name: distanceFieldName,
         key: const Key(distanceFieldName),
         builder: (FormFieldState<dynamic> field) {
+          print('field: $field');
           return FlutterSlider(
-            values: [distanceValue],
+            values: values,
             max: distanceMax,
             min: distanceMin,
             handler: FlutterSliderHandler(

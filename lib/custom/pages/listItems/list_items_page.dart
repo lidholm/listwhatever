@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/custom/currentLocationBloc/current_location_bloc.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_bloc.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_event.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
 import 'package:listwhatever/custom/pages/listItems/map/flutter_maps_view.dart';
+import 'package:listwhatever/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
 import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_event.dart';
 import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_state.dart';
+import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_bloc.dart';
+import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_event.dart';
+import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_state.dart';
 import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
+import 'package:listwhatever/standard/constants.dart';
 
 import '/custom/navigation/routes.dart';
 import '/custom/pages/import/csv/import_csv_page_route.dart';
 import '/custom/pages/listItems/addListItem/add_list_item_page_route.dart';
-import '/custom/pages/listItems/filters/filter_bloc.dart';
 import '/custom/pages/listItems/filters/filter_list_items.dart';
 import '/custom/pages/listItems/filters/filters.dart';
 import '/custom/pages/listItems/infoView/list_item_info_view.dart';
@@ -26,10 +32,8 @@ import '/standard/widgets/appBar/app_bar_action_dropdown.dart';
 import '/standard/widgets/appBar/app_bar_action_icon.dart';
 import '/standard/widgets/appBar/app_bar_action_overflow_icon.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
-import '../lists/list_load_events/list_load_bloc.dart';
-import '../lists/list_load_events/list_load_event.dart';
-import '../lists/list_load_events/list_load_state.dart';
-import 'filters/filter_state.dart';
+import 'filters/bloc/filter_bloc.dart';
+import 'filters/bloc/filter_state.dart';
 import 'filters/filter_view.dart';
 import 'list_item.dart';
 import 'list_items_list_view.dart';
@@ -59,6 +63,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
       builder: (context) {
         final listItemsState = context.watch<ListItemsLoadBloc>().state;
         final filtersState = context.watch<FilterBloc>().state;
+        final currentLocation = context.watch<CurrentLocationCubit>().state;
 
         final viewToShow = context.watch<ListItemsPageViewCubit>().state;
         final sortOrder = context.watch<ListItemsSortOrderCubit>().state;
@@ -86,7 +91,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
               title: context.l10n.listItemsHeader(listName),
               actions: getAppBarActions(listState, viewToShow, sortOrder, filters),
             ),
-            body: showLoadedItems(list, listItems, viewToShow, filters, sortOrder, widget.listId),
+            body: showLoadedItems(list, listItems, viewToShow, filters, currentLocation, sortOrder, widget.listId),
             floatingActionButton: list?.shareType == ShareType.editor
                 ? FloatingActionButton(
                     onPressed: () {
@@ -106,14 +111,20 @@ class _ListItemsPageState extends State<ListItemsPage> {
     List<ListItem> listItems,
     ListItemsPageView viewToShow,
     Filters filters,
+    Position? currentLocation,
     (ListItemsSortOrder, SortOrder) sortOrder,
     String userListId,
   ) {
-    // logger.d('number of items: ${items.length}');
-    // logger.d('items: $items');
-    // logger.d('items:\n${items.map((i) => '${i.latLong} - ${i.name} ').join('\n')}');
-
-    final filteredItems = filterItems(list, listItems, filters);
+    logger
+          ..d('=======================')
+          ..d('number of items: ${listItems.length}')
+        // ..d('items: $listItems')
+        // ..d('items:\n${listItems.map((i) => '${i.latLong} - ${i.name} ').join('\n')}');
+        ;
+    final filteredItems = filterItems(list, listItems, filters, currentLocation);
+    logger
+      ..d('filters: $filters')
+      ..d('filteredItems: ${filteredItems.length}');
 
     if (viewToShow == ListItemsPageView.listView) {
       final multiplier = sortOrder.$2 == SortOrder.ascending ? 1 : -1;
@@ -142,13 +153,14 @@ class _ListItemsPageState extends State<ListItemsPage> {
     }
   }
 
-  List<ListItem> filterItems(ListOfThings? list, List<ListItem> items, Filters filters) {
+  List<ListItem> filterItems(ListOfThings? list, List<ListItem> items, Filters filters, Position? currentLocation) {
     return filterListItems(
       allItems: items,
       filters: filters,
       listHasDates: list?.withDates ?? false,
       listHasMap: list?.withMap ?? false,
-      distanceFilterCenter: null, // TODO: Implement
+      distanceFilterCenter:
+          (currentLocation != null) ? LatLong(lat: currentLocation.latitude, lng: currentLocation.longitude) : null,
     );
   }
 
