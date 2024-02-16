@@ -28,4 +28,5 @@
 - [ ] Filter on the right on web
 - [ ] Randomly select one from the list 
   - Checkboxes for ones to choose from
+- [ ] Better position for markers so they don't move when zooming
   

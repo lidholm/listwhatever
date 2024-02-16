@@ -1,13 +1,15 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_cancellable_tile_provider/flutter_map_cancellable_tile_provider.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:listwhatever/custom/currentLocationBloc/current_location_bloc.dart';
 import 'package:listwhatever/custom/pages/listItems/list_item.dart';
 import 'package:listwhatever/custom/pages/listItems/map/custom_marker.dart';
 import 'package:listwhatever/standard/constants.dart';
-import 'package:location/location.dart';
 
 class FlutterMapsView extends StatefulWidget {
   const FlutterMapsView({required this.items, required this.onTap, super.key});
@@ -20,19 +22,20 @@ class FlutterMapsView extends StatefulWidget {
 
 class FlutterMapsViewState extends State<FlutterMapsView> {
   double doubleInRange(Random source, num start, num end) => source.nextDouble() * (end - start) + start;
-  LocationData? _locationData;
 
   @override
   void initState() {
     super.initState();
-    checkForLocation();
   }
 
   @override
   Widget build(BuildContext context) {
+    final currentLocation = context.watch<CurrentLocationCubit>().state;
+
     logger.d('rebuilding map view');
     final options = getMapOptions();
 
+    final currentLocationMarker = getCurrentLocationMarker(currentLocation);
     return Column(
       children: [
         Flexible(
@@ -40,7 +43,12 @@ class FlutterMapsViewState extends State<FlutterMapsView> {
             options: options,
             children: [
               openStreetMapTileLayer,
-              MarkerLayer(markers: getMarkers()),
+              MarkerLayer(
+                markers: [
+                  ...getMarkers(),
+                  if (currentLocationMarker != null) currentLocationMarker,
+                ],
+              ),
             ],
           ),
         ),
@@ -116,58 +124,23 @@ class FlutterMapsViewState extends State<FlutterMapsView> {
         );
       }
     }
-
-    print('location: ${(_locationData?.longitude, _locationData?.latitude)}');
-
-    if (_locationData?.longitude != null && _locationData?.latitude != null) {
-      markers.add(
-        Marker(
-          point: LatLng(
-            _locationData!.latitude!,
-            _locationData!.longitude!,
-          ),
-          child: CustomMarker(
-            color: Colors.blue,
-            onPressed: () {},
-          ),
-        ),
-      );
-    }
     return markers;
   }
 
-  Future<void> checkForLocation() async {
-    final location = Location();
-
-    bool serviceEnabled;
-    PermissionStatus permissionGranted;
-
-    serviceEnabled = await location.serviceEnabled();
-    if (!serviceEnabled) {
-      serviceEnabled = await location.requestService();
-      if (!serviceEnabled) {
-        return;
-      }
+  Marker? getCurrentLocationMarker(Position? currentLocation) {
+    if (currentLocation == null) {
+      return null;
     }
-
-    permissionGranted = await location.hasPermission();
-    if (permissionGranted == PermissionStatus.denied) {
-      permissionGranted = await location.requestPermission();
-      if (permissionGranted != PermissionStatus.granted) {
-        return;
-      }
-    }
-    location.onLocationChanged.listen((LocationData currentLocation) {
-      setState(() {
-        _locationData = currentLocation;
-      });
-    });
-
-    final tmp = await location.getLocation();
-    setState(() {
-      _locationData = tmp;
-      print('_locationData: $_locationData');
-    });
+    return Marker(
+      point: LatLng(
+        currentLocation!.latitude,
+        currentLocation.longitude,
+      ),
+      child: CustomMarker(
+        color: Colors.blue,
+        onPressed: () {},
+      ),
+    );
   }
 }
 

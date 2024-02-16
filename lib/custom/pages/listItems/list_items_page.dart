@@ -111,7 +111,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
     List<ListItem> listItems,
     ListItemsPageView viewToShow,
     Filters filters,
-    Position currentLocation,
+    Position? currentLocation,
     (ListItemsSortOrder, SortOrder) sortOrder,
     String userListId,
   ) {
@@ -153,13 +153,14 @@ class _ListItemsPageState extends State<ListItemsPage> {
     }
   }
 
-  List<ListItem> filterItems(ListOfThings? list, List<ListItem> items, Filters filters, Position currentLocation) {
+  List<ListItem> filterItems(ListOfThings? list, List<ListItem> items, Filters filters, Position? currentLocation) {
     return filterListItems(
       allItems: items,
       filters: filters,
       listHasDates: list?.withDates ?? false,
       listHasMap: list?.withMap ?? false,
-      distanceFilterCenter: LatLong(lat: currentLocation.latitude, lng: currentLocation.longitude),
+      distanceFilterCenter:
+          (currentLocation != null) ? LatLong(lat: currentLocation.latitude, lng: currentLocation.longitude) : null,
     );
   }
 
