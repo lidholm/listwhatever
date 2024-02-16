@@ -120,7 +120,11 @@ class _AddListItemPageState extends State<AddListItemPage> {
           GoRouter.of(context).pop();
           GoRouter.of(context).pop();
         } else if (state is ListItemCrudUpdated) {
+          print('popping GoRouter after updated');
           GoRouter.of(context).pop();
+          GoRouter.of(context).pop();
+        } else if (state is ListItemCrudAdded) {
+          print('popping GoRouter after added');
           GoRouter.of(context).pop();
         }
       },
