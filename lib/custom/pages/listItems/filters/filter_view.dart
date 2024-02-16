@@ -30,6 +30,7 @@ class SelectedChipsCubit extends Cubit<Set<String>> {
 
 const distanceFieldName = 'distance';
 const metersInMile = 1608;
+const metersInKilometer = 1000;
 
 const distanceMin = 0.0;
 const distanceMax = 50.0;
@@ -139,7 +140,7 @@ class _FilterViewState extends State<FilterView> {
 
   Widget getDistanceFilter() {
     return BorderWithHeader(
-      title: 'Distance ', //(${settings?.distanceUnit.name})',
+      title: 'Distance (miles)', //(${settings?.distanceUnit.name})',
       child: FormBuilderField(
         name: distanceFieldName,
         key: const Key(distanceFieldName),
