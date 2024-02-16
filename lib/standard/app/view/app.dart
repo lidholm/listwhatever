@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/custom/currentLocationBloc/current_location_bloc.dart';
 import 'package:listwhatever/custom/pages/listItems/filters/bloc/filter_bloc.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_bloc.dart';
@@ -94,6 +95,7 @@ class App extends StatelessWidget {
               BlocProvider<ListItemsSortOrderCubit>(create: (context) => ListItemsSortOrderCubit()),
               BlocProvider<SelectedChipsCubit>(create: (context) => SelectedChipsCubit()),
               BlocProvider<RedirectCubit>(create: (context) => RedirectCubit()),
+              BlocProvider<CurrentLocationCubit>(create: (context) => CurrentLocationCubit()),
               BlocProvider<LoginBloc>(
                 create: (context) => LoginBloc(
                   userRepository: context.read<UserRepository>(),

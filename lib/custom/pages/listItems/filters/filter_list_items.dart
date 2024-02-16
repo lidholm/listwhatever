@@ -38,10 +38,10 @@ bool matchesFilter({
   required LatLong? distanceFilterCenter,
 }) {
   return matchesDatesFilter(
-    item: item,
-    filters: filters,
-    listHasDates: listHasDates,
-  ) &&
+        item: item,
+        filters: filters,
+        listHasDates: listHasDates,
+      ) &&
       matchesCategoriesFilter(item, filters) &&
       matchesDistanceFilter(
         listHasMap: listHasMap,
@@ -57,8 +57,8 @@ bool matchesDatesFilter({
   required bool listHasDates,
 }) {
   if (filters.startDate == null && filters.endDate == null) {
-  // logger.d('no filters, so a match');
-  return true;
+    // logger.d('no filters, so a match');
+    return true;
   }
   if (!listHasDates) {
     // logger.d("List doesn't have dates, so a match");
@@ -86,20 +86,16 @@ bool matchesCategoriesFilter(ListItem item, Filters filters) {
     // logger.d('no filters, so a match');
     return true;
   }
-  if (filters.categoryFilters.values.expand((e) => e).isNotEmpty &&
-      item.categories.isEmpty) {
+  if (filters.categoryFilters.values.expand((e) => e).isNotEmpty && item.categories.isEmpty) {
     // logger.d("filters but no categories, so can't be a match");
     return false;
   }
   // items without a date set will match even if a start or end date has been set
 
   for (final categoryName in filters.categoryFilters.keys) {
-    final acceptedFilterValues =
-        getFilterValuesForCategory(filters.categoryFilters, categoryName) ?? [];
-    final valuesForCategory = item.categories.entries
-        .where((c) => c.key == categoryName)
-        .expand((c) => c.value)
-        .toList();
+    final acceptedFilterValues = getFilterValuesForCategory(filters.categoryFilters, categoryName) ?? [];
+    final valuesForCategory =
+        item.categories.entries.where((c) => c.key == categoryName).expand((c) => c.value).toList();
     var matches = false;
     if (valuesForCategory.isEmpty) {
       matches = true;
@@ -110,8 +106,7 @@ bool matchesCategoriesFilter(ListItem item, Filters filters) {
       }
     }
     if (filters.startDate != null) {
-      if (item.datetime != null &&
-          item.datetime!.compareTo(filters.startDate!) < 0) {
+      if (item.datetime != null && item.datetime!.compareTo(filters.startDate!) < 0) {
         matches = false;
       }
     }
@@ -128,9 +123,9 @@ bool hasFilterForCategory(CategoryFilters filters, String categoryName) {
 }
 
 List<String?>? getFilterValuesForCategory(
-    CategoryFilters filters,
-    String categoryName,
-    ) {
+  CategoryFilters filters,
+  String categoryName,
+) {
   return filters[categoryName];
 }
 
@@ -140,9 +135,7 @@ bool matchesDistanceFilter({
   required ListItem item,
   required Filters filters,
 }) {
-  if (item.latLong == null ||
-      filters.distance == null ||
-      distanceFilterCenter == null) return true;
+  if (item.latLong == null || filters.distance == null || distanceFilterCenter == null) return true;
 
   final gcd = GreatCircleDistance.fromDegrees(
     latitude1: item.latLong!.lat,
