@@ -133,7 +133,7 @@ class FlutterMapsViewState extends State<FlutterMapsView> {
     }
     return Marker(
       point: LatLng(
-        currentLocation!.latitude,
+        currentLocation.latitude,
         currentLocation.longitude,
       ),
       child: CustomMarker(
