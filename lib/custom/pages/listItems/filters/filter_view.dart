@@ -80,6 +80,9 @@ class _FilterViewState extends State<FilterView> {
       startDateFieldName: filters.startDate,
       endDateFieldName: filters.endDate,
     };
+    if (filters.distance != null) {
+      initialValues[distanceFieldName] = filters.distance! / metersInMile;
+    }
     return getFormBuilderWrapper(list, listItems, initialValues);
   }
 
@@ -104,7 +107,7 @@ class _FilterViewState extends State<FilterView> {
                   if (list.withDates) DateFilter(formKey: _formKey),
                   if (list.withMap) ...[
                     const SizedBox(height: 16),
-                    getDistanceFilter(), //widget.firestoreUser?.settings),
+                    getDistanceFilter(initialValue[distanceFieldName] as double?), //widget.firestoreUser?.settings),
                   ],
                   const SizedBox(height: 16),
                   ...getCategoriesSections(getCategories(listItems), selectedChips),
@@ -138,15 +141,18 @@ class _FilterViewState extends State<FilterView> {
     return selectedChips.contains('$categoryName-$c');
   }
 
-  Widget getDistanceFilter() {
+  Widget getDistanceFilter(double? initialValue) {
+    final values = [initialValue ?? distanceValue];
+    print('values: $values');
     return BorderWithHeader(
       title: 'Distance (miles)', //(${settings?.distanceUnit.name})',
       child: FormBuilderField(
         name: distanceFieldName,
         key: const Key(distanceFieldName),
         builder: (FormFieldState<dynamic> field) {
+          print('field: $field');
           return FlutterSlider(
-            values: [distanceValue],
+            values: values,
             max: distanceMax,
             min: distanceMin,
             handler: FlutterSliderHandler(
