@@ -1,3 +1,4 @@
+import 'package:listwhatever/standard/settings/settings.dart';
 
 import '/standard/authenticationClient/models/authentication_user.dart';
 
@@ -12,6 +13,8 @@ class User extends AuthenticationUser {
     super.name,
     super.photo,
     super.isNewUser,
+    this.settings,
+    this.hasLoadedFromFirestore = false,
   });
 
   /// Converts [AuthenticationUser] to [User].
@@ -25,6 +28,9 @@ class User extends AuthenticationUser {
         photo: authenticationUser.photo,
         isNewUser: authenticationUser.isNewUser,
       );
+
+  final Settings? settings;
+  final bool hasLoadedFromFirestore;
 
   /// Whether the current user is anonymous.
   @override

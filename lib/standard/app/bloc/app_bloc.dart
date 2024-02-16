@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:listwhatever/standard/userRepository/user_service.dart';
 import '/standard/app/bloc/app_event.dart';
 import '/standard/app/bloc/app_state.dart';
 import '/standard/userRepository/models/user.dart';
@@ -10,7 +11,9 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   AppBloc({
     required UserRepository userRepository,
     required User user,
+    required UserService userService,
   })  : _userRepository = userRepository,
+        _userService = userService,
         super(
           user == User.anonymous ? const AppState.unauthenticated() : AppState.authenticated(user),
         ) {
@@ -27,23 +30,31 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   static const _appOpenedCountForLoginOverlay = 5;
 
   final UserRepository _userRepository;
+  final UserService _userService;
 
   late StreamSubscription<User> _userSubscription;
 
   void _userChanged(User user) => add(AppUserChanged(user));
 
-  void _onUserChanged(AppUserChanged event, Emitter<AppState> emit) {
+  Future<void> _onUserChanged(AppUserChanged event, Emitter<AppState> emit) async {
     final user = event.user;
 
     switch (state.status) {
       case AppStatus.onboardingRequired:
       case AppStatus.authenticated:
       case AppStatus.unauthenticated:
-        return user != User.anonymous && user.isNewUser
-            ? emit(AppState.onboardingRequired(user))
-            : user == User.anonymous
-                ? emit(const AppState.unauthenticated())
-                : emit(AppState.authenticated(user));
+        // TODO: Handle all of this correctly
+        if (!user.hasLoadedFromFirestore) {
+          final firestoreUser = await _userService.getUser();
+          print('loaded firestoreUser: $firestoreUser');
+          final mergedUser = User(id: 'asd');
+          // user.settings = firestoreUser?.settings;
+          emit(AppState.authenticated(mergedUser));
+        } else if (user != User.anonymous && user.isNewUser) {
+          return emit(AppState.onboardingRequired(user));
+        } else {
+          user == User.anonymous ? emit(const AppState.unauthenticated()) : emit(AppState.authenticated(user));
+        }
     }
   }
 
