@@ -18,6 +18,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           user.isAnonymous() ? const AppState.unauthenticated() : AppState.authenticated(user),
         ) {
     on<AppUserChanged>(_onUserChanged);
+    on<UpdateSettings>(_onUpdateSettings);
     on<AppOnboardingCompleted>(_onOnboardingCompleted);
     on<AppLogoutRequested>(_onLogoutRequested);
     on<AppOpened>(_onAppOpened);
@@ -68,6 +69,15 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       return state.user.isAnonymous()
           ? emit(const AppState.unauthenticated())
           : emit(AppState.authenticated(state.user));
+    }
+  }
+
+  Future<void> _onUpdateSettings(UpdateSettings event, Emitter<AppState> emit) async {
+    // TODO: This should maybe not be allowed?
+    if (!state.user.isAnonymous()) {
+      final updatedUser = event.user.copyWith(settings: event.settings);
+      await _userService.updateUser(updatedUser);
+      emit(AppState.authenticated(updatedUser));
     }
   }
 

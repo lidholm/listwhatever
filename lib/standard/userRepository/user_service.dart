@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:listwhatever/standard/userRepository/firestore_user.dart';
+import 'package:listwhatever/standard/userRepository/models/user.dart';
 
 import '/standard/constants.dart';
 import '/standard/firebase/firestore/firestore.dart';
@@ -39,5 +40,11 @@ class UserService {
   FirestoreUser convertToUserList(String id, Map<String, dynamic> data) {
     final tmp = FirestoreUser.fromJson(data);
     return tmp.copyWith(id: id);
+  }
+
+  Future<void> updateUser(User user) async {
+    logger.d('updating user: $user');
+    final doc = await getDocument();
+    return doc.update(user.toJson());
   }
 }

@@ -1,4 +1,3 @@
-
 import 'package:bloc/bloc.dart';
 import '/standard/analyticsRepository/analytics_repository.dart';
 import '/standard/analyticsRepository/models/analytics_event.dart';
@@ -17,7 +16,7 @@ class AppBlocObserver extends BlocObserver {
     Transition<dynamic, dynamic> transition,
   ) {
     super.onTransition(bloc, transition);
-    logger.i('onTransition ${bloc.runtimeType}: $transition');
+    // logger.i('onTransition ${bloc.runtimeType}: $transition');
   }
 
   @override
