@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/models/list_type.dart';
 import 'package:listwhatever/custom/pages/lists/models/user_list.dart';
 import 'package:listwhatever/standard/app/app.dart';
-import 'package:listwhatever/standard/app/bloc/app_state.dart';
 import 'package:listwhatever/standard/appUi/colors/app_colors.dart';
 
 import '/custom/navigation/routes.dart';

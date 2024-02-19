@@ -12,3 +12,5 @@ abstract class Settings with _$Settings {
 
   factory Settings.fromJson(Map<String, dynamic> json) => _$SettingsFromJson(json);
 }
+
+const defaultSettings = Settings(distanceUnit: 'kilometers', timezone: '');

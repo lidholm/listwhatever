@@ -100,11 +100,11 @@ class _UserProfileViewState extends State<UserProfileView> with WidgetsBindingOb
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const UserProfileTitle(),
-                    if (!user.isAnonymous) ...[
+                    if (!user.isAnonymous()) ...[
                       UserProfileItem(
                         key: const Key('userProfilePage_userItem'),
                         leading: Assets.icons.profileIcon.svg(),
-                        title: user.email ?? '',
+                        title: user.email,
                       ),
                       const UserProfileLogoutButton(),
                     ],

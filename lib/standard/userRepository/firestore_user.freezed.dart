@@ -20,9 +20,9 @@ FirestoreUser _$FirestoreUserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$FirestoreUser {
-  String? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   Settings get settings => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +36,7 @@ abstract class $FirestoreUserCopyWith<$Res> {
           FirestoreUser value, $Res Function(FirestoreUser) then) =
       _$FirestoreUserCopyWithImpl<$Res, FirestoreUser>;
   @useResult
-  $Res call({String? id, String name, Settings settings});
+  $Res call({String name, Settings settings, String? id});
 
   $SettingsCopyWith<$Res> get settings;
 }
@@ -54,15 +54,11 @@ class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
     Object? name = null,
     Object? settings = null,
+    Object? id = freezed,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -71,6 +67,10 @@ class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
               as Settings,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -91,7 +91,7 @@ abstract class _$$FirestoreUserImplCopyWith<$Res>
       __$$FirestoreUserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? id, String name, Settings settings});
+  $Res call({String name, Settings settings, String? id});
 
   @override
   $SettingsCopyWith<$Res> get settings;
@@ -108,15 +108,11 @@ class __$$FirestoreUserImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
     Object? name = null,
     Object? settings = null,
+    Object? id = freezed,
   }) {
     return _then(_$FirestoreUserImpl(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -125,6 +121,10 @@ class __$$FirestoreUserImplCopyWithImpl<$Res>
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
               as Settings,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -133,21 +133,21 @@ class __$$FirestoreUserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$FirestoreUserImpl implements _FirestoreUser {
   const _$FirestoreUserImpl(
-      {this.id, required this.name, required this.settings});
+      {required this.name, required this.settings, this.id});
 
   factory _$FirestoreUserImpl.fromJson(Map<String, dynamic> json) =>
       _$$FirestoreUserImplFromJson(json);
 
   @override
-  final String? id;
-  @override
   final String name;
   @override
   final Settings settings;
+  @override
+  final String? id;
 
   @override
   String toString() {
-    return 'FirestoreUser(id: $id, name: $name, settings: $settings)';
+    return 'FirestoreUser(name: $name, settings: $settings, id: $id)';
   }
 
   @override
@@ -155,15 +155,15 @@ class _$FirestoreUserImpl implements _FirestoreUser {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FirestoreUserImpl &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.settings, settings) ||
-                other.settings == settings));
+                other.settings == settings) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, settings);
+  int get hashCode => Object.hash(runtimeType, name, settings, id);
 
   @JsonKey(ignore: true)
   @override
@@ -181,19 +181,19 @@ class _$FirestoreUserImpl implements _FirestoreUser {
 
 abstract class _FirestoreUser implements FirestoreUser {
   const factory _FirestoreUser(
-      {final String? id,
-      required final String name,
-      required final Settings settings}) = _$FirestoreUserImpl;
+      {required final String name,
+      required final Settings settings,
+      final String? id}) = _$FirestoreUserImpl;
 
   factory _FirestoreUser.fromJson(Map<String, dynamic> json) =
       _$FirestoreUserImpl.fromJson;
 
   @override
-  String? get id;
-  @override
   String get name;
   @override
   Settings get settings;
+  @override
+  String? get id;
   @override
   @JsonKey(ignore: true)
   _$$FirestoreUserImplCopyWith<_$FirestoreUserImpl> get copyWith =>

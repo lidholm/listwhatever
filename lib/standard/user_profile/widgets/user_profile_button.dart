@@ -18,7 +18,7 @@ class UserProfileButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isAnonymous = context.select<AppBloc, bool>(
-      (bloc) => bloc.state.user.isAnonymous,
+      (bloc) => bloc.state.user.isAnonymous(),
     );
 
     return isAnonymous ? const LoginButton() : const OpenProfileButton();
@@ -34,7 +34,7 @@ class LoginButton extends StatelessWidget {
     return IconButton(
       icon: Assets.icons.logInIcon.svg(),
       iconSize: 24,
-      padding:  const EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.lg,
         vertical: AppSpacing.sm,
       ),
@@ -57,7 +57,7 @@ class OpenProfileButton extends StatelessWidget {
     return IconButton(
       icon: Assets.icons.profileIcon.svg(),
       iconSize: 24,
-      padding:  const EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.lg,
         vertical: AppSpacing.sm,
       ),

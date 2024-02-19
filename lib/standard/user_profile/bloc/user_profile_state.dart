@@ -1,4 +1,3 @@
-
 import 'package:equatable/equatable.dart';
 import '/standard/userRepository/models/user.dart';
 
@@ -23,7 +22,7 @@ class UserProfileState extends Equatable {
   const UserProfileState.initial()
       : this(
           status: UserProfileStatus.initial,
-          user: User.anonymous,
+          user: anonymousUser,
         );
 
   final UserProfileStatus status;

@@ -15,7 +15,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   })  : _userRepository = userRepository,
         _userService = userService,
         super(
-          user == User.anonymous ? const AppState.unauthenticated() : AppState.authenticated(user),
+          user.isAnonymous() ? const AppState.unauthenticated() : AppState.authenticated(user),
         ) {
     on<AppUserChanged>(_onUserChanged);
     on<AppOnboardingCompleted>(_onOnboardingCompleted);
@@ -47,13 +47,15 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         if (!user.hasLoadedFromFirestore) {
           final firestoreUser = await _userService.getUser();
           print('loaded firestoreUser: $firestoreUser');
-          final mergedUser = User(id: 'asd');
-          // user.settings = firestoreUser?.settings;
+
+          final mergedUser = (firestoreUser == null)
+              ? user.copyWith(hasLoadedFromFirestore: true)
+              : user.copyWith(hasLoadedFromFirestore: true, settings: firestoreUser.settings);
           emit(AppState.authenticated(mergedUser));
-        } else if (user != User.anonymous && user.isNewUser) {
+        } else if (user.isAnonymous() && user.isNewUser) {
           return emit(AppState.onboardingRequired(user));
         } else {
-          user == User.anonymous ? emit(const AppState.unauthenticated()) : emit(AppState.authenticated(user));
+          user.isAnonymous() ? emit(const AppState.unauthenticated()) : emit(AppState.authenticated(user));
         }
     }
   }
@@ -63,7 +65,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     Emitter<AppState> emit,
   ) {
     if (state.status == AppStatus.onboardingRequired) {
-      return state.user == User.anonymous
+      return state.user.isAnonymous()
           ? emit(const AppState.unauthenticated())
           : emit(AppState.authenticated(state.user));
     }
@@ -77,7 +79,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
 
   Future<void> _onAppOpened(AppOpened event, Emitter<AppState> emit) async {
-    if (state.user.isAnonymous) {
+    if (state.user.isAnonymous()) {
       final appOpenedCount = await _userRepository.fetchAppOpenedCount();
 
       if (appOpenedCount == _appOpenedCountForLoginOverlay - 1) {
