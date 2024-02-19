@@ -8,6 +8,7 @@ import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_it
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_event.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
 import 'package:listwhatever/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
+import 'package:listwhatever/standard/constants.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 
 /// PlutoGrid Example
@@ -72,23 +73,53 @@ class _ListAsSpreadsheetsPageState extends State<ListAsSpreadsheetsPage> {
   }
 
   PlutoGrid getPlutoGrid(List<ListItem> items) {
+    final categories = getCategories(items);
+
     return PlutoGrid(
-      columns: getColumns(),
-      rows: getRows(items),
-      columnGroups: getColumnGroups(),
+      columns: getColumns(categories),
+      rows: getRows(items, categories),
+      columnGroups: getColumnGroups(categories),
       onLoaded: (PlutoGridOnLoadedEvent event) {
         stateManager = event.stateManager;
         // stateManager.setShowColumnFilter(true);
       },
-      onChanged: (PlutoGridOnChangedEvent event) {
-        print(event);
-      },
-      configuration: const PlutoGridConfiguration(),
+      // onChanged: (PlutoGridOnChangedEvent event) {
+      //   print(event);
+      // },
+      // configuration: const PlutoGridConfiguration(),
     );
   }
 
-  List<PlutoColumn> getColumns() {
+  List<PlutoColumn> getColumns(Map<String, Set<String>> categories) {
+    final categoryColumns = categories.entries
+        .map(
+          (categoryEntry) => PlutoColumn(
+            title: categoryEntry.key,
+            field: categoryEntry.key,
+            type: PlutoColumnType.text(),
+          ),
+        )
+        .toList();
     final columns = <PlutoColumn>[
+      PlutoColumn(
+        title: '',
+        field: 'delete',
+        width: 60,
+        enableContextMenu: false,
+        enableDropToResize: false,
+        type: PlutoColumnType.text(),
+        renderer: (rendererContext) {
+          return IconButton(
+            icon: const Icon(
+              Icons.delete,
+            ),
+            onPressed: () {
+              rendererContext.stateManager.removeRows([rendererContext.row]);
+            },
+            iconSize: 18,
+          );
+        },
+      ),
       PlutoColumn(
         title: 'Name',
         field: 'name',
@@ -109,49 +140,40 @@ class _ListAsSpreadsheetsPageState extends State<ListAsSpreadsheetsPage> {
         field: 'latlong',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
-        title: 'Delete',
-        field: 'delete',
-        type: PlutoColumnType.text(),
-        renderer: (rendererContext) {
-          return IconButton(
-            icon: const Icon(
-              Icons.delete,
-            ),
-            onPressed: () {
-              rendererContext.stateManager.removeRows([rendererContext.row]);
-            },
-            iconSize: 18,
-          );
-        },
-      ),
+      ...categoryColumns,
     ];
     return columns;
   }
 
-  List<PlutoRow> getRows(List<ListItem> items) {
-    final rows = items
-        .map((item) => PlutoRow(
-              cells: {
-                'name': PlutoCell(value: item.name),
-                'urls': PlutoCell(value: item.urls.join(', ')),
-                'address': PlutoCell(value: item.address),
-                'latlong': PlutoCell(value: item.latLong == null ? '' : '${item.latLong?.lat}, ${item.latLong?.lng}'),
-                'delete': PlutoCell(value: ''),
-              },
-            ))
-        .toList();
+  List<PlutoRow> getRows(List<ListItem> items, Map<String, Set<String>> categories) {
+    final rows = items.map(
+      (item) {
+        final categoryMap = {
+          for (final c in categories.entries)
+            c.key: PlutoCell(value: item.categories.containsKey(c.key) ? item.categories[c.key]!.join(', ') : ''),
+        };
+        return PlutoRow(
+          cells: {
+            'name': PlutoCell(value: item.name),
+            'urls': PlutoCell(value: item.urls.join(', ')),
+            'address': PlutoCell(value: item.address),
+            'latlong': PlutoCell(value: item.latLong == null ? '' : '${item.latLong?.lat}, ${item.latLong?.lng}'),
+            'delete': PlutoCell(value: ''),
+            ...categoryMap,
+          },
+        );
+      },
+    ).toList();
 
     return rows;
   }
 
-  List<PlutoColumnGroup> getColumnGroups() {
-    /// columnGroups that can group columns can be omitted.
+  List<PlutoColumnGroup> getColumnGroups(Map<String, Set<String>> categories) {
     final columnGroups = <PlutoColumnGroup>[
+      PlutoColumnGroup(title: '', fields: ['delete']),
       PlutoColumnGroup(title: 'Standard fields', fields: ['name', 'urls']),
       PlutoColumnGroup(title: 'Location', fields: ['address', 'latlong']),
-      // PlutoColumnGroup(title: 'Categories', fields: ['name', 'age']),
-      PlutoColumnGroup(title: '', fields: ['delete']),
+      PlutoColumnGroup(title: 'Categories', fields: categories.keys.toList()),
     ];
     return columnGroups;
   }

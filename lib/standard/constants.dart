@@ -3,11 +3,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:listwhatever/custom/pages/listItems/list_item.dart';
 import 'package:logger/logger.dart';
 
 Logger logger = Logger(
   // printer: PrettyPrinter(methodCount: 0, printTime: true),
-  printer: SimplePrinter( printTime: true),
+  printer: SimplePrinter(printTime: true),
   level: Level.debug,
 );
 
@@ -83,6 +84,22 @@ extension MyIterable<E> on Iterable<E> {
 
 extension GoRouterStateExtension on GoRouterState {
   // ignore: strict_raw_type
-  String debugString() =>  'GoRouterState: name: $name,  path: $path, fullPath: $fullPath, pathParams: $pathParameters, extra: $extra, matchedLocation: $matchedLocation\n'
+  String debugString() =>
+      'GoRouterState: name: $name,  path: $path, fullPath: $fullPath, pathParams: $pathParameters, extra: $extra, matchedLocation: $matchedLocation\n'
       'uri: ${uri.path} ${uri.queryParameters} ${uri.query} ${uri.data} ${uri.userInfo}';
+}
+
+Map<String, Set<String>> getCategories(List<ListItem> items) {
+  final categories = <String, Set<String>>{};
+
+  for (final item in items) {
+    for (final category in item.categories.entries) {
+      final categoryName = category.key.trim();
+      if (!categories.containsKey(categoryName)) {
+        categories[categoryName] = {};
+      }
+      categories[categoryName]!.addAll(category.value.map((e) => e.trim()));
+    }
+  }
+  return categories;
 }

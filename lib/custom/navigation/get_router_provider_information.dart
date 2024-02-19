@@ -1,5 +1,4 @@
 import 'package:listwhatever/custom/pages/import/spreadsheet/list_as_spreadsheets_page_route.dart';
-import 'package:listwhatever/custom/pages/lists/page/lists_page_route.dart';
 
 import '/custom/navigation/routes.dart';
 import '/standard/navigation/models/router_provider_information.dart';
