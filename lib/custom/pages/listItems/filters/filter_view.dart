@@ -185,7 +185,6 @@ class _FilterViewState extends State<FilterView> {
               activeTrackBar: const BoxDecoration(), //color: mainColor),
             ),
             onDragCompleted: (handlerIndex, lowerValue, upperValue) {
-              print('something: $handlerIndex, $lowerValue, $upperValue');
               setState(() {
                 distanceValue = lowerValue as double;
                 field.didChange(distanceValue);

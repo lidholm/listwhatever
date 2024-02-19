@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/models/list_type.dart';
 import 'package:listwhatever/custom/pages/lists/models/user_list.dart';
-import 'package:listwhatever/standard/app/app.dart';
 import 'package:listwhatever/standard/appUi/colors/app_colors.dart';
 
 import '/custom/navigation/routes.dart';
@@ -44,8 +43,6 @@ class _ListsPageState extends State<ListsPage> {
       body: BlocBuilder<ListsLoadBloc, ListsLoadState>(
         builder: (userListContext, userListState) {
           logger.d('userListState: $userListState');
-          final userState = context.watch<AppBloc>().state;
-          print('===============> user: $userState');
           final userListStateView = ListOrListItemNotLoadedHandler.handleUserListsState(userListState);
           if (userListStateView != null) {
             return userListStateView;

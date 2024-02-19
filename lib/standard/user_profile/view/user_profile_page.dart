@@ -72,9 +72,6 @@ class _UserProfileViewState extends State<UserProfileView> with WidgetsBindingOb
 
   @override
   Widget build(BuildContext context) {
-    // final user = context.select((UserProfileBloc bloc) => bloc.state.user);
-    // final notificationsEnabled = context.select((UserProfileBloc bloc) => bloc.state.notificationsEnabled);
-
     final l10n = context.l10n;
     final user = context.watch<AppBloc>().state.user;
 
@@ -115,31 +112,6 @@ class _UserProfileViewState extends State<UserProfileView> with WidgetsBindingOb
                     UserProfileSubtitle(
                       subtitle: l10n.userProfileSettingsSubtitle,
                     ),
-                    // UserProfileItem(
-                    //   key: const Key('userProfilePage_notificationsItem'),
-                    //   leading: Assets.icons.notificationsIcon.svg(),
-                    //   title: l10n.userProfileSettingsNotificationsTitle,
-                    //   trailing: AppSwitch(
-                    //     onText: l10n.checkboxOnTitle,
-                    //     offText: l10n.userProfileCheckboxOffTitle,
-                    //     value: notificationsEnabled,
-                    //     onChanged: (_) => context.read<UserProfileBloc>().add(const ToggleNotifications()),
-                    //   ),
-                    // ),
-                    // UserProfileItem(
-                    //   key: const Key(
-                    //     'userProfilePage_notificationPreferencesItem',
-                    //   ),
-                    //   title: l10n.notificationPreferencesTitle,
-                    //   trailing: const Icon(
-                    //     Icons.chevron_right,
-                    //     key: Key(
-                    //       '''userProfilePage_notificationPreferencesItem_trailing''',
-                    //     ),
-                    //   ),
-                    //   onTap: () {},
-                    // ),
-
                     UserProfileItem(
                       key: const Key('userProfilePage_distanceUnitItem'),
                       leading: const Icon(Icons.display_settings_outlined),
