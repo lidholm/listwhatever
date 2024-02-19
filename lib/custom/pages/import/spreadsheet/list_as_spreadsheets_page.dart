@@ -4,72 +4,29 @@ import 'package:pluto_grid/pluto_grid.dart';
 /// PlutoGrid Example
 //
 /// For more examples, go to the demo web link on the github below.
-class PlutoGridExamplePage extends StatefulWidget {
-  const PlutoGridExamplePage({super.key});
+class ListAsSpreadsheetsPage extends StatefulWidget {
+  const ListAsSpreadsheetsPage({super.key});
 
   @override
-  State<PlutoGridExamplePage> createState() => _PlutoGridExamplePageState();
+  State<ListAsSpreadsheetsPage> createState() => _ListAsSpreadsheetsPageState();
 }
 
-class _PlutoGridExamplePageState extends State<PlutoGridExamplePage> {
+class _ListAsSpreadsheetsPageState extends State<ListAsSpreadsheetsPage> {
   final List<PlutoColumn> columns = <PlutoColumn>[
-    PlutoColumn(
-      title: 'Id',
-      field: 'id',
-      type: PlutoColumnType.text(),
-    ),
     PlutoColumn(
       title: 'Name',
       field: 'name',
       type: PlutoColumnType.text(),
     ),
     PlutoColumn(
-      title: 'Age',
-      field: 'age',
-      type: PlutoColumnType.number(),
+      title: 'Address',
+      field: 'address',
+      type: PlutoColumnType.text(),
     ),
     PlutoColumn(
-      title: 'Role',
-      field: 'role',
-      type: PlutoColumnType.select(<String>[
-        'Programmer',
-        'Designer',
-        'Owner',
-      ]),
-    ),
-    PlutoColumn(
-      title: 'Joined',
-      field: 'joined',
-      type: PlutoColumnType.date(),
-    ),
-    PlutoColumn(
-      title: 'Working time',
-      field: 'working_time',
-      type: PlutoColumnType.time(),
-    ),
-    PlutoColumn(
-      title: 'salary',
-      field: 'salary',
-      type: PlutoColumnType.currency(),
-      footerRenderer: (rendererContext) {
-        return PlutoAggregateColumnFooter(
-          rendererContext: rendererContext,
-          formatAsCurrency: true,
-          type: PlutoAggregateColumnType.sum,
-          format: '#,###',
-          alignment: Alignment.center,
-          titleSpanBuilder: (text) {
-            return [
-              const TextSpan(
-                text: 'Sum',
-                style: TextStyle(color: Colors.red),
-              ),
-              const TextSpan(text: ' : '),
-              TextSpan(text: text),
-            ];
-          },
-        );
-      },
+      title: 'LatLong',
+      field: 'latlong',
+      type: PlutoColumnType.text(),
     ),
   ];
 

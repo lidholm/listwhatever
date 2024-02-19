@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listwhatever/custom/currentLocationBloc/current_location_bloc.dart';
-import 'package:listwhatever/custom/pages/import/spreadsheet/spreadsheets_page_route.dart';
+import 'package:listwhatever/custom/pages/import/spreadsheet/list_as_spreadsheets_page_route.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_bloc.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_event.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
@@ -399,7 +399,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
         title: context.l10n.listAsSpreadsheetsMenuItem,
         icon: Icons.list_alt,
         callback: () async {
-          await SpreadsheetsPageRoute(widget.listId).push<void>(context);
+          await ListAsSpreadsheetsPageRoute(widget.listId).push<void>(context);
         },
         key: const Key('listAsSpreadsheet'),
       ),
