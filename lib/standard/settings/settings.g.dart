@@ -8,12 +8,16 @@ part of 'settings.dart';
 
 _$SettingsImpl _$$SettingsImplFromJson(Map<String, dynamic> json) =>
     _$SettingsImpl(
-      distanceUnit: json['distanceUnit'] as String,
-      timezone: json['timezone'] as String,
+      distanceUnit:
+          $enumDecode(_$DistanceUnitOptionsEnumMap, json['distanceUnit']),
     );
 
 Map<String, dynamic> _$$SettingsImplToJson(_$SettingsImpl instance) =>
     <String, dynamic>{
-      'distanceUnit': instance.distanceUnit,
-      'timezone': instance.timezone,
+      'distanceUnit': _$DistanceUnitOptionsEnumMap[instance.distanceUnit]!,
     };
+
+const _$DistanceUnitOptionsEnumMap = {
+  DistanceUnitOptions.kilometers: 'kilometers',
+  DistanceUnitOptions.miles: 'miles',
+};

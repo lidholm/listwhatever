@@ -20,8 +20,7 @@ Settings _$SettingsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Settings {
-  String get distanceUnit => throw _privateConstructorUsedError;
-  String get timezone => throw _privateConstructorUsedError;
+  DistanceUnitOptions get distanceUnit => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +33,7 @@ abstract class $SettingsCopyWith<$Res> {
   factory $SettingsCopyWith(Settings value, $Res Function(Settings) then) =
       _$SettingsCopyWithImpl<$Res, Settings>;
   @useResult
-  $Res call({String distanceUnit, String timezone});
+  $Res call({DistanceUnitOptions distanceUnit});
 }
 
 /// @nodoc
@@ -51,17 +50,12 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
   @override
   $Res call({
     Object? distanceUnit = null,
-    Object? timezone = null,
   }) {
     return _then(_value.copyWith(
       distanceUnit: null == distanceUnit
           ? _value.distanceUnit
           : distanceUnit // ignore: cast_nullable_to_non_nullable
-              as String,
-      timezone: null == timezone
-          ? _value.timezone
-          : timezone // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DistanceUnitOptions,
     ) as $Val);
   }
 }
@@ -74,7 +68,7 @@ abstract class _$$SettingsImplCopyWith<$Res>
       __$$SettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String distanceUnit, String timezone});
+  $Res call({DistanceUnitOptions distanceUnit});
 }
 
 /// @nodoc
@@ -89,17 +83,12 @@ class __$$SettingsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? distanceUnit = null,
-    Object? timezone = null,
   }) {
     return _then(_$SettingsImpl(
       distanceUnit: null == distanceUnit
           ? _value.distanceUnit
           : distanceUnit // ignore: cast_nullable_to_non_nullable
-              as String,
-      timezone: null == timezone
-          ? _value.timezone
-          : timezone // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DistanceUnitOptions,
     ));
   }
 }
@@ -107,19 +96,17 @@ class __$$SettingsImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$SettingsImpl implements _Settings {
-  const _$SettingsImpl({required this.distanceUnit, required this.timezone});
+  const _$SettingsImpl({required this.distanceUnit});
 
   factory _$SettingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$SettingsImplFromJson(json);
 
   @override
-  final String distanceUnit;
-  @override
-  final String timezone;
+  final DistanceUnitOptions distanceUnit;
 
   @override
   String toString() {
-    return 'Settings(distanceUnit: $distanceUnit, timezone: $timezone)';
+    return 'Settings(distanceUnit: $distanceUnit)';
   }
 
   @override
@@ -128,14 +115,12 @@ class _$SettingsImpl implements _Settings {
         (other.runtimeType == runtimeType &&
             other is _$SettingsImpl &&
             (identical(other.distanceUnit, distanceUnit) ||
-                other.distanceUnit == distanceUnit) &&
-            (identical(other.timezone, timezone) ||
-                other.timezone == timezone));
+                other.distanceUnit == distanceUnit));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, distanceUnit, timezone);
+  int get hashCode => Object.hash(runtimeType, distanceUnit);
 
   @JsonKey(ignore: true)
   @override
@@ -152,17 +137,14 @@ class _$SettingsImpl implements _Settings {
 }
 
 abstract class _Settings implements Settings {
-  const factory _Settings(
-      {required final String distanceUnit,
-      required final String timezone}) = _$SettingsImpl;
+  const factory _Settings({required final DistanceUnitOptions distanceUnit}) =
+      _$SettingsImpl;
 
   factory _Settings.fromJson(Map<String, dynamic> json) =
       _$SettingsImpl.fromJson;
 
   @override
-  String get distanceUnit;
-  @override
-  String get timezone;
+  DistanceUnitOptions get distanceUnit;
   @override
   @JsonKey(ignore: true)
   _$$SettingsImplCopyWith<_$SettingsImpl> get copyWith =>

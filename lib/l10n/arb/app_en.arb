@@ -834,5 +834,15 @@
     "description": "Text for 'Cancel'",
     "type": "text",
     "placeholders": {}
+  },
+
+  "distanceFilterText": "Distance ({distanceType, select, miles{miles} kilometers{kilometers} other{missing}})",
+  "@distanceFilterText": {
+    "description": "Distance name for filter with type in parenthesis",
+    "placeholders": {
+      "distanceType": {
+        "type": "String"
+      }
+    }
   }
 }
