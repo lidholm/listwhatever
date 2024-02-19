@@ -64,8 +64,8 @@ class UserRepository {
         (authenticationUser) {
           print('authenticationUser: $authenticationUser');
           print('authenticationUser.email: ${authenticationUser.email}');
-          return User.fromAuthenticationUser(
-            authenticationUser: authenticationUser,
+          return fromAuthenticationUser(
+            authenticationUser,
           );
         },
       ).asBroadcastStream();

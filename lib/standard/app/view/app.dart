@@ -7,6 +7,7 @@ import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_it
 import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/lists_load_events/lists_bloc.dart';
+import 'package:listwhatever/standard/userRepository/user_service.dart';
 
 import '/custom/navigation/get_router_provider_information.dart';
 import '/custom/navigation/routes.dart';
@@ -61,6 +62,7 @@ class App extends StatelessWidget {
 
     final sharedListsService = SharedListsService();
     final userListsService = UserListsService(userId: initialUserId);
+    final userService = UserService(userId: initialUserId);
     final listsService = ListsService(userId: initialUserId);
     final listItemsService = ListItemsService(userId: initialUserId);
 
@@ -75,6 +77,7 @@ class App extends StatelessWidget {
                 create: (_) => AppBloc(
                   userRepository: _userRepository,
                   user: _user,
+                  userService: userService,
                 )..add(const AppOpened()),
               ),
               BlocProvider(create: (_) => ThemeModeBloc()),

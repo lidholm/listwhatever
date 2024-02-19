@@ -8,7 +8,6 @@ import '/standard/userRepository/user_repository.dart';
 
 import 'analytics_state.dart';
 
-
 class AnalyticsBloc extends Bloc<AnalyticsEvent, AnalyticsState> {
   AnalyticsBloc({
     required analytics.AnalyticsRepository analyticsRepository,
@@ -25,15 +24,14 @@ class AnalyticsBloc extends Bloc<AnalyticsEvent, AnalyticsState> {
 
   Future<void> _onUserChanged(User user) async {
     try {
-      await _analyticsRepository
-          .setUserId(user != User.anonymous ? user.id : null);
+      await _analyticsRepository.setUserId(user.isAnonymous() ? user.id : null);
     } catch (error, stackTrace) {
       addError(error, stackTrace);
     }
   }
 
   Future<void> _onTrackAnalyticsEvent(
-      TrackAnalyticsEvent event,
+    TrackAnalyticsEvent event,
     Emitter<AnalyticsState> emit,
   ) async {
     try {

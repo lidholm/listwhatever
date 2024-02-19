@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/standard/appUi/widgets/app_dropdown.dart';
+import 'package:listwhatever/standard/settings/settings.dart';
 import '/l10n/l10n.dart';
 import '/standard/analytics/bloc/analytics_bloc.dart';
 import '/standard/analytics/bloc/analytics_event.dart';
@@ -12,7 +14,6 @@ import '/standard/appUi/colors/app_colors.dart';
 import '/standard/appUi/generated/assets.gen.dart';
 import '/standard/appUi/spacing/app_spacing.dart';
 import '/standard/appUi/widgets/app_button.dart';
-import '/standard/appUi/widgets/app_switch.dart';
 import '/standard/userRepository/user_repository.dart';
 import '/standard/user_profile/bloc/user_profile_event.dart';
 import '/standard/user_profile/bloc/user_profile_state.dart';
@@ -71,10 +72,8 @@ class _UserProfileViewState extends State<UserProfileView> with WidgetsBindingOb
 
   @override
   Widget build(BuildContext context) {
-    final user = context.select((UserProfileBloc bloc) => bloc.state.user);
-    final notificationsEnabled = context.select((UserProfileBloc bloc) => bloc.state.notificationsEnabled);
-
     final l10n = context.l10n;
+    final user = context.watch<AppBloc>().state.user;
 
     return BlocListener<UserProfileBloc, UserProfileState>(
       listener: (context, state) {
@@ -100,46 +99,38 @@ class _UserProfileViewState extends State<UserProfileView> with WidgetsBindingOb
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const UserProfileTitle(),
-                    if (!user.isAnonymous) ...[
+                    if (!user.isAnonymous()) ...[
                       UserProfileItem(
                         key: const Key('userProfilePage_userItem'),
                         leading: Assets.icons.profileIcon.svg(),
-                        title: user.email ?? '',
+                        title: user.email,
                       ),
                       const UserProfileLogoutButton(),
                     ],
                     const SizedBox(height: AppSpacing.lg),
                     const _UserProfileDivider(),
                     UserProfileSubtitle(
-                      subtitle: l10n.userProfileSubscriptionDetailsSubtitle,
-                    ),
-                    const _UserProfileDivider(),
-                    UserProfileSubtitle(
                       subtitle: l10n.userProfileSettingsSubtitle,
                     ),
                     UserProfileItem(
-                      key: const Key('userProfilePage_notificationsItem'),
-                      leading: Assets.icons.notificationsIcon.svg(),
-                      title: l10n.userProfileSettingsNotificationsTitle,
-                      trailing: AppSwitch(
-                        onText: l10n.checkboxOnTitle,
-                        offText: l10n.userProfileCheckboxOffTitle,
-                        value: notificationsEnabled,
-                        onChanged: (_) => context.read<UserProfileBloc>().add(const ToggleNotifications()),
+                      key: const Key('userProfilePage_distanceUnitItem'),
+                      leading: const Icon(Icons.display_settings_outlined),
+                      title: l10n.userProfileSettingsDistanceUnitTitle,
+                      trailing: AppDropdown<DistanceUnitOptions>(
+                        selectedValue: user.settings.distanceUnit,
+                        values: {
+                          for (var v in DistanceUnitOptions.values)
+                            v: l10n.userProfileSettingsDistanceUnitType(v.toString())
+                        },
+                        onChanged: (distanceUnit) {
+                          if (distanceUnit != null) {
+                            final updatedSettings = user.settings.copyWith(
+                              distanceUnit: distanceUnit,
+                            );
+                            context.read<AppBloc>().add(UpdateSettings(user, updatedSettings));
+                          }
+                        },
                       ),
-                    ),
-                    UserProfileItem(
-                      key: const Key(
-                        'userProfilePage_notificationPreferencesItem',
-                      ),
-                      title: l10n.notificationPreferencesTitle,
-                      trailing: const Icon(
-                        Icons.chevron_right,
-                        key: Key(
-                          '''userProfilePage_notificationPreferencesItem_trailing''',
-                        ),
-                      ),
-                      onTap: () {},
                     ),
                     const _UserProfileDivider(),
                     UserProfileSubtitle(

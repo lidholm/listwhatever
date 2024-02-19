@@ -1,37 +1,53 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:listwhatever/standard/authenticationClient/models/authentication_user.dart';
+import 'package:listwhatever/standard/settings/settings.dart';
 
-import '/standard/authenticationClient/models/authentication_user.dart';
+part 'user.freezed.dart';
+part 'user.g.dart';
 
-/// {@template user}
-/// User model represents the current user with subscription plan.
-/// {@endtemplate}
-class User extends AuthenticationUser {
-  /// {@macro user}
-  const User({
-    required super.id,
-    super.email,
-    super.name,
-    super.photo,
-    super.isNewUser,
-  });
+@freezed
+abstract class User with _$User {
+  const factory User({
+    required String id,
+    required String email,
+    required String name,
+    required String photo,
+    required bool isNewUser,
+    required Settings settings,
+    required bool hasLoadedFromFirestore,
+    required bool anonymous,
+  }) = _User;
 
-  /// Converts [AuthenticationUser] to [User].
-  factory User.fromAuthenticationUser({
-    required AuthenticationUser authenticationUser,
-  }) =>
-      User(
-        email: authenticationUser.email,
-        id: authenticationUser.id,
-        name: authenticationUser.name,
-        photo: authenticationUser.photo,
-        isNewUser: authenticationUser.isNewUser,
-      );
+  // Added constructor. Must not have any parameter
+  const User._();
 
-  /// Whether the current user is anonymous.
-  @override
-  bool get isAnonymous => this == anonymous;
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
-  /// Anonymous user which represents an unauthenticated user.
-  static const User anonymous = User(
-    id: '',
+  bool isAnonymous() {
+    return anonymous || id == '';
+  }
+}
+
+User fromAuthenticationUser(AuthenticationUser authenticationUser) {
+  return User(
+    email: authenticationUser.email ?? '',
+    id: authenticationUser.id,
+    name: authenticationUser.name ?? '',
+    photo: authenticationUser.photo ?? '',
+    isNewUser: authenticationUser.isNewUser,
+    settings: defaultSettings,
+    hasLoadedFromFirestore: false,
+    anonymous: authenticationUser.isAnonymous,
   );
 }
+
+const anonymousUser = User(
+  email: '',
+  id: '',
+  name: '',
+  photo: '',
+  isNewUser: false,
+  settings: defaultSettings,
+  hasLoadedFromFirestore: true,
+  anonymous: true,
+);

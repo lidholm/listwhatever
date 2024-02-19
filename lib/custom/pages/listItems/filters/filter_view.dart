@@ -12,11 +12,14 @@ import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_bloc.
 import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_event.dart';
 import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_state.dart';
 import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
+import 'package:listwhatever/standard/app/bloc/app_bloc.dart';
+import 'package:listwhatever/standard/settings/settings.dart';
 
 import '/custom/pages/listItems/filters/filters.dart';
 import '/custom/pages/listItems/list_item.dart';
 import '/custom/pages/listItems/list_items.dart';
 import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
+import '/l10n/l10n.dart';
 import '/standard/widgets/border_with_header.dart';
 import 'bloc/filter_bloc.dart';
 import 'bloc/filter_event.dart';
@@ -29,8 +32,6 @@ class SelectedChipsCubit extends Cubit<Set<String>> {
 }
 
 const distanceFieldName = 'distance';
-const metersInMile = 1608;
-const metersInKilometer = 1000;
 
 const distanceMin = 0.0;
 const distanceMax = 50.0;
@@ -59,6 +60,7 @@ class _FilterViewState extends State<FilterView> {
     final listItemsState = context.watch<ListItemsLoadBloc>().state;
 
     final filtersState = context.watch<FilterBloc>().state;
+    final appState = context.watch<AppBloc>().state;
 
     final filtersNotLoadedView = handleFiltersNotLoaded(filtersState);
     if (filtersNotLoadedView != null) {
@@ -66,6 +68,8 @@ class _FilterViewState extends State<FilterView> {
     }
     final filters = (filtersState as FiltersUpdated).filters;
     // logger.d('this filters: $filters');
+
+    final settings = appState.user.settings;
 
     final listStateView = ListOrListItemNotLoadedHandler.handleListAndListItemsState(listState, listItemsState);
     if (listStateView != null) {
@@ -81,12 +85,17 @@ class _FilterViewState extends State<FilterView> {
       endDateFieldName: filters.endDate,
     };
     if (filters.distance != null) {
-      initialValues[distanceFieldName] = filters.distance! / metersInMile;
+      initialValues[distanceFieldName] = filters.distance! / convertDistanceToMeters(settings.distanceUnit, 1);
     }
-    return getFormBuilderWrapper(list, listItems, initialValues);
+    return getFormBuilderWrapper(list, listItems, initialValues, settings);
   }
 
-  Widget getFormBuilderWrapper(ListOfThings list, List<ListItem> listItems, Map<String, dynamic> initialValue) {
+  Widget getFormBuilderWrapper(
+    ListOfThings list,
+    List<ListItem> listItems,
+    Map<String, dynamic> initialValue,
+    Settings settings,
+  ) {
     final selectedChips = context.watch<SelectedChipsCubit>().state;
     return Padding(
       padding: const EdgeInsets.all(10),
@@ -107,12 +116,12 @@ class _FilterViewState extends State<FilterView> {
                   if (list.withDates) DateFilter(formKey: _formKey),
                   if (list.withMap) ...[
                     const SizedBox(height: 16),
-                    getDistanceFilter(initialValue[distanceFieldName] as double?), //widget.firestoreUser?.settings),
+                    getDistanceFilter(initialValue[distanceFieldName] as double?, settings),
                   ],
                   const SizedBox(height: 16),
                   ...getCategoriesSections(getCategories(listItems), selectedChips),
                   const SizedBox(height: 16),
-                  cancelAndSubmitButtons(),
+                  cancelAndSubmitButtons(settings),
                 ],
               ),
             ),
@@ -141,11 +150,13 @@ class _FilterViewState extends State<FilterView> {
     return selectedChips.contains('$categoryName-$c');
   }
 
-  Widget getDistanceFilter(double? initialValue) {
-    final values = [initialValue ?? distanceValue];
+  Widget getDistanceFilter(double? initialValue, Settings settings) {
+    print('distanceValue: $distanceValue');
+    print('initialValue: $initialValue');
+    final values = (distanceValue == distanceMax) ? [initialValue ?? distanceValue] : [distanceValue];
     print('values: $values');
     return BorderWithHeader(
-      title: 'Distance (miles)', //(${settings?.distanceUnit.name})',
+      title: context.l10n.distanceFilterText(settings.distanceUnit.toString()),
       child: FormBuilderField(
         name: distanceFieldName,
         key: const Key(distanceFieldName),
@@ -223,7 +234,7 @@ class _FilterViewState extends State<FilterView> {
     }).toList();
   }
 
-  Widget cancelAndSubmitButtons() {
+  Widget cancelAndSubmitButtons(Settings settings) {
     return Row(
       children: <Widget>[
         Expanded(
@@ -241,9 +252,7 @@ class _FilterViewState extends State<FilterView> {
           child: ElevatedButton(
             onPressed: () {
               if (_formKey.currentState?.saveAndValidate() ?? false) {
-                updateFilters(
-                    // widget.firestoreUser?.settings,
-                    );
+                updateFilters(settings);
               }
             },
             child: const Text(
@@ -256,7 +265,7 @@ class _FilterViewState extends State<FilterView> {
     );
   }
 
-  void updateFilters() {
+  void updateFilters(Settings settings) {
     final fields = _formKey.currentState?.fields;
 
     final categoryFilters = <String, List<String>>{};
@@ -271,7 +280,8 @@ class _FilterViewState extends State<FilterView> {
         endDate = field.value.value as DateTime?;
       } else if (field.key == distanceFieldName) {
         final d = (field.value.value ?? distanceMax) as double;
-        maxDistance = convertDistanceToMeters(/*settings,*/ d);
+        maxDistance = convertDistanceToMeters(settings.distanceUnit, d);
+        print('Distance: $d, $maxDistance');
       } else {
         final values = field.value.value as List<String>?;
         if (values != null && values.isNotEmpty) {
@@ -287,12 +297,5 @@ class _FilterViewState extends State<FilterView> {
     );
     BlocProvider.of<FilterBloc>(context).add(UpdateFilters(filters));
     GoRouter.of(context).pop();
-  }
-
-  double convertDistanceToMeters(/*Settings? settings,*/ double d) {
-    return d * metersInMile;
-    // return (settings!.distanceUnit == DistanceUnitType.miles)
-    //     ? d * metersInMile
-    //     : d * 1000;
   }
 }

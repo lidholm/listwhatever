@@ -9,7 +9,7 @@
  - https://github.com/flutter/flutter/issues/36653
 [x] Share list
 [x] Firestore rules
-[ ] Create docker containers to be able to test, deploy from local machine
+[ ] Create docker containers to be able to test, deploy from local machine. Go back to Dagger?
  - [x] Write steps for locally deploying
 [ ] (Free) Other map than Google maps
 [ ] Import from other source
@@ -20,7 +20,7 @@
 - [x] Delete list
 - [ ] User profile and settings (e.g. use Google Maps or flutter_map)
 - [x] Current location and distance
-- [ ] Upload image for list
+- [ ] Upload image for list (Get from AI creator?)
 - [ ] View a list without logging in if you have the code
 - [ ] Fix fastlane
 - [ ] Better colors/styling

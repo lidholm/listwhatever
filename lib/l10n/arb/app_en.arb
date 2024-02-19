@@ -248,6 +248,12 @@
     "type": "text",
     "placeholders": {}
   },
+  "userProfileSettingsDistanceUnitTitle": "Distance type",
+  "@userProfileSettingsDistanceUnitTitle": {
+    "description": "Distance type",
+    "type": "text",
+    "placeholders": {}
+  },
   "userProfileSubscribeBoxSubtitle": "You are not currently a subscriber.",
   "@userProfileSubscribeBoxSubtitle": {
     "description": "User profile not a subscriber subtitle",
@@ -834,5 +840,24 @@
     "description": "Text for 'Cancel'",
     "type": "text",
     "placeholders": {}
+  },
+
+  "distanceFilterText": "Distance ({distanceType, select, miles{miles} kilometers{kilometers} other{missing}})",
+  "@distanceFilterText": {
+    "description": "Distance name for filter with type in parenthesis",
+    "placeholders": {
+      "distanceType": {
+        "type": "String"
+      }
+    }
+  },
+  "userProfileSettingsDistanceUnitType": "{distanceType, select, miles{Miles} kilometers{Kilometers} other{Unknown}}",
+  "@userProfileSettingsDistanceUnitType": {
+    "description": "Distance type in dropdown",
+    "placeholders": {
+      "distanceType": {
+        "type": "String"
+      }
+    }
   }
 }
