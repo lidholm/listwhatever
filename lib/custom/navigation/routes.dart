@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/custom/pages/import/spreadsheet/spreadsheets_page_route.dart';
 import 'package:listwhatever/custom/pages/lists/page/lists_page_route.dart';
 
 import '/custom/pages/about/about_page_route.dart';
@@ -70,6 +71,10 @@ part 'routes.g.dart';
         TypedGoRoute<ImportCsvPageRoute>(
           path: ':listId/import/csv',
           name: 'importcsv',
+        ),
+        TypedGoRoute<SpreadsheetsPageRoute>(
+          path: ':listId/import/spreadsheet',
+          name: 'listasspreadsheet',
         ),
       ],
     ),

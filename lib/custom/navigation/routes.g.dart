@@ -66,6 +66,11 @@ RouteBase get $mainPageRoute => GoRouteData.$route(
               name: 'importcsv',
               factory: $ImportCsvPageRouteExtension._fromState,
             ),
+            GoRouteData.$route(
+              path: ':listId/import/spreadsheet',
+              name: 'listasspreadsheet',
+              factory: $SpreadsheetsPageRouteExtension._fromState,
+            ),
           ],
         ),
         GoRouteData.$route(
@@ -327,6 +332,26 @@ extension $ImportCsvPageRouteExtension on ImportCsvPageRoute {
 
   String get location => GoRouteData.$location(
         '/lists/${Uri.encodeComponent(listId)}/import/csv',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $SpreadsheetsPageRouteExtension on SpreadsheetsPageRoute {
+  static SpreadsheetsPageRoute _fromState(GoRouterState state) =>
+      SpreadsheetsPageRoute(
+        state.pathParameters['listId']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/lists/${Uri.encodeComponent(listId)}/import/spreadsheet',
       );
 
   void go(BuildContext context) => context.go(location);
