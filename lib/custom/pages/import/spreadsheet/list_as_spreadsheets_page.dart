@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listwhatever/custom/pages/listItems/list_item.dart';
 import 'package:listwhatever/custom/pages/listItems/list_item_crud_bloc/list_item_crud_bloc.dart';
+import 'package:listwhatever/custom/pages/listItems/list_item_crud_bloc/list_item_crud_event.dart';
 import 'package:listwhatever/custom/pages/listItems/list_item_crud_bloc/list_item_crud_state.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_bloc.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_event.dart';
@@ -11,9 +12,6 @@ import 'package:listwhatever/custom/pages/listItems/list_or_list_item_not_loaded
 import 'package:listwhatever/standard/constants.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 
-/// PlutoGrid Example
-//
-/// For more examples, go to the demo web link on the github below.
 class ListAsSpreadsheetsPage extends StatefulWidget {
   const ListAsSpreadsheetsPage({required this.listId, super.key});
   final String listId;
@@ -28,10 +26,6 @@ class _ListAsSpreadsheetsPageState extends State<ListAsSpreadsheetsPage> {
     super.initState();
     BlocProvider.of<ListItemsLoadBloc>(context).add(LoadListItems(widget.listId));
   }
-
-  /// [PlutoGridStateManager] has many methods and properties to dynamically manipulate the grid.
-  /// You can manipulate the grid dynamically at runtime by passing this through the `onLoaded` callback.
-  late final PlutoGridStateManager stateManager;
 
   @override
   Widget build(BuildContext context) {
@@ -50,43 +44,68 @@ class _ListAsSpreadsheetsPageState extends State<ListAsSpreadsheetsPage> {
           }
 
           final items = (listItemsState as ListItemsLoadLoaded).listItems;
-          return Scaffold(
-            body: Container(
-              padding: const EdgeInsets.all(15),
-              child: Column(
-                children: [
-                  Expanded(child: getPlutoGrid(items)),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      ElevatedButton(onPressed: () {}, child: const Text('Save')),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          );
+
+          return ListAsSpreadsheetsPageInner(items: items, listId: widget.listId);
         },
       ),
     );
   }
+}
 
-  PlutoGrid getPlutoGrid(List<ListItem> items) {
-    final categories = getCategories(items);
+class ListAsSpreadsheetsPageInner extends StatefulWidget {
+  const ListAsSpreadsheetsPageInner({required this.items, required this.listId, super.key});
+
+  final String listId;
+  final List<ListItem> items;
+
+  @override
+  State<ListAsSpreadsheetsPageInner> createState() => _ListAsSpreadsheetsPageInnerState();
+}
+
+class _ListAsSpreadsheetsPageInnerState extends State<ListAsSpreadsheetsPageInner> {
+  late final PlutoGridStateManager stateManager;
+  late List<ListItem> _items;
+
+  @override
+  void initState() {
+    super.initState();
+    _items = widget.items;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          children: [
+            Expanded(child: getPlutoGrid()),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ElevatedButton(
+                  onPressed: save,
+                  child: const Text('Save'),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  PlutoGrid getPlutoGrid() {
+    final categories = getCategories(_items);
 
     return PlutoGrid(
       columns: getColumns(categories),
-      rows: getRows(items, categories),
+      rows: getRows(categories),
       columnGroups: getColumnGroups(categories),
       onLoaded: (PlutoGridOnLoadedEvent event) {
         stateManager = event.stateManager;
-        // stateManager.setShowColumnFilter(true);
       },
-      // onChanged: (PlutoGridOnChangedEvent event) {
-      //   print(event);
-      // },
-      // configuration: const PlutoGridConfiguration(),
     );
   }
 
@@ -145,8 +164,8 @@ class _ListAsSpreadsheetsPageState extends State<ListAsSpreadsheetsPage> {
     return columns;
   }
 
-  List<PlutoRow> getRows(List<ListItem> items, Map<String, Set<String>> categories) {
-    final rows = items.map(
+  List<PlutoRow> getRows(Map<String, Set<String>> categories) {
+    final rows = _items.map(
       (item) {
         final categoryMap = {
           for (final c in categories.entries)
@@ -164,7 +183,6 @@ class _ListAsSpreadsheetsPageState extends State<ListAsSpreadsheetsPage> {
         );
       },
     ).toList();
-
     return rows;
   }
 
@@ -176,5 +194,78 @@ class _ListAsSpreadsheetsPageState extends State<ListAsSpreadsheetsPage> {
       PlutoColumnGroup(title: 'Categories', fields: categories.keys.toList()),
     ];
     return columnGroups;
+  }
+
+  ListItem createListItem(ListItem item, PlutoRow row, Map<String, Set<String>> categories) {
+    final name = row.cells['name']?.value as String? ?? item.name;
+    final urls = (row.cells['urls']?.value as String?)?.split(',').map((e) => e.trim()).toList() ?? item.urls;
+    final updatedItem = item.copyWith(
+      name: name,
+      urls: urls,
+    );
+    print('updatedItem: $updatedItem');
+
+    return updatedItem;
+  }
+
+  void save() {
+    final categorieNames = getCategories(_items).entries.map((e) => e.key).toList();
+
+    final listItems = <ListItem>[];
+
+    for (final (rowIndex, row) in stateManager.rows.indexed) {
+      final name = getValueFromRow<String>(row, 'name', false);
+      final urls = getValueFromRow<String>(row, 'urls', false).split(',').map((e) => e.trim()).toList();
+
+      final categories = <String, List<String>>{};
+
+      for (final cellName in categorieNames) {
+        final values = getValueFromRow<String>(row, cellName, false)
+            .split(',')
+            .map((e) => e.trim())
+            .where((e) => e != '')
+            .toList();
+        if (values.isNotEmpty) {
+          categories[cellName] = values;
+        }
+      }
+
+      final item = _items[rowIndex].copyWith(
+        name: name,
+        urls: urls,
+        categories: categories,
+      );
+      listItems.add(item);
+    }
+
+    BlocProvider.of<ListItemCrudBloc>(context).add(ImportListItems(widget.listId, listItems));
+  }
+
+  // ignore: avoid_positional_boolean_parameters
+  T getValueFromRow<T>(PlutoRow row, String cellName, bool allowNull) {
+    final value = row.cells.entries
+        .firstWhere((e) {
+          print('e.ket: ${e.key} - $cellName');
+          return e.key == cellName;
+        })
+        .value
+        .value as T;
+    if (!allowNull) {
+      assertField(value, cellName);
+    }
+    return value;
+  }
+
+  String? convertEmptyToNull(String value) {
+    if (value.trim() == '') {
+      return null;
+    }
+    return value;
+  }
+
+  void assertField(Object? field, String s) {
+    if (field == null) {
+      throw Exception("'name' is required");
+    }
   }
 }
