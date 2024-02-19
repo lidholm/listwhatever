@@ -8,6 +8,6 @@ class ListAsSpreadsheetsPageRoute extends GoRouteData {
   final String listId;
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return ListAsSpreadsheetsPage(/*listId: listId*/);
+    return ListAsSpreadsheetsPage(listId: listId);
   }
 }

@@ -69,7 +69,7 @@ RouteBase get $mainPageRoute => GoRouteData.$route(
             GoRouteData.$route(
               path: ':listId/import/spreadsheet',
               name: 'listasspreadsheet',
-              factory: $SpreadsheetsPageRouteExtension._fromState,
+              factory: $ListAsSpreadsheetsPageRouteExtension._fromState,
             ),
           ],
         ),
@@ -344,9 +344,9 @@ extension $ImportCsvPageRouteExtension on ImportCsvPageRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $SpreadsheetsPageRouteExtension on SpreadsheetsPageRoute {
-  static SpreadsheetsPageRoute _fromState(GoRouterState state) =>
-      SpreadsheetsPageRoute(
+extension $ListAsSpreadsheetsPageRouteExtension on ListAsSpreadsheetsPageRoute {
+  static ListAsSpreadsheetsPageRoute _fromState(GoRouterState state) =>
+      ListAsSpreadsheetsPageRoute(
         state.pathParameters['listId']!,
       );
 

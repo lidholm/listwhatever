@@ -119,8 +119,8 @@ class _UserProfileViewState extends State<UserProfileView> with WidgetsBindingOb
                       trailing: AppDropdown<DistanceUnitOptions>(
                         selectedValue: user.settings.distanceUnit,
                         values: {
-                          for (var v in DistanceUnitOptions.values)
-                            v: l10n.userProfileSettingsDistanceUnitType(v.toString())
+                          for (final v in DistanceUnitOptions.values)
+                            v: l10n.userProfileSettingsDistanceUnitType(v.toString()),
                         },
                         onChanged: (distanceUnit) {
                           if (distanceUnit != null) {

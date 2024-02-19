@@ -1,104 +1,158 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:listwhatever/custom/pages/listItems/list_item.dart';
+import 'package:listwhatever/custom/pages/listItems/list_item_crud_bloc/list_item_crud_bloc.dart';
+import 'package:listwhatever/custom/pages/listItems/list_item_crud_bloc/list_item_crud_state.dart';
+import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_bloc.dart';
+import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_event.dart';
+import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
+import 'package:listwhatever/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 
 /// PlutoGrid Example
 //
 /// For more examples, go to the demo web link on the github below.
 class ListAsSpreadsheetsPage extends StatefulWidget {
-  const ListAsSpreadsheetsPage({super.key});
+  const ListAsSpreadsheetsPage({required this.listId, super.key});
+  final String listId;
 
   @override
   State<ListAsSpreadsheetsPage> createState() => _ListAsSpreadsheetsPageState();
 }
 
 class _ListAsSpreadsheetsPageState extends State<ListAsSpreadsheetsPage> {
-  final List<PlutoColumn> columns = <PlutoColumn>[
-    PlutoColumn(
-      title: 'Name',
-      field: 'name',
-      type: PlutoColumnType.text(),
-    ),
-    PlutoColumn(
-      title: 'Address',
-      field: 'address',
-      type: PlutoColumnType.text(),
-    ),
-    PlutoColumn(
-      title: 'LatLong',
-      field: 'latlong',
-      type: PlutoColumnType.text(),
-    ),
-  ];
-
-  final List<PlutoRow> rows = [
-    PlutoRow(
-      cells: {
-        'id': PlutoCell(value: 'user1'),
-        'name': PlutoCell(value: 'Mike'),
-        'age': PlutoCell(value: 20),
-        'role': PlutoCell(value: 'Programmer'),
-        'joined': PlutoCell(value: '2021-01-01'),
-        'working_time': PlutoCell(value: '09:00'),
-        'salary': PlutoCell(value: 300),
-      },
-    ),
-    PlutoRow(
-      cells: {
-        'id': PlutoCell(value: 'user2'),
-        'name': PlutoCell(value: 'Jack'),
-        'age': PlutoCell(value: 25),
-        'role': PlutoCell(value: 'Designer'),
-        'joined': PlutoCell(value: '2021-02-01'),
-        'working_time': PlutoCell(value: '10:00'),
-        'salary': PlutoCell(value: 400),
-      },
-    ),
-    PlutoRow(
-      cells: {
-        'id': PlutoCell(value: 'user3'),
-        'name': PlutoCell(value: 'Suzi'),
-        'age': PlutoCell(value: 40),
-        'role': PlutoCell(value: 'Owner'),
-        'joined': PlutoCell(value: '2021-03-01'),
-        'working_time': PlutoCell(value: '11:00'),
-        'salary': PlutoCell(value: 700),
-      },
-    ),
-  ];
-
-  /// columnGroups that can group columns can be omitted.
-  final List<PlutoColumnGroup> columnGroups = [
-    PlutoColumnGroup(title: 'Id', fields: ['id'], expandedColumn: true),
-    PlutoColumnGroup(title: 'User information', fields: ['name', 'age']),
-    PlutoColumnGroup(title: 'Status', children: [
-      PlutoColumnGroup(title: 'A', fields: ['role'], expandedColumn: true),
-      PlutoColumnGroup(title: 'Etc.', fields: ['joined', 'working_time']),
-    ]),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<ListItemsLoadBloc>(context).add(LoadListItems(widget.listId));
+  }
 
   /// [PlutoGridStateManager] has many methods and properties to dynamically manipulate the grid.
-  /// You can manipulate the grid dynamically at runtime by passing this through the [onLoaded] callback.
+  /// You can manipulate the grid dynamically at runtime by passing this through the `onLoaded` callback.
   late final PlutoGridStateManager stateManager;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.all(15),
-        child: PlutoGrid(
-          columns: columns,
-          rows: rows,
-          columnGroups: columnGroups,
-          onLoaded: (PlutoGridOnLoadedEvent event) {
-            stateManager = event.stateManager;
-            stateManager.setShowColumnFilter(true);
-          },
-          onChanged: (PlutoGridOnChangedEvent event) {
-            print(event);
-          },
-          configuration: const PlutoGridConfiguration(),
-        ),
+    return BlocListener<ListItemCrudBloc, ListItemCrudState>(
+      listener: (context, state) {
+        print('state: $state');
+        if (state is ListItemCrudImported) {
+          GoRouter.of(context).pop();
+        }
+      },
+      child: BlocBuilder<ListItemsLoadBloc, ListItemsLoadState>(
+        builder: (listItemsContext, listItemsState) {
+          final listItemsStateView = ListOrListItemNotLoadedHandler.handleListItemsState(listItemsState);
+          if (listItemsStateView != null) {
+            return listItemsStateView;
+          }
+
+          final items = (listItemsState as ListItemsLoadLoaded).listItems;
+          return Scaffold(
+            body: Container(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                children: [
+                  Expanded(child: getPlutoGrid(items)),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      ElevatedButton(onPressed: () {}, child: const Text('Save')),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
+  }
+
+  PlutoGrid getPlutoGrid(List<ListItem> items) {
+    return PlutoGrid(
+      columns: getColumns(),
+      rows: getRows(items),
+      columnGroups: getColumnGroups(),
+      onLoaded: (PlutoGridOnLoadedEvent event) {
+        stateManager = event.stateManager;
+        // stateManager.setShowColumnFilter(true);
+      },
+      onChanged: (PlutoGridOnChangedEvent event) {
+        print(event);
+      },
+      configuration: const PlutoGridConfiguration(),
+    );
+  }
+
+  List<PlutoColumn> getColumns() {
+    final columns = <PlutoColumn>[
+      PlutoColumn(
+        title: 'Name',
+        field: 'name',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        title: 'Urls',
+        field: 'urls',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        title: 'Address',
+        field: 'address',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        title: 'LatLong',
+        field: 'latlong',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        title: 'Delete',
+        field: 'delete',
+        type: PlutoColumnType.text(),
+        renderer: (rendererContext) {
+          return IconButton(
+            icon: const Icon(
+              Icons.delete,
+            ),
+            onPressed: () {
+              rendererContext.stateManager.removeRows([rendererContext.row]);
+            },
+            iconSize: 18,
+          );
+        },
+      ),
+    ];
+    return columns;
+  }
+
+  List<PlutoRow> getRows(List<ListItem> items) {
+    final rows = items
+        .map((item) => PlutoRow(
+              cells: {
+                'name': PlutoCell(value: item.name),
+                'urls': PlutoCell(value: item.urls.join(', ')),
+                'address': PlutoCell(value: item.address),
+                'latlong': PlutoCell(value: item.latLong == null ? '' : '${item.latLong?.lat}, ${item.latLong?.lng}'),
+                'delete': PlutoCell(value: ''),
+              },
+            ))
+        .toList();
+
+    return rows;
+  }
+
+  List<PlutoColumnGroup> getColumnGroups() {
+    /// columnGroups that can group columns can be omitted.
+    final columnGroups = <PlutoColumnGroup>[
+      PlutoColumnGroup(title: 'Standard fields', fields: ['name', 'urls']),
+      PlutoColumnGroup(title: 'Location', fields: ['address', 'latlong']),
+      // PlutoColumnGroup(title: 'Categories', fields: ['name', 'age']),
+      PlutoColumnGroup(title: '', fields: ['delete']),
+    ];
+    return columnGroups;
   }
 }

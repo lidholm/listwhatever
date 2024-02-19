@@ -1,3 +1,4 @@
+import 'package:listwhatever/custom/pages/import/spreadsheet/list_as_spreadsheets_page_route.dart';
 import 'package:listwhatever/custom/pages/lists/page/lists_page_route.dart';
 
 import '/custom/navigation/routes.dart';
@@ -14,7 +15,7 @@ RouterProviderInformation getRouterProviderInformation() {
       const LoginWithEmailAndPasswordPageRoute().location,
     ],
     requireLoginRouteLocations: [],
-    initialRouteLocation: const ListsPageRoute().location,
+    initialRouteLocation: const ListAsSpreadsheetsPageRoute('tEGHI3eAyCs6ZYrXXB6D').location,
     signUpRouteLocation: 'notyet',
     signInRouteLocation: const LoginPageRoute().location,
     errorLoadingUserRouteLocation: MainPageRoute().location,
