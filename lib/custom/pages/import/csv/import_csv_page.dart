@@ -103,7 +103,8 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
   }
 
   Text createDescription() {
-    return const Text('Csv file with first row being the names of the headers.\n'
+    return const Text('Warning: Will overwrite existing items with the same name!! .\n'
+        'Csv file with first row being the names of the headers.\n'
         "'name', 'info', 'lat', 'long', 'urls', 'address' are reserved header names that will be mapped to fields of the ListItems\n"
         'Any other header names will be name for categories\n'
         "For 'urls' and 'categories', values can be comma separated");

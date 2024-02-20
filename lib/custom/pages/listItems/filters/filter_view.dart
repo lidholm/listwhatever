@@ -13,6 +13,7 @@ import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_event
 import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_state.dart';
 import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
 import 'package:listwhatever/standard/app/bloc/app_bloc.dart';
+import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/settings/settings.dart';
 
 import '/custom/pages/listItems/filters/filters.dart';
@@ -129,21 +130,6 @@ class _FilterViewState extends State<FilterView> {
         ),
       ),
     );
-  }
-
-  Map<String, Set<String>> getCategories(List<ListItem> items) {
-    final categories = <String, Set<String>>{};
-
-    for (final item in items) {
-      for (final category in item.categories.entries) {
-        final categoryName = category.key.trim();
-        if (!categories.containsKey(categoryName)) {
-          categories[categoryName] = {};
-        }
-        categories[categoryName]!.addAll(category.value.map((e) => e.trim()));
-      }
-    }
-    return categories;
   }
 
   bool isSelected(String categoryName, String c, Set<String> selectedChips) {

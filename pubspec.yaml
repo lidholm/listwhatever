@@ -64,6 +64,7 @@ dependencies:
   permission_handler: ^10.0.0
   platform: ^3.0.2
   plugin_platform_interface: ^2.1.7
+  pluto_grid: ^7.0.2
   share_plus: ^7.2.1
   share_plus_platform_interface: ^3.1.2
   shared_preferences: ^2.2.1

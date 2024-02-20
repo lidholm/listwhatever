@@ -52,7 +52,9 @@ class UserListsService {
     logger.d('getting user list: $id');
     final listsCollection = await getCollection();
     final snapshot = await listsCollection.doc(id).get();
-    return convertToUserList(snapshot.id, snapshot.data()!);
+    final data = snapshot.data();
+    print('user list data: $data');
+    return convertToUserList(snapshot.id, data!);
   }
 
   Future<void> addList(UserList list) async {

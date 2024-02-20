@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listwhatever/custom/currentLocationBloc/current_location_bloc.dart';
+import 'package:listwhatever/custom/pages/import/spreadsheet/list_as_spreadsheets_page_route.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_bloc.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_event.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
@@ -188,6 +189,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
       getShowEditAction(list),
       getShowDeleteAction(list),
       getShowImportAction(),
+      getListAsSpreadsheetAction(),
     ].nonNulls.toList();
 
     return actions;
@@ -386,6 +388,20 @@ class _ListItemsPageState extends State<ListItemsPage> {
           await ImportCsvPageRoute(widget.listId).push<void>(context);
         },
         key: const Key('deleteList'),
+      ),
+    );
+  }
+
+  AppBarAction<dynamic> getListAsSpreadsheetAction() {
+    return AppBarAction(
+      type: AppBarActionType.overflowIcon,
+      overflowIcon: AppBarActionOverflowIcon(
+        title: context.l10n.listAsSpreadsheetsMenuItem,
+        icon: Icons.list_alt,
+        callback: () async {
+          await ListAsSpreadsheetsPageRoute(widget.listId).push<void>(context);
+        },
+        key: const Key('listAsSpreadsheet'),
       ),
     );
   }

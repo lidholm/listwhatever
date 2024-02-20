@@ -759,6 +759,12 @@
     "type": "text",
     "placeholders": {}
   },
+  "listAsSpreadsheetsMenuItem": "List items as spreadsheet",
+  "@listAsSpreadsheetsMenuItem": {
+    "description": "Text for 'List items as spreadsheet'",
+    "type": "text",
+    "placeholders": {}
+  },
   "editListItem": "Edit list item",
   "@editListItem": {
     "description": "Text for 'Edit list item'",
