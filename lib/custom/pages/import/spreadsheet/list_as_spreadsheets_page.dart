@@ -9,13 +9,17 @@ import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_it
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_event.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
 import 'package:listwhatever/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
+import 'package:listwhatever/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
 import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_bloc.dart';
+import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_event.dart';
+import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_state.dart';
+import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
 import 'package:listwhatever/standard/constants.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 
 class ListAsSpreadsheetsPage extends StatefulWidget {
-  const ListAsSpreadsheetsPage({required this.listId, super.key});
-  final String listId;
+  const ListAsSpreadsheetsPage({required this.userListId, super.key});
+  final String userListId;
 
   @override
   State<ListAsSpreadsheetsPage> createState() => _ListAsSpreadsheetsPageState();
@@ -25,19 +29,21 @@ class _ListAsSpreadsheetsPageState extends State<ListAsSpreadsheetsPage> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<ListItemsLoadBloc>(context).add(LoadListItems(widget.listId));
+    BlocProvider.of<ListItemsLoadBloc>(context).add(LoadListItems(widget.userListId));
+    BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.userListId));
   }
 
   @override
   Widget build(BuildContext context) {
-    // final listState = context.watch<ListLoadBloc>().state;
+    final listState = context.watch<ListLoadBloc>().state;
     final listItemsState = context.watch<ListItemsLoadBloc>().state;
 
-    final listItemsStateView = ListOrListItemNotLoadedHandler.handleListItemsState(listItemsState);
+    final listItemsStateView = ListOrListItemNotLoadedHandler.handleListAndListItemsState(listState, listItemsState);
     if (listItemsStateView != null) {
       return listItemsStateView;
     }
 
+    final list = (listState as ListLoadLoaded).list!;
     final items = (listItemsState as ListItemsLoadLoaded).listItems;
 
     return BlocListener<ListItemCrudBloc, ListItemCrudState>(
@@ -47,16 +53,17 @@ class _ListAsSpreadsheetsPageState extends State<ListAsSpreadsheetsPage> {
           GoRouter.of(context).pop();
         }
       },
-      child: ListAsSpreadsheetsPageInner(items: items, listId: widget.listId),
+      child: ListAsSpreadsheetsPageInner(items: items, list: list, userListId: widget.userListId),
     );
   }
 }
 
 class ListAsSpreadsheetsPageInner extends StatefulWidget {
-  const ListAsSpreadsheetsPageInner({required this.items, required this.listId, super.key});
+  const ListAsSpreadsheetsPageInner({required this.items, required this.list, required this.userListId, super.key});
 
-  final String listId;
+  final ListOfThings list;
   final List<ListItem> items;
+  final String userListId;
 
   @override
   State<ListAsSpreadsheetsPageInner> createState() => _ListAsSpreadsheetsPageInnerState();
@@ -149,16 +156,24 @@ class _ListAsSpreadsheetsPageInnerState extends State<ListAsSpreadsheetsPageInne
         field: 'urls',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
-        title: 'Address',
-        field: 'address',
-        type: PlutoColumnType.text(),
-      ),
-      PlutoColumn(
-        title: 'LatLong',
-        field: 'latlong',
-        type: PlutoColumnType.text(),
-      ),
+      if (widget.list.withDates)
+        PlutoColumn(
+          title: 'Date',
+          field: 'date',
+          type: PlutoColumnType.date(),
+        ),
+      if (widget.list.withMap) ...[
+        PlutoColumn(
+          title: 'Address',
+          field: 'address',
+          type: PlutoColumnType.text(),
+        ),
+        PlutoColumn(
+          title: 'LatLong',
+          field: 'latlong',
+          type: PlutoColumnType.text(),
+        ),
+      ],
       ...categoryColumns,
     ];
     return columns;
@@ -171,14 +186,20 @@ class _ListAsSpreadsheetsPageInnerState extends State<ListAsSpreadsheetsPageInne
           for (final c in categories.entries)
             c.key: PlutoCell(value: item.categories.containsKey(c.key) ? item.categories[c.key]!.join(', ') : ''),
         };
+
         return PlutoRow(
           cells: {
             'name': PlutoCell(value: item.name),
             'urls': PlutoCell(value: item.urls.join(', ')),
-            'address': PlutoCell(value: item.address),
-            'latlong': PlutoCell(value: item.latLong == null ? '' : '${item.latLong?.lat}, ${item.latLong?.lng}'),
             'delete': PlutoCell(value: ''),
             ...categoryMap,
+            if (widget.list.withDates) ...{
+              'date': PlutoCell(value: item.datetime),
+            },
+            if (widget.list.withMap) ...{
+              'address': PlutoCell(value: item.address),
+              'latlong': PlutoCell(value: item.latLong == null ? '' : '${item.latLong?.lat}, ${item.latLong?.lng}'),
+            },
           },
         );
       },
@@ -189,8 +210,15 @@ class _ListAsSpreadsheetsPageInnerState extends State<ListAsSpreadsheetsPageInne
   List<PlutoColumnGroup> getColumnGroups(Map<String, Set<String>> categories) {
     final columnGroups = <PlutoColumnGroup>[
       PlutoColumnGroup(title: '', fields: ['delete']),
-      PlutoColumnGroup(title: 'Standard fields', fields: ['name', 'urls']),
-      PlutoColumnGroup(title: 'Location', fields: ['address', 'latlong']),
+      PlutoColumnGroup(
+        title: 'Standard fields',
+        fields: [
+          'name',
+          'urls',
+          if (widget.list.withDates) 'date',
+        ],
+      ),
+      if (widget.list.withMap) PlutoColumnGroup(title: 'Location', fields: ['address', 'latlong']),
       PlutoColumnGroup(title: 'Categories', fields: categories.keys.toList()),
     ];
     return columnGroups;
@@ -230,30 +258,54 @@ class _ListAsSpreadsheetsPageInnerState extends State<ListAsSpreadsheetsPageInne
         }
       }
 
-      final item = _items[rowIndex].copyWith(
+      print('name: $name');
+      var item = _items[rowIndex].copyWith(
         name: name,
         urls: urls,
         categories: categories,
       );
+      if (widget.list.withDates) {
+        item = item.copyWith(
+          datetime: getValueFromRow<DateTime?>(row, 'date', true),
+        );
+      }
+      if (widget.list.withMap) {
+        final latlong = getValueFromRow<String>(row, 'latlong', true);
+        item = item.copyWith(
+          address: getValueFromRow<String>(row, 'address', true),
+          latLong: LatLong(
+            lat: double.parse(latlong.split(',').first.trim()),
+            lng: double.parse(latlong.split(',').last.trim()),
+          ),
+        );
+      }
       listItems.add(item);
     }
 
-    BlocProvider.of<ListItemCrudBloc>(context).add(ImportListItems(widget.listId, listItems));
+    BlocProvider.of<ListItemCrudBloc>(context).add(ImportListItems(widget.userListId, listItems));
   }
 
   // ignore: avoid_positional_boolean_parameters
   T getValueFromRow<T>(PlutoRow row, String cellName, bool allowNull) {
-    final value = row.cells.entries
+    final tmp = row.cells.entries
         .firstWhere((e) {
-          print('e.ket: ${e.key} - $cellName');
+          print('e.key: ${e.key} - $cellName');
           return e.key == cellName;
         })
         .value
-        .value as T;
+        .value as Object;
+    final value = (cellName == 'date') ? parseDate(tmp as String) as T : tmp as T;
     if (!allowNull) {
       assertField(value, cellName);
     }
     return value;
+  }
+
+  DateTime? parseDate(String tmp) {
+    if (tmp.isEmpty) {
+      return null;
+    }
+    return DateTime.parse(tmp);
   }
 
   String? convertEmptyToNull(String value) {
@@ -263,9 +315,9 @@ class _ListAsSpreadsheetsPageInnerState extends State<ListAsSpreadsheetsPageInne
     return value;
   }
 
-  void assertField(Object? field, String s) {
+  void assertField(Object? field, String name) {
     if (field == null) {
-      throw Exception("'name' is required");
+      throw Exception("'$name' is required");
     }
   }
 }
