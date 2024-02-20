@@ -9,6 +9,7 @@ import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_it
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_event.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
 import 'package:listwhatever/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
+import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_bloc.dart';
 import 'package:listwhatever/standard/constants.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 
@@ -29,6 +30,16 @@ class _ListAsSpreadsheetsPageState extends State<ListAsSpreadsheetsPage> {
 
   @override
   Widget build(BuildContext context) {
+    // final listState = context.watch<ListLoadBloc>().state;
+    final listItemsState = context.watch<ListItemsLoadBloc>().state;
+
+    final listItemsStateView = ListOrListItemNotLoadedHandler.handleListItemsState(listItemsState);
+    if (listItemsStateView != null) {
+      return listItemsStateView;
+    }
+
+    final items = (listItemsState as ListItemsLoadLoaded).listItems;
+
     return BlocListener<ListItemCrudBloc, ListItemCrudState>(
       listener: (context, state) {
         print('state: $state');
@@ -36,18 +47,7 @@ class _ListAsSpreadsheetsPageState extends State<ListAsSpreadsheetsPage> {
           GoRouter.of(context).pop();
         }
       },
-      child: BlocBuilder<ListItemsLoadBloc, ListItemsLoadState>(
-        builder: (listItemsContext, listItemsState) {
-          final listItemsStateView = ListOrListItemNotLoadedHandler.handleListItemsState(listItemsState);
-          if (listItemsStateView != null) {
-            return listItemsStateView;
-          }
-
-          final items = (listItemsState as ListItemsLoadLoaded).listItems;
-
-          return ListAsSpreadsheetsPageInner(items: items, listId: widget.listId);
-        },
-      ),
+      child: ListAsSpreadsheetsPageInner(items: items, listId: widget.listId),
     );
   }
 }
