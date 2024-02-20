@@ -103,3 +103,10 @@ Map<String, Set<String>> getCategories(List<ListItem> items) {
   }
   return categories;
 }
+
+String doubleDigit(int num) {
+  if (num < 10) {
+    return '0$num';
+  }
+  return '$num';
+}

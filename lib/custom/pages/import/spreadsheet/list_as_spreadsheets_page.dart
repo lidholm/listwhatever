@@ -162,6 +162,12 @@ class _ListAsSpreadsheetsPageInnerState extends State<ListAsSpreadsheetsPageInne
           field: 'date',
           type: PlutoColumnType.date(),
         ),
+      if (widget.list.withTimes)
+        PlutoColumn(
+          title: 'Time',
+          field: 'time',
+          type: PlutoColumnType.text(),
+        ),
       if (widget.list.withMap) ...[
         PlutoColumn(
           title: 'Address',
@@ -195,6 +201,14 @@ class _ListAsSpreadsheetsPageInnerState extends State<ListAsSpreadsheetsPageInne
             ...categoryMap,
             if (widget.list.withDates) ...{
               'date': PlutoCell(value: item.datetime),
+              if (widget.list.withTimes) ...{
+                'time': PlutoCell(
+                  value: item.datetime == null
+                      ? ''
+                      : '${doubleDigit(item.datetime!.hour)}:${doubleDigit(item.datetime!.minute)}',
+                ),
+                // TODO: Support AM/PM
+              },
             },
             if (widget.list.withMap) ...{
               'address': PlutoCell(value: item.address),
@@ -216,6 +230,7 @@ class _ListAsSpreadsheetsPageInnerState extends State<ListAsSpreadsheetsPageInne
           'name',
           'urls',
           if (widget.list.withDates) 'date',
+          if (widget.list.withTimes) 'time',
         ],
       ),
       if (widget.list.withMap) PlutoColumnGroup(title: 'Location', fields: ['address', 'latlong']),
@@ -265,8 +280,17 @@ class _ListAsSpreadsheetsPageInnerState extends State<ListAsSpreadsheetsPageInne
         categories: categories,
       );
       if (widget.list.withDates) {
+        var date = getValueFromRow<DateTime?>(row, 'date', true);
+        if (widget.list.withTimes && date != null) {
+          final time = getValueFromRow<String?>(row, 'time', true);
+          if (time != null && time.trim() != '') {
+            final hours = int.parse(time.split(':').first);
+            final minutes = int.parse(time.split(':')[1]);
+            date = date!.add(Duration(hours: hours, minutes: minutes));
+          }
+        }
         item = item.copyWith(
-          datetime: getValueFromRow<DateTime?>(row, 'date', true),
+          datetime: date,
         );
       }
       if (widget.list.withMap) {
@@ -289,7 +313,6 @@ class _ListAsSpreadsheetsPageInnerState extends State<ListAsSpreadsheetsPageInne
   T getValueFromRow<T>(PlutoRow row, String cellName, bool allowNull) {
     final tmp = row.cells.entries
         .firstWhere((e) {
-          print('e.key: ${e.key} - $cellName');
           return e.key == cellName;
         })
         .value
