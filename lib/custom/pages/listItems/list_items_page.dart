@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
@@ -104,7 +105,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
                   child:
                       showLoadedItems(list, listItems, viewToShow, filters, currentLocation, sortOrder, widget.listId),
                 ),
-                filterSideBar(list, listItems, filters, appState.user.settings),
+                filterWidget(list, listItems, filters, appState.user.settings),
               ],
             ),
             floatingActionButton: list?.shareType == ShareType.editor
@@ -121,31 +122,42 @@ class _ListItemsPageState extends State<ListItemsPage> {
     );
   }
 
-  Widget filterSideBar(ListOfThings? list, List<ListItem> listItems, Filters filters, Settings settings) {
-    const width = 400.0;
+  Widget filterWidget(ListOfThings? list, List<ListItem> listItems, Filters filters, Settings settings) {
+    const widthForRightHandSideView = 400.0;
+    const heightForBottomView = 400.0;
+    const onRightHandSide = kIsWeb;
+
     return AnimatedPositioned(
-        duration: const Duration(milliseconds: 300),
-        right: showSideWidget ? 0 : -width,
-        top: 0,
-        height: MediaQuery.of(context).size.height,
-        child: SingleChildScrollView(
-            child: Column(
+      duration: const Duration(milliseconds: 300),
+      right: onRightHandSide
+          ? showSideWidget
+              ? 0
+              : -widthForRightHandSideView
+          : null,
+      left: onRightHandSide ? null : 0,
+      top: onRightHandSide
+          ? 0
+          : showSideWidget
+              ? MediaQuery.of(context).size.height - heightForBottomView
+              : MediaQuery.of(context).size.height,
+      height: onRightHandSide ? MediaQuery.of(context).size.height : heightForBottomView,
+      width: onRightHandSide ? widthForRightHandSideView : MediaQuery.of(context).size.width,
+      child: SingleChildScrollView(
+        child: Column(
           children: [
-            Container(
-              // color: Colors.amber[200],
-              width: width,
-              child: FilterView(
-                list: list!,
-                listItems: listItems,
-                filters: filters,
-                settings: settings,
-              ),
+            FilterView(
+              list: list!,
+              listItems: listItems,
+              filters: filters,
+              settings: settings,
             ),
             const SizedBox(
               height: 100,
-            )
+            ),
           ],
-        )));
+        ),
+      ),
+    );
   }
 
   Widget showLoadedItems(
@@ -355,12 +367,6 @@ class _ListItemsPageState extends State<ListItemsPage> {
           setState(() {
             showSideWidget = !showSideWidget;
           });
-          // showModalBottomSheet<void>(
-          //   context: context,
-          //   builder: (BuildContext context) {
-          //     return FilterView(listId: widget.listId);
-          //   },
-          // );
         },
         key: const Key('filterListItems'),
       ),
