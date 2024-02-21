@@ -14,8 +14,8 @@
 [ ] (Free) Other map than Google maps
 [ ] Import from other source
   - [ ] Google sheets
+  - [x] In-app sheet
   - [x] CSV
-- [ ] Firestore function to update users lists when data in list is changed
 - [x] Delete list item 
 - [x] Delete list
 - [ ] User profile and settings (e.g. use Google Maps or flutter_map)

@@ -14,6 +14,7 @@ class BorderWithHeader extends StatelessWidget {
     return InputDecorator(
       decoration: InputDecoration(
         labelText: title,
+        labelStyle: const TextStyle(fontWeight: FontWeight.w800),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),

@@ -286,7 +286,7 @@ class _ListAsSpreadsheetsPageInnerState extends State<ListAsSpreadsheetsPageInne
           if (time != null && time.trim() != '') {
             final hours = int.parse(time.split(':').first);
             final minutes = int.parse(time.split(':')[1]);
-            date = date!.add(Duration(hours: hours, minutes: minutes));
+            date = date.add(Duration(hours: hours, minutes: minutes));
           }
         }
         item = item.copyWith(
