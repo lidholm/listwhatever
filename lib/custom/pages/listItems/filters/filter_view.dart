@@ -5,7 +5,6 @@ import 'package:another_xlider/models/trackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:go_router/go_router.dart';
 import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
 import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/settings/settings.dart';
@@ -85,6 +84,7 @@ class _FilterViewState extends State<FilterView> {
               key: _formKey,
               onChanged: () {
                 _formKey.currentState!.save();
+                updateFilters(settings);
               },
               autovalidateMode: AutovalidateMode.disabled,
               skipDisabled: true,
@@ -92,7 +92,10 @@ class _FilterViewState extends State<FilterView> {
               child: Column(
                 children: <Widget>[
                   const SizedBox(height: 16),
-                  if (list.withDates) DateFilter(formKey: _formKey),
+                  if (list.withDates)
+                    DateFilter(
+                      formKey: _formKey,
+                    ),
                   if (list.withMap) ...[
                     const SizedBox(height: 16),
                     getDistanceFilter(initialValue[distanceFieldName] as double?, settings),
@@ -100,7 +103,6 @@ class _FilterViewState extends State<FilterView> {
                   const SizedBox(height: 16),
                   ...getCategoriesSections(getCategories(listItems), selectedChips),
                   const SizedBox(height: 16),
-                  cancelAndSubmitButtons(settings),
                 ],
               ),
             ),
@@ -198,37 +200,6 @@ class _FilterViewState extends State<FilterView> {
     }).toList();
   }
 
-  Widget cancelAndSubmitButtons(Settings settings) {
-    return Row(
-      children: <Widget>[
-        Expanded(
-          child: OutlinedButton(
-            onPressed: () {
-              _formKey.currentState?.reset();
-            },
-            child: const Text(
-              'Reset',
-            ),
-          ),
-        ),
-        const SizedBox(width: 20),
-        Expanded(
-          child: ElevatedButton(
-            onPressed: () {
-              if (_formKey.currentState?.saveAndValidate() ?? false) {
-                updateFilters(settings);
-              }
-            },
-            child: const Text(
-              'Submit',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
   void updateFilters(Settings settings) {
     final fields = _formKey.currentState?.fields;
 
@@ -244,7 +215,9 @@ class _FilterViewState extends State<FilterView> {
         endDate = field.value.value as DateTime?;
       } else if (field.key == distanceFieldName) {
         final d = (field.value.value ?? distanceMax) as double;
-        maxDistance = convertDistanceToMeters(settings.distanceUnit, d);
+        if (d != distanceMax) {
+          maxDistance = convertDistanceToMeters(settings.distanceUnit, d);
+        }
         print('Distance: $d, $maxDistance');
       } else {
         final values = field.value.value as List<String>?;
@@ -260,6 +233,5 @@ class _FilterViewState extends State<FilterView> {
       distance: maxDistance,
     );
     BlocProvider.of<FilterBloc>(context).add(UpdateFilters(filters));
-    GoRouter.of(context).pop();
   }
 }

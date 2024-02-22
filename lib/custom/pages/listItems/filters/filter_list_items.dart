@@ -37,18 +37,26 @@ bool matchesFilter({
   required bool listHasMap,
   required LatLong? distanceFilterCenter,
 }) {
-  return matchesDatesFilter(
-        item: item,
-        filters: filters,
-        listHasDates: listHasDates,
-      ) &&
-      matchesCategoriesFilter(item, filters) &&
-      matchesDistanceFilter(
-        listHasMap: listHasMap,
-        distanceFilterCenter: distanceFilterCenter,
-        item: item,
-        filters: filters,
-      );
+  final matchesDate = matchesDatesFilter(
+    item: item,
+    filters: filters,
+    listHasDates: listHasDates,
+  );
+  final matchesCategories = matchesCategoriesFilter(item, filters);
+  final matchesDistance = matchesDistanceFilter(
+    listHasMap: listHasMap,
+    distanceFilterCenter: distanceFilterCenter,
+    item: item,
+    filters: filters,
+  );
+
+  logger
+    ..d('distanceFilterCenter: $distanceFilterCenter')
+    ..d('filters.distance: ${filters.distance}')
+    ..d('matchesDate: $matchesDate')
+    ..d('matchesCategories: $matchesCategories')
+    ..d('matchesDistance: $matchesDistance');
+  return matchesDate && matchesCategories && matchesDistance;
 }
 
 bool matchesDatesFilter({
