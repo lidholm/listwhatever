@@ -29,4 +29,7 @@
 - [ ] Randomly select one from the list 
   - Checkboxes for ones to choose from
 - [ ] Better position for markers so they don't move when zooming
+- [x] Put filter view on right side on web
+  - [ ] Should rather check screen size ratio
+- [ ] Save filters?  
   
