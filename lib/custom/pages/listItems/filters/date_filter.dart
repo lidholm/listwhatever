@@ -1,15 +1,11 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 import '/standard/constants.dart';
 import '/standard/widgets/border_with_header.dart';
 
-
 const startDateFieldName = 'startDate';
 const endDateFieldName = 'endDate';
-
 
 class DateFilter extends StatefulWidget {
   const DateFilter({
@@ -39,12 +35,10 @@ class _DateFilterState extends State<DateFilter> {
               getDatePicker(
                 widget.formKey,
                 startDateFieldName,
-                    () =>
-                  setState(() {
-                    startDate = null;
-                    widget.formKey.currentState?.fields[startDateFieldName]?.didChange(startDate);
-                  }),
-
+                () => setState(() {
+                  startDate = null;
+                  widget.formKey.currentState?.fields[startDateFieldName]?.didChange(startDate);
+                }),
               ),
             ],
           ),
@@ -56,25 +50,23 @@ class _DateFilterState extends State<DateFilter> {
               getDatePicker(
                 widget.formKey,
                 endDateFieldName,
-                    () =>
-                    setState(() {
-                      endDate = null;
-                      widget.formKey.currentState?.fields[endDateFieldName]?.didChange(endDate);
-                    }),
+                () => setState(() {
+                  endDate = null;
+                  widget.formKey.currentState?.fields[endDateFieldName]?.didChange(endDate);
+                }),
               ),
             ],
           ),
         ],
       ),
     );
-
   }
 
   Widget getDatePicker(
-      GlobalKey<FormBuilderState> formKey,
-      String name,
-      void Function()? clearCallback,
-      ) {
+    GlobalKey<FormBuilderState> formKey,
+    String name,
+    void Function()? clearCallback,
+  ) {
     return SizedBox(
       width: 200,
       height: 40,
@@ -90,12 +82,9 @@ class _DateFilterState extends State<DateFilter> {
         firstDate: minDateTime,
         lastDate: maxDateTime,
         format: getDateFormatter(),
-
         validator: (val) {
-          final startDate = formKey
-              .currentState?.fields[startDateFieldName]?.value as DateTime?;
-          final endDate = formKey.currentState?.fields[endDateFieldName]?.value
-          as DateTime?;
+          final startDate = formKey.currentState?.fields[startDateFieldName]?.value as DateTime?;
+          final endDate = formKey.currentState?.fields[endDateFieldName]?.value as DateTime?;
           if (startDate != null && endDate != null) {
             if (startDate.compareTo(endDate) > 0) {
               return 'Start date has to be before end date';
@@ -107,11 +96,10 @@ class _DateFilterState extends State<DateFilter> {
     );
   }
 
-  DateFormat getDateFormatter(){ //}CurrentUser? firestoreUser) {
+  DateFormat getDateFormatter() {
     return dateFormatter;
-    // return firestoreUser?.settings.dateFormatType == DateFormatType.ISO_8601
+    // TODO: return firestoreUser?.settings.dateFormatType == DateFormatType.ISO_8601
     //     ? dateFormatter
     //     : usDateFormatter;
   }
-
 }

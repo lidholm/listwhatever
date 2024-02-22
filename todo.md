@@ -14,8 +14,8 @@
 [ ] (Free) Other map than Google maps
 [ ] Import from other source
   - [ ] Google sheets
+  - [x] In-app sheet
   - [x] CSV
-- [ ] Firestore function to update users lists when data in list is changed
 - [x] Delete list item 
 - [x] Delete list
 - [ ] User profile and settings (e.g. use Google Maps or flutter_map)
@@ -29,4 +29,7 @@
 - [ ] Randomly select one from the list 
   - Checkboxes for ones to choose from
 - [ ] Better position for markers so they don't move when zooming
+- [x] Put filter view on right side on web
+  - [ ] Should rather check screen size ratio
+- [ ] Save filters?  
   

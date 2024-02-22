@@ -5,26 +5,16 @@ import 'package:another_xlider/models/trackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:go_router/go_router.dart';
-import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_bloc.dart';
-import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
-import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_bloc.dart';
-import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_event.dart';
-import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_state.dart';
 import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
-import 'package:listwhatever/standard/app/bloc/app_bloc.dart';
 import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/settings/settings.dart';
 
 import '/custom/pages/listItems/filters/filters.dart';
 import '/custom/pages/listItems/list_item.dart';
-import '/custom/pages/listItems/list_items.dart';
-import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
 import '/l10n/l10n.dart';
 import '/standard/widgets/border_with_header.dart';
 import 'bloc/filter_bloc.dart';
 import 'bloc/filter_event.dart';
-import 'bloc/filter_state.dart';
 import 'date_filter.dart';
 
 class SelectedChipsCubit extends Cubit<Set<String>> {
@@ -38,8 +28,17 @@ const distanceMin = 0.0;
 const distanceMax = 50.0;
 
 class FilterView extends StatefulWidget {
-  const FilterView({required this.listId, super.key});
-  final String listId;
+  const FilterView({
+    required this.list,
+    required this.listItems,
+    required this.filters,
+    required this.settings,
+    super.key,
+  });
+  final ListOfThings list;
+  final List<ListItem> listItems;
+  final Filters filters;
+  final Settings settings;
 
   @override
   State<FilterView> createState() => _FilterViewState();
@@ -51,44 +50,22 @@ class _FilterViewState extends State<FilterView> {
 
   @override
   void initState() {
-    BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.listId));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final listState = context.watch<ListLoadBloc>().state;
-    final listItemsState = context.watch<ListItemsLoadBloc>().state;
-
-    final filtersState = context.watch<FilterBloc>().state;
-    final appState = context.watch<AppBloc>().state;
-
-    final filtersNotLoadedView = handleFiltersNotLoaded(filtersState);
-    if (filtersNotLoadedView != null) {
-      return filtersNotLoadedView;
-    }
-    final filters = (filtersState as FiltersUpdated).filters;
-    // logger.d('this filters: $filters');
-
-    final settings = appState.user.settings;
-
-    final listStateView = ListOrListItemNotLoadedHandler.handleListAndListItemsState(listState, listItemsState);
-    if (listStateView != null) {
-      return listStateView;
-    }
-
-    final list = (listState as ListLoadLoaded).list!;
-    final listItems = (listItemsState as ListItemsLoadLoaded).listItems;
-
     final initialValues = {
-      ...filters.categoryFilters,
-      startDateFieldName: filters.startDate,
-      endDateFieldName: filters.endDate,
+      ...widget.filters.categoryFilters,
+      startDateFieldName: widget.filters.startDate,
+      endDateFieldName: widget.filters.endDate,
     };
-    if (filters.distance != null) {
-      initialValues[distanceFieldName] = filters.distance! / convertDistanceToMeters(settings.distanceUnit, 1);
+    if (widget.filters.distance != null) {
+      initialValues[distanceFieldName] =
+          widget.filters.distance! / convertDistanceToMeters(widget.settings.distanceUnit, 1);
     }
-    return getFormBuilderWrapper(list, listItems, initialValues, settings);
+
+    return getFormBuilderWrapper(widget.list, widget.listItems, initialValues, widget.settings);
   }
 
   Widget getFormBuilderWrapper(
@@ -107,6 +84,7 @@ class _FilterViewState extends State<FilterView> {
               key: _formKey,
               onChanged: () {
                 _formKey.currentState!.save();
+                updateFilters(settings);
               },
               autovalidateMode: AutovalidateMode.disabled,
               skipDisabled: true,
@@ -114,7 +92,10 @@ class _FilterViewState extends State<FilterView> {
               child: Column(
                 children: <Widget>[
                   const SizedBox(height: 16),
-                  if (list.withDates) DateFilter(formKey: _formKey),
+                  if (list.withDates)
+                    DateFilter(
+                      formKey: _formKey,
+                    ),
                   if (list.withMap) ...[
                     const SizedBox(height: 16),
                     getDistanceFilter(initialValue[distanceFieldName] as double?, settings),
@@ -122,7 +103,6 @@ class _FilterViewState extends State<FilterView> {
                   const SizedBox(height: 16),
                   ...getCategoriesSections(getCategories(listItems), selectedChips),
                   const SizedBox(height: 16),
-                  cancelAndSubmitButtons(settings),
                 ],
               ),
             ),
@@ -220,37 +200,6 @@ class _FilterViewState extends State<FilterView> {
     }).toList();
   }
 
-  Widget cancelAndSubmitButtons(Settings settings) {
-    return Row(
-      children: <Widget>[
-        Expanded(
-          child: OutlinedButton(
-            onPressed: () {
-              _formKey.currentState?.reset();
-            },
-            child: const Text(
-              'Reset',
-            ),
-          ),
-        ),
-        const SizedBox(width: 20),
-        Expanded(
-          child: ElevatedButton(
-            onPressed: () {
-              if (_formKey.currentState?.saveAndValidate() ?? false) {
-                updateFilters(settings);
-              }
-            },
-            child: const Text(
-              'Submit',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
   void updateFilters(Settings settings) {
     final fields = _formKey.currentState?.fields;
 
@@ -266,7 +215,9 @@ class _FilterViewState extends State<FilterView> {
         endDate = field.value.value as DateTime?;
       } else if (field.key == distanceFieldName) {
         final d = (field.value.value ?? distanceMax) as double;
-        maxDistance = convertDistanceToMeters(settings.distanceUnit, d);
+        if (d != distanceMax) {
+          maxDistance = convertDistanceToMeters(settings.distanceUnit, d);
+        }
         print('Distance: $d, $maxDistance');
       } else {
         final values = field.value.value as List<String>?;
@@ -282,6 +233,5 @@ class _FilterViewState extends State<FilterView> {
       distance: maxDistance,
     );
     BlocProvider.of<FilterBloc>(context).add(UpdateFilters(filters));
-    GoRouter.of(context).pop();
   }
 }

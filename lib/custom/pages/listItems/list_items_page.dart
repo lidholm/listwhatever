@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
@@ -16,7 +17,9 @@ import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_bloc.
 import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_event.dart';
 import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_state.dart';
 import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
+import 'package:listwhatever/standard/app/bloc/app_bloc.dart';
 import 'package:listwhatever/standard/constants.dart';
+import 'package:listwhatever/standard/settings/settings.dart';
 
 import '/custom/navigation/routes.dart';
 import '/custom/pages/import/csv/import_csv_page_route.dart';
@@ -51,6 +54,8 @@ class ListItemsPage extends StatefulWidget {
 }
 
 class _ListItemsPageState extends State<ListItemsPage> {
+  bool showSideWidget = false;
+
   @override
   void initState() {
     BlocProvider.of<ListItemsLoadBloc>(context).add(WatchListItems(widget.listId));
@@ -65,6 +70,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
         final listItemsState = context.watch<ListItemsLoadBloc>().state;
         final filtersState = context.watch<FilterBloc>().state;
         final currentLocation = context.watch<CurrentLocationCubit>().state;
+        final appState = context.watch<AppBloc>().state;
 
         final viewToShow = context.watch<ListItemsPageViewCubit>().state;
         final sortOrder = context.watch<ListItemsSortOrderCubit>().state;
@@ -92,7 +98,16 @@ class _ListItemsPageState extends State<ListItemsPage> {
               title: context.l10n.listItemsHeader(listName),
               actions: getAppBarActions(listState, viewToShow, sortOrder, filters),
             ),
-            body: showLoadedItems(list, listItems, viewToShow, filters, currentLocation, sortOrder, widget.listId),
+            body: Stack(
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height - 10,
+                  child:
+                      showLoadedItems(list, listItems, viewToShow, filters, currentLocation, sortOrder, widget.listId),
+                ),
+                filterWidget(list, listItems, filters, appState.user.settings),
+              ],
+            ),
             floatingActionButton: list?.shareType == ShareType.editor
                 ? FloatingActionButton(
                     onPressed: () {
@@ -104,6 +119,44 @@ class _ListItemsPageState extends State<ListItemsPage> {
           ),
         );
       },
+    );
+  }
+
+  Widget filterWidget(ListOfThings? list, List<ListItem> listItems, Filters filters, Settings settings) {
+    const widthForRightHandSideView = 400.0;
+    const heightForBottomView = 400.0;
+    const onRightHandSide = kIsWeb;
+
+    return AnimatedPositioned(
+      duration: const Duration(milliseconds: 300),
+      right: onRightHandSide
+          ? showSideWidget
+              ? 0
+              : -widthForRightHandSideView
+          : null,
+      left: onRightHandSide ? null : 0,
+      top: onRightHandSide
+          ? 0
+          : showSideWidget
+              ? MediaQuery.of(context).size.height - heightForBottomView
+              : MediaQuery.of(context).size.height,
+      height: onRightHandSide ? MediaQuery.of(context).size.height : heightForBottomView,
+      width: onRightHandSide ? widthForRightHandSideView : MediaQuery.of(context).size.width,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            FilterView(
+              list: list!,
+              listItems: listItems,
+              filters: filters,
+              settings: settings,
+            ),
+            const SizedBox(
+              height: 100,
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -311,12 +364,9 @@ class _ListItemsPageState extends State<ListItemsPage> {
             ? Icons.filter_alt
             : Icons.filter_alt_outlined,
         callback: () {
-          showModalBottomSheet<void>(
-            context: context,
-            builder: (BuildContext context) {
-              return FilterView(listId: widget.listId);
-            },
-          );
+          setState(() {
+            showSideWidget = !showSideWidget;
+          });
         },
         key: const Key('filterListItems'),
       ),

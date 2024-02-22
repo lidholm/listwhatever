@@ -1,3 +1,8 @@
+0.0.37
+* Filter on right hand side on web
+* Nicer filter view look on both web and mobile
+* Automatically apply filters as soon as they are changed
+
 0.0.36
 * Improve bloc setups and delete list and list items
 
