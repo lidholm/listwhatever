@@ -58,7 +58,7 @@ class _AddListPageState extends State<AddListPage> {
   late Map<String, dynamic> initialValue;
   ListOfThings? list;
   ListType? selectedListType;
-  String? _selectedImageUrl;
+  String? _selectedImageFilename;
 
   UploadTask? _uploadTask;
 
@@ -203,10 +203,11 @@ class _AddListPageState extends State<AddListPage> {
             if (firebaseStorage == null) {
               return Container();
             }
-            final imageFilename = (selectedListType != null && selectedListType != ListType.other)
-                ? selectedListType!.getImagePath()
-                : 'food.webp';
-
+            final imageFilename = _selectedImageFilename ??
+                ((selectedListType != null && selectedListType != ListType.other)
+                    ? selectedListType!.getImagePath()
+                    : 'generic.jpg');
+            logger.i('$this => imageFilename: $imageFilename');
             final imageUrlFuture = firebaseStorage.ref().child('images').child(imageFilename).getDownloadURL();
             return FutureBuilder(
               future: imageUrlFuture,
@@ -350,6 +351,16 @@ class _AddListPageState extends State<AddListPage> {
         ..i(uploadTask.snapshot.metadata)
         ..i(uploadTask.snapshot.totalBytes)
         ..i(uploadTask.snapshot.ref);
+
+      uploadTask.snapshotEvents.listen((event) {}).onData((data) {
+        logger.i('$this => ${data.bytesTransferred} - ${data.totalBytes}');
+
+        if (data.bytesTransferred >= data.totalBytes) {
+          logger.i('$this => upload is done!');
+          _selectedImageFilename = fileName;
+          logger.i('$this => _selectedImageFilename: $_selectedImageFilename');
+        }
+      });
 
       return Future.value(uploadTask);
     } on FirebaseException catch (e) {
