@@ -196,14 +196,14 @@ class _AddListPageState extends State<AddListPage> {
           ),
         ),
         const SizedBox(width: 16),
-        SizedBox(
-          width: imageSize,
-          height: imageSize,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image.asset((selectedListType ?? ListType.restaurants).getImagePath(), fit: BoxFit.cover),
-          ),
-        ),
+        // SizedBox(
+        //   width: imageSize,
+        //   height: imageSize,
+        //   child: ClipRRect(
+        //     borderRadius: BorderRadius.circular(8),
+        //     child: Image.network('something', fit: BoxFit.cover),
+        //   ),
+        // ),
         const SizedBox(width: 16),
         if (_uploadTask == null)
           const Center(child: Text("Press the '+' button to add a new file."))
@@ -345,11 +345,13 @@ class _AddListPageState extends State<AddListPage> {
     for (final entry in currentState!.fields.entries) {
       values[entry.key] = entry.value.value;
     }
+    final listType = values[AddListValues.type.toString()] as ListType;
     // logger.d('values: $values');
     final list = ListOfThings(
       id: initialValue[AddListValues.id.toString()] as String?,
       name: values[AddListValues.name.toString()]! as String,
-      listType: values[AddListValues.type.toString()] as ListType,
+      listType: listType,
+      imageFilename: '1708696124638.png',
       withMap: values[AddListValues.withMap.toString()] as bool,
       withDates: values[AddListValues.withDates.toString()] as bool,
       withTimes: values[AddListValues.withTimes.toString()] as bool,

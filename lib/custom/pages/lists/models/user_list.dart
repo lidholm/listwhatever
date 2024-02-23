@@ -11,6 +11,7 @@ class UserList with _$UserList {
     required String listId,
     required String listName,
     required ListType listType,
+    required String imageFilename,
     required String ownerId,
     required bool? isOwnList,
   }) = _UserList;

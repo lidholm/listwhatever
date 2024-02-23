@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/models/list_type.dart';
 import 'package:listwhatever/custom/pages/lists/models/user_list.dart';
 import 'package:listwhatever/standard/appUi/colors/app_colors.dart';
+import 'package:listwhatever/standard/firebase/firestore/firebase_storage.dart';
 
 import '/custom/navigation/routes.dart';
 import '/custom/pages/listItems/list_items_page_route.dart';
@@ -42,50 +43,68 @@ class _ListsPageState extends State<ListsPage> {
       ),
       body: BlocBuilder<ListsLoadBloc, ListsLoadState>(
         builder: (userListContext, userListState) {
-          logger.d('userListState: $userListState');
-          final userListStateView = ListOrListItemNotLoadedHandler.handleUserListsState(userListState);
-          if (userListStateView != null) {
-            return userListStateView;
-          }
-          final lists = (userListState as ListsLoadLoaded).lists;
+          return FutureBuilder(
+            future: getFirebaseStorage(),
+            builder: (context, snapshot) {
+              final firebaseStorage = snapshot.data;
+              if (firebaseStorage == null) {
+                return const Text('no firebaseStorage');
+              }
+              logger.d('userListState: $userListState');
+              final userListStateView = ListOrListItemNotLoadedHandler.handleUserListsState(userListState);
+              if (userListStateView != null) {
+                return userListStateView;
+              }
+              final lists = (userListState as ListsLoadLoaded).lists;
 
-          // logger.d('lists: ${lists.length}');
-          return Padding(
-            padding: const EdgeInsets.all(16),
-            child: CustomScrollView(
-              slivers: [
-                SliverGrid.count(
-                  mainAxisSpacing: 20,
-                  crossAxisSpacing: 20,
-                  crossAxisCount: crossAxisCount,
-                  children: lists.map(
-                    (list) {
-                      return ImageButton<UserList>(
-                        item: list,
-                        image: list.listType.getImagePath(),
-                        text: list.listName,
-                        chipText: list.listType.readable(),
-                        callback: (list) {
-                          ListItemsPageRoute(listId: list.id!).push<void>(userListContext);
+              // logger.d('lists: ${lists.length}');
+              return Padding(
+                padding: const EdgeInsets.all(16),
+                child: CustomScrollView(
+                  slivers: [
+                    SliverGrid.count(
+                      mainAxisSpacing: 20,
+                      crossAxisSpacing: 20,
+                      crossAxisCount: crossAxisCount,
+                      children: lists.map(
+                        (list) {
+                          final imageUrlFuture =
+                              firebaseStorage.ref().child('images').child(list.imageFilename).getDownloadURL();
+                          return FutureBuilder(
+                            future: imageUrlFuture,
+                            builder: (context, snapshot) {
+                              final imageUrl = snapshot.data!;
+                              logger.i('$this => imageUrl: $imageUrl');
+                              return ImageButton<UserList>(
+                                item: list,
+                                imageUrl: imageUrl,
+                                text: list.listName,
+                                chipText: list.listType.readable(),
+                                callback: (list) {
+                                  ListItemsPageRoute(listId: list.id!).push<void>(userListContext);
+                                },
+                                isLoading: false,
+                                topRightIcon: list.isOwnList!
+                                    ? const Icon(
+                                        Icons.verified_user_outlined,
+                                        color: mainColor,
+                                      )
+                                    : const Icon(
+                                        Icons.supervised_user_circle,
+                                        color: AppColors.casablanca,
+                                      ),
+                                topRightIconBorderColor:
+                                    list.isOwnList! ? const AppTheme().themeData.primaryColor : AppColors.casablanca,
+                              );
+                            },
+                          );
                         },
-                        isLoading: false,
-                        topRightIcon: list.isOwnList!
-                            ? const Icon(
-                                Icons.verified_user_outlined,
-                                color: mainColor,
-                              )
-                            : const Icon(
-                                Icons.supervised_user_circle,
-                                color: AppColors.casablanca,
-                              ),
-                        topRightIconBorderColor:
-                            list.isOwnList! ? const AppTheme().themeData.primaryColor : AppColors.casablanca,
-                      );
-                    },
-                  ).toList(),
+                      ).toList(),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              );
+            },
           );
         },
       ),

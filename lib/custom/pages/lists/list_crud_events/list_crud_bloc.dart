@@ -35,6 +35,7 @@ class ListCrudBloc extends Bloc<ListCrudEvent, ListCrudState> {
       final listId = await _listsService.addList(event.list);
       final userList = UserList(
         id: '',
+        imageFilename: list.imageFilename,
         listId: listId,
         listName: list.name,
         listType: list.listType,
