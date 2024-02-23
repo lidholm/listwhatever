@@ -8,6 +8,7 @@ enum ListType {
 
 extension ListTypename on ListType {
   String readable() => toCapitalized(name);
+  String getImagePath() => images[this] ?? 'generic.jpg';
 }
 
 String toCapitalized(String text) =>

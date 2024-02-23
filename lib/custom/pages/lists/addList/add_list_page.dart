@@ -203,7 +203,11 @@ class _AddListPageState extends State<AddListPage> {
             if (firebaseStorage == null) {
               return Container();
             }
-            final imageUrlFuture = firebaseStorage.ref().child('images').child('generic.jpg').getDownloadURL();
+            final imageFilename = (selectedListType != null && selectedListType != ListType.other)
+                ? selectedListType!.getImagePath()
+                : 'food.webp';
+
+            final imageUrlFuture = firebaseStorage.ref().child('images').child(imageFilename).getDownloadURL();
             return FutureBuilder(
               future: imageUrlFuture,
               builder: (context, snapshot) {
