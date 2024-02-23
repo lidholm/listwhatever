@@ -1,15 +1,20 @@
 import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:listwhatever/custom/pages/lists/addList/upload_task_tile.dart';
 import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_event.dart';
 import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_state.dart';
 import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
 import 'package:listwhatever/standard/appUi/theme/app_theme.dart';
+import 'package:listwhatever/standard/firebase/firestore/firebase_storage.dart';
 
 import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
 import '/standard/constants.dart';
@@ -19,7 +24,6 @@ import '../list_load_events/list_load_bloc.dart';
 import '../list_load_events/list_load_event.dart';
 import '../list_load_events/list_load_state.dart';
 import '../models/list_type.dart';
-import 'package:image_picker/image_picker.dart';
 
 const imageSize = 80.0;
 
@@ -54,7 +58,9 @@ class _AddListPageState extends State<AddListPage> {
   late Map<String, dynamic> initialValue;
   ListOfThings? list;
   ListType? selectedListType;
-  File? _selectedImage;
+  String? _selectedImageUrl;
+
+  UploadTask? _uploadTask;
 
   void _onChanged(dynamic val) => logger.d(val.toString());
 
@@ -90,7 +96,7 @@ class _AddListPageState extends State<AddListPage> {
     };
     return BlocListener<ListCrudBloc, ListCrudState>(
       listener: (context, state) {
-        print('state: $state');
+        logger.i('$this => state: $state');
         if (state is ListCrudAdded) {
           GoRouter.of(context).pop();
         }
@@ -199,18 +205,42 @@ class _AddListPageState extends State<AddListPage> {
           ),
         ),
         const SizedBox(width: 16),
+        if (_uploadTask == null)
+          const Center(child: Text("Press the '+' button to add a new file."))
+        else
+          Expanded(
+            child: UploadTaskListTile(
+              task: _uploadTask!,
+              onDismissed: () {}, // => _removeTaskAtIndex(index),
+              onDownloadLink: () async {
+                // return _downloadLink(_uploadTasks[index].snapshot.ref);
+              },
+              onDownload: () async {
+                // if (kIsWeb) {
+                //   return _downloadBytes(_uploadTasks[index].snapshot.ref);
+                // } else {
+                //   return _downloadFile(_uploadTasks[index].snapshot.ref);
+                // }
+              },
+              onDelete: () async {
+                // return _delete(_uploadTasks[index].snapshot.ref);
+              },
+            ),
+          ),
         ElevatedButton(
           onPressed: () async {
             final picker = ImagePicker();
             final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
             if (pickedFile != null) {
+              final tmp = await uploadImage(pickedFile);
               setState(() {
-                _selectedImage = File(pickedFile.path);
-                print('_selectedImage: $_selectedImage');
+                logger.i('$this => pickedFile.path: ${pickedFile.path}');
+                _uploadTask = tmp;
+                logger.i('$this => _uploadTask: $_uploadTask');
               });
             } else {
-              print('No image selected.');
+              logger.i('$this => No image selected.');
             }
           },
           child: const Padding(
@@ -269,6 +299,45 @@ class _AddListPageState extends State<AddListPage> {
         ),
       ),
     );
+  }
+
+  Future<UploadTask> uploadImage(XFile pickedFile) async {
+    final storage = await getFirebaseStorage();
+    try {
+      // Create a unique file name for the upload
+      final fileName = '${DateTime.now().millisecondsSinceEpoch}.png';
+
+      // Create a reference to the location you want to upload to in Firebase Storage
+      final ref = storage.ref().child('images').child('/$fileName');
+
+      final metadata = SettableMetadata(
+        contentType: 'image/jpeg',
+        customMetadata: {'picked-file-path': pickedFile.path},
+      );
+
+      UploadTask uploadTask;
+      if (kIsWeb) {
+        final bytes = await pickedFile.readAsBytes();
+        uploadTask = ref.putData(bytes, metadata);
+      } else {
+        uploadTask = ref.putFile(File(pickedFile.path), metadata);
+      }
+      logger
+        ..i('fullPath: ${uploadTask.snapshot.ref.fullPath}')
+        ..i(uploadTask.snapshot.state)
+        ..i(uploadTask.snapshot.bytesTransferred)
+        ..i(uploadTask.snapshot.metadata)
+        ..i(uploadTask.snapshot.totalBytes)
+        ..i(uploadTask.snapshot.ref);
+
+      return Future.value(uploadTask);
+    } on FirebaseException catch (e) {
+      logger.i(e);
+      rethrow;
+    } on Exception catch (e) {
+      logger.i(e);
+      rethrow;
+    }
   }
 
   void save(FormBuilderState? currentState) {

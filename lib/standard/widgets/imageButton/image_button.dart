@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:listwhatever/standard/appUi/colors/app_colors.dart';
+import 'package:listwhatever/standard/constants.dart';
 import '/standard/navigation/widgets/shimmer/shimmer_loading.dart';
 
 const imageRadius = 16.0;
@@ -81,7 +82,7 @@ class ImageButton<T> extends StatelessWidget {
   Widget imageWidget() {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        print('constraints: $constraints');
+        logger.i('$this => constraints: $constraints');
         return Padding(
           padding: const EdgeInsets.only(left: 8, right: 8, top: 16, bottom: 8),
           child: ClipRRect(

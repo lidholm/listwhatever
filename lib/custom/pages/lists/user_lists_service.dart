@@ -53,7 +53,7 @@ class UserListsService {
     final listsCollection = await getCollection();
     final snapshot = await listsCollection.doc(id).get();
     final data = snapshot.data();
-    print('user list data: $data');
+    logger.i('$this => user list data: $data');
     return convertToUserList(snapshot.id, data!);
   }
 

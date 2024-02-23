@@ -42,7 +42,7 @@ class ListItemCrudBloc extends Bloc<ListItemCrudEvent, ListItemCrudState> {
   }
 
   Future<void> _onUpdateListItem(UpdateListItem event, Emitter<ListItemCrudState> emit) async {
-    logger.i('updating list item for list ${event.listId}');
+    logger.i('$this => updating list item for list ${event.listId}');
     try {
       emit(ListItemCrudLoading());
       final userList = await _userListsService.getList(event.listId);
@@ -55,7 +55,7 @@ class ListItemCrudBloc extends Bloc<ListItemCrudEvent, ListItemCrudState> {
   }
 
   Future<void> _onDeleteListItem(DeleteListItem event, Emitter<ListItemCrudState> emit) async {
-    logger.i('deleting list item for list ${event.listId}');
+    logger.i('$this => deleting list item for list ${event.listId}');
     try {
       emit(ListItemCrudLoading());
 
@@ -69,7 +69,7 @@ class ListItemCrudBloc extends Bloc<ListItemCrudEvent, ListItemCrudState> {
   }
 
   Future<void> _onImportListItems(ImportListItems event, Emitter<ListItemCrudState> emit) async {
-    logger.i('import list items for list ${event.listId}');
+    logger.i('$this => import list items for list ${event.listId}');
     try {
       emit(ListItemCrudLoading());
 

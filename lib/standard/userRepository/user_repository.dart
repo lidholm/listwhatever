@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
+import 'package:listwhatever/standard/constants.dart';
 import '/standard/authenticationClient/authentication_client.dart';
 import '/standard/userRepository/models/user.dart';
 import '/standard/userRepository/user_storage.dart';
@@ -62,8 +63,9 @@ class UserRepository {
   ///
   Stream<User> get user => _authenticationClient.user.map(
         (authenticationUser) {
-          print('authenticationUser: $authenticationUser');
-          print('authenticationUser.email: ${authenticationUser.email}');
+          logger
+            ..i('authenticationUser: $authenticationUser')
+            ..i('authenticationUser.email: ${authenticationUser.email}');
           return fromAuthenticationUser(
             authenticationUser,
           );

@@ -88,7 +88,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
 
         return BlocListener<ListCrudBloc, ListCrudState>(
           listener: (context, state) {
-            print('state: $state');
+            logger.i('$this => state: $state');
             if (state is ListCrudDeleted) {
               GoRouter.of(context).pop();
             }

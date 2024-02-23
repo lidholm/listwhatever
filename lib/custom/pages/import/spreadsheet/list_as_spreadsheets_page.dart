@@ -48,7 +48,7 @@ class _ListAsSpreadsheetsPageState extends State<ListAsSpreadsheetsPage> {
 
     return BlocListener<ListItemCrudBloc, ListItemCrudState>(
       listener: (context, state) {
-        print('state: $state');
+        logger.i('$this => state: $state');
         if (state is ListItemCrudImported) {
           GoRouter.of(context).pop();
         }
@@ -246,7 +246,7 @@ class _ListAsSpreadsheetsPageInnerState extends State<ListAsSpreadsheetsPageInne
       name: name,
       urls: urls,
     );
-    print('updatedItem: $updatedItem');
+    logger.i('$this => updatedItem: $updatedItem');
 
     return updatedItem;
   }
@@ -273,7 +273,7 @@ class _ListAsSpreadsheetsPageInnerState extends State<ListAsSpreadsheetsPageInne
         }
       }
 
-      print('name: $name');
+      logger.i('$this => name: $name');
       var item = _items[rowIndex].copyWith(
         name: name,
         urls: urls,

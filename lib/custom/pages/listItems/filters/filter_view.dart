@@ -117,17 +117,18 @@ class _FilterViewState extends State<FilterView> {
   }
 
   Widget getDistanceFilter(double? initialValue, Settings settings) {
-    print('distanceValue: $distanceValue');
-    print('initialValue: $initialValue');
+    logger
+      ..i('distanceValue: $distanceValue')
+      ..i('initialValue: $initialValue');
     final values = (distanceValue == distanceMax) ? [initialValue ?? distanceValue] : [distanceValue];
-    print('values: $values');
+    logger.i('$this => values: $values');
     return BorderWithHeader(
       title: context.l10n.distanceFilterText(settings.distanceUnit.toString()),
       child: FormBuilderField(
         name: distanceFieldName,
         key: const Key(distanceFieldName),
         builder: (FormFieldState<dynamic> field) {
-          print('field: $field');
+          logger.i('$this => field: $field');
           return FlutterSlider(
             values: values,
             max: distanceMax,
@@ -218,7 +219,7 @@ class _FilterViewState extends State<FilterView> {
         if (d != distanceMax) {
           maxDistance = convertDistanceToMeters(settings.distanceUnit, d);
         }
-        print('Distance: $d, $maxDistance');
+        logger.i('$this => Distance: $d, $maxDistance');
       } else {
         final values = field.value.value as List<String>?;
         if (values != null && values.isNotEmpty) {
