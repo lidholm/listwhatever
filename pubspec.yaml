@@ -55,6 +55,7 @@ dependencies:
   great_circle_distance_calculator: ^1.0.4
   http: ^1.0.0
   hydrated_bloc: ^9.1.2
+  image_picker: ^1.0.7
   intl: ^0.18.0
   json_annotation: ^4.8.1
   latlong2: ^0.9.0

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -17,6 +19,7 @@ import '../list_load_events/list_load_bloc.dart';
 import '../list_load_events/list_load_event.dart';
 import '../list_load_events/list_load_state.dart';
 import '../models/list_type.dart';
+import 'package:image_picker/image_picker.dart';
 
 const imageSize = 80.0;
 
@@ -51,6 +54,7 @@ class _AddListPageState extends State<AddListPage> {
   late Map<String, dynamic> initialValue;
   ListOfThings? list;
   ListType? selectedListType;
+  File? _selectedImage;
 
   void _onChanged(dynamic val) => logger.d(val.toString());
 
@@ -196,7 +200,19 @@ class _AddListPageState extends State<AddListPage> {
         ),
         const SizedBox(width: 16),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () async {
+            final picker = ImagePicker();
+            final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+            if (pickedFile != null) {
+              setState(() {
+                _selectedImage = File(pickedFile.path);
+                print('_selectedImage: $_selectedImage');
+              });
+            } else {
+              print('No image selected.');
+            }
+          },
           child: const Padding(
             padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
             child: Text('Upload image'),
