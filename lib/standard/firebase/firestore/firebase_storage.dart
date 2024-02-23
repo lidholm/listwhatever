@@ -3,7 +3,7 @@ import 'package:listwhatever/standard/constants.dart';
 import '/standard/emulator/emulator_info.dart';
 import '/standard/emulator/get_emulator_info.dart';
 
-const port = 8080;
+const port = 9199;
 
 Future<FirebaseStorage> getFirebaseStorage() async {
   final emulatorInfo = await getEmulatorInfo();
@@ -11,7 +11,7 @@ Future<FirebaseStorage> getFirebaseStorage() async {
   final instance = FirebaseStorage.instance;
   if (emulatorInfo.type != EmulatorType.none) {
     logger.i('firebaseStorage. Using emulator ${emulatorInfo.address}');
-    // _connectToFirebaseEmulator(instance, emulatorInfo.address!);
+    _connectToFirebaseEmulator(instance, emulatorInfo.address!);
   } else {
     logger.i('firebaseStorage. Using firestore without emulator');
   }
