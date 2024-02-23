@@ -18,6 +18,8 @@ import '../list_load_events/list_load_event.dart';
 import '../list_load_events/list_load_state.dart';
 import '../models/list_type.dart';
 
+const imageSize = 80.0;
+
 enum AddListValues {
   id,
   name,
@@ -108,7 +110,6 @@ class _AddListPageState extends State<AddListPage> {
                   const SizedBox(height: 15),
                   getListNameField(),
                   getListTypeField(),
-                  getImageRow(),
                   getWithMapCheckbox(),
                   getWithDatesCheckbox(),
                   getWithTimesCheckbox(),
@@ -153,52 +154,54 @@ class _AddListPageState extends State<AddListPage> {
   }
 
   Widget getListTypeField() {
-    return FormBuilderDropdown<ListType>(
-      name: AddListValues.type.toString(),
-      decoration: InputDecoration(
-        labelText: 'Type',
-        suffix: _typeHasError ? const Icon(Icons.error) : const Icon(Icons.check),
-        hintText: 'Select Type',
-      ),
-      validator: FormBuilderValidators.compose(
-        [FormBuilderValidators.required()],
-      ),
-      items: _typeOptions
-          .map(
-            (type) => DropdownMenuItem(
-              alignment: AlignmentDirectional.center,
-              value: type,
-              child: Text(type.readable()),
-            ),
-          )
-          .toList(),
-      onChanged: (val) {
-        setState(() {
-          _typeHasError = !(_formKey.currentState?.fields[AddListValues.type.toString()]?.validate() ?? false);
-          selectedListType = val;
-        });
-      },
-      valueTransformer: (val) => val?.toString(),
-    );
-  }
-
-  Widget getImageRow() {
-    final imageSize = 80.0;
     return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
       children: [
+        Expanded(
+          child: FormBuilderDropdown<ListType>(
+            name: AddListValues.type.toString(),
+            decoration: InputDecoration(
+              labelText: 'Type',
+              suffix: _typeHasError ? const Icon(Icons.error) : const Icon(Icons.check),
+              hintText: 'Select Type',
+            ),
+            validator: FormBuilderValidators.compose(
+              [FormBuilderValidators.required()],
+            ),
+            items: _typeOptions
+                .map(
+                  (type) => DropdownMenuItem(
+                    alignment: AlignmentDirectional.center,
+                    value: type,
+                    child: Text(type.readable()),
+                  ),
+                )
+                .toList(),
+            onChanged: (val) {
+              setState(() {
+                _typeHasError = !(_formKey.currentState?.fields[AddListValues.type.toString()]?.validate() ?? false);
+                selectedListType = val;
+              });
+            },
+            valueTransformer: (val) => val?.toString(),
+          ),
+        ),
+        const SizedBox(width: 16),
         SizedBox(
           width: imageSize,
           height: imageSize,
-          child: Image.asset((selectedListType ?? ListType.restaurants).getImagePath(), fit: BoxFit.cover),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.asset((selectedListType ?? ListType.restaurants).getImagePath(), fit: BoxFit.cover),
+          ),
         ),
         const SizedBox(width: 16),
         ElevatedButton(
-            onPressed: () {},
-            child: const Padding(
-              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-              child: Text('Upload image'),
-            ))
+          onPressed: () {},
+          child: const Padding(
+            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+            child: Text('Upload image'),
+          ),
+        ),
       ],
     );
   }
