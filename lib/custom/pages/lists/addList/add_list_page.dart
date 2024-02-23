@@ -48,6 +48,7 @@ class _AddListPageState extends State<AddListPage> {
   final _typeOptions = ListType.values;
   late Map<String, dynamic> initialValue;
   ListOfThings? list;
+  ListType? selectedListType;
 
   void _onChanged(dynamic val) => logger.d(val.toString());
 
@@ -107,6 +108,7 @@ class _AddListPageState extends State<AddListPage> {
                   const SizedBox(height: 15),
                   getListNameField(),
                   getListTypeField(),
+                  getImageRow(),
                   getWithMapCheckbox(),
                   getWithDatesCheckbox(),
                   getWithTimesCheckbox(),
@@ -173,9 +175,31 @@ class _AddListPageState extends State<AddListPage> {
       onChanged: (val) {
         setState(() {
           _typeHasError = !(_formKey.currentState?.fields[AddListValues.type.toString()]?.validate() ?? false);
+          selectedListType = val;
         });
       },
       valueTransformer: (val) => val?.toString(),
+    );
+  }
+
+  Widget getImageRow() {
+    final imageSize = 80.0;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        SizedBox(
+          width: imageSize,
+          height: imageSize,
+          child: Image.asset((selectedListType ?? ListType.restaurants).getImagePath(), fit: BoxFit.cover),
+        ),
+        const SizedBox(width: 16),
+        ElevatedButton(
+            onPressed: () {},
+            child: const Padding(
+              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+              child: Text('Upload image'),
+            ))
+      ],
     );
   }
 
