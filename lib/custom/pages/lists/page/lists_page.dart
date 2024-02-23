@@ -48,7 +48,7 @@ class _ListsPageState extends State<ListsPage> {
             builder: (context, snapshot) {
               final firebaseStorage = snapshot.data;
               if (firebaseStorage == null) {
-                return const Text('no firebaseStorage');
+                return Container();
               }
               logger.d('userListState: $userListState');
               final userListStateView = ListOrListItemNotLoadedHandler.handleUserListsState(userListState);
@@ -73,17 +73,17 @@ class _ListsPageState extends State<ListsPage> {
                           return FutureBuilder(
                             future: imageUrlFuture,
                             builder: (context, snapshot) {
-                              final imageUrl = snapshot.data!;
+                              final imageUrl = snapshot.data;
                               logger.i('$this => imageUrl: $imageUrl');
                               return ImageButton<UserList>(
                                 item: list,
-                                imageUrl: imageUrl,
+                                imageUrl: imageUrl ?? '',
                                 text: list.listName,
                                 chipText: list.listType.readable(),
                                 callback: (list) {
                                   ListItemsPageRoute(listId: list.id!).push<void>(userListContext);
                                 },
-                                isLoading: false,
+                                isLoading: imageUrl == null,
                                 topRightIcon: list.isOwnList!
                                     ? const Icon(
                                         Icons.verified_user_outlined,

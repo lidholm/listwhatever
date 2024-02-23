@@ -8,15 +8,15 @@ enum ListType {
 
 extension ListTypename on ListType {
   String readable() => toCapitalized(name);
-  // String getImagePath() => images[this] ?? 'assets/images/generic.jpg';
 }
 
 String toCapitalized(String text) =>
     text.isNotEmpty ? '${text[0].toUpperCase()}${text.substring(1).toLowerCase()}' : '';
 
-// const images = {
-//   ListType.restaurants: 'assets/images/restaurants.jpeg',
-//   ListType.food: 'assets/images/food.webp',
-//   ListType.movies: 'assets/images/movies.webp',
-//   ListType.activities: 'assets/images/activities.png',
-// };
+const images = {
+  ListType.restaurants: 'restaurants.jpeg',
+  ListType.food: 'food.webp',
+  ListType.movies: 'movies.webp',
+  ListType.activities: 'activities.png',
+  ListType.other: 'generic.jpg',
+};

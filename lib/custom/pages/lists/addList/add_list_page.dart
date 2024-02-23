@@ -196,14 +196,31 @@ class _AddListPageState extends State<AddListPage> {
           ),
         ),
         const SizedBox(width: 16),
-        // SizedBox(
-        //   width: imageSize,
-        //   height: imageSize,
-        //   child: ClipRRect(
-        //     borderRadius: BorderRadius.circular(8),
-        //     child: Image.network('something', fit: BoxFit.cover),
-        //   ),
-        // ),
+        FutureBuilder(
+          future: getFirebaseStorage(),
+          builder: (context, snapshot) {
+            final firebaseStorage = snapshot.data;
+            if (firebaseStorage == null) {
+              return Container();
+            }
+            final imageUrlFuture = firebaseStorage.ref().child('images').child('generic.jpg').getDownloadURL();
+            return FutureBuilder(
+              future: imageUrlFuture,
+              builder: (context, snapshot) {
+                final imageUrl = snapshot.data;
+                logger.i('$this => imageUrl: $imageUrl');
+                return SizedBox(
+                  width: imageSize,
+                  height: imageSize,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: imageUrl != null ? Image.network(imageUrl, fit: BoxFit.cover) : Container(),
+                  ),
+                );
+              },
+            );
+          },
+        ),
         const SizedBox(width: 16),
         if (_uploadTask == null)
           const Center(child: Text("Press the '+' button to add a new file."))
