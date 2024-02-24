@@ -404,5 +404,6 @@ class _AddListPageState extends State<AddListPage> {
     } else {
       BlocProvider.of<ListCrudBloc>(context).add(UpdateList(list));
     }
+    GoRouter.of(context).pop();
   }
 }
