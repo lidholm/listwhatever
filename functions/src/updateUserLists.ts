@@ -28,14 +28,10 @@ export const updateUserLists = onDocumentWritten('/lists/{listId}', async (event
     for (const doc of querySnapshot.docs) {
       const docId = doc.id;
       const userList = doc.data();
-      console.log('docId: ', docId);
-      console.log('userList: ', userList);
 
       userList.listName = listInfo.name;
       userList.listType = listInfo.listType;
       userList.imageFilename = listInfo.imageFilename;
-
-      console.log(doc.id, userList);
 
       const userListPath = `users/${userListId}/lists/${docId}`;
       const userListDoc = getFirestore().doc(userListPath);
