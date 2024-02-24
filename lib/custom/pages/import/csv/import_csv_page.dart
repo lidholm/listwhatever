@@ -43,7 +43,7 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
   Widget build(BuildContext context) {
     return BlocListener<ListItemCrudBloc, ListItemCrudState>(
       listener: (context, state) {
-        print('state: $state');
+        logger.i('$this => state: $state');
         if (state is ListItemCrudImported) {
           GoRouter.of(context).pop();
         }

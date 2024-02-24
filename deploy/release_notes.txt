@@ -1,3 +1,7 @@
+0.0.38
+* Allow to upload image for list
+* Propogate updates to list to user list
+
 0.0.37
 * Filter on right hand side on web
 * Nicer filter view look on both web and mobile

@@ -18,7 +18,7 @@ class SubscribeListBloc extends Bloc<SubscribeListEvent, SubscribeListState> {
   final ListsService _listService;
 
   Future<void> _onSubscribeListForUser(SubscribeListForUser event, Emitter<SubscribeListState> emit) async {
-    // logger.i('_onLoadSharedList');
+    // logger.i('$this => _onLoadSharedList');
     try {
       emit(SubscribeListLoading());
       final userId = _listService.userId!;

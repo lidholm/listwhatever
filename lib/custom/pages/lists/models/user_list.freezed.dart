@@ -24,6 +24,7 @@ mixin _$UserList {
   String get listId => throw _privateConstructorUsedError;
   String get listName => throw _privateConstructorUsedError;
   ListType get listType => throw _privateConstructorUsedError;
+  String get imageFilename => throw _privateConstructorUsedError;
   String get ownerId => throw _privateConstructorUsedError;
   bool? get isOwnList => throw _privateConstructorUsedError;
 
@@ -43,6 +44,7 @@ abstract class $UserListCopyWith<$Res> {
       String listId,
       String listName,
       ListType listType,
+      String imageFilename,
       String ownerId,
       bool? isOwnList});
 }
@@ -64,6 +66,7 @@ class _$UserListCopyWithImpl<$Res, $Val extends UserList>
     Object? listId = null,
     Object? listName = null,
     Object? listType = null,
+    Object? imageFilename = null,
     Object? ownerId = null,
     Object? isOwnList = freezed,
   }) {
@@ -84,6 +87,10 @@ class _$UserListCopyWithImpl<$Res, $Val extends UserList>
           ? _value.listType
           : listType // ignore: cast_nullable_to_non_nullable
               as ListType,
+      imageFilename: null == imageFilename
+          ? _value.imageFilename
+          : imageFilename // ignore: cast_nullable_to_non_nullable
+              as String,
       ownerId: null == ownerId
           ? _value.ownerId
           : ownerId // ignore: cast_nullable_to_non_nullable
@@ -109,6 +116,7 @@ abstract class _$$UserListImplCopyWith<$Res>
       String listId,
       String listName,
       ListType listType,
+      String imageFilename,
       String ownerId,
       bool? isOwnList});
 }
@@ -128,6 +136,7 @@ class __$$UserListImplCopyWithImpl<$Res>
     Object? listId = null,
     Object? listName = null,
     Object? listType = null,
+    Object? imageFilename = null,
     Object? ownerId = null,
     Object? isOwnList = freezed,
   }) {
@@ -148,6 +157,10 @@ class __$$UserListImplCopyWithImpl<$Res>
           ? _value.listType
           : listType // ignore: cast_nullable_to_non_nullable
               as ListType,
+      imageFilename: null == imageFilename
+          ? _value.imageFilename
+          : imageFilename // ignore: cast_nullable_to_non_nullable
+              as String,
       ownerId: null == ownerId
           ? _value.ownerId
           : ownerId // ignore: cast_nullable_to_non_nullable
@@ -168,6 +181,7 @@ class _$UserListImpl implements _UserList {
       required this.listId,
       required this.listName,
       required this.listType,
+      required this.imageFilename,
       required this.ownerId,
       required this.isOwnList});
 
@@ -183,13 +197,15 @@ class _$UserListImpl implements _UserList {
   @override
   final ListType listType;
   @override
+  final String imageFilename;
+  @override
   final String ownerId;
   @override
   final bool? isOwnList;
 
   @override
   String toString() {
-    return 'UserList(id: $id, listId: $listId, listName: $listName, listType: $listType, ownerId: $ownerId, isOwnList: $isOwnList)';
+    return 'UserList(id: $id, listId: $listId, listName: $listName, listType: $listType, imageFilename: $imageFilename, ownerId: $ownerId, isOwnList: $isOwnList)';
   }
 
   @override
@@ -203,6 +219,8 @@ class _$UserListImpl implements _UserList {
                 other.listName == listName) &&
             (identical(other.listType, listType) ||
                 other.listType == listType) &&
+            (identical(other.imageFilename, imageFilename) ||
+                other.imageFilename == imageFilename) &&
             (identical(other.ownerId, ownerId) || other.ownerId == ownerId) &&
             (identical(other.isOwnList, isOwnList) ||
                 other.isOwnList == isOwnList));
@@ -210,8 +228,8 @@ class _$UserListImpl implements _UserList {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, listId, listName, listType, ownerId, isOwnList);
+  int get hashCode => Object.hash(runtimeType, id, listId, listName, listType,
+      imageFilename, ownerId, isOwnList);
 
   @JsonKey(ignore: true)
   @override
@@ -233,6 +251,7 @@ abstract class _UserList implements UserList {
       required final String listId,
       required final String listName,
       required final ListType listType,
+      required final String imageFilename,
       required final String ownerId,
       required final bool? isOwnList}) = _$UserListImpl;
 
@@ -247,6 +266,8 @@ abstract class _UserList implements UserList {
   String get listName;
   @override
   ListType get listType;
+  @override
+  String get imageFilename;
   @override
   String get ownerId;
   @override

@@ -11,25 +11,28 @@
 [x] Firestore rules
 [ ] Create docker containers to be able to test, deploy from local machine. Go back to Dagger?
  - [x] Write steps for locally deploying
-[ ] (Free) Other map than Google maps
-[ ] Import from other source
+[x] (Free) Other map than Google maps
+[x] Import from other source
   - [ ] Google sheets
   - [x] In-app sheet
   - [x] CSV
 - [x] Delete list item 
 - [x] Delete list
-- [ ] User profile and settings (e.g. use Google Maps or flutter_map)
 - [x] Current location and distance
-- [ ] Upload image for list (Get from AI creator?)
+- [x] Upload image for list 
+  - [ ] (Get from AI creator?)
+- [x] Put filter view on right side on web
+
+- [ ] User profile and settings (e.g. use Google Maps or flutter_map)
 - [ ] View a list without logging in if you have the code
-- [ ] Fix fastlane
 - [ ] Better colors/styling
 - [ ] Set up Google Play
 - [ ] Filter on the right on web
 - [ ] Randomly select one from the list 
   - Checkboxes for ones to choose from
 - [ ] Better position for markers so they don't move when zooming
-- [x] Put filter view on right side on web
   - [ ] Should rather check screen size ratio
 - [ ] Save filters?  
+- [ ] Zoom to fit all filtered items
+- [ ] Fix fastlane
   

@@ -70,7 +70,7 @@ class FlutterMapsViewState extends State<FlutterMapsView> {
 
   (LatLng, LatLng)? getBounds() {
     final latLngList = widget.items.where((e) => e.latLong != null).map((e) => e.latLong!.toLatLng()).toList();
-    print('latLngList: $latLngList');
+    logger.i('$this => latLngList: $latLngList');
     if (latLngList.isEmpty) {
       return null;
     }

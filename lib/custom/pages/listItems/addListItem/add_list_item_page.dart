@@ -112,7 +112,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
     list = (listState as ListLoadLoaded).list;
     return BlocListener<ListItemCrudBloc, ListItemCrudState>(
       listener: (context, state) {
-        print('state: $state');
+        logger.i('$this => state: $state');
         if (state is ListItemCrudDeleted) {
           setState(() {
             listItemId = null;
@@ -120,11 +120,11 @@ class _AddListItemPageState extends State<AddListItemPage> {
           GoRouter.of(context).pop();
           GoRouter.of(context).pop();
         } else if (state is ListItemCrudUpdated) {
-          print('popping GoRouter after updated');
+          logger.i('$this => popping GoRouter after updated');
           GoRouter.of(context).pop();
           GoRouter.of(context).pop();
         } else if (state is ListItemCrudAdded) {
-          print('popping GoRouter after added');
+          logger.i('$this => popping GoRouter after added');
           GoRouter.of(context).pop();
         }
       },
@@ -452,7 +452,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
                   Icons.delete,
                   () {
                     setState(() {
-                      print('not doing anything yet');
+                      logger.i('$this => not doing anything yet');
                     });
                   },
                 ),

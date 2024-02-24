@@ -36,7 +36,7 @@ class _ShareListPageState extends State<ShareListPage> {
     final listState = context.watch<ListLoadBloc>().state;
 
     final listStateView = ListOrListItemNotLoadedHandler.handleListState(listState);
-    // logger.i('listState: $listState');
+    // logger.i('$this => listState: $listState');
     if (listStateView != null) {
       return listStateView;
     }

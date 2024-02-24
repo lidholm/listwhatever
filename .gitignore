@@ -148,3 +148,6 @@ terraform/terraform.tfstate
 terraform/terraform.tfstate.backup
 
 .firebase/hosting.*
+
+
+node_modules

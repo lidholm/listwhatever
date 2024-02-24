@@ -26,7 +26,7 @@ class ListLoadBloc extends Bloc<ListLoadEvent, ListLoadState> {
   }
 
   Future<void> _onLoadList(LoadList event, Emitter<ListLoadState> emit) async {
-    logger.i('getting list  ${event.listId}');
+    logger.i('$this => getting list  ${event.listId}');
     try {
       emit(ListLoadLoading());
       final userList = await _userListsService.getList(event.listId);

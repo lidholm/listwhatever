@@ -17,10 +17,11 @@ class AppRedirect {
     logger.d('===================\n');
     final appBloc = BlocProvider.of<AppBloc>(context);
     final currentUser = appBloc.state;
-    print('state.uri.path: ${state.uri.path}');
-    logger.d('$this.currentUser: $currentUser');
-    print('$this.currentUser: ${currentUser.user.id}');
-    print('$this.currentUser: ${currentUser.user.email}');
+    logger
+      ..i('state.uri.path: ${state.uri.path}')
+      ..d('$this.currentUser: $currentUser')
+      ..i('$this.currentUser: ${currentUser.user.id}')
+      ..i('$this.currentUser: ${currentUser.user.email}');
 
     if (currentUser.status != AppStatus.authenticated) {
       if (routerProviderInformation.dontRequireLoginRouteLocations
@@ -31,8 +32,9 @@ class AppRedirect {
       // logger.d('fromParam: $fromParam');
       context.read<RedirectCubit>().setRedirect(fromParam);
       final redirectUri = routerProviderInformation.signInRouteLocation;
-      logger.d('$this.redirectUri: $redirectUri');
-      print('$this.redirectUri: $redirectUri');
+      logger
+        ..d('$this.redirectUri: $redirectUri')
+        ..i('$this.redirectUri: $redirectUri');
       return redirectUri;
     }
     // no other redirects, check if 'from' is set and if so, redirect to it
@@ -41,13 +43,15 @@ class AppRedirect {
     // logger.d('fromParam: $fromParam');
     if (fromParam != null) {
       context.read<RedirectCubit>().clear();
-      logger.d('$this.fromParam: $fromParam');
-      print('$this.fromParam: $fromParam');
+      logger
+        ..d('$this.fromParam: $fromParam')
+        ..i('$this.fromParam: $fromParam');
       return fromParam;
     }
 
-    logger.d('$this.returns null');
-    print('$this.returns null');
+    logger
+      ..d('$this.returns null')
+      ..i('$this.returns null');
     return null;
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:listwhatever/standard/appUi/colors/app_colors.dart';
+import 'package:listwhatever/standard/constants.dart';
 import '/standard/navigation/widgets/shimmer/shimmer_loading.dart';
 
 const imageRadius = 16.0;
@@ -11,7 +12,7 @@ const background = Colors.white;
 class ImageButton<T> extends StatelessWidget {
   const ImageButton({
     required this.item,
-    required this.image,
+    required this.imageUrl,
     required this.text,
     required this.callback,
     required this.isLoading,
@@ -22,7 +23,7 @@ class ImageButton<T> extends StatelessWidget {
   });
 
   final T item;
-  final String image;
+  final String imageUrl;
   final String text;
   final void Function(T item) callback;
   final bool isLoading;
@@ -79,9 +80,10 @@ class ImageButton<T> extends StatelessWidget {
   }
 
   Widget imageWidget() {
+    logger.i('$this => image: $imageUrl');
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        print('constraints: $constraints');
+        logger.i('$this => constraints: $constraints');
         return Padding(
           padding: const EdgeInsets.only(left: 8, right: 8, top: 16, bottom: 8),
           child: ClipRRect(
@@ -89,7 +91,7 @@ class ImageButton<T> extends StatelessWidget {
             child: SizedBox(
               width: constraints.maxWidth * 0.9,
               height: constraints.maxWidth * 0.6,
-              child: Image.asset(image, fit: BoxFit.cover),
+              child: Image.network(imageUrl, fit: BoxFit.cover),
             ),
           ),
         );

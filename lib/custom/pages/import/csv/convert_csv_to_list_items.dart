@@ -24,7 +24,7 @@ class CsvConverter {
     final headers = rows[0].map((x) => (x as String).trim()).toList();
     final rest = rows.skip(1);
     final headerPositions = getHeaderPositions(headers);
-    print('headerPositions: $headerPositions');
+    logger.i('$this => headerPositions: $headerPositions');
 
     for (final row in rest) {
       if (row.isEmpty || (row.length == 1 && (row[0] as String).trim() == '')) {
@@ -37,8 +37,9 @@ class CsvConverter {
         try {
           latlong = LatLong(lat: double.parse(lat), lng: double.parse(lng));
         } catch (e) {
-          logger.e("Can't parse latlong: $e, $row");
-          print("Can't parse latlong: $e, $row");
+          logger
+            ..e("Can't parse latlong: $e, $row")
+            ..i("Can't parse latlong: $e, $row");
         }
       }
       final listItem = ListItem(
@@ -90,7 +91,7 @@ class CsvConverter {
         return keyword.name.toLowerCase();
       }
     }
-    print('$header is not matching a keyword');
+    logger.i('$this => $header is not matching a keyword');
     return null;
   }
 

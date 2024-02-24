@@ -23,6 +23,7 @@ mixin _$ListOfThings {
   String? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   ListType get listType => throw _privateConstructorUsedError;
+  String get imageFilename => throw _privateConstructorUsedError;
   bool get withMap => throw _privateConstructorUsedError;
   bool get withDates => throw _privateConstructorUsedError;
   bool get withTimes => throw _privateConstructorUsedError;
@@ -50,6 +51,7 @@ abstract class $ListOfThingsCopyWith<$Res> {
       {String? id,
       String name,
       ListType listType,
+      String imageFilename,
       bool withMap,
       bool withDates,
       bool withTimes,
@@ -78,6 +80,7 @@ class _$ListOfThingsCopyWithImpl<$Res, $Val extends ListOfThings>
     Object? id = freezed,
     Object? name = null,
     Object? listType = null,
+    Object? imageFilename = null,
     Object? withMap = null,
     Object? withDates = null,
     Object? withTimes = null,
@@ -102,6 +105,10 @@ class _$ListOfThingsCopyWithImpl<$Res, $Val extends ListOfThings>
           ? _value.listType
           : listType // ignore: cast_nullable_to_non_nullable
               as ListType,
+      imageFilename: null == imageFilename
+          ? _value.imageFilename
+          : imageFilename // ignore: cast_nullable_to_non_nullable
+              as String,
       withMap: null == withMap
           ? _value.withMap
           : withMap // ignore: cast_nullable_to_non_nullable
@@ -158,6 +165,7 @@ abstract class _$$ListOfThingsImplCopyWith<$Res>
       {String? id,
       String name,
       ListType listType,
+      String imageFilename,
       bool withMap,
       bool withDates,
       bool withTimes,
@@ -184,6 +192,7 @@ class __$$ListOfThingsImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = null,
     Object? listType = null,
+    Object? imageFilename = null,
     Object? withMap = null,
     Object? withDates = null,
     Object? withTimes = null,
@@ -208,6 +217,10 @@ class __$$ListOfThingsImplCopyWithImpl<$Res>
           ? _value.listType
           : listType // ignore: cast_nullable_to_non_nullable
               as ListType,
+      imageFilename: null == imageFilename
+          ? _value.imageFilename
+          : imageFilename // ignore: cast_nullable_to_non_nullable
+              as String,
       withMap: null == withMap
           ? _value.withMap
           : withMap // ignore: cast_nullable_to_non_nullable
@@ -259,6 +272,7 @@ class _$ListOfThingsImpl implements _ListOfThings {
       {required this.id,
       required this.name,
       required this.listType,
+      required this.imageFilename,
       required this.withMap,
       required this.withDates,
       required this.withTimes,
@@ -280,6 +294,8 @@ class _$ListOfThingsImpl implements _ListOfThings {
   final String name;
   @override
   final ListType listType;
+  @override
+  final String imageFilename;
   @override
   final bool withMap;
   @override
@@ -311,7 +327,7 @@ class _$ListOfThingsImpl implements _ListOfThings {
 
   @override
   String toString() {
-    return 'ListOfThings(id: $id, name: $name, listType: $listType, withMap: $withMap, withDates: $withDates, withTimes: $withTimes, shared: $shared, shareCodeForViewer: $shareCodeForViewer, shareCodeForEditor: $shareCodeForEditor, sharedWith: $sharedWith, ownerId: $ownerId, isOwnList: $isOwnList, shareType: $shareType)';
+    return 'ListOfThings(id: $id, name: $name, listType: $listType, imageFilename: $imageFilename, withMap: $withMap, withDates: $withDates, withTimes: $withTimes, shared: $shared, shareCodeForViewer: $shareCodeForViewer, shareCodeForEditor: $shareCodeForEditor, sharedWith: $sharedWith, ownerId: $ownerId, isOwnList: $isOwnList, shareType: $shareType)';
   }
 
   @override
@@ -323,6 +339,8 @@ class _$ListOfThingsImpl implements _ListOfThings {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.listType, listType) ||
                 other.listType == listType) &&
+            (identical(other.imageFilename, imageFilename) ||
+                other.imageFilename == imageFilename) &&
             (identical(other.withMap, withMap) || other.withMap == withMap) &&
             (identical(other.withDates, withDates) ||
                 other.withDates == withDates) &&
@@ -349,6 +367,7 @@ class _$ListOfThingsImpl implements _ListOfThings {
       id,
       name,
       listType,
+      imageFilename,
       withMap,
       withDates,
       withTimes,
@@ -379,6 +398,7 @@ abstract class _ListOfThings implements ListOfThings {
       {required final String? id,
       required final String name,
       required final ListType listType,
+      required final String imageFilename,
       required final bool withMap,
       required final bool withDates,
       required final bool withTimes,
@@ -399,6 +419,8 @@ abstract class _ListOfThings implements ListOfThings {
   String get name;
   @override
   ListType get listType;
+  @override
+  String get imageFilename;
   @override
   bool get withMap;
   @override

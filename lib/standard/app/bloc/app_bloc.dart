@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/userRepository/user_service.dart';
 import '/standard/app/bloc/app_event.dart';
 import '/standard/app/bloc/app_state.dart';
@@ -47,7 +48,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         // TODO: Handle all of this correctly
         if (!user.hasLoadedFromFirestore) {
           final firestoreUser = await _userService.getUser();
-          print('loaded firestoreUser: $firestoreUser');
+          logger.i('$this => loaded firestoreUser: $firestoreUser');
 
           final mergedUser = (firestoreUser == null)
               ? user.copyWith(hasLoadedFromFirestore: true)

@@ -15,6 +15,7 @@ class ListOfThings with _$ListOfThings {
     required String? id,
     required String name,
     required ListType listType,
+    required String imageFilename,
     required bool withMap,
     required bool withDates,
     required bool withTimes,

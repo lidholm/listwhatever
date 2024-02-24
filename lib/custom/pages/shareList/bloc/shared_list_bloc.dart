@@ -13,7 +13,7 @@ class SharedListBloc extends Bloc<SharedListEvent, SharedListState> {
   final SharedListsService _sharedListsService;
 
   Future<void> _onLoadSharedList(LoadSharedList event, Emitter<SharedListState> emit) async {
-    // logger.i('_onLoadSharedList');
+    // logger.i('$this => _onLoadSharedList');
     try {
       emit(SharedListLoading());
       final sharedList = await _sharedListsService.getSharedList(event.shareCode);

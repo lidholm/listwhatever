@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:listwhatever/standard/constants.dart';
 
 class CurrentLocationCubit extends Cubit<Position?> {
   CurrentLocationCubit() : super(null) {
@@ -18,7 +19,7 @@ class CurrentLocationCubit extends Cubit<Position?> {
   Future<void> _getCurrentLocation() async {
     try {
       final position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-      print('position: $position');
+      logger.i('$this => position: $position');
       emit(position);
     } catch (e) {
       // handle exception

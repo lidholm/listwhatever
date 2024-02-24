@@ -35,6 +35,7 @@ class ListCrudBloc extends Bloc<ListCrudEvent, ListCrudState> {
       final listId = await _listsService.addList(event.list);
       final userList = UserList(
         id: '',
+        imageFilename: list.imageFilename,
         listId: listId,
         listName: list.name,
         listType: list.listType,
@@ -50,7 +51,7 @@ class ListCrudBloc extends Bloc<ListCrudEvent, ListCrudState> {
   }
 
   Future<void> _onUpdateList(UpdateList event, Emitter<ListCrudState> emit) async {
-    // logger.i('_onUpdateList');
+    // logger.i('$this => _onUpdateList');
     try {
       emit(ListCrudLoading());
       await _listsService.updateList(event.list);

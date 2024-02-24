@@ -28,7 +28,7 @@ class ListItemsLoadBloc extends Bloc<ListItemsLoadEvent, ListItemsLoadState> {
   }
 
   Future<void> _onLoadListItems(LoadListItems event, Emitter<ListItemsLoadState> emit) async {
-    logger.i('loading list item for list ${event.listId}');
+    logger.i('$this => loading list item for list ${event.listId}');
     try {
       emit(ListItemsLoadLoading());
       final userList = await _userListsService.getList(event.listId);
@@ -41,7 +41,7 @@ class ListItemsLoadBloc extends Bloc<ListItemsLoadEvent, ListItemsLoadState> {
   }
 
   Future<void> _onWatchListItems(WatchListItems event, Emitter<ListItemsLoadState> emit) async {
-    logger.i('loading list item for list ${event.listId}');
+    logger.i('$this => loading list item for list ${event.listId}');
     try {
       emit(ListItemsLoadLoading());
       final userList = await _userListsService.getList(event.listId);
