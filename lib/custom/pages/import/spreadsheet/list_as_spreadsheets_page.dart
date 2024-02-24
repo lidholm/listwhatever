@@ -103,17 +103,38 @@ class _ListAsSpreadsheetsPageInnerState extends State<ListAsSpreadsheetsPageInne
     );
   }
 
-  PlutoGrid getPlutoGrid() {
+  Widget getPlutoGrid() {
     final categories = getCategories(_items);
 
-    return PlutoGrid(
-      columns: getColumns(categories),
-      rows: getRows(categories),
-      columnGroups: getColumnGroups(categories),
-      onLoaded: (PlutoGridOnLoadedEvent event) {
-        stateManager = event.stateManager;
-      },
-    );
+    final columns = getColumns(categories);
+    final rows = getRows(categories);
+
+    logger
+      ..i('columns: ${columns.map(
+        (e) => e.field,
+      )}')
+      ..i('rows: ${rows.map((e) => e.toJson())}');
+
+    if (categories.isEmpty) {
+      return PlutoGrid(
+        columns: columns,
+        rows: rows,
+        onLoaded: (PlutoGridOnLoadedEvent event) {
+          stateManager = event.stateManager;
+        },
+      );
+    } else {
+      final columnGroups = categories.isNotEmpty ? getColumnGroups(categories) : null;
+      logger.i('columnGroups: $columnGroups');
+      return PlutoGrid(
+        columns: columns,
+        rows: rows,
+        columnGroups: columnGroups,
+        onLoaded: (PlutoGridOnLoadedEvent event) {
+          stateManager = event.stateManager;
+        },
+      );
+    }
   }
 
   List<PlutoColumn> getColumns(Map<String, Set<String>> categories) {
@@ -162,7 +183,7 @@ class _ListAsSpreadsheetsPageInnerState extends State<ListAsSpreadsheetsPageInne
           field: 'date',
           type: PlutoColumnType.date(),
         ),
-      if (widget.list.withTimes)
+      if (widget.list.withDates && widget.list.withTimes)
         PlutoColumn(
           title: 'Time',
           field: 'time',
