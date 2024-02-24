@@ -3,9 +3,6 @@ import {onDocumentWritten} from 'firebase-functions/v2/firestore';
 import {getFirestore} from 'firebase-admin/firestore';
 import * as logger from 'firebase-functions/logger';
 
-import * as firestoreUtils from './firestoreUtils';
-
-
 export const updateUserLists = onDocumentWritten('/lists/{listId}', async (event: any): Promise<void> => {
   const listId = event.params.listId;
 
@@ -27,13 +24,22 @@ export const updateUserLists = onDocumentWritten('/lists/{listId}', async (event
 
     const query = collectionRef.where('listId', '==', listInfo.id);
 
-    query.get().then((querySnapshot) => {
-  querySnapshot.forEach((doc) => {
-    console.log(doc.id, doc.data());
-  });
-});
+    const querySnapshot = await query.get();
+    for (const doc of querySnapshot.docs) {
+      const docId = doc.id;
+      const userList = doc.data();
+      console.log('docId: ', docId);
+      console.log('userList: ', userList);
+
+      userList.listName = listInfo.name;
+      userList.listType = listInfo.listType;
+      userList.imageFilename = listInfo.imageFilename;
+
+      console.log(doc.id, userList);
+
+      const userListPath = `users/${userListId}/lists/${docId}`;
+      const userListDoc = getFirestore().doc(userListPath);
+      await userListDoc.set(userList, {merge: true});
+    }
   }
-  // sharedListPath = `sharedLists/${editorCode}`;
-  // sharedListDocRef = getFirestore().doc(sharedListPath);
-  // await sharedListDocRef.set({...data, shareType: 'editor'}, {merge: true});
 });
