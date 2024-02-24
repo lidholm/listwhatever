@@ -203,10 +203,7 @@ class _AddListPageState extends State<AddListPage> {
             if (firebaseStorage == null) {
               return Container();
             }
-            final imageFilename = _selectedImageFilename ??
-                ((selectedListType != null && selectedListType != ListType.other)
-                    ? selectedListType!.getImagePath()
-                    : 'generic.jpg');
+            final imageFilename = getImageFilename();
             logger.i('$this => imageFilename: $imageFilename');
             final imageUrlFuture = firebaseStorage.ref().child('images').child(imageFilename).getDownloadURL();
             return FutureBuilder(
@@ -272,6 +269,13 @@ class _AddListPageState extends State<AddListPage> {
         ),
       ],
     );
+  }
+
+  String getImageFilename() {
+    return _selectedImageFilename ??
+        ((selectedListType != null && selectedListType != ListType.other)
+            ? selectedListType!.getImagePath()
+            : 'generic.jpg');
   }
 
   Widget getWithMapCheckbox() {
@@ -357,7 +361,9 @@ class _AddListPageState extends State<AddListPage> {
 
         if (data.bytesTransferred >= data.totalBytes) {
           logger.i('$this => upload is done!');
-          _selectedImageFilename = fileName;
+          setState(() {
+            _selectedImageFilename = fileName;
+          });
           logger.i('$this => _selectedImageFilename: $_selectedImageFilename');
         }
       });
@@ -383,7 +389,7 @@ class _AddListPageState extends State<AddListPage> {
       id: initialValue[AddListValues.id.toString()] as String?,
       name: values[AddListValues.name.toString()]! as String,
       listType: listType,
-      imageFilename: '1708696124638.png',
+      imageFilename: getImageFilename(),
       withMap: values[AddListValues.withMap.toString()] as bool,
       withDates: values[AddListValues.withDates.toString()] as bool,
       withTimes: values[AddListValues.withTimes.toString()] as bool,
