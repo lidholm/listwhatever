@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listwhatever/standard/app/bloc/app_bloc.dart';
 import 'package:listwhatever/standard/app/widgets/authenticated_user_listener.dart';
+import 'package:listwhatever/standard/changeUserBloc/bloc/change_user_bloc_bloc.dart';
 import 'package:listwhatever/standard/theme_selector/bloc/theme_mode_bloc.dart';
 
 import '/custom/currentLocationBloc/current_location_bloc.dart';
@@ -81,6 +82,7 @@ class App extends StatelessWidget {
                   userService: userService,
                 )..add(const AppOpened()),
               ),
+              BlocProvider<ChangeUserBlocBloc>(create: (context) => ChangeUserBlocBloc()),
               BlocProvider(create: (_) => ThemeModeBloc()),
               BlocProvider<OnScreenLogsCubit>(create: (context) => OnScreenLogsCubit()),
               BlocProvider<SearchLocationBloc>(create: (context) => SearchLocationBloc()),
