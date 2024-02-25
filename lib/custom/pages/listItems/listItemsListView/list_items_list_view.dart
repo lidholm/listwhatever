@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:listwhatever/standard/widgets/vStack/v_stack.dart';
 
+import '/custom/pages/listItems/models/list_item.dart';
 import '/standard/constants.dart';
-import 'list_item.dart';
+import '/standard/widgets/vStack/v_stack.dart';
 
 class ListItemsListView extends StatelessWidget {
   const ListItemsListView({required this.listId, required this.items, required this.onTap, super.key});

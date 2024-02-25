@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-import 'firebase_in_app_messaging.dart';
+import 'package:listwhatever/custom/pages/firebase_in_app_messaging/firebase_in_app_messaging_page.dart';
 
 @immutable
 class FirebaseInAppMessagingPageRoute extends GoRouteData {

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
+import '/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
 
 import '/custom/pages/shareList/bloc/shared_list_state.dart';
 import '/standard/constants.dart';
-import '../lists/list_load_events/list_load_state.dart';
-import '../lists/lists_load_events/lists_state.dart';
-import 'list_item_load_bloc/list_item_load_state.dart';
+import 'listItems/list_item_load_bloc/list_item_load_state.dart';
+import 'lists/list_load_events/list_load_state.dart';
+import 'lists/lists_load_events/lists_state.dart';
 
 class ListOrListItemNotLoadedHandler {
   static Widget? handleListAndListItemsState(ListLoadState listState, ListItemsLoadState listItemsState) {

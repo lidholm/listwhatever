@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../list_item.dart';
+import '/custom/pages/listItems/models/list_item.dart';
 
 @immutable
 sealed class ListItemLoadState {}

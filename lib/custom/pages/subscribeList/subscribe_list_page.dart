@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
+import '/custom/pages/list_or_list_item_not_loaded_handler.dart';
 import '/custom/pages/shareList/bloc/shared_list_bloc.dart';
 import '/custom/pages/shareList/bloc/shared_list_event.dart';
 import '/custom/pages/shareList/bloc/shared_list_state.dart';

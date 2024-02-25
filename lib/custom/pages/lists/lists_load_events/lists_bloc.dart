@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:listwhatever/custom/pages/lists/models/user_list.dart';
+import '/custom/pages/lists/models/user_list.dart';
 import '/custom/pages/lists/user_lists_service.dart';
 
 import '/standard/constants.dart';

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:listwhatever/standard/constants.dart';
+import '/standard/constants.dart';
 
 class CurrentLocationCubit extends Cubit<Position?> {
   CurrentLocationCubit() : super(null) {

@@ -1,5 +1,6 @@
 import 'package:csv/csv.dart';
-import '/custom/pages/listItems/list_item.dart';
+import '/custom/pages/listItems/models/list_item.dart';
+
 import '/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
 import '/standard/constants.dart';
 

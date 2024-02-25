@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-import 'list_items_page.dart';
+import '/custom/pages/listItems/listItemsPage/list_items_page.dart';
 
 @immutable
 class ListItemsPageRoute extends GoRouteData {

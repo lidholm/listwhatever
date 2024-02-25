@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:listwhatever/custom/pages/lists/models/list_type.dart';
+import '/custom/pages/lists/models/list_type.dart';
 
 part 'user_list.freezed.dart';
 part 'user_list.g.dart';

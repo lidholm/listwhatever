@@ -1,16 +1,16 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:listwhatever/standard/analyticsRepository/analytics_repository.dart';
 import '/standard/analytics/bloc/analytics_event.dart';
-import '/standard/analyticsRepository/index.dart' as analytics;
 import '/standard/userRepository/models/user.dart';
 import '/standard/userRepository/user_repository.dart';
 
 import 'analytics_state.dart';
 
-class AnalyticsBloc extends Bloc<AnalyticsEvent, AnalyticsState> {
+class AnalyticsBloc extends Bloc<BaseAnalyticsEvent, AnalyticsState> {
   AnalyticsBloc({
-    required analytics.AnalyticsRepository analyticsRepository,
+    required AnalyticsRepository analyticsRepository,
     required UserRepository userRepository,
   })  : _analyticsRepository = analyticsRepository,
         super(AnalyticsInitial()) {
@@ -19,7 +19,7 @@ class AnalyticsBloc extends Bloc<AnalyticsEvent, AnalyticsState> {
     _userSubscription = userRepository.user.listen(_onUserChanged);
   }
 
-  final analytics.AnalyticsRepository _analyticsRepository;
+  final AnalyticsRepository _analyticsRepository;
   late StreamSubscription<User> _userSubscription;
 
   Future<void> _onUserChanged(User user) async {

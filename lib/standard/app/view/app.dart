@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listwhatever/custom/currentLocationBloc/current_location_bloc.dart';
-import 'package:listwhatever/custom/pages/listItems/filters/bloc/filter_bloc.dart';
-import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_bloc.dart';
-import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_bloc.dart';
-import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_bloc.dart';
-import 'package:listwhatever/custom/pages/lists/lists_load_events/lists_bloc.dart';
-import 'package:listwhatever/standard/userRepository/user_service.dart';
+import 'package:listwhatever/standard/app/bloc/app_bloc.dart';
+import 'package:listwhatever/standard/app/widgets/authenticated_user_listener.dart';
+import 'package:listwhatever/standard/theme_selector/bloc/theme_mode_bloc.dart';
 
+import '/custom/currentLocationBloc/current_location_bloc.dart';
 import '/custom/navigation/get_router_provider_information.dart';
 import '/custom/navigation/routes.dart';
+import '/custom/pages/listItems/filters/bloc/filter_bloc.dart';
 import '/custom/pages/listItems/filters/filter_view.dart';
-import '/custom/pages/listItems/list_items_page_view_cubit.dart';
-import '/custom/pages/listItems/list_items_service.dart';
-import '/custom/pages/listItems/list_items_sort_order_cubit.dart';
+import '/custom/pages/listItems/listItemsListView/list_items_sort_order_cubit.dart';
+import '/custom/pages/listItems/listItemsPage/list_items_page_view_cubit.dart';
+import '/custom/pages/listItems/list_item_crud_bloc/list_item_crud_bloc.dart';
+import '/custom/pages/listItems/list_item_load_bloc/list_item_load_bloc.dart';
+import '/custom/pages/listItems/list_items_load_bloc/list_items_load_bloc.dart';
 import '/custom/pages/listItems/searchLocation/search_location_bloc.dart';
+import '/custom/pages/listItems/service/list_items_service.dart';
+import '/custom/pages/lists/list_crud_events/list_crud_bloc.dart';
+import '/custom/pages/lists/list_load_events/list_load_bloc.dart';
+import '/custom/pages/lists/lists_load_events/lists_bloc.dart';
 import '/custom/pages/lists/lists_service.dart';
 import '/custom/pages/lists/user_lists_service.dart';
 import '/custom/pages/shareList/bloc/shared_list_bloc.dart';
@@ -24,7 +28,6 @@ import '/custom/pages/subscribeList/bloc/subscribe_list_bloc.dart';
 import '/l10n/l10n.dart';
 import '/standard/analytics/bloc/analytics_bloc.dart';
 import '/standard/analyticsRepository/analytics_repository.dart';
-import '/standard/app/app.dart';
 import '/standard/app/bloc/app_event.dart';
 import '/standard/app/widgets/to_onscreen_logs_listener.dart';
 import '/standard/appUi/theme/app_theme.dart';
@@ -33,11 +36,9 @@ import '/standard/constants.dart';
 import '/standard/navigation/redirect_cubit.dart';
 import '/standard/navigation/router.dart';
 import '/standard/onScreenLog/on_screen_log_cubit.dart';
-import '/standard/theme_selector/theme_selector.dart';
 import '/standard/userRepository/models/user.dart';
 import '/standard/userRepository/user_repository.dart';
-import '../../../custom/pages/listItems/list_item_crud_bloc/list_item_crud_bloc.dart';
-import '../../../custom/pages/listItems/list_item_load_bloc/list_item_load_bloc.dart';
+import '/standard/userRepository/user_service.dart';
 
 class App extends StatelessWidget {
   const App({

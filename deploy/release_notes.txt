@@ -1,3 +1,8 @@
+0.0.39
+* Refactor
+  * Remove barrel files
+  * Better diretcory structure for listItems
+
 0.0.38
 * Allow to upload image for list
 * Propogate updates to list to user list

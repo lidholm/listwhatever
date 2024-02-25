@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:listwhatever/standard/appUi/colors/app_colors.dart';
-import 'package:listwhatever/standard/constants.dart';
+import '/standard/appUi/colors/app_colors.dart';
+import '/standard/constants.dart';
 import '/standard/navigation/widgets/shimmer/shimmer_loading.dart';
 
 const imageRadius = 16.0;

@@ -1,14 +1,14 @@
 import 'package:equatable/equatable.dart';
-import '/standard/analyticsRepository/index.dart' as analytics;
+import 'package:listwhatever/standard/analyticsRepository/models/analytics_event.dart';
 
-sealed class AnalyticsEvent extends Equatable {
-  const AnalyticsEvent();
+sealed class BaseAnalyticsEvent extends Equatable {
+  const BaseAnalyticsEvent();
 }
 
-class TrackAnalyticsEvent extends AnalyticsEvent {
+class TrackAnalyticsEvent extends BaseAnalyticsEvent {
   const TrackAnalyticsEvent(this.event);
 
-  final analytics.AnalyticsEvent event;
+  final AnalyticsEvent event;
 
   @override
   List<Object> get props => [event];

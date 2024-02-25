@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:listwhatever/standard/userRepository/firestore_user.dart';
-import 'package:listwhatever/standard/userRepository/models/user.dart';
 
 import '/standard/constants.dart';
 import '/standard/firebase/firestore/firestore.dart';
+import '/standard/userRepository/firestore_user.dart';
+import '/standard/userRepository/models/user.dart';
 
 class UserService {
   UserService({required this.userId}) {

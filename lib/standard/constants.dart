@@ -3,8 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:listwhatever/custom/pages/listItems/list_item.dart';
 import 'package:logger/logger.dart';
+
+import '/custom/pages/listItems/models/list_item.dart';
 
 Logger logger = Logger(
   // printer: PrettyPrinter(methodCount: 0, printTime: true),

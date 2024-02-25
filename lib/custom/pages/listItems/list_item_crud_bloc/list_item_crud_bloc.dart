@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:collection/collection.dart';
-import '/custom/pages/listItems/list_items_service.dart';
+import '/custom/pages/listItems/service/list_items_service.dart';
 import '/custom/pages/lists/user_lists_service.dart';
 import '/standard/constants.dart';
 

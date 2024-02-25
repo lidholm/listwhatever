@@ -15,15 +15,13 @@ class ListItem with _$ListItem {
     @Default(null) String? info,
     @Default([]) List<String> urls,
     @Default(null) DateTime? datetime,
-    @JsonKey(fromJson: _fromJsonGeoPoint, toJson: _toJsonGeoPoint)
-    @Default(null) LatLong? latLong,
+    @JsonKey(fromJson: _fromJsonGeoPoint, toJson: _toJsonGeoPoint) @Default(null) LatLong? latLong,
     @Default(null) String? address,
     @Default({}) Map<String, List<String>> categories,
     @Default(null) String? latestUpdateUser,
   }) = _ListItem;
 
-  factory ListItem.fromJson(Map<String, Object?> json)
-  => _$ListItemFromJson(json);
+  factory ListItem.fromJson(Map<String, Object?> json) => _$ListItemFromJson(json);
 }
 
 GeoPoint? _toJsonGeoPoint(LatLong? latLong) {

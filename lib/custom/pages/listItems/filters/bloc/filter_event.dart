@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:listwhatever/custom/pages/listItems/filters/filters.dart';
+import '/custom/pages/listItems/filters/filters.dart';
 
 @immutable
 sealed class FilterEvent {}

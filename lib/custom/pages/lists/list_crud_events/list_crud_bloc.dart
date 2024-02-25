@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:listwhatever/custom/pages/lists/models/user_list.dart';
-import '/custom/pages/lists/lists_service.dart';
-import '/custom/pages/lists/user_lists_service.dart';
 
+import '/custom/pages/lists/lists_service.dart';
+import '/custom/pages/lists/models/user_list.dart';
+import '/custom/pages/lists/user_lists_service.dart';
 import '/standard/constants.dart';
 import 'list_crud_event.dart';
 import 'list_crud_state.dart';

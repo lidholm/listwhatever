@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '/standard/app/app.dart';
+import 'package:listwhatever/standard/app/bloc/app_bloc.dart';
+import 'package:listwhatever/standard/navigation/view/nav_drawer.dart';
+import 'package:listwhatever/standard/user_profile/widgets/user_profile_button.dart';
 import '/standard/app/bloc/app_state.dart';
 import '/standard/appUi/widgets/app_logo.dart';
 import '/standard/appUi/widgets/show_app_modal.dart';
-import '/standard/navigation/navigation.dart';
-import '/standard/user_profile/user_profile.dart';
 import '/standard/view/login_modal.dart';
 
 class HomeView extends StatelessWidget {

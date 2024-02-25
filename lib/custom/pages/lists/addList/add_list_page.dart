@@ -8,22 +8,22 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:listwhatever/custom/pages/lists/addList/upload_task_tile.dart';
-import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_bloc.dart';
-import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_event.dart';
-import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_state.dart';
-import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
-import 'package:listwhatever/standard/appUi/theme/app_theme.dart';
-import 'package:listwhatever/standard/firebase/firestore/firebase_storage.dart';
 
-import '/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
+import '/custom/pages/list_or_list_item_not_loaded_handler.dart';
+import '/custom/pages/lists/addList/upload_task_tile.dart';
+import '/custom/pages/lists/list_crud_events/list_crud_bloc.dart';
+import '/custom/pages/lists/list_crud_events/list_crud_event.dart';
+import '/custom/pages/lists/list_crud_events/list_crud_state.dart';
+import '/custom/pages/lists/list_load_events/list_load_bloc.dart';
+import '/custom/pages/lists/list_load_events/list_load_event.dart';
+import '/custom/pages/lists/list_load_events/list_load_state.dart';
+import '/custom/pages/lists/models/list_of_things.dart';
+import '/custom/pages/lists/models/list_type.dart';
+import '/standard/appUi/theme/app_theme.dart';
 import '/standard/constants.dart';
+import '/standard/firebase/firestore/firebase_storage.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
 import '/standard/widgets/vStack/v_stack.dart';
-import '../list_load_events/list_load_bloc.dart';
-import '../list_load_events/list_load_event.dart';
-import '../list_load_events/list_load_state.dart';
-import '../models/list_type.dart';
 
 const imageSize = 80.0;
 

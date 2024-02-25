@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:listwhatever/standard/app/bloc/app_bloc.dart';
+import 'package:listwhatever/standard/user_profile/page/user_profile_page_route.dart';
 import '/custom/navigation/routes.dart';
 import '/l10n/l10n.dart';
-import '/standard/app/app.dart';
 import '/standard/appUi/generated/assets.gen.dart';
 import '/standard/appUi/spacing/app_spacing.dart';
 import '/standard/appUi/widgets/show_app_modal.dart';
-import '/standard/user_profile/user_profile.dart';
 import '/standard/view/login_modal.dart';
 
 /// A user profile button which displays a [LoginButton]
