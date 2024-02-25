@@ -35,8 +35,15 @@ import '/standard/widgets/appBar/common_app_bar.dart';
 import 'list_items_page_view_cubit.dart';
 
 class InnerListItemsPage extends StatefulWidget {
-  const InnerListItemsPage(this.user, this.list, this.listItems, this.filters, this.currentLocation, this.viewToShow,
-      {super.key});
+  const InnerListItemsPage(
+    this.user,
+    this.list,
+    this.listItems,
+    this.filters,
+    this.currentLocation,
+    this.viewToShow, {
+    super.key,
+  });
 
   final User user;
   final ListOfThings list;
