@@ -1,4 +1,5 @@
-import '/standard/app/app.dart';
+import 'package:listwhatever/standard/app/view/app.dart';
+
 import '/standard/main/bootstrap/bootstrap.dart';
 import '/standard/userRepository/user_repository.dart';
 

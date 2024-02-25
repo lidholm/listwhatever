@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/standard/app/bloc/app_bloc.dart';
+import 'package:listwhatever/standard/user_profile/bloc/user_profile_bloc.dart';
 
 import '/l10n/l10n.dart';
 import '/standard/analytics/bloc/analytics_bloc.dart';
 import '/standard/analytics/bloc/analytics_event.dart';
 import '/standard/analyticsRepository/models/ntg_event.dart';
-import '/standard/app/app.dart';
 import '/standard/app/bloc/app_event.dart';
 import '/standard/app/bloc/app_state.dart';
 import '/standard/appUi/colors/app_colors.dart';
@@ -18,7 +19,6 @@ import '/standard/settings/settings.dart';
 import '/standard/userRepository/user_repository.dart';
 import '/standard/user_profile/bloc/user_profile_event.dart';
 import '/standard/user_profile/bloc/user_profile_state.dart';
-import '/standard/user_profile/user_profile.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
 
 class UserProfilePage extends StatelessWidget {

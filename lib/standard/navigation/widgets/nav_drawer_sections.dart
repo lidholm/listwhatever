@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
+import 'package:listwhatever/custom/pages/crashlytics/crashlytics_page_route.dart';
+import 'package:listwhatever/custom/pages/firebase_performance/firebase_performance_page_route.dart';
 
 import '/custom/navigation/routes.dart';
 import '/custom/pages/about/about_page_route.dart';
-import '/custom/pages/crashlytics/crashlytics.dart';
 import '/custom/pages/deleteAccount/delete_account_page_route.dart';
-import '/custom/pages/firebase_performance/firebase_performance.dart';
 import '/custom/pages/lists/page/lists_page_route.dart';
 import '/custom/pages/privacyPolicy/privacy_policy_page_route.dart';
 import '/custom/pages/remoteConfig/remote_config_page_route.dart';

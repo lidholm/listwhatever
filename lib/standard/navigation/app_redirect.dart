@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '/standard/app/app.dart';
+import 'package:listwhatever/standard/app/bloc/app_bloc.dart';
+import 'package:listwhatever/standard/navigation/models/router_provider_information.dart';
 import '/standard/app/bloc/app_state.dart';
 import '/standard/constants.dart';
 import '/standard/navigation/redirect_cubit.dart';
-
-import 'navigation.dart';
 
 class AppRedirect {
   Future<String?> appRedirect(

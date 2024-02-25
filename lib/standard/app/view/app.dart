@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/standard/app/bloc/app_bloc.dart';
+import 'package:listwhatever/standard/app/widgets/authenticated_user_listener.dart';
+import 'package:listwhatever/standard/theme_selector/bloc/theme_mode_bloc.dart';
 
 import '/custom/currentLocationBloc/current_location_bloc.dart';
 import '/custom/navigation/get_router_provider_information.dart';
@@ -25,7 +28,6 @@ import '/custom/pages/subscribeList/bloc/subscribe_list_bloc.dart';
 import '/l10n/l10n.dart';
 import '/standard/analytics/bloc/analytics_bloc.dart';
 import '/standard/analyticsRepository/analytics_repository.dart';
-import '/standard/app/app.dart';
 import '/standard/app/bloc/app_event.dart';
 import '/standard/app/widgets/to_onscreen_logs_listener.dart';
 import '/standard/appUi/theme/app_theme.dart';
@@ -34,7 +36,6 @@ import '/standard/constants.dart';
 import '/standard/navigation/redirect_cubit.dart';
 import '/standard/navigation/router.dart';
 import '/standard/onScreenLog/on_screen_log_cubit.dart';
-import '/standard/theme_selector/theme_selector.dart';
 import '/standard/userRepository/models/user.dart';
 import '/standard/userRepository/user_repository.dart';
 import '/standard/userRepository/user_service.dart';
