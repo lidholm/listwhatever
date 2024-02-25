@@ -8,6 +8,11 @@ enum DistanceUnitOptions {
   miles,
 }
 
+enum MapsType {
+  googleMaps,
+  flutterMaps,
+}
+
 const metersInMile = 1608;
 const metersInKilometer = 1000;
 
@@ -19,6 +24,7 @@ double convertDistanceToMeters(DistanceUnitOptions distanceTypes, double d) {
 abstract class Settings with _$Settings {
   const factory Settings({
     required DistanceUnitOptions distanceUnit,
+    @Default(MapsType.flutterMaps) MapsType mapsType,
   }) = _Settings;
 
   factory Settings.fromJson(Map<String, dynamic> json) => _$SettingsFromJson(json);
