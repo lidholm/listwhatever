@@ -32,4 +32,5 @@
   - [ ] Checkboxes for ones to choose from
 - [ ] User profile and settings (e.g. use Google Maps or flutter_map)
 - [ ] Better position for markers so they don't move when zooming
+- [ ] Create a bloc that only sends updated users to user service and userlistservice etc
 

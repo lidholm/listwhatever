@@ -5,6 +5,8 @@ import '/standard/settings/settings.dart';
 part 'user.freezed.dart';
 part 'user.g.dart';
 
+const anonymousId = 'anonymous';
+
 @freezed
 abstract class User with _$User {
   const factory User({
@@ -24,7 +26,7 @@ abstract class User with _$User {
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   bool isAnonymous() {
-    return anonymous || id == '';
+    return anonymous || id == anonymousId;
   }
 }
 
@@ -43,7 +45,7 @@ User fromAuthenticationUser(AuthenticationUser authenticationUser) {
 
 const anonymousUser = User(
   email: '',
-  id: '',
+  id: anonymousId,
   name: '',
   photo: '',
   isNewUser: false,

@@ -20,6 +20,7 @@ class UserService {
   // ignore: use_setters_to_change_properties
   void changeUser(String? userId) {
     this.userId = userId;
+    logger.i('$this => changing user: $userId');
   }
 
   Future<DocumentReference<Map<String, dynamic>>> getDocument() async {
@@ -29,6 +30,9 @@ class UserService {
   }
 
   Future<FirestoreUser?> getUser() async {
+    if (userId == null) {
+      return null;
+    }
     final fu = await getDocument();
     final data = (await fu.get()).data();
     if (data == null) {

@@ -59,7 +59,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     logger.d('starting app');
-    final initialUserId = _user.id;
+    final initialUserId = _user.id.isEmpty ? null : _user.id;
 
     final sharedListsService = SharedListsService();
     final userListsService = UserListsService(userId: initialUserId);
