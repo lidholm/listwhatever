@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:listwhatever/custom/pages/listItems/list_item.dart';
-import 'package:listwhatever/custom/pages/listItems/list_items_service.dart';
-import 'package:listwhatever/custom/pages/lists/user_lists_service.dart';
+import '/custom/pages/listItems/models/list_item.dart';
+import '/custom/pages/listItems/service/list_items_service.dart';
+import '/custom/pages/lists/user_lists_service.dart';
 
 import '/standard/constants.dart';
 import 'list_items_load_event.dart';

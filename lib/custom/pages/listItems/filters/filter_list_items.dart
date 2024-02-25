@@ -1,8 +1,8 @@
 import 'package:great_circle_distance_calculator/great_circle_distance_calculator.dart';
+import '/custom/pages/listItems/models/list_item.dart';
 
 import '/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
 import '/standard/constants.dart';
-import '../list_item.dart';
 import 'filters.dart';
 
 typedef CategoryFilters = Map<String, List<String>>;

@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:listwhatever/custom/pages/listItems/filters/filters.dart';
+import '/custom/pages/listItems/filters/filters.dart';
 import '/standard/constants.dart';
 
 import 'filter_event.dart';

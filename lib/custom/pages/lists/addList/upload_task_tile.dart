@@ -1,6 +1,6 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:listwhatever/standard/constants.dart';
+import '/standard/constants.dart';
 
 class UploadTaskListTile extends StatelessWidget {
   // ignore: public_member_api_docs

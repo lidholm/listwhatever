@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:listwhatever/standard/settings/settings.dart';
+import '/standard/settings/settings.dart';
 
 part 'firestore_user.freezed.dart';
 part 'firestore_user.g.dart';

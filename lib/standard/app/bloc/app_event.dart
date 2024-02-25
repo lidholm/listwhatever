@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:listwhatever/standard/settings/settings.dart';
+import '/standard/settings/settings.dart';
 import '/standard/userRepository/models/user.dart';
 
 abstract class AppEvent extends Equatable {

@@ -1,5 +1,5 @@
 import 'package:listwhatever/custom/pages/import/csv/convert_csv_to_list_items.dart';
-import 'package:listwhatever/custom/pages/listItems/list_item.dart';
+import 'package:listwhatever/custom/pages/listItems/models/list_item.dart';
 import 'package:listwhatever/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
 import 'package:test/test.dart';
 
@@ -29,17 +29,17 @@ void main() {
     final csvConverter = CsvConverter();
 
     expect(
-        csvConverter.getHeaderPositions(['name', 'datetime', 'info']),
-        {'name': 0, 'info': 2, 'datetime': 1},
+      csvConverter.getHeaderPositions(['name', 'datetime', 'info']),
+      {'name': 0, 'info': 2, 'datetime': 1},
     );
     expect(
-        csvConverter.getHeaderPositions([ 'DATETIME', 'Info', 'name']),
-        {'name': 2, 'info': 1, 'datetime': 0},
+      csvConverter.getHeaderPositions(['DATETIME', 'Info', 'name']),
+      {'name': 2, 'info': 1, 'datetime': 0},
     );
 
     expect(
-        csvConverter.getHeaderPositions(['name', 'datetime', 'info','latlong','address','categoryOne','categoryTwo']),
-        {'name': 0, 'info': 2, 'datetime': 1, 'latlong': 3, 'address': 4, 'categoryOne': 5, 'categoryTwo': 6},
+      csvConverter.getHeaderPositions(['name', 'datetime', 'info', 'latlong', 'address', 'categoryOne', 'categoryTwo']),
+      {'name': 0, 'info': 2, 'datetime': 1, 'latlong': 3, 'address': 4, 'categoryOne': 5, 'categoryTwo': 6},
     );
   });
 
@@ -47,8 +47,10 @@ void main() {
     final csvConverter = CsvConverter();
 
     expect(
-      csvConverter.getCategoryHeaders( {'name': 0, 'Color':1, 'Size':2},),
-      { 'Color':1, 'Size':2},
+      csvConverter.getCategoryHeaders(
+        {'name': 0, 'Color': 1, 'Size': 2},
+      ),
+      {'Color': 1, 'Size': 2},
     );
   });
 
@@ -59,7 +61,8 @@ void main() {
           Name
           First item
           Second item
-    '''.trim();
+    '''
+        .trim();
 
     final listItems = csvConverter.convert(csv);
 
@@ -83,7 +86,8 @@ void main() {
           Name, Info
           First item, hello
           Second item, hey
-    '''.trim();
+    '''
+        .trim();
 
     final listItems = csvConverter.convert(csv);
 
@@ -118,13 +122,19 @@ info,name,Color,difficulty
         id: null,
         name: 'Coronado Golf Course',
         info: 'Info, with a comma',
-        categories: {'Color': ['black', 'white'], 'difficulty': ['hard']},
+        categories: {
+          'Color': ['black', 'white'],
+          'difficulty': ['hard'],
+        },
       ),
       const ListItem(
         id: null,
         name: 'Sea N Air Golf Course',
         info: 'Sea N Air Golf Course, Coronado, CA',
-        categories: {'Color': ['red','blue','yellow'], 'difficulty': ['easy']},
+        categories: {
+          'Color': ['red', 'blue', 'yellow'],
+          'difficulty': ['easy'],
+        },
       ),
     ];
     expect(listItems, expected);
@@ -145,7 +155,7 @@ Second item, 65.3,65.8,"123 Main Street, CA 92260",2021-02-03 14:15:16,
       ListItem(
         id: null,
         name: 'First item',
-        datetime: DateTime(2012,01,12),
+        datetime: DateTime(2012, 01, 12),
         address: '2000 Visalia Row, CA 92118',
         latLong: const LatLong(lat: 12.2, lng: 43.1),
         urls: ['http://url1.com', 'https://url2.com'],
@@ -153,7 +163,7 @@ Second item, 65.3,65.8,"123 Main Street, CA 92260",2021-02-03 14:15:16,
       ListItem(
         id: null,
         name: 'Second item',
-        datetime: DateTime(2021,02,03,14,15,16),
+        datetime: DateTime(2021, 02, 03, 14, 15, 16),
         address: '123 Main Street, CA 92260',
         latLong: const LatLong(lat: 65.3, lng: 65.8),
       ),

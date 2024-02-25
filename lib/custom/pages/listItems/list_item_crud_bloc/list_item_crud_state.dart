@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:listwhatever/custom/pages/listItems/list_item.dart';
+import '/custom/pages/listItems/models/list_item.dart';
 
 @immutable
 sealed class ListItemCrudState {}

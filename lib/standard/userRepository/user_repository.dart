@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
-import 'package:listwhatever/standard/constants.dart';
+
 import '/standard/authenticationClient/authentication_client.dart';
+import '/standard/constants.dart';
 import '/standard/userRepository/models/user.dart';
 import '/standard/userRepository/user_storage.dart';
 

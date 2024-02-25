@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
-import 'package:listwhatever/custom/pages/lists/models/list_type.dart';
+import '/custom/pages/lists/models/list_of_things.dart';
+import '/custom/pages/lists/models/list_type.dart';
 
 part 'shared_list.freezed.dart';
 part 'shared_list.g.dart';

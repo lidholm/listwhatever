@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:listwhatever/standard/authenticationClient/models/authentication_user.dart';
-import 'package:listwhatever/standard/settings/settings.dart';
+import '/standard/authenticationClient/models/authentication_user.dart';
+import '/standard/settings/settings.dart';
 
 part 'user.freezed.dart';
 part 'user.g.dart';

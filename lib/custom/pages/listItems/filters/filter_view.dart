@@ -5,13 +5,13 @@ import 'package:another_xlider/models/trackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
-import 'package:listwhatever/standard/constants.dart';
-import 'package:listwhatever/standard/settings/settings.dart';
 
 import '/custom/pages/listItems/filters/filters.dart';
-import '/custom/pages/listItems/list_item.dart';
+import '/custom/pages/listItems/models/list_item.dart';
+import '/custom/pages/lists/models/list_of_things.dart';
 import '/l10n/l10n.dart';
+import '/standard/constants.dart';
+import '/standard/settings/settings.dart';
 import '/standard/widgets/border_with_header.dart';
 import 'bloc/filter_bloc.dart';
 import 'bloc/filter_event.dart';

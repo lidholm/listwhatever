@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listwhatever/custom/pages/listItems/list_item.dart';
-import 'package:listwhatever/custom/pages/listItems/list_item_crud_bloc/list_item_crud_bloc.dart';
-import 'package:listwhatever/custom/pages/listItems/list_item_crud_bloc/list_item_crud_event.dart';
-import 'package:listwhatever/custom/pages/listItems/list_item_crud_bloc/list_item_crud_state.dart';
-import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_bloc.dart';
-import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_event.dart';
-import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
-import 'package:listwhatever/custom/pages/listItems/list_or_list_item_not_loaded_handler.dart';
-import 'package:listwhatever/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
-import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_bloc.dart';
-import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_event.dart';
-import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_state.dart';
-import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
-import 'package:listwhatever/standard/constants.dart';
 import 'package:pluto_grid/pluto_grid.dart';
+
+import '/custom/pages/listItems/list_item_crud_bloc/list_item_crud_bloc.dart';
+import '/custom/pages/listItems/list_item_crud_bloc/list_item_crud_event.dart';
+import '/custom/pages/listItems/list_item_crud_bloc/list_item_crud_state.dart';
+import '/custom/pages/listItems/list_items_load_bloc/list_items_load_bloc.dart';
+import '/custom/pages/listItems/list_items_load_bloc/list_items_load_event.dart';
+import '/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
+import '/custom/pages/listItems/models/list_item.dart';
+import '/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
+import '/custom/pages/list_or_list_item_not_loaded_handler.dart';
+import '/custom/pages/lists/list_load_events/list_load_bloc.dart';
+import '/custom/pages/lists/list_load_events/list_load_event.dart';
+import '/custom/pages/lists/list_load_events/list_load_state.dart';
+import '/custom/pages/lists/models/list_of_things.dart';
+import '/standard/constants.dart';
 
 class ListAsSpreadsheetsPage extends StatefulWidget {
   const ListAsSpreadsheetsPage({required this.userListId, super.key});
