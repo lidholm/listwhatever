@@ -19,20 +19,17 @@
 - [x] Delete list item 
 - [x] Delete list
 - [x] Current location and distance
-- [x] Upload image for list 
-  - [ ] (Get from AI creator?)
+- [x] Upload image for list (Get from AI creator?)
 - [x] Put filter view on right side on web
-
-- [ ] User profile and settings (e.g. use Google Maps or flutter_map)
+  - [ ] Should rather check screen size ratio
 - [ ] View a list without logging in if you have the code
 - [ ] Better colors/styling
 - [ ] Set up Google Play
-- [ ] Filter on the right on web
-- [ ] Randomly select one from the list 
-  - Checkboxes for ones to choose from
-- [ ] Better position for markers so they don't move when zooming
-  - [ ] Should rather check screen size ratio
 - [ ] Save filters?  
-- [ ] Zoom to fit all filtered items
 - [ ] Fix fastlane
-  
+- [ ] Clickable URLs 
+- [ ] Randomly select one from the list 
+  - [ ] Checkboxes for ones to choose from
+- [ ] User profile and settings (e.g. use Google Maps or flutter_map)
+- [ ] Better position for markers so they don't move when zooming
+
