@@ -1,6 +1,8 @@
 part of 'change_user_bloc_bloc.dart';
 
-@freezed
-class ChangeUserBlocEvent with _$ChangeUserBlocEvent {
-  const factory ChangeUserBlocEvent.started() = _Started;
+abstract class BaseChangeUserEvent {}
+
+class ChangeUserEvent extends BaseChangeUserEvent {
+  ChangeUserEvent(this.user);
+  final User? user;
 }
