@@ -82,7 +82,17 @@ class App extends StatelessWidget {
                   userService: userService,
                 )..add(const AppOpened()),
               ),
-              BlocProvider<ChangeUserBlocBloc>(create: (context) => ChangeUserBlocBloc()),
+              BlocProvider<ChangeUserBlocBloc>(
+                create: (context) => ChangeUserBlocBloc(
+                  services: [
+                    sharedListsService,
+                    userListsService,
+                    userService,
+                    listsService,
+                    listItemsService,
+                  ],
+                ),
+              ),
               BlocProvider(create: (_) => ThemeModeBloc()),
               BlocProvider<OnScreenLogsCubit>(create: (context) => OnScreenLogsCubit()),
               BlocProvider<SearchLocationBloc>(create: (context) => SearchLocationBloc()),

@@ -18,9 +18,9 @@ class AppRedirect {
     final currentUser = appBloc.state;
     logger
       ..i('state.uri.path: ${state.uri.path}')
-      ..d('$this.currentUser: $currentUser')
-      ..i('$this.currentUser: ${currentUser.user.id}')
-      ..i('$this.currentUser: ${currentUser.user.email}');
+      ..d('$this => currentUser: $currentUser')
+      ..i('$this => currentUser: ${currentUser.user.id}   QQQ')
+      ..i('$this => currentUser: ${currentUser.user.email}');
 
     if (currentUser.status != AppStatus.authenticated) {
       if (routerProviderInformation.dontRequireLoginRouteLocations
@@ -32,8 +32,8 @@ class AppRedirect {
       context.read<RedirectCubit>().setRedirect(fromParam);
       final redirectUri = routerProviderInformation.signInRouteLocation;
       logger
-        ..d('$this.redirectUri: $redirectUri')
-        ..i('$this.redirectUri: $redirectUri');
+        ..d('$this => redirectUri: $redirectUri')
+        ..i('$this => redirectUri: $redirectUri');
       return redirectUri;
     }
     // no other redirects, check if 'from' is set and if so, redirect to it
@@ -43,14 +43,14 @@ class AppRedirect {
     if (fromParam != null) {
       context.read<RedirectCubit>().clear();
       logger
-        ..d('$this.fromParam: $fromParam')
-        ..i('$this.fromParam: $fromParam');
+        ..d('$this => fromParam: $fromParam')
+        ..i('$this => fromParam: $fromParam');
       return fromParam;
     }
 
     logger
-      ..d('$this.returns null')
-      ..i('$this.returns null');
+      ..d('$this => returns null')
+      ..i('$this => returns null');
     return null;
   }
 
@@ -71,12 +71,12 @@ class AppRedirect {
     if (pattern.contains('*')) {
       final regex = RegExp(pattern);
       final notRequired = regex.hasMatch(state.fullPath ?? 'notamatch-XYXYXYXYX');
-      logger.d('$this.notRequired: $notRequired');
+      logger.d('$this => notRequired: $notRequired');
       return notRequired;
     } else {
       // logger.d('pattern: $pattern : ${pattern == state.location}');
       final notRequired = pattern == state.fullPath;
-      logger.d('$this.notRequired: $notRequired');
+      logger.d('$this => notRequired: $notRequired');
       return notRequired;
     }
   }
