@@ -370,10 +370,10 @@ class _AddListPageState extends State<AddListPage> {
 
       return Future.value(uploadTask);
     } on FirebaseException catch (e) {
-      logger.i(e);
+      logger.e(e);
       rethrow;
     } on Exception catch (e) {
-      logger.i(e);
+      logger.e(e);
       rethrow;
     }
   }

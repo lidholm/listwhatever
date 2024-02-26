@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:listwhatever/standard/constants.dart';
 import '/standard/settings/settings.dart';
 import '/standard/userRepository/models/user.dart';
 
@@ -14,7 +15,9 @@ class AppLogoutRequested extends AppEvent {
 }
 
 class AppUserChanged extends AppEvent {
-  const AppUserChanged(this.user);
+  AppUserChanged(this.user) {
+    logger.i('$this => creating AppUserChanged with $user QQQ');
+  }
 
   final User user;
 

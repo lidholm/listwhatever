@@ -1,24 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:listwhatever/standard/firebaseService/firebase_service.dart';
 import '/custom/pages/lists/models/list_of_things.dart';
 import '/standard/constants.dart';
-import '/standard/firebase/firestore/firestore.dart';
 
-class ListsService {
-  ListsService({required this.userId}) {
-    _initFirestore();
-  }
-
-  String? userId;
-  late final FirebaseFirestore firestore;
-
-  Future<void> _initFirestore() async {
-    firestore = await getFirestore();
-  }
-
-  // ignore: use_setters_to_change_properties
-  void changeUser(String? userId) {
-    this.userId = userId;
-  }
+class ListsService extends FirestoreService {
+  ListsService({super.userId});
 
   Future<CollectionReference<Map<String, dynamic>>> getCollection() async {
     const path = '/lists';

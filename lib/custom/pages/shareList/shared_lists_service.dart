@@ -1,16 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:listwhatever/standard/firebaseService/firebase_service.dart';
 import '/custom/pages/shareList/shared_list.dart';
-import '/standard/firebase/firestore/firestore.dart';
 
-class SharedListsService {
-  SharedListsService() {
-    _initFirestore();
-  }
-  late final FirebaseFirestore firestore;
-
-  Future<void> _initFirestore() async {
-    firestore = await getFirestore();
-  }
+class SharedListsService extends FirestoreService {
+  SharedListsService({super.userId});
 
   Future<CollectionReference<Map<String, dynamic>>> getCollection() async {
     const path = '/sharedLists';

@@ -37,7 +37,10 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
   late StreamSubscription<User> _userSubscription;
 
-  void _userChanged(User user) => add(AppUserChanged(user));
+  void _userChanged(User user) {
+    logger.i('$this => add(AppUserChanged($user)) QQQ');
+    add(AppUserChanged(user));
+  }
 
   Future<void> _onUserChanged(AppUserChanged event, Emitter<AppState> emit) async {
     final user = event.user;
