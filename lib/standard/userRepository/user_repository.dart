@@ -65,8 +65,8 @@ class UserRepository {
   Stream<User> get user => _authenticationClient.user.map(
         (authenticationUser) {
           logger
-            ..i('authenticationUser: $authenticationUser     QQQ')
-            ..i('authenticationUser.email: ${authenticationUser.email}     QQQ');
+            ..i('$this => authenticationUser: $authenticationUser     QQQ')
+            ..i('$this => authenticationUser.email: ${authenticationUser.email}     QQQ');
           return fromAuthenticationUser(
             authenticationUser,
           );

@@ -17,7 +17,7 @@ class AppRedirect {
     final appBloc = BlocProvider.of<AppBloc>(context);
     final currentUser = appBloc.state;
     logger
-      ..i('state.uri.path: ${state.uri.path}')
+      ..i('$this => state.uri.path: ${state.uri.path}')
       ..d('$this => currentUser: $currentUser')
       ..i('$this => currentUser: ${currentUser.user.id}   QQQ')
       ..i('$this => currentUser: ${currentUser.user.email}');

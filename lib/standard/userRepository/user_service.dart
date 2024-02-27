@@ -10,7 +10,7 @@ class UserService extends FirestoreService {
 
   Future<DocumentReference<Map<String, dynamic>>> getDocument() async {
     final path = '/users/$userId';
-    logger.d('user path: $path');
+    logger.d('$this => user path: $path');
     return firestore.doc(path);
   }
 
