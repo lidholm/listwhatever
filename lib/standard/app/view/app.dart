@@ -68,82 +68,78 @@ class App extends StatelessWidget {
     final listsService = ListsService(userId: initialUserId);
     final listItemsService = ListItemsService(userId: initialUserId);
 
-    Widget blocAndProviders(Widget child) => MultiRepositoryProvider(
-          providers: [
-            RepositoryProvider.value(value: _userRepository),
-            RepositoryProvider.value(value: _analyticsRepository),
-          ],
-          child: MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (_) => AppBloc(
-                  userRepository: _userRepository,
-                  user: _user,
-                  userService: userService,
-                )..add(const AppOpened()),
-              ),
-              BlocProvider<ChangeUserBlocBloc>(
-                create: (context) => ChangeUserBlocBloc(
-                  services: [
-                    sharedListsService,
-                    userListsService,
-                    userService,
-                    listsService,
-                    listItemsService,
-                  ],
-                ),
-              ),
-              BlocProvider(create: (_) => ThemeModeBloc()),
-              BlocProvider<OnScreenLogsCubit>(create: (context) => OnScreenLogsCubit()),
-              BlocProvider<SearchLocationBloc>(create: (context) => SearchLocationBloc()),
-              BlocProvider<FilterBloc>(create: (context) => FilterBloc()),
-              BlocProvider<SharedListBloc>(create: (context) => SharedListBloc(sharedListsService)),
-              BlocProvider<ListCrudBloc>(create: (context) => ListCrudBloc(userListsService, listsService)),
-              BlocProvider<ListLoadBloc>(create: (context) => ListLoadBloc(userListsService, listsService)),
-              BlocProvider<ListsLoadBloc>(create: (context) => ListsLoadBloc(userListsService)),
-              BlocProvider<SubscribeListBloc>(create: (context) => SubscribeListBloc(sharedListsService, listsService)),
-              BlocProvider<ListItemsLoadBloc>(
-                create: (context) => ListItemsLoadBloc(userListsService, listItemsService),
-              ),
-              BlocProvider<ListItemCrudBloc>(create: (context) => ListItemCrudBloc(userListsService, listItemsService)),
-              BlocProvider<ListItemLoadBloc>(create: (context) => ListItemLoadBloc(userListsService, listItemsService)),
-              BlocProvider<ListItemsPageViewCubit>(create: (context) => ListItemsPageViewCubit()),
-              BlocProvider<ListItemsSortOrderCubit>(create: (context) => ListItemsSortOrderCubit()),
-              BlocProvider<SelectedChipsCubit>(create: (context) => SelectedChipsCubit()),
-              BlocProvider<RedirectCubit>(create: (context) => RedirectCubit()),
-              BlocProvider<CurrentLocationCubit>(create: (context) => CurrentLocationCubit()),
-              BlocProvider<LoginBloc>(
-                create: (context) => LoginBloc(
-                  userRepository: context.read<UserRepository>(),
-                ),
-              ),
-              BlocProvider(
-                create: (context) => AnalyticsBloc(
-                  analyticsRepository: _analyticsRepository,
-                  userRepository: _userRepository,
-                ),
-                lazy: false,
-              ),
-            ],
-            child: AuthenticatedUserListener(
-              child: ToOnScreenLogsListener(
-                child: child,
-              ),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider.value(value: _userRepository),
+        RepositoryProvider.value(value: _analyticsRepository),
+      ],
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (_) => AppBloc(
+              userRepository: _userRepository,
+              user: _user,
+              userService: userService,
+            )..add(const AppOpened()),
+          ),
+          BlocProvider<ChangeUserBloc>(
+            create: (context) => ChangeUserBloc(
+              services: [
+                sharedListsService,
+                userListsService,
+                userService,
+                listsService,
+                listItemsService,
+              ],
             ),
           ),
-        );
-    final routerProviderInformation = getRouterProviderInformation();
-    return blocAndProviders(
-      Builder(
-        builder: (context) {
-          final router = getRouter(
-            context: context,
-            routes: $appRoutes,
-            routerProviderInformation: routerProviderInformation,
-            observers: observers,
-          );
-          return AppView(router);
-        },
+          BlocProvider(create: (_) => ThemeModeBloc()),
+          BlocProvider<OnScreenLogsCubit>(create: (context) => OnScreenLogsCubit()),
+          BlocProvider<SearchLocationBloc>(create: (context) => SearchLocationBloc()),
+          BlocProvider<FilterBloc>(create: (context) => FilterBloc()),
+          BlocProvider<SharedListBloc>(create: (context) => SharedListBloc(sharedListsService)),
+          BlocProvider<ListCrudBloc>(create: (context) => ListCrudBloc(userListsService, listsService)),
+          BlocProvider<ListLoadBloc>(create: (context) => ListLoadBloc(userListsService, listsService)),
+          BlocProvider<ListsLoadBloc>(create: (context) => ListsLoadBloc(userListsService)),
+          BlocProvider<SubscribeListBloc>(create: (context) => SubscribeListBloc(sharedListsService, listsService)),
+          BlocProvider<ListItemsLoadBloc>(
+            create: (context) => ListItemsLoadBloc(userListsService, listItemsService),
+          ),
+          BlocProvider<ListItemCrudBloc>(create: (context) => ListItemCrudBloc(userListsService, listItemsService)),
+          BlocProvider<ListItemLoadBloc>(create: (context) => ListItemLoadBloc(userListsService, listItemsService)),
+          BlocProvider<ListItemsPageViewCubit>(create: (context) => ListItemsPageViewCubit()),
+          BlocProvider<ListItemsSortOrderCubit>(create: (context) => ListItemsSortOrderCubit()),
+          BlocProvider<SelectedChipsCubit>(create: (context) => SelectedChipsCubit()),
+          BlocProvider<RedirectCubit>(create: (context) => RedirectCubit()),
+          BlocProvider<CurrentLocationCubit>(create: (context) => CurrentLocationCubit()),
+          BlocProvider<LoginBloc>(
+            create: (context) => LoginBloc(
+              userRepository: context.read<UserRepository>(),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => AnalyticsBloc(
+              analyticsRepository: _analyticsRepository,
+              userRepository: _userRepository,
+            ),
+            lazy: false,
+          ),
+        ],
+        child: AuthenticatedUserListener(
+          child: ToOnScreenLogsListener(
+            child: Builder(
+              builder: (context) {
+                final router = getRouter(
+                  context: context,
+                  routes: $appRoutes,
+                  routerProviderInformation: getRouterProviderInformation(),
+                  observers: observers,
+                );
+                return AppView(router);
+              },
+            ),
+          ),
+        ),
       ),
     );
   }
