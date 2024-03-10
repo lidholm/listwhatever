@@ -19,18 +19,18 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         super(
           user.isAnonymous() ? const AppState.unauthenticated() : AppState.authenticated(user),
         ) {
-    on<AppUserChanged>(_onUserChanged);
-    on<UpdateSettings>(_onUpdateSettings);
-    on<AppOnboardingCompleted>(_onOnboardingCompleted);
+    on<AuthenticationUserChanged>(_onUserChanged);
+    // on<UpdateSettings>(_onUpdateSettings);
+    // on<AppOnboardingCompleted>(_onOnboardingCompleted);
     on<AppLogoutRequested>(_onLogoutRequested);
-    on<AppOpened>(_onAppOpened);
+    // on<AppOpened>(_onAppOpened);
 
     _userSubscription = _userRepository.user.listen(_userChanged);
   }
 
   /// The number of app opens after which the login overlay is shown
   /// for an unauthenticated user.
-  static const _appOpenedCountForLoginOverlay = 5;
+  // static const _appOpenedCountForLoginOverlay = 5;
 
   final UserRepository _userRepository;
   final UserService _userService;
@@ -39,10 +39,10 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
   void _userChanged(User user) {
     logger.i('$this => add(AppUserChanged($user)) QQQ');
-    add(AppUserChanged(user));
+    add(AuthenticationUserChanged(user));
   }
 
-  Future<void> _onUserChanged(AppUserChanged event, Emitter<AppState> emit) async {
+  Future<void> _onUserChanged(AuthenticationUserChanged event, Emitter<AppState> emit) async {
     final user = event.user;
 
     switch (state.status) {
@@ -66,25 +66,25 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     }
   }
 
-  void _onOnboardingCompleted(
-    AppOnboardingCompleted event,
-    Emitter<AppState> emit,
-  ) {
-    if (state.status == AppStatus.onboardingRequired) {
-      return state.user.isAnonymous()
-          ? emit(const AppState.unauthenticated())
-          : emit(AppState.authenticated(state.user));
-    }
-  }
+  // void _onOnboardingCompleted(
+  //   AppOnboardingCompleted event,
+  //   Emitter<AppState> emit,
+  // ) {
+  //   if (state.status == AppStatus.onboardingRequired) {
+  //     return state.user.isAnonymous()
+  //         ? emit(const AppState.unauthenticated())
+  //         : emit(AppState.authenticated(state.user));
+  //   }
+  // }
 
-  Future<void> _onUpdateSettings(UpdateSettings event, Emitter<AppState> emit) async {
-    // TODO: This should maybe not be allowed?
-    if (!state.user.isAnonymous()) {
-      final updatedUser = event.user.copyWith(settings: event.settings);
-      await _userService.updateUser(updatedUser);
-      emit(AppState.authenticated(updatedUser));
-    }
-  }
+  // Future<void> _onUpdateSettings(UpdateSettings event, Emitter<AppState> emit) async {
+  //   // TODO: This should maybe not be allowed?
+  //   if (!state.user.isAnonymous()) {
+  //     final updatedUser = event.user.copyWith(settings: event.settings);
+  //     await _userService.updateUser(updatedUser);
+  //     emit(AppState.authenticated(updatedUser));
+  //   }
+  // }
 
   void _onLogoutRequested(AppLogoutRequested event, Emitter<AppState> emit) {
     // We are disabling notifications when a user logs out because
@@ -93,19 +93,19 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     unawaited(_userRepository.logOut());
   }
 
-  Future<void> _onAppOpened(AppOpened event, Emitter<AppState> emit) async {
-    if (state.user.isAnonymous()) {
-      final appOpenedCount = await _userRepository.fetchAppOpenedCount();
+  // Future<void> _onAppOpened(AppOpened event, Emitter<AppState> emit) async {
+  //   if (state.user.isAnonymous()) {
+  //     final appOpenedCount = await _userRepository.fetchAppOpenedCount();
 
-      if (appOpenedCount == _appOpenedCountForLoginOverlay - 1) {
-        emit(state.copyWith(showLoginOverlay: true));
-      }
+  //     if (appOpenedCount == _appOpenedCountForLoginOverlay - 1) {
+  //       emit(state.copyWith(showLoginOverlay: true));
+  //     }
 
-      if (appOpenedCount < _appOpenedCountForLoginOverlay + 1) {
-        await _userRepository.incrementAppOpenedCount();
-      }
-    }
-  }
+  //     if (appOpenedCount < _appOpenedCountForLoginOverlay + 1) {
+  //       await _userRepository.incrementAppOpenedCount();
+  //     }
+  //   }
+  // }
 
   @override
   Future<void> close() {

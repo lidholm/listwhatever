@@ -128,7 +128,7 @@ class _UserProfileViewState extends State<UserProfileView> with WidgetsBindingOb
                             final updatedSettings = user.settings.copyWith(
                               distanceUnit: distanceUnit,
                             );
-                            context.read<AppBloc>().add(UpdateSettings(user, updatedSettings));
+                            // context.read<AppBloc>().add(UpdateSettings(user, updatedSettings));
                           }
                         },
                       ),

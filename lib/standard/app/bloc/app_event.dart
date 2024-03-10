@@ -14,8 +14,8 @@ class AppLogoutRequested extends AppEvent {
   const AppLogoutRequested();
 }
 
-class AppUserChanged extends AppEvent {
-  AppUserChanged(this.user) {
+class AuthenticationUserChanged extends AppEvent {
+  AuthenticationUserChanged(this.user) {
     logger.i('$this => creating AppUserChanged with $user QQQ');
   }
 
@@ -25,20 +25,20 @@ class AppUserChanged extends AppEvent {
   List<Object> get props => [user];
 }
 
-class AppOnboardingCompleted extends AppEvent {
-  const AppOnboardingCompleted();
-}
+// class AppOnboardingCompleted extends AppEvent {
+//   const AppOnboardingCompleted();
+// }
 
-class AppOpened extends AppEvent {
-  const AppOpened();
-}
+// class AppOpened extends AppEvent {
+//   const AppOpened();
+// }
 
-class UpdateSettings extends AppEvent {
-  const UpdateSettings(this.user, this.settings);
+// class UpdateSettings extends AppEvent {
+//   const UpdateSettings(this.user, this.settings);
 
-  final User user;
-  final Settings settings;
+//   final User user;
+//   final Settings settings;
 
-  @override
-  List<Object> get props => [user];
-}
+//   @override
+//   List<Object> get props => [user];
+// }

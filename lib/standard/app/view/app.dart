@@ -76,12 +76,13 @@ class App extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (_) => AppBloc(
-              userRepository: _userRepository,
-              user: _user,
-              userService: userService,
-            )..add(const AppOpened()),
-          ),
+              create: (_) => AppBloc(
+                    userRepository: _userRepository,
+                    user: _user,
+                    userService: userService,
+                  )
+              // ..add(const AppOpened()),
+              ),
           BlocProvider<ChangeUserBloc>(
             create: (context) => ChangeUserBloc(
               services: [

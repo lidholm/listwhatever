@@ -21,9 +21,15 @@ class AuthenticatedUserListener extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<AppBloc, AppState>(
       listener: (context, state) {
+// call firestore to try and get the user data
+// if it exists, then just fill the user object
+// if it doesn't exists, set a OnboardingRequired thing
+
         logger
           ..i('$this => in AuthenticatedUserListener QQQQ')
           ..i('$this => calling ChangeUserBloc for ChangeUserEvent and user ${state.user} QQQQ');
+
+        // this part below should be moved into a listener for the user bloc
         context.read<ChangeUserBloc>().add(
               ChangeUserEvent(
                 state.user,
