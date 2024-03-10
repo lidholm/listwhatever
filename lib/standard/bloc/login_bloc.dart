@@ -9,8 +9,7 @@ import '/standard/formsInputs/email.dart';
 import '/standard/formsInputs/password.dart';
 import '/standard/userRepository/user_repository.dart';
 
-
-class LoginBloc extends Bloc<LoginEvent, LoginState> {
+class LoginBloc extends Bloc<LoginFormEvent, LoginState> {
   LoginBloc({
     required UserRepository userRepository,
   })  : _userRepository = userRepository,
@@ -75,11 +74,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     } on LogInWithGoogleCanceled {
       emit(state.copyWith(status: FormzSubmissionStatus.canceled));
     } catch (error, stackTrace) {
-      final errorMessage = switch(error) {
-          LogInWithGoogleFailure() => error.extraMessage,
-        _ => error.toString()
-      };
-      emit(state.copyWith(status: FormzSubmissionStatus.failure, errorMessage: errorMessage ));
+      final errorMessage = switch (error) { LogInWithGoogleFailure() => error.extraMessage, _ => error.toString() };
+      emit(state.copyWith(status: FormzSubmissionStatus.failure, errorMessage: errorMessage));
       addError(error, stackTrace);
     }
   }

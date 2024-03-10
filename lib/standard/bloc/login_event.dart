@@ -1,12 +1,11 @@
-
 import 'package:equatable/equatable.dart';
 import '/standard/analyticsRepository/models/analytics_event.dart';
 
-abstract class LoginEvent extends Equatable {
-  const LoginEvent();
+abstract class LoginFormEvent extends Equatable {
+  const LoginFormEvent();
 }
 
-class LoginEmailChanged extends LoginEvent {
+class LoginEmailChanged extends LoginFormEvent {
   const LoginEmailChanged(this.email);
 
   final String email;
@@ -15,7 +14,7 @@ class LoginEmailChanged extends LoginEvent {
   List<Object> get props => [email];
 }
 
-class LoginPasswordChanged extends LoginEvent {
+class LoginPasswordChanged extends LoginFormEvent {
   const LoginPasswordChanged(this.password);
 
   final String password;
@@ -24,27 +23,27 @@ class LoginPasswordChanged extends LoginEvent {
   List<Object> get props => [password];
 }
 
-class EmailAndPasswordSubmitted extends LoginEvent with AnalyticsEventMixin {
+class EmailAndPasswordSubmitted extends LoginFormEvent with AnalyticsEventMixin {
   @override
   AnalyticsEvent get event => const AnalyticsEvent('EmailAndPasswordSubmitted');
 }
 
-class LoginGoogleSubmitted extends LoginEvent with AnalyticsEventMixin {
+class LoginGoogleSubmitted extends LoginFormEvent with AnalyticsEventMixin {
   @override
   AnalyticsEvent get event => const AnalyticsEvent('LoginGoogleSubmitted');
 }
 
-class LoginAppleSubmitted extends LoginEvent with AnalyticsEventMixin {
+class LoginAppleSubmitted extends LoginFormEvent with AnalyticsEventMixin {
   @override
   AnalyticsEvent get event => const AnalyticsEvent('LoginAppleSubmitted');
 }
 
-class LoginTwitterSubmitted extends LoginEvent with AnalyticsEventMixin {
+class LoginTwitterSubmitted extends LoginFormEvent with AnalyticsEventMixin {
   @override
   AnalyticsEvent get event => const AnalyticsEvent('LoginTwitterSubmitted');
 }
 
-class LoginFacebookSubmitted extends LoginEvent with AnalyticsEventMixin {
+class LoginFacebookSubmitted extends LoginFormEvent with AnalyticsEventMixin {
   @override
   AnalyticsEvent get event => const AnalyticsEvent('LoginFacebookSubmitted');
 }
