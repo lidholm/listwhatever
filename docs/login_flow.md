@@ -18,3 +18,28 @@ a `AppUserChanged(user)` event. That is then in turn picked up by the `_onUserCh
 
 Currently that method is then trying to read user information from the Firestore document `users/$userId` 
 and populate the `User` class, and then emits the `AppState.authenticated` event with that `User` object.
+
+
+
+Current log in flow things: 
+
+* `AppEvent`
+  * `AppLogoutRequested`
+    * `_userRepository.logOut()`
+  * `AppUserChanged`
+  * `AppOnboardingCompleted`
+  * `AppOpened`
+    * `_userRepository.fetchAppOpenedCount()`
+    * `_userRepository.incrementAppOpenedCount()`
+  * `UpdateSettings`
+    * `_userService.updateUser(updatedUser)`
+
+* `LoginEvent`
+  * `LoginEmailChanged`
+  * `LoginPasswordChanged`
+  * `EmailAndPasswordSubmitted`
+  * `LoginGoogleSubmitted`
+  * `LoginAppleSubmitted`
+  * `LoginTwitterSubmitted`
+  * `LoginFacebookSubmitted`
+

@@ -51,7 +51,7 @@ class GoRouterRefreshStream extends ChangeNotifier {
       _subscriptions.add(
         stream.asBroadcastStream().listen(
           (dynamic value) {
-            logger.d('$this.$value has changed');
+            logger.d('$this.=> $value has changed   QQQ');
             notifyListeners();
           },
         ),

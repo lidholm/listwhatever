@@ -100,7 +100,9 @@ class _LoginTitleAndCloseButton extends StatelessWidget {
           key: const Key('loginForm_closeModal_iconButton'),
           constraints: const BoxConstraints.tightFor(width: 24, height: 36),
           padding: EdgeInsets.zero,
-          onPressed: () => GoRouter.of(context).pop(),
+          onPressed: () {
+            GoRouter.of(context).pop();
+          },
           icon: const Icon(Icons.close),
         ),
       ],

@@ -21,7 +21,9 @@ class AuthenticatedUserListener extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<AppBloc, AppState>(
       listener: (context, state) {
-        logger.i('$this => calling ChangeUserBloc for ChangeUserEvent and user ${state.user} QQQQ');
+        logger
+          ..i('$this => in AuthenticatedUserListener QQQQ')
+          ..i('$this => calling ChangeUserBloc for ChangeUserEvent and user ${state.user} QQQQ');
         context.read<ChangeUserBloc>().add(
               ChangeUserEvent(
                 state.user,
