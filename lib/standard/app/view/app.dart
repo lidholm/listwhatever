@@ -29,7 +29,6 @@ import '/custom/pages/subscribeList/bloc/subscribe_list_bloc.dart';
 import '/l10n/l10n.dart';
 import '/standard/analytics/bloc/analytics_bloc.dart';
 import '/standard/analyticsRepository/analytics_repository.dart';
-import '/standard/app/bloc/app_event.dart';
 import '/standard/app/widgets/to_onscreen_logs_listener.dart';
 import '/standard/appUi/theme/app_theme.dart';
 import '/standard/bloc/login_bloc.dart';
@@ -76,13 +75,13 @@ class App extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (_) => AppBloc(
-                    userRepository: _userRepository,
-                    user: _user,
-                    userService: userService,
-                  )
-              // ..add(const AppOpened()),
-              ),
+            create: (_) => AppBloc(
+              userRepository: _userRepository,
+              user: _user,
+              userService: userService,
+            ),
+            // ..add(const AppOpened()),
+          ),
           BlocProvider<ChangeUserBloc>(
             create: (context) => ChangeUserBloc(
               services: [

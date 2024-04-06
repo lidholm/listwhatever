@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listwhatever/custom/pages/listItems/listItemsPage/inner_list_items_page.dart';
 import 'package:listwhatever/custom/pages/listItems/listItemsPage/list_items_page_view_cubit.dart';
+import 'package:listwhatever/standard/app/bloc/app_state.dart';
 
 import '/custom/currentLocationBloc/current_location_bloc.dart';
 import '/custom/pages/listItems/filters/bloc/filter_bloc.dart';
@@ -51,6 +52,10 @@ class _ListItemsPageState extends State<ListItemsPage> {
         final notLoadedView = getNotLoadedView(listState, listItemsState, filtersState);
         if (notLoadedView != null) {
           return notLoadedView;
+        }
+
+        if (appState is! LoggedInWithData) {
+          return const Text('Not logged in or onboarded');
         }
         final user = appState.user;
 

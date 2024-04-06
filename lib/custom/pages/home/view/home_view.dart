@@ -16,16 +16,16 @@ class HomeView extends StatelessWidget {
     return MultiBlocListener(
       listeners: [
         BlocListener<AppBloc, AppState>(
-          listenWhen: (previous, current) => previous.showLoginOverlay != current.showLoginOverlay,
+          // listenWhen: (previous, current) => previous.showLoginOverlay != current.showLoginOverlay,
           listener: (context, state) {
-            if (state.showLoginOverlay) {
-              showAppModal<void>(
-                context: context,
-                builder: (context) => const LoginModal(),
-                routeSettings: const RouteSettings(name: LoginModal.name),
-              );
-            }
+            // if (state.showLoginOverlay) {
+            showAppModal<void>(
+              context: context,
+              builder: (context) => const LoginModal(),
+              routeSettings: const RouteSettings(name: LoginModal.name),
+            );
           },
+          // },
         ),
       ],
       child: Scaffold(
