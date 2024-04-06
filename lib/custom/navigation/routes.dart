@@ -5,6 +5,7 @@ import 'package:listwhatever/custom/pages/firebase_in_app_messaging/firebase_in_
 import 'package:listwhatever/custom/pages/firebase_performance/firebase_performance_page_route.dart';
 import 'package:listwhatever/custom/pages/home/view/home_page.dart';
 import 'package:listwhatever/custom/pages/lists/addList/add_list_page_route.dart';
+import 'package:listwhatever/custom/pages/onboarding/onboarding_page_route.dart';
 import 'package:listwhatever/standard/user_profile/page/user_profile_page_route.dart';
 
 import '/custom/pages/about/about_page_route.dart';
@@ -33,6 +34,10 @@ part 'routes.g.dart';
     TypedGoRoute<OnScreenLogsPageRoute>(
       path: 'logs',
       name: 'logs',
+    ),
+    TypedGoRoute<OnboardingPageRoute>(
+      path: 'onboarding',
+      name: 'onboarding',
     ),
     TypedGoRoute<ListsPageRoute>(
       path: 'lists',

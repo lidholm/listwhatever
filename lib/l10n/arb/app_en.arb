@@ -632,6 +632,12 @@
     "type": "text",
     "placeholders": {}
   },
+  "onboardingHeader": "Onboarding",
+  "@onboardingHeader": {
+    "description": "For 'Onboarding'.",
+    "type": "text",
+    "placeholders": {}
+  },
   "versionLabel": "Version: {version}",
   "@versionLabel": {
     "description": "Text for 'Version: X'",

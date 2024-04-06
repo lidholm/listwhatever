@@ -20,6 +20,11 @@ RouteBase get $mainPageRoute => GoRouteData.$route(
           factory: $OnScreenLogsPageRouteExtension._fromState,
         ),
         GoRouteData.$route(
+          path: 'onboarding',
+          name: 'onboarding',
+          factory: $OnboardingPageRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
           path: 'lists',
           name: 'lists',
           factory: $ListsPageRouteExtension._fromState,
@@ -156,6 +161,24 @@ extension $OnScreenLogsPageRouteExtension on OnScreenLogsPageRoute {
 
   String get location => GoRouteData.$location(
         '/logs',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $OnboardingPageRouteExtension on OnboardingPageRoute {
+  static OnboardingPageRoute _fromState(GoRouterState state) =>
+      const OnboardingPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/onboarding',
       );
 
   void go(BuildContext context) => context.go(location);
