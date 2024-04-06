@@ -25,26 +25,39 @@ class AuthenticatedUserListener extends StatelessWidget {
 // if it exists, then just fill the user object
 // if it doesn't exists, set a OnboardingRequired thing
 
-        logger
-          ..i('$this => in AuthenticatedUserListener QQQQ')
-          ..i('$this => calling ChangeUserBloc for ChangeUserEvent and user ${state.user} QQQQ');
+        logger..i('$this => in AuthenticatedUserListener QQQQ3')
+            // ..i('$this => calling ChangeUserBloc for ChangeUserEvent and user ${state.user.id} QQQQ4')
+            ;
 
         // this part below should be moved into a listener for the user bloc
-        context.read<ChangeUserBloc>().add(
-              ChangeUserEvent(
-                state.user,
-              ),
-            );
-        if (state.status.isLoggedIn) {
-          context.read<AnalyticsBloc>().add(
-                TrackAnalyticsEvent(
-                  state.user.isNewUser ? RegistrationEvent() : LoginEvent(),
-                ),
-              );
-        }
+        // context.read<ChangeUserBloc>().add(
+        //       ChangeUserEvent(
+        //         state.user,
+        //       ),
+        //     );
+        // if (state.status.isLoggedIn) {
+        //   context.read<AnalyticsBloc>().add(
+        //         TrackAnalyticsEvent(
+        //           state.user.isNewUser ? RegistrationEvent() : LoginEvent(),
+        //         ),
+        //       );
+        // }
       },
-      listenWhen: (previous, current) => previous.status != current.status || previous.user != current.user,
+      listenWhen: differentStateOrUser,
       child: child,
     );
+  }
+
+  bool differentStateOrUser(AppState previous, AppState current) {
+    if (previous != current) {
+      return true;
+    }
+
+    if (previous is LoggedInWithData && current is LoggedInWithData) {
+      if (previous.user != current.user) {
+        return true;
+      }
+    }
+    return false;
   }
 }

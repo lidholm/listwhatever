@@ -24,10 +24,7 @@ mixin _$User {
   String get email => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get photo => throw _privateConstructorUsedError;
-  bool get isNewUser => throw _privateConstructorUsedError;
   Settings get settings => throw _privateConstructorUsedError;
-  bool get hasLoadedFromFirestore => throw _privateConstructorUsedError;
-  bool get anonymous => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,14 +37,7 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res, User>;
   @useResult
   $Res call(
-      {String id,
-      String email,
-      String name,
-      String photo,
-      bool isNewUser,
-      Settings settings,
-      bool hasLoadedFromFirestore,
-      bool anonymous});
+      {String id, String email, String name, String photo, Settings settings});
 
   $SettingsCopyWith<$Res> get settings;
 }
@@ -69,10 +59,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? email = null,
     Object? name = null,
     Object? photo = null,
-    Object? isNewUser = null,
     Object? settings = null,
-    Object? hasLoadedFromFirestore = null,
-    Object? anonymous = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -91,22 +78,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.photo
           : photo // ignore: cast_nullable_to_non_nullable
               as String,
-      isNewUser: null == isNewUser
-          ? _value.isNewUser
-          : isNewUser // ignore: cast_nullable_to_non_nullable
-              as bool,
       settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
               as Settings,
-      hasLoadedFromFirestore: null == hasLoadedFromFirestore
-          ? _value.hasLoadedFromFirestore
-          : hasLoadedFromFirestore // ignore: cast_nullable_to_non_nullable
-              as bool,
-      anonymous: null == anonymous
-          ? _value.anonymous
-          : anonymous // ignore: cast_nullable_to_non_nullable
-              as bool,
     ) as $Val);
   }
 
@@ -127,14 +102,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id,
-      String email,
-      String name,
-      String photo,
-      bool isNewUser,
-      Settings settings,
-      bool hasLoadedFromFirestore,
-      bool anonymous});
+      {String id, String email, String name, String photo, Settings settings});
 
   @override
   $SettingsCopyWith<$Res> get settings;
@@ -154,10 +122,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? email = null,
     Object? name = null,
     Object? photo = null,
-    Object? isNewUser = null,
     Object? settings = null,
-    Object? hasLoadedFromFirestore = null,
-    Object? anonymous = null,
   }) {
     return _then(_$UserImpl(
       id: null == id
@@ -176,22 +141,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.photo
           : photo // ignore: cast_nullable_to_non_nullable
               as String,
-      isNewUser: null == isNewUser
-          ? _value.isNewUser
-          : isNewUser // ignore: cast_nullable_to_non_nullable
-              as bool,
       settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
               as Settings,
-      hasLoadedFromFirestore: null == hasLoadedFromFirestore
-          ? _value.hasLoadedFromFirestore
-          : hasLoadedFromFirestore // ignore: cast_nullable_to_non_nullable
-              as bool,
-      anonymous: null == anonymous
-          ? _value.anonymous
-          : anonymous // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -204,10 +157,7 @@ class _$UserImpl extends _User {
       required this.email,
       required this.name,
       required this.photo,
-      required this.isNewUser,
-      required this.settings,
-      required this.hasLoadedFromFirestore,
-      required this.anonymous})
+      required this.settings})
       : super._();
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
@@ -222,17 +172,11 @@ class _$UserImpl extends _User {
   @override
   final String photo;
   @override
-  final bool isNewUser;
-  @override
   final Settings settings;
-  @override
-  final bool hasLoadedFromFirestore;
-  @override
-  final bool anonymous;
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, name: $name, photo: $photo, isNewUser: $isNewUser, settings: $settings, hasLoadedFromFirestore: $hasLoadedFromFirestore, anonymous: $anonymous)';
+    return 'User(id: $id, email: $email, name: $name, photo: $photo, settings: $settings)';
   }
 
   @override
@@ -244,20 +188,14 @@ class _$UserImpl extends _User {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.photo, photo) || other.photo == photo) &&
-            (identical(other.isNewUser, isNewUser) ||
-                other.isNewUser == isNewUser) &&
             (identical(other.settings, settings) ||
-                other.settings == settings) &&
-            (identical(other.hasLoadedFromFirestore, hasLoadedFromFirestore) ||
-                other.hasLoadedFromFirestore == hasLoadedFromFirestore) &&
-            (identical(other.anonymous, anonymous) ||
-                other.anonymous == anonymous));
+                other.settings == settings));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, email, name, photo,
-      isNewUser, settings, hasLoadedFromFirestore, anonymous);
+  int get hashCode =>
+      Object.hash(runtimeType, id, email, name, photo, settings);
 
   @JsonKey(ignore: true)
   @override
@@ -279,10 +217,7 @@ abstract class _User extends User {
       required final String email,
       required final String name,
       required final String photo,
-      required final bool isNewUser,
-      required final Settings settings,
-      required final bool hasLoadedFromFirestore,
-      required final bool anonymous}) = _$UserImpl;
+      required final Settings settings}) = _$UserImpl;
   const _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
@@ -296,13 +231,7 @@ abstract class _User extends User {
   @override
   String get photo;
   @override
-  bool get isNewUser;
-  @override
   Settings get settings;
-  @override
-  bool get hasLoadedFromFirestore;
-  @override
-  bool get anonymous;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

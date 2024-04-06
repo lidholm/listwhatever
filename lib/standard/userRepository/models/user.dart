@@ -14,10 +14,7 @@ abstract class User with _$User {
     required String email,
     required String name,
     required String photo,
-    required bool isNewUser,
     required Settings settings,
-    required bool hasLoadedFromFirestore,
-    required bool anonymous,
   }) = _User;
 
   // Added constructor. Must not have any parameter
@@ -26,7 +23,7 @@ abstract class User with _$User {
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   bool isAnonymous() {
-    return anonymous || id == anonymousId;
+    return email.isEmpty;
   }
 }
 
@@ -36,20 +33,15 @@ User fromAuthenticationUser(AuthenticationUser authenticationUser) {
     id: authenticationUser.id,
     name: authenticationUser.name ?? '',
     photo: authenticationUser.photo ?? '',
-    isNewUser: authenticationUser.isNewUser,
     settings: defaultSettings,
-    hasLoadedFromFirestore: false,
-    anonymous: authenticationUser.isAnonymous,
   );
 }
 
 const anonymousUser = User(
+  // TODO: Should be able to remove this !?
   email: '',
   id: anonymousId,
   name: '',
   photo: '',
-  isNewUser: false,
   settings: defaultSettings,
-  hasLoadedFromFirestore: true,
-  anonymous: true,
 );

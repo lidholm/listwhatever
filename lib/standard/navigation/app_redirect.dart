@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/custom/navigation/routes.dart';
+import 'package:listwhatever/custom/pages/onboarding/onboarding_page_route.dart';
 import 'package:listwhatever/standard/app/bloc/app_bloc.dart';
 import 'package:listwhatever/standard/navigation/models/router_provider_information.dart';
 import '/standard/app/bloc/app_state.dart';
@@ -15,25 +17,27 @@ class AppRedirect {
   ) async {
     logger.d('===================\n');
     final appBloc = BlocProvider.of<AppBloc>(context);
-    final currentUser = appBloc.state;
+    final appState = appBloc.state;
     logger
       ..i('$this => state.uri.path: ${state.uri.path}')
-      ..d('$this => currentUser: $currentUser')
-      ..i('$this => currentUser: ${currentUser.user.id}   QQQ')
-      ..i('$this => currentUser: ${currentUser.user.email}');
+      ..i('$this => appState: $appState   QQQ10');
 
-    if (currentUser.status != AppStatus.authenticated) {
+    if (appState is OnboardingRequired) {
+      logger.i('$this => redirectUri: OnboardingPage     QQQ11');
+      return const OnboardingPageRoute().location;
+    }
+
+    if (appState is! LoggedInWithData) {
       if (routerProviderInformation.dontRequireLoginRouteLocations
           .any((pattern) => matchingDontRequireLoginPatterns(state, pattern))) {
+        logger.i('$this => return null     QQQ12');
         return null;
       }
       final fromParam = context.read<RedirectCubit>().state ?? state.uri.path;
       // logger.d('fromParam: $fromParam');
       context.read<RedirectCubit>().setRedirect(fromParam);
       final redirectUri = routerProviderInformation.signInRouteLocation;
-      logger
-        ..d('$this => redirectUri: $redirectUri')
-        ..i('$this => redirectUri: $redirectUri');
+      logger.i('$this => redirectUri: $redirectUri    QQQ13');
       return redirectUri;
     }
     // no other redirects, check if 'from' is set and if so, redirect to it
@@ -42,15 +46,11 @@ class AppRedirect {
     // logger.d('fromParam: $fromParam');
     if (fromParam != null) {
       context.read<RedirectCubit>().clear();
-      logger
-        ..d('$this => fromParam: $fromParam')
-        ..i('$this => fromParam: $fromParam');
+      logger.i('$this => fromParam: $fromParam    QQQ14');
       return fromParam;
     }
 
-    logger
-      ..d('$this => returns null')
-      ..i('$this => returns null');
+    logger.d('$this => returns null at end    QQQ15');
     return null;
   }
 

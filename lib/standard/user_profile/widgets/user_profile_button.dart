@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:listwhatever/standard/app/bloc/app_bloc.dart';
+import 'package:listwhatever/standard/app/bloc/app_state.dart';
 import 'package:listwhatever/standard/user_profile/page/user_profile_page_route.dart';
 import '/custom/navigation/routes.dart';
 import '/l10n/l10n.dart';
@@ -17,11 +18,11 @@ class UserProfileButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isAnonymous = context.select<AppBloc, bool>(
-      (bloc) => bloc.state.user.isAnonymous(),
+    final isLoggedIn = context.select<AppBloc, bool>(
+      (bloc) => bloc.state is LoggedInWithData,
     );
 
-    return isAnonymous ? const LoginButton() : const OpenProfileButton();
+    return isLoggedIn ? const OpenProfileButton() : const LoginButton();
   }
 }
 

@@ -74,7 +74,11 @@ class _UserProfileViewState extends State<UserProfileView> with WidgetsBindingOb
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final user = context.watch<AppBloc>().state.user;
+    final appState = context.watch<AppBloc>().state;
+    if (appState is! LoggedInWithData) {
+      return const Text('Not logged in and onboarded');
+    }
+    final user = appState.user;
 
     return BlocListener<UserProfileBloc, UserProfileState>(
       listener: (context, state) {
@@ -84,9 +88,7 @@ class _UserProfileViewState extends State<UserProfileView> with WidgetsBindingOb
       },
       child: BlocListener<AppBloc, AppState>(
         listener: (context, state) {
-          if (state.status == AppStatus.unauthenticated) {
-            GoRouter.of(context).pop();
-          }
+          GoRouter.of(context).pop();
         },
         child: Scaffold(
           appBar: const CommonAppBar(
@@ -125,9 +127,9 @@ class _UserProfileViewState extends State<UserProfileView> with WidgetsBindingOb
                         },
                         onChanged: (distanceUnit) {
                           if (distanceUnit != null) {
-                            final updatedSettings = user.settings.copyWith(
-                              distanceUnit: distanceUnit,
-                            );
+                            // final updatedSettings = user.settings.copyWith(
+                            //   distanceUnit: distanceUnit,
+                            // );
                             // context.read<AppBloc>().add(UpdateSettings(user, updatedSettings));
                           }
                         },
