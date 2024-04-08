@@ -1,0 +1,19 @@
+{
+  "name": "images/generic.jpg",
+  "bucket": "listwhatever-ad43ed.appspot.com",
+  "metageneration": 1,
+  "generation": 1712420337739,
+  "contentType": "image/jpeg",
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "downloadTokens": [
+    "87cb203a-8c27-448b-b8c9-49094d84416a"
+  ],
+  "etag": "78T1SKyL0KTqpjgQ9DubvOdPLeU",
+  "customMetadata": {},
+  "timeCreated": "2024-04-06T16:18:57.739Z",
+  "updated": "2024-04-06T16:18:57.739Z",
+  "size": 354564,
+  "md5Hash": "BoLYWlPMIhYeWmFrrEqiuQ==",
+  "crc32c": "249759078"
+}
