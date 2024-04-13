@@ -33,21 +33,25 @@ class ListsService extends FirestoreService {
     return list.copyWith(
       id: id,
       shareType: list.ownerId == userId ? ShareType.editor : list.sharedWith[userId]!,
-      isOwnList: list.ownerId == userId,
     );
   }
 
   Future<ListOfThings> getList(String id) async {
-    logger.d('getting actual list: $id');
-    final listsCollection = await getCollection();
-    final snapshot = await listsCollection.doc(id).get();
-    return convertToListOfThings(snapshot.id, snapshot.data()!);
+    try {
+      logger.d('getting actual list: $id');
+      final listsCollection = await getCollection();
+      final snapshot = await listsCollection.doc(id).get();
+      return convertToListOfThings(snapshot.id, snapshot.data()!);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<String> addList(ListOfThings list) async {
     logger.d('adding actual list: $list');
     final listsCollection = await getCollection();
     final docId = listsCollection.doc().id;
+    logger.d('adding actual list, docId: $docId');
     final listToSave = list.copyWith(id: docId, ownerId: userId);
     await listsCollection.doc(docId).set(listToSave.toJson());
     return docId;
@@ -59,9 +63,9 @@ class ListsService extends FirestoreService {
     return listsCollection.doc(list.id).update(list.toJson());
   }
 
-  Future<void> deleteList(String listId) async {
-    logger.d('deleting actual list: $listId');
+  Future<void> deleteList(String actualListId) async {
+    logger.d('deleting actual list: $actualListId');
     final listsCollection = await getCollection();
-    return listsCollection.doc(listId).delete();
+    return listsCollection.doc(actualListId).delete();
   }
 }

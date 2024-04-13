@@ -21,7 +21,7 @@ UserList _$UserListFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UserList {
   String? get id => throw _privateConstructorUsedError;
-  String get listId => throw _privateConstructorUsedError;
+  String get actualListId => throw _privateConstructorUsedError;
   String get listName => throw _privateConstructorUsedError;
   ListType get listType => throw _privateConstructorUsedError;
   String get imageFilename => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $UserListCopyWith<$Res> {
   @useResult
   $Res call(
       {String? id,
-      String listId,
+      String actualListId,
       String listName,
       ListType listType,
       String imageFilename,
@@ -63,7 +63,7 @@ class _$UserListCopyWithImpl<$Res, $Val extends UserList>
   @override
   $Res call({
     Object? id = freezed,
-    Object? listId = null,
+    Object? actualListId = null,
     Object? listName = null,
     Object? listType = null,
     Object? imageFilename = null,
@@ -75,9 +75,9 @@ class _$UserListCopyWithImpl<$Res, $Val extends UserList>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      listId: null == listId
-          ? _value.listId
-          : listId // ignore: cast_nullable_to_non_nullable
+      actualListId: null == actualListId
+          ? _value.actualListId
+          : actualListId // ignore: cast_nullable_to_non_nullable
               as String,
       listName: null == listName
           ? _value.listName
@@ -113,7 +113,7 @@ abstract class _$$UserListImplCopyWith<$Res>
   @useResult
   $Res call(
       {String? id,
-      String listId,
+      String actualListId,
       String listName,
       ListType listType,
       String imageFilename,
@@ -133,7 +133,7 @@ class __$$UserListImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? listId = null,
+    Object? actualListId = null,
     Object? listName = null,
     Object? listType = null,
     Object? imageFilename = null,
@@ -145,9 +145,9 @@ class __$$UserListImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      listId: null == listId
-          ? _value.listId
-          : listId // ignore: cast_nullable_to_non_nullable
+      actualListId: null == actualListId
+          ? _value.actualListId
+          : actualListId // ignore: cast_nullable_to_non_nullable
               as String,
       listName: null == listName
           ? _value.listName
@@ -178,7 +178,7 @@ class __$$UserListImplCopyWithImpl<$Res>
 class _$UserListImpl implements _UserList {
   const _$UserListImpl(
       {required this.id,
-      required this.listId,
+      required this.actualListId,
       required this.listName,
       required this.listType,
       required this.imageFilename,
@@ -191,7 +191,7 @@ class _$UserListImpl implements _UserList {
   @override
   final String? id;
   @override
-  final String listId;
+  final String actualListId;
   @override
   final String listName;
   @override
@@ -205,7 +205,7 @@ class _$UserListImpl implements _UserList {
 
   @override
   String toString() {
-    return 'UserList(id: $id, listId: $listId, listName: $listName, listType: $listType, imageFilename: $imageFilename, ownerId: $ownerId, isOwnList: $isOwnList)';
+    return 'UserList(id: $id, actualListId: $actualListId, listName: $listName, listType: $listType, imageFilename: $imageFilename, ownerId: $ownerId, isOwnList: $isOwnList)';
   }
 
   @override
@@ -214,7 +214,8 @@ class _$UserListImpl implements _UserList {
         (other.runtimeType == runtimeType &&
             other is _$UserListImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.listId, listId) || other.listId == listId) &&
+            (identical(other.actualListId, actualListId) ||
+                other.actualListId == actualListId) &&
             (identical(other.listName, listName) ||
                 other.listName == listName) &&
             (identical(other.listType, listType) ||
@@ -228,8 +229,8 @@ class _$UserListImpl implements _UserList {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, listId, listName, listType,
-      imageFilename, ownerId, isOwnList);
+  int get hashCode => Object.hash(runtimeType, id, actualListId, listName,
+      listType, imageFilename, ownerId, isOwnList);
 
   @JsonKey(ignore: true)
   @override
@@ -248,7 +249,7 @@ class _$UserListImpl implements _UserList {
 abstract class _UserList implements UserList {
   const factory _UserList(
       {required final String? id,
-      required final String listId,
+      required final String actualListId,
       required final String listName,
       required final ListType listType,
       required final String imageFilename,
@@ -261,7 +262,7 @@ abstract class _UserList implements UserList {
   @override
   String? get id;
   @override
-  String get listId;
+  String get actualListId;
   @override
   String get listName;
   @override

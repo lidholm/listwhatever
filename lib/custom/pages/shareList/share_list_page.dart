@@ -14,11 +14,11 @@ import '/standard/widgets/appBar/common_app_bar.dart';
 
 class ShareListPage extends StatefulWidget {
   const ShareListPage({
-    required this.listId,
+    required this.actualListId,
     super.key,
   });
 
-  final String listId;
+  final String actualListId;
 
   @override
   State<ShareListPage> createState() => _ShareListPageState();
@@ -27,7 +27,7 @@ class ShareListPage extends StatefulWidget {
 class _ShareListPageState extends State<ShareListPage> {
   @override
   void initState() {
-    BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.listId));
+    BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.actualListId));
     super.initState();
   }
 

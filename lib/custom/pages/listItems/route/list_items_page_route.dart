@@ -4,11 +4,11 @@ import '/custom/pages/listItems/listItemsPage/list_items_page.dart';
 
 @immutable
 class ListItemsPageRoute extends GoRouteData {
-  const ListItemsPageRoute({required this.listId});
-  final String listId;
+  const ListItemsPageRoute({required this.actualListId});
+  final String actualListId;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return ListItemsPage(listId: listId);
+    return ListItemsPage(actualListId: actualListId);
   }
 }

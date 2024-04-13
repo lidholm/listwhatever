@@ -24,7 +24,6 @@ class ListOfThings with _$ListOfThings {
     required String? shareCodeForEditor,
     required Map<String, ShareType> sharedWith,
     required String? ownerId,
-    @Default(false) bool isOwnList,
     @Default(ShareType.viewer) ShareType shareType,
   }) = _ListOfThings;
 

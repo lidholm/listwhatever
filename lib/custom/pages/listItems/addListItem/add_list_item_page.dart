@@ -45,8 +45,8 @@ enum AddListItemValues {
 }
 
 class AddListItemPage extends StatefulWidget {
-  const AddListItemPage({required this.listId, this.listItemId, super.key});
-  final String listId;
+  const AddListItemPage({required this.actualListId, this.listItemId, super.key});
+  final String actualListId;
   final String? listItemId;
 
   @override
@@ -89,10 +89,10 @@ class _AddListItemPageState extends State<AddListItemPage> {
 
   @override
   void initState() {
-    BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.listId));
+    BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.actualListId));
     listItemId = widget.listItemId;
     if (listItemId != null) {
-      BlocProvider.of<ListItemLoadBloc>(context).add(LoadListItem(widget.listId, listItemId!));
+      BlocProvider.of<ListItemLoadBloc>(context).add(LoadListItem(widget.actualListId, listItemId!));
     }
     super.initState();
   }
@@ -140,8 +140,10 @@ class _AddListItemPageState extends State<AddListItemPage> {
                   icon: Icons.delete,
                   key: const Key('deleteListItemAction'),
                   callback: () async {
-                    context.read<ListItemCrudBloc>().add(DeleteListItem(widget.listId, listItem.id!));
-                    context.read<RedirectCubit>().setRedirect(ListItemsPageRoute(listId: widget.listId).location);
+                    context.read<ListItemCrudBloc>().add(DeleteListItem(widget.actualListId, listItem.id!));
+                    context
+                        .read<RedirectCubit>()
+                        .setRedirect(ListItemsPageRoute(actualListId: widget.actualListId).location);
                   },
                 ),
               ),
@@ -175,7 +177,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
                   children: <Widget>[
                     createResetButton(context),
                     const SizedBox(width: 20),
-                    createSaveButton(widget.listId, list),
+                    createSaveButton(widget.actualListId, list),
                   ],
                 ),
               ],
@@ -602,7 +604,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
     );
   }
 
-  void save(String listId, FormBuilderState? currentState) {
+  void save(String actualListId, FormBuilderState? currentState) {
     final values = <String, dynamic>{};
     for (final entry in currentState!.fields.entries) {
       values[entry.key] = entry.value.value;
@@ -633,9 +635,9 @@ class _AddListItemPageState extends State<AddListItemPage> {
     );
 
     if (listItemId == null) {
-      BlocProvider.of<ListItemCrudBloc>(context).add(AddListItem(listId, listItem));
+      BlocProvider.of<ListItemCrudBloc>(context).add(AddListItem(actualListId, listItem));
     } else {
-      BlocProvider.of<ListItemCrudBloc>(context).add(UpdateListItem(listId, listItem));
+      BlocProvider.of<ListItemCrudBloc>(context).add(UpdateListItem(actualListId, listItem));
     }
   }
 

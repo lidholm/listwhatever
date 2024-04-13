@@ -15,9 +15,9 @@ import '/standard/widgets/appBar/app_bar_action_icon.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
 
 class ListItemInfoView extends StatefulWidget {
-  const ListItemInfoView({required this.listId, required this.itemId, super.key});
+  const ListItemInfoView({required this.actualListId, required this.itemId, super.key});
 
-  final String? listId;
+  final String? actualListId;
   final String? itemId;
 
   @override
@@ -28,8 +28,8 @@ class _ListItemInfoViewState extends State<ListItemInfoView> {
   @override
   void initState() {
     super.initState();
-    if (widget.listId != null && widget.itemId != null) {
-      BlocProvider.of<ListItemLoadBloc>(context).add(LoadListItem(widget.listId!, widget.itemId!));
+    if (widget.actualListId != null && widget.itemId != null) {
+      BlocProvider.of<ListItemLoadBloc>(context).add(LoadListItem(widget.actualListId!, widget.itemId!));
     }
   }
 
@@ -59,8 +59,8 @@ class _ListItemInfoViewState extends State<ListItemInfoView> {
               key: const Key('editListItemAction'),
               callback: () async {
                 final listItemBloc = context.read<ListItemLoadBloc>();
-                await EditListItemPageRoute(widget.listId!, listItem.id!).push<void>(context);
-                listItemBloc.add(LoadListItem(widget.listId!, listItem.id!));
+                await EditListItemPageRoute(widget.actualListId!, listItem.id!).push<void>(context);
+                listItemBloc.add(LoadListItem(widget.actualListId!, listItem.id!));
               },
             ),
           ),

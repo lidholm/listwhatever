@@ -13,7 +13,7 @@ class UserListsService extends FirestoreService {
     return firestore.collection(path);
   }
 
-  Stream<List<UserList>> getLists() async* {
+  Stream<List<UserList>> getUserLists() async* {
     logger.d('getting user lists');
     if (userId == null) {
       logger.d('no user yet');
@@ -34,10 +34,10 @@ class UserListsService extends FirestoreService {
     return tmp.copyWith(id: id, isOwnList: tmp.ownerId == userId);
   }
 
-  Future<UserList> getList(String id) async {
-    logger.d('getting user list: $id');
+  Future<UserList> getUserList(String listId) async {
+    logger.d('getting user list: $listId');
     final listsCollection = await getCollection();
-    final snapshot = await listsCollection.doc(id).get();
+    final snapshot = await listsCollection.doc(listId).get();
     final data = snapshot.data();
     logger.i('$this => user list data: $data');
     return convertToUserList(snapshot.id, data!);
@@ -47,6 +47,7 @@ class UserListsService extends FirestoreService {
     logger.d('adding user list: $list');
     final listsCollection = await getCollection();
     final docId = listsCollection.doc().id;
+    logger.d('adding user list, docId: $docId');
     return listsCollection.doc(docId).set(list.copyWith(id: docId).toJson());
   }
 

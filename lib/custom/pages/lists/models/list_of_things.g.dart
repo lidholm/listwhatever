@@ -22,7 +22,6 @@ _$ListOfThingsImpl _$$ListOfThingsImplFromJson(Map<String, dynamic> json) =>
         (k, e) => MapEntry(k, $enumDecode(_$ShareTypeEnumMap, e)),
       ),
       ownerId: json['ownerId'] as String?,
-      isOwnList: json['isOwnList'] as bool? ?? false,
       shareType: $enumDecodeNullable(_$ShareTypeEnumMap, json['shareType']) ??
           ShareType.viewer,
     );
@@ -42,7 +41,6 @@ Map<String, dynamic> _$$ListOfThingsImplToJson(_$ListOfThingsImpl instance) =>
       'sharedWith': instance.sharedWith
           .map((k, e) => MapEntry(k, _$ShareTypeEnumMap[e]!)),
       'ownerId': instance.ownerId,
-      'isOwnList': instance.isOwnList,
       'shareType': _$ShareTypeEnumMap[instance.shareType]!,
     };
 

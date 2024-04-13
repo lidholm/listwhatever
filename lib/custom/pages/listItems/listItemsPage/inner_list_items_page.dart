@@ -148,7 +148,7 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
           },
         );
       return ListItemsListView(
-        listId: widget.list.id,
+        actualListId: widget.list.id,
         items: sortedItems,
         onTap: showDetailsView,
       );
@@ -167,7 +167,7 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
   void showDetailsView(String itemId) {
     showModalBottomSheet<ListItemInfoView>(
       context: context,
-      builder: (context) => ListItemInfoView(listId: widget.list.id, itemId: itemId),
+      builder: (context) => ListItemInfoView(actualListId: widget.list.id, itemId: itemId),
     );
   }
 

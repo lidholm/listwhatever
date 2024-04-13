@@ -5,12 +5,11 @@ import 'add_list_item_page.dart';
 
 @immutable
 class AddListItemPageRoute extends GoRouteData {
-  const AddListItemPageRoute(this.listId);
-  final String listId;
-
+  const AddListItemPageRoute(this.actualListId);
+  final String actualListId;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return  AddListItemPage(listId: listId);
+    return AddListItemPage(actualListId: actualListId);
   }
 }

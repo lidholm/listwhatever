@@ -8,7 +8,7 @@ void main() {
     late AddListItemPage addListItemPage;
 
     setUp(() {
-      addListItemPage = AddListItemPage(listId: 'a');
+      addListItemPage = AddListItemPage(actualListId: 'a');
     });
 
     test('get categories from filled in values', () {

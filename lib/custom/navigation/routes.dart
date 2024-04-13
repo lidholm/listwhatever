@@ -48,7 +48,7 @@ part 'routes.g.dart';
           name: 'subscribe',
         ),
         TypedGoRoute<ListItemsPageRoute>(
-          path: ':listId/items',
+          path: ':actualListId/items',
           name: 'items',
           routes: [
             TypedGoRoute<AddListItemPageRoute>(
@@ -66,19 +66,19 @@ part 'routes.g.dart';
           name: 'addList',
         ),
         TypedGoRoute<EditListPageRoute>(
-          path: ':listId/edit',
+          path: ':actualListId/edit',
           name: 'editList',
         ),
         TypedGoRoute<ShareListPageRoute>(
-          path: ':listId/share',
+          path: ':actualListId/share',
           name: 'share',
         ),
         TypedGoRoute<ImportCsvPageRoute>(
-          path: ':listId/import/csv',
+          path: ':actualListId/import/csv',
           name: 'importcsv',
         ),
         TypedGoRoute<ListAsSpreadsheetsPageRoute>(
-          path: ':listId/import/spreadsheet',
+          path: ':actualListId/import/spreadsheet',
           name: 'listasspreadsheet',
         ),
       ],

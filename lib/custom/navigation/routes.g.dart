@@ -35,7 +35,7 @@ RouteBase get $mainPageRoute => GoRouteData.$route(
               factory: $SubscribeListPageRouteExtension._fromState,
             ),
             GoRouteData.$route(
-              path: ':listId/items',
+              path: ':actualListId/items',
               name: 'items',
               factory: $ListItemsPageRouteExtension._fromState,
               routes: [
@@ -57,22 +57,22 @@ RouteBase get $mainPageRoute => GoRouteData.$route(
               factory: $AddListPageRouteExtension._fromState,
             ),
             GoRouteData.$route(
-              path: ':listId/edit',
+              path: ':actualListId/edit',
               name: 'editList',
               factory: $EditListPageRouteExtension._fromState,
             ),
             GoRouteData.$route(
-              path: ':listId/share',
+              path: ':actualListId/share',
               name: 'share',
               factory: $ShareListPageRouteExtension._fromState,
             ),
             GoRouteData.$route(
-              path: ':listId/import/csv',
+              path: ':actualListId/import/csv',
               name: 'importcsv',
               factory: $ImportCsvPageRouteExtension._fromState,
             ),
             GoRouteData.$route(
-              path: ':listId/import/spreadsheet',
+              path: ':actualListId/import/spreadsheet',
               name: 'listasspreadsheet',
               factory: $ListAsSpreadsheetsPageRouteExtension._fromState,
             ),
@@ -232,11 +232,11 @@ extension $SubscribeListPageRouteExtension on SubscribeListPageRoute {
 extension $ListItemsPageRouteExtension on ListItemsPageRoute {
   static ListItemsPageRoute _fromState(GoRouterState state) =>
       ListItemsPageRoute(
-        listId: state.pathParameters['listId']!,
+        actualListId: state.pathParameters['actualListId']!,
       );
 
   String get location => GoRouteData.$location(
-        '/lists/${Uri.encodeComponent(listId)}/items',
+        '/lists/${Uri.encodeComponent(actualListId)}/items',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -252,11 +252,11 @@ extension $ListItemsPageRouteExtension on ListItemsPageRoute {
 extension $AddListItemPageRouteExtension on AddListItemPageRoute {
   static AddListItemPageRoute _fromState(GoRouterState state) =>
       AddListItemPageRoute(
-        state.pathParameters['listId']!,
+        state.pathParameters['actualListId']!,
       );
 
   String get location => GoRouteData.$location(
-        '/lists/${Uri.encodeComponent(listId)}/items/add',
+        '/lists/${Uri.encodeComponent(actualListId)}/items/add',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -272,12 +272,12 @@ extension $AddListItemPageRouteExtension on AddListItemPageRoute {
 extension $EditListItemPageRouteExtension on EditListItemPageRoute {
   static EditListItemPageRoute _fromState(GoRouterState state) =>
       EditListItemPageRoute(
-        state.pathParameters['listId']!,
+        state.pathParameters['actualListId']!,
         state.pathParameters['itemId']!,
       );
 
   String get location => GoRouteData.$location(
-        '/lists/${Uri.encodeComponent(listId)}/items/${Uri.encodeComponent(itemId)}/edit',
+        '/lists/${Uri.encodeComponent(actualListId)}/items/${Uri.encodeComponent(itemId)}/edit',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -310,11 +310,11 @@ extension $AddListPageRouteExtension on AddListPageRoute {
 
 extension $EditListPageRouteExtension on EditListPageRoute {
   static EditListPageRoute _fromState(GoRouterState state) => EditListPageRoute(
-        state.pathParameters['listId']!,
+        state.pathParameters['actualListId']!,
       );
 
   String get location => GoRouteData.$location(
-        '/lists/${Uri.encodeComponent(listId)}/edit',
+        '/lists/${Uri.encodeComponent(actualListId)}/edit',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -330,11 +330,11 @@ extension $EditListPageRouteExtension on EditListPageRoute {
 extension $ShareListPageRouteExtension on ShareListPageRoute {
   static ShareListPageRoute _fromState(GoRouterState state) =>
       ShareListPageRoute(
-        state.pathParameters['listId']!,
+        state.pathParameters['actualListId']!,
       );
 
   String get location => GoRouteData.$location(
-        '/lists/${Uri.encodeComponent(listId)}/share',
+        '/lists/${Uri.encodeComponent(actualListId)}/share',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -350,11 +350,11 @@ extension $ShareListPageRouteExtension on ShareListPageRoute {
 extension $ImportCsvPageRouteExtension on ImportCsvPageRoute {
   static ImportCsvPageRoute _fromState(GoRouterState state) =>
       ImportCsvPageRoute(
-        state.pathParameters['listId']!,
+        state.pathParameters['actualListId']!,
       );
 
   String get location => GoRouteData.$location(
-        '/lists/${Uri.encodeComponent(listId)}/import/csv',
+        '/lists/${Uri.encodeComponent(actualListId)}/import/csv',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -370,11 +370,11 @@ extension $ImportCsvPageRouteExtension on ImportCsvPageRoute {
 extension $ListAsSpreadsheetsPageRouteExtension on ListAsSpreadsheetsPageRoute {
   static ListAsSpreadsheetsPageRoute _fromState(GoRouterState state) =>
       ListAsSpreadsheetsPageRoute(
-        state.pathParameters['listId']!,
+        state.pathParameters['actualListId']!,
       );
 
   String get location => GoRouteData.$location(
-        '/lists/${Uri.encodeComponent(listId)}/import/spreadsheet',
+        '/lists/${Uri.encodeComponent(actualListId)}/import/spreadsheet',
       );
 
   void go(BuildContext context) => context.go(location);

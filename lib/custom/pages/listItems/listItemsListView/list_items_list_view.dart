@@ -5,15 +5,15 @@ import '/standard/constants.dart';
 import '/standard/widgets/vStack/v_stack.dart';
 
 class ListItemsListView extends StatelessWidget {
-  const ListItemsListView({required this.listId, required this.items, required this.onTap, super.key});
+  const ListItemsListView({required this.actualListId, required this.items, required this.onTap, super.key});
 
-  final String? listId;
+  final String? actualListId;
   final List<ListItem> items;
   final void Function(String itemId) onTap;
 
   @override
   Widget build(BuildContext context) {
-    if (listId == null) {
+    if (actualListId == null) {
       return const Text('No list');
     }
 

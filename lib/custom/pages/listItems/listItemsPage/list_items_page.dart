@@ -21,9 +21,9 @@ import '/standard/app/bloc/app_bloc.dart';
 import '/standard/constants.dart';
 
 class ListItemsPage extends StatefulWidget {
-  const ListItemsPage({required this.listId, super.key});
+  const ListItemsPage({required this.actualListId, super.key});
 
-  final String listId;
+  final String actualListId;
 
   @override
   State<ListItemsPage> createState() => _ListItemsPageState();
@@ -32,8 +32,8 @@ class ListItemsPage extends StatefulWidget {
 class _ListItemsPageState extends State<ListItemsPage> {
   @override
   void initState() {
-    BlocProvider.of<ListItemsLoadBloc>(context).add(WatchListItems(widget.listId));
-    BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.listId));
+    BlocProvider.of<ListItemsLoadBloc>(context).add(WatchListItems(widget.actualListId));
+    BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.actualListId));
     super.initState();
   }
 

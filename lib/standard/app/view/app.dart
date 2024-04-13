@@ -99,7 +99,7 @@ class App extends StatelessWidget {
           BlocProvider<FilterBloc>(create: (context) => FilterBloc()),
           BlocProvider<SharedListBloc>(create: (context) => SharedListBloc(sharedListsService)),
           BlocProvider<ListCrudBloc>(create: (context) => ListCrudBloc(userListsService, listsService)),
-          BlocProvider<ListLoadBloc>(create: (context) => ListLoadBloc(userListsService, listsService)),
+          BlocProvider<ListLoadBloc>(create: (context) => ListLoadBloc(listsService)),
           BlocProvider<ListsLoadBloc>(create: (context) => ListsLoadBloc(userListsService)),
           BlocProvider<SubscribeListBloc>(create: (context) => SubscribeListBloc(sharedListsService, listsService)),
           BlocProvider<ListItemsLoadBloc>(

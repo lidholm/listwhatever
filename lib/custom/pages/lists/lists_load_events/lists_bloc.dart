@@ -27,7 +27,7 @@ class ListsLoadBloc extends Bloc<ListsLoadEvent, ListsLoadState> {
 
   Future<void> _onWatchUserLists(WatchLists event, Emitter<ListsLoadState> emit) async {
     await emit.forEach(
-      _userListsService.getLists(),
+      _userListsService.getUserLists(),
       onData: (List<UserList> lists) {
         return ListsLoadLoaded(lists);
       },

@@ -6,14 +6,14 @@ import '/standard/constants.dart';
 class ListItemsService extends FirestoreService {
   ListItemsService({super.userId});
 
-  Future<CollectionReference<Map<String, dynamic>>> getCollection(String listId) async {
-    final path = '/lists/$listId/items';
+  Future<CollectionReference<Map<String, dynamic>>> getCollection(String actualListId) async {
+    final path = '/lists/$actualListId/items';
     logger.d('ListItemsService.path: $path');
     return firestore.collection(path);
   }
 
-  Stream<List<ListItem>> getListItems(String listId) async* {
-    final itemsCollection = await getCollection(listId);
+  Stream<List<ListItem>> getListItems(String actualListId) async* {
+    final itemsCollection = await getCollection(actualListId);
 
     yield* itemsCollection.snapshots().map((snapshot) {
       // logger.d('number of getListItems: ${snapshot.docs.length}');
@@ -24,9 +24,9 @@ class ListItemsService extends FirestoreService {
     });
   }
 
-  Future<ListItem?> getListItem(String listId, String itemId) async {
-    // logger.d('getListItem($listId, $itemId)');
-    final itemsCollection = await getCollection(listId);
+  Future<ListItem?> getListItem(String actualListId, String itemId) async {
+    // logger.d('getListItem($actualListId, $itemId)');
+    final itemsCollection = await getCollection(actualListId);
     final snapshot = await itemsCollection.doc(itemId).get();
     final data = snapshot.data();
     if (data == null) {
@@ -35,8 +35,8 @@ class ListItemsService extends FirestoreService {
     return ListItem.fromJson(data);
   }
 
-  Future<void> addListItem(String listId, ListItem list) async {
-    final itemsCollection = await getCollection(listId);
+  Future<void> addListItem(String actualListId, ListItem list) async {
+    final itemsCollection = await getCollection(actualListId);
     final docId = itemsCollection.doc().id;
 
     final updatedListItem = list
@@ -49,8 +49,8 @@ class ListItemsService extends FirestoreService {
     return itemsCollection.doc(docId).set(updatedListItem);
   }
 
-  Future<void> updateListItem(String listId, ListItem listItem) async {
-    final itemsCollection = await getCollection(listId);
+  Future<void> updateListItem(String actualListId, ListItem listItem) async {
+    final itemsCollection = await getCollection(actualListId);
 
     final updatedListItem = listItem
         .copyWith(
@@ -61,8 +61,8 @@ class ListItemsService extends FirestoreService {
     return itemsCollection.doc(listItem.id).update(updatedListItem);
   }
 
-  Future<void> deleteListItem(String listId, String itemId) async {
-    final itemsCollection = await getCollection(listId);
+  Future<void> deleteListItem(String actualListId, String itemId) async {
+    final itemsCollection = await getCollection(actualListId);
     return itemsCollection.doc(itemId).delete();
   }
 }
