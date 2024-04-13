@@ -1,21 +1,19 @@
 import 'package:bloc/bloc.dart';
 import 'package:collection/collection.dart';
 import '/custom/pages/listItems/service/list_items_service.dart';
-import '/custom/pages/lists/user_lists_service.dart';
 import '/standard/constants.dart';
 
 import 'list_item_crud_event.dart';
 import 'list_item_crud_state.dart';
 
 class ListItemCrudBloc extends Bloc<ListItemCrudEvent, ListItemCrudState> {
-  ListItemCrudBloc(this._userListsService, this._listItemsService) : super(ListItemCrudInitial()) {
+  ListItemCrudBloc(this._listItemsService) : super(ListItemCrudInitial()) {
     on<ChangeUserForListItemCrud>(_onChangeUser);
     on<AddListItem>(_onAddListItem);
     on<UpdateListItem>(_onUpdateListItem);
     on<DeleteListItem>(_onDeleteListItem);
     on<ImportListItems>(_onImportListItems);
   }
-  final UserListsService _userListsService;
   final ListItemsService _listItemsService;
 
   Future<void> _onChangeUser(ChangeUserForListItemCrud event, Emitter<ListItemCrudState> emit) async {

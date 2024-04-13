@@ -1,19 +1,17 @@
 import 'package:bloc/bloc.dart';
 import '/custom/pages/listItems/models/list_item.dart';
 import '/custom/pages/listItems/service/list_items_service.dart';
-import '/custom/pages/lists/user_lists_service.dart';
 
 import '/standard/constants.dart';
 import 'list_items_load_event.dart';
 import 'list_items_load_state.dart';
 
 class ListItemsLoadBloc extends Bloc<ListItemsLoadEvent, ListItemsLoadState> {
-  ListItemsLoadBloc(this._userListsService, this._listItemsService) : super(ListItemsLoadInitial()) {
+  ListItemsLoadBloc(this._listItemsService) : super(ListItemsLoadInitial()) {
     on<ChangeUserForListItemsLoad>(_onChangeUser);
     on<LoadListItems>(_onLoadListItems);
     on<WatchListItems>(_onWatchListItems);
   }
-  final UserListsService _userListsService;
   final ListItemsService _listItemsService;
 
   Future<void> _onChangeUser(ChangeUserForListItemsLoad event, Emitter<ListItemsLoadState> emit) async {

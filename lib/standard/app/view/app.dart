@@ -103,10 +103,10 @@ class App extends StatelessWidget {
           BlocProvider<ListsLoadBloc>(create: (context) => ListsLoadBloc(userListsService)),
           BlocProvider<SubscribeListBloc>(create: (context) => SubscribeListBloc(sharedListsService, listsService)),
           BlocProvider<ListItemsLoadBloc>(
-            create: (context) => ListItemsLoadBloc(userListsService, listItemsService),
+            create: (context) => ListItemsLoadBloc(listItemsService),
           ),
-          BlocProvider<ListItemCrudBloc>(create: (context) => ListItemCrudBloc(userListsService, listItemsService)),
-          BlocProvider<ListItemLoadBloc>(create: (context) => ListItemLoadBloc(userListsService, listItemsService)),
+          BlocProvider<ListItemCrudBloc>(create: (context) => ListItemCrudBloc(listItemsService)),
+          BlocProvider<ListItemLoadBloc>(create: (context) => ListItemLoadBloc(listItemsService)),
           BlocProvider<ListItemsPageViewCubit>(create: (context) => ListItemsPageViewCubit()),
           BlocProvider<ListItemsSortOrderCubit>(create: (context) => ListItemsSortOrderCubit()),
           BlocProvider<SelectedChipsCubit>(create: (context) => SelectedChipsCubit()),
