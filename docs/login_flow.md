@@ -16,25 +16,15 @@ The `User.anonymous` has an `id` that will be set to `anonymous`, so it is a lit
 After successfully logging in, a listener in `AppBloc` will call the `_userChanged` method, which in turn emits 
 a `AppUserChanged(user)` event. That is then in turn picked up by the `_onUserChanged` method.
 
-Currently that method is then trying to read user information from the Firestore document `users/$userId` 
-and populate the `User` class, and then emits the `AppState.authenticated` event with that `User` object.
+The `_onUserChanged` can return one of four different states;
+
+* `loggedIn` - Which means that the user is logged in, is a temporary status, and then it will try to see if the user is onboarded or not.
+* `loggedInWithData` - If the user is already onboarded, this status will be returned
+* `onboardingRequired` - If the user is not already onboarded, this status will be returned
+* `loggedOut` - This will be returned when the user is logged out
 
 
-
-Current log in flow things: 
-
-* `AppEvent`
-  * `AppLogoutRequested`
-    * `_userRepository.logOut()`
-  * `AppUserChanged`
-  * `AppOnboardingCompleted`
-  * `AppOpened`
-    * `_userRepository.fetchAppOpenedCount()`
-    * `_userRepository.incrementAppOpenedCount()`
-  * `UpdateSettings`
-    * `_userService.updateUser(updatedUser)`
-
-* `LoginEvent`
+### `LoginEvent`
   * `LoginEmailChanged`
   * `LoginPasswordChanged`
   * `EmailAndPasswordSubmitted`

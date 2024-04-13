@@ -50,13 +50,9 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       ..i('$this => state.status: $state      QQQQQ 21')
       ..i('$this => user: $user      QQQQQ 22');
     if (user.isAnonymous()) {
-      emit(AppState.loggedOut());
-      return;
-    }
-
-    if (user.isAnonymous()) {
       logger.i('$this => AppStatus.loggedOut QQQQQ 23');
       emit(AppState.loggedOut());
+      return;
     }
     emit(AppState.loggedIn(user));
     final userWithData = await tryReadUser(user);

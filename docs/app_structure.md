@@ -18,3 +18,5 @@ There is also a listener for `ToOnScreenLogsListener` that can listen to errors 
 
 Finally it is also creating the GoRouter object by getting the different routes from `routes.dart` and basic set up from `getRouterProviderInformation()`. It also uses the redirect function from `AppRedirect.dart`.
 
+The `AppRedirect.dart` is responsible for checking the login status, and redirect the user to the log in screen if not logged in. It will also redirect the user to the `onboarding` page, if the user isn't onboarded yet.
+
