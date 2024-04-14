@@ -57,11 +57,14 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
     emit(AppState.loggedIn(user));
     final userWithData = await tryReadUser(user);
+    logger.i('$this => userWithData: $userWithData');
 
     if (userWithData == null) {
       emit(AppState.onboardingRequired(user));
+      return;
     } else {
       emit(AppState.loggedInWithData(userWithData));
+      return;
     }
   }
 
@@ -99,7 +102,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
   Future<User?> tryReadUser(User user) async {
     logger.i('$this => in tryReadUser QQQQ 31');
-    final firestoreUser = await _userService.getUser();
+    final firestoreUser = await _userService.getUser(user.id);
     logger
       ..i('$this => loaded firestoreUser: $firestoreUser')
       ..i('$this => in firestoreUser $firestoreUser QQQQ 31');

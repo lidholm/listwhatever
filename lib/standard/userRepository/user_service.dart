@@ -13,11 +13,11 @@ class UserService extends FirestoreService {
     return firestore.doc(path);
   }
 
-  Future<User?> getUser() async {
+  Future<User?> getUser(String? userId) async {
     if (userId == null) {
       return null;
     }
-    final fu = await getDocument();
+    final fu = await getDocument(userId);
     final data = (await fu.get()).data();
     if (data == null) {
       return null;

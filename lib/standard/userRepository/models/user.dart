@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:listwhatever/standard/constants.dart';
 import '/standard/authenticationClient/models/authentication_user.dart';
 import '/standard/settings/settings.dart';
 
@@ -23,7 +24,8 @@ abstract class User with _$User {
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   bool isAnonymous() {
-    return id == anonymousId;
+    logger.i('in User.isAnonymous: id: $id');
+    return id == anonymousId || id.isEmpty;
   }
 }
 

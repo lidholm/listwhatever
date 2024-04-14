@@ -1,3 +1,5 @@
+import 'package:listwhatever/custom/pages/lists/page/lists_page_route.dart';
+
 import '/custom/navigation/routes.dart';
 import '/standard/navigation/models/router_provider_information.dart';
 import '/standard/onScreenLog/on_screen_logs_page_route.dart';
@@ -12,8 +14,7 @@ RouterProviderInformation getRouterProviderInformation() {
       const LoginWithEmailAndPasswordPageRoute().location,
     ],
     requireLoginRouteLocations: [],
-    initialRouteLocation: MainPageRoute().location,
-    // initialRouteLocation: const ListsPageRoute().location,
+    initialRouteLocation: const ListsPageRoute().location,
     signUpRouteLocation: 'notyet',
     signInRouteLocation: const LoginPageRoute().location,
     errorLoadingUserRouteLocation: MainPageRoute().location,
