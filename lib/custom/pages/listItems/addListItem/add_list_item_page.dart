@@ -117,14 +117,19 @@ class _AddListItemPageState extends State<AddListItemPage> {
           setState(() {
             listItemId = null;
           });
+          logger.i('$this -> popping twice');
           GoRouter.of(context).pop();
           GoRouter.of(context).pop();
         } else if (state is ListItemCrudUpdated) {
-          logger.i('$this => popping GoRouter after updated');
+          logger
+            ..i('$this => popping GoRouter after updated')
+            ..i('$this -> popping twice');
           GoRouter.of(context).pop();
           GoRouter.of(context).pop();
         } else if (state is ListItemCrudAdded) {
-          logger.i('$this => popping GoRouter after added');
+          logger
+            ..i('$this => popping GoRouter after added')
+            ..i('$this -> popping once');
           GoRouter.of(context).pop();
         }
       },

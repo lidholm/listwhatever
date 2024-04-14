@@ -51,6 +51,7 @@ class _ListAsSpreadsheetsPageState extends State<ListAsSpreadsheetsPage> {
       listener: (context, state) {
         logger.i('$this => state: $state');
         if (state is ListItemCrudImported) {
+          logger.i('$this -> popping once');
           GoRouter.of(context).pop();
         }
       },

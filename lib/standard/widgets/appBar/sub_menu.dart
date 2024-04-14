@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/standard/constants.dart';
 
 /// An item with sub menu for using in popup menus
 ///
@@ -10,7 +11,11 @@ import 'package:go_router/go_router.dart';
 /// Selecting items from the submenu will automatically close the parent menu
 /// Closing the sub menu by clicking outside of it, will automatically close the parent menu
 class PopupSubMenuItem<T> extends PopupMenuEntry<T> {
-  const PopupSubMenuItem({required this.title, required this.items, required this.onSelected, super.key,
+  const PopupSubMenuItem({
+    required this.title,
+    required this.items,
+    required this.onSelected,
+    super.key,
   });
 
   final String title;
@@ -50,11 +55,13 @@ class _PopupSubMenuState<T> extends State<PopupSubMenuItem<T>> {
       ),
       onCanceled: () {
         if (Navigator.canPop(context)) {
+          logger.i('$this -> popping once');
           GoRouter.of(context).pop();
         }
       },
       onSelected: (T value) {
         if (Navigator.canPop(context)) {
+          logger.i('$this -> popping once');
           GoRouter.of(context).pop();
         }
         widget.onSelected.call(value);
@@ -64,8 +71,9 @@ class _PopupSubMenuState<T> extends State<PopupSubMenuItem<T>> {
             .map(
               (item) => PopupMenuItem<T>(
                 value: item,
-                child: Text(item
-                    .toString(),), //MEthod toString() of class T should be overridden to repesent something meaningful
+                child: Text(
+                  item.toString(),
+                ), //MEthod toString() of class T should be overridden to repesent something meaningful
               ),
             )
             .toList();

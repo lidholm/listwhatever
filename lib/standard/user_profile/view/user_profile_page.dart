@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listwhatever/standard/app/bloc/app_bloc.dart';
+import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/user_profile/bloc/user_profile_bloc.dart';
 
 import '/l10n/l10n.dart';
@@ -88,6 +89,7 @@ class _UserProfileViewState extends State<UserProfileView> with WidgetsBindingOb
       },
       child: BlocListener<AppBloc, AppState>(
         listener: (context, state) {
+          logger.i('$this -> popping once');
           GoRouter.of(context).pop();
         },
         child: Scaffold(

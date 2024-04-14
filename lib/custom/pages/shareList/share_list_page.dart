@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/standard/constants.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '/custom/pages/list_or_list_item_not_loaded_handler.dart';
@@ -145,6 +146,7 @@ class _ShareListPageState extends State<ShareListPage> {
           ),
           ElevatedButton(
             onPressed: () {
+              logger.i('$this -> popping once');
               GoRouter.of(context).pop();
             },
             child: const Padding(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/standard/constants.dart';
 import '/custom/navigation/routes.dart';
 import '/l10n/l10n.dart';
 import '/standard/appUi/generated/assets.gen.dart';
@@ -57,10 +58,6 @@ class _LoginContent extends StatelessWidget {
               AppSpacing.xxlg,
             ),
             children: [
-              const _LoginTitleAndCloseButton(),
-              const SizedBox(height: AppSpacing.sm),
-              const _LoginSubtitle(),
-              const SizedBox(height: AppSpacing.lg),
               _GoogleLoginButton(),
               if (theme.platform == TargetPlatform.iOS) ...[
                 const SizedBox(height: AppSpacing.lg),
@@ -101,6 +98,7 @@ class _LoginTitleAndCloseButton extends StatelessWidget {
           constraints: const BoxConstraints.tightFor(width: 24, height: 36),
           padding: EdgeInsets.zero,
           onPressed: () {
+            logger.i('$this -> popping once');
             GoRouter.of(context).pop();
           },
           icon: const Icon(Icons.close),

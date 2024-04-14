@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:listwhatever/standard/app/bloc/app_bloc.dart';
 import 'package:listwhatever/standard/app/bloc/app_state.dart';
+import 'package:listwhatever/standard/page/login_page_route.dart';
 import 'package:listwhatever/standard/user_profile/page/user_profile_page_route.dart';
 import '/custom/navigation/routes.dart';
 import '/l10n/l10n.dart';
@@ -39,11 +41,9 @@ class LoginButton extends StatelessWidget {
         horizontal: AppSpacing.lg,
         vertical: AppSpacing.sm,
       ),
-      onPressed: () => showAppModal<void>(
-        context: context,
-        builder: (context) => const LoginModal(),
-        routeSettings: const RouteSettings(name: LoginModal.name),
-      ),
+      onPressed: () {
+        context.go(const LoginPageRoute().location);
+      },
       tooltip: context.l10n.loginTooltip,
     );
   }

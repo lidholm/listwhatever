@@ -94,44 +94,36 @@ class _AddListPageState extends State<AddListPage> {
       AddListValues.ownerId.toString(): list?.ownerId,
       // AddListValues.share.toString(): list?.shared ?? false,
     };
-    return BlocListener<ListCrudBloc, ListCrudState>(
-      listener: (context, state) {
-        logger.i('$this => state: $state');
-        if (state is ListCrudAdded) {
-          GoRouter.of(context).pop();
-        }
-      },
-      child: Scaffold(
-        appBar: const CommonAppBar(title: 'Add list'),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: FormBuilder(
-              key: _formKey,
-              onChanged: () {
-                _formKey.currentState!.save();
-                // logger.d(_formKey.currentState!.value.toString());
-              },
-              autovalidateMode: AutovalidateMode.disabled,
-              initialValue: initialValue,
-              skipDisabled: true,
-              child: VStack(
-                children: <Widget>[
-                  const SizedBox(height: 15),
-                  getListNameField(),
-                  getListTypeField(),
-                  getWithMapCheckbox(),
-                  getWithDatesCheckbox(),
-                  getWithTimesCheckbox(),
-                  Row(
-                    children: <Widget>[
-                      getCancelButton(),
-                      const SizedBox(width: 20),
-                      getSubmitButton(),
-                    ],
-                  ),
-                ],
-              ),
+    return Scaffold(
+      appBar: const CommonAppBar(title: 'Add list'),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: FormBuilder(
+            key: _formKey,
+            onChanged: () {
+              _formKey.currentState!.save();
+              // logger.d(_formKey.currentState!.value.toString());
+            },
+            autovalidateMode: AutovalidateMode.disabled,
+            initialValue: initialValue,
+            skipDisabled: true,
+            child: VStack(
+              children: <Widget>[
+                const SizedBox(height: 15),
+                getListNameField(),
+                getListTypeField(),
+                getWithMapCheckbox(),
+                getWithDatesCheckbox(),
+                getWithTimesCheckbox(),
+                Row(
+                  children: <Widget>[
+                    getCancelButton(),
+                    const SizedBox(width: 20),
+                    getSubmitButton(),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
@@ -404,6 +396,7 @@ class _AddListPageState extends State<AddListPage> {
     } else {
       BlocProvider.of<ListCrudBloc>(context).add(UpdateList(list));
     }
+    logger.i('$this -> popping once');
     GoRouter.of(context).pop();
   }
 }

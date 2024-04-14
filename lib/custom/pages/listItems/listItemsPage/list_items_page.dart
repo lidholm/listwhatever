@@ -71,6 +71,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
           listener: (context, state) {
             logger.i('$this => state: $state');
             if (state is ListCrudDeleted) {
+              logger.i('$this -> popping once');
               GoRouter.of(context).pop();
             }
           },

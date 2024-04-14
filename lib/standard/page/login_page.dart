@@ -8,8 +8,8 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-        appBar: CommonAppBar(title: 'Login'),
-        body: LoginForm(),
+      appBar: CommonAppBar(title: 'Login'),
+      body: LoginForm(),
     );
   }
 }
