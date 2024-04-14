@@ -54,6 +54,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       emit(AppState.loggedOut());
       return;
     }
+
     emit(AppState.loggedIn(user));
     final userWithData = await tryReadUser(user);
 

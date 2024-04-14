@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:listwhatever/standard/app/bloc/app_bloc.dart';
 import 'package:listwhatever/standard/changeUserBloc/bloc/change_user_bloc_bloc.dart';
-import 'package:listwhatever/standard/constants.dart';
 
 import '/standard/analytics/bloc/analytics_bloc.dart';
 import '/standard/analytics/bloc/analytics_event.dart';
@@ -25,23 +24,34 @@ class AuthenticatedUserListener extends StatelessWidget {
 // if it exists, then just fill the user object
 // if it doesn't exists, set a OnboardingRequired thing
 
-        logger..i('$this => in AuthenticatedUserListener QQQQ3')
-            // ..i('$this => calling ChangeUserBloc for ChangeUserEvent and user ${state.user.id} QQQQ4')
-            ;
+        final user = switch (state) {
+          LoggedIn(:final user) => user,
+          LoggedInWithData(:final user) => user,
+          OnboardingRequired() => null,
+          LoggedOut() => null,
+        };
 
-        // this part below should be moved into a listener for the user bloc
-        // context.read<ChangeUserBloc>().add(
-        //       ChangeUserEvent(
-        //         state.user,
-        //       ),
-        //     );
-        // if (state.status.isLoggedIn) {
-        //   context.read<AnalyticsBloc>().add(
-        //         TrackAnalyticsEvent(
-        //           state.user.isNewUser ? RegistrationEvent() : LoginEvent(),
-        //         ),
-        //       );
-        // }
+        // logger
+        //   ..i('$this => in AuthenticatedUserListener QQQQ3')
+        //   ..i('$this => state $state QQQQ4')
+        //   ..i('$this => calling ChangeUserBloc for ChangeUserEvent and user ${user.id} QQQQ4');
+
+        context.read<ChangeUserBloc>().add(
+              ChangeUserEvent(
+                user,
+              ),
+            );
+
+        switch (state) {
+          case LoggedIn():
+            break;
+          case LoggedInWithData():
+            context.read<AnalyticsBloc>().add(TrackAnalyticsEvent(LoginEvent()));
+          case OnboardingRequired():
+            context.read<AnalyticsBloc>().add(TrackAnalyticsEvent(RequireOnboardingEvent()));
+          case LoggedOut():
+            context.read<AnalyticsBloc>().add(TrackAnalyticsEvent(LogoutEvent()));
+        }
       },
       listenWhen: differentStateOrUser,
       child: child,

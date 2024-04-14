@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/firebaseService/firebase_service.dart';
 import 'package:listwhatever/standard/userRepository/models/user.dart';
 
@@ -12,11 +13,11 @@ class ChangeUserBloc extends Bloc<ChangeUserEvent, ChangeUserState> {
   final List<FirestoreService> services;
 
   void _onChangeUserEvent(ChangeUserEvent event, Emitter<ChangeUserState> emit) {
-    // logger.i('$this => event.user: ${event.user}');
+    logger.i('$this => event.user: ${event.user}');
     final userId = (event.user == null || event.user!.id.isEmpty) ? null : event.user!.id;
-    // logger.i('$this => userId: $userId   QQQ');
+    logger.i('$this => userId: $userId   QQQ');
     for (final service in services) {
-      // logger.i('$this => service: $service   QQQ');
+      logger.i('$this => service: $service   QQQ');
       service.changeUser(userId);
     }
   }
