@@ -9,8 +9,6 @@ import '/custom/navigation/routes.dart';
 import '/l10n/l10n.dart';
 import '/standard/appUi/generated/assets.gen.dart';
 import '/standard/appUi/spacing/app_spacing.dart';
-import '/standard/appUi/widgets/show_app_modal.dart';
-import '/standard/view/login_modal.dart';
 
 /// A user profile button which displays a [LoginButton]
 /// for the unauthenticated user or an [OpenProfileButton]

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:go_router/go_router.dart';
-import 'package:listwhatever/standard/constants.dart';
 import '/custom/navigation/routes.dart';
 import '/l10n/l10n.dart';
 import '/standard/appUi/generated/assets.gen.dart';
@@ -73,49 +71,6 @@ class _LoginContent extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class _LoginTitleAndCloseButton extends StatelessWidget {
-  const _LoginTitleAndCloseButton();
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(right: AppSpacing.sm),
-          child: Text(
-            context.l10n.loginModalTitle,
-            style: Theme.of(context).textTheme.displaySmall,
-          ),
-        ),
-        IconButton(
-          key: const Key('loginForm_closeModal_iconButton'),
-          constraints: const BoxConstraints.tightFor(width: 24, height: 36),
-          padding: EdgeInsets.zero,
-          onPressed: () {
-            logger.i('$this -> popping once');
-            GoRouter.of(context).pop();
-          },
-          icon: const Icon(Icons.close),
-        ),
-      ],
-    );
-  }
-}
-
-class _LoginSubtitle extends StatelessWidget {
-  const _LoginSubtitle();
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      context.l10n.loginModalSubtitle,
-      style: Theme.of(context).textTheme.titleMedium,
     );
   }
 }
