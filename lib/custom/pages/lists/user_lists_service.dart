@@ -59,7 +59,12 @@ class UserListsService extends FirestoreService {
 
   Future<void> deleteList(String listId) async {
     logger.d('deleting user list: $listId');
+
     final listsCollection = await getCollection();
-    return listsCollection.doc(listId).delete();
+    final querySnapshot = await listsCollection.where('actualListId', isEqualTo: listId).get();
+    final documents = querySnapshot.docs;
+    final document = documents.first;
+    final docId = convertToUserList(document.id, document.data()).id;
+    return listsCollection.doc(docId).delete();
   }
 }
