@@ -195,7 +195,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
       photo: originalUser.photo,
     );
 
-    // TODO: Check if user already existed
     if (originalUser.name.isEmpty) {
       logger.d('$this => adding firestoreUser $user   ');
       BlocProvider.of<AppBloc>(context).add(AddUser(user: user));
