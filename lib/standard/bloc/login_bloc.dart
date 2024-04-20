@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:listwhatever/standard/widgets/login_with_email_and_password_form.dart';
 import '/standard/authenticationClient/authentication_client.dart';
 import '/standard/bloc/login_event.dart';
 import '/standard/bloc/login_state.dart';
@@ -9,12 +10,11 @@ import '/standard/formsInputs/email.dart';
 import '/standard/formsInputs/password.dart';
 import '/standard/userRepository/user_repository.dart';
 
-
-class LoginBloc extends Bloc<LoginEvent, LoginState> {
+class LoginBloc extends Bloc<LoginFormEvent, LoginState> {
   LoginBloc({
     required UserRepository userRepository,
   })  : _userRepository = userRepository,
-        super(const LoginState()) {
+        super(LoginState(valid: emailText.isNotEmpty)) {
     on<LoginEmailChanged>(_onEmailChanged);
     on<LoginPasswordChanged>(_onPasswordChanged);
     on<EmailAndPasswordSubmitted>(_onEmailAndPasswordSubmitted);
@@ -54,8 +54,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
       await _userRepository.logInWithEmailAndPassword(
-        email: state.email.value,
-        password: state.password.value,
+        email: state.email.value != '' ? state.email.value : emailText,
+        password: state.password.value != '' ? state.password.value : passwordText,
       );
       emit(state.copyWith(status: FormzSubmissionStatus.success));
     } catch (error, stackTrace) {
@@ -75,11 +75,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     } on LogInWithGoogleCanceled {
       emit(state.copyWith(status: FormzSubmissionStatus.canceled));
     } catch (error, stackTrace) {
-      final errorMessage = switch(error) {
-          LogInWithGoogleFailure() => error.extraMessage,
-        _ => error.toString()
-      };
-      emit(state.copyWith(status: FormzSubmissionStatus.failure, errorMessage: errorMessage ));
+      final errorMessage = switch (error) { LogInWithGoogleFailure() => error.extraMessage, _ => error.toString() };
+      emit(state.copyWith(status: FormzSubmissionStatus.failure, errorMessage: errorMessage));
       addError(error, stackTrace);
     }
   }

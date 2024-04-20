@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/standard/constants.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '/custom/pages/list_or_list_item_not_loaded_handler.dart';
@@ -14,11 +15,11 @@ import '/standard/widgets/appBar/common_app_bar.dart';
 
 class ShareListPage extends StatefulWidget {
   const ShareListPage({
-    required this.listId,
+    required this.actualListId,
     super.key,
   });
 
-  final String listId;
+  final String actualListId;
 
   @override
   State<ShareListPage> createState() => _ShareListPageState();
@@ -27,7 +28,7 @@ class ShareListPage extends StatefulWidget {
 class _ShareListPageState extends State<ShareListPage> {
   @override
   void initState() {
-    BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.listId));
+    BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.actualListId));
     super.initState();
   }
 
@@ -145,6 +146,7 @@ class _ShareListPageState extends State<ShareListPage> {
           ),
           ElevatedButton(
             onPressed: () {
+              logger.i('$this -> popping once');
               GoRouter.of(context).pop();
             },
             child: const Padding(

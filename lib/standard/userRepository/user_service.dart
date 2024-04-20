@@ -1,35 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:listwhatever/standard/firebaseService/firebase_service.dart';
 
 import '/standard/constants.dart';
-import '/standard/firebase/firestore/firestore.dart';
-import '/standard/userRepository/firestore_user.dart';
 import '/standard/userRepository/models/user.dart';
 
-class UserService {
-  UserService({required this.userId}) {
-    _initFirestore();
-  }
+class UserService extends FirestoreService {
+  UserService({super.userId});
 
-  String? userId;
-  late final FirebaseFirestore firestore;
-
-  Future<void> _initFirestore() async {
-    firestore = await getFirestore();
-  }
-
-  // ignore: use_setters_to_change_properties
-  void changeUser(String? userId) {
-    this.userId = userId;
-  }
-
-  Future<DocumentReference<Map<String, dynamic>>> getDocument() async {
-    final path = '/users/$userId';
-    logger.d('user path: $path');
+  Future<DocumentReference<Map<String, dynamic>>> getDocument([String? userId]) async {
+    final path = '/users/${userId ?? this.userId}';
+    logger.d('$this => user path: $path');
     return firestore.doc(path);
   }
 
-  Future<FirestoreUser?> getUser() async {
-    final fu = await getDocument();
+  Future<User?> getUser(String? userId) async {
+    if (userId == null) {
+      return null;
+    }
+    final fu = await getDocument(userId);
     final data = (await fu.get()).data();
     if (data == null) {
       return null;
@@ -37,14 +25,22 @@ class UserService {
     return convertToUserList(fu.id, data);
   }
 
-  FirestoreUser convertToUserList(String id, Map<String, dynamic> data) {
-    final tmp = FirestoreUser.fromJson(data);
+  User convertToUserList(String id, Map<String, dynamic> data) {
+    final tmp = User.fromJson(data);
     return tmp.copyWith(id: id);
   }
 
-  Future<void> updateUser(User user) async {
+  Future<User> updateUser(User user) async {
     logger.d('updating user: $user');
-    final doc = await getDocument();
-    return doc.update(user.toJson());
+    final doc = await getDocument(user.id);
+    await doc.update(user.toJson());
+    return user;
+  }
+
+  Future<User> addUser(User user) async {
+    logger.d('updating user: $user');
+    final doc = await getDocument(user.id);
+    await doc.set(user.toJson());
+    return user;
   }
 }

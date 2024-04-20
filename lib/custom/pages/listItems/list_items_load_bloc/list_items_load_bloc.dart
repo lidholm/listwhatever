@@ -1,19 +1,17 @@
 import 'package:bloc/bloc.dart';
 import '/custom/pages/listItems/models/list_item.dart';
 import '/custom/pages/listItems/service/list_items_service.dart';
-import '/custom/pages/lists/user_lists_service.dart';
 
 import '/standard/constants.dart';
 import 'list_items_load_event.dart';
 import 'list_items_load_state.dart';
 
 class ListItemsLoadBloc extends Bloc<ListItemsLoadEvent, ListItemsLoadState> {
-  ListItemsLoadBloc(this._userListsService, this._listItemsService) : super(ListItemsLoadInitial()) {
+  ListItemsLoadBloc(this._listItemsService) : super(ListItemsLoadInitial()) {
     on<ChangeUserForListItemsLoad>(_onChangeUser);
     on<LoadListItems>(_onLoadListItems);
     on<WatchListItems>(_onWatchListItems);
   }
-  final UserListsService _userListsService;
   final ListItemsService _listItemsService;
 
   Future<void> _onChangeUser(ChangeUserForListItemsLoad event, Emitter<ListItemsLoadState> emit) async {
@@ -28,11 +26,10 @@ class ListItemsLoadBloc extends Bloc<ListItemsLoadEvent, ListItemsLoadState> {
   }
 
   Future<void> _onLoadListItems(LoadListItems event, Emitter<ListItemsLoadState> emit) async {
-    logger.i('$this => loading list item for list ${event.listId}');
+    logger.i('$this => loading list item for list ${event.actualListId}');
     try {
       emit(ListItemsLoadLoading());
-      final userList = await _userListsService.getList(event.listId);
-      final listItems = await _listItemsService.getListItems(userList.listId).first;
+      final listItems = await _listItemsService.getListItems(event.actualListId).first;
       emit(ListItemsLoadLoaded(listItems));
     } catch (e) {
       logger.e('Error: $e');
@@ -41,12 +38,11 @@ class ListItemsLoadBloc extends Bloc<ListItemsLoadEvent, ListItemsLoadState> {
   }
 
   Future<void> _onWatchListItems(WatchListItems event, Emitter<ListItemsLoadState> emit) async {
-    logger.i('$this => loading list item for list ${event.listId}');
+    logger.i('$this => loading list item for list ${event.actualListId}');
     try {
       emit(ListItemsLoadLoading());
-      final userList = await _userListsService.getList(event.listId);
       await emit.forEach(
-        _listItemsService.getListItems(userList.listId),
+        _listItemsService.getListItems(event.actualListId),
         onData: (List<ListItem> listItems) {
           return ListItemsLoadLoaded(listItems);
         },

@@ -10,7 +10,7 @@ class ChangeUserForListItemLoad extends ListItemLoadEvent {
 }
 
 class LoadListItem extends ListItemLoadEvent {
-  LoadListItem(this.listId, this.listItemId);
-  final String listId;
+  LoadListItem(this.actualListId, this.listItemId);
+  final String actualListId;
   final String listItemId;
 }

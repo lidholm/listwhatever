@@ -22,9 +22,9 @@ enum ImportCsvValues {
 }
 
 class ImportCsvPage extends StatefulWidget {
-  const ImportCsvPage({required this.listId, super.key});
+  const ImportCsvPage({required this.actualListId, super.key});
 
-  final String listId;
+  final String actualListId;
 
   @override
   State<ImportCsvPage> createState() => _ImportCsvPageState();
@@ -37,7 +37,7 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<ListItemsLoadBloc>(context).add(LoadListItems(widget.listId));
+    BlocProvider.of<ListItemsLoadBloc>(context).add(LoadListItems(widget.actualListId));
   }
 
   @override
@@ -46,6 +46,7 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
       listener: (context, state) {
         logger.i('$this => state: $state');
         if (state is ListItemCrudImported) {
+          logger.i('$this -> popping once');
           GoRouter.of(context).pop();
         }
       },
@@ -73,7 +74,7 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
                       children: <Widget>[
                         createResetButton(context),
                         const SizedBox(width: 20),
-                        createSaveButton(widget.listId, listItems),
+                        createSaveButton(widget.actualListId, listItems),
                       ],
                     ),
                   ],
@@ -135,13 +136,13 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
     );
   }
 
-  Expanded createSaveButton(String listId, List<ListItem> listItems) {
+  Expanded createSaveButton(String actualListId, List<ListItem> listItems) {
     return Expanded(
       child: ElevatedButton(
         onPressed: () {
           if (_formKey.currentState?.saveAndValidate() ?? false) {
             // logger.d(_formKey.currentState?.value.toString());
-            save(listId, listItems, _formKey.currentState);
+            save(actualListId, listItems, _formKey.currentState);
           } else {
             logger
               ..d(_formKey.currentState?.value.toString())
@@ -182,7 +183,7 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
     );
   }
 
-  void save(String listId, List<ListItem> originalListItems, FormBuilderState? currentState) {
+  void save(String actualListId, List<ListItem> originalListItems, FormBuilderState? currentState) {
     final values = <String, dynamic>{};
     for (final entry in currentState!.fields.entries) {
       values[entry.key] = entry.value.value;
@@ -196,6 +197,6 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
     final listItems = CsvConverter().convert(csv);
     logger.d('listItems: $listItems');
 
-    BlocProvider.of<ListItemCrudBloc>(context).add(ImportListItems(listId, listItems));
+    BlocProvider.of<ListItemCrudBloc>(context).add(ImportListItems(actualListId, listItems));
   }
 }

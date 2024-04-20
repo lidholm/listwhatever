@@ -4,11 +4,11 @@ import '/custom/pages/shareList/share_list_page.dart';
 
 @immutable
 class ShareListPageRoute extends GoRouteData {
-  const ShareListPageRoute(this.listId);
-  final String listId;
+  const ShareListPageRoute(this.actualListId);
+  final String actualListId;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return ShareListPage(listId: listId);
+    return ShareListPage(actualListId: actualListId);
   }
 }

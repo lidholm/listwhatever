@@ -9,11 +9,11 @@ class ChangeUserForListItemsLoad extends ListItemsLoadEvent {
 }
 
 class LoadListItems extends ListItemsLoadEvent {
-  LoadListItems(this.listId);
-  final String listId;
+  LoadListItems(this.actualListId);
+  final String actualListId;
 }
 
 class WatchListItems extends ListItemsLoadEvent {
-  WatchListItems(this.listId);
-  final String listId;
+  WatchListItems(this.actualListId);
+  final String actualListId;
 }

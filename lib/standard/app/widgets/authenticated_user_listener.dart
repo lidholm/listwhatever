@@ -1,17 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:listwhatever/standard/app/bloc/app_bloc.dart';
+import 'package:listwhatever/standard/changeUserBloc/bloc/change_user_bloc_bloc.dart';
 
-import '/custom/pages/listItems/list_item_crud_bloc/list_item_crud_bloc.dart';
-import '/custom/pages/listItems/list_item_crud_bloc/list_item_crud_event.dart';
-import '/custom/pages/listItems/list_item_load_bloc/list_item_load_bloc.dart';
-import '/custom/pages/listItems/list_item_load_bloc/list_item_load_event.dart';
-import '/custom/pages/listItems/list_items_load_bloc/list_items_load_bloc.dart';
-import '/custom/pages/listItems/list_items_load_bloc/list_items_load_event.dart';
-import '/custom/pages/lists/list_load_events/list_load_bloc.dart';
-import '/custom/pages/lists/list_load_events/list_load_event.dart';
-import '/custom/pages/lists/lists_load_events/lists_bloc.dart';
-import '/custom/pages/lists/lists_load_events/lists_event.dart';
 import '/standard/analytics/bloc/analytics_bloc.dart';
 import '/standard/analytics/bloc/analytics_event.dart';
 import '/standard/analyticsRepository/models/ntg_event.dart';
@@ -29,42 +20,54 @@ class AuthenticatedUserListener extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<AppBloc, AppState>(
       listener: (context, state) {
-        context.read<ListLoadBloc>().add(
-              ChangeUserForListLoad(
-                state.user.id,
-              ),
-            );
-        context.read<ListsLoadBloc>().add(
-              ChangeUserForListsLoad(
-                state.user.id,
-              ),
-            );
-        context.read<ListItemLoadBloc>().add(
-              ChangeUserForListItemLoad(
-                state.user.id,
-              ),
-            );
-        context.read<ListItemsLoadBloc>().add(
-              ChangeUserForListItemsLoad(
-                state.user.id,
-              ),
-            );
-        context.read<ListItemCrudBloc>().add(
-              ChangeUserForListItemCrud(
-                state.user.id,
+// call firestore to try and get the user data
+// if it exists, then just fill the user object
+// if it doesn't exists, set a OnboardingRequired thing
+
+        final user = switch (state) {
+          LoggedIn(:final user) => user,
+          LoggedInWithData(:final user) => user,
+          OnboardingRequired() => null,
+          LoggedOut() => null,
+        };
+
+        // logger
+        //   ..i('$this => in AuthenticatedUserListener QQQQ3')
+        //   ..i('$this => state $state QQQQ4')
+        //   ..i('$this => calling ChangeUserBloc for ChangeUserEvent and user ${user.id} QQQQ4');
+
+        context.read<ChangeUserBloc>().add(
+              ChangeUserEvent(
+                user,
               ),
             );
 
-        if (state.status.isLoggedIn) {
-          context.read<AnalyticsBloc>().add(
-                TrackAnalyticsEvent(
-                  state.user.isNewUser ? RegistrationEvent() : LoginEvent(),
-                ),
-              );
+        switch (state) {
+          case LoggedIn():
+            break;
+          case LoggedInWithData():
+            context.read<AnalyticsBloc>().add(TrackAnalyticsEvent(LoginEvent()));
+          case OnboardingRequired():
+            context.read<AnalyticsBloc>().add(TrackAnalyticsEvent(RequireOnboardingEvent()));
+          case LoggedOut():
+            context.read<AnalyticsBloc>().add(TrackAnalyticsEvent(LogoutEvent()));
         }
       },
-      listenWhen: (previous, current) => previous.status != current.status,
+      listenWhen: differentStateOrUser,
       child: child,
     );
+  }
+
+  bool differentStateOrUser(AppState previous, AppState current) {
+    if (previous != current) {
+      return true;
+    }
+
+    if (previous is LoggedInWithData && current is LoggedInWithData) {
+      if (previous.user != current.user) {
+        return true;
+      }
+    }
+    return false;
   }
 }

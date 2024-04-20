@@ -1,24 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:listwhatever/standard/firebaseService/firebase_service.dart';
 import '/custom/pages/lists/models/list_of_things.dart';
 import '/standard/constants.dart';
-import '/standard/firebase/firestore/firestore.dart';
 
-class ListsService {
-  ListsService({required this.userId}) {
-    _initFirestore();
-  }
-
-  String? userId;
-  late final FirebaseFirestore firestore;
-
-  Future<void> _initFirestore() async {
-    firestore = await getFirestore();
-  }
-
-  // ignore: use_setters_to_change_properties
-  void changeUser(String? userId) {
-    this.userId = userId;
-  }
+class ListsService extends FirestoreService {
+  ListsService({super.userId});
 
   Future<CollectionReference<Map<String, dynamic>>> getCollection() async {
     const path = '/lists';
@@ -47,21 +33,25 @@ class ListsService {
     return list.copyWith(
       id: id,
       shareType: list.ownerId == userId ? ShareType.editor : list.sharedWith[userId]!,
-      isOwnList: list.ownerId == userId,
     );
   }
 
   Future<ListOfThings> getList(String id) async {
-    logger.d('getting actual list: $id');
-    final listsCollection = await getCollection();
-    final snapshot = await listsCollection.doc(id).get();
-    return convertToListOfThings(snapshot.id, snapshot.data()!);
+    try {
+      logger.d('getting actual list: $id');
+      final listsCollection = await getCollection();
+      final snapshot = await listsCollection.doc(id).get();
+      return convertToListOfThings(snapshot.id, snapshot.data()!);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<String> addList(ListOfThings list) async {
     logger.d('adding actual list: $list');
     final listsCollection = await getCollection();
     final docId = listsCollection.doc().id;
+    logger.d('adding actual list, docId: $docId');
     final listToSave = list.copyWith(id: docId, ownerId: userId);
     await listsCollection.doc(docId).set(listToSave.toJson());
     return docId;
@@ -73,9 +63,9 @@ class ListsService {
     return listsCollection.doc(list.id).update(list.toJson());
   }
 
-  Future<void> deleteList(String listId) async {
-    logger.d('deleting actual list: $listId');
+  Future<void> deleteList(String actualListId) async {
+    logger.d('deleting actual list: $actualListId');
     final listsCollection = await getCollection();
-    return listsCollection.doc(listId).delete();
+    return listsCollection.doc(actualListId).delete();
   }
 }

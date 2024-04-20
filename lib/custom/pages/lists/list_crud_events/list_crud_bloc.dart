@@ -32,11 +32,11 @@ class ListCrudBloc extends Bloc<ListCrudEvent, ListCrudState> {
     try {
       emit(ListCrudLoading());
       final list = event.list.copyWith(ownerId: _listsService.userId);
-      final listId = await _listsService.addList(event.list);
+      final actualListId = await _listsService.addList(event.list);
       final userList = UserList(
         id: '',
         imageFilename: list.imageFilename,
-        listId: listId,
+        actualListId: actualListId,
         listName: list.name,
         listType: list.listType,
         ownerId: list.ownerId!,

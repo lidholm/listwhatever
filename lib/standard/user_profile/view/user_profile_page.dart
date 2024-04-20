@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listwhatever/standard/app/bloc/app_bloc.dart';
+import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/user_profile/bloc/user_profile_bloc.dart';
 
 import '/l10n/l10n.dart';
@@ -74,7 +75,11 @@ class _UserProfileViewState extends State<UserProfileView> with WidgetsBindingOb
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final user = context.watch<AppBloc>().state.user;
+    final appState = context.watch<AppBloc>().state;
+    if (appState is! LoggedInWithData) {
+      return const Text('Not logged in and onboarded');
+    }
+    final user = appState.user;
 
     return BlocListener<UserProfileBloc, UserProfileState>(
       listener: (context, state) {
@@ -84,9 +89,8 @@ class _UserProfileViewState extends State<UserProfileView> with WidgetsBindingOb
       },
       child: BlocListener<AppBloc, AppState>(
         listener: (context, state) {
-          if (state.status == AppStatus.unauthenticated) {
-            GoRouter.of(context).pop();
-          }
+          logger.i('$this -> popping once');
+          GoRouter.of(context).pop();
         },
         child: Scaffold(
           appBar: const CommonAppBar(
@@ -125,10 +129,10 @@ class _UserProfileViewState extends State<UserProfileView> with WidgetsBindingOb
                         },
                         onChanged: (distanceUnit) {
                           if (distanceUnit != null) {
-                            final updatedSettings = user.settings.copyWith(
-                              distanceUnit: distanceUnit,
-                            );
-                            context.read<AppBloc>().add(UpdateSettings(user, updatedSettings));
+                            // final updatedSettings = user.settings.copyWith(
+                            //   distanceUnit: distanceUnit,
+                            // );
+                            // context.read<AppBloc>().add(UpdateSettings(user, updatedSettings));
                           }
                         },
                       ),

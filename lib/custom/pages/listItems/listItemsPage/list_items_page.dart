@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listwhatever/custom/pages/listItems/listItemsPage/inner_list_items_page.dart';
 import 'package:listwhatever/custom/pages/listItems/listItemsPage/list_items_page_view_cubit.dart';
+import 'package:listwhatever/standard/app/bloc/app_state.dart';
 
 import '/custom/currentLocationBloc/current_location_bloc.dart';
 import '/custom/pages/listItems/filters/bloc/filter_bloc.dart';
@@ -20,9 +21,9 @@ import '/standard/app/bloc/app_bloc.dart';
 import '/standard/constants.dart';
 
 class ListItemsPage extends StatefulWidget {
-  const ListItemsPage({required this.listId, super.key});
+  const ListItemsPage({required this.actualListId, super.key});
 
-  final String listId;
+  final String actualListId;
 
   @override
   State<ListItemsPage> createState() => _ListItemsPageState();
@@ -31,8 +32,8 @@ class ListItemsPage extends StatefulWidget {
 class _ListItemsPageState extends State<ListItemsPage> {
   @override
   void initState() {
-    BlocProvider.of<ListItemsLoadBloc>(context).add(WatchListItems(widget.listId));
-    BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.listId));
+    BlocProvider.of<ListItemsLoadBloc>(context).add(WatchListItems(widget.actualListId));
+    BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.actualListId));
     super.initState();
   }
 
@@ -52,6 +53,10 @@ class _ListItemsPageState extends State<ListItemsPage> {
         if (notLoadedView != null) {
           return notLoadedView;
         }
+
+        if (appState is! LoggedInWithData) {
+          return const Text('Not logged in or onboarded');
+        }
         final user = appState.user;
 
         final filters = (filtersState as FiltersUpdated).filters;
@@ -66,6 +71,7 @@ class _ListItemsPageState extends State<ListItemsPage> {
           listener: (context, state) {
             logger.i('$this => state: $state');
             if (state is ListCrudDeleted) {
+              logger.i('$this -> popping once');
               GoRouter.of(context).pop();
             }
           },

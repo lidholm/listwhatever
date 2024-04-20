@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/standard/constants.dart';
 import '/custom/pages/list_or_list_item_not_loaded_handler.dart';
 import '/custom/pages/shareList/bloc/shared_list_bloc.dart';
 import '/custom/pages/shareList/bloc/shared_list_event.dart';
@@ -68,6 +69,7 @@ class _SubscribeListPageState extends State<SubscribeListPage> {
                     ),
                     ElevatedButton(
                       onPressed: () {
+                        logger.i('$this -> popping once');
                         GoRouter.of(context).pop();
                       },
                       child: Padding(

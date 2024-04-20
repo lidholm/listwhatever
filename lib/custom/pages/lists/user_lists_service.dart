@@ -1,25 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:listwhatever/standard/firebaseService/firebase_service.dart';
 import '/custom/pages/lists/models/user_list.dart';
 
 import '/standard/constants.dart';
-import '/standard/firebase/firestore/firestore.dart';
 
-class UserListsService {
-  UserListsService({required this.userId}) {
-    _initFirestore();
-  }
-
-  String? userId;
-  late final FirebaseFirestore firestore;
-
-  Future<void> _initFirestore() async {
-    firestore = await getFirestore();
-  }
-
-  // ignore: use_setters_to_change_properties
-  void changeUser(String? userId) {
-    this.userId = userId;
-  }
+class UserListsService extends FirestoreService {
+  UserListsService({super.userId});
 
   Future<CollectionReference<Map<String, dynamic>>> getCollection() async {
     final path = '/users/$userId/lists';
@@ -27,7 +13,7 @@ class UserListsService {
     return firestore.collection(path);
   }
 
-  Stream<List<UserList>> getLists() async* {
+  Stream<List<UserList>> getUserLists() async* {
     logger.d('getting user lists');
     if (userId == null) {
       logger.d('no user yet');
@@ -48,10 +34,10 @@ class UserListsService {
     return tmp.copyWith(id: id, isOwnList: tmp.ownerId == userId);
   }
 
-  Future<UserList> getList(String id) async {
-    logger.d('getting user list: $id');
+  Future<UserList> getUserList(String listId) async {
+    logger.d('getting user list: $listId');
     final listsCollection = await getCollection();
-    final snapshot = await listsCollection.doc(id).get();
+    final snapshot = await listsCollection.doc(listId).get();
     final data = snapshot.data();
     logger.i('$this => user list data: $data');
     return convertToUserList(snapshot.id, data!);
@@ -61,6 +47,7 @@ class UserListsService {
     logger.d('adding user list: $list');
     final listsCollection = await getCollection();
     final docId = listsCollection.doc().id;
+    logger.d('adding user list, docId: $docId');
     return listsCollection.doc(docId).set(list.copyWith(id: docId).toJson());
   }
 
@@ -72,7 +59,12 @@ class UserListsService {
 
   Future<void> deleteList(String listId) async {
     logger.d('deleting user list: $listId');
+
     final listsCollection = await getCollection();
-    return listsCollection.doc(listId).delete();
+    final querySnapshot = await listsCollection.where('actualListId', isEqualTo: listId).get();
+    final documents = querySnapshot.docs;
+    final document = documents.first;
+    final docId = convertToUserList(document.id, document.data()).id;
+    return listsCollection.doc(docId).delete();
   }
 }

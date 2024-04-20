@@ -64,9 +64,7 @@ class UserRepository {
   ///
   Stream<User> get user => _authenticationClient.user.map(
         (authenticationUser) {
-          logger
-            ..i('authenticationUser: $authenticationUser')
-            ..i('authenticationUser.email: ${authenticationUser.email}');
+          logger.i('$this => authenticationUser.email: ${authenticationUser.email}     QQQ9');
           return fromAuthenticationUser(
             authenticationUser,
           );
@@ -150,9 +148,6 @@ class UserRepository {
     }
   }
 
-  /// Signs out the current user which will emit
-  /// [User.anonymous] from the [user] Stream.
-  ///
   /// Throws a [LogOutFailure] if an exception occurs.
   Future<void> logOut() async {
     try {

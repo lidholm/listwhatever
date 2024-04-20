@@ -11,25 +11,25 @@ class ChangeUserForListItemCrud extends ListItemCrudEvent {
 }
 
 class AddListItem extends ListItemCrudEvent {
-  AddListItem(this.listId, this.listItem);
-  final String listId;
+  AddListItem(this.actualListId, this.listItem);
+  final String actualListId;
   final ListItem listItem;
 }
 
 class UpdateListItem extends ListItemCrudEvent {
-  UpdateListItem(this.listId, this.listItem);
-  final String listId;
+  UpdateListItem(this.actualListId, this.listItem);
+  final String actualListId;
   final ListItem listItem;
 }
 
 class DeleteListItem extends ListItemCrudEvent {
-  DeleteListItem(this.listId, this.listItemId);
-  final String listId;
+  DeleteListItem(this.actualListId, this.listItemId);
+  final String actualListId;
   final String listItemId;
 }
 
 class ImportListItems extends ListItemCrudEvent {
-  ImportListItems(this.listId, this.listItems);
-  final String listId;
+  ImportListItems(this.actualListId, this.listItems);
+  final String actualListId;
   final List<ListItem> listItems;
 }

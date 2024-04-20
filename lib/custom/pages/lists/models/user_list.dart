@@ -8,7 +8,7 @@ part 'user_list.g.dart';
 class UserList with _$UserList {
   const factory UserList({
     required String? id,
-    required String listId,
+    required String actualListId,
     required String listName,
     required ListType listType,
     required String imageFilename,

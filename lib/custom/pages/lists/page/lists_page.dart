@@ -81,7 +81,7 @@ class _ListsPageState extends State<ListsPage> {
                                 text: list.listName,
                                 chipText: list.listType.readable(),
                                 callback: (list) {
-                                  ListItemsPageRoute(listId: list.id!).push<void>(userListContext);
+                                  ListItemsPageRoute(actualListId: list.actualListId).push<void>(userListContext);
                                 },
                                 isLoading: imageUrl == null,
                                 topRightIcon: list.isOwnList!

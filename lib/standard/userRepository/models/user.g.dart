@@ -11,10 +11,7 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       email: json['email'] as String,
       name: json['name'] as String,
       photo: json['photo'] as String,
-      isNewUser: json['isNewUser'] as bool,
       settings: Settings.fromJson(json['settings'] as Map<String, dynamic>),
-      hasLoadedFromFirestore: json['hasLoadedFromFirestore'] as bool,
-      anonymous: json['anonymous'] as bool,
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
@@ -23,8 +20,5 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'email': instance.email,
       'name': instance.name,
       'photo': instance.photo,
-      'isNewUser': instance.isNewUser,
       'settings': instance.settings.toJson(),
-      'hasLoadedFromFirestore': instance.hasLoadedFromFirestore,
-      'anonymous': instance.anonymous,
     };

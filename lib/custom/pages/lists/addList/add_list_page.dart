@@ -13,7 +13,6 @@ import '/custom/pages/list_or_list_item_not_loaded_handler.dart';
 import '/custom/pages/lists/addList/upload_task_tile.dart';
 import '/custom/pages/lists/list_crud_events/list_crud_bloc.dart';
 import '/custom/pages/lists/list_crud_events/list_crud_event.dart';
-import '/custom/pages/lists/list_crud_events/list_crud_state.dart';
 import '/custom/pages/lists/list_load_events/list_load_bloc.dart';
 import '/custom/pages/lists/list_load_events/list_load_event.dart';
 import '/custom/pages/lists/list_load_events/list_load_state.dart';
@@ -94,44 +93,36 @@ class _AddListPageState extends State<AddListPage> {
       AddListValues.ownerId.toString(): list?.ownerId,
       // AddListValues.share.toString(): list?.shared ?? false,
     };
-    return BlocListener<ListCrudBloc, ListCrudState>(
-      listener: (context, state) {
-        logger.i('$this => state: $state');
-        if (state is ListCrudAdded) {
-          GoRouter.of(context).pop();
-        }
-      },
-      child: Scaffold(
-        appBar: const CommonAppBar(title: 'Add list'),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: FormBuilder(
-              key: _formKey,
-              onChanged: () {
-                _formKey.currentState!.save();
-                // logger.d(_formKey.currentState!.value.toString());
-              },
-              autovalidateMode: AutovalidateMode.disabled,
-              initialValue: initialValue,
-              skipDisabled: true,
-              child: VStack(
-                children: <Widget>[
-                  const SizedBox(height: 15),
-                  getListNameField(),
-                  getListTypeField(),
-                  getWithMapCheckbox(),
-                  getWithDatesCheckbox(),
-                  getWithTimesCheckbox(),
-                  Row(
-                    children: <Widget>[
-                      getCancelButton(),
-                      const SizedBox(width: 20),
-                      getSubmitButton(),
-                    ],
-                  ),
-                ],
-              ),
+    return Scaffold(
+      appBar: const CommonAppBar(title: 'Add list'),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: FormBuilder(
+            key: _formKey,
+            onChanged: () {
+              _formKey.currentState!.save();
+              // logger.d(_formKey.currentState!.value.toString());
+            },
+            autovalidateMode: AutovalidateMode.disabled,
+            initialValue: initialValue,
+            skipDisabled: true,
+            child: VStack(
+              children: <Widget>[
+                const SizedBox(height: 15),
+                getListNameField(),
+                getListTypeField(),
+                getWithMapCheckbox(),
+                getWithDatesCheckbox(),
+                getWithTimesCheckbox(),
+                Row(
+                  children: <Widget>[
+                    getCancelButton(),
+                    const SizedBox(width: 20),
+                    getSubmitButton(),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
@@ -370,10 +361,10 @@ class _AddListPageState extends State<AddListPage> {
 
       return Future.value(uploadTask);
     } on FirebaseException catch (e) {
-      logger.i(e);
+      logger.e(e);
       rethrow;
     } on Exception catch (e) {
-      logger.i(e);
+      logger.e(e);
       rethrow;
     }
   }
@@ -404,6 +395,7 @@ class _AddListPageState extends State<AddListPage> {
     } else {
       BlocProvider.of<ListCrudBloc>(context).add(UpdateList(list));
     }
+    logger.i('$this -> popping once');
     GoRouter.of(context).pop();
   }
 }

@@ -52,14 +52,32 @@ class NewsletterEvent extends NTGEvent {
         );
 }
 
-/// {@template login_event}
-/// An analytics event for tracking user login.
-/// {@endtemplate}
 class LoginEvent extends NTGEvent {
-  /// {@macro login_event}
   LoginEvent()
       : super(
           name: 'login',
+          category: 'NTG account',
+          action: 'login',
+          label: 'success',
+          nonInteraction: false,
+        );
+}
+
+class LogoutEvent extends NTGEvent {
+  LogoutEvent()
+      : super(
+          name: 'logout',
+          category: 'NTG account',
+          action: 'logout',
+          label: 'success',
+          nonInteraction: false,
+        );
+}
+
+class RequireOnboardingEvent extends NTGEvent {
+  RequireOnboardingEvent()
+      : super(
+          name: 'require_onboarding',
           category: 'NTG account',
           action: 'login',
           label: 'success',

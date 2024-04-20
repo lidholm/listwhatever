@@ -17,96 +17,103 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   })  : _userRepository = userRepository,
         _userService = userService,
         super(
-          user.isAnonymous() ? const AppState.unauthenticated() : AppState.authenticated(user),
+          user.isAnonymous() ? AppState.loggedOut() : AppState.loggedIn(user),
         ) {
-    on<AppUserChanged>(_onUserChanged);
-    on<UpdateSettings>(_onUpdateSettings);
-    on<AppOnboardingCompleted>(_onOnboardingCompleted);
+    on<AuthenticationUserChanged>(_onUserChanged);
+    // on<UpdateSettings>(_onUpdateSettings);
+    on<UpdateUser>(_onUpdateUser);
+    on<AddUser>(_onAddUser);
     on<AppLogoutRequested>(_onLogoutRequested);
-    on<AppOpened>(_onAppOpened);
+    // on<AppOpened>(_onAppOpened);
 
     _userSubscription = _userRepository.user.listen(_userChanged);
   }
 
   /// The number of app opens after which the login overlay is shown
   /// for an unauthenticated user.
-  static const _appOpenedCountForLoginOverlay = 5;
+  // static const _appOpenedCountForLoginOverlay = 5;
 
   final UserRepository _userRepository;
   final UserService _userService;
 
   late StreamSubscription<User> _userSubscription;
 
-  void _userChanged(User user) => add(AppUserChanged(user));
+  void _userChanged(User user) {
+    logger.i('$this => add(AppUserChanged(${user.id})) QQQ1');
+    add(AuthenticationUserChanged(user));
+  }
 
-  Future<void> _onUserChanged(AppUserChanged event, Emitter<AppState> emit) async {
+  Future<void> _onUserChanged(AuthenticationUserChanged event, Emitter<AppState> emit) async {
     final user = event.user;
 
-    switch (state.status) {
-      case AppStatus.onboardingRequired:
-      case AppStatus.authenticated:
-      case AppStatus.unauthenticated:
-        // TODO: Handle all of this correctly
-        if (!user.hasLoadedFromFirestore) {
-          final firestoreUser = await _userService.getUser();
-          logger.i('$this => loaded firestoreUser: $firestoreUser');
+    logger
+      ..i('$this => state.status: $state      QQQQQ 21')
+      ..i('$this => user: $user      QQQQQ 22');
+    if (user.isAnonymous()) {
+      logger.i('$this => AppStatus.loggedOut QQQQQ 23');
+      emit(AppState.loggedOut());
+      return;
+    }
 
-          final mergedUser = (firestoreUser == null)
-              ? user.copyWith(hasLoadedFromFirestore: true)
-              : user.copyWith(hasLoadedFromFirestore: true, settings: firestoreUser.settings);
-          emit(AppState.authenticated(mergedUser));
-        } else if (user.isAnonymous() && user.isNewUser) {
-          return emit(AppState.onboardingRequired(user));
-        } else {
-          user.isAnonymous() ? emit(const AppState.unauthenticated()) : emit(AppState.authenticated(user));
-        }
+    emit(AppState.loggedIn(user));
+    final userWithData = await tryReadUser(user);
+    logger.i('$this => userWithData: $userWithData');
+
+    if (userWithData == null) {
+      emit(AppState.onboardingRequired(user));
+      return;
+    } else {
+      emit(AppState.loggedInWithData(userWithData));
+      return;
     }
   }
 
-  void _onOnboardingCompleted(
-    AppOnboardingCompleted event,
-    Emitter<AppState> emit,
-  ) {
-    if (state.status == AppStatus.onboardingRequired) {
-      return state.user.isAnonymous()
-          ? emit(const AppState.unauthenticated())
-          : emit(AppState.authenticated(state.user));
-    }
+  // Future<void> _onUpdateSettings(UpdateSettings event, Emitter<AppState> emit) async {
+  //   // TODO: This should maybe not be allowed?
+  //   if (!state.user.isAnonymous()) {
+  //     final updatedUser = event.user.copyWith(settings: event.settings);
+  //     await _userService.updateUser(updatedUser);
+  //     emit(AppState.authenticated(updatedUser));
+  //   }
+  // }
+
+  Future<void> _onUpdateUser(UpdateUser event, Emitter<AppState> emit) async {
+    logger.i('$this => _onUpdateUser $event');
+
+    await _userService.updateUser(event.user);
   }
 
-  Future<void> _onUpdateSettings(UpdateSettings event, Emitter<AppState> emit) async {
-    // TODO: This should maybe not be allowed?
-    if (!state.user.isAnonymous()) {
-      final updatedUser = event.user.copyWith(settings: event.settings);
-      await _userService.updateUser(updatedUser);
-      emit(AppState.authenticated(updatedUser));
-    }
+  Future<void> _onAddUser(AddUser event, Emitter<AppState> emit) async {
+    logger.i('$this => _onAddUser $event');
+
+    final user = await _userService.addUser(event.user);
+    emit(LoggedInWithData(user));
   }
 
   void _onLogoutRequested(AppLogoutRequested event, Emitter<AppState> emit) {
-    // We are disabling notifications when a user logs out because
-    // the user should not receive any notifications when logged out.
-
     unawaited(_userRepository.logOut());
-  }
-
-  Future<void> _onAppOpened(AppOpened event, Emitter<AppState> emit) async {
-    if (state.user.isAnonymous()) {
-      final appOpenedCount = await _userRepository.fetchAppOpenedCount();
-
-      if (appOpenedCount == _appOpenedCountForLoginOverlay - 1) {
-        emit(state.copyWith(showLoginOverlay: true));
-      }
-
-      if (appOpenedCount < _appOpenedCountForLoginOverlay + 1) {
-        await _userRepository.incrementAppOpenedCount();
-      }
-    }
   }
 
   @override
   Future<void> close() {
     _userSubscription.cancel();
     return super.close();
+  }
+
+  Future<User?> tryReadUser(User user) async {
+    logger.i('$this => in tryReadUser QQQQ 31');
+    final firestoreUser = await _userService.getUser(user.id);
+    logger
+      ..i('$this => loaded firestoreUser: $firestoreUser')
+      ..i('$this => in firestoreUser $firestoreUser QQQQ 31');
+
+    if (firestoreUser == null) {
+      logger.i('$this => return null');
+      return null;
+    }
+
+    final fullUser = user.copyWith(settings: firestoreUser.settings);
+    logger.i('$this => return fullUser: $fullUser');
+    return fullUser;
   }
 }

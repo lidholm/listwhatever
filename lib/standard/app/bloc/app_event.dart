@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import '/standard/settings/settings.dart';
+import 'package:listwhatever/standard/constants.dart';
 import '/standard/userRepository/models/user.dart';
 
 abstract class AppEvent extends Equatable {
@@ -13,8 +13,10 @@ class AppLogoutRequested extends AppEvent {
   const AppLogoutRequested();
 }
 
-class AppUserChanged extends AppEvent {
-  const AppUserChanged(this.user);
+class AuthenticationUserChanged extends AppEvent {
+  AuthenticationUserChanged(this.user) {
+    logger.i('AuthenticationUserChanged => creating AppUserChanged with ${user.id} QQQ2');
+  }
 
   final User user;
 
@@ -22,20 +24,36 @@ class AppUserChanged extends AppEvent {
   List<Object> get props => [user];
 }
 
-class AppOnboardingCompleted extends AppEvent {
-  const AppOnboardingCompleted();
-}
+// class AppOnboardingCompleted extends AppEvent {
+//   const AppOnboardingCompleted();
+// }
 
-class AppOpened extends AppEvent {
-  const AppOpened();
-}
+// class AppOpened extends AppEvent {
+//   const AppOpened();
+// }
 
-class UpdateSettings extends AppEvent {
-  const UpdateSettings(this.user, this.settings);
-
+class UpdateUser extends AppEvent {
+  const UpdateUser({required this.user});
   final User user;
-  final Settings settings;
 
   @override
   List<Object> get props => [user];
 }
+
+class AddUser extends AppEvent {
+  const AddUser({required this.user});
+  final User user;
+
+  @override
+  List<Object> get props => [user];
+}
+
+// class UpdateSettings extends AppEvent {
+//   const UpdateSettings(this.user, this.settings);
+
+//   final User user;
+//   final Settings settings;
+
+//   @override
+//   List<Object> get props => [user];
+// }

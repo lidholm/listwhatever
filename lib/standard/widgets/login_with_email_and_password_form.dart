@@ -11,6 +11,9 @@ import '/standard/bloc/login_bloc.dart';
 import '/standard/bloc/login_event.dart';
 import '/standard/bloc/login_state.dart';
 
+const emailText = 'regular@email.com';
+const passwordText = 'test1234';
+
 class LoginWithEmailAndPasswordForm extends StatelessWidget {
   const LoginWithEmailAndPasswordForm({super.key});
 
@@ -80,7 +83,7 @@ class _EmailInput extends StatefulWidget {
 }
 
 class _EmailInputState extends State<_EmailInput> {
-  final _controller = TextEditingController();
+  final _controller = TextEditingController(text: emailText);
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +124,7 @@ class _PasswordInput extends StatefulWidget {
 }
 
 class _PasswordInputState extends State<_PasswordInput> {
-  final _controller = TextEditingController();
+  final _controller = TextEditingController(text: passwordText);
 
   @override
   Widget build(BuildContext context) {

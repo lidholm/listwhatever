@@ -21,6 +21,7 @@ Settings _$SettingsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Settings {
   DistanceUnitOptions get distanceUnit => throw _privateConstructorUsedError;
+  MapsType get mapsType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +34,7 @@ abstract class $SettingsCopyWith<$Res> {
   factory $SettingsCopyWith(Settings value, $Res Function(Settings) then) =
       _$SettingsCopyWithImpl<$Res, Settings>;
   @useResult
-  $Res call({DistanceUnitOptions distanceUnit});
+  $Res call({DistanceUnitOptions distanceUnit, MapsType mapsType});
 }
 
 /// @nodoc
@@ -50,12 +51,17 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
   @override
   $Res call({
     Object? distanceUnit = null,
+    Object? mapsType = null,
   }) {
     return _then(_value.copyWith(
       distanceUnit: null == distanceUnit
           ? _value.distanceUnit
           : distanceUnit // ignore: cast_nullable_to_non_nullable
               as DistanceUnitOptions,
+      mapsType: null == mapsType
+          ? _value.mapsType
+          : mapsType // ignore: cast_nullable_to_non_nullable
+              as MapsType,
     ) as $Val);
   }
 }
@@ -68,7 +74,7 @@ abstract class _$$SettingsImplCopyWith<$Res>
       __$$SettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({DistanceUnitOptions distanceUnit});
+  $Res call({DistanceUnitOptions distanceUnit, MapsType mapsType});
 }
 
 /// @nodoc
@@ -83,12 +89,17 @@ class __$$SettingsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? distanceUnit = null,
+    Object? mapsType = null,
   }) {
     return _then(_$SettingsImpl(
       distanceUnit: null == distanceUnit
           ? _value.distanceUnit
           : distanceUnit // ignore: cast_nullable_to_non_nullable
               as DistanceUnitOptions,
+      mapsType: null == mapsType
+          ? _value.mapsType
+          : mapsType // ignore: cast_nullable_to_non_nullable
+              as MapsType,
     ));
   }
 }
@@ -96,17 +107,21 @@ class __$$SettingsImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$SettingsImpl implements _Settings {
-  const _$SettingsImpl({required this.distanceUnit});
+  const _$SettingsImpl(
+      {required this.distanceUnit, this.mapsType = MapsType.flutterMaps});
 
   factory _$SettingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$SettingsImplFromJson(json);
 
   @override
   final DistanceUnitOptions distanceUnit;
+  @override
+  @JsonKey()
+  final MapsType mapsType;
 
   @override
   String toString() {
-    return 'Settings(distanceUnit: $distanceUnit)';
+    return 'Settings(distanceUnit: $distanceUnit, mapsType: $mapsType)';
   }
 
   @override
@@ -115,12 +130,14 @@ class _$SettingsImpl implements _Settings {
         (other.runtimeType == runtimeType &&
             other is _$SettingsImpl &&
             (identical(other.distanceUnit, distanceUnit) ||
-                other.distanceUnit == distanceUnit));
+                other.distanceUnit == distanceUnit) &&
+            (identical(other.mapsType, mapsType) ||
+                other.mapsType == mapsType));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, distanceUnit);
+  int get hashCode => Object.hash(runtimeType, distanceUnit, mapsType);
 
   @JsonKey(ignore: true)
   @override
@@ -137,14 +154,17 @@ class _$SettingsImpl implements _Settings {
 }
 
 abstract class _Settings implements Settings {
-  const factory _Settings({required final DistanceUnitOptions distanceUnit}) =
-      _$SettingsImpl;
+  const factory _Settings(
+      {required final DistanceUnitOptions distanceUnit,
+      final MapsType mapsType}) = _$SettingsImpl;
 
   factory _Settings.fromJson(Map<String, dynamic> json) =
       _$SettingsImpl.fromJson;
 
   @override
   DistanceUnitOptions get distanceUnit;
+  @override
+  MapsType get mapsType;
   @override
   @JsonKey(ignore: true)
   _$$SettingsImplCopyWith<_$SettingsImpl> get copyWith =>
