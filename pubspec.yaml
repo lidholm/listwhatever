@@ -17,14 +17,10 @@ dependencies:
   device_info_plus: ^9.1.1
   envify: ^2.0.3
   equatable: ^2.0.3
-
-
-  firebase_core: ^3.3.0
-  firebase_auth: ^5.1.4
-  firebase_ui_auth: ^1.15.0
-
   firebase_analytics: ^11.2.1
+  firebase_auth: ^5.1.4
   firebase_auth_platform_interface: ^7.4.3
+  firebase_core: ^3.3.0
   firebase_core_platform_interface: ^5.2.0
   firebase_crashlytics: ^4.0.4
   firebase_in_app_messaging: ^0.8.0+4 
