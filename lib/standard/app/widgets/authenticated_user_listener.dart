@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:listwhatever/standard/app/bloc/app_bloc.dart';
-import 'package:listwhatever/standard/changeUserBloc/bloc/change_user_bloc_bloc.dart';
 
 import '/standard/analytics/bloc/analytics_bloc.dart';
 import '/standard/analytics/bloc/analytics_event.dart';
 import '/standard/analyticsRepository/models/ntg_event.dart';
+import '/standard/app/bloc/app_bloc.dart';
 import '/standard/app/bloc/app_state.dart';
+import '/standard/changeUserBloc/bloc/change_user_bloc_bloc.dart';
 
 class AuthenticatedUserListener extends StatelessWidget {
   const AuthenticatedUserListener({

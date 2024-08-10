@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:listwhatever/standard/userRepository/models/user.dart';
 
 import '/custom/navigation/routes.dart';
 import '/custom/pages/import/csv/import_csv_page_route.dart';
@@ -27,6 +26,7 @@ import '/custom/pages/lists/models/list_of_things.dart';
 import '/custom/pages/shareList/share_list_page_route.dart';
 import '/l10n/l10n.dart';
 import '/standard/constants.dart';
+import '/standard/userRepository/models/user.dart';
 import '/standard/widgets/appBar/app_bar_action.dart';
 import '/standard/widgets/appBar/app_bar_action_dropdown.dart';
 import '/standard/widgets/appBar/app_bar_action_icon.dart';

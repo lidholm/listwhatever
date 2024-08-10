@@ -7,18 +7,18 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:listwhatever/standard/app/view/app.dart';
-import 'package:listwhatever/standard/userRepository/user_repository.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '/standard/analyticsRepository/analytics_repository.dart';
+import '/standard/app/view/app.dart';
 import '/standard/authenticationClient/firebase_authentication_client.dart';
 import '/standard/authenticationClient/token_storage.dart';
 import '/standard/firebase/firebase_options.dart';
 import '/standard/firebase/firestore/firebase_auth.dart';
 import '/standard/main/bootstrap/app_bloc_observer.dart';
 import '/standard/storage/persistentStorage/persistent_storage.dart';
+import '/standard/userRepository/user_repository.dart';
 import '/standard/userRepository/user_storage.dart';
 
 Future<void> bootstrap() async {

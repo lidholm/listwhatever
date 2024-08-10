@@ -25,8 +25,7 @@ class AppButton extends StatelessWidget {
         _disabledButtonColor = disabledButtonColor ?? AppColors.disabledButton,
         _borderSide = borderSide,
         _foregroundColor = foregroundColor ?? AppColors.black,
-        _disabledForegroundColor =
-            disabledForegroundColor ?? AppColors.disabledForeground,
+        _disabledForegroundColor = disabledForegroundColor ?? AppColors.disabledForeground,
         _elevation = elevation ?? 0,
         _textStyle = textStyle,
         _maximumSize = maximumSize ?? _defaultMaximumSize,
@@ -389,19 +388,18 @@ class AppButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        maximumSize: MaterialStateProperty.all(_maximumSize),
-        padding: MaterialStateProperty.all(_padding),
-        minimumSize: MaterialStateProperty.all(_minimumSize),
-        textStyle: MaterialStateProperty.all(textStyle),
-        backgroundColor: onPressed == null
-            ? MaterialStateProperty.all(_disabledButtonColor)
-            : MaterialStateProperty.all(_buttonColor),
-        elevation: MaterialStateProperty.all(_elevation),
+        maximumSize: WidgetStateProperty.all(_maximumSize),
+        padding: WidgetStateProperty.all(_padding),
+        minimumSize: WidgetStateProperty.all(_minimumSize),
+        textStyle: WidgetStateProperty.all(textStyle),
+        backgroundColor:
+            onPressed == null ? WidgetStateProperty.all(_disabledButtonColor) : WidgetStateProperty.all(_buttonColor),
+        elevation: WidgetStateProperty.all(_elevation),
         foregroundColor: onPressed == null
-            ? MaterialStateProperty.all(_disabledForegroundColor)
-            : MaterialStateProperty.all(_foregroundColor),
-        side: MaterialStateProperty.all(_borderSide),
-        shape: MaterialStateProperty.all(
+            ? WidgetStateProperty.all(_disabledForegroundColor)
+            : WidgetStateProperty.all(_foregroundColor),
+        side: WidgetStateProperty.all(_borderSide),
+        shape: WidgetStateProperty.all(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(100),
           ),

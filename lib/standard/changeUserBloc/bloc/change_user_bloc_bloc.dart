@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:listwhatever/standard/firebaseService/firebase_service.dart';
-import 'package:listwhatever/standard/userRepository/models/user.dart';
+import '/standard/firebaseService/firebase_service.dart';
+import '/standard/userRepository/models/user.dart';
 
 part 'change_user_bloc_event.dart';
 part 'change_user_bloc_state.dart';

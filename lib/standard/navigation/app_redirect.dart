@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listwhatever/custom/navigation/routes.dart';
-import 'package:listwhatever/custom/pages/onboarding/onboarding_page_route.dart';
-import 'package:listwhatever/standard/app/bloc/app_bloc.dart';
-import 'package:listwhatever/standard/navigation/models/router_provider_information.dart';
+
+import '/custom/navigation/routes.dart';
+import '/custom/pages/onboarding/onboarding_page_route.dart';
+import '/standard/app/bloc/app_bloc.dart';
 import '/standard/app/bloc/app_state.dart';
 import '/standard/constants.dart';
+import '/standard/navigation/models/router_provider_information.dart';
 import '/standard/navigation/redirect_cubit.dart';
 
 class AppRedirect {

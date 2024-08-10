@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:listwhatever/standard/firebaseService/firebase_service.dart';
+
 import '/custom/pages/shareList/shared_list.dart';
+import '/standard/firebaseService/firebase_service.dart';
 
 class SharedListsService extends FirestoreService {
   SharedListsService({super.userId});

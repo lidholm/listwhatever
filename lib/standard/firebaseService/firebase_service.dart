@@ -1,6 +1,6 @@
 // ignore: one_member_abstracts
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:listwhatever/standard/firebase/firestore/firestore.dart';
+import '/standard/firebase/firestore/firestore.dart';
 
 class FirestoreService {
   FirestoreService({this.userId}) {

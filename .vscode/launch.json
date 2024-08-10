@@ -22,8 +22,6 @@
       "type": "dart",
       "program": "lib/standard/main/main_development.dart",
       "args": [
-        "--flavor",
-        "development",
         "--target",
         "lib/standard/main/main_development.dart",
         "-d",
@@ -40,8 +38,6 @@
       "type": "dart",
       "program": "lib/standard/main/main_development.dart",
       "args": [
-        "--flavor",
-        "development",
         "--target",
         "lib/standard/main/main_development.dart",
         "-d",
@@ -59,8 +55,6 @@
       "flutterMode": "profile",
       "program": "lib/main_production.dart",
       "args": [
-        "--flavor",
-        "production",
         "--target",
         "lib/main_production.dart",
         "--web-renderer",

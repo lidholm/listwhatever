@@ -335,7 +335,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
       validator: FormBuilderValidators.compose([
         FormBuilderValidators.max(40),
         FormBuilderValidators.match(
-          r'\d*(\.\d*)?,\s*-?\d*(\.\d*)',
+          RegExp(r'\d*(\.\d*)?,\s*-?\d*(\.\d*)'),
           errorText: "Doesn't match 12.3, 3.45",
         ),
       ]),

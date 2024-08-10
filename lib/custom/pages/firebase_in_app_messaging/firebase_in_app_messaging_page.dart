@@ -80,8 +80,8 @@ class AnalyticsEventExample extends StatelessWidget {
   Future<void> _sendAnalyticsEvent() async {
     await FirebaseInAppMessagingPage.analytics.logEvent(
       name: 'awesome_event',
-      parameters: <String, dynamic>{
-        //'id': 1, // not required?
+      parameters: <String, Object>{
+        'id': 1, // not required?
       },
     );
   }

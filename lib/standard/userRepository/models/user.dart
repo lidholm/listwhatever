@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:listwhatever/standard/constants.dart';
+
 import '/standard/authenticationClient/models/authentication_user.dart';
+import '/standard/constants.dart';
 import '/standard/settings/settings.dart';
 
 part 'user.freezed.dart';

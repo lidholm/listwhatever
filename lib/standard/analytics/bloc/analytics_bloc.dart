@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:listwhatever/standard/analyticsRepository/analytics_repository.dart';
+
 import '/standard/analytics/bloc/analytics_event.dart';
+import '/standard/analyticsRepository/analytics_repository.dart';
 import '/standard/userRepository/models/user.dart';
 import '/standard/userRepository/user_repository.dart';
-
 import 'analytics_state.dart';
 
 class AnalyticsBloc extends Bloc<BaseAnalyticsEvent, AnalyticsState> {

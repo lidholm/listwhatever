@@ -204,8 +204,10 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
                       },
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(),
-                        FormBuilderValidators.match(r'\d*(\.\d*)?,\s*-?\d*(\.\d*)',
-                            errorText: "Doesn't match 12.3, 3.45",),
+                        FormBuilderValidators.match(
+                          RegExp(r'\d*(\.\d*)?,\s*-?\d*(\.\d*)'),
+                          errorText: "Doesn't match 12.3, 3.45",
+                        ),
                       ]),
                       keyboardType: TextInputType.name,
                       textInputAction: TextInputAction.next,
@@ -234,8 +236,9 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
                                 // logger.d(_formKey.currentState?.value.toString());
                                 closeAndReturnValues(_formKey.currentState);
                               } else {
-                                logger..d(_formKey.currentState?.value.toString())
-                                ..d('validation failed');
+                                logger
+                                  ..d(_formKey.currentState?.value.toString())
+                                  ..d('validation failed');
                               }
                             },
                             child: const Text(

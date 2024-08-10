@@ -147,12 +147,12 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
       // Or use signInWithRedirect
       // return await FirebaseAuth.instance.signInWithRedirect(googleProvider);
     } catch (error, stackTrace) {
-      var extraMessage =  error.runtimeType.toString();
+      var extraMessage = error.runtimeType.toString();
       if (error is AssertionError) {
-        extraMessage= error.message.toString();
+        extraMessage = error.message.toString();
       }
       if (error is firebase_auth.FirebaseAuthException) {
-        extraMessage= '${error.code} - ${error.message}';
+        extraMessage = '${error.code} - ${error.message}';
       }
       Error.throwWithStackTrace(LogInWithGoogleFailure(error, extraMessage), stackTrace);
     }
@@ -178,7 +178,7 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
         );
       }
 
-      final accessToken = loginResult.accessToken?.token;
+      final accessToken = loginResult.accessToken?.tokenString;
       if (accessToken == null) {
         throw LogInWithFacebookFailure(
           Exception(
