@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listwhatever/custom/pages/firebase_performance/firebase_performance_page.dart';
+import '/custom/pages/firebase_performance/firebase_performance_page.dart';
 
 @immutable
 class FirebasePerformancePageRoute extends GoRouteData {

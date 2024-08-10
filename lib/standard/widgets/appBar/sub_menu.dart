@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listwhatever/standard/constants.dart';
+import '/standard/constants.dart';
 
 /// An item with sub menu for using in popup menus
 ///

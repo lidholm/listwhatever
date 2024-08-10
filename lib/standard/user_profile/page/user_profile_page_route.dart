@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listwhatever/standard/user_profile/view/user_profile_page.dart';
+import '/standard/user_profile/view/user_profile_page.dart';
 
 @immutable
 class UserProfilePageRoute extends GoRouteData {

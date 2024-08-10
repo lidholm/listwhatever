@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:listwhatever/standard/firebaseService/firebase_service.dart';
+
 import '/custom/pages/lists/models/list_of_things.dart';
 import '/standard/constants.dart';
+import '/standard/firebaseService/firebase_service.dart';
 
 class ListsService extends FirestoreService {
   ListsService({super.userId});

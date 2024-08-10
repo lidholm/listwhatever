@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:listwhatever/standard/navigation/widgets/nav_drawer_sections.dart';
+
 import '/standard/appUi/colors/app_colors.dart';
 import '/standard/appUi/spacing/app_spacing.dart';
 import '/standard/appUi/widgets/app_logo.dart';
+import '/standard/navigation/widgets/nav_drawer_sections.dart';
 
 class NavDrawer extends StatelessWidget {
   const NavDrawer({super.key});

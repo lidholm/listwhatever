@@ -2,19 +2,19 @@ import 'package:flutter/material.dart'; // hide Page;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:listwhatever/standard/app/bloc/app_bloc.dart';
-import 'package:listwhatever/standard/app/bloc/app_event.dart';
-import 'package:listwhatever/standard/app/bloc/app_state.dart';
-import 'package:listwhatever/standard/appUi/typography/app_text_styles.dart';
-import 'package:listwhatever/standard/constants.dart';
-import 'package:listwhatever/standard/settings/settings.dart';
-import 'package:listwhatever/standard/userRepository/models/user.dart';
-import 'package:listwhatever/standard/widgets/appBar/app_bar_action.dart';
-import 'package:listwhatever/standard/widgets/appBar/app_bar_action_icon.dart';
-import 'package:listwhatever/standard/widgets/appBar/common_app_bar.dart';
-import 'package:listwhatever/standard/widgets/vStack/v_stack.dart';
 
 import '/l10n/l10n.dart';
+import '/standard/app/bloc/app_bloc.dart';
+import '/standard/app/bloc/app_event.dart';
+import '/standard/app/bloc/app_state.dart';
+import '/standard/appUi/typography/app_text_styles.dart';
+import '/standard/constants.dart';
+import '/standard/settings/settings.dart';
+import '/standard/userRepository/models/user.dart';
+import '/standard/widgets/appBar/app_bar_action.dart';
+import '/standard/widgets/appBar/app_bar_action_icon.dart';
+import '/standard/widgets/appBar/common_app_bar.dart';
+import '/standard/widgets/vStack/v_stack.dart';
 
 enum OnboardingValues {
   name,
