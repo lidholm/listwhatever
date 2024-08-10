@@ -37,18 +37,17 @@ class SetUserIdFailure extends AnalyticsFailure {
 /// {@endtemplate}
 class AnalyticsRepository {
   /// {@macro analytics_repository}
-  const AnalyticsRepository(FirebaseAnalytics analytics)
-      : _analytics = analytics;
+  const AnalyticsRepository(FirebaseAnalytics analytics) : _analytics = analytics;
 
   final FirebaseAnalytics _analytics;
 
   /// Tracks the provided [AnalyticsEvent].
   Future<void> track(AnalyticsEvent event) async {
     try {
-      await _analytics.logEvent(
-        name: event.name,
-        parameters: event.properties,
-      );
+      // await _analytics.logEvent(
+      //   name: event.name,
+      //   parameters: event.properties,
+      // );
     } catch (error, stackTrace) {
       Error.throwWithStackTrace(TrackEventFailure(error), stackTrace);
     }
