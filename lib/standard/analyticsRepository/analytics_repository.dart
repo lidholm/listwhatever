@@ -44,10 +44,10 @@ class AnalyticsRepository {
   /// Tracks the provided [AnalyticsEvent].
   Future<void> track(AnalyticsEvent event) async {
     try {
-      // await _analytics.logEvent(
-      //   name: event.name,
-      //   parameters: event.properties,
-      // );
+      await _analytics.logEvent(
+        name: event.name,
+        parameters: event.properties,
+      );
     } catch (error, stackTrace) {
       Error.throwWithStackTrace(TrackEventFailure(error), stackTrace);
     }

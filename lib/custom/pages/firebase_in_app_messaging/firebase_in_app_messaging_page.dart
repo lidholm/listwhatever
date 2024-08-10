@@ -78,12 +78,12 @@ class AnalyticsEventExample extends StatelessWidget {
   const AnalyticsEventExample({super.key});
 
   Future<void> _sendAnalyticsEvent() async {
-    // await FirebaseInAppMessagingPage.analytics.logEvent(
-    //   name: 'awesome_event',
-    //   parameters: <String, dynamic>{
-    //     //'id': 1, // not required?
-    //   },
-    // );
+    await FirebaseInAppMessagingPage.analytics.logEvent(
+      name: 'awesome_event',
+      parameters: <String, Object>{
+        'id': 1, // not required?
+      },
+    );
   }
 
   @override
