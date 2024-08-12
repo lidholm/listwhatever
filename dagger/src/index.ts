@@ -36,7 +36,10 @@ class Listwhatever {
       return dag
         .container()
         .from("node:21-slim")
-        .withDirectory("/src", source)
+        .withDirectory("/src", source,
+          { include: [
+            "lib"
+          ]})
         .withWorkdir("/src")
         .withExec(["echo","hello"])
     }
