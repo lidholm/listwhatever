@@ -18,10 +18,12 @@
   before_script:
     - apk add curl
     - curl -L https://dl.dagger.io/dagger/install.sh | BIN_DIR=/usr/local/bin sh
+    - dagger version
+    - which docker
 build:
   extends: [.dagger]
   script:
     # assumes a Go project
     # modify to use different function(s) as needed
-    - dagger -m github.com/kpenfound/dagger-modules/golang@v0.2.0 call container-echo --string-arg="hello there"
+    - dagger -m github.com/kpenfound/dagger-modules/golang@v0.2.0 call container-echo --string-arg="hello again"
     
