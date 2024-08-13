@@ -25,5 +25,5 @@ build:
   script:
     # assumes a Go project
     # modify to use different function(s) as needed
-    - dagger -m github.com/kpenfound/dagger-modules/golang@v0.2.0 call container-echo --string-arg="hello again"
+    - dagger -m github.com/kpenfound/dagger-modules/golang@v0.2.0 call container-echo --string-arg="hello once more"
     
