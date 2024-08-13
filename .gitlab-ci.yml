@@ -24,7 +24,4 @@ build:
     # assumes a Go project
     # modify to use different function(s) as needed
     - dagger -m github.com/kpenfound/dagger-modules/golang@v0.2.0 call container-echo --string-arg="hello there"
-    # for ephemeral runners only: override the default docker stop timeout and
-    # give the Dagger Engine more time to push cache data to Dagger Cloud
-    - docker stop -t 300 $(docker ps --filter name="dagger-engine-*" -q)
     
