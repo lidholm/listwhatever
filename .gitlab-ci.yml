@@ -25,5 +25,6 @@ variables:
 build:
   stage: build
   script:
+    - echo hello
     - docker build -t my-docker-image .
     - docker run my-docker-image /script/to/run/tests
