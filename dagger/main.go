@@ -22,8 +22,9 @@ import (
 type Listwhatever struct{}
 
 // Returns a container that echoes whatever string argument is provided
-func (m *Listwhatever) ContainerEcho(stringArg string) *dagger.Container {
-	return dag.Container().From("alpine:latest").WithExec([]string{"echo", stringArg})
+func (m *Listwhatever) ContainerEcho(ctx context.Context, stringArg string) (string, error) {
+	return dag.Container().From("alpine:latest").WithExec([]string{"echo", stringArg}).
+	Stdout(ctx)
 }
 
 // Returns lines that match a pattern in the files of the provided Directory
