@@ -1,6 +1,6 @@
 {
   "name": "listwhatever",
-  "sdk": "typescript",
+  "sdk": "go",
   "source": "dagger",
   "engineVersion": "v0.12.4"
 }
