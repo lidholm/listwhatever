@@ -288,17 +288,26 @@ class _AddListPageState extends State<AddListPage> {
 
   Widget getWithMapCheckbox() {
     return AppTheme.getCheckbox(
-        AddListValues.withMap.toString(), 'With Map', _onChanged);
+      AddListValues.withMap.toString(),
+      'With Map',
+      _onChanged,
+    );
   }
 
   Widget getWithDatesCheckbox() {
     return AppTheme.getCheckbox(
-        AddListValues.withDates.toString(), 'With Dates', _onChanged);
+      AddListValues.withDates.toString(),
+      'With Dates',
+      _onChanged,
+    );
   }
 
   Widget getWithTimesCheckbox() {
     return AppTheme.getCheckbox(
-        AddListValues.withTimes.toString(), 'With Times', _onChanged);
+      AddListValues.withTimes.toString(),
+      'With Times',
+      _onChanged,
+    );
   }
 
   Widget getCancelButton() {

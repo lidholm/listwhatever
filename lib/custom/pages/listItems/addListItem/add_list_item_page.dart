@@ -45,8 +45,11 @@ enum AddListItemValues {
 }
 
 class AddListItemPage extends StatefulWidget {
-  const AddListItemPage(
-      {required this.actualListId, this.listItemId, super.key});
+  const AddListItemPage({
+    required this.actualListId,
+    this.listItemId,
+    super.key,
+  });
   final String actualListId;
   final String? listItemId;
 
@@ -56,12 +59,16 @@ class AddListItemPage extends StatefulWidget {
   Map<String, List<String>> getCategories(Map<String, dynamic> values) {
     final categoriesZip = IterableZip([
       values.entries
-          .where((element) =>
-              element.key.startsWith(AddListItemValues.categoryKeys.toString()))
+          .where(
+            (element) => element.key
+                .startsWith(AddListItemValues.categoryKeys.toString()),
+          )
           .toList(),
       values.entries
-          .where((element) => element.key
-              .startsWith(AddListItemValues.categoryValues.toString()))
+          .where(
+            (element) => element.key
+                .startsWith(AddListItemValues.categoryValues.toString()),
+          )
           .toList(),
     ]);
     final categories = <String, List<String>>{};
@@ -158,8 +165,9 @@ class _AddListItemPageState extends State<AddListItemPage> {
                         .read<ListItemCrudBloc>()
                         .add(DeleteListItem(widget.actualListId, listItem.id!));
                     context.read<RedirectCubit>().setRedirect(
-                        ListItemsPageRoute(actualListId: widget.actualListId)
-                            .location);
+                          ListItemsPageRoute(actualListId: widget.actualListId)
+                              .location,
+                        );
                   },
                 ),
               ),
@@ -184,7 +192,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
                 if (list?.withDates ?? false) ...[
                   createDivider(),
                   header('Date'),
-                  padLeft(createDateField(list))
+                  padLeft(createDateField(list)),
                 ],
                 if (list?.withMap ?? false) ...[
                   createDivider(),
@@ -209,13 +217,19 @@ class _AddListItemPageState extends State<AddListItemPage> {
   }
 
   FormBuilder createForm(
-      ListOfThings? list, ListItem? listItem, List<Widget> children) {
+    ListOfThings? list,
+    ListItem? listItem,
+    List<Widget> children,
+  ) {
     final initialValue = {
       AddListItemValues.name.toString(): listItem?.name,
       AddListItemValues.info.toString(): listItem?.info,
       AddListItemValues.date.toString(): listItem?.datetime ??
           DateTime.now().copyWith(
-              hour: (list?.withTimes ?? false) ? 8 : 0, minute: 0, second: 0),
+            hour: (list?.withTimes ?? false) ? 8 : 0,
+            minute: 0,
+            second: 0,
+          ),
       AddListItemValues.address.toString(): listItem?.address,
       AddListItemValues.latlong.toString():
           (listItem != null && listItem.latLong != null)
@@ -710,7 +724,9 @@ class _AddListItemPageState extends State<AddListItemPage> {
   }
 
   Widget? getNotLoadedView(
-      ListLoadState listState, ListItemLoadState listItemState) {
+    ListLoadState listState,
+    ListItemLoadState listItemState,
+  ) {
     final listStateView =
         ListOrListItemNotLoadedHandler.handleListState(listState);
     if (listStateView != null) {
