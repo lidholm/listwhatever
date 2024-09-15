@@ -140,7 +140,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       },
       validator: FormBuilderValidators.compose([
         FormBuilderValidators.required(),
-        FormBuilderValidators.max(70),
+        FormBuilderValidators.maxLength(70),
       ]),
       keyboardType: TextInputType.name,
       textInputAction: TextInputAction.next,
