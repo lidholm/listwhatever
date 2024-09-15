@@ -43,7 +43,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     add(AuthenticationUserChanged(user));
   }
 
-  Future<void> _onUserChanged(AuthenticationUserChanged event, Emitter<AppState> emit) async {
+  Future<void> _onUserChanged(
+      AuthenticationUserChanged event, Emitter<AppState> emit) async {
     final user = event.user;
 
     logger
@@ -102,18 +103,23 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
   Future<User?> tryReadUser(User user) async {
     logger.i('$this => in tryReadUser QQQQ 31');
-    final firestoreUser = await _userService.getUser(user.id);
-    logger
-      ..i('$this => loaded firestoreUser: $firestoreUser')
-      ..i('$this => in firestoreUser $firestoreUser QQQQ 31');
 
-    if (firestoreUser == null) {
-      logger.i('$this => return null');
+    try {
+      final firestoreUser = await _userService.getUser(user.id);
+      logger
+        ..i('$this => loaded firestoreUser: $firestoreUser')
+        ..i('$this => in firestoreUser $firestoreUser QQQQ 31');
+
+      if (firestoreUser == null) {
+        logger.i('$this => return null');
+        return null;
+      }
+
+      final fullUser = user.copyWith(settings: firestoreUser.settings);
+      logger.i('$this => return fullUser: $fullUser');
+      return fullUser;
+    } catch (e) {
       return null;
     }
-
-    final fullUser = user.copyWith(settings: firestoreUser.settings);
-    logger.i('$this => return fullUser: $fullUser');
-    return fullUser;
   }
 }
