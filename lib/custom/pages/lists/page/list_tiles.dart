@@ -7,11 +7,10 @@ import 'package:listwhatever/custom/pages/lists/models/list_type.dart';
 import 'package:listwhatever/custom/pages/lists/models/user_list.dart';
 import 'package:listwhatever/standard/appUi/colors/app_colors.dart';
 import 'package:listwhatever/standard/appUi/theme/app_theme.dart';
-import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/widgets/imageButton/image_button.dart';
 
-class ListSquares extends StatelessWidget {
-  const ListSquares({
+class ListTiles extends StatelessWidget {
+  const ListTiles({
     required this.firebaseStorage,
     required this.lists,
     required this.userListContext,
@@ -46,7 +45,7 @@ class ListSquares extends StatelessWidget {
                   future: imageUrlFuture,
                   builder: (context, snapshot) {
                     final imageUrl = snapshot.data;
-                    logger.i('$this => imageUrl: $imageUrl');
+                    // logger.i('$this => imageUrl: $imageUrl');
                     return ImageButton<UserList>(
                       item: list,
                       imageUrl: imageUrl ?? '',

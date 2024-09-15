@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:listwhatever/custom/pages/lists/page/list_squares.dart';
+import 'package:listwhatever/custom/pages/lists/page/list_list.dart';
+import 'package:listwhatever/custom/pages/lists/page/list_tiles.dart';
+import 'package:listwhatever/custom/pages/lists/page/list_type_cubit/list_type_cubit.dart';
+import 'package:listwhatever/standard/widgets/appBar/app_bar_action.dart';
+import 'package:listwhatever/standard/widgets/appBar/app_bar_action_icon.dart';
 
 import '/custom/navigation/routes.dart';
 import '/custom/pages/list_or_list_item_not_loaded_handler.dart';
@@ -32,6 +36,30 @@ class _ListsPageState extends State<ListsPage> {
     return Scaffold(
       appBar: CommonAppBar(
         title: context.l10n.listsHeader,
+        actions: [
+          AppBarAction(
+            type: AppBarActionType.icon,
+            iconAction: AppBarActionIcon(
+              title: 'Show as list',
+              icon: Icons.list,
+              callback: () {
+                context.read<ListTypeCubit>().toggle();
+              },
+              key: const Key('show_list_as_list'),
+            ),
+          ),
+          AppBarAction(
+            type: AppBarActionType.icon,
+            iconAction: AppBarActionIcon(
+              title: 'Show as tiles',
+              icon: Icons.square_outlined,
+              callback: () {
+                context.read<ListTypeCubit>().toggle();
+              },
+              key: const Key('show_list_as_tiles'),
+            ),
+          ),
+        ],
       ),
       body: BlocBuilder<ListsLoadBloc, ListsLoadState>(
         builder: (userListContext, userListState) {
@@ -52,10 +80,23 @@ class _ListsPageState extends State<ListsPage> {
               }
               final lists = (userListState as ListsLoadLoaded).lists;
 
-              return ListSquares(
-                firebaseStorage: firebaseStorage,
-                lists: lists,
-                userListContext: userListContext,
+              return BlocBuilder<ListTypeCubit, ListType>(
+                builder: (listTypeContext, listType) {
+                  print('listType: $listType');
+                  if (listType == ListType.squares) {
+                    return ListTiles(
+                      firebaseStorage: firebaseStorage,
+                      lists: lists,
+                      userListContext: userListContext,
+                    );
+                  } else {
+                    return ListList(
+                      firebaseStorage: firebaseStorage,
+                      lists: lists,
+                      userListContext: userListContext,
+                    );
+                  }
+                },
               );
             },
           );

@@ -44,7 +44,9 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
 
   Future<void> _onUserChanged(
-      AuthenticationUserChanged event, Emitter<AppState> emit) async {
+    AuthenticationUserChanged event,
+    Emitter<AppState> emit,
+  ) async {
     final user = event.user;
 
     logger
