@@ -11,7 +11,8 @@ class PrivacyPolicyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context).privacyPolicyTitle)),
+      appBar:
+          AppBar(title: Text(AppLocalizations.of(context).privacyPolicyTitle)),
       body: ColoredBox(
         color: Colors.white.withOpacity(0.3),
         child: Padding(
@@ -35,7 +36,7 @@ class PrivacyPolicyPage extends StatelessWidget {
   List<TextSpan> getTexts() {
     return <TextSpan>[
       TextSpan(
-        text: 'Privacy Policy for FlutterTemplate\n',
+        text: 'Privacy Policy for ListWhatever\n',
         style: UITextStyle.headline1,
       ),
       const TextSpan(
@@ -75,9 +76,9 @@ For the purposes of this Privacy Policy:
 
 • Affiliate means an entity that controls, is controlled by or is under common control with a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.
 
-• Application refers to FlutterTemplate, the software program provided by the Company.
+• Application refers to ListWhatever, the software program provided by the Company.
 
-• Company (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to FlutterTemplate.
+• Company (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to ListWhatever.
 
 • Country refers to: California, United States
 
