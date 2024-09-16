@@ -76,7 +76,8 @@ class _AddListPageState extends State<AddListPage> {
     if (widget.listId != null) {
       final listState = context.watch<ListLoadBloc>().state;
 
-      final listStateView = ListOrListItemNotLoadedHandler.handleListState(listState);
+      final listStateView =
+          ListOrListItemNotLoadedHandler.handleListState(listState);
       if (listStateView != null) {
         return listStateView;
       }
@@ -136,18 +137,22 @@ class _AddListPageState extends State<AddListPage> {
       name: AddListValues.name.toString(),
       decoration: InputDecoration(
         labelText: 'List name',
-        suffixIcon:
-            _nameHasError ? const Icon(Icons.error, color: Colors.red) : const Icon(Icons.check, color: Colors.green),
+        suffixIcon: _nameHasError
+            ? const Icon(Icons.error, color: Colors.red)
+            : const Icon(Icons.check, color: Colors.green),
       ),
       onChanged: (val) {
         setState(() {
-          _nameHasError = !(_formKey.currentState?.fields[AddListValues.name.toString()]?.validate() ?? false);
+          _nameHasError = !(_formKey
+                  .currentState?.fields[AddListValues.name.toString()]
+                  ?.validate() ??
+              false);
         });
       },
       // valueTransformer: (text) => num.tryParse(text),
       validator: FormBuilderValidators.compose([
         FormBuilderValidators.required(),
-        FormBuilderValidators.max(70),
+        FormBuilderValidators.maxLength(70),
       ]),
       keyboardType: TextInputType.name,
       textInputAction: TextInputAction.next,
@@ -162,7 +167,9 @@ class _AddListPageState extends State<AddListPage> {
             name: AddListValues.type.toString(),
             decoration: InputDecoration(
               labelText: 'Type',
-              suffix: _typeHasError ? const Icon(Icons.error) : const Icon(Icons.check),
+              suffix: _typeHasError
+                  ? const Icon(Icons.error)
+                  : const Icon(Icons.check),
               hintText: 'Select Type',
             ),
             validator: FormBuilderValidators.compose(
@@ -179,7 +186,10 @@ class _AddListPageState extends State<AddListPage> {
                 .toList(),
             onChanged: (val) {
               setState(() {
-                _typeHasError = !(_formKey.currentState?.fields[AddListValues.type.toString()]?.validate() ?? false);
+                _typeHasError = !(_formKey
+                        .currentState?.fields[AddListValues.type.toString()]
+                        ?.validate() ??
+                    false);
                 selectedListType = val;
               });
             },
@@ -196,7 +206,11 @@ class _AddListPageState extends State<AddListPage> {
             }
             final imageFilename = getImageFilename();
             logger.i('$this => imageFilename: $imageFilename');
-            final imageUrlFuture = firebaseStorage.ref().child('images').child(imageFilename).getDownloadURL();
+            final imageUrlFuture = firebaseStorage
+                .ref()
+                .child('images')
+                .child(imageFilename)
+                .getDownloadURL();
             return FutureBuilder(
               future: imageUrlFuture,
               builder: (context, snapshot) {
@@ -207,7 +221,9 @@ class _AddListPageState extends State<AddListPage> {
                   height: imageSize,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
-                    child: imageUrl != null ? Image.network(imageUrl, fit: BoxFit.cover) : Container(),
+                    child: imageUrl != null
+                        ? Image.network(imageUrl, fit: BoxFit.cover)
+                        : Container(),
                   ),
                 );
               },
@@ -240,7 +256,8 @@ class _AddListPageState extends State<AddListPage> {
         ElevatedButton(
           onPressed: () async {
             final picker = ImagePicker();
-            final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+            final pickedFile =
+                await picker.pickImage(source: ImageSource.gallery);
 
             if (pickedFile != null) {
               final tmp = await uploadImage(pickedFile);
@@ -270,15 +287,27 @@ class _AddListPageState extends State<AddListPage> {
   }
 
   Widget getWithMapCheckbox() {
-    return AppTheme.getCheckbox(AddListValues.withMap.toString(), 'With Map', _onChanged);
+    return AppTheme.getCheckbox(
+      AddListValues.withMap.toString(),
+      'With Map',
+      _onChanged,
+    );
   }
 
   Widget getWithDatesCheckbox() {
-    return AppTheme.getCheckbox(AddListValues.withDates.toString(), 'With Dates', _onChanged);
+    return AppTheme.getCheckbox(
+      AddListValues.withDates.toString(),
+      'With Dates',
+      _onChanged,
+    );
   }
 
   Widget getWithTimesCheckbox() {
-    return AppTheme.getCheckbox(AddListValues.withTimes.toString(), 'With Times', _onChanged);
+    return AppTheme.getCheckbox(
+      AddListValues.withTimes.toString(),
+      'With Times',
+      _onChanged,
+    );
   }
 
   Widget getCancelButton() {

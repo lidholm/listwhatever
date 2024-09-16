@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/custom/pages/lists/page/list_type_cubit/list_type_cubit.dart';
 
 import '/custom/currentLocationBloc/current_location_bloc.dart';
 import '/custom/navigation/get_router_provider_information.dart';
@@ -94,24 +95,52 @@ class App extends StatelessWidget {
             ),
           ),
           BlocProvider(create: (_) => ThemeModeBloc()),
-          BlocProvider<OnScreenLogsCubit>(create: (context) => OnScreenLogsCubit()),
-          BlocProvider<SearchLocationBloc>(create: (context) => SearchLocationBloc()),
+          BlocProvider<ListTypeCubit>(create: (context) => ListTypeCubit()),
+          BlocProvider<OnScreenLogsCubit>(
+            create: (context) => OnScreenLogsCubit(),
+          ),
+          BlocProvider<SearchLocationBloc>(
+            create: (context) => SearchLocationBloc(),
+          ),
           BlocProvider<FilterBloc>(create: (context) => FilterBloc()),
-          BlocProvider<SharedListBloc>(create: (context) => SharedListBloc(sharedListsService)),
-          BlocProvider<ListCrudBloc>(create: (context) => ListCrudBloc(userListsService, listsService)),
-          BlocProvider<ListLoadBloc>(create: (context) => ListLoadBloc(listsService)),
-          BlocProvider<ListsLoadBloc>(create: (context) => ListsLoadBloc(userListsService)),
-          BlocProvider<SubscribeListBloc>(create: (context) => SubscribeListBloc(sharedListsService, listsService)),
+          BlocProvider<SharedListBloc>(
+            create: (context) => SharedListBloc(sharedListsService),
+          ),
+          BlocProvider<ListCrudBloc>(
+            create: (context) => ListCrudBloc(userListsService, listsService),
+          ),
+          BlocProvider<ListLoadBloc>(
+            create: (context) => ListLoadBloc(listsService),
+          ),
+          BlocProvider<ListsLoadBloc>(
+            create: (context) => ListsLoadBloc(userListsService),
+          ),
+          BlocProvider<SubscribeListBloc>(
+            create: (context) =>
+                SubscribeListBloc(sharedListsService, listsService),
+          ),
           BlocProvider<ListItemsLoadBloc>(
             create: (context) => ListItemsLoadBloc(listItemsService),
           ),
-          BlocProvider<ListItemCrudBloc>(create: (context) => ListItemCrudBloc(listItemsService)),
-          BlocProvider<ListItemLoadBloc>(create: (context) => ListItemLoadBloc(listItemsService)),
-          BlocProvider<ListItemsPageViewCubit>(create: (context) => ListItemsPageViewCubit()),
-          BlocProvider<ListItemsSortOrderCubit>(create: (context) => ListItemsSortOrderCubit()),
-          BlocProvider<SelectedChipsCubit>(create: (context) => SelectedChipsCubit()),
+          BlocProvider<ListItemCrudBloc>(
+            create: (context) => ListItemCrudBloc(listItemsService),
+          ),
+          BlocProvider<ListItemLoadBloc>(
+            create: (context) => ListItemLoadBloc(listItemsService),
+          ),
+          BlocProvider<ListItemsPageViewCubit>(
+            create: (context) => ListItemsPageViewCubit(),
+          ),
+          BlocProvider<ListItemsSortOrderCubit>(
+            create: (context) => ListItemsSortOrderCubit(),
+          ),
+          BlocProvider<SelectedChipsCubit>(
+            create: (context) => SelectedChipsCubit(),
+          ),
           BlocProvider<RedirectCubit>(create: (context) => RedirectCubit()),
-          BlocProvider<CurrentLocationCubit>(create: (context) => CurrentLocationCubit()),
+          BlocProvider<CurrentLocationCubit>(
+            create: (context) => CurrentLocationCubit(),
+          ),
           BlocProvider<LoginBloc>(
             create: (context) => LoginBloc(
               userRepository: context.read<UserRepository>(),

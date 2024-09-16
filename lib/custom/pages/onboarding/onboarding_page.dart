@@ -65,7 +65,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
             child: createForm(
               originalUser,
               [
-                header('Main info'),
+                header('Personal info'),
                 padLeft(createNameField()),
                 createDivider(),
                 const SizedBox(height: 40),
@@ -125,18 +125,22 @@ class _OnboardingPageState extends State<OnboardingPage> {
       autovalidateMode: AutovalidateMode.always,
       name: OnboardingValues.name.toString(),
       decoration: InputDecoration(
-        labelText: 'Item name',
-        suffixIcon:
-            _nameHasError ? const Icon(Icons.error, color: Colors.red) : const Icon(Icons.check, color: Colors.green),
+        labelText: 'Name',
+        suffixIcon: _nameHasError
+            ? const Icon(Icons.error, color: Colors.red)
+            : const Icon(Icons.check, color: Colors.green),
       ),
       onChanged: (val) {
         setState(() {
-          _nameHasError = !(_formKey.currentState?.fields[OnboardingValues.name.toString()]?.validate() ?? false);
+          _nameHasError = !(_formKey
+                  .currentState?.fields[OnboardingValues.name.toString()]
+                  ?.validate() ??
+              false);
         });
       },
       validator: FormBuilderValidators.compose([
         FormBuilderValidators.required(),
-        FormBuilderValidators.max(70),
+        FormBuilderValidators.maxLength(70),
       ]),
       keyboardType: TextInputType.name,
       textInputAction: TextInputAction.next,

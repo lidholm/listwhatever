@@ -45,7 +45,11 @@ enum AddListItemValues {
 }
 
 class AddListItemPage extends StatefulWidget {
-  const AddListItemPage({required this.actualListId, this.listItemId, super.key});
+  const AddListItemPage({
+    required this.actualListId,
+    this.listItemId,
+    super.key,
+  });
   final String actualListId;
   final String? listItemId;
 
@@ -54,13 +58,24 @@ class AddListItemPage extends StatefulWidget {
 
   Map<String, List<String>> getCategories(Map<String, dynamic> values) {
     final categoriesZip = IterableZip([
-      values.entries.where((element) => element.key.startsWith(AddListItemValues.categoryKeys.toString())).toList(),
-      values.entries.where((element) => element.key.startsWith(AddListItemValues.categoryValues.toString())).toList(),
+      values.entries
+          .where(
+            (element) => element.key
+                .startsWith(AddListItemValues.categoryKeys.toString()),
+          )
+          .toList(),
+      values.entries
+          .where(
+            (element) => element.key
+                .startsWith(AddListItemValues.categoryValues.toString()),
+          )
+          .toList(),
     ]);
     final categories = <String, List<String>>{};
     for (final e in categoriesZip) {
       final category = e[0].value as String;
-      final values = (e[1].value as String).split(',').map((t) => t.trim()).toList();
+      final values =
+          (e[1].value as String).split(',').map((t) => t.trim()).toList();
       categories[category] = values;
     }
     return categories;
@@ -92,7 +107,8 @@ class _AddListItemPageState extends State<AddListItemPage> {
     BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.actualListId));
     listItemId = widget.listItemId;
     if (listItemId != null) {
-      BlocProvider.of<ListItemLoadBloc>(context).add(LoadListItem(widget.actualListId, listItemId!));
+      BlocProvider.of<ListItemLoadBloc>(context)
+          .add(LoadListItem(widget.actualListId, listItemId!));
     }
     super.initState();
   }
@@ -145,10 +161,13 @@ class _AddListItemPageState extends State<AddListItemPage> {
                   icon: Icons.delete,
                   key: const Key('deleteListItemAction'),
                   callback: () async {
-                    context.read<ListItemCrudBloc>().add(DeleteListItem(widget.actualListId, listItem.id!));
                     context
-                        .read<RedirectCubit>()
-                        .setRedirect(ListItemsPageRoute(actualListId: widget.actualListId).location);
+                        .read<ListItemCrudBloc>()
+                        .add(DeleteListItem(widget.actualListId, listItem.id!));
+                    context.read<RedirectCubit>().setRedirect(
+                          ListItemsPageRoute(actualListId: widget.actualListId)
+                              .location,
+                        );
                   },
                 ),
               ),
@@ -170,7 +189,11 @@ class _AddListItemPageState extends State<AddListItemPage> {
                 createDivider(),
                 header('Urls', addUrlButton()),
                 ...createUrlFields(),
-                if (list?.withDates ?? false) ...[createDivider(), header('Date'), padLeft(createDateField(list))],
+                if (list?.withDates ?? false) ...[
+                  createDivider(),
+                  header('Date'),
+                  padLeft(createDateField(list)),
+                ],
                 if (list?.withMap ?? false) ...[
                   createDivider(),
                   header('Location', createSearchLocationButton(context)),
@@ -193,15 +216,25 @@ class _AddListItemPageState extends State<AddListItemPage> {
     );
   }
 
-  FormBuilder createForm(ListOfThings? list, ListItem? listItem, List<Widget> children) {
+  FormBuilder createForm(
+    ListOfThings? list,
+    ListItem? listItem,
+    List<Widget> children,
+  ) {
     final initialValue = {
       AddListItemValues.name.toString(): listItem?.name,
       AddListItemValues.info.toString(): listItem?.info,
-      AddListItemValues.date.toString():
-          listItem?.datetime ?? DateTime.now().copyWith(hour: (list?.withTimes ?? false) ? 8 : 0, minute: 0, second: 0),
+      AddListItemValues.date.toString(): listItem?.datetime ??
+          DateTime.now().copyWith(
+            hour: (list?.withTimes ?? false) ? 8 : 0,
+            minute: 0,
+            second: 0,
+          ),
       AddListItemValues.address.toString(): listItem?.address,
       AddListItemValues.latlong.toString():
-          (listItem != null && listItem.latLong != null) ? '${listItem.latLong!.lat}, ${listItem.latLong!.lng}' : null,
+          (listItem != null && listItem.latLong != null)
+              ? '${listItem.latLong!.lat}, ${listItem.latLong!.lng}'
+              : null,
       ...getCategoryKeysMap(listItem),
       ...getCategoryValuesMap(listItem),
       ...getUrlsMap(listItem),
@@ -328,8 +361,10 @@ class _AddListItemPageState extends State<AddListItemPage> {
       ),
       onChanged: (val) {
         setState(() {
-          _latLongHasError =
-              !(_formKey.currentState?.fields[AddListItemValues.latlong.toString()]?.validate() ?? false);
+          _latLongHasError = !(_formKey
+                  .currentState?.fields[AddListItemValues.latlong.toString()]
+                  ?.validate() ??
+              false);
         });
       },
       validator: FormBuilderValidators.compose([
@@ -358,8 +393,10 @@ class _AddListItemPageState extends State<AddListItemPage> {
       ),
       onChanged: (val) {
         setState(() {
-          _addressHasError =
-              !(_formKey.currentState?.fields[AddListItemValues.address.toString()]?.validate() ?? false);
+          _addressHasError = !(_formKey
+                  .currentState?.fields[AddListItemValues.address.toString()]
+                  ?.validate() ??
+              false);
         });
       },
       validator: FormBuilderValidators.compose([
@@ -373,13 +410,15 @@ class _AddListItemPageState extends State<AddListItemPage> {
   ElevatedButton createSearchLocationButton(BuildContext context) {
     return ElevatedButton(
       onPressed: () async {
-        final response = await const SearchLocationPageRoute().push<SearchLocationResponse>(context);
+        final response = await const SearchLocationPageRoute()
+            .push<SearchLocationResponse>(context);
         if (response == null) {
           return;
         }
         _formKey.currentState?.patchValue({
           AddListItemValues.address.toString(): response.address,
-          AddListItemValues.latlong.toString(): '${response.lat}, ${response.long}',
+          AddListItemValues.latlong.toString():
+              '${response.lat}, ${response.long}',
         });
       },
       child: Padding(
@@ -443,8 +482,10 @@ class _AddListItemPageState extends State<AddListItemPage> {
                   ),
                   onChanged: (val) {
                     setState(() {
-                      _urlHasError[urlMap.$1] =
-                          !(_formKey.currentState?.fields[AddListItemValues.info.toString()]?.validate() ?? false);
+                      _urlHasError[urlMap.$1] = !(_formKey.currentState
+                              ?.fields[AddListItemValues.info.toString()]
+                              ?.validate() ??
+                          false);
                     });
                   },
                   validator: FormBuilderValidators.compose([
@@ -515,14 +556,17 @@ class _AddListItemPageState extends State<AddListItemPage> {
                   ),
                   onChanged: (val) {
                     setState(() {
-                      _categoryHasError[categoryMap.$1] =
-                          !(_formKey.currentState?.fields[AddListItemValues.categoryKeys.toString()]?.validate() ??
-                              false);
+                      _categoryHasError[categoryMap.$1] = !(_formKey
+                              .currentState
+                              ?.fields[
+                                  AddListItemValues.categoryKeys.toString()]
+                              ?.validate() ??
+                          false);
                     });
                   },
                   validator: FormBuilderValidators.compose([
                     FormBuilderValidators.required(),
-                    FormBuilderValidators.max(70),
+                    FormBuilderValidators.maxLength(70),
                   ]),
                   keyboardType: TextInputType.name,
                   textInputAction: TextInputAction.next,
@@ -543,9 +587,12 @@ class _AddListItemPageState extends State<AddListItemPage> {
                   ),
                   onChanged: (val) {
                     setState(() {
-                      _categoryValueHasError[categoryMap.$1] =
-                          !(_formKey.currentState?.fields[AddListItemValues.categoryValues.toString()]?.validate() ??
-                              false);
+                      _categoryValueHasError[categoryMap.$1] = !(_formKey
+                              .currentState
+                              ?.fields[
+                                  AddListItemValues.categoryValues.toString()]
+                              ?.validate() ??
+                          false);
                     });
                   },
                   validator: FormBuilderValidators.compose([
@@ -570,12 +617,16 @@ class _AddListItemPageState extends State<AddListItemPage> {
       name: AddListItemValues.info.toString(),
       decoration: InputDecoration(
         labelText: 'Extra info',
-        suffixIcon:
-            _infoHasError ? const Icon(Icons.error, color: Colors.red) : const Icon(Icons.check, color: Colors.green),
+        suffixIcon: _infoHasError
+            ? const Icon(Icons.error, color: Colors.red)
+            : const Icon(Icons.check, color: Colors.green),
       ),
       onChanged: (val) {
         setState(() {
-          _infoHasError = !(_formKey.currentState?.fields[AddListItemValues.info.toString()]?.validate() ?? false);
+          _infoHasError = !(_formKey
+                  .currentState?.fields[AddListItemValues.info.toString()]
+                  ?.validate() ??
+              false);
         });
       },
       validator: FormBuilderValidators.compose([
@@ -592,17 +643,21 @@ class _AddListItemPageState extends State<AddListItemPage> {
       name: AddListItemValues.name.toString(),
       decoration: InputDecoration(
         labelText: 'Item name',
-        suffixIcon:
-            _nameHasError ? const Icon(Icons.error, color: Colors.red) : const Icon(Icons.check, color: Colors.green),
+        suffixIcon: _nameHasError
+            ? const Icon(Icons.error, color: Colors.red)
+            : const Icon(Icons.check, color: Colors.green),
       ),
       onChanged: (val) {
         setState(() {
-          _nameHasError = !(_formKey.currentState?.fields[AddListItemValues.name.toString()]?.validate() ?? false);
+          _nameHasError = !(_formKey
+                  .currentState?.fields[AddListItemValues.name.toString()]
+                  ?.validate() ??
+              false);
         });
       },
       validator: FormBuilderValidators.compose([
         FormBuilderValidators.required(),
-        FormBuilderValidators.max(70),
+        FormBuilderValidators.maxLength(70),
       ]),
       keyboardType: TextInputType.name,
       textInputAction: TextInputAction.next,
@@ -615,10 +670,13 @@ class _AddListItemPageState extends State<AddListItemPage> {
       values[entry.key] = entry.value.value;
     }
 
-    final latLongString = values[AddListItemValues.latlong.toString()] as String?;
+    final latLongString =
+        values[AddListItemValues.latlong.toString()] as String?;
     final latLongParts = latLongString?.split(',');
-    final lat = latLongParts == null ? null : double.parse(latLongParts.first.trim());
-    final lng = latLongParts == null ? null : double.parse(latLongParts.last.trim());
+    final lat =
+        latLongParts == null ? null : double.parse(latLongParts.first.trim());
+    final lng =
+        latLongParts == null ? null : double.parse(latLongParts.last.trim());
 
     final categories = widget.getCategories(values);
 
@@ -629,7 +687,8 @@ class _AddListItemPageState extends State<AddListItemPage> {
       info: values[AddListItemValues.info.toString()] as String?,
       urls: values.entries
           .where(
-            (element) => element.key.startsWith(AddListItemValues.urls.toString()),
+            (element) =>
+                element.key.startsWith(AddListItemValues.urls.toString()),
           )
           .map((entry) => entry.value as String)
           .toList(),
@@ -640,9 +699,11 @@ class _AddListItemPageState extends State<AddListItemPage> {
     );
 
     if (listItemId == null) {
-      BlocProvider.of<ListItemCrudBloc>(context).add(AddListItem(actualListId, listItem));
+      BlocProvider.of<ListItemCrudBloc>(context)
+          .add(AddListItem(actualListId, listItem));
     } else {
-      BlocProvider.of<ListItemCrudBloc>(context).add(UpdateListItem(actualListId, listItem));
+      BlocProvider.of<ListItemCrudBloc>(context)
+          .add(UpdateListItem(actualListId, listItem));
     }
   }
 
@@ -662,13 +723,18 @@ class _AddListItemPageState extends State<AddListItemPage> {
     return null;
   }
 
-  Widget? getNotLoadedView(ListLoadState listState, ListItemLoadState listItemState) {
-    final listStateView = ListOrListItemNotLoadedHandler.handleListState(listState);
+  Widget? getNotLoadedView(
+    ListLoadState listState,
+    ListItemLoadState listItemState,
+  ) {
+    final listStateView =
+        ListOrListItemNotLoadedHandler.handleListState(listState);
     if (listStateView != null) {
       return listStateView;
     }
     if (listItemId != null) {
-      final listItemStateView = ListOrListItemNotLoadedHandler.handleListItemState(listItemState);
+      final listItemStateView =
+          ListOrListItemNotLoadedHandler.handleListItemState(listItemState);
       if (listItemStateView != null) {
         return listItemStateView;
       }
