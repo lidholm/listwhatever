@@ -44,9 +44,9 @@ class ListList extends StatelessWidget {
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       subtitle: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           typeWidget(list.listType.readable()),
+                          const Spacer(),
                           sharedInfoWidget(
                             list.isOwnList!
                                 ? const Icon(
@@ -84,10 +84,9 @@ class ListList extends StatelessWidget {
         color: mainColor,
         borderRadius: BorderRadius.circular(16),
       ),
-      child: SizedBox(
-        width: 100,
+      child: IntrinsicWidth(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
           child: Text(chipText, style: const TextStyle(color: Colors.white)),
         ),
       ),
