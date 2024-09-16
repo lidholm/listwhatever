@@ -33,57 +33,59 @@ class _ListsPageState extends State<ListsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CommonAppBar(
-        title: context.l10n.listsHeader,
-        actions: [
-          AppBarAction(
-            type: AppBarActionType.icon,
-            iconAction: AppBarActionIcon(
-              title: 'Show as list',
-              icon: Icons.list,
-              callback: () {
-                context.read<ListTypeCubit>().toggle();
-              },
-              key: const Key('show_list_as_list'),
-            ),
+    return BlocBuilder<ListTypeCubit, ListType>(
+      builder: (listTypeContext, listType) {
+        return Scaffold(
+          appBar: CommonAppBar(
+            title: context.l10n.listsHeader,
+            actions: [
+              if (listType == ListType.tiles)
+                AppBarAction(
+                  type: AppBarActionType.icon,
+                  iconAction: AppBarActionIcon(
+                    title: 'Show as list',
+                    icon: Icons.list,
+                    callback: () {
+                      context.read<ListTypeCubit>().toggle();
+                    },
+                    key: const Key('show_list_as_list'),
+                  ),
+                ),
+              if (listType == ListType.list)
+                AppBarAction(
+                  type: AppBarActionType.icon,
+                  iconAction: AppBarActionIcon(
+                    title: 'Show as tiles',
+                    icon: Icons.square_outlined,
+                    callback: () {
+                      context.read<ListTypeCubit>().toggle();
+                    },
+                    key: const Key('show_list_as_tiles'),
+                  ),
+                ),
+            ],
           ),
-          AppBarAction(
-            type: AppBarActionType.icon,
-            iconAction: AppBarActionIcon(
-              title: 'Show as tiles',
-              icon: Icons.square_outlined,
-              callback: () {
-                context.read<ListTypeCubit>().toggle();
-              },
-              key: const Key('show_list_as_tiles'),
-            ),
-          ),
-        ],
-      ),
-      body: BlocBuilder<ListsLoadBloc, ListsLoadState>(
-        builder: (userListContext, userListState) {
-          return FutureBuilder(
-            future: getFirebaseStorage(),
-            builder: (context, snapshot) {
-              final firebaseStorage = snapshot.data;
-              if (firebaseStorage == null) {
-                return Container();
-              }
-              logger.d('userListState: $userListState');
-              final userListStateView =
-                  ListOrListItemNotLoadedHandler.handleUserListsState(
-                userListState,
-              );
-              if (userListStateView != null) {
-                return userListStateView;
-              }
-              final lists = (userListState as ListsLoadLoaded).lists;
+          body: BlocBuilder<ListsLoadBloc, ListsLoadState>(
+            builder: (userListContext, userListState) {
+              return FutureBuilder(
+                future: getFirebaseStorage(),
+                builder: (context, snapshot) {
+                  final firebaseStorage = snapshot.data;
+                  if (firebaseStorage == null) {
+                    return Container();
+                  }
+                  logger.d('userListState: $userListState');
+                  final userListStateView =
+                      ListOrListItemNotLoadedHandler.handleUserListsState(
+                    userListState,
+                  );
+                  if (userListStateView != null) {
+                    return userListStateView;
+                  }
+                  final lists = (userListState as ListsLoadLoaded).lists;
 
-              return BlocBuilder<ListTypeCubit, ListType>(
-                builder: (listTypeContext, listType) {
                   print('listType: $listType');
-                  if (listType == ListType.squares) {
+                  if (listType == ListType.tiles) {
                     return ListTiles(
                       firebaseStorage: firebaseStorage,
                       lists: lists,
@@ -99,15 +101,15 @@ class _ListsPageState extends State<ListsPage> {
                 },
               );
             },
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          const AddListPageRoute().push<void>(context);
-        },
-        child: const Icon(Icons.add),
-      ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              const AddListPageRoute().push<void>(context);
+            },
+            child: const Icon(Icons.add),
+          ),
+        );
+      },
     );
   }
 }

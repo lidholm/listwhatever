@@ -1,13 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ListTypeCubit extends Cubit<ListType> {
-  ListTypeCubit() : super(ListType.squares);
+  ListTypeCubit() : super(ListType.tiles);
 
   void toggle() =>
-      emit(state == ListType.list ? ListType.squares : ListType.list);
+      emit(state == ListType.list ? ListType.tiles : ListType.list);
 }
 
 enum ListType {
   list,
-  squares,
+  tiles,
 }
