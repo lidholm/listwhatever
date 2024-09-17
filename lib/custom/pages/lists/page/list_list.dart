@@ -1,5 +1,7 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:listwhatever/custom/navigation/routes.dart';
+import 'package:listwhatever/custom/pages/listItems/route/list_items_page_route.dart';
 import 'package:listwhatever/custom/pages/lists/models/list_type.dart';
 import 'package:listwhatever/custom/pages/lists/models/user_list.dart';
 import 'package:listwhatever/standard/appUi/colors/app_colors.dart';
@@ -38,6 +40,10 @@ class ListList extends StatelessWidget {
                     final imageUrl = snapshot.data;
                     // logger.i('$this => imageUrl: $imageUrl');
                     return ListTile(
+                      onTap: () {
+                        ListItemsPageRoute(actualListId: list.actualListId)
+                            .push<void>(userListContext);
+                      },
                       leading: imageWidget(imageUrl ?? ''),
                       title: Text(
                         list.listName,
