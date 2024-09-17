@@ -1,3 +1,6 @@
+0.0.43
+* Fix: Option of list or tiles for lists
+
 0.0.42
 * Option of list or tiles for lists
 
