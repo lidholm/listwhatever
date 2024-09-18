@@ -33,13 +33,13 @@ class _ListsPageState extends State<ListsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ListTypeCubit, ListType>(
+    return BlocBuilder<ListTypeCubit, ListViewType>(
       builder: (listTypeContext, listType) {
         return Scaffold(
           appBar: CommonAppBar(
             title: context.l10n.listsHeader,
             actions: [
-              if (listType == ListType.tiles)
+              if (listType == ListViewType.tiles)
                 AppBarAction(
                   type: AppBarActionType.icon,
                   iconAction: AppBarActionIcon(
@@ -51,7 +51,7 @@ class _ListsPageState extends State<ListsPage> {
                     key: const Key('show_list_as_list'),
                   ),
                 ),
-              if (listType == ListType.list)
+              if (listType == ListViewType.list)
                 AppBarAction(
                   type: AppBarActionType.icon,
                   iconAction: AppBarActionIcon(
@@ -85,7 +85,7 @@ class _ListsPageState extends State<ListsPage> {
                   final lists = (userListState as ListsLoadLoaded).lists;
 
                   print('listType: $listType');
-                  if (listType == ListType.tiles) {
+                  if (listType == ListViewType.tiles) {
                     return ListTiles(
                       firebaseStorage: firebaseStorage,
                       lists: lists,
