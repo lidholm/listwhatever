@@ -26,6 +26,7 @@ class LoginBloc extends Bloc<LoginFormEvent, LoginState> {
     on<LoginFacebookSubmitted>(_onFacebookSubmitted);
   }
 
+  static String className = 'LoginBloc';
   final UserRepository _userRepository;
 
   void _onEmailChanged(LoginEmailChanged event, Emitter<LoginState> emit) {
@@ -39,7 +40,9 @@ class LoginBloc extends Bloc<LoginFormEvent, LoginState> {
   }
 
   void _onPasswordChanged(
-      LoginPasswordChanged event, Emitter<LoginState> emit) {
+    LoginPasswordChanged event,
+    Emitter<LoginState> emit,
+  ) {
     final password = Password.dirty(event.password);
     emit(
       state.copyWith(
@@ -74,9 +77,9 @@ class LoginBloc extends Bloc<LoginFormEvent, LoginState> {
   ) async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
-      logger.i('$this logInWithGoogle');
+      logger.i('$className logInWithGoogle');
       await _userRepository.logInWithGoogle();
-      logger.i('$this logInWithGoogle done');
+      logger.i('$className logInWithGoogle done');
       emit(state.copyWith(status: FormzSubmissionStatus.success));
     } on LogInWithGoogleCanceled {
       emit(state.copyWith(status: FormzSubmissionStatus.canceled));
@@ -85,8 +88,12 @@ class LoginBloc extends Bloc<LoginFormEvent, LoginState> {
         LogInWithGoogleFailure() => error.extraMessage,
         _ => error.toString()
       };
-      emit(state.copyWith(
-          status: FormzSubmissionStatus.failure, errorMessage: errorMessage));
+      emit(
+        state.copyWith(
+          status: FormzSubmissionStatus.failure,
+          errorMessage: errorMessage,
+        ),
+      );
       addError(error, stackTrace);
     }
   }

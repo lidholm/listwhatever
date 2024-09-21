@@ -12,6 +12,7 @@ class UploadTaskListTile extends StatelessWidget {
     required this.onDelete,
     super.key,
   });
+  static String className = 'UploadTaskListTile';
 
   /// The [UploadTask].
   final UploadTask /*!*/ task;
@@ -53,8 +54,8 @@ class UploadTaskListTile extends StatelessWidget {
           } else {
             // ignore: avoid_print
             logger
-              ..i('$this => ${asyncSnapshot.error}')
-              ..i('$this => ${asyncSnapshot.stackTrace}');
+              ..i('$className => ${asyncSnapshot.error}')
+              ..i('$className => ${asyncSnapshot.stackTrace}');
             subtitle = const Text('Something went wrong.');
           }
         } else if (snapshot != null) {

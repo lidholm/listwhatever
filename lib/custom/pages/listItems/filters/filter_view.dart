@@ -45,6 +45,7 @@ class FilterView extends StatefulWidget {
 }
 
 class _FilterViewState extends State<FilterView> {
+  static String className = 'FilterView';
   double distanceValue = distanceMax;
   final _formKey = GlobalKey<FormBuilderState>();
 
@@ -61,11 +62,16 @@ class _FilterViewState extends State<FilterView> {
       endDateFieldName: widget.filters.endDate,
     };
     if (widget.filters.distance != null) {
-      initialValues[distanceFieldName] =
-          widget.filters.distance! / convertDistanceToMeters(widget.settings.distanceUnit, 1);
+      initialValues[distanceFieldName] = widget.filters.distance! /
+          convertDistanceToMeters(widget.settings.distanceUnit, 1);
     }
 
-    return getFormBuilderWrapper(widget.list, widget.listItems, initialValues, widget.settings);
+    return getFormBuilderWrapper(
+      widget.list,
+      widget.listItems,
+      initialValues,
+      widget.settings,
+    );
   }
 
   Widget getFormBuilderWrapper(
@@ -98,10 +104,16 @@ class _FilterViewState extends State<FilterView> {
                     ),
                   if (list.withMap) ...[
                     const SizedBox(height: 16),
-                    getDistanceFilter(initialValue[distanceFieldName] as double?, settings),
+                    getDistanceFilter(
+                      initialValue[distanceFieldName] as double?,
+                      settings,
+                    ),
                   ],
                   const SizedBox(height: 16),
-                  ...getCategoriesSections(getCategories(listItems), selectedChips),
+                  ...getCategoriesSections(
+                    getCategories(listItems),
+                    selectedChips,
+                  ),
                   const SizedBox(height: 16),
                 ],
               ),
@@ -120,15 +132,17 @@ class _FilterViewState extends State<FilterView> {
     logger
       ..i('distanceValue: $distanceValue')
       ..i('initialValue: $initialValue');
-    final values = (distanceValue == distanceMax) ? [initialValue ?? distanceValue] : [distanceValue];
-    logger.i('$this => values: $values');
+    final values = (distanceValue == distanceMax)
+        ? [initialValue ?? distanceValue]
+        : [distanceValue];
+    logger.i('$className => values: $values');
     return BorderWithHeader(
       title: context.l10n.distanceFilterText(settings.distanceUnit.toString()),
       child: FormBuilderField(
         name: distanceFieldName,
         key: const Key(distanceFieldName),
         builder: (FormFieldState<dynamic> field) {
-          logger.i('$this => field: $field');
+          logger.i('$className => field: $field');
           return FlutterSlider(
             values: values,
             max: distanceMax,
@@ -163,7 +177,10 @@ class _FilterViewState extends State<FilterView> {
     );
   }
 
-  List<Widget> getCategoriesSections(Map<String, Set<String>> categories, Set<String> selectedChips) {
+  List<Widget> getCategoriesSections(
+    Map<String, Set<String>> categories,
+    Set<String> selectedChips,
+  ) {
     return categories.entries.expand((e) {
       final categoryName = e.key;
       final categoryValues = e.value;
@@ -183,7 +200,8 @@ class _FilterViewState extends State<FilterView> {
           backgroundColor: Theme.of(context).primaryColor.withAlpha(100),
           options: categoryValues.map(
             (c) {
-              final iconText = isSelected(categoryName, c, selectedChips) ? '' : c[0];
+              final iconText =
+                  isSelected(categoryName, c, selectedChips) ? '' : c[0];
               return FormBuilderChipOption<String>(
                 value: c,
                 avatar: CircleAvatar(
@@ -219,7 +237,7 @@ class _FilterViewState extends State<FilterView> {
         if (d != distanceMax) {
           maxDistance = convertDistanceToMeters(settings.distanceUnit, d);
         }
-        logger.i('$this => Distance: $d, $maxDistance');
+        logger.i('$className => Distance: $d, $maxDistance');
       } else {
         final values = field.value.value as List<String>?;
         if (values != null && values.isNotEmpty) {

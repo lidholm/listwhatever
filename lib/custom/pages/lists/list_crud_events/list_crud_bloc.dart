@@ -8,7 +8,8 @@ import 'list_crud_event.dart';
 import 'list_crud_state.dart';
 
 class ListCrudBloc extends Bloc<ListCrudEvent, ListCrudState> {
-  ListCrudBloc(this._userListsService, this._listsService) : super(ListCrudInitial()) {
+  ListCrudBloc(this._userListsService, this._listsService)
+      : super(ListCrudInitial()) {
     on<ChangeUserForListCrud>(_onChangeUser);
     on<AddList>(_onAddList);
     on<UpdateList>(_onUpdateList);
@@ -17,7 +18,10 @@ class ListCrudBloc extends Bloc<ListCrudEvent, ListCrudState> {
   final UserListsService _userListsService;
   final ListsService _listsService;
 
-  Future<void> _onChangeUser(ChangeUserForListCrud event, Emitter<ListCrudState> emit) async {
+  Future<void> _onChangeUser(
+    ChangeUserForListCrud event,
+    Emitter<ListCrudState> emit,
+  ) async {
     try {
       emit(ListCrudLoading());
       _listsService.changeUser(event.userId);
@@ -50,8 +54,11 @@ class ListCrudBloc extends Bloc<ListCrudEvent, ListCrudState> {
     }
   }
 
-  Future<void> _onUpdateList(UpdateList event, Emitter<ListCrudState> emit) async {
-    // logger.i('$this => _onUpdateList');
+  Future<void> _onUpdateList(
+    UpdateList event,
+    Emitter<ListCrudState> emit,
+  ) async {
+    // logger.i('$className => _onUpdateList');
     try {
       emit(ListCrudLoading());
       await _listsService.updateList(event.list);
@@ -62,7 +69,10 @@ class ListCrudBloc extends Bloc<ListCrudEvent, ListCrudState> {
     }
   }
 
-  Future<void> _onDeleteList(DeleteList event, Emitter<ListCrudState> emit) async {
+  Future<void> _onDeleteList(
+    DeleteList event,
+    Emitter<ListCrudState> emit,
+  ) async {
     logger
       ..i('_onDeleteList')
       ..i('_listsService.userId: ${_listsService.userId}');

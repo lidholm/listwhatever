@@ -55,6 +55,7 @@ class UserRepository {
     required UserStorage storage,
   })  : _authenticationClient = authenticationClient,
         _storage = storage;
+  static String className = 'UserRepository';
 
   final AuthenticationClient _authenticationClient;
   final UserStorage _storage;
@@ -65,7 +66,8 @@ class UserRepository {
   Stream<User> get user => _authenticationClient.user.map(
         (authenticationUser) {
           logger.i(
-              '$this => authenticationUser.email: ${authenticationUser.email}     QQQ9');
+            '$className => authenticationUser.email: ${authenticationUser.email}     QQQ9',
+          );
           return fromAuthenticationUser(
             authenticationUser,
           );
@@ -91,9 +93,9 @@ class UserRepository {
   /// Throws a [LogInWithGoogleFailure] if an exception occurs.
   Future<void> logInWithGoogle() async {
     try {
-      logger.i('$this logInWithGoogle');
+      logger.i('$className logInWithGoogle');
       await _authenticationClient.logInWithGoogle();
-      logger.i('$this logInWithGoogle done');
+      logger.i('$className logInWithGoogle done');
     } on LogInWithGoogleFailure {
       logger.i('logInWithGoogle');
       rethrow;
@@ -103,7 +105,9 @@ class UserRepository {
     } catch (error, stackTrace) {
       logger.i('error');
       Error.throwWithStackTrace(
-          LogInWithGoogleFailure(error, null), stackTrace);
+        LogInWithGoogleFailure(error, null),
+        stackTrace,
+      );
     }
   }
 
@@ -120,7 +124,9 @@ class UserRepository {
       rethrow;
     } catch (error, stackTrace) {
       Error.throwWithStackTrace(
-          LogInWithTwitterFailure(error, null), stackTrace);
+        LogInWithTwitterFailure(error, null),
+        stackTrace,
+      );
     }
   }
 
@@ -137,7 +143,9 @@ class UserRepository {
       rethrow;
     } catch (error, stackTrace) {
       Error.throwWithStackTrace(
-          LogInWithFacebookFailure(error, null), stackTrace);
+        LogInWithFacebookFailure(error, null),
+        stackTrace,
+      );
     }
   }
 
@@ -154,7 +162,9 @@ class UserRepository {
       rethrow;
     } catch (error, stackTrace) {
       Error.throwWithStackTrace(
-          LogInWithEmailAndPasswordFailure(error, null), stackTrace);
+        LogInWithEmailAndPasswordFailure(error, null),
+        stackTrace,
+      );
     }
   }
 

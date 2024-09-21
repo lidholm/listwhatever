@@ -11,12 +11,16 @@ class ChangeUserBloc extends Bloc<ChangeUserEvent, ChangeUserState> {
   }
   final List<FirestoreService> services;
 
-  void _onChangeUserEvent(ChangeUserEvent event, Emitter<ChangeUserState> emit) {
-    // logger.i('$this => event.user: ${event.user}');
-    final userId = (event.user == null || event.user!.id.isEmpty) ? null : event.user!.id;
-    // logger.i('$this => userId: $userId   QQQ');
+  void _onChangeUserEvent(
+    ChangeUserEvent event,
+    Emitter<ChangeUserState> emit,
+  ) {
+    // logger.i('$className => event.user: ${event.user}');
+    final userId =
+        (event.user == null || event.user!.id.isEmpty) ? null : event.user!.id;
+    // logger.i('$className => userId: $userId   QQQ');
     for (final service in services) {
-      // logger.i('$this => service: $service   QQQ');
+      // logger.i('$className => service: $service   QQQ');
       service.changeUser(userId);
     }
   }

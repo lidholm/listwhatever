@@ -18,6 +18,6 @@ class FirestoreService {
   // ignore: use_setters_to_change_properties
   void changeUser(String? userId) {
     this.userId = userId;
-    // logger.i('$this => changing user id to $userId   QQ');
+    // logger.i('$className => changing user id to $userId   QQ');
   }
 }

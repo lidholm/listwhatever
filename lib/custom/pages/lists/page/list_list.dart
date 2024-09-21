@@ -38,7 +38,7 @@ class ListList extends StatelessWidget {
                   future: imageUrlFuture,
                   builder: (context, snapshot) {
                     final imageUrl = snapshot.data;
-                    // logger.i('$this => imageUrl: $imageUrl');
+                    // logger.i('$className => imageUrl: $imageUrl');
                     return ListTile(
                       onTap: () {
                         ListItemsPageRoute(actualListId: list.actualListId)

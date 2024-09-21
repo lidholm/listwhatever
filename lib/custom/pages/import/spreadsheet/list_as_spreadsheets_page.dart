@@ -27,10 +27,12 @@ class ListAsSpreadsheetsPage extends StatefulWidget {
 }
 
 class _ListAsSpreadsheetsPageState extends State<ListAsSpreadsheetsPage> {
+  static String className = 'ListAsSpreadsheetsPage';
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<ListItemsLoadBloc>(context).add(LoadListItems(widget.userListId));
+    BlocProvider.of<ListItemsLoadBloc>(context)
+        .add(LoadListItems(widget.userListId));
     BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.userListId));
   }
 
@@ -39,7 +41,11 @@ class _ListAsSpreadsheetsPageState extends State<ListAsSpreadsheetsPage> {
     final listState = context.watch<ListLoadBloc>().state;
     final listItemsState = context.watch<ListItemsLoadBloc>().state;
 
-    final listItemsStateView = ListOrListItemNotLoadedHandler.handleListAndListItemsState(listState, listItemsState);
+    final listItemsStateView =
+        ListOrListItemNotLoadedHandler.handleListAndListItemsState(
+      listState,
+      listItemsState,
+    );
     if (listItemsStateView != null) {
       return listItemsStateView;
     }
@@ -49,31 +55,43 @@ class _ListAsSpreadsheetsPageState extends State<ListAsSpreadsheetsPage> {
 
     return BlocListener<ListItemCrudBloc, ListItemCrudState>(
       listener: (context, state) {
-        logger.i('$this => state: $state');
+        logger.i('$className => state: $state');
         if (state is ListItemCrudImported) {
-          logger.i('$this -> popping once');
+          logger.i('$className -> popping once');
           GoRouter.of(context).pop();
         }
       },
-      child: ListAsSpreadsheetsPageInner(items: items, list: list, userListId: widget.userListId),
+      child: ListAsSpreadsheetsPageInner(
+        items: items,
+        list: list,
+        userListId: widget.userListId,
+      ),
     );
   }
 }
 
 class ListAsSpreadsheetsPageInner extends StatefulWidget {
-  const ListAsSpreadsheetsPageInner({required this.items, required this.list, required this.userListId, super.key});
+  const ListAsSpreadsheetsPageInner({
+    required this.items,
+    required this.list,
+    required this.userListId,
+    super.key,
+  });
 
   final ListOfThings list;
   final List<ListItem> items;
   final String userListId;
 
   @override
-  State<ListAsSpreadsheetsPageInner> createState() => _ListAsSpreadsheetsPageInnerState();
+  State<ListAsSpreadsheetsPageInner> createState() =>
+      _ListAsSpreadsheetsPageInnerState();
 }
 
-class _ListAsSpreadsheetsPageInnerState extends State<ListAsSpreadsheetsPageInner> {
+class _ListAsSpreadsheetsPageInnerState
+    extends State<ListAsSpreadsheetsPageInner> {
   late final PlutoGridStateManager stateManager;
   late List<ListItem> _items;
+  static String className = 'ListAsSPreadsheetsPage';
 
   @override
   void initState() {
@@ -126,7 +144,8 @@ class _ListAsSpreadsheetsPageInnerState extends State<ListAsSpreadsheetsPageInne
         },
       );
     } else {
-      final columnGroups = categories.isNotEmpty ? getColumnGroups(categories) : null;
+      final columnGroups =
+          categories.isNotEmpty ? getColumnGroups(categories) : null;
       logger.i('columnGroups: $columnGroups');
       return PlutoGrid(
         columns: columns,
@@ -213,7 +232,11 @@ class _ListAsSpreadsheetsPageInnerState extends State<ListAsSpreadsheetsPageInne
       (item) {
         final categoryMap = {
           for (final c in categories.entries)
-            c.key: PlutoCell(value: item.categories.containsKey(c.key) ? item.categories[c.key]!.join(', ') : ''),
+            c.key: PlutoCell(
+              value: item.categories.containsKey(c.key)
+                  ? item.categories[c.key]!.join(', ')
+                  : '',
+            ),
         };
 
         return PlutoRow(
@@ -235,7 +258,11 @@ class _ListAsSpreadsheetsPageInnerState extends State<ListAsSpreadsheetsPageInne
             },
             if (widget.list.withMap) ...{
               'address': PlutoCell(value: item.address),
-              'latlong': PlutoCell(value: item.latLong == null ? '' : '${item.latLong?.lat}, ${item.latLong?.lng}'),
+              'latlong': PlutoCell(
+                value: item.latLong == null
+                    ? ''
+                    : '${item.latLong?.lat}, ${item.latLong?.lng}',
+              ),
             },
           },
         );
@@ -256,32 +283,45 @@ class _ListAsSpreadsheetsPageInnerState extends State<ListAsSpreadsheetsPageInne
           if (widget.list.withTimes) 'time',
         ],
       ),
-      if (widget.list.withMap) PlutoColumnGroup(title: 'Location', fields: ['address', 'latlong']),
+      if (widget.list.withMap)
+        PlutoColumnGroup(title: 'Location', fields: ['address', 'latlong']),
       PlutoColumnGroup(title: 'Categories', fields: categories.keys.toList()),
     ];
     return columnGroups;
   }
 
-  ListItem createListItem(ListItem item, PlutoRow row, Map<String, Set<String>> categories) {
+  ListItem createListItem(
+    ListItem item,
+    PlutoRow row,
+    Map<String, Set<String>> categories,
+  ) {
     final name = row.cells['name']?.value as String? ?? item.name;
-    final urls = (row.cells['urls']?.value as String?)?.split(',').map((e) => e.trim()).toList() ?? item.urls;
+    final urls = (row.cells['urls']?.value as String?)
+            ?.split(',')
+            .map((e) => e.trim())
+            .toList() ??
+        item.urls;
     final updatedItem = item.copyWith(
       name: name,
       urls: urls,
     );
-    logger.i('$this => updatedItem: $updatedItem');
+    logger.i('$className => updatedItem: $updatedItem');
 
     return updatedItem;
   }
 
   void save() {
-    final categorieNames = getCategories(_items).entries.map((e) => e.key).toList();
+    final categorieNames =
+        getCategories(_items).entries.map((e) => e.key).toList();
 
     final listItems = <ListItem>[];
 
     for (final (rowIndex, row) in stateManager.rows.indexed) {
       final name = getValueFromRow<String>(row, 'name', false);
-      final urls = getValueFromRow<String>(row, 'urls', false).split(',').map((e) => e.trim()).toList();
+      final urls = getValueFromRow<String>(row, 'urls', false)
+          .split(',')
+          .map((e) => e.trim())
+          .toList();
 
       final categories = <String, List<String>>{};
 
@@ -296,7 +336,7 @@ class _ListAsSpreadsheetsPageInnerState extends State<ListAsSpreadsheetsPageInne
         }
       }
 
-      logger.i('$this => name: $name');
+      logger.i('$className => name: $name');
       var item = _items[rowIndex].copyWith(
         name: name,
         urls: urls,
@@ -329,7 +369,8 @@ class _ListAsSpreadsheetsPageInnerState extends State<ListAsSpreadsheetsPageInne
       listItems.add(item);
     }
 
-    BlocProvider.of<ListItemCrudBloc>(context).add(ImportListItems(widget.userListId, listItems));
+    BlocProvider.of<ListItemCrudBloc>(context)
+        .add(ImportListItems(widget.userListId, listItems));
   }
 
   // ignore: avoid_positional_boolean_parameters
@@ -340,7 +381,8 @@ class _ListAsSpreadsheetsPageInnerState extends State<ListAsSpreadsheetsPageInne
         })
         .value
         .value as Object;
-    final value = (cellName == 'date') ? parseDate(tmp as String) as T : tmp as T;
+    final value =
+        (cellName == 'date') ? parseDate(tmp as String) as T : tmp as T;
     if (!allowNull) {
       assertField(value, cellName);
     }

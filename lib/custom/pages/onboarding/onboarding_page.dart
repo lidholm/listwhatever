@@ -28,6 +28,7 @@ class OnboardingPage extends StatefulWidget {
 }
 
 class _OnboardingPageState extends State<OnboardingPage> {
+  static String className = 'OnboardingPage';
   final _formKey = GlobalKey<FormBuilderState>();
   bool _nameHasError = false;
 
@@ -200,10 +201,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
     );
 
     if (originalUser.name.isEmpty) {
-      logger.d('$this => adding firestoreUser $user   ');
+      logger.d('$className => adding firestoreUser $user   ');
       BlocProvider.of<AppBloc>(context).add(AddUser(user: user));
     } else {
-      logger.d('$this => updating firestoreUser $user   ');
+      logger.d('$className => updating firestoreUser $user   ');
       BlocProvider.of<AppBloc>(context).add(UpdateUser(user: user));
     }
   }

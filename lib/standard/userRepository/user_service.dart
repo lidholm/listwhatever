@@ -7,9 +7,13 @@ import '/standard/userRepository/models/user.dart';
 class UserService extends FirestoreService {
   UserService({super.userId});
 
-  Future<DocumentReference<Map<String, dynamic>>> getDocument([String? userId]) async {
+  static String className = 'UserService';
+
+  Future<DocumentReference<Map<String, dynamic>>> getDocument([
+    String? userId,
+  ]) async {
     final path = '/users/${userId ?? this.userId}';
-    logger.d('$this => user path: $path');
+    logger.d('$className => user path: $path');
     return firestore.doc(path);
   }
 

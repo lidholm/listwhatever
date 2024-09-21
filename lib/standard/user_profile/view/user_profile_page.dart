@@ -50,6 +50,7 @@ class UserProfileView extends StatefulWidget {
 
 class _UserProfileViewState extends State<UserProfileView>
     with WidgetsBindingObserver {
+  static String className = 'UserProfilePage';
   @override
   void initState() {
     super.initState();
@@ -126,7 +127,7 @@ class _UserProfileViewState extends State<UserProfileView>
       },
       child: BlocListener<AppBloc, AppState>(
         listener: (context, state) {
-          logger.i('$this -> popping once');
+          logger.i('$className -> popping once');
           GoRouter.of(context).pop();
         },
         child: Scaffold(
@@ -163,7 +164,8 @@ class _UserProfileViewState extends State<UserProfileView>
                         values: {
                           for (final v in DistanceUnitOptions.values)
                             v: l10n.userProfileSettingsDistanceUnitType(
-                                v.toString()),
+                              v.toString(),
+                            ),
                         },
                         onChanged: (distanceUnit) {
                           if (distanceUnit != null) {

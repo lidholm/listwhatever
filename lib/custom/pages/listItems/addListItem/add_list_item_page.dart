@@ -83,6 +83,7 @@ class AddListItemPage extends StatefulWidget {
 }
 
 class _AddListItemPageState extends State<AddListItemPage> {
+  static String className = 'AddListItemPage';
   String? listItemId;
   bool autoValidate = true;
   bool readOnly = false;
@@ -128,24 +129,24 @@ class _AddListItemPageState extends State<AddListItemPage> {
     list = (listState as ListLoadLoaded).list;
     return BlocListener<ListItemCrudBloc, ListItemCrudState>(
       listener: (context, state) {
-        logger.i('$this => state: $state');
+        logger.i('$className => state: $state');
         if (state is ListItemCrudDeleted) {
           setState(() {
             listItemId = null;
           });
-          logger.i('$this -> popping twice');
+          logger.i('$className -> popping twice');
           GoRouter.of(context).pop();
           GoRouter.of(context).pop();
         } else if (state is ListItemCrudUpdated) {
           logger
-            ..i('$this => popping GoRouter after updated')
-            ..i('$this -> popping twice');
+            ..i('$className => popping GoRouter after updated')
+            ..i('$className -> popping twice');
           GoRouter.of(context).pop();
           GoRouter.of(context).pop();
         } else if (state is ListItemCrudAdded) {
           logger
-            ..i('$this => popping GoRouter after added')
-            ..i('$this -> popping once');
+            ..i('$className => popping GoRouter after added')
+            ..i('$className -> popping once');
           GoRouter.of(context).pop();
         }
       },
@@ -500,7 +501,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
                   Icons.delete,
                   () {
                     setState(() {
-                      logger.i('$this => not doing anything yet');
+                      logger.i('$className => not doing anything yet');
                     });
                   },
                 ),

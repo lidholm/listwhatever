@@ -22,7 +22,9 @@ class FlutterMapsView extends StatefulWidget {
 }
 
 class FlutterMapsViewState extends State<FlutterMapsView> {
-  double doubleInRange(Random source, num start, num end) => source.nextDouble() * (end - start) + start;
+  static String className = 'FlutterMapsView';
+  double doubleInRange(Random source, num start, num end) =>
+      source.nextDouble() * (end - start) + start;
 
   @override
   void initState() {
@@ -70,8 +72,11 @@ class FlutterMapsViewState extends State<FlutterMapsView> {
   }
 
   (LatLng, LatLng)? getBounds() {
-    final latLngList = widget.items.where((e) => e.latLong != null).map((e) => e.latLong!.toLatLng()).toList();
-    logger.i('$this => latLngList: $latLngList');
+    final latLngList = widget.items
+        .where((e) => e.latLong != null)
+        .map((e) => e.latLong!.toLatLng())
+        .toList();
+    logger.i('$className => latLngList: $latLngList');
     if (latLngList.isEmpty) {
       return null;
     }

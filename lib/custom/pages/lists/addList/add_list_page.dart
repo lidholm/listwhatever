@@ -46,6 +46,7 @@ class AddListPage extends StatefulWidget {
 }
 
 class _AddListPageState extends State<AddListPage> {
+  static String className = 'AddListPage';
   bool autoValidate = true;
   bool readOnly = false;
   bool showSegmentedControl = true;
@@ -205,7 +206,7 @@ class _AddListPageState extends State<AddListPage> {
               return Container();
             }
             final imageFilename = getImageFilename();
-            logger.i('$this => imageFilename: $imageFilename');
+            logger.i('$className => imageFilename: $imageFilename');
             final imageUrlFuture = firebaseStorage
                 .ref()
                 .child('images')
@@ -215,7 +216,7 @@ class _AddListPageState extends State<AddListPage> {
               future: imageUrlFuture,
               builder: (context, snapshot) {
                 final imageUrl = snapshot.data;
-                logger.i('$this => imageUrl: $imageUrl');
+                logger.i('$className => imageUrl: $imageUrl');
                 return SizedBox(
                   width: imageSize,
                   height: imageSize,
@@ -262,12 +263,12 @@ class _AddListPageState extends State<AddListPage> {
             if (pickedFile != null) {
               final tmp = await uploadImage(pickedFile);
               setState(() {
-                logger.i('$this => pickedFile.path: ${pickedFile.path}');
+                logger.i('$className => pickedFile.path: ${pickedFile.path}');
                 _uploadTask = tmp;
-                logger.i('$this => _uploadTask: $_uploadTask');
+                logger.i('$className => _uploadTask: $_uploadTask');
               });
             } else {
-              logger.i('$this => No image selected.');
+              logger.i('$className => No image selected.');
             }
           },
           child: const Padding(
@@ -377,14 +378,16 @@ class _AddListPageState extends State<AddListPage> {
         ..i(uploadTask.snapshot.ref);
 
       uploadTask.snapshotEvents.listen((event) {}).onData((data) {
-        logger.i('$this => ${data.bytesTransferred} - ${data.totalBytes}');
+        logger.i('$className => ${data.bytesTransferred} - ${data.totalBytes}');
 
         if (data.bytesTransferred >= data.totalBytes) {
-          logger.i('$this => upload is done!');
+          logger.i('$className => upload is done!');
           setState(() {
             _selectedImageFilename = fileName;
           });
-          logger.i('$this => _selectedImageFilename: $_selectedImageFilename');
+          logger.i(
+            '$className => _selectedImageFilename: $_selectedImageFilename',
+          );
         }
       });
 
@@ -424,7 +427,7 @@ class _AddListPageState extends State<AddListPage> {
     } else {
       BlocProvider.of<ListCrudBloc>(context).add(UpdateList(list));
     }
-    logger.i('$this -> popping once');
+    logger.i('$className -> popping once');
     GoRouter.of(context).pop();
   }
 }

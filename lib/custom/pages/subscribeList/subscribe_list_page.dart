@@ -30,9 +30,11 @@ class SubscribeListPage extends StatefulWidget {
 }
 
 class _SubscribeListPageState extends State<SubscribeListPage> {
+  static String className = 'SubscribeListPage';
   @override
   void initState() {
-    BlocProvider.of<SharedListBloc>(context).add(LoadSharedList(widget.shareCode));
+    BlocProvider.of<SharedListBloc>(context)
+        .add(LoadSharedList(widget.shareCode));
     super.initState();
   }
 
@@ -44,7 +46,8 @@ class _SubscribeListPageState extends State<SubscribeListPage> {
       ),
       body: BlocBuilder<SharedListBloc, SharedListState>(
         builder: (context, state) {
-          final listStateView = ListOrListItemNotLoadedHandler.handleSharedListState(state);
+          final listStateView =
+              ListOrListItemNotLoadedHandler.handleSharedListState(state);
           if (listStateView != null) {
             return listStateView;
           }
@@ -61,7 +64,9 @@ class _SubscribeListPageState extends State<SubscribeListPage> {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        context.read<SubscribeListBloc>().add(SubscribeListForUser(widget.shareCode));
+                        context
+                            .read<SubscribeListBloc>()
+                            .add(SubscribeListForUser(widget.shareCode));
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(left: 8, right: 8),
@@ -70,7 +75,7 @@ class _SubscribeListPageState extends State<SubscribeListPage> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        logger.i('$this -> popping once');
+                        logger.i('$className -> popping once');
                         GoRouter.of(context).pop();
                       },
                       child: Padding(
