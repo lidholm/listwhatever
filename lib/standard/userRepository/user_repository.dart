@@ -93,9 +93,10 @@ class UserRepository {
   /// Throws a [LogInWithGoogleFailure] if an exception occurs.
   Future<void> logInWithGoogle() async {
     try {
-      logger.i('$className logInWithGoogle');
-      await _authenticationClient.logInWithGoogle();
-      logger.i('$className logInWithGoogle done');
+      logger.i('$className logInWithGoogle -> ');
+      final userCreds = await _authenticationClient.logInWithGoogle();
+      logger
+          .i('$className userCreds: ${userCreds.toString().substring(0, 100)}');
     } on LogInWithGoogleFailure {
       logger.i('logInWithGoogle');
       rethrow;

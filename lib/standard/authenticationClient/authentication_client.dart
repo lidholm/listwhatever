@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
+
 import '/standard/authenticationClient/models/authentication_user.dart';
 
 /// {@template authentication_exception}
@@ -123,7 +125,7 @@ abstract class AuthenticationClient {
   /// Starts the Sign In with Google Flow.
   ///
   /// Throws a [LogInWithGoogleFailure] if an exception occurs.
-  Future<void> logInWithGoogle();
+  Future<UserCredential> logInWithGoogle();
 
   /// Starts the Sign In with Facebook Flow.
   ///

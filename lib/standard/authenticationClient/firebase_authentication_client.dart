@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:listwhatever/standard/constants.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:twitter_login/twitter_login.dart';
 
@@ -33,7 +34,8 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
   })  : _tokenStorage = tokenStorage,
         _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance,
         _googleSignIn = googleSignIn ?? GoogleSignIn.standard(),
-        _getAppleCredentials = getAppleCredentials ?? SignInWithApple.getAppleIDCredential,
+        _getAppleCredentials =
+            getAppleCredentials ?? SignInWithApple.getAppleIDCredential,
         _facebookAuth = facebookAuth ?? FacebookAuth.instance,
         _twitterLogin = twitterLogin ??
             TwitterLogin(
@@ -43,6 +45,7 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
             ) {
     user.listen(_onUserChanged);
   }
+  final String className = 'FirebaseAuthenticationClient';
 
   final TokenStorage _tokenStorage;
   final firebase_auth.FirebaseAuth _firebaseAuth;
@@ -58,7 +61,12 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
   @override
   Stream<AuthenticationUser> get user {
     return _firebaseAuth.authStateChanges().map((firebaseUser) {
-      return firebaseUser == null ? AuthenticationUser.anonymous : firebaseUser.toUser;
+      logger.i(
+        '$className: user is updated. firebaseUser: ${firebaseUser?.toString().substring(0, 100)}',
+      );
+      return firebaseUser == null
+          ? AuthenticationUser.anonymous
+          : firebaseUser.toUser;
     });
   }
 
@@ -68,9 +76,11 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
   @override
   Future<void> logInWithEmailAndPassword(String email, String password) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+      await _firebaseAuth.signInWithEmailAndPassword(
+          email: email, password: password);
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithEmailAndPasswordFailure(error, null), stackTrace);
+      Error.throwWithStackTrace(
+          LogInWithEmailAndPasswordFailure(error, null), stackTrace);
     }
   }
 
@@ -102,18 +112,24 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
   /// Throws a [LogInWithGoogleCanceled] if the flow is canceled by the user.
   /// Throws a [LogInWithGoogleFailure] if an exception occurs.
   @override
-  Future<void> logInWithGoogle() async {
+  Future<firebase_auth.UserCredential> logInWithGoogle() async {
+    logger.i('$className: logInWithGoogle');
     if (kIsWeb) {
-      await logInWithGoogleWeb();
+      logger.i('$className: kIsWeb');
+      return logInWithGoogleWeb();
     } else {
-      await logInWithGoogleOther();
+      logger.i('$className: not kIsWeb');
+      return logInWithGoogleOther();
     }
   }
 
-  Future<void> logInWithGoogleOther() async {
+  Future<firebase_auth.UserCredential> logInWithGoogleOther() async {
     try {
+      logger.i('$className: logInWithGoogleOther');
+
       final googleUser = await _googleSignIn.signIn();
       if (googleUser == null) {
+        logger.i('$className: googleUser == null');
         throw LogInWithGoogleCanceled(
           Exception('Sign in with Google canceled'),
           null,
@@ -121,15 +137,22 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
       }
       final googleAuth = await googleUser.authentication;
       final credential = firebase_auth.GoogleAuthProvider.credential(
-        // accessToken: googleAuth.accessToken,
+        accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-      await _firebaseAuth.signInWithCredential(credential);
+      logger.i('$className: credential: $credential');
+
+      final userCreds = await _firebaseAuth.signInWithCredential(credential);
+      logger.i('$className: userCreds: $userCreds');
+      return userCreds;
     } on LogInWithGoogleCanceled {
       rethrow;
     } catch (error, stackTrace) {
-      final extraMessage = (error is AssertionError) ? error.message.toString() : error.runtimeType.toString();
-      Error.throwWithStackTrace(LogInWithGoogleFailure(error, extraMessage), stackTrace);
+      final extraMessage = (error is AssertionError)
+          ? error.message.toString()
+          : error.runtimeType.toString();
+      Error.throwWithStackTrace(
+          LogInWithGoogleFailure(error, extraMessage), stackTrace);
     }
   }
 
@@ -141,12 +164,16 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
         ..setCustomParameters({'login_hint': 'user@example.com'});
 
       // Once signed in, return the UserCredential
-      final userCredentials = await FirebaseAuth.instance.signInWithPopup(googleProvider);
+      final userCredentials =
+          await FirebaseAuth.instance.signInWithPopup(googleProvider);
+      logger.i(
+          '$className: logInWithGoogleWeb userCredentials: ${userCredentials.toString().substring(0, 100)}');
       return userCredentials;
 
       // Or use signInWithRedirect
       // return await FirebaseAuth.instance.signInWithRedirect(googleProvider);
     } catch (error, stackTrace) {
+      logger.i('$className: logInWithGoogleWeb error: $error');
       var extraMessage = error.runtimeType.toString();
       if (error is AssertionError) {
         extraMessage = error.message.toString();
@@ -154,7 +181,8 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
       if (error is firebase_auth.FirebaseAuthException) {
         extraMessage = '${error.code} - ${error.message}';
       }
-      Error.throwWithStackTrace(LogInWithGoogleFailure(error, extraMessage), stackTrace);
+      Error.throwWithStackTrace(
+          LogInWithGoogleFailure(error, extraMessage), stackTrace);
     }
   }
 
@@ -188,13 +216,15 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
         );
       }
 
-      final credential = firebase_auth.FacebookAuthProvider.credential(accessToken);
+      final credential =
+          firebase_auth.FacebookAuthProvider.credential(accessToken);
 
       await _firebaseAuth.signInWithCredential(credential);
     } on LogInWithFacebookCanceled {
       rethrow;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithFacebookFailure(error, null), stackTrace);
+      Error.throwWithStackTrace(
+          LogInWithFacebookFailure(error, null), stackTrace);
     }
   }
 
@@ -238,7 +268,8 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
     } on LogInWithTwitterCanceled {
       rethrow;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithTwitterFailure(error, null), stackTrace);
+      Error.throwWithStackTrace(
+          LogInWithTwitterFailure(error, null), stackTrace);
     }
   }
 
@@ -249,10 +280,12 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
   @override
   Future<void> logOut() async {
     try {
+      logger.i('$className logOut()');
       await Future.wait([
         _firebaseAuth.signOut(),
         _googleSignIn.signOut(),
       ]);
+      logger.i('$className logOut() done');
     } catch (error, stackTrace) {
       Error.throwWithStackTrace(LogOutFailure(error, null), stackTrace);
     }
@@ -260,6 +293,7 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
 
   /// Updates the user token in [TokenStorage] if the user is authenticated.
   Future<void> _onUserChanged(AuthenticationUser user) async {
+    logger.i('$className: _onUserChanged: user: $user');
     if (!user.isAnonymous) {
       await _tokenStorage.saveToken(user.id);
     } else {
