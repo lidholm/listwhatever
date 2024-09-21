@@ -37,7 +37,8 @@ class UserService extends FirestoreService {
   Future<User> updateUser(User user) async {
     logger.d('updating user: $user');
     final doc = await getDocument(user.id);
-    await doc.update(user.toJson());
+    final options = SetOptions(merge: true);
+    await doc.set(user.toJson(), options);
     return user;
   }
 

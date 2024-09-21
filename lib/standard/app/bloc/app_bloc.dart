@@ -73,7 +73,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
 
   // Future<void> _onUpdateSettings(UpdateSettings event, Emitter<AppState> emit) async {
-  //   // TODO: This should maybe not be allowed?
+  //   // TO.DO: This should maybe not be allowed?
   //   if (!state.user.isAnonymous()) {
   //     final updatedUser = event.user.copyWith(settings: event.settings);
   //     await _userService.updateUser(updatedUser);
@@ -83,8 +83,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
   Future<void> _onUpdateUser(UpdateUser event, Emitter<AppState> emit) async {
     logger.i('$className => _onUpdateUser $event');
-
-    await _userService.updateUser(event.user);
+    final updatedUser = await _userService.updateUser(event.user);
+    emit(AppState.loggedInWithData(updatedUser));
   }
 
   Future<void> _onAddUser(AddUser event, Emitter<AppState> emit) async {

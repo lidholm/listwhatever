@@ -62,7 +62,7 @@ class GoRouterRefreshStream extends ChangeNotifier {
       );
     }
   }
-  static String className = 'GoRtouerRefreshStream';
+  static String className = 'GoRouterRefreshStream';
 
   @override
   String toString() {

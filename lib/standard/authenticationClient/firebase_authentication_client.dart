@@ -77,10 +77,14 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
   Future<void> logInWithEmailAndPassword(String email, String password) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
-          email: email, password: password);
+        email: email,
+        password: password,
+      );
     } catch (error, stackTrace) {
       Error.throwWithStackTrace(
-          LogInWithEmailAndPasswordFailure(error, null), stackTrace);
+        LogInWithEmailAndPasswordFailure(error, null),
+        stackTrace,
+      );
     }
   }
 
@@ -152,7 +156,9 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
           ? error.message.toString()
           : error.runtimeType.toString();
       Error.throwWithStackTrace(
-          LogInWithGoogleFailure(error, extraMessage), stackTrace);
+        LogInWithGoogleFailure(error, extraMessage),
+        stackTrace,
+      );
     }
   }
 
@@ -167,7 +173,8 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
       final userCredentials =
           await FirebaseAuth.instance.signInWithPopup(googleProvider);
       logger.i(
-          '$className: logInWithGoogleWeb userCredentials: ${userCredentials.toString().substring(0, 100)}');
+        '$className: logInWithGoogleWeb userCredentials: ${userCredentials.toString().substring(0, 100)}',
+      );
       return userCredentials;
 
       // Or use signInWithRedirect
@@ -182,7 +189,9 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
         extraMessage = '${error.code} - ${error.message}';
       }
       Error.throwWithStackTrace(
-          LogInWithGoogleFailure(error, extraMessage), stackTrace);
+        LogInWithGoogleFailure(error, extraMessage),
+        stackTrace,
+      );
     }
   }
 
@@ -224,7 +233,9 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
       rethrow;
     } catch (error, stackTrace) {
       Error.throwWithStackTrace(
-          LogInWithFacebookFailure(error, null), stackTrace);
+        LogInWithFacebookFailure(error, null),
+        stackTrace,
+      );
     }
   }
 
@@ -269,7 +280,9 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
       rethrow;
     } catch (error, stackTrace) {
       Error.throwWithStackTrace(
-          LogInWithTwitterFailure(error, null), stackTrace);
+        LogInWithTwitterFailure(error, null),
+        stackTrace,
+      );
     }
   }
 
