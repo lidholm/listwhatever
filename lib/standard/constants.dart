@@ -11,7 +11,18 @@ Logger logger = Logger(
   // printer: PrettyPrinter(methodCount: 0, printTime: true),
   printer: SimplePrinter(printTime: true),
   level: Level.debug,
+  output: PrintLogOutput(),
+  filter: ProductionFilter(),
 );
+
+class PrintLogOutput extends LogOutput {
+  @override
+  void output(OutputEvent event) {
+    for (final line in event.lines) {
+      print(line);
+    }
+  }
+}
 
 Iterable<(int, T)> mapIndexed<T>(
   Iterable<T> items,
@@ -80,7 +91,8 @@ final DateTime maxDateTime = DateTime.utc(2100, 09, 13);
 
 extension MyIterable<E> on Iterable<E> {
   // ignore: strict_raw_type
-  Iterable<E> sortedBy(Comparable Function(E e) key) => toList()..sort((a, b) => key(a).compareTo(key(b)));
+  Iterable<E> sortedBy(Comparable Function(E e) key) =>
+      toList()..sort((a, b) => key(a).compareTo(key(b)));
 }
 
 extension GoRouterStateExtension on GoRouterState {

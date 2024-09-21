@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:listwhatever/standard/constants.dart';
 
 import '/standard/authenticationClient/authentication_client.dart';
 import '/standard/bloc/login_event.dart';
@@ -37,7 +38,8 @@ class LoginBloc extends Bloc<LoginFormEvent, LoginState> {
     );
   }
 
-  void _onPasswordChanged(LoginPasswordChanged event, Emitter<LoginState> emit) {
+  void _onPasswordChanged(
+      LoginPasswordChanged event, Emitter<LoginState> emit) {
     final password = Password.dirty(event.password);
     emit(
       state.copyWith(
@@ -56,7 +58,8 @@ class LoginBloc extends Bloc<LoginFormEvent, LoginState> {
     try {
       await _userRepository.logInWithEmailAndPassword(
         email: state.email.value != '' ? state.email.value : emailText,
-        password: state.password.value != '' ? state.password.value : passwordText,
+        password:
+            state.password.value != '' ? state.password.value : passwordText,
       );
       emit(state.copyWith(status: FormzSubmissionStatus.success));
     } catch (error, stackTrace) {
@@ -71,13 +74,19 @@ class LoginBloc extends Bloc<LoginFormEvent, LoginState> {
   ) async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
+      logger.i('$this logInWithGoogle');
       await _userRepository.logInWithGoogle();
+      logger.i('$this logInWithGoogle done');
       emit(state.copyWith(status: FormzSubmissionStatus.success));
     } on LogInWithGoogleCanceled {
       emit(state.copyWith(status: FormzSubmissionStatus.canceled));
     } catch (error, stackTrace) {
-      final errorMessage = switch (error) { LogInWithGoogleFailure() => error.extraMessage, _ => error.toString() };
-      emit(state.copyWith(status: FormzSubmissionStatus.failure, errorMessage: errorMessage));
+      final errorMessage = switch (error) {
+        LogInWithGoogleFailure() => error.extraMessage,
+        _ => error.toString()
+      };
+      emit(state.copyWith(
+          status: FormzSubmissionStatus.failure, errorMessage: errorMessage));
       addError(error, stackTrace);
     }
   }

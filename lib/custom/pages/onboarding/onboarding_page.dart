@@ -156,8 +156,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
             save(originalUser, _formKey.currentState);
           } else {
             logger
-              ..d(_formKey.currentState?.value.toString())
-              ..d('validation failed');
+              ..i(_formKey.currentState?.value.toString())
+              ..i('validation failed');
           }
         },
         child: const Text(

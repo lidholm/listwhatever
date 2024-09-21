@@ -48,7 +48,8 @@ class UserProfileView extends StatefulWidget {
   State<UserProfileView> createState() => _UserProfileViewState();
 }
 
-class _UserProfileViewState extends State<UserProfileView> with WidgetsBindingObserver {
+class _UserProfileViewState extends State<UserProfileView>
+    with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
@@ -76,15 +77,51 @@ class _UserProfileViewState extends State<UserProfileView> with WidgetsBindingOb
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final appState = context.watch<AppBloc>().state;
-    if (appState is! LoggedInWithData) {
-      return const Text('Not logged in and onboarded');
+    switch (appState) {
+      case LoggedIn():
+        return Scaffold(
+          body: Column(
+            children: [
+              const Text('LoggedIn'),
+              const Text(''),
+              const Text('User:'),
+              for (final entry in appState.user.toJson().entries)
+                Text('${entry.key}: ${entry.value}'),
+            ],
+          ),
+        );
+      case LoggedInWithData():
+        logger.i('LoggedInWithData');
+      case OnboardingRequired():
+        return Scaffold(
+          body: Column(
+            children: [
+              const Text('OnboardingRequired'),
+              const Text(''),
+              const Text('User:'),
+              for (final entry in appState.user.toJson().entries)
+                Text('${entry.key}: ${entry.value}'),
+            ],
+          ),
+        );
+      case LoggedOut():
+        return const Scaffold(
+          body: Column(
+            children: [
+              Text('LoggedOut'),
+            ],
+          ),
+        );
     }
     final user = appState.user;
 
     return BlocListener<UserProfileBloc, UserProfileState>(
       listener: (context, state) {
-        if (state.status == UserProfileStatus.togglingNotificationsSucceeded && state.notificationsEnabled) {
-          context.read<AnalyticsBloc>().add(TrackAnalyticsEvent(PushNotificationSubscriptionEvent()));
+        if (state.status == UserProfileStatus.togglingNotificationsSucceeded &&
+            state.notificationsEnabled) {
+          context
+              .read<AnalyticsBloc>()
+              .add(TrackAnalyticsEvent(PushNotificationSubscriptionEvent()));
         }
       },
       child: BlocListener<AppBloc, AppState>(
@@ -125,7 +162,8 @@ class _UserProfileViewState extends State<UserProfileView> with WidgetsBindingOb
                         selectedValue: user.settings.distanceUnit,
                         values: {
                           for (final v in DistanceUnitOptions.values)
-                            v: l10n.userProfileSettingsDistanceUnitType(v.toString()),
+                            v: l10n.userProfileSettingsDistanceUnitType(
+                                v.toString()),
                         },
                         onChanged: (distanceUnit) {
                           if (distanceUnit != null) {
@@ -144,7 +182,8 @@ class _UserProfileViewState extends State<UserProfileView> with WidgetsBindingOb
                     UserProfileItem(
                       key: const Key('userProfilePage_termsOfServiceItem'),
                       leading: Assets.icons.termsOfUseIcon.svg(),
-                      title: l10n.userProfileLegalTermsOfUseAndPrivacyPolicyTitle,
+                      title:
+                          l10n.userProfileLegalTermsOfUseAndPrivacyPolicyTitle,
                       onTap: () {},
                     ),
                     UserProfileItem(
@@ -273,7 +312,8 @@ class UserProfileLogoutButton extends StatelessWidget {
             Text(context.l10n.userProfileLogoutButtonText),
           ],
         ),
-        onPressed: () => context.read<AppBloc>().add(const AppLogoutRequested()),
+        onPressed: () =>
+            context.read<AppBloc>().add(const AppLogoutRequested()),
       ),
     );
   }

@@ -23,24 +23,35 @@ class AppRedirect {
       ..i('$this => state.uri.path: ${state.uri.path}')
       ..i('$this => appState: $appState   QQQ10');
 
-    if (appState is OnboardingRequired) {
-      logger.i('$this => redirectUri: OnboardingPage     QQQ11');
-      return const OnboardingPageRoute().location;
-    }
-
     if (appState is! LoggedInWithData) {
       if (routerProviderInformation.dontRequireLoginRouteLocations
           .any((pattern) => matchingDontRequireLoginPatterns(state, pattern))) {
-        logger.i('$this => return null     QQQ12');
+        logger.i(
+            '$this => Does not required to be logged in. return null     QQQ12');
         return null;
       }
       final fromParam = context.read<RedirectCubit>().state ?? state.uri.path;
       // logger.d('fromParam: $fromParam');
       context.read<RedirectCubit>().setRedirect(fromParam);
+
+      if (appState is LoggedIn) {
+        final redirectUri = routerProviderInformation.signUpRouteLocation;
+        logger
+            .i('$this => Sign up required. redirectUri: $redirectUri    QQQ13');
+        return redirectUri;
+      }
+
       final redirectUri = routerProviderInformation.signInRouteLocation;
       logger.i('$this => redirectUri: $redirectUri    QQQ13');
       return redirectUri;
     }
+
+    if (appState is OnboardingRequired) {
+      final redirectUri = routerProviderInformation.signUpRouteLocation;
+      logger.i('$this => Sign up required. redirectUri: $redirectUri    QQQ13');
+      return redirectUri;
+    }
+
     // no other redirects, check if 'from' is set and if so, redirect to it
     //   logger.d('no other redirects');
     final fromParam = context.read<RedirectCubit>().state;
@@ -71,7 +82,8 @@ class AppRedirect {
   bool matchingDontRequireLoginPatterns(GoRouterState state, String pattern) {
     if (pattern.contains('*')) {
       final regex = RegExp(pattern);
-      final notRequired = regex.hasMatch(state.fullPath ?? 'notamatch-XYXYXYXYX');
+      final notRequired =
+          regex.hasMatch(state.fullPath ?? 'notamatch-XYXYXYXYX');
       logger.d('$this => notRequired: $notRequired');
       return notRequired;
     } else {

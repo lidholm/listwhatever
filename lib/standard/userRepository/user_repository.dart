@@ -64,7 +64,8 @@ class UserRepository {
   ///
   Stream<User> get user => _authenticationClient.user.map(
         (authenticationUser) {
-          logger.i('$this => authenticationUser.email: ${authenticationUser.email}     QQQ9');
+          logger.i(
+              '$this => authenticationUser.email: ${authenticationUser.email}     QQQ9');
           return fromAuthenticationUser(
             authenticationUser,
           );
@@ -90,13 +91,19 @@ class UserRepository {
   /// Throws a [LogInWithGoogleFailure] if an exception occurs.
   Future<void> logInWithGoogle() async {
     try {
+      logger.i('$this logInWithGoogle');
       await _authenticationClient.logInWithGoogle();
+      logger.i('$this logInWithGoogle done');
     } on LogInWithGoogleFailure {
+      logger.i('logInWithGoogle');
       rethrow;
     } on LogInWithGoogleCanceled {
+      logger.i('LogInWithGoogleCanceled');
       rethrow;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithGoogleFailure(error, null), stackTrace);
+      logger.i('error');
+      Error.throwWithStackTrace(
+          LogInWithGoogleFailure(error, null), stackTrace);
     }
   }
 
@@ -112,7 +119,8 @@ class UserRepository {
     } on LogInWithTwitterCanceled {
       rethrow;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithTwitterFailure(error, null), stackTrace);
+      Error.throwWithStackTrace(
+          LogInWithTwitterFailure(error, null), stackTrace);
     }
   }
 
@@ -128,7 +136,8 @@ class UserRepository {
     } on LogInWithFacebookCanceled {
       rethrow;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithFacebookFailure(error, null), stackTrace);
+      Error.throwWithStackTrace(
+          LogInWithFacebookFailure(error, null), stackTrace);
     }
   }
 
@@ -144,7 +153,8 @@ class UserRepository {
     } on LogInWithEmailAndPasswordFailure {
       rethrow;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithEmailAndPasswordFailure(error, null), stackTrace);
+      Error.throwWithStackTrace(
+          LogInWithEmailAndPasswordFailure(error, null), stackTrace);
     }
   }
 
