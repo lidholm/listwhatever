@@ -8,6 +8,7 @@ class AppBlocObserver extends BlocObserver {
     required AnalyticsRepository analyticsRepository,
   }) : _analyticsRepository = analyticsRepository;
 
+  final String className = 'AppBlocObserver';
   final AnalyticsRepository _analyticsRepository;
 
   @override
@@ -23,7 +24,7 @@ class AppBlocObserver extends BlocObserver {
   void onError(BlocBase<dynamic> bloc, Object error, StackTrace stackTrace) {
     super.onError(bloc, error, stackTrace);
     logger.e(
-      'onError ${bloc.runtimeType}',
+      '$className onError ${bloc.runtimeType}',
       error: error,
       stackTrace: stackTrace,
     );

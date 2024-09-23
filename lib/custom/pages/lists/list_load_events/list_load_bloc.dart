@@ -18,11 +18,12 @@ class ListLoadBloc extends Bloc<ListLoadEvent, ListLoadState> {
     Emitter<ListLoadState> emit,
   ) async {
     try {
+      logger.e('$className: event: $event');
       emit(ListLoadLoading());
       _listsService.changeUser(event.userId);
       emit(ListLoadLoaded(null));
     } catch (e) {
-      logger.e('Error: $e');
+      logger.e('$className _onChangeUser Error: $e');
       emit(ListLoadError('Failed to change user.\n$e'));
     }
   }
@@ -34,7 +35,7 @@ class ListLoadBloc extends Bloc<ListLoadEvent, ListLoadState> {
       final list = await _listsService.getList(event.listId);
       emit(ListLoadLoaded(list));
     } catch (e) {
-      logger.e('Error: $e');
+      logger.e('$className _onLoadList Error: $e');
       emit(ListLoadError('Failed to load lists.\n$e'));
     }
   }
