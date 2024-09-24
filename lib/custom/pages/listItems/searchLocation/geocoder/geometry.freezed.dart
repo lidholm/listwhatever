@@ -25,8 +25,12 @@ mixin _$Geometry {
   String get locationType => throw _privateConstructorUsedError;
   Bounds get viewport => throw _privateConstructorUsedError;
 
+  /// Serializes this Geometry to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Geometry
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GeometryCopyWith<Geometry> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -55,6 +59,8 @@ class _$GeometryCopyWithImpl<$Res, $Val extends Geometry>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Geometry
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -78,6 +84,8 @@ class _$GeometryCopyWithImpl<$Res, $Val extends Geometry>
     ) as $Val);
   }
 
+  /// Create a copy of Geometry
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LatLongCopyWith<$Res> get location {
@@ -86,6 +94,8 @@ class _$GeometryCopyWithImpl<$Res, $Val extends Geometry>
     });
   }
 
+  /// Create a copy of Geometry
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $BoundsCopyWith<$Res> get viewport {
@@ -122,6 +132,8 @@ class __$$GeometryImplCopyWithImpl<$Res>
       _$GeometryImpl _value, $Res Function(_$GeometryImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Geometry
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -183,12 +195,14 @@ class _$GeometryImpl implements _Geometry {
                 other.viewport == viewport));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, location, locationType, viewport);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Geometry
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GeometryImplCopyWith<_$GeometryImpl> get copyWith =>
@@ -218,8 +232,11 @@ abstract class _Geometry implements Geometry {
   String get locationType;
   @override
   Bounds get viewport;
+
+  /// Create a copy of Geometry
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GeometryImplCopyWith<_$GeometryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

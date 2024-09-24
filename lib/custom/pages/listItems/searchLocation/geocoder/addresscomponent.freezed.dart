@@ -26,8 +26,12 @@ mixin _$AddressComponent {
   String get shortName => throw _privateConstructorUsedError;
   List<String> get types => throw _privateConstructorUsedError;
 
+  /// Serializes this AddressComponent to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AddressComponent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AddressComponentCopyWith<AddressComponent> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,6 +58,8 @@ class _$AddressComponentCopyWithImpl<$Res, $Val extends AddressComponent>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AddressComponent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -100,6 +106,8 @@ class __$$AddressComponentImplCopyWithImpl<$Res>
       $Res Function(_$AddressComponentImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AddressComponent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -167,12 +175,14 @@ class _$AddressComponentImpl implements _AddressComponent {
             const DeepCollectionEquality().equals(other._types, _types));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, longName, shortName,
       const DeepCollectionEquality().hash(_types));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AddressComponent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AddressComponentImplCopyWith<_$AddressComponentImpl> get copyWith =>
@@ -204,8 +214,11 @@ abstract class _AddressComponent implements AddressComponent {
   String get shortName;
   @override
   List<String> get types;
+
+  /// Create a copy of AddressComponent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AddressComponentImplCopyWith<_$AddressComponentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

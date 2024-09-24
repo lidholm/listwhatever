@@ -23,8 +23,12 @@ mixin _$Bounds {
   LatLong get northeast => throw _privateConstructorUsedError;
   LatLong get southwest => throw _privateConstructorUsedError;
 
+  /// Serializes this Bounds to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Bounds
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $BoundsCopyWith<Bounds> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -49,6 +53,8 @@ class _$BoundsCopyWithImpl<$Res, $Val extends Bounds>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Bounds
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -67,6 +73,8 @@ class _$BoundsCopyWithImpl<$Res, $Val extends Bounds>
     ) as $Val);
   }
 
+  /// Create a copy of Bounds
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LatLongCopyWith<$Res> get northeast {
@@ -75,6 +83,8 @@ class _$BoundsCopyWithImpl<$Res, $Val extends Bounds>
     });
   }
 
+  /// Create a copy of Bounds
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LatLongCopyWith<$Res> get southwest {
@@ -107,6 +117,8 @@ class __$$BoundsImplCopyWithImpl<$Res>
       _$BoundsImpl _value, $Res Function(_$BoundsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Bounds
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -155,11 +167,13 @@ class _$BoundsImpl implements _Bounds {
                 other.southwest == southwest));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, northeast, southwest);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Bounds
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$BoundsImplCopyWith<_$BoundsImpl> get copyWith =>
@@ -184,8 +198,11 @@ abstract class _Bounds implements Bounds {
   LatLong get northeast;
   @override
   LatLong get southwest;
+
+  /// Create a copy of Bounds
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BoundsImplCopyWith<_$BoundsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

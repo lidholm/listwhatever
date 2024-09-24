@@ -21,7 +21,9 @@ mixin _$AppBarActionOverflowIcon {
   void Function() get callback => throw _privateConstructorUsedError;
   Key get key => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppBarActionOverflowIcon
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AppBarActionOverflowIconCopyWith<AppBarActionOverflowIcon> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -46,6 +48,8 @@ class _$AppBarActionOverflowIconCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AppBarActionOverflowIcon
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -97,6 +101,8 @@ class __$$AppBarActionOverflowIconImplCopyWithImpl<$Res>
       $Res Function(_$AppBarActionOverflowIconImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AppBarActionOverflowIcon
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -164,7 +170,9 @@ class _$AppBarActionOverflowIconImpl implements _AppBarActionOverflowIcon {
   @override
   int get hashCode => Object.hash(runtimeType, title, icon, callback, key);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppBarActionOverflowIcon
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AppBarActionOverflowIconImplCopyWith<_$AppBarActionOverflowIconImpl>
@@ -187,8 +195,11 @@ abstract class _AppBarActionOverflowIcon implements AppBarActionOverflowIcon {
   void Function() get callback;
   @override
   Key get key;
+
+  /// Create a copy of AppBarActionOverflowIcon
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AppBarActionOverflowIconImplCopyWith<_$AppBarActionOverflowIconImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

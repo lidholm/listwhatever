@@ -21,7 +21,9 @@ mixin _$AppBarActionIcon {
   void Function() get callback => throw _privateConstructorUsedError;
   Key get key => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppBarActionIcon
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AppBarActionIconCopyWith<AppBarActionIcon> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -45,6 +47,8 @@ class _$AppBarActionIconCopyWithImpl<$Res, $Val extends AppBarActionIcon>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AppBarActionIcon
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -93,6 +97,8 @@ class __$$AppBarActionIconImplCopyWithImpl<$Res>
       $Res Function(_$AppBarActionIconImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AppBarActionIcon
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -160,7 +166,9 @@ class _$AppBarActionIconImpl implements _AppBarActionIcon {
   @override
   int get hashCode => Object.hash(runtimeType, title, icon, callback, key);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppBarActionIcon
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AppBarActionIconImplCopyWith<_$AppBarActionIconImpl> get copyWith =>
@@ -183,8 +191,11 @@ abstract class _AppBarActionIcon implements AppBarActionIcon {
   void Function() get callback;
   @override
   Key get key;
+
+  /// Create a copy of AppBarActionIcon
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AppBarActionIconImplCopyWith<_$AppBarActionIconImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

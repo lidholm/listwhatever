@@ -34,8 +34,12 @@ mixin _$ListOfThings {
   String? get ownerId => throw _privateConstructorUsedError;
   ShareType get shareType => throw _privateConstructorUsedError;
 
+  /// Serializes this ListOfThings to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ListOfThings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ListOfThingsCopyWith<ListOfThings> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -72,6 +76,8 @@ class _$ListOfThingsCopyWithImpl<$Res, $Val extends ListOfThings>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ListOfThings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -178,6 +184,8 @@ class __$$ListOfThingsImplCopyWithImpl<$Res>
       _$ListOfThingsImpl _value, $Res Function(_$ListOfThingsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ListOfThings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -344,7 +352,7 @@ class _$ListOfThingsImpl implements _ListOfThings {
                 other.shareType == shareType));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -362,7 +370,9 @@ class _$ListOfThingsImpl implements _ListOfThings {
       ownerId,
       shareType);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ListOfThings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ListOfThingsImplCopyWith<_$ListOfThingsImpl> get copyWith =>
@@ -421,8 +431,11 @@ abstract class _ListOfThings implements ListOfThings {
   String? get ownerId;
   @override
   ShareType get shareType;
+
+  /// Create a copy of ListOfThings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ListOfThingsImplCopyWith<_$ListOfThingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

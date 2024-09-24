@@ -23,8 +23,12 @@ mixin _$Settings {
   DistanceUnitOptions get distanceUnit => throw _privateConstructorUsedError;
   MapsType get mapsType => throw _privateConstructorUsedError;
 
+  /// Serializes this Settings to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Settings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SettingsCopyWith<Settings> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -47,6 +51,8 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Settings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -85,6 +91,8 @@ class __$$SettingsImplCopyWithImpl<$Res>
       _$SettingsImpl _value, $Res Function(_$SettingsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Settings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -135,11 +143,13 @@ class _$SettingsImpl implements _Settings {
                 other.mapsType == mapsType));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, distanceUnit, mapsType);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Settings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SettingsImplCopyWith<_$SettingsImpl> get copyWith =>
@@ -165,8 +175,11 @@ abstract class _Settings implements Settings {
   DistanceUnitOptions get distanceUnit;
   @override
   MapsType get mapsType;
+
+  /// Create a copy of Settings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SettingsImplCopyWith<_$SettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
