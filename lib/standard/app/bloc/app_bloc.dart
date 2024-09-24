@@ -61,7 +61,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
     emit(AppState.loggedIn(user));
     final userWithData = await tryReadUser(user);
-    logger.i('$className => userWithData: $userWithData');
+    // logger.i('$className => userWithData: $userWithData');
 
     if (userWithData == null) {
       emit(AppState.onboardingRequired(user));

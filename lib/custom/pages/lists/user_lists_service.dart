@@ -10,12 +10,12 @@ class UserListsService extends FirestoreService {
 
   Future<CollectionReference<Map<String, dynamic>>> getCollection() async {
     final path = '/users/$userId/lists';
-    logger.d('user lists path: $path');
+    // logger.d('user lists path: $path');
     return firestore.collection(path);
   }
 
   Stream<List<UserList>> getUserLists() async* {
-    logger.d('getting user lists');
+    // logger.d('getting user lists');
     if (userId == null) {
       logger.d('no user yet');
       yield* Stream.value([]);
@@ -23,7 +23,7 @@ class UserListsService extends FirestoreService {
     }
     final listsCollection = await getCollection();
     yield* listsCollection.snapshots().map((snapshot) {
-      logger.d('snapshot.docs: ${snapshot.docs.length}');
+      // logger.d('snapshot.docs: ${snapshot.docs.length}');
       return snapshot.docs.map((doc) {
         return convertToUserList(doc.id, doc.data());
       }).toList();
@@ -31,36 +31,36 @@ class UserListsService extends FirestoreService {
   }
 
   UserList convertToUserList(String id, Map<String, dynamic> data) {
-    logger.d('$className: convertToUserList $id $data');
+    // logger.d('$className: convertToUserList $id $data');
     final tmp = UserList.fromJson(data);
     return tmp.copyWith(id: id, isOwnList: tmp.ownerId == userId);
   }
 
   Future<UserList> getUserList(String listId) async {
-    logger.d('getting user list: $listId');
+    // logger.d('getting user list: $listId');
     final listsCollection = await getCollection();
     final snapshot = await listsCollection.doc(listId).get();
     final data = snapshot.data();
-    logger.i('$className => user list data: $data');
+    // logger.i('$className => user list data: $data');
     return convertToUserList(snapshot.id, data!);
   }
 
   Future<void> addList(UserList list) async {
-    logger.d('adding user list: $list');
+    // logger.d('adding user list: $list');
     final listsCollection = await getCollection();
     final docId = listsCollection.doc().id;
-    logger.d('adding user list, docId: $docId');
+    // logger.d('adding user list, docId: $docId');
     return listsCollection.doc(docId).set(list.copyWith(id: docId).toJson());
   }
 
   Future<void> updateList(UserList list) async {
-    logger.d('updaing user list: $list');
+    // logger.d('updaing user list: $list');
     final listsCollection = await getCollection();
     return listsCollection.doc(list.id).update(list.toJson());
   }
 
   Future<void> deleteList(String listId) async {
-    logger.d('deleting user list: $listId');
+    // logger.d('deleting user list: $listId');
 
     final listsCollection = await getCollection();
     final querySnapshot =
