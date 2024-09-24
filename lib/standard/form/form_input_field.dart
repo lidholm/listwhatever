@@ -20,7 +20,7 @@ sealed class FormInputField<T> with _$FormInputField<T> {
     required String label,
     required T currentValue,
     required List<T> options,
-    required String Function(T) optionToString,
+    required String Function(dynamic) optionToString,
     required List<FormFieldValidator<String>> validators,
     required String sectionName,
     required bool hasError,

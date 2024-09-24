@@ -52,11 +52,6 @@ class _AddListPageState extends State<AddListPage> {
   bool readOnly = false;
   bool showSegmentedControl = true;
   final _formKey = GlobalKey<FormBuilderState>();
-  bool _nameHasError = false;
-  // bool _typeHasError = false;
-
-  // final _typeOptions = ListType.values;
-  // late Map<String, dynamic> initialValue;
 
   // ignore: strict_raw_type
   late List<FormInputField> fields;
@@ -102,6 +97,19 @@ class _AddListPageState extends State<AddListPage> {
         sectionName: SectionName.name.value,
         hasError: false,
       ),
+      FormInputField<ListType>.dropdown(
+        id: 'listType',
+        label: 'List type',
+        currentValue: list?.listType ?? ListType.other,
+        validators: [
+          FormBuilderValidators.required(),
+          FormBuilderValidators.maxLength(70),
+        ],
+        options: ListType.values,
+        optionToString: (listType) => (listType as ListType).name,
+        sectionName: SectionName.name.value,
+        hasError: false,
+      ),
     ];
 
     // initialValue = {
@@ -121,9 +129,9 @@ class _AddListPageState extends State<AddListPage> {
       SectionName.shared.value,
     ];
     final formGenerator = FormGenerator(
-      formKey: const Key('add_list_form'),
+      formKey: _formKey,
       sectionNames: sectionNames,
-      formInputFields: fields,
+      fields: fields,
     );
 
     return Scaffold(
@@ -131,159 +139,11 @@ class _AddListPageState extends State<AddListPage> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(24),
-          child: formGenerator.generateForm(),
+          child: formGenerator,
         ),
       ),
     );
   }
-
-  FormBuilderTextField getListNameField() {
-    return FormBuilderTextField(
-      autovalidateMode: AutovalidateMode.always,
-      name: AddListValues.name.toString(),
-      decoration: InputDecoration(
-        labelText: 'List name',
-        suffixIcon: _nameHasError
-            ? const Icon(Icons.error, color: Colors.red)
-            : const Icon(Icons.check, color: Colors.green),
-      ),
-      onChanged: (val) {
-        setState(() {
-          _nameHasError = !(_formKey
-                  .currentState?.fields[AddListValues.name.toString()]
-                  ?.validate() ??
-              false);
-        });
-      },
-      // valueTransformer: (text) => num.tryParse(text),
-      validator: FormBuilderValidators.compose([
-        FormBuilderValidators.required(),
-        FormBuilderValidators.maxLength(70),
-      ]),
-      keyboardType: TextInputType.name,
-      textInputAction: TextInputAction.next,
-    );
-  }
-
-  // Widget getListTypeField() {
-  //   return Row(
-  //     children: [
-  //       Expanded(
-  //         child: FormBuilderDropdown<ListType>(
-  //           name: AddListValues.type.toString(),
-  //           decoration: InputDecoration(
-  //             labelText: 'Type',
-  //             suffix: _typeHasError
-  //                 ? const Icon(Icons.error)
-  //                 : const Icon(Icons.check),
-  //             hintText: 'Select Type',
-  //           ),
-  //           validator: FormBuilderValidators.compose(
-  //             [FormBuilderValidators.required()],
-  //           ),
-  //           items: _typeOptions
-  //               .map(
-  //                 (type) => DropdownMenuItem(
-  //                   alignment: AlignmentDirectional.center,
-  //                   value: type,
-  //                   child: Text(type.readable()),
-  //                 ),
-  //               )
-  //               .toList(),
-  //           onChanged: (val) {
-  //             setState(() {
-  //               _typeHasError = !(_formKey
-  //                       .currentState?.fields[AddListValues.type.toString()]
-  //                       ?.validate() ??
-  //                   false);
-  //               selectedListType = val;
-  //             });
-  //           },
-  //           valueTransformer: (val) => val?.toString(),
-  //         ),
-  //       ),
-  //       const SizedBox(width: 16),
-  //       FutureBuilder(
-  //         future: getFirebaseStorage(),
-  //         builder: (context, snapshot) {
-  //           final firebaseStorage = snapshot.data;
-  //           if (firebaseStorage == null) {
-  //             return Container();
-  //           }
-  //           final imageFilename = getImageFilename();
-  //           logger.i('$className => imageFilename: $imageFilename');
-  //           final imageUrlFuture = firebaseStorage
-  //               .ref()
-  //               .child('images')
-  //               .child(imageFilename)
-  //               .getDownloadURL();
-  //           return FutureBuilder(
-  //             future: imageUrlFuture,
-  //             builder: (context, snapshot) {
-  //               final imageUrl = snapshot.data;
-  //               logger.i('$className => imageUrl: $imageUrl');
-  //               return SizedBox(
-  //                 width: imageSize,
-  //                 height: imageSize,
-  //                 child: ClipRRect(
-  //                   borderRadius: BorderRadius.circular(8),
-  //                   child: imageUrl != null
-  //                       ? Image.network(imageUrl, fit: BoxFit.cover)
-  //                       : Container(),
-  //                 ),
-  //               );
-  //             },
-  //           );
-  //         },
-  //       ),
-  //       const SizedBox(width: 16),
-  //       if (_uploadTask == null)
-  //         const Center(child: Text("Press the '+' button to add a new file."))
-  //       else
-  //         Expanded(
-  //           child: UploadTaskListTile(
-  //             task: _uploadTask!,
-  //             onDismissed: () {}, // => _removeTaskAtIndex(index),
-  //             onDownloadLink: () async {
-  //               // return _downloadLink(_uploadTasks[index].snapshot.ref);
-  //             },
-  //             onDownload: () async {
-  //               // if (kIsWeb) {
-  //               //   return _downloadBytes(_uploadTasks[index].snapshot.ref);
-  //               // } else {
-  //               //   return _downloadFile(_uploadTasks[index].snapshot.ref);
-  //               // }
-  //             },
-  //             onDelete: () async {
-  //               // return _delete(_uploadTasks[index].snapshot.ref);
-  //             },
-  //           ),
-  //         ),
-  //       ElevatedButton(
-  //         onPressed: () async {
-  //           final picker = ImagePicker();
-  //           final pickedFile =
-  //               await picker.pickImage(source: ImageSource.gallery);
-
-  //           if (pickedFile != null) {
-  //             final tmp = await uploadImage(pickedFile);
-  //             setState(() {
-  //               logger.i('$className => pickedFile.path: ${pickedFile.path}');
-  //               _uploadTask = tmp;
-  //               logger.i('$className => _uploadTask: $_uploadTask');
-  //             });
-  //           } else {
-  //             logger.i('$className => No image selected.');
-  //           }
-  //         },
-  //         child: const Padding(
-  //           padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-  //           child: Text('Upload image'),
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
 
   // String getImageFilename() {
   //   return _selectedImageFilename ??
