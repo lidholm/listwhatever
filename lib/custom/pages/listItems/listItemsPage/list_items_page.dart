@@ -30,9 +30,11 @@ class ListItemsPage extends StatefulWidget {
 }
 
 class _ListItemsPageState extends State<ListItemsPage> {
+  static String className = 'ListItemsPage';
   @override
   void initState() {
-    BlocProvider.of<ListItemsLoadBloc>(context).add(WatchListItems(widget.actualListId));
+    BlocProvider.of<ListItemsLoadBloc>(context)
+        .add(WatchListItems(widget.actualListId));
     BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.actualListId));
     super.initState();
   }
@@ -49,7 +51,8 @@ class _ListItemsPageState extends State<ListItemsPage> {
 
         final listState = context.watch<ListLoadBloc>().state;
 
-        final notLoadedView = getNotLoadedView(listState, listItemsState, filtersState);
+        final notLoadedView =
+            getNotLoadedView(listState, listItemsState, filtersState);
         if (notLoadedView != null) {
           return notLoadedView;
         }
@@ -69,25 +72,40 @@ class _ListItemsPageState extends State<ListItemsPage> {
 
         return BlocListener<ListCrudBloc, ListCrudState>(
           listener: (context, state) {
-            logger.i('$this => state: $state');
+            logger.i('$className => state: $state');
             if (state is ListCrudDeleted) {
-              logger.i('$this -> popping once');
+              logger.i('$className -> popping once');
               GoRouter.of(context).pop();
             }
           },
-          child: InnerListItemsPage(user, list, listItems, filters, currentLocation, viewToShow),
+          child: InnerListItemsPage(
+            user,
+            list,
+            listItems,
+            filters,
+            currentLocation,
+            viewToShow,
+          ),
         );
       },
     );
   }
 
-  Widget? getNotLoadedView(ListLoadState listState, ListItemsLoadState listItemsState, FilterState filtersState) {
+  Widget? getNotLoadedView(
+    ListLoadState listState,
+    ListItemsLoadState listItemsState,
+    FilterState filtersState,
+  ) {
     final filtersNotLoadedView = handleFiltersNotLoaded(filtersState);
     if (filtersNotLoadedView != null) {
       return filtersNotLoadedView;
     }
 
-    final listStateView = ListOrListItemNotLoadedHandler.handleListAndListItemsState(listState, listItemsState);
+    final listStateView =
+        ListOrListItemNotLoadedHandler.handleListAndListItemsState(
+      listState,
+      listItemsState,
+    );
     if (listStateView != null) {
       return listStateView;
     }

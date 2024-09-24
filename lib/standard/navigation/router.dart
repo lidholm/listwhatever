@@ -24,14 +24,18 @@ GoRouter getRouter({
       BlocProvider.of<AppBloc>(context).stream,
     ]),
     debugLogDiagnostics: true,
-    initialLocation: initialLocation ?? routerProviderInformation.initialRouteLocation,
+    initialLocation:
+        initialLocation ?? routerProviderInformation.initialRouteLocation,
     navigatorKey: GlobalKey(),
-    observers: observers ?? [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
-    redirect: (context, state) async => AppRedirect().appRedirect(context, state, routerProviderInformation),
+    observers: observers ??
+        [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
+    redirect: (context, state) async =>
+        AppRedirect().appRedirect(context, state, routerProviderInformation),
     routes: [
       ShellRoute(
         navigatorKey: shellNavigatorKey,
-        observers: observers ?? [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
+        observers: observers ??
+            [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
         builder: (context, state, child) {
           return AuthenticatedUserListener(
             child: child,
@@ -51,13 +55,14 @@ class GoRouterRefreshStream extends ChangeNotifier {
       _subscriptions.add(
         stream.asBroadcastStream().listen(
           (dynamic value) {
-            logger.d('$this.=> value has changed   QQQ8');
+            logger.d('$className.=> value has changed   QQQ8');
             notifyListeners();
           },
         ),
       );
     }
   }
+  static String className = 'GoRouterRefreshStream';
 
   @override
   String toString() {

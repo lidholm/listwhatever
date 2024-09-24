@@ -6,6 +6,7 @@ import 'package:listwhatever/custom/pages/lists/models/list_type.dart';
 import 'package:listwhatever/custom/pages/lists/models/user_list.dart';
 import 'package:listwhatever/standard/appUi/colors/app_colors.dart';
 import 'package:listwhatever/standard/appUi/theme/app_theme.dart';
+import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/widgets/imageButton/image_button.dart';
 
 class ListList extends StatelessWidget {
@@ -32,16 +33,16 @@ class ListList extends StatelessWidget {
                 final imageUrlFuture = firebaseStorage
                     .ref()
                     .child('images')
-                    .child(list.imageFilename)
+                    .child(list.imageFilename ?? defaultImageFilename)
                     .getDownloadURL();
                 return FutureBuilder(
                   future: imageUrlFuture,
                   builder: (context, snapshot) {
                     final imageUrl = snapshot.data;
-                    // logger.i('$this => imageUrl: $imageUrl');
+                    // logger.i('$className => imageUrl: $imageUrl');
                     return ListTile(
                       onTap: () {
-                        ListItemsPageRoute(actualListId: list.actualListId)
+                        ListItemsPageRoute(actualListId: list.listId)
                             .push<void>(userListContext);
                       },
                       leading: imageWidget(imageUrl ?? ''),

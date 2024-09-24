@@ -14,9 +14,13 @@ class ListItemCrudBloc extends Bloc<ListItemCrudEvent, ListItemCrudState> {
     on<DeleteListItem>(_onDeleteListItem);
     on<ImportListItems>(_onImportListItems);
   }
+  static String className = 'ListItemCrudBloc';
   final ListItemsService _listItemsService;
 
-  Future<void> _onChangeUser(ChangeUserForListItemCrud event, Emitter<ListItemCrudState> emit) async {
+  Future<void> _onChangeUser(
+    ChangeUserForListItemCrud event,
+    Emitter<ListItemCrudState> emit,
+  ) async {
     try {
       emit(ListItemCrudLoading());
       _listItemsService.changeUser(event.userId);
@@ -27,7 +31,10 @@ class ListItemCrudBloc extends Bloc<ListItemCrudEvent, ListItemCrudState> {
     }
   }
 
-  Future<void> _onAddListItem(AddListItem event, Emitter<ListItemCrudState> emit) async {
+  Future<void> _onAddListItem(
+    AddListItem event,
+    Emitter<ListItemCrudState> emit,
+  ) async {
     try {
       emit(ListItemCrudLoading());
       await _listItemsService.addListItem(event.actualListId, event.listItem);
@@ -38,11 +45,17 @@ class ListItemCrudBloc extends Bloc<ListItemCrudEvent, ListItemCrudState> {
     }
   }
 
-  Future<void> _onUpdateListItem(UpdateListItem event, Emitter<ListItemCrudState> emit) async {
-    logger.i('$this => updating list item for list ${event.actualListId}');
+  Future<void> _onUpdateListItem(
+    UpdateListItem event,
+    Emitter<ListItemCrudState> emit,
+  ) async {
+    logger.i('$className => updating list item for list ${event.actualListId}');
     try {
       emit(ListItemCrudLoading());
-      await _listItemsService.updateListItem(event.actualListId, event.listItem);
+      await _listItemsService.updateListItem(
+        event.actualListId,
+        event.listItem,
+      );
       emit(ListItemCrudUpdated(event.listItem));
     } catch (e) {
       logger.e('Error: $e');
@@ -50,11 +63,17 @@ class ListItemCrudBloc extends Bloc<ListItemCrudEvent, ListItemCrudState> {
     }
   }
 
-  Future<void> _onDeleteListItem(DeleteListItem event, Emitter<ListItemCrudState> emit) async {
-    logger.i('$this => deleting list item for list ${event.actualListId}');
+  Future<void> _onDeleteListItem(
+    DeleteListItem event,
+    Emitter<ListItemCrudState> emit,
+  ) async {
+    logger.i('$className => deleting list item for list ${event.actualListId}');
     try {
       emit(ListItemCrudLoading());
-      await _listItemsService.deleteListItem(event.actualListId, event.listItemId);
+      await _listItemsService.deleteListItem(
+        event.actualListId,
+        event.listItemId,
+      );
       emit(ListItemCrudDeleted(event.listItemId));
     } catch (e) {
       logger.e('Error: $e');
@@ -62,16 +81,24 @@ class ListItemCrudBloc extends Bloc<ListItemCrudEvent, ListItemCrudState> {
     }
   }
 
-  Future<void> _onImportListItems(ImportListItems event, Emitter<ListItemCrudState> emit) async {
-    logger.i('$this => import list items for list ${event.actualListId}');
+  Future<void> _onImportListItems(
+    ImportListItems event,
+    Emitter<ListItemCrudState> emit,
+  ) async {
+    logger.i('$className => import list items for list ${event.actualListId}');
     try {
       emit(ListItemCrudLoading());
-      final originalListItems = await _listItemsService.getListItems(event.actualListId).first;
+      final originalListItems =
+          await _listItemsService.getListItems(event.actualListId).first;
 
       for (final listItem in event.listItems) {
-        final existingListItem = originalListItems.firstWhereOrNull((element) => element.name == listItem.name);
+        final existingListItem = originalListItems
+            .firstWhereOrNull((element) => element.name == listItem.name);
         if (existingListItem != null) {
-          await _listItemsService.updateListItem(event.actualListId, listItem.copyWith(id: existingListItem.id));
+          await _listItemsService.updateListItem(
+            event.actualListId,
+            listItem.copyWith(id: existingListItem.id),
+          );
         } else {
           await _listItemsService.addListItem(event.actualListId, listItem);
         }

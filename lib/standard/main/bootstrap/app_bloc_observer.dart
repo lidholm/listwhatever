@@ -8,6 +8,7 @@ class AppBlocObserver extends BlocObserver {
     required AnalyticsRepository analyticsRepository,
   }) : _analyticsRepository = analyticsRepository;
 
+  final String className = 'AppBlocObserver';
   final AnalyticsRepository _analyticsRepository;
 
   @override
@@ -16,13 +17,17 @@ class AppBlocObserver extends BlocObserver {
     Transition<dynamic, dynamic> transition,
   ) {
     super.onTransition(bloc, transition);
-    // logger.i('$this => onTransition ${bloc.runtimeType}: $transition');
+    // logger.i('$className => onTransition ${bloc.runtimeType}: $transition');
   }
 
   @override
   void onError(BlocBase<dynamic> bloc, Object error, StackTrace stackTrace) {
     super.onError(bloc, error, stackTrace);
-    logger.e('onError ${bloc.runtimeType}', error: error, stackTrace: stackTrace);
+    logger.e(
+      '$className onError ${bloc.runtimeType}',
+      error: error,
+      stackTrace: stackTrace,
+    );
   }
 
   @override

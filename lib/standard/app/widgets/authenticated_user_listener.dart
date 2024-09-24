@@ -32,9 +32,9 @@ class AuthenticatedUserListener extends StatelessWidget {
         };
 
         // logger
-        //   ..i('$this => in AuthenticatedUserListener QQQQ3')
-        //   ..i('$this => state $state QQQQ4')
-        //   ..i('$this => calling ChangeUserBloc for ChangeUserEvent and user ${user.id} QQQQ4');
+        //   ..i('$className => in AuthenticatedUserListener QQQQ3')
+        //   ..i('$className => state $state QQQQ4')
+        //   ..i('$className => calling ChangeUserBloc for ChangeUserEvent and user ${user.id} QQQQ4');
 
         context.read<ChangeUserBloc>().add(
               ChangeUserEvent(
@@ -46,11 +46,17 @@ class AuthenticatedUserListener extends StatelessWidget {
           case LoggedIn():
             break;
           case LoggedInWithData():
-            context.read<AnalyticsBloc>().add(TrackAnalyticsEvent(LoginEvent()));
+            context
+                .read<AnalyticsBloc>()
+                .add(TrackAnalyticsEvent(LoginEvent()));
           case OnboardingRequired():
-            context.read<AnalyticsBloc>().add(TrackAnalyticsEvent(RequireOnboardingEvent()));
+            context
+                .read<AnalyticsBloc>()
+                .add(TrackAnalyticsEvent(RequireOnboardingEvent()));
           case LoggedOut():
-            context.read<AnalyticsBloc>().add(TrackAnalyticsEvent(LogoutEvent()));
+            context
+                .read<AnalyticsBloc>()
+                .add(TrackAnalyticsEvent(LogoutEvent()));
         }
       },
       listenWhen: differentStateOrUser,

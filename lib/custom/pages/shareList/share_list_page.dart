@@ -26,6 +26,7 @@ class ShareListPage extends StatefulWidget {
 }
 
 class _ShareListPageState extends State<ShareListPage> {
+  static String className = 'ShareListPage';
   @override
   void initState() {
     BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.actualListId));
@@ -36,8 +37,9 @@ class _ShareListPageState extends State<ShareListPage> {
   Widget build(BuildContext context) {
     final listState = context.watch<ListLoadBloc>().state;
 
-    final listStateView = ListOrListItemNotLoadedHandler.handleListState(listState);
-    // logger.i('$this => listState: $listState');
+    final listStateView =
+        ListOrListItemNotLoadedHandler.handleListState(listState);
+    // logger.i('$className => listState: $listState');
     if (listStateView != null) {
       return listStateView;
     }
@@ -64,22 +66,30 @@ class _ShareListPageState extends State<ShareListPage> {
               const Text('Enable'),
               OutlinedButton(
                 onPressed: () {
-                  BlocProvider.of<ListCrudBloc>(context).add(UpdateList(list.copyWith(shared: true)));
+                  BlocProvider.of<ListCrudBloc>(context)
+                      .add(UpdateList(list.copyWith(shared: true)));
                 },
                 child: Row(
                   children: [
-                    if (list.shared) const Icon(Icons.check_box) else const Icon(Icons.check_box_outline_blank),
+                    if (list.shared)
+                      const Icon(Icons.check_box)
+                    else
+                      const Icon(Icons.check_box_outline_blank),
                     const Text('Enable'),
                   ],
                 ),
               ),
               OutlinedButton(
                 onPressed: () {
-                  BlocProvider.of<ListCrudBloc>(context).add(UpdateList(list.copyWith(shared: false)));
+                  BlocProvider.of<ListCrudBloc>(context)
+                      .add(UpdateList(list.copyWith(shared: false)));
                 },
                 child: Row(
                   children: [
-                    if (!list.shared) const Icon(Icons.check_box) else const Icon(Icons.check_box_outline_blank),
+                    if (!list.shared)
+                      const Icon(Icons.check_box)
+                    else
+                      const Icon(Icons.check_box_outline_blank),
                     const Text('Disable'),
                   ],
                 ),
@@ -146,7 +156,7 @@ class _ShareListPageState extends State<ShareListPage> {
           ),
           ElevatedButton(
             onPressed: () {
-              logger.i('$this -> popping once');
+              logger.i('$className -> popping once');
               GoRouter.of(context).pop();
             },
             child: const Padding(

@@ -23,10 +23,12 @@ class PopupSubMenuItem<T> extends PopupMenuEntry<T> {
   final void Function(T) onSelected;
 
   @override
-  double get height => kMinInteractiveDimension; //Does not actually affect anything
+  double get height =>
+      kMinInteractiveDimension; //Does not actually affect anything
 
   @override
-  bool represents(T? value) => false; //Our submenu does not represent any specific value for the parent menu
+  bool represents(T? value) =>
+      false; //Our submenu does not represent any specific value for the parent menu
 
   @override
   State createState() => _PopupSubMenuState<T>();
@@ -34,6 +36,8 @@ class PopupSubMenuItem<T> extends PopupMenuEntry<T> {
 
 /// The [State] for [PopupSubMenuItem] subclasses.
 class _PopupSubMenuState<T> extends State<PopupSubMenuItem<T>> {
+  static String className = 'PopupSubMenu';
+
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<T>(
@@ -55,13 +59,13 @@ class _PopupSubMenuState<T> extends State<PopupSubMenuItem<T>> {
       ),
       onCanceled: () {
         if (Navigator.canPop(context)) {
-          logger.i('$this -> popping once');
+          logger.i('$className -> popping once');
           GoRouter.of(context).pop();
         }
       },
       onSelected: (T value) {
         if (Navigator.canPop(context)) {
-          logger.i('$this -> popping once');
+          logger.i('$className -> popping once');
           GoRouter.of(context).pop();
         }
         widget.onSelected.call(value);

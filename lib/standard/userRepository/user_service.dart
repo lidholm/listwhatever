@@ -7,9 +7,13 @@ import '/standard/userRepository/models/user.dart';
 class UserService extends FirestoreService {
   UserService({super.userId});
 
-  Future<DocumentReference<Map<String, dynamic>>> getDocument([String? userId]) async {
+  static String className = 'UserService';
+
+  Future<DocumentReference<Map<String, dynamic>>> getDocument([
+    String? userId,
+  ]) async {
     final path = '/users/${userId ?? this.userId}';
-    logger.d('$this => user path: $path');
+    logger.d('$className => user path: $path');
     return firestore.doc(path);
   }
 
@@ -33,7 +37,8 @@ class UserService extends FirestoreService {
   Future<User> updateUser(User user) async {
     logger.d('updating user: $user');
     final doc = await getDocument(user.id);
-    await doc.update(user.toJson());
+    final options = SetOptions(merge: true);
+    await doc.set(user.toJson(), options);
     return user;
   }
 

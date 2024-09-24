@@ -6,6 +6,7 @@ import '/standard/firebaseService/firebase_service.dart';
 
 class UserListsService extends FirestoreService {
   UserListsService({super.userId});
+  static String className = 'UserListsService';
 
   Future<CollectionReference<Map<String, dynamic>>> getCollection() async {
     final path = '/users/$userId/lists';
@@ -30,6 +31,7 @@ class UserListsService extends FirestoreService {
   }
 
   UserList convertToUserList(String id, Map<String, dynamic> data) {
+    // logger.d('$className: convertToUserList $id $data');
     final tmp = UserList.fromJson(data);
     return tmp.copyWith(id: id, isOwnList: tmp.ownerId == userId);
   }
@@ -39,7 +41,7 @@ class UserListsService extends FirestoreService {
     final listsCollection = await getCollection();
     final snapshot = await listsCollection.doc(listId).get();
     final data = snapshot.data();
-    logger.i('$this => user list data: $data');
+    logger.i('$className => user list data: $data');
     return convertToUserList(snapshot.id, data!);
   }
 
@@ -61,7 +63,8 @@ class UserListsService extends FirestoreService {
     logger.d('deleting user list: $listId');
 
     final listsCollection = await getCollection();
-    final querySnapshot = await listsCollection.where('actualListId', isEqualTo: listId).get();
+    final querySnapshot =
+        await listsCollection.where('actualListId', isEqualTo: listId).get();
     final documents = querySnapshot.docs;
     final document = documents.first;
     final docId = convertToUserList(document.id, document.data()).id;

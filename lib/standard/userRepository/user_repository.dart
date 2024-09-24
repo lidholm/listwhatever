@@ -55,6 +55,7 @@ class UserRepository {
     required UserStorage storage,
   })  : _authenticationClient = authenticationClient,
         _storage = storage;
+  static String className = 'UserRepository';
 
   final AuthenticationClient _authenticationClient;
   final UserStorage _storage;
@@ -64,7 +65,9 @@ class UserRepository {
   ///
   Stream<User> get user => _authenticationClient.user.map(
         (authenticationUser) {
-          logger.i('$this => authenticationUser.email: ${authenticationUser.email}     QQQ9');
+          logger.i(
+            '$className => authenticationUser.email: ${authenticationUser.email}     QQQ9',
+          );
           return fromAuthenticationUser(
             authenticationUser,
           );
@@ -90,13 +93,22 @@ class UserRepository {
   /// Throws a [LogInWithGoogleFailure] if an exception occurs.
   Future<void> logInWithGoogle() async {
     try {
-      await _authenticationClient.logInWithGoogle();
+      logger.i('$className logInWithGoogle -> ');
+      final userCreds = await _authenticationClient.logInWithGoogle();
+      logger
+          .i('$className userCreds: ${userCreds.toString().substring(0, 100)}');
     } on LogInWithGoogleFailure {
+      logger.i('logInWithGoogle');
       rethrow;
     } on LogInWithGoogleCanceled {
+      logger.i('LogInWithGoogleCanceled');
       rethrow;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithGoogleFailure(error, null), stackTrace);
+      logger.i('error');
+      Error.throwWithStackTrace(
+        LogInWithGoogleFailure(error, null),
+        stackTrace,
+      );
     }
   }
 
@@ -112,7 +124,10 @@ class UserRepository {
     } on LogInWithTwitterCanceled {
       rethrow;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithTwitterFailure(error, null), stackTrace);
+      Error.throwWithStackTrace(
+        LogInWithTwitterFailure(error, null),
+        stackTrace,
+      );
     }
   }
 
@@ -128,7 +143,10 @@ class UserRepository {
     } on LogInWithFacebookCanceled {
       rethrow;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithFacebookFailure(error, null), stackTrace);
+      Error.throwWithStackTrace(
+        LogInWithFacebookFailure(error, null),
+        stackTrace,
+      );
     }
   }
 
@@ -144,7 +162,10 @@ class UserRepository {
     } on LogInWithEmailAndPasswordFailure {
       rethrow;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithEmailAndPasswordFailure(error, null), stackTrace);
+      Error.throwWithStackTrace(
+        LogInWithEmailAndPasswordFailure(error, null),
+        stackTrace,
+      );
     }
   }
 

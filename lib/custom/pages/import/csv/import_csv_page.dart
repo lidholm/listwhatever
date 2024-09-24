@@ -24,6 +24,7 @@ enum ImportCsvValues {
 class ImportCsvPage extends StatefulWidget {
   const ImportCsvPage({required this.actualListId, super.key});
 
+  static String className = 'ImportCsvPage';
   final String actualListId;
 
   @override
@@ -31,28 +32,33 @@ class ImportCsvPage extends StatefulWidget {
 }
 
 class _ImportCsvPageState extends State<ImportCsvPage> {
+  static String className = 'ImportCsvPage';
   final _formKey = GlobalKey<FormBuilderState>();
   bool _csvHasError = false;
 
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<ListItemsLoadBloc>(context).add(LoadListItems(widget.actualListId));
+    BlocProvider.of<ListItemsLoadBloc>(context)
+        .add(LoadListItems(widget.actualListId));
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<ListItemCrudBloc, ListItemCrudState>(
       listener: (context, state) {
-        logger.i('$this => state: $state');
+        logger.i('$className => state: $state');
         if (state is ListItemCrudImported) {
-          logger.i('$this -> popping once');
+          logger.i('$className -> popping once');
           GoRouter.of(context).pop();
         }
       },
       child: BlocBuilder<ListItemsLoadBloc, ListItemsLoadState>(
         builder: (listItemsContext, listItemsState) {
-          final listItemsView = ListOrListItemNotLoadedHandler.handleListItemsState(listItemsState);
+          final listItemsView =
+              ListOrListItemNotLoadedHandler.handleListItemsState(
+            listItemsState,
+          );
           if (listItemsView != null) {
             return listItemsView;
           }
@@ -105,7 +111,8 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
   }
 
   Text createDescription() {
-    return const Text('Warning: Will overwrite existing items with the same name!! .\n'
+    return const Text(
+        'Warning: Will overwrite existing items with the same name!! .\n'
         'Csv file with first row being the names of the headers.\n'
         "'name', 'info', 'lat', 'long', 'urls', 'address' are reserved header names that will be mapped to fields of the ListItems\n"
         'Any other header names will be name for categories\n'
@@ -120,12 +127,16 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
       name: ImportCsvValues.csv.name,
       decoration: InputDecoration(
         labelText: 'Paste CSV here',
-        suffixIcon:
-            _csvHasError ? const Icon(Icons.error, color: Colors.red) : const Icon(Icons.check, color: Colors.green),
+        suffixIcon: _csvHasError
+            ? const Icon(Icons.error, color: Colors.red)
+            : const Icon(Icons.check, color: Colors.green),
       ),
       onChanged: (val) {
         setState(() {
-          _csvHasError = !(_formKey.currentState?.fields[ImportCsvValues.csv.toString()]?.validate() ?? false);
+          _csvHasError = !(_formKey
+                  .currentState?.fields[ImportCsvValues.csv.toString()]
+                  ?.validate() ??
+              false);
         });
       },
       validator: FormBuilderValidators.compose([
@@ -183,7 +194,11 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
     );
   }
 
-  void save(String actualListId, List<ListItem> originalListItems, FormBuilderState? currentState) {
+  void save(
+    String actualListId,
+    List<ListItem> originalListItems,
+    FormBuilderState? currentState,
+  ) {
     final values = <String, dynamic>{};
     for (final entry in currentState!.fields.entries) {
       values[entry.key] = entry.value.value;
@@ -197,6 +212,7 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
     final listItems = CsvConverter().convert(csv);
     logger.d('listItems: $listItems');
 
-    BlocProvider.of<ListItemCrudBloc>(context).add(ImportListItems(actualListId, listItems));
+    BlocProvider.of<ListItemCrudBloc>(context)
+        .add(ImportListItems(actualListId, listItems));
   }
 }

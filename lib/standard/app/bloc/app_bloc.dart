@@ -28,6 +28,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
     _userSubscription = _userRepository.user.listen(_userChanged);
   }
+  static String className = 'AppBloc';
 
   /// The number of app opens after which the login overlay is shown
   /// for an unauthenticated user.
@@ -39,7 +40,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   late StreamSubscription<User> _userSubscription;
 
   void _userChanged(User user) {
-    logger.i('$this => add(AppUserChanged(${user.id})) QQQ1');
+    logger.i('$className => add(AppUserChanged(${user.id})) QQQ1');
     add(AuthenticationUserChanged(user));
   }
 
@@ -50,17 +51,17 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     final user = event.user;
 
     logger
-      ..i('$this => state.status: $state      QQQQQ 21')
-      ..i('$this => user: $user      QQQQQ 22');
+      ..i('$className => state.status: $state      QQQQQ 21')
+      ..i('$className => user: $user      QQQQQ 22');
     if (user.isAnonymous()) {
-      logger.i('$this => AppStatus.loggedOut QQQQQ 23');
+      logger.i('$className => AppStatus.loggedOut QQQQQ 23');
       emit(AppState.loggedOut());
       return;
     }
 
     emit(AppState.loggedIn(user));
     final userWithData = await tryReadUser(user);
-    logger.i('$this => userWithData: $userWithData');
+    logger.i('$className => userWithData: $userWithData');
 
     if (userWithData == null) {
       emit(AppState.onboardingRequired(user));
@@ -72,7 +73,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
 
   // Future<void> _onUpdateSettings(UpdateSettings event, Emitter<AppState> emit) async {
-  //   // TODO: This should maybe not be allowed?
+  //   // TO.DO: This should maybe not be allowed?
   //   if (!state.user.isAnonymous()) {
   //     final updatedUser = event.user.copyWith(settings: event.settings);
   //     await _userService.updateUser(updatedUser);
@@ -81,13 +82,13 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   // }
 
   Future<void> _onUpdateUser(UpdateUser event, Emitter<AppState> emit) async {
-    logger.i('$this => _onUpdateUser $event');
-
-    await _userService.updateUser(event.user);
+    logger.i('$className => _onUpdateUser $event');
+    final updatedUser = await _userService.updateUser(event.user);
+    emit(AppState.loggedInWithData(updatedUser));
   }
 
   Future<void> _onAddUser(AddUser event, Emitter<AppState> emit) async {
-    logger.i('$this => _onAddUser $event');
+    logger.i('$className => _onAddUser $event');
 
     final user = await _userService.addUser(event.user);
     emit(LoggedInWithData(user));
@@ -104,21 +105,21 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
 
   Future<User?> tryReadUser(User user) async {
-    logger.i('$this => in tryReadUser QQQQ 31');
+    logger.i('$className => in tryReadUser QQQQ 31');
 
     try {
       final firestoreUser = await _userService.getUser(user.id);
       logger
-        ..i('$this => loaded firestoreUser: $firestoreUser')
-        ..i('$this => in firestoreUser $firestoreUser QQQQ 31');
+        ..i('$className => loaded firestoreUser: $firestoreUser')
+        ..i('$className => in firestoreUser $firestoreUser QQQQ 31');
 
       if (firestoreUser == null) {
-        logger.i('$this => return null');
+        logger.i('$className => return null');
         return null;
       }
 
       final fullUser = user.copyWith(settings: firestoreUser.settings);
-      logger.i('$this => return fullUser: $fullUser');
+      logger.i('$className => return fullUser: $fullUser');
       return fullUser;
     } catch (e) {
       return null;

@@ -12,9 +12,13 @@ class ListItemsLoadBloc extends Bloc<ListItemsLoadEvent, ListItemsLoadState> {
     on<LoadListItems>(_onLoadListItems);
     on<WatchListItems>(_onWatchListItems);
   }
+  static String className = 'ListItemsLoadBloc';
   final ListItemsService _listItemsService;
 
-  Future<void> _onChangeUser(ChangeUserForListItemsLoad event, Emitter<ListItemsLoadState> emit) async {
+  Future<void> _onChangeUser(
+    ChangeUserForListItemsLoad event,
+    Emitter<ListItemsLoadState> emit,
+  ) async {
     try {
       emit(ListItemsLoadLoading());
       _listItemsService.changeUser(event.userId);
@@ -25,11 +29,15 @@ class ListItemsLoadBloc extends Bloc<ListItemsLoadEvent, ListItemsLoadState> {
     }
   }
 
-  Future<void> _onLoadListItems(LoadListItems event, Emitter<ListItemsLoadState> emit) async {
-    logger.i('$this => loading list item for list ${event.actualListId}');
+  Future<void> _onLoadListItems(
+    LoadListItems event,
+    Emitter<ListItemsLoadState> emit,
+  ) async {
+    logger.i('$className => loading list item for list ${event.actualListId}');
     try {
       emit(ListItemsLoadLoading());
-      final listItems = await _listItemsService.getListItems(event.actualListId).first;
+      final listItems =
+          await _listItemsService.getListItems(event.actualListId).first;
       emit(ListItemsLoadLoaded(listItems));
     } catch (e) {
       logger.e('Error: $e');
@@ -37,8 +45,11 @@ class ListItemsLoadBloc extends Bloc<ListItemsLoadEvent, ListItemsLoadState> {
     }
   }
 
-  Future<void> _onWatchListItems(WatchListItems event, Emitter<ListItemsLoadState> emit) async {
-    logger.i('$this => loading list item for list ${event.actualListId}');
+  Future<void> _onWatchListItems(
+    WatchListItems event,
+    Emitter<ListItemsLoadState> emit,
+  ) async {
+    logger.i('$className => loading list item for list ${event.actualListId}');
     try {
       emit(ListItemsLoadLoading());
       await emit.forEach(

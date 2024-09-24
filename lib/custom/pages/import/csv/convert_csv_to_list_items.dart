@@ -15,6 +15,8 @@ enum Keywords {
 }
 
 class CsvConverter {
+  static String className = 'CsvConverter';
+
   List<ListItem> convert(String csv) {
     final rows = const CsvToListConverter(
       eol: '\n',
@@ -25,7 +27,7 @@ class CsvConverter {
     final headers = rows[0].map((x) => (x as String).trim()).toList();
     final rest = rows.skip(1);
     final headerPositions = getHeaderPositions(headers);
-    logger.i('$this => headerPositions: $headerPositions');
+    logger.i('$className => headerPositions: $headerPositions');
 
     for (final row in rest) {
       if (row.isEmpty || (row.length == 1 && (row[0] as String).trim() == '')) {
@@ -47,7 +49,9 @@ class CsvConverter {
         id: null,
         name: getRowValue(row, headerPositions, Keywords.name)!,
         info: getRowValue(row, headerPositions, Keywords.info),
-        datetime: DateTime.tryParse(getRowValue(row, headerPositions, Keywords.datetime) ?? ''),
+        datetime: DateTime.tryParse(
+          getRowValue(row, headerPositions, Keywords.datetime) ?? '',
+        ),
         address: getRowValue(row, headerPositions, Keywords.address),
         latLong: latlong,
         urls: getUrls(row, headerPositions),
@@ -60,7 +64,11 @@ class CsvConverter {
     return listItems;
   }
 
-  String? getRowValue(List<dynamic> row, Map<String, int> headerPositions, Keywords keyword) {
+  String? getRowValue(
+    List<dynamic> row,
+    Map<String, int> headerPositions,
+    Keywords keyword,
+  ) {
     if (headerPositions[keyword.name] == null) {
       return null;
     }
@@ -92,11 +100,14 @@ class CsvConverter {
         return keyword.name.toLowerCase();
       }
     }
-    logger.i('$this => $header is not matching a keyword');
+    logger.i('$className => $header is not matching a keyword');
     return null;
   }
 
-  Map<String, List<String>> getCategories(List<dynamic> row, Map<String, int> headerPositions) {
+  Map<String, List<String>> getCategories(
+    List<dynamic> row,
+    Map<String, int> headerPositions,
+  ) {
     final otherHeaders = getCategoryHeaders(headerPositions);
     final categories = <String, List<String>>{};
 
