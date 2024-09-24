@@ -9,10 +9,10 @@ part of 'user_list.dart';
 _$UserListImpl _$$UserListImplFromJson(Map<String, dynamic> json) =>
     _$UserListImpl(
       id: json['id'] as String?,
-      actualListId: json['actualListId'] as String,
+      listId: json['listId'] as String,
       listName: json['listName'] as String,
       listType: $enumDecode(_$ListTypeEnumMap, json['listType']),
-      imageFilename: json['imageFilename'] as String,
+      imageFilename: json['imageFilename'] as String?,
       ownerId: json['ownerId'] as String,
       isOwnList: json['isOwnList'] as bool?,
     );
@@ -20,7 +20,7 @@ _$UserListImpl _$$UserListImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$UserListImplToJson(_$UserListImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'actualListId': instance.actualListId,
+      'listId': instance.listId,
       'listName': instance.listName,
       'listType': _$ListTypeEnumMap[instance.listType]!,
       'imageFilename': instance.imageFilename,

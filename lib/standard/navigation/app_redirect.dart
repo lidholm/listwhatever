@@ -69,11 +69,11 @@ class AppRedirect {
         '$className => Sign up required. redirectUri: $redirectUri    QQQ13',
       );
       return redirectUri;
-    } else {
-      logger.i(
-        '$className => Logged in and onboarded redirect to : ${routerProviderInformation.initialRouteLocation}    QQQ13',
-      );
-      return routerProviderInformation.initialRouteLocation;
+      // } else {
+      //   logger.i(
+      //     '$className => Logged in and onboarded redirect to : ${routerProviderInformation.initialRouteLocation}    QQQ13',
+      //   );
+      //   return routerProviderInformation.initialRouteLocation;
     }
 
     // no other redirects, check if 'from' is set and if so, redirect to it

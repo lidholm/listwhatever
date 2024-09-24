@@ -8,13 +8,14 @@ part 'user_list.g.dart';
 class UserList with _$UserList {
   const factory UserList({
     required String? id,
-    required String actualListId,
+    required String listId,
     required String listName,
     required ListType listType,
-    required String imageFilename,
+    required String? imageFilename,
     required String ownerId,
     required bool? isOwnList,
   }) = _UserList;
 
-  factory UserList.fromJson(Map<String, Object?> json) => _$UserListFromJson(json);
+  factory UserList.fromJson(Map<String, Object?> json) =>
+      _$UserListFromJson(json);
 }

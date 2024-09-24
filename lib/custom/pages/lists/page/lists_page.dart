@@ -74,7 +74,7 @@ class _ListsPageState extends State<ListsPage> {
                   if (firebaseStorage == null) {
                     return Container();
                   }
-                  logger.d('userListState: $userListState');
+                  // logger.d('userListState: $userListState');
                   final userListStateView =
                       ListOrListItemNotLoadedHandler.handleUserListsState(
                     userListState,

@@ -13,7 +13,7 @@ Future<FirebaseStorage> getFirebaseStorage() async {
     logger.i('firebaseStorage. Using emulator ${emulatorInfo.address}');
     _connectToFirebaseEmulator(instance, emulatorInfo.address!);
   } else {
-    logger.i('firebaseStorage. Using firestore without emulator');
+    logger.i('firebaseStorage. Using firesbase storage without emulator');
   }
 
   return instance;

@@ -40,7 +40,7 @@ class ListCrudBloc extends Bloc<ListCrudEvent, ListCrudState> {
       final userList = UserList(
         id: '',
         imageFilename: list.imageFilename,
-        actualListId: actualListId,
+        listId: actualListId,
         listName: list.name,
         listType: list.listType,
         ownerId: list.ownerId!,

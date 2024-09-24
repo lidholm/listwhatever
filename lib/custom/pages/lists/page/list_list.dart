@@ -32,7 +32,7 @@ class ListList extends StatelessWidget {
                 final imageUrlFuture = firebaseStorage
                     .ref()
                     .child('images')
-                    .child(list.imageFilename)
+                    .child(list.imageFilename ?? 'activities.png')
                     .getDownloadURL();
                 return FutureBuilder(
                   future: imageUrlFuture,
@@ -41,7 +41,7 @@ class ListList extends StatelessWidget {
                     // logger.i('$className => imageUrl: $imageUrl');
                     return ListTile(
                       onTap: () {
-                        ListItemsPageRoute(actualListId: list.actualListId)
+                        ListItemsPageRoute(actualListId: list.listId)
                             .push<void>(userListContext);
                       },
                       leading: imageWidget(imageUrl ?? ''),

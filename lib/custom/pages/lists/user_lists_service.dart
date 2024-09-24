@@ -31,6 +31,7 @@ class UserListsService extends FirestoreService {
   }
 
   UserList convertToUserList(String id, Map<String, dynamic> data) {
+    // logger.d('$className: convertToUserList $id $data');
     final tmp = UserList.fromJson(data);
     return tmp.copyWith(id: id, isOwnList: tmp.ownerId == userId);
   }
