@@ -23,7 +23,7 @@ class UserListsService extends FirestoreService {
     }
     final listsCollection = await getCollection();
     yield* listsCollection.snapshots().map((snapshot) {
-      // logger.d('snapshot.docs: ${snapshot.docs.length}');
+      logger.d('snapshot.docs: ${snapshot.docs.length}');
       return snapshot.docs.map((doc) {
         return convertToUserList(doc.id, doc.data());
       }).toList();
@@ -31,7 +31,7 @@ class UserListsService extends FirestoreService {
   }
 
   UserList convertToUserList(String id, Map<String, dynamic> data) {
-    // logger.d('$className: convertToUserList $id $data');
+    logger.d('$className: convertToUserList $id $data');
     final tmp = UserList.fromJson(data);
     return tmp.copyWith(id: id, isOwnList: tmp.ownerId == userId);
   }
