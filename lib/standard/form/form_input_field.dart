@@ -25,4 +25,13 @@ sealed class FormInputField<T> with _$FormInputField<T> {
     required String sectionName,
     required bool hasError,
   }) = FormInputFieldDropDown<T>;
+
+  const factory FormInputField.checkbox({
+    required String id,
+    required String label,
+    required bool currentValue,
+    required List<FormFieldValidator<bool>> validators,
+    required String sectionName,
+    required bool hasError,
+  }) = FormInputFieldCheckbox<T>;
 }

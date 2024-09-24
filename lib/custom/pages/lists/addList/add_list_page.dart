@@ -16,9 +16,8 @@ import '/standard/widgets/appBar/common_app_bar.dart';
 const imageSize = 80.0;
 
 enum SectionName {
-  name._('Name'),
-  map._('Map information'),
-  dateAndTime._('Date and time'),
+  basic._('Basic information'),
+  options._('Options'),
   shared._('Share information');
 
   const SectionName._(this.value);
@@ -110,24 +109,47 @@ class _AddListPageState extends State<AddListPage> {
         sectionName: SectionName.name.value,
         hasError: false,
       ),
+      FormInputField<ListType>.checkbox(
+        id: 'withMap',
+        label: 'Use a map',
+        currentValue: false,
+        validators: [
+          FormBuilderValidators.required(),
+          FormBuilderValidators.maxLength(70),
+        ],
+        sectionName: SectionName.options.value,
+        hasError: false,
+      ),
+      FormInputField<ListType>.checkbox(
+        id: 'withDate',
+        label: 'Use dates',
+        currentValue: false,
+        validators: [
+          FormBuilderValidators.required(),
+          FormBuilderValidators.maxLength(70),
+        ],
+        sectionName: SectionName.options.value,
+        hasError: false,
+      ),
+      FormInputField<ListType>.checkbox(
+        id: 'withTime',
+        label: 'Use time',
+        currentValue: false,
+        validators: [
+          FormBuilderValidators.required(),
+          FormBuilderValidators.maxLength(70),
+        ],
+        sectionName: SectionName.options.value,
+        hasError: false,
+      ),
     ];
 
-    // initialValue = {
-    //   AddListValues.id.toString(): list?.id,
-    //   AddListValues.name.toString(): list?.name,
-    //   AddListValues.type.toString(): list?.listType ?? ListType.other,
-    //   AddListValues.withMap.toString(): list?.withMap ?? false,
-    //   AddListValues.withDates.toString(): list?.withDates ?? false,
-    //   AddListValues.withTimes.toString(): list?.withTimes ?? false,
-    //   AddListValues.ownerId.toString(): list?.ownerId,
-    //   // AddListValues.share.toString(): list?.shared ?? false,
-    // };
     final sectionNames = [
-      SectionName.name.value,
-      SectionName.dateAndTime.value,
-      SectionName.map.value,
+      SectionName.basic.value,
+      SectionName.options.value,
       SectionName.shared.value,
     ];
+
     final formGenerator = FormGenerator(
       formKey: _formKey,
       sectionNames: sectionNames,

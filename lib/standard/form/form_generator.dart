@@ -58,6 +58,7 @@ class _FormGeneratorState extends State<FormGenerator> {
     return switch (field) {
       FormInputFieldTextArea() => generateTextAreaField(field),
       FormInputFieldDropDown() => generateDropDownField(field),
+      FormInputFieldCheckbox<T>() => generateCheckboxField(field),
     };
   }
 
@@ -187,6 +188,22 @@ class _FormGeneratorState extends State<FormGenerator> {
         //   ),
         // ),
       ],
+    );
+  }
+
+  Widget generateCheckboxField<T>(FormInputFieldCheckbox<T> field) {
+    return FormBuilderCheckbox(
+      autovalidateMode: AutovalidateMode.always,
+      name: field.id,
+      decoration: InputDecoration(
+        labelText: field.label,
+        suffixIcon: field.hasError
+            ? const Icon(Icons.error, color: Colors.red)
+            : const Icon(Icons.check, color: Colors.green),
+      ),
+      // valueTransformer: (text) => num.tryParse(text),
+      validator: FormBuilderValidators.compose(field.validators),
+      title: Text(field.label),
     );
   }
 }

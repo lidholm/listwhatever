@@ -18,8 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$FormInputField<T> {
   String get id => throw _privateConstructorUsedError;
   String get label => throw _privateConstructorUsedError;
-  T get currentValue => throw _privateConstructorUsedError;
-  List<String? Function(String?)> get validators =>
+  Object? get currentValue => throw _privateConstructorUsedError;
+  List<String? Function(Never?)> get validators =>
       throw _privateConstructorUsedError;
   String get sectionName => throw _privateConstructorUsedError;
   bool get hasError => throw _privateConstructorUsedError;
@@ -38,11 +38,19 @@ mixin _$FormInputField<T> {
             String label,
             T currentValue,
             List<T> options,
-            String Function(T) optionToString,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError)
         dropdown,
+    required TResult Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)
+        checkbox,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,11 +68,19 @@ mixin _$FormInputField<T> {
             String label,
             T currentValue,
             List<T> options,
-            String Function(T) optionToString,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError)?
         dropdown,
+    TResult? Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        checkbox,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -82,11 +98,19 @@ mixin _$FormInputField<T> {
             String label,
             T currentValue,
             List<T> options,
-            String Function(T) optionToString,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError)?
         dropdown,
+    TResult Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        checkbox,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -94,18 +118,21 @@ mixin _$FormInputField<T> {
   TResult map<TResult extends Object?>({
     required TResult Function(FormInputFieldTextArea<T> value) textArea,
     required TResult Function(FormInputFieldDropDown<T> value) dropdown,
+    required TResult Function(FormInputFieldCheckbox<T> value) checkbox,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(FormInputFieldTextArea<T> value)? textArea,
     TResult? Function(FormInputFieldDropDown<T> value)? dropdown,
+    TResult? Function(FormInputFieldCheckbox<T> value)? checkbox,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(FormInputFieldTextArea<T> value)? textArea,
     TResult Function(FormInputFieldDropDown<T> value)? dropdown,
+    TResult Function(FormInputFieldCheckbox<T> value)? checkbox,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -123,13 +150,7 @@ abstract class $FormInputFieldCopyWith<T, $Res> {
           FormInputField<T> value, $Res Function(FormInputField<T>) then) =
       _$FormInputFieldCopyWithImpl<T, $Res, FormInputField<T>>;
   @useResult
-  $Res call(
-      {String id,
-      String label,
-      T currentValue,
-      List<String? Function(String?)> validators,
-      String sectionName,
-      bool hasError});
+  $Res call({String id, String label, String sectionName, bool hasError});
 }
 
 /// @nodoc
@@ -149,8 +170,6 @@ class _$FormInputFieldCopyWithImpl<T, $Res, $Val extends FormInputField<T>>
   $Res call({
     Object? id = null,
     Object? label = null,
-    Object? currentValue = freezed,
-    Object? validators = null,
     Object? sectionName = null,
     Object? hasError = null,
   }) {
@@ -163,14 +182,6 @@ class _$FormInputFieldCopyWithImpl<T, $Res, $Val extends FormInputField<T>>
           ? _value.label
           : label // ignore: cast_nullable_to_non_nullable
               as String,
-      currentValue: freezed == currentValue
-          ? _value.currentValue
-          : currentValue // ignore: cast_nullable_to_non_nullable
-              as T,
-      validators: null == validators
-          ? _value.validators
-          : validators // ignore: cast_nullable_to_non_nullable
-              as List<String? Function(String?)>,
       sectionName: null == sectionName
           ? _value.sectionName
           : sectionName // ignore: cast_nullable_to_non_nullable
@@ -355,11 +366,19 @@ class _$FormInputFieldTextAreaImpl<T>
             String label,
             T currentValue,
             List<T> options,
-            String Function(T) optionToString,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError)
         dropdown,
+    required TResult Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)
+        checkbox,
   }) {
     return textArea(id, label, currentValue, validators, sectionName, hasError);
   }
@@ -380,11 +399,19 @@ class _$FormInputFieldTextAreaImpl<T>
             String label,
             T currentValue,
             List<T> options,
-            String Function(T) optionToString,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError)?
         dropdown,
+    TResult? Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        checkbox,
   }) {
     return textArea?.call(
         id, label, currentValue, validators, sectionName, hasError);
@@ -406,11 +433,19 @@ class _$FormInputFieldTextAreaImpl<T>
             String label,
             T currentValue,
             List<T> options,
-            String Function(T) optionToString,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError)?
         dropdown,
+    TResult Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        checkbox,
     required TResult orElse(),
   }) {
     if (textArea != null) {
@@ -425,6 +460,7 @@ class _$FormInputFieldTextAreaImpl<T>
   TResult map<TResult extends Object?>({
     required TResult Function(FormInputFieldTextArea<T> value) textArea,
     required TResult Function(FormInputFieldDropDown<T> value) dropdown,
+    required TResult Function(FormInputFieldCheckbox<T> value) checkbox,
   }) {
     return textArea(this);
   }
@@ -434,6 +470,7 @@ class _$FormInputFieldTextAreaImpl<T>
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(FormInputFieldTextArea<T> value)? textArea,
     TResult? Function(FormInputFieldDropDown<T> value)? dropdown,
+    TResult? Function(FormInputFieldCheckbox<T> value)? checkbox,
   }) {
     return textArea?.call(this);
   }
@@ -443,6 +480,7 @@ class _$FormInputFieldTextAreaImpl<T>
   TResult maybeMap<TResult extends Object?>({
     TResult Function(FormInputFieldTextArea<T> value)? textArea,
     TResult Function(FormInputFieldDropDown<T> value)? dropdown,
+    TResult Function(FormInputFieldCheckbox<T> value)? checkbox,
     required TResult orElse(),
   }) {
     if (textArea != null) {
@@ -496,7 +534,7 @@ abstract class _$$FormInputFieldDropDownImplCopyWith<T, $Res>
       String label,
       T currentValue,
       List<T> options,
-      String Function(T) optionToString,
+      String Function(dynamic) optionToString,
       List<String? Function(String?)> validators,
       String sectionName,
       bool hasError});
@@ -546,7 +584,7 @@ class __$$FormInputFieldDropDownImplCopyWithImpl<T, $Res>
       optionToString: null == optionToString
           ? _value.optionToString
           : optionToString // ignore: cast_nullable_to_non_nullable
-              as String Function(T),
+              as String Function(dynamic),
       validators: null == validators
           ? _value._validators
           : validators // ignore: cast_nullable_to_non_nullable
@@ -595,7 +633,7 @@ class _$FormInputFieldDropDownImpl<T>
   }
 
   @override
-  final String Function(T) optionToString;
+  final String Function(dynamic) optionToString;
   final List<String? Function(String?)> _validators;
   @override
   List<String? Function(String?)> get validators {
@@ -686,11 +724,19 @@ class _$FormInputFieldDropDownImpl<T>
             String label,
             T currentValue,
             List<T> options,
-            String Function(T) optionToString,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError)
         dropdown,
+    required TResult Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)
+        checkbox,
   }) {
     return dropdown(id, label, currentValue, options, optionToString,
         validators, sectionName, hasError);
@@ -712,11 +758,19 @@ class _$FormInputFieldDropDownImpl<T>
             String label,
             T currentValue,
             List<T> options,
-            String Function(T) optionToString,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError)?
         dropdown,
+    TResult? Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        checkbox,
   }) {
     return dropdown?.call(id, label, currentValue, options, optionToString,
         validators, sectionName, hasError);
@@ -738,11 +792,19 @@ class _$FormInputFieldDropDownImpl<T>
             String label,
             T currentValue,
             List<T> options,
-            String Function(T) optionToString,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError)?
         dropdown,
+    TResult Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        checkbox,
     required TResult orElse(),
   }) {
     if (dropdown != null) {
@@ -757,6 +819,7 @@ class _$FormInputFieldDropDownImpl<T>
   TResult map<TResult extends Object?>({
     required TResult Function(FormInputFieldTextArea<T> value) textArea,
     required TResult Function(FormInputFieldDropDown<T> value) dropdown,
+    required TResult Function(FormInputFieldCheckbox<T> value) checkbox,
   }) {
     return dropdown(this);
   }
@@ -766,6 +829,7 @@ class _$FormInputFieldDropDownImpl<T>
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(FormInputFieldTextArea<T> value)? textArea,
     TResult? Function(FormInputFieldDropDown<T> value)? dropdown,
+    TResult? Function(FormInputFieldCheckbox<T> value)? checkbox,
   }) {
     return dropdown?.call(this);
   }
@@ -775,6 +839,7 @@ class _$FormInputFieldDropDownImpl<T>
   TResult maybeMap<TResult extends Object?>({
     TResult Function(FormInputFieldTextArea<T> value)? textArea,
     TResult Function(FormInputFieldDropDown<T> value)? dropdown,
+    TResult Function(FormInputFieldCheckbox<T> value)? checkbox,
     required TResult orElse(),
   }) {
     if (dropdown != null) {
@@ -790,7 +855,7 @@ abstract class FormInputFieldDropDown<T> implements FormInputField<T> {
       required final String label,
       required final T currentValue,
       required final List<T> options,
-      required final String Function(T) optionToString,
+      required final String Function(dynamic) optionToString,
       required final List<String? Function(String?)> validators,
       required final String sectionName,
       required final bool hasError}) = _$FormInputFieldDropDownImpl<T>;
@@ -802,7 +867,7 @@ abstract class FormInputFieldDropDown<T> implements FormInputField<T> {
   @override
   T get currentValue;
   List<T> get options;
-  String Function(T) get optionToString;
+  String Function(dynamic) get optionToString;
   @override
   List<String? Function(String?)> get validators;
   @override
@@ -815,5 +880,325 @@ abstract class FormInputFieldDropDown<T> implements FormInputField<T> {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FormInputFieldDropDownImplCopyWith<T, _$FormInputFieldDropDownImpl<T>>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FormInputFieldCheckboxImplCopyWith<T, $Res>
+    implements $FormInputFieldCopyWith<T, $Res> {
+  factory _$$FormInputFieldCheckboxImplCopyWith(
+          _$FormInputFieldCheckboxImpl<T> value,
+          $Res Function(_$FormInputFieldCheckboxImpl<T>) then) =
+      __$$FormInputFieldCheckboxImplCopyWithImpl<T, $Res>;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String label,
+      bool currentValue,
+      List<String? Function(bool?)> validators,
+      String sectionName,
+      bool hasError});
+}
+
+/// @nodoc
+class __$$FormInputFieldCheckboxImplCopyWithImpl<T, $Res>
+    extends _$FormInputFieldCopyWithImpl<T, $Res,
+        _$FormInputFieldCheckboxImpl<T>>
+    implements _$$FormInputFieldCheckboxImplCopyWith<T, $Res> {
+  __$$FormInputFieldCheckboxImplCopyWithImpl(
+      _$FormInputFieldCheckboxImpl<T> _value,
+      $Res Function(_$FormInputFieldCheckboxImpl<T>) _then)
+      : super(_value, _then);
+
+  /// Create a copy of FormInputField
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? label = null,
+    Object? currentValue = null,
+    Object? validators = null,
+    Object? sectionName = null,
+    Object? hasError = null,
+  }) {
+    return _then(_$FormInputFieldCheckboxImpl<T>(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      label: null == label
+          ? _value.label
+          : label // ignore: cast_nullable_to_non_nullable
+              as String,
+      currentValue: null == currentValue
+          ? _value.currentValue
+          : currentValue // ignore: cast_nullable_to_non_nullable
+              as bool,
+      validators: null == validators
+          ? _value._validators
+          : validators // ignore: cast_nullable_to_non_nullable
+              as List<String? Function(bool?)>,
+      sectionName: null == sectionName
+          ? _value.sectionName
+          : sectionName // ignore: cast_nullable_to_non_nullable
+              as String,
+      hasError: null == hasError
+          ? _value.hasError
+          : hasError // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$FormInputFieldCheckboxImpl<T>
+    with DiagnosticableTreeMixin
+    implements FormInputFieldCheckbox<T> {
+  const _$FormInputFieldCheckboxImpl(
+      {required this.id,
+      required this.label,
+      required this.currentValue,
+      required final List<String? Function(bool?)> validators,
+      required this.sectionName,
+      required this.hasError})
+      : _validators = validators;
+
+  @override
+  final String id;
+  @override
+  final String label;
+  @override
+  final bool currentValue;
+  final List<String? Function(bool?)> _validators;
+  @override
+  List<String? Function(bool?)> get validators {
+    if (_validators is EqualUnmodifiableListView) return _validators;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_validators);
+  }
+
+  @override
+  final String sectionName;
+  @override
+  final bool hasError;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'FormInputField<$T>.checkbox(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'FormInputField<$T>.checkbox'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('label', label))
+      ..add(DiagnosticsProperty('currentValue', currentValue))
+      ..add(DiagnosticsProperty('validators', validators))
+      ..add(DiagnosticsProperty('sectionName', sectionName))
+      ..add(DiagnosticsProperty('hasError', hasError));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FormInputFieldCheckboxImpl<T> &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.label, label) || other.label == label) &&
+            (identical(other.currentValue, currentValue) ||
+                other.currentValue == currentValue) &&
+            const DeepCollectionEquality()
+                .equals(other._validators, _validators) &&
+            (identical(other.sectionName, sectionName) ||
+                other.sectionName == sectionName) &&
+            (identical(other.hasError, hasError) ||
+                other.hasError == hasError));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id, label, currentValue,
+      const DeepCollectionEquality().hash(_validators), sectionName, hasError);
+
+  /// Create a copy of FormInputField
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FormInputFieldCheckboxImplCopyWith<T, _$FormInputFieldCheckboxImpl<T>>
+      get copyWith => __$$FormInputFieldCheckboxImplCopyWithImpl<T,
+          _$FormInputFieldCheckboxImpl<T>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String id,
+            String label,
+            T currentValue,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError)
+        textArea,
+    required TResult Function(
+            String id,
+            String label,
+            T currentValue,
+            List<T> options,
+            String Function(dynamic) optionToString,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError)
+        dropdown,
+    required TResult Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)
+        checkbox,
+  }) {
+    return checkbox(id, label, currentValue, validators, sectionName, hasError);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String id,
+            String label,
+            T currentValue,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError)?
+        textArea,
+    TResult? Function(
+            String id,
+            String label,
+            T currentValue,
+            List<T> options,
+            String Function(dynamic) optionToString,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError)?
+        dropdown,
+    TResult? Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        checkbox,
+  }) {
+    return checkbox?.call(
+        id, label, currentValue, validators, sectionName, hasError);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String id,
+            String label,
+            T currentValue,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError)?
+        textArea,
+    TResult Function(
+            String id,
+            String label,
+            T currentValue,
+            List<T> options,
+            String Function(dynamic) optionToString,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError)?
+        dropdown,
+    TResult Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        checkbox,
+    required TResult orElse(),
+  }) {
+    if (checkbox != null) {
+      return checkbox(
+          id, label, currentValue, validators, sectionName, hasError);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(FormInputFieldTextArea<T> value) textArea,
+    required TResult Function(FormInputFieldDropDown<T> value) dropdown,
+    required TResult Function(FormInputFieldCheckbox<T> value) checkbox,
+  }) {
+    return checkbox(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(FormInputFieldTextArea<T> value)? textArea,
+    TResult? Function(FormInputFieldDropDown<T> value)? dropdown,
+    TResult? Function(FormInputFieldCheckbox<T> value)? checkbox,
+  }) {
+    return checkbox?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(FormInputFieldTextArea<T> value)? textArea,
+    TResult Function(FormInputFieldDropDown<T> value)? dropdown,
+    TResult Function(FormInputFieldCheckbox<T> value)? checkbox,
+    required TResult orElse(),
+  }) {
+    if (checkbox != null) {
+      return checkbox(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FormInputFieldCheckbox<T> implements FormInputField<T> {
+  const factory FormInputFieldCheckbox(
+      {required final String id,
+      required final String label,
+      required final bool currentValue,
+      required final List<String? Function(bool?)> validators,
+      required final String sectionName,
+      required final bool hasError}) = _$FormInputFieldCheckboxImpl<T>;
+
+  @override
+  String get id;
+  @override
+  String get label;
+  @override
+  bool get currentValue;
+  @override
+  List<String? Function(bool?)> get validators;
+  @override
+  String get sectionName;
+  @override
+  bool get hasError;
+
+  /// Create a copy of FormInputField
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FormInputFieldCheckboxImplCopyWith<T, _$FormInputFieldCheckboxImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
 }
