@@ -369,7 +369,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
         });
       },
       validator: FormBuilderValidators.compose([
-        FormBuilderValidators.max(40),
+        FormBuilderValidators.maxLength(40),
         FormBuilderValidators.match(
           RegExp(r'\d*(\.\d*)?,\s*-?\d*(\.\d*)'),
           errorText: "Doesn't match 12.3, 3.45",
@@ -401,7 +401,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
         });
       },
       validator: FormBuilderValidators.compose([
-        FormBuilderValidators.max(200),
+        FormBuilderValidators.maxLength(200),
       ]),
       keyboardType: TextInputType.multiline,
       textInputAction: TextInputAction.newline,
@@ -631,7 +631,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
         });
       },
       validator: FormBuilderValidators.compose([
-        FormBuilderValidators.max(1200),
+        FormBuilderValidators.maxLength(1200),
       ]),
       keyboardType: TextInputType.multiline,
       textInputAction: TextInputAction.newline,
