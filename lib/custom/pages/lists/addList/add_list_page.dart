@@ -93,7 +93,7 @@ class _AddListPageState extends State<AddListPage> {
           FormBuilderValidators.required(),
           FormBuilderValidators.maxLength(70),
         ],
-        sectionName: SectionName.name.value,
+        sectionName: SectionName.basic.value,
         hasError: false,
       ),
       FormInputField<ListType>.dropdown(
@@ -106,7 +106,7 @@ class _AddListPageState extends State<AddListPage> {
         ],
         options: ListType.values,
         optionToString: (listType) => (listType as ListType).name,
-        sectionName: SectionName.name.value,
+        sectionName: SectionName.basic.value,
         hasError: false,
       ),
       FormInputField<ListType>.checkbox(

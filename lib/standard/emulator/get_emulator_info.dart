@@ -10,7 +10,7 @@ import 'emulator_info.dart';
 // override == false   =>   don't use emulator
 // override == true    =>   use emulator
 
-bool? override = false;
+bool? override;
 
 Future<EmulatorInfo> getEmulatorInfo() async {
   final deviceInfo = await getDeviceInfo();
