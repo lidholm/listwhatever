@@ -10,14 +10,15 @@ import 'emulator_info.dart';
 // override == false   =>   don't use emulator
 // override == true    =>   use emulator
 
-bool? override;
+bool? override = false;
 
 Future<EmulatorInfo> getEmulatorInfo() async {
   final deviceInfo = await getDeviceInfo();
   // logger
   //   ..d('isPhysicalDevice: ${deviceInfo['isPhysicalDevice']}')
   //   ..d('foundation.kDebugMode: ${foundation.kDebugMode}');
-  final useEmulator = deviceInfo['isPhysicalDevice'] == false || foundation.kDebugMode;
+  final useEmulator =
+      deviceInfo['isPhysicalDevice'] == false || foundation.kDebugMode;
   // logger
   //   ..d('useEmulator: $useEmulator')
   //   ..d('override: $override');

@@ -23,7 +23,7 @@ mixin _$ListOfThings {
   String? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   ListType get listType => throw _privateConstructorUsedError;
-  String get imageFilename => throw _privateConstructorUsedError;
+  String? get imageFilename => throw _privateConstructorUsedError;
   bool get withMap => throw _privateConstructorUsedError;
   bool get withDates => throw _privateConstructorUsedError;
   bool get withTimes => throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ abstract class $ListOfThingsCopyWith<$Res> {
       {String? id,
       String name,
       ListType listType,
-      String imageFilename,
+      String? imageFilename,
       bool withMap,
       bool withDates,
       bool withTimes,
@@ -78,7 +78,7 @@ class _$ListOfThingsCopyWithImpl<$Res, $Val extends ListOfThings>
     Object? id = freezed,
     Object? name = null,
     Object? listType = null,
-    Object? imageFilename = null,
+    Object? imageFilename = freezed,
     Object? withMap = null,
     Object? withDates = null,
     Object? withTimes = null,
@@ -102,10 +102,10 @@ class _$ListOfThingsCopyWithImpl<$Res, $Val extends ListOfThings>
           ? _value.listType
           : listType // ignore: cast_nullable_to_non_nullable
               as ListType,
-      imageFilename: null == imageFilename
+      imageFilename: freezed == imageFilename
           ? _value.imageFilename
           : imageFilename // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       withMap: null == withMap
           ? _value.withMap
           : withMap // ignore: cast_nullable_to_non_nullable
@@ -158,7 +158,7 @@ abstract class _$$ListOfThingsImplCopyWith<$Res>
       {String? id,
       String name,
       ListType listType,
-      String imageFilename,
+      String? imageFilename,
       bool withMap,
       bool withDates,
       bool withTimes,
@@ -184,7 +184,7 @@ class __$$ListOfThingsImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = null,
     Object? listType = null,
-    Object? imageFilename = null,
+    Object? imageFilename = freezed,
     Object? withMap = null,
     Object? withDates = null,
     Object? withTimes = null,
@@ -208,10 +208,10 @@ class __$$ListOfThingsImplCopyWithImpl<$Res>
           ? _value.listType
           : listType // ignore: cast_nullable_to_non_nullable
               as ListType,
-      imageFilename: null == imageFilename
+      imageFilename: freezed == imageFilename
           ? _value.imageFilename
           : imageFilename // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       withMap: null == withMap
           ? _value.withMap
           : withMap // ignore: cast_nullable_to_non_nullable
@@ -259,13 +259,13 @@ class _$ListOfThingsImpl implements _ListOfThings {
       {required this.id,
       required this.name,
       required this.listType,
-      required this.imageFilename,
+      this.imageFilename = null,
       required this.withMap,
       required this.withDates,
       required this.withTimes,
       required this.shared,
-      required this.shareCodeForViewer,
-      required this.shareCodeForEditor,
+      this.shareCodeForViewer = null,
+      this.shareCodeForEditor = null,
       required final Map<String, ShareType> sharedWith,
       required this.ownerId,
       this.shareType = ShareType.viewer})
@@ -281,7 +281,8 @@ class _$ListOfThingsImpl implements _ListOfThings {
   @override
   final ListType listType;
   @override
-  final String imageFilename;
+  @JsonKey()
+  final String? imageFilename;
   @override
   final bool withMap;
   @override
@@ -291,8 +292,10 @@ class _$ListOfThingsImpl implements _ListOfThings {
   @override
   final bool shared;
   @override
+  @JsonKey()
   final String? shareCodeForViewer;
   @override
+  @JsonKey()
   final String? shareCodeForEditor;
   final Map<String, ShareType> _sharedWith;
   @override
@@ -378,13 +381,13 @@ abstract class _ListOfThings implements ListOfThings {
       {required final String? id,
       required final String name,
       required final ListType listType,
-      required final String imageFilename,
+      final String? imageFilename,
       required final bool withMap,
       required final bool withDates,
       required final bool withTimes,
       required final bool shared,
-      required final String? shareCodeForViewer,
-      required final String? shareCodeForEditor,
+      final String? shareCodeForViewer,
+      final String? shareCodeForEditor,
       required final Map<String, ShareType> sharedWith,
       required final String? ownerId,
       final ShareType shareType}) = _$ListOfThingsImpl;
@@ -399,7 +402,7 @@ abstract class _ListOfThings implements ListOfThings {
   @override
   ListType get listType;
   @override
-  String get imageFilename;
+  String? get imageFilename;
   @override
   bool get withMap;
   @override

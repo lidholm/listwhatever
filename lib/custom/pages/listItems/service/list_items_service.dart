@@ -7,7 +7,9 @@ import '/standard/firebaseService/firebase_service.dart';
 class ListItemsService extends FirestoreService {
   ListItemsService({super.userId});
 
-  Future<CollectionReference<Map<String, dynamic>>> getCollection(String actualListId) async {
+  Future<CollectionReference<Map<String, dynamic>>> getCollection(
+    String actualListId,
+  ) async {
     final path = '/lists/$actualListId/items';
     logger.d('ListItemsService.path: $path');
     return firestore.collection(path);
@@ -17,23 +19,35 @@ class ListItemsService extends FirestoreService {
     final itemsCollection = await getCollection(actualListId);
 
     yield* itemsCollection.snapshots().map((snapshot) {
-      // logger.d('number of getListItems: ${snapshot.docs.length}');
+      logger.d('number of getListItems: ${snapshot.docs.length}');
       return snapshot.docs.map((doc) {
         final data = doc.data();
-        return ListItem.fromJson(data);
+        try {
+          final listItem = ListItem.fromJson(data);
+          return listItem;
+        } catch (e) {
+          logger.e(e);
+          rethrow;
+        }
       }).toList();
     });
   }
 
   Future<ListItem?> getListItem(String actualListId, String itemId) async {
-    // logger.d('getListItem($actualListId, $itemId)');
+    logger.d('getListItem($actualListId, $itemId)');
     final itemsCollection = await getCollection(actualListId);
     final snapshot = await itemsCollection.doc(itemId).get();
     final data = snapshot.data();
     if (data == null) {
       return null;
     }
-    return ListItem.fromJson(data);
+    try {
+      final listItem = ListItem.fromJson(data);
+      return listItem;
+    } catch (e) {
+      logger.e(e);
+      rethrow;
+    }
   }
 
   Future<void> addListItem(String actualListId, ListItem list) async {
