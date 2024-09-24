@@ -7,6 +7,8 @@ import 'package:logger/logger.dart';
 
 import '/custom/pages/listItems/models/list_item.dart';
 
+String defaultImageFilename = 'activities.png';
+
 Logger logger = Logger(
   // printer: PrettyPrinter(methodCount: 0, printTime: true),
   printer: SimplePrinter(printTime: true),
