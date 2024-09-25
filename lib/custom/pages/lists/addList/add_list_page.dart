@@ -13,8 +13,6 @@ import '/custom/pages/lists/models/list_of_things.dart';
 import '/custom/pages/lists/models/list_type.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
 
-const imageSize = 80.0;
-
 enum SectionName {
   basic._('Basic information'),
   options._('Options'),

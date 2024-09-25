@@ -9,6 +9,8 @@ import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/firebase/firestore/firebase_storage.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 
+const imageSize = 80.0;
+
 class FormInputFieldImagePicker<T> extends StatefulWidget {
   const FormInputFieldImagePicker({required this.field, super.key});
 
@@ -29,96 +31,112 @@ class _FormInputFieldImagePickerState<T>
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const SizedBox(width: 16),
-        if (_uploadTask == null)
-          const Center(child: Text("Press the '+' button to add a new file."))
-        else
-          Expanded(
-            child: UploadTaskListTile(
-              task: _uploadTask!,
-              onDismissed: () {}, // => _removeTaskAtIndex(index),
-              onDownloadLink: () async {
-                // return _downloadLink(_uploadTasks[index].snapshot.ref);
-              },
-              onDownload: () async {
-                // if (kIsWeb) {
-                //   return _downloadBytes(_uploadTasks[index].snapshot.ref);
-                // } else {
-                //   return _downloadFile(_uploadTasks[index].snapshot.ref);
-                // }
-              },
-              onDelete: () async {
-                // return _delete(_uploadTasks[index].snapshot.ref);
-              },
-            ),
-          ),
-        ElevatedButton(
-          onPressed: () async {
-            final picker = ImagePicker();
-            final pickedFile =
-                await picker.pickImage(source: ImageSource.gallery);
-
-            if (pickedFile != null) {
-              final tmp = await uploadImage(pickedFile);
-              setState(() {
-                logger.i('$className => pickedFile.path: ${pickedFile.path}');
-                _uploadTask = tmp;
-                logger.i('$className => _uploadTask: $_uploadTask');
-              });
-            } else {
-              logger.i('$className => No image selected.');
-            }
-          },
-          child: const Padding(
-            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-            child: Text('Upload image'),
-          ),
+        uploadedImage(),
+        Row(
+          children: [
+            // if (_uploadTask == null)
+            //   const Center(
+            //       child: Text("Press the '+' button to add a new file."))
+            // else
+            //   uploadedStatus(),
+            uploadButton(),
+          ],
         ),
       ],
     );
   }
 
-  // FutureBuilder(
-  //   future: getFirebaseStorage(),
-  //   builder: (context, snapshot) {
-  //     final firebaseStorage = snapshot.data;
-  //     if (firebaseStorage == null) {
-  //       return Container();
-  //     }
-  //     final imageFilename = getImageFilename();
-  //     logger.i('$className => imageFilename: $imageFilename');
-  //     final imageUrlFuture = firebaseStorage
-  //         .ref()
-  //         .child('images')
-  //         .child(imageFilename)
-  //         .getDownloadURL();
-  //     return FutureBuilder(
-  //       future: imageUrlFuture,
-  //       builder: (context, snapshot) {
-  //         final imageUrl = snapshot.data;
-  //         logger.i('$className => imageUrl: $imageUrl');
-  //         return SizedBox(
-  //           width: imageSize,
-  //           height: imageSize,
-  //           child: ClipRRect(
-  //             borderRadius: BorderRadius.circular(8),
-  //             child: imageUrl != null
-  //                 ? Image.network(imageUrl, fit: BoxFit.cover)
-  //                 : Container(),
-  //           ),
-  //         );
-  //       },
-  //     );
-  //   },
-  // ),
-  //
-  // String getImageFilename() {
-  //   return _selectedImageFilename ??
-  //       ((selectedListType != null && selectedListType != ListType.other)
-  //           ? selectedListType!.getImagePath()
-  //           : 'generic.jpg');
-  // }
+  Widget uploadedImage() {
+    return FutureBuilder(
+      future: getFirebaseStorage(),
+      builder: (context, snapshot) {
+        final firebaseStorage = snapshot.data;
+        if (firebaseStorage == null) {
+          return Container();
+        }
+        final imageFilename = getImageFilename();
+        logger.i('$className => imageFilename: $imageFilename');
+        final imageUrlFuture = firebaseStorage
+            .ref()
+            .child('images')
+            .child(imageFilename)
+            .getDownloadURL();
+        return FutureBuilder(
+          future: imageUrlFuture,
+          builder: (context, snapshot) {
+            final imageUrl = snapshot.data;
+            logger.i('$className => imageUrl: $imageUrl');
+            return SizedBox(
+              width: imageSize,
+              height: imageSize,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: imageUrl != null
+                    ? Image.network(imageUrl, fit: BoxFit.cover)
+                    : Container(),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  String getImageFilename() {
+    return
+        // _selectedImageFilename ??
+        //     ((selectedListType != null && selectedListType != ListType.other)
+        //         ? selectedListType!.getImagePath() :
+        'generic.jpg';
+  }
+
+  Widget uploadedStatus() {
+    return Expanded(
+      child: UploadTaskListTile(
+        task: _uploadTask!,
+        onDismissed: () {}, // => _removeTaskAtIndex(index),
+        onDownloadLink: () async {
+          // return _downloadLink(_uploadTasks[index].snapshot.ref);
+        },
+        onDownload: () async {
+          // if (kIsWeb) {
+          //   return _downloadBytes(_uploadTasks[index].snapshot.ref);
+          // } else {
+          //   return _downloadFile(_uploadTasks[index].snapshot.ref);
+          // }
+        },
+        onDelete: () async {
+          // return _delete(_uploadTasks[index].snapshot.ref);
+        },
+      ),
+    );
+  }
+
+  Widget uploadButton() {
+    return ElevatedButton(
+      onPressed: () async {
+        final picker = ImagePicker();
+        final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+        if (pickedFile != null) {
+          final tmp = await uploadImage(pickedFile);
+          setState(() {
+            logger.i('$className => pickedFile.path: ${pickedFile.path}');
+            _uploadTask = tmp;
+            logger.i('$className => _uploadTask: $_uploadTask');
+          });
+        } else {
+          logger.i('$className => No image selected.');
+        }
+      },
+      child: const Padding(
+        padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+        child: Text('Upload image'),
+      ),
+    );
+  }
 
   Future<UploadTask> uploadImage(XFile pickedFile) async {
     final storage = await getFirebaseStorage();
