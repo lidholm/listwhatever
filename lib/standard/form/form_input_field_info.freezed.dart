@@ -51,6 +51,14 @@ mixin _$FormInputFieldInfo<T> {
             String sectionName,
             bool hasError)
         checkbox,
+    required TResult Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)
+        imagePicker,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -81,6 +89,14 @@ mixin _$FormInputFieldInfo<T> {
             String sectionName,
             bool hasError)?
         checkbox,
+    TResult? Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        imagePicker,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -111,6 +127,14 @@ mixin _$FormInputFieldInfo<T> {
             String sectionName,
             bool hasError)?
         checkbox,
+    TResult Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        imagePicker,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -119,6 +143,8 @@ mixin _$FormInputFieldInfo<T> {
     required TResult Function(FormInputFieldInfoTextArea<T> value) textArea,
     required TResult Function(FormInputFieldInfoDropDown<T> value) dropdown,
     required TResult Function(FormInputFieldInfoCheckbox<T> value) checkbox,
+    required TResult Function(FormInputFieldInfoImagePicker<T> value)
+        imagePicker,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -126,6 +152,7 @@ mixin _$FormInputFieldInfo<T> {
     TResult? Function(FormInputFieldInfoTextArea<T> value)? textArea,
     TResult? Function(FormInputFieldInfoDropDown<T> value)? dropdown,
     TResult? Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
+    TResult? Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -133,6 +160,7 @@ mixin _$FormInputFieldInfo<T> {
     TResult Function(FormInputFieldInfoTextArea<T> value)? textArea,
     TResult Function(FormInputFieldInfoDropDown<T> value)? dropdown,
     TResult Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
+    TResult Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -381,6 +409,14 @@ class _$FormInputFieldInfoTextAreaImpl<T>
             String sectionName,
             bool hasError)
         checkbox,
+    required TResult Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)
+        imagePicker,
   }) {
     return textArea(id, label, currentValue, validators, sectionName, hasError);
   }
@@ -414,6 +450,14 @@ class _$FormInputFieldInfoTextAreaImpl<T>
             String sectionName,
             bool hasError)?
         checkbox,
+    TResult? Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        imagePicker,
   }) {
     return textArea?.call(
         id, label, currentValue, validators, sectionName, hasError);
@@ -448,6 +492,14 @@ class _$FormInputFieldInfoTextAreaImpl<T>
             String sectionName,
             bool hasError)?
         checkbox,
+    TResult Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        imagePicker,
     required TResult orElse(),
   }) {
     if (textArea != null) {
@@ -463,6 +515,8 @@ class _$FormInputFieldInfoTextAreaImpl<T>
     required TResult Function(FormInputFieldInfoTextArea<T> value) textArea,
     required TResult Function(FormInputFieldInfoDropDown<T> value) dropdown,
     required TResult Function(FormInputFieldInfoCheckbox<T> value) checkbox,
+    required TResult Function(FormInputFieldInfoImagePicker<T> value)
+        imagePicker,
   }) {
     return textArea(this);
   }
@@ -473,6 +527,7 @@ class _$FormInputFieldInfoTextAreaImpl<T>
     TResult? Function(FormInputFieldInfoTextArea<T> value)? textArea,
     TResult? Function(FormInputFieldInfoDropDown<T> value)? dropdown,
     TResult? Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
+    TResult? Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
   }) {
     return textArea?.call(this);
   }
@@ -483,6 +538,7 @@ class _$FormInputFieldInfoTextAreaImpl<T>
     TResult Function(FormInputFieldInfoTextArea<T> value)? textArea,
     TResult Function(FormInputFieldInfoDropDown<T> value)? dropdown,
     TResult Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
+    TResult Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
     required TResult orElse(),
   }) {
     if (textArea != null) {
@@ -741,6 +797,14 @@ class _$FormInputFieldInfoDropDownImpl<T>
             String sectionName,
             bool hasError)
         checkbox,
+    required TResult Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)
+        imagePicker,
   }) {
     return dropdown(id, label, currentValue, options, optionToString,
         validators, sectionName, hasError);
@@ -775,6 +839,14 @@ class _$FormInputFieldInfoDropDownImpl<T>
             String sectionName,
             bool hasError)?
         checkbox,
+    TResult? Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        imagePicker,
   }) {
     return dropdown?.call(id, label, currentValue, options, optionToString,
         validators, sectionName, hasError);
@@ -809,6 +881,14 @@ class _$FormInputFieldInfoDropDownImpl<T>
             String sectionName,
             bool hasError)?
         checkbox,
+    TResult Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        imagePicker,
     required TResult orElse(),
   }) {
     if (dropdown != null) {
@@ -824,6 +904,8 @@ class _$FormInputFieldInfoDropDownImpl<T>
     required TResult Function(FormInputFieldInfoTextArea<T> value) textArea,
     required TResult Function(FormInputFieldInfoDropDown<T> value) dropdown,
     required TResult Function(FormInputFieldInfoCheckbox<T> value) checkbox,
+    required TResult Function(FormInputFieldInfoImagePicker<T> value)
+        imagePicker,
   }) {
     return dropdown(this);
   }
@@ -834,6 +916,7 @@ class _$FormInputFieldInfoDropDownImpl<T>
     TResult? Function(FormInputFieldInfoTextArea<T> value)? textArea,
     TResult? Function(FormInputFieldInfoDropDown<T> value)? dropdown,
     TResult? Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
+    TResult? Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
   }) {
     return dropdown?.call(this);
   }
@@ -844,6 +927,7 @@ class _$FormInputFieldInfoDropDownImpl<T>
     TResult Function(FormInputFieldInfoTextArea<T> value)? textArea,
     TResult Function(FormInputFieldInfoDropDown<T> value)? dropdown,
     TResult Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
+    TResult Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
     required TResult orElse(),
   }) {
     if (dropdown != null) {
@@ -1068,6 +1152,14 @@ class _$FormInputFieldInfoCheckboxImpl<T>
             String sectionName,
             bool hasError)
         checkbox,
+    required TResult Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)
+        imagePicker,
   }) {
     return checkbox(id, label, currentValue, validators, sectionName, hasError);
   }
@@ -1101,6 +1193,14 @@ class _$FormInputFieldInfoCheckboxImpl<T>
             String sectionName,
             bool hasError)?
         checkbox,
+    TResult? Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        imagePicker,
   }) {
     return checkbox?.call(
         id, label, currentValue, validators, sectionName, hasError);
@@ -1135,6 +1235,14 @@ class _$FormInputFieldInfoCheckboxImpl<T>
             String sectionName,
             bool hasError)?
         checkbox,
+    TResult Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        imagePicker,
     required TResult orElse(),
   }) {
     if (checkbox != null) {
@@ -1150,6 +1258,8 @@ class _$FormInputFieldInfoCheckboxImpl<T>
     required TResult Function(FormInputFieldInfoTextArea<T> value) textArea,
     required TResult Function(FormInputFieldInfoDropDown<T> value) dropdown,
     required TResult Function(FormInputFieldInfoCheckbox<T> value) checkbox,
+    required TResult Function(FormInputFieldInfoImagePicker<T> value)
+        imagePicker,
   }) {
     return checkbox(this);
   }
@@ -1160,6 +1270,7 @@ class _$FormInputFieldInfoCheckboxImpl<T>
     TResult? Function(FormInputFieldInfoTextArea<T> value)? textArea,
     TResult? Function(FormInputFieldInfoDropDown<T> value)? dropdown,
     TResult? Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
+    TResult? Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
   }) {
     return checkbox?.call(this);
   }
@@ -1170,6 +1281,7 @@ class _$FormInputFieldInfoCheckboxImpl<T>
     TResult Function(FormInputFieldInfoTextArea<T> value)? textArea,
     TResult Function(FormInputFieldInfoDropDown<T> value)? dropdown,
     TResult Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
+    TResult Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
     required TResult orElse(),
   }) {
     if (checkbox != null) {
@@ -1207,5 +1319,357 @@ abstract class FormInputFieldInfoCheckbox<T> implements FormInputFieldInfo<T> {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FormInputFieldInfoCheckboxImplCopyWith<T,
           _$FormInputFieldInfoCheckboxImpl<T>>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FormInputFieldInfoImagePickerImplCopyWith<T, $Res>
+    implements $FormInputFieldInfoCopyWith<T, $Res> {
+  factory _$$FormInputFieldInfoImagePickerImplCopyWith(
+          _$FormInputFieldInfoImagePickerImpl<T> value,
+          $Res Function(_$FormInputFieldInfoImagePickerImpl<T>) then) =
+      __$$FormInputFieldInfoImagePickerImplCopyWithImpl<T, $Res>;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String label,
+      String? currentValue,
+      List<String? Function(bool?)> validators,
+      String sectionName,
+      bool hasError});
+}
+
+/// @nodoc
+class __$$FormInputFieldInfoImagePickerImplCopyWithImpl<T, $Res>
+    extends _$FormInputFieldInfoCopyWithImpl<T, $Res,
+        _$FormInputFieldInfoImagePickerImpl<T>>
+    implements _$$FormInputFieldInfoImagePickerImplCopyWith<T, $Res> {
+  __$$FormInputFieldInfoImagePickerImplCopyWithImpl(
+      _$FormInputFieldInfoImagePickerImpl<T> _value,
+      $Res Function(_$FormInputFieldInfoImagePickerImpl<T>) _then)
+      : super(_value, _then);
+
+  /// Create a copy of FormInputFieldInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? label = null,
+    Object? currentValue = freezed,
+    Object? validators = null,
+    Object? sectionName = null,
+    Object? hasError = null,
+  }) {
+    return _then(_$FormInputFieldInfoImagePickerImpl<T>(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      label: null == label
+          ? _value.label
+          : label // ignore: cast_nullable_to_non_nullable
+              as String,
+      currentValue: freezed == currentValue
+          ? _value.currentValue
+          : currentValue // ignore: cast_nullable_to_non_nullable
+              as String?,
+      validators: null == validators
+          ? _value._validators
+          : validators // ignore: cast_nullable_to_non_nullable
+              as List<String? Function(bool?)>,
+      sectionName: null == sectionName
+          ? _value.sectionName
+          : sectionName // ignore: cast_nullable_to_non_nullable
+              as String,
+      hasError: null == hasError
+          ? _value.hasError
+          : hasError // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$FormInputFieldInfoImagePickerImpl<T>
+    with DiagnosticableTreeMixin
+    implements FormInputFieldInfoImagePicker<T> {
+  const _$FormInputFieldInfoImagePickerImpl(
+      {required this.id,
+      required this.label,
+      required this.currentValue,
+      required final List<String? Function(bool?)> validators,
+      required this.sectionName,
+      required this.hasError})
+      : _validators = validators;
+
+  @override
+  final String id;
+  @override
+  final String label;
+  @override
+  final String? currentValue;
+  final List<String? Function(bool?)> _validators;
+  @override
+  List<String? Function(bool?)> get validators {
+    if (_validators is EqualUnmodifiableListView) return _validators;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_validators);
+  }
+
+  @override
+  final String sectionName;
+  @override
+  final bool hasError;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'FormInputFieldInfo<$T>.imagePicker(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'FormInputFieldInfo<$T>.imagePicker'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('label', label))
+      ..add(DiagnosticsProperty('currentValue', currentValue))
+      ..add(DiagnosticsProperty('validators', validators))
+      ..add(DiagnosticsProperty('sectionName', sectionName))
+      ..add(DiagnosticsProperty('hasError', hasError));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FormInputFieldInfoImagePickerImpl<T> &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.label, label) || other.label == label) &&
+            (identical(other.currentValue, currentValue) ||
+                other.currentValue == currentValue) &&
+            const DeepCollectionEquality()
+                .equals(other._validators, _validators) &&
+            (identical(other.sectionName, sectionName) ||
+                other.sectionName == sectionName) &&
+            (identical(other.hasError, hasError) ||
+                other.hasError == hasError));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id, label, currentValue,
+      const DeepCollectionEquality().hash(_validators), sectionName, hasError);
+
+  /// Create a copy of FormInputFieldInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FormInputFieldInfoImagePickerImplCopyWith<T,
+          _$FormInputFieldInfoImagePickerImpl<T>>
+      get copyWith => __$$FormInputFieldInfoImagePickerImplCopyWithImpl<T,
+          _$FormInputFieldInfoImagePickerImpl<T>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String id,
+            String label,
+            T currentValue,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError)
+        textArea,
+    required TResult Function(
+            String id,
+            String label,
+            T currentValue,
+            List<T> options,
+            String Function(dynamic) optionToString,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError)
+        dropdown,
+    required TResult Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)
+        checkbox,
+    required TResult Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)
+        imagePicker,
+  }) {
+    return imagePicker(
+        id, label, currentValue, validators, sectionName, hasError);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String id,
+            String label,
+            T currentValue,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError)?
+        textArea,
+    TResult? Function(
+            String id,
+            String label,
+            T currentValue,
+            List<T> options,
+            String Function(dynamic) optionToString,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError)?
+        dropdown,
+    TResult? Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        checkbox,
+    TResult? Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        imagePicker,
+  }) {
+    return imagePicker?.call(
+        id, label, currentValue, validators, sectionName, hasError);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String id,
+            String label,
+            T currentValue,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError)?
+        textArea,
+    TResult Function(
+            String id,
+            String label,
+            T currentValue,
+            List<T> options,
+            String Function(dynamic) optionToString,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError)?
+        dropdown,
+    TResult Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        checkbox,
+    TResult Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        imagePicker,
+    required TResult orElse(),
+  }) {
+    if (imagePicker != null) {
+      return imagePicker(
+          id, label, currentValue, validators, sectionName, hasError);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(FormInputFieldInfoTextArea<T> value) textArea,
+    required TResult Function(FormInputFieldInfoDropDown<T> value) dropdown,
+    required TResult Function(FormInputFieldInfoCheckbox<T> value) checkbox,
+    required TResult Function(FormInputFieldInfoImagePicker<T> value)
+        imagePicker,
+  }) {
+    return imagePicker(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(FormInputFieldInfoTextArea<T> value)? textArea,
+    TResult? Function(FormInputFieldInfoDropDown<T> value)? dropdown,
+    TResult? Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
+    TResult? Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
+  }) {
+    return imagePicker?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(FormInputFieldInfoTextArea<T> value)? textArea,
+    TResult Function(FormInputFieldInfoDropDown<T> value)? dropdown,
+    TResult Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
+    TResult Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
+    required TResult orElse(),
+  }) {
+    if (imagePicker != null) {
+      return imagePicker(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FormInputFieldInfoImagePicker<T>
+    implements FormInputFieldInfo<T> {
+  const factory FormInputFieldInfoImagePicker(
+      {required final String id,
+      required final String label,
+      required final String? currentValue,
+      required final List<String? Function(bool?)> validators,
+      required final String sectionName,
+      required final bool hasError}) = _$FormInputFieldInfoImagePickerImpl<T>;
+
+  @override
+  String get id;
+  @override
+  String get label;
+  @override
+  String? get currentValue;
+  @override
+  List<String? Function(bool?)> get validators;
+  @override
+  String get sectionName;
+  @override
+  bool get hasError;
+
+  /// Create a copy of FormInputFieldInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FormInputFieldInfoImagePickerImplCopyWith<T,
+          _$FormInputFieldInfoImagePickerImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
 }

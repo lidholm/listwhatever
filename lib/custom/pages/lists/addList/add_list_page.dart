@@ -46,9 +46,6 @@ class _AddListPageState extends State<AddListPage> {
 
   ListOfThings? list;
   ListType? selectedListType;
-  // String? _selectedImageFilename;
-
-  // UploadTask? _uploadTask;
 
   // void _onChanged(dynamic val) => logger.d(val.toString());
 
@@ -98,17 +95,17 @@ class _AddListPageState extends State<AddListPage> {
         sectionName: SectionName.basic.value,
         hasError: false,
       ),
-      // FormInputFieldInfo<ListType>.imagePicker(
-      //   id: 'listTypeImage',
-      //   label: 'Image',
-      //   currentValue: null,
-      //   validators: [
-      //     FormBuilderValidators.required(),
-      //     FormBuilderValidators.maxLength(70),
-      //   ],
-      //   sectionName: SectionName.basic.value,
-      //   hasError: false,
-      // ),
+      FormInputFieldInfo<ListType>.imagePicker(
+        id: 'listTypeImage',
+        label: 'Image',
+        currentValue: null,
+        validators: [
+          FormBuilderValidators.required(),
+          FormBuilderValidators.maxLength(70),
+        ],
+        sectionName: SectionName.basic.value,
+        hasError: false,
+      ),
       FormInputFieldInfo<ListType>.checkbox(
         id: 'withMap',
         label: 'Use a map',
@@ -167,13 +164,6 @@ class _AddListPageState extends State<AddListPage> {
     );
   }
 
-  // String getImageFilename() {
-  //   return _selectedImageFilename ??
-  //       ((selectedListType != null && selectedListType != ListType.other)
-  //           ? selectedListType!.getImagePath()
-  //           : 'generic.jpg');
-  // }
-
   // Widget getCancelButton() {
   //   return Expanded(
   //     child: OutlinedButton(
@@ -209,59 +199,6 @@ class _AddListPageState extends State<AddListPage> {
   //       ),
   //     ),
   //   );
-  // }
-
-  // Future<UploadTask> uploadImage(XFile pickedFile) async {
-  //   final storage = await getFirebaseStorage();
-  //   try {
-  //     // Create a unique file name for the upload
-  //     final fileName = '${DateTime.now().millisecondsSinceEpoch}.png';
-
-  //     // Create a reference to the location you want to upload to in Firebase Storage
-  //     final ref = storage.ref().child('images').child('/$fileName');
-
-  //     final metadata = SettableMetadata(
-  //       contentType: 'image/jpeg',
-  //       customMetadata: {'picked-file-path': pickedFile.path},
-  //     );
-
-  //     UploadTask uploadTask;
-  //     if (kIsWeb) {
-  //       final bytes = await pickedFile.readAsBytes();
-  //       uploadTask = ref.putData(bytes, metadata);
-  //     } else {
-  //       uploadTask = ref.putFile(File(pickedFile.path), metadata);
-  //     }
-  //     logger
-  //       ..i('fullPath: ${uploadTask.snapshot.ref.fullPath}')
-  //       ..i(uploadTask.snapshot.state)
-  //       ..i(uploadTask.snapshot.bytesTransferred)
-  //       ..i(uploadTask.snapshot.metadata)
-  //       ..i(uploadTask.snapshot.totalBytes)
-  //       ..i(uploadTask.snapshot.ref);
-
-  //     uploadTask.snapshotEvents.listen((event) {}).onData((data) {
-  //       logger.i('$className => ${data.bytesTransferred} - ${data.totalBytes}');
-
-  //       if (data.bytesTransferred >= data.totalBytes) {
-  //         logger.i('$className => upload is done!');
-  //         setState(() {
-  //           _selectedImageFilename = fileName;
-  //         });
-  //         logger.i(
-  //           '$className => _selectedImageFilename: $_selectedImageFilename',
-  //         );
-  //       }
-  //     });
-
-  //     return Future.value(uploadTask);
-  //   } on FirebaseException catch (e) {
-  //     logger.e(e);
-  //     rethrow;
-  //   } on Exception catch (e) {
-  //     logger.e(e);
-  //     rethrow;
-  //   }
   // }
 
   void save(FormBuilderState? currentState) {

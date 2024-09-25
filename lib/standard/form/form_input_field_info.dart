@@ -34,4 +34,13 @@ sealed class FormInputFieldInfo<T> with _$FormInputFieldInfo<T> {
     required String sectionName,
     required bool hasError,
   }) = FormInputFieldInfoCheckbox<T>;
+
+  const factory FormInputFieldInfo.imagePicker({
+    required String id,
+    required String label,
+    required String? currentValue,
+    required List<FormFieldValidator<bool>> validators,
+    required String sectionName,
+    required bool hasError,
+  }) = FormInputFieldInfoImagePicker<T>;
 }

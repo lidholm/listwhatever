@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:listwhatever/standard/form/form_input_field_checkbox.dart';
 import 'package:listwhatever/standard/form/form_input_field_drop_down.dart';
+import 'package:listwhatever/standard/form/form_input_field_image_picker.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 import 'package:listwhatever/standard/form/form_input_field_text_area.dart';
 import 'package:listwhatever/standard/widgets/vStack/v_stack.dart';
@@ -62,6 +62,8 @@ class _FormGeneratorState extends State<FormGenerator> {
       FormInputFieldInfoTextArea() => FormInputFieldTextArea(field: field),
       FormInputFieldInfoDropDown() => FormInputFieldDropDown(field: field),
       FormInputFieldInfoCheckbox<T>() => FormInputFieldCheckbox(field: field),
+      FormInputFieldInfoImagePicker<T>() =>
+        FormInputFieldImagePicker(field: field),
     };
   }
 }
