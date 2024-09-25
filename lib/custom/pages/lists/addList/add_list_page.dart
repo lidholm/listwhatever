@@ -25,17 +25,6 @@ enum SectionName {
   final String value;
 }
 
-enum AddListValues {
-  id,
-  name,
-  type,
-  withMap,
-  withDates,
-  withTimes,
-  ownerId,
-  // share
-}
-
 class AddListPage extends StatefulWidget {
   const AddListPage({super.key, this.listId});
   final String? listId;
@@ -106,6 +95,17 @@ class _AddListPageState extends State<AddListPage> {
         ],
         options: ListType.values,
         optionToString: (listType) => (listType as ListType).name,
+        sectionName: SectionName.basic.value,
+        hasError: false,
+      ),
+      FormInputField<ListType>.imagePicker(
+        id: 'listTypeImage',
+        label: 'Image',
+        currentValue: null,
+        validators: [
+          FormBuilderValidators.required(),
+          FormBuilderValidators.maxLength(70),
+        ],
         sectionName: SectionName.basic.value,
         hasError: false,
       ),
