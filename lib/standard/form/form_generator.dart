@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:listwhatever/standard/form/form_input_field_cancel_button.dart';
 import 'package:listwhatever/standard/form/form_input_field_checkbox.dart';
 import 'package:listwhatever/standard/form/form_input_field_drop_down.dart';
 import 'package:listwhatever/standard/form/form_input_field_image_picker.dart';
@@ -89,8 +90,8 @@ class _FormGeneratorState extends State<FormGenerator> {
       FormInputFieldInfoCheckbox<T>() => FormInputFieldCheckbox(field: field),
       FormInputFieldInfoImagePicker<T>() =>
         FormInputFieldImagePicker(field: field),
-      FormInputFieldInfoCancelButton<T>() => Container(),
-      // FormInputFieldCancelButton(field: field),
+      FormInputFieldInfoCancelButton<T>() =>
+        FormInputFieldCancelButton(formKey: formKey, field: field),
       FormInputFieldInfoSubmitButton<T>() =>
         FormInputFieldSubmitButton(formKey: formKey, field: field),
     };

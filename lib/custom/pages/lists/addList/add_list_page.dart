@@ -138,11 +138,11 @@ class _AddListPageState extends State<AddListPage> {
         sectionName: SectionName.options.value,
         hasError: false,
       ),
-      // FormInputFieldInfo<ListType>.cancelButton(
-      //   id: 'cancel',
-      //   label: 'Cancel',
-      //   sectionName: SectionName.submit.value,
-      // ),
+      FormInputFieldInfo<ListType>.cancelButton(
+        id: 'cancel',
+        label: 'Cancel',
+        sectionName: SectionName.submit.value,
+      ),
       FormInputFieldInfo<ListType>.submitButton(
         id: 'submit',
         label: 'Submit',
@@ -173,23 +173,6 @@ class _AddListPageState extends State<AddListPage> {
       ),
     );
   }
-
-  // Widget getCancelButton() {
-  //   return Expanded(
-  //     child: OutlinedButton(
-  //       onPressed: () {
-  //         _formKey.currentState?.reset();
-  //       },
-  //       // color: Theme.of(context).colorScheme.secondary,
-  //       child: Text(
-  //         'Reset',
-  //         style: TextStyle(
-  //           color: Theme.of(context).colorScheme.secondary,
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
 
   void save(FormBuilderState? currentState) {
     final values = <String, dynamic>{};
