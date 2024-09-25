@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:listwhatever/standard/form/form_generator.dart';
-import 'package:listwhatever/standard/form/form_input_field.dart';
+import 'package:listwhatever/standard/form/form_input_field_info.dart';
 
 import '/custom/pages/list_or_list_item_not_loaded_handler.dart';
 import '/custom/pages/lists/list_load_events/list_load_bloc.dart';
@@ -42,7 +42,7 @@ class _AddListPageState extends State<AddListPage> {
   final _formKey = GlobalKey<FormBuilderState>();
 
   // ignore: strict_raw_type
-  late List<FormInputField> fields;
+  late List<FormInputFieldInfo> fields;
 
   ListOfThings? list;
   ListType? selectedListType;
@@ -74,7 +74,7 @@ class _AddListPageState extends State<AddListPage> {
     }
 
     fields = [
-      FormInputField.textArea(
+      FormInputFieldInfo.textArea(
         id: 'name',
         label: 'Name',
         currentValue: list?.name,
@@ -85,7 +85,7 @@ class _AddListPageState extends State<AddListPage> {
         sectionName: SectionName.basic.value,
         hasError: false,
       ),
-      FormInputField<ListType>.dropdown(
+      FormInputFieldInfo<ListType>.dropdown(
         id: 'listType',
         label: 'List type',
         currentValue: list?.listType ?? ListType.other,
@@ -98,18 +98,18 @@ class _AddListPageState extends State<AddListPage> {
         sectionName: SectionName.basic.value,
         hasError: false,
       ),
-      FormInputField<ListType>.imagePicker(
-        id: 'listTypeImage',
-        label: 'Image',
-        currentValue: null,
-        validators: [
-          FormBuilderValidators.required(),
-          FormBuilderValidators.maxLength(70),
-        ],
-        sectionName: SectionName.basic.value,
-        hasError: false,
-      ),
-      FormInputField<ListType>.checkbox(
+      // FormInputFieldInfo<ListType>.imagePicker(
+      //   id: 'listTypeImage',
+      //   label: 'Image',
+      //   currentValue: null,
+      //   validators: [
+      //     FormBuilderValidators.required(),
+      //     FormBuilderValidators.maxLength(70),
+      //   ],
+      //   sectionName: SectionName.basic.value,
+      //   hasError: false,
+      // ),
+      FormInputFieldInfo<ListType>.checkbox(
         id: 'withMap',
         label: 'Use a map',
         currentValue: false,
@@ -120,7 +120,7 @@ class _AddListPageState extends State<AddListPage> {
         sectionName: SectionName.options.value,
         hasError: false,
       ),
-      FormInputField<ListType>.checkbox(
+      FormInputFieldInfo<ListType>.checkbox(
         id: 'withDate',
         label: 'Use dates',
         currentValue: false,
@@ -131,7 +131,7 @@ class _AddListPageState extends State<AddListPage> {
         sectionName: SectionName.options.value,
         hasError: false,
       ),
-      FormInputField<ListType>.checkbox(
+      FormInputFieldInfo<ListType>.checkbox(
         id: 'withTime',
         label: 'Use time',
         currentValue: false,

@@ -2,20 +2,20 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'form_input_field.freezed.dart';
+part 'form_input_field_info.freezed.dart';
 
 @freezed
-sealed class FormInputField<T> with _$FormInputField<T> {
-  const factory FormInputField.textArea({
+sealed class FormInputFieldInfo<T> with _$FormInputFieldInfo<T> {
+  const factory FormInputFieldInfo.textArea({
     required String id,
     required String label,
     required T currentValue,
     required List<FormFieldValidator<String>> validators,
     required String sectionName,
     required bool hasError,
-  }) = FormInputFieldTextArea<T>;
+  }) = FormInputFieldInfoTextArea<T>;
 
-  const factory FormInputField.dropdown({
+  const factory FormInputFieldInfo.dropdown({
     required String id,
     required String label,
     required T currentValue,
@@ -24,14 +24,14 @@ sealed class FormInputField<T> with _$FormInputField<T> {
     required List<FormFieldValidator<String>> validators,
     required String sectionName,
     required bool hasError,
-  }) = FormInputFieldDropDown<T>;
+  }) = FormInputFieldInfoDropDown<T>;
 
-  const factory FormInputField.checkbox({
+  const factory FormInputFieldInfo.checkbox({
     required String id,
     required String label,
     required bool currentValue,
     required List<FormFieldValidator<bool>> validators,
     required String sectionName,
     required bool hasError,
-  }) = FormInputFieldCheckbox<T>;
+  }) = FormInputFieldInfoCheckbox<T>;
 }

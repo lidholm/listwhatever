@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:listwhatever/standard/form/form_input_field.dart';
+import 'package:listwhatever/standard/form/form_input_field_info.dart';
 import 'package:listwhatever/standard/widgets/vStack/v_stack.dart';
 
 class FormGenerator extends StatefulWidget {
@@ -15,7 +15,7 @@ class FormGenerator extends StatefulWidget {
   final GlobalKey<FormBuilderState> formKey;
   final List<String> sectionNames;
   // ignore: strict_raw_type
-  final List<FormInputField> fields;
+  final List<FormInputFieldInfo> fields;
 
   @override
   State<StatefulWidget> createState() {
@@ -25,7 +25,7 @@ class FormGenerator extends StatefulWidget {
 
 class _FormGeneratorState extends State<FormGenerator> {
   // ignore: strict_raw_type
-  late final List<FormInputField> formInputFields;
+  late final List<FormInputFieldInfo> formInputFields;
 
   @override
   void initState() {
@@ -54,15 +54,15 @@ class _FormGeneratorState extends State<FormGenerator> {
     ];
   }
 
-  Widget generateField<T>(FormInputField<T> field) {
+  Widget generateField<T>(FormInputFieldInfo<T> field) {
     return switch (field) {
-      FormInputFieldTextArea() => generateTextAreaField(field),
-      FormInputFieldDropDown() => generateDropDownField(field),
-      FormInputFieldCheckbox<T>() => generateCheckboxField(field),
+      FormInputFieldInfoTextArea() => generateTextAreaField(field),
+      FormInputFieldInfoDropDown() => generateDropDownField(field),
+      FormInputFieldInfoCheckbox<T>() => generateCheckboxField(field),
     };
   }
 
-  Widget generateTextAreaField<T>(FormInputFieldTextArea<T> field) {
+  Widget generateTextAreaField<T>(FormInputFieldInfoTextArea<T> field) {
     return FormBuilderTextField(
       autovalidateMode: AutovalidateMode.always,
       name: field.id,
@@ -79,7 +79,7 @@ class _FormGeneratorState extends State<FormGenerator> {
     );
   }
 
-  Widget generateDropDownField<T>(FormInputFieldDropDown<T> field) {
+  Widget generateDropDownField<T>(FormInputFieldInfoDropDown<T> field) {
     return Row(
       children: [
         Expanded(
@@ -191,7 +191,7 @@ class _FormGeneratorState extends State<FormGenerator> {
     );
   }
 
-  Widget generateCheckboxField<T>(FormInputFieldCheckbox<T> field) {
+  Widget generateCheckboxField<T>(FormInputFieldInfoCheckbox<T> field) {
     return FormBuilderCheckbox(
       autovalidateMode: AutovalidateMode.always,
       name: field.id,

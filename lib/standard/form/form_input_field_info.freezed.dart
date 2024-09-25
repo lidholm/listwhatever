@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'form_input_field.dart';
+part of 'form_input_field_info.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$FormInputField<T> {
+mixin _$FormInputFieldInfo<T> {
   String get id => throw _privateConstructorUsedError;
   String get label => throw _privateConstructorUsedError;
   Object? get currentValue => throw _privateConstructorUsedError;
@@ -116,54 +116,55 @@ mixin _$FormInputField<T> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(FormInputFieldTextArea<T> value) textArea,
-    required TResult Function(FormInputFieldDropDown<T> value) dropdown,
-    required TResult Function(FormInputFieldCheckbox<T> value) checkbox,
+    required TResult Function(FormInputFieldInfoTextArea<T> value) textArea,
+    required TResult Function(FormInputFieldInfoDropDown<T> value) dropdown,
+    required TResult Function(FormInputFieldInfoCheckbox<T> value) checkbox,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FormInputFieldTextArea<T> value)? textArea,
-    TResult? Function(FormInputFieldDropDown<T> value)? dropdown,
-    TResult? Function(FormInputFieldCheckbox<T> value)? checkbox,
+    TResult? Function(FormInputFieldInfoTextArea<T> value)? textArea,
+    TResult? Function(FormInputFieldInfoDropDown<T> value)? dropdown,
+    TResult? Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(FormInputFieldTextArea<T> value)? textArea,
-    TResult Function(FormInputFieldDropDown<T> value)? dropdown,
-    TResult Function(FormInputFieldCheckbox<T> value)? checkbox,
+    TResult Function(FormInputFieldInfoTextArea<T> value)? textArea,
+    TResult Function(FormInputFieldInfoDropDown<T> value)? dropdown,
+    TResult Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 
-  /// Create a copy of FormInputField
+  /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $FormInputFieldCopyWith<T, FormInputField<T>> get copyWith =>
+  $FormInputFieldInfoCopyWith<T, FormInputFieldInfo<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $FormInputFieldCopyWith<T, $Res> {
-  factory $FormInputFieldCopyWith(
-          FormInputField<T> value, $Res Function(FormInputField<T>) then) =
-      _$FormInputFieldCopyWithImpl<T, $Res, FormInputField<T>>;
+abstract class $FormInputFieldInfoCopyWith<T, $Res> {
+  factory $FormInputFieldInfoCopyWith(FormInputFieldInfo<T> value,
+          $Res Function(FormInputFieldInfo<T>) then) =
+      _$FormInputFieldInfoCopyWithImpl<T, $Res, FormInputFieldInfo<T>>;
   @useResult
   $Res call({String id, String label, String sectionName, bool hasError});
 }
 
 /// @nodoc
-class _$FormInputFieldCopyWithImpl<T, $Res, $Val extends FormInputField<T>>
-    implements $FormInputFieldCopyWith<T, $Res> {
-  _$FormInputFieldCopyWithImpl(this._value, this._then);
+class _$FormInputFieldInfoCopyWithImpl<T, $Res,
+        $Val extends FormInputFieldInfo<T>>
+    implements $FormInputFieldInfoCopyWith<T, $Res> {
+  _$FormInputFieldInfoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of FormInputField
+  /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -195,12 +196,12 @@ class _$FormInputFieldCopyWithImpl<T, $Res, $Val extends FormInputField<T>>
 }
 
 /// @nodoc
-abstract class _$$FormInputFieldTextAreaImplCopyWith<T, $Res>
-    implements $FormInputFieldCopyWith<T, $Res> {
-  factory _$$FormInputFieldTextAreaImplCopyWith(
-          _$FormInputFieldTextAreaImpl<T> value,
-          $Res Function(_$FormInputFieldTextAreaImpl<T>) then) =
-      __$$FormInputFieldTextAreaImplCopyWithImpl<T, $Res>;
+abstract class _$$FormInputFieldInfoTextAreaImplCopyWith<T, $Res>
+    implements $FormInputFieldInfoCopyWith<T, $Res> {
+  factory _$$FormInputFieldInfoTextAreaImplCopyWith(
+          _$FormInputFieldInfoTextAreaImpl<T> value,
+          $Res Function(_$FormInputFieldInfoTextAreaImpl<T>) then) =
+      __$$FormInputFieldInfoTextAreaImplCopyWithImpl<T, $Res>;
   @override
   @useResult
   $Res call(
@@ -213,16 +214,16 @@ abstract class _$$FormInputFieldTextAreaImplCopyWith<T, $Res>
 }
 
 /// @nodoc
-class __$$FormInputFieldTextAreaImplCopyWithImpl<T, $Res>
-    extends _$FormInputFieldCopyWithImpl<T, $Res,
-        _$FormInputFieldTextAreaImpl<T>>
-    implements _$$FormInputFieldTextAreaImplCopyWith<T, $Res> {
-  __$$FormInputFieldTextAreaImplCopyWithImpl(
-      _$FormInputFieldTextAreaImpl<T> _value,
-      $Res Function(_$FormInputFieldTextAreaImpl<T>) _then)
+class __$$FormInputFieldInfoTextAreaImplCopyWithImpl<T, $Res>
+    extends _$FormInputFieldInfoCopyWithImpl<T, $Res,
+        _$FormInputFieldInfoTextAreaImpl<T>>
+    implements _$$FormInputFieldInfoTextAreaImplCopyWith<T, $Res> {
+  __$$FormInputFieldInfoTextAreaImplCopyWithImpl(
+      _$FormInputFieldInfoTextAreaImpl<T> _value,
+      $Res Function(_$FormInputFieldInfoTextAreaImpl<T>) _then)
       : super(_value, _then);
 
-  /// Create a copy of FormInputField
+  /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -234,7 +235,7 @@ class __$$FormInputFieldTextAreaImplCopyWithImpl<T, $Res>
     Object? sectionName = null,
     Object? hasError = null,
   }) {
-    return _then(_$FormInputFieldTextAreaImpl<T>(
+    return _then(_$FormInputFieldInfoTextAreaImpl<T>(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -265,10 +266,10 @@ class __$$FormInputFieldTextAreaImplCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$FormInputFieldTextAreaImpl<T>
+class _$FormInputFieldInfoTextAreaImpl<T>
     with DiagnosticableTreeMixin
-    implements FormInputFieldTextArea<T> {
-  const _$FormInputFieldTextAreaImpl(
+    implements FormInputFieldInfoTextArea<T> {
+  const _$FormInputFieldInfoTextAreaImpl(
       {required this.id,
       required this.label,
       required this.currentValue,
@@ -298,14 +299,14 @@ class _$FormInputFieldTextAreaImpl<T>
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputField<$T>.textArea(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError)';
+    return 'FormInputFieldInfo<$T>.textArea(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'FormInputField<$T>.textArea'))
+      ..add(DiagnosticsProperty('type', 'FormInputFieldInfo<$T>.textArea'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('label', label))
       ..add(DiagnosticsProperty('currentValue', currentValue))
@@ -318,7 +319,7 @@ class _$FormInputFieldTextAreaImpl<T>
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FormInputFieldTextAreaImpl<T> &&
+            other is _$FormInputFieldInfoTextAreaImpl<T> &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.label, label) || other.label == label) &&
             const DeepCollectionEquality()
@@ -341,14 +342,15 @@ class _$FormInputFieldTextAreaImpl<T>
       sectionName,
       hasError);
 
-  /// Create a copy of FormInputField
+  /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FormInputFieldTextAreaImplCopyWith<T, _$FormInputFieldTextAreaImpl<T>>
-      get copyWith => __$$FormInputFieldTextAreaImplCopyWithImpl<T,
-          _$FormInputFieldTextAreaImpl<T>>(this, _$identity);
+  _$$FormInputFieldInfoTextAreaImplCopyWith<T,
+          _$FormInputFieldInfoTextAreaImpl<T>>
+      get copyWith => __$$FormInputFieldInfoTextAreaImplCopyWithImpl<T,
+          _$FormInputFieldInfoTextAreaImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -458,9 +460,9 @@ class _$FormInputFieldTextAreaImpl<T>
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(FormInputFieldTextArea<T> value) textArea,
-    required TResult Function(FormInputFieldDropDown<T> value) dropdown,
-    required TResult Function(FormInputFieldCheckbox<T> value) checkbox,
+    required TResult Function(FormInputFieldInfoTextArea<T> value) textArea,
+    required TResult Function(FormInputFieldInfoDropDown<T> value) dropdown,
+    required TResult Function(FormInputFieldInfoCheckbox<T> value) checkbox,
   }) {
     return textArea(this);
   }
@@ -468,9 +470,9 @@ class _$FormInputFieldTextAreaImpl<T>
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FormInputFieldTextArea<T> value)? textArea,
-    TResult? Function(FormInputFieldDropDown<T> value)? dropdown,
-    TResult? Function(FormInputFieldCheckbox<T> value)? checkbox,
+    TResult? Function(FormInputFieldInfoTextArea<T> value)? textArea,
+    TResult? Function(FormInputFieldInfoDropDown<T> value)? dropdown,
+    TResult? Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
   }) {
     return textArea?.call(this);
   }
@@ -478,9 +480,9 @@ class _$FormInputFieldTextAreaImpl<T>
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(FormInputFieldTextArea<T> value)? textArea,
-    TResult Function(FormInputFieldDropDown<T> value)? dropdown,
-    TResult Function(FormInputFieldCheckbox<T> value)? checkbox,
+    TResult Function(FormInputFieldInfoTextArea<T> value)? textArea,
+    TResult Function(FormInputFieldInfoDropDown<T> value)? dropdown,
+    TResult Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
     required TResult orElse(),
   }) {
     if (textArea != null) {
@@ -490,14 +492,14 @@ class _$FormInputFieldTextAreaImpl<T>
   }
 }
 
-abstract class FormInputFieldTextArea<T> implements FormInputField<T> {
-  const factory FormInputFieldTextArea(
+abstract class FormInputFieldInfoTextArea<T> implements FormInputFieldInfo<T> {
+  const factory FormInputFieldInfoTextArea(
       {required final String id,
       required final String label,
       required final T currentValue,
       required final List<String? Function(String?)> validators,
       required final String sectionName,
-      required final bool hasError}) = _$FormInputFieldTextAreaImpl<T>;
+      required final bool hasError}) = _$FormInputFieldInfoTextAreaImpl<T>;
 
   @override
   String get id;
@@ -512,21 +514,22 @@ abstract class FormInputFieldTextArea<T> implements FormInputField<T> {
   @override
   bool get hasError;
 
-  /// Create a copy of FormInputField
+  /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FormInputFieldTextAreaImplCopyWith<T, _$FormInputFieldTextAreaImpl<T>>
+  _$$FormInputFieldInfoTextAreaImplCopyWith<T,
+          _$FormInputFieldInfoTextAreaImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FormInputFieldDropDownImplCopyWith<T, $Res>
-    implements $FormInputFieldCopyWith<T, $Res> {
-  factory _$$FormInputFieldDropDownImplCopyWith(
-          _$FormInputFieldDropDownImpl<T> value,
-          $Res Function(_$FormInputFieldDropDownImpl<T>) then) =
-      __$$FormInputFieldDropDownImplCopyWithImpl<T, $Res>;
+abstract class _$$FormInputFieldInfoDropDownImplCopyWith<T, $Res>
+    implements $FormInputFieldInfoCopyWith<T, $Res> {
+  factory _$$FormInputFieldInfoDropDownImplCopyWith(
+          _$FormInputFieldInfoDropDownImpl<T> value,
+          $Res Function(_$FormInputFieldInfoDropDownImpl<T>) then) =
+      __$$FormInputFieldInfoDropDownImplCopyWithImpl<T, $Res>;
   @override
   @useResult
   $Res call(
@@ -541,16 +544,16 @@ abstract class _$$FormInputFieldDropDownImplCopyWith<T, $Res>
 }
 
 /// @nodoc
-class __$$FormInputFieldDropDownImplCopyWithImpl<T, $Res>
-    extends _$FormInputFieldCopyWithImpl<T, $Res,
-        _$FormInputFieldDropDownImpl<T>>
-    implements _$$FormInputFieldDropDownImplCopyWith<T, $Res> {
-  __$$FormInputFieldDropDownImplCopyWithImpl(
-      _$FormInputFieldDropDownImpl<T> _value,
-      $Res Function(_$FormInputFieldDropDownImpl<T>) _then)
+class __$$FormInputFieldInfoDropDownImplCopyWithImpl<T, $Res>
+    extends _$FormInputFieldInfoCopyWithImpl<T, $Res,
+        _$FormInputFieldInfoDropDownImpl<T>>
+    implements _$$FormInputFieldInfoDropDownImplCopyWith<T, $Res> {
+  __$$FormInputFieldInfoDropDownImplCopyWithImpl(
+      _$FormInputFieldInfoDropDownImpl<T> _value,
+      $Res Function(_$FormInputFieldInfoDropDownImpl<T>) _then)
       : super(_value, _then);
 
-  /// Create a copy of FormInputField
+  /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -564,7 +567,7 @@ class __$$FormInputFieldDropDownImplCopyWithImpl<T, $Res>
     Object? sectionName = null,
     Object? hasError = null,
   }) {
-    return _then(_$FormInputFieldDropDownImpl<T>(
+    return _then(_$FormInputFieldInfoDropDownImpl<T>(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -603,10 +606,10 @@ class __$$FormInputFieldDropDownImplCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$FormInputFieldDropDownImpl<T>
+class _$FormInputFieldInfoDropDownImpl<T>
     with DiagnosticableTreeMixin
-    implements FormInputFieldDropDown<T> {
-  const _$FormInputFieldDropDownImpl(
+    implements FormInputFieldInfoDropDown<T> {
+  const _$FormInputFieldInfoDropDownImpl(
       {required this.id,
       required this.label,
       required this.currentValue,
@@ -649,14 +652,14 @@ class _$FormInputFieldDropDownImpl<T>
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputField<$T>.dropdown(id: $id, label: $label, currentValue: $currentValue, options: $options, optionToString: $optionToString, validators: $validators, sectionName: $sectionName, hasError: $hasError)';
+    return 'FormInputFieldInfo<$T>.dropdown(id: $id, label: $label, currentValue: $currentValue, options: $options, optionToString: $optionToString, validators: $validators, sectionName: $sectionName, hasError: $hasError)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'FormInputField<$T>.dropdown'))
+      ..add(DiagnosticsProperty('type', 'FormInputFieldInfo<$T>.dropdown'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('label', label))
       ..add(DiagnosticsProperty('currentValue', currentValue))
@@ -671,7 +674,7 @@ class _$FormInputFieldDropDownImpl<T>
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FormInputFieldDropDownImpl<T> &&
+            other is _$FormInputFieldInfoDropDownImpl<T> &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.label, label) || other.label == label) &&
             const DeepCollectionEquality()
@@ -699,14 +702,15 @@ class _$FormInputFieldDropDownImpl<T>
       sectionName,
       hasError);
 
-  /// Create a copy of FormInputField
+  /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FormInputFieldDropDownImplCopyWith<T, _$FormInputFieldDropDownImpl<T>>
-      get copyWith => __$$FormInputFieldDropDownImplCopyWithImpl<T,
-          _$FormInputFieldDropDownImpl<T>>(this, _$identity);
+  _$$FormInputFieldInfoDropDownImplCopyWith<T,
+          _$FormInputFieldInfoDropDownImpl<T>>
+      get copyWith => __$$FormInputFieldInfoDropDownImplCopyWithImpl<T,
+          _$FormInputFieldInfoDropDownImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -817,9 +821,9 @@ class _$FormInputFieldDropDownImpl<T>
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(FormInputFieldTextArea<T> value) textArea,
-    required TResult Function(FormInputFieldDropDown<T> value) dropdown,
-    required TResult Function(FormInputFieldCheckbox<T> value) checkbox,
+    required TResult Function(FormInputFieldInfoTextArea<T> value) textArea,
+    required TResult Function(FormInputFieldInfoDropDown<T> value) dropdown,
+    required TResult Function(FormInputFieldInfoCheckbox<T> value) checkbox,
   }) {
     return dropdown(this);
   }
@@ -827,9 +831,9 @@ class _$FormInputFieldDropDownImpl<T>
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FormInputFieldTextArea<T> value)? textArea,
-    TResult? Function(FormInputFieldDropDown<T> value)? dropdown,
-    TResult? Function(FormInputFieldCheckbox<T> value)? checkbox,
+    TResult? Function(FormInputFieldInfoTextArea<T> value)? textArea,
+    TResult? Function(FormInputFieldInfoDropDown<T> value)? dropdown,
+    TResult? Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
   }) {
     return dropdown?.call(this);
   }
@@ -837,9 +841,9 @@ class _$FormInputFieldDropDownImpl<T>
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(FormInputFieldTextArea<T> value)? textArea,
-    TResult Function(FormInputFieldDropDown<T> value)? dropdown,
-    TResult Function(FormInputFieldCheckbox<T> value)? checkbox,
+    TResult Function(FormInputFieldInfoTextArea<T> value)? textArea,
+    TResult Function(FormInputFieldInfoDropDown<T> value)? dropdown,
+    TResult Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
     required TResult orElse(),
   }) {
     if (dropdown != null) {
@@ -849,8 +853,8 @@ class _$FormInputFieldDropDownImpl<T>
   }
 }
 
-abstract class FormInputFieldDropDown<T> implements FormInputField<T> {
-  const factory FormInputFieldDropDown(
+abstract class FormInputFieldInfoDropDown<T> implements FormInputFieldInfo<T> {
+  const factory FormInputFieldInfoDropDown(
       {required final String id,
       required final String label,
       required final T currentValue,
@@ -858,7 +862,7 @@ abstract class FormInputFieldDropDown<T> implements FormInputField<T> {
       required final String Function(dynamic) optionToString,
       required final List<String? Function(String?)> validators,
       required final String sectionName,
-      required final bool hasError}) = _$FormInputFieldDropDownImpl<T>;
+      required final bool hasError}) = _$FormInputFieldInfoDropDownImpl<T>;
 
   @override
   String get id;
@@ -875,21 +879,22 @@ abstract class FormInputFieldDropDown<T> implements FormInputField<T> {
   @override
   bool get hasError;
 
-  /// Create a copy of FormInputField
+  /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FormInputFieldDropDownImplCopyWith<T, _$FormInputFieldDropDownImpl<T>>
+  _$$FormInputFieldInfoDropDownImplCopyWith<T,
+          _$FormInputFieldInfoDropDownImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FormInputFieldCheckboxImplCopyWith<T, $Res>
-    implements $FormInputFieldCopyWith<T, $Res> {
-  factory _$$FormInputFieldCheckboxImplCopyWith(
-          _$FormInputFieldCheckboxImpl<T> value,
-          $Res Function(_$FormInputFieldCheckboxImpl<T>) then) =
-      __$$FormInputFieldCheckboxImplCopyWithImpl<T, $Res>;
+abstract class _$$FormInputFieldInfoCheckboxImplCopyWith<T, $Res>
+    implements $FormInputFieldInfoCopyWith<T, $Res> {
+  factory _$$FormInputFieldInfoCheckboxImplCopyWith(
+          _$FormInputFieldInfoCheckboxImpl<T> value,
+          $Res Function(_$FormInputFieldInfoCheckboxImpl<T>) then) =
+      __$$FormInputFieldInfoCheckboxImplCopyWithImpl<T, $Res>;
   @override
   @useResult
   $Res call(
@@ -902,16 +907,16 @@ abstract class _$$FormInputFieldCheckboxImplCopyWith<T, $Res>
 }
 
 /// @nodoc
-class __$$FormInputFieldCheckboxImplCopyWithImpl<T, $Res>
-    extends _$FormInputFieldCopyWithImpl<T, $Res,
-        _$FormInputFieldCheckboxImpl<T>>
-    implements _$$FormInputFieldCheckboxImplCopyWith<T, $Res> {
-  __$$FormInputFieldCheckboxImplCopyWithImpl(
-      _$FormInputFieldCheckboxImpl<T> _value,
-      $Res Function(_$FormInputFieldCheckboxImpl<T>) _then)
+class __$$FormInputFieldInfoCheckboxImplCopyWithImpl<T, $Res>
+    extends _$FormInputFieldInfoCopyWithImpl<T, $Res,
+        _$FormInputFieldInfoCheckboxImpl<T>>
+    implements _$$FormInputFieldInfoCheckboxImplCopyWith<T, $Res> {
+  __$$FormInputFieldInfoCheckboxImplCopyWithImpl(
+      _$FormInputFieldInfoCheckboxImpl<T> _value,
+      $Res Function(_$FormInputFieldInfoCheckboxImpl<T>) _then)
       : super(_value, _then);
 
-  /// Create a copy of FormInputField
+  /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -923,7 +928,7 @@ class __$$FormInputFieldCheckboxImplCopyWithImpl<T, $Res>
     Object? sectionName = null,
     Object? hasError = null,
   }) {
-    return _then(_$FormInputFieldCheckboxImpl<T>(
+    return _then(_$FormInputFieldInfoCheckboxImpl<T>(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -954,10 +959,10 @@ class __$$FormInputFieldCheckboxImplCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$FormInputFieldCheckboxImpl<T>
+class _$FormInputFieldInfoCheckboxImpl<T>
     with DiagnosticableTreeMixin
-    implements FormInputFieldCheckbox<T> {
-  const _$FormInputFieldCheckboxImpl(
+    implements FormInputFieldInfoCheckbox<T> {
+  const _$FormInputFieldInfoCheckboxImpl(
       {required this.id,
       required this.label,
       required this.currentValue,
@@ -987,14 +992,14 @@ class _$FormInputFieldCheckboxImpl<T>
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputField<$T>.checkbox(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError)';
+    return 'FormInputFieldInfo<$T>.checkbox(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'FormInputField<$T>.checkbox'))
+      ..add(DiagnosticsProperty('type', 'FormInputFieldInfo<$T>.checkbox'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('label', label))
       ..add(DiagnosticsProperty('currentValue', currentValue))
@@ -1007,7 +1012,7 @@ class _$FormInputFieldCheckboxImpl<T>
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FormInputFieldCheckboxImpl<T> &&
+            other is _$FormInputFieldInfoCheckboxImpl<T> &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.label, label) || other.label == label) &&
             (identical(other.currentValue, currentValue) ||
@@ -1024,14 +1029,15 @@ class _$FormInputFieldCheckboxImpl<T>
   int get hashCode => Object.hash(runtimeType, id, label, currentValue,
       const DeepCollectionEquality().hash(_validators), sectionName, hasError);
 
-  /// Create a copy of FormInputField
+  /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FormInputFieldCheckboxImplCopyWith<T, _$FormInputFieldCheckboxImpl<T>>
-      get copyWith => __$$FormInputFieldCheckboxImplCopyWithImpl<T,
-          _$FormInputFieldCheckboxImpl<T>>(this, _$identity);
+  _$$FormInputFieldInfoCheckboxImplCopyWith<T,
+          _$FormInputFieldInfoCheckboxImpl<T>>
+      get copyWith => __$$FormInputFieldInfoCheckboxImplCopyWithImpl<T,
+          _$FormInputFieldInfoCheckboxImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1141,9 +1147,9 @@ class _$FormInputFieldCheckboxImpl<T>
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(FormInputFieldTextArea<T> value) textArea,
-    required TResult Function(FormInputFieldDropDown<T> value) dropdown,
-    required TResult Function(FormInputFieldCheckbox<T> value) checkbox,
+    required TResult Function(FormInputFieldInfoTextArea<T> value) textArea,
+    required TResult Function(FormInputFieldInfoDropDown<T> value) dropdown,
+    required TResult Function(FormInputFieldInfoCheckbox<T> value) checkbox,
   }) {
     return checkbox(this);
   }
@@ -1151,9 +1157,9 @@ class _$FormInputFieldCheckboxImpl<T>
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FormInputFieldTextArea<T> value)? textArea,
-    TResult? Function(FormInputFieldDropDown<T> value)? dropdown,
-    TResult? Function(FormInputFieldCheckbox<T> value)? checkbox,
+    TResult? Function(FormInputFieldInfoTextArea<T> value)? textArea,
+    TResult? Function(FormInputFieldInfoDropDown<T> value)? dropdown,
+    TResult? Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
   }) {
     return checkbox?.call(this);
   }
@@ -1161,9 +1167,9 @@ class _$FormInputFieldCheckboxImpl<T>
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(FormInputFieldTextArea<T> value)? textArea,
-    TResult Function(FormInputFieldDropDown<T> value)? dropdown,
-    TResult Function(FormInputFieldCheckbox<T> value)? checkbox,
+    TResult Function(FormInputFieldInfoTextArea<T> value)? textArea,
+    TResult Function(FormInputFieldInfoDropDown<T> value)? dropdown,
+    TResult Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
     required TResult orElse(),
   }) {
     if (checkbox != null) {
@@ -1173,14 +1179,14 @@ class _$FormInputFieldCheckboxImpl<T>
   }
 }
 
-abstract class FormInputFieldCheckbox<T> implements FormInputField<T> {
-  const factory FormInputFieldCheckbox(
+abstract class FormInputFieldInfoCheckbox<T> implements FormInputFieldInfo<T> {
+  const factory FormInputFieldInfoCheckbox(
       {required final String id,
       required final String label,
       required final bool currentValue,
       required final List<String? Function(bool?)> validators,
       required final String sectionName,
-      required final bool hasError}) = _$FormInputFieldCheckboxImpl<T>;
+      required final bool hasError}) = _$FormInputFieldInfoCheckboxImpl<T>;
 
   @override
   String get id;
@@ -1195,10 +1201,11 @@ abstract class FormInputFieldCheckbox<T> implements FormInputField<T> {
   @override
   bool get hasError;
 
-  /// Create a copy of FormInputField
+  /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FormInputFieldCheckboxImplCopyWith<T, _$FormInputFieldCheckboxImpl<T>>
+  _$$FormInputFieldInfoCheckboxImplCopyWith<T,
+          _$FormInputFieldInfoCheckboxImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
 }
