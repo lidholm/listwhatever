@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:listwhatever/standard/form/form_input_field_checkbox.dart';
+import 'package:listwhatever/standard/form/form_input_field_drop_down.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
+import 'package:listwhatever/standard/form/form_input_field_text_area.dart';
 import 'package:listwhatever/standard/widgets/vStack/v_stack.dart';
 
 class FormGenerator extends StatefulWidget {
@@ -56,154 +59,9 @@ class _FormGeneratorState extends State<FormGenerator> {
 
   Widget generateField<T>(FormInputFieldInfo<T> field) {
     return switch (field) {
-      FormInputFieldInfoTextArea() => generateTextAreaField(field),
-      FormInputFieldInfoDropDown() => generateDropDownField(field),
-      FormInputFieldInfoCheckbox<T>() => generateCheckboxField(field),
+      FormInputFieldInfoTextArea() => FormInputFieldTextArea(field: field),
+      FormInputFieldInfoDropDown() => FormInputFieldDropDown(field: field),
+      FormInputFieldInfoCheckbox<T>() => FormInputFieldCheckbox(field: field),
     };
-  }
-
-  Widget generateTextAreaField<T>(FormInputFieldInfoTextArea<T> field) {
-    return FormBuilderTextField(
-      autovalidateMode: AutovalidateMode.always,
-      name: field.id,
-      decoration: InputDecoration(
-        labelText: field.label,
-        suffixIcon: field.hasError
-            ? const Icon(Icons.error, color: Colors.red)
-            : const Icon(Icons.check, color: Colors.green),
-      ),
-      // valueTransformer: (text) => num.tryParse(text),
-      validator: FormBuilderValidators.compose(field.validators),
-      keyboardType: TextInputType.name,
-      textInputAction: TextInputAction.next,
-    );
-  }
-
-  Widget generateDropDownField<T>(FormInputFieldInfoDropDown<T> field) {
-    return Row(
-      children: [
-        Expanded(
-          child: FormBuilderDropdown<T>(
-            name: field.id,
-            decoration: InputDecoration(
-              labelText: 'Type',
-              suffix: field.hasError
-                  ? const Icon(Icons.error)
-                  : const Icon(Icons.check),
-              hintText: 'Select Type',
-            ),
-            validator: FormBuilderValidators.compose(
-              [FormBuilderValidators.required()],
-            ),
-            items: field.options
-                .map(
-                  (type) => DropdownMenuItem(
-                    alignment: AlignmentDirectional.center,
-                    value: type,
-                    child: Text(field.optionToString(type)),
-                  ),
-                )
-                .toList(),
-            onChanged: (val) {},
-            valueTransformer: (val) => val?.toString(),
-          ),
-        ),
-        const SizedBox(width: 16),
-        // FutureBuilder(
-        //   future: getFirebaseStorage(),
-        //   builder: (context, snapshot) {
-        //     final firebaseStorage = snapshot.data;
-        //     if (firebaseStorage == null) {
-        //       return Container();
-        //     }
-        //     final imageFilename = getImageFilename();
-        //     logger.i('$className => imageFilename: $imageFilename');
-        //     final imageUrlFuture = firebaseStorage
-        //         .ref()
-        //         .child('images')
-        //         .child(imageFilename)
-        //         .getDownloadURL();
-        //     return FutureBuilder(
-        //       future: imageUrlFuture,
-        //       builder: (context, snapshot) {
-        //         final imageUrl = snapshot.data;
-        //         logger.i('$className => imageUrl: $imageUrl');
-        //         return SizedBox(
-        //           width: imageSize,
-        //           height: imageSize,
-        //           child: ClipRRect(
-        //             borderRadius: BorderRadius.circular(8),
-        //             child: imageUrl != null
-        //                 ? Image.network(imageUrl, fit: BoxFit.cover)
-        //                 : Container(),
-        //           ),
-        //         );
-        //       },
-        //     );
-        //   },
-        // ),
-        // const SizedBox(width: 16),
-        // if (_uploadTask == null)
-        //   const Center(child: Text("Press the '+' button to add a new file."))
-        // else
-        //   Expanded(
-        //     child: UploadTaskListTile(
-        //       task: _uploadTask!,
-        //       onDismissed: () {}, // => _removeTaskAtIndex(index),
-        //       onDownloadLink: () async {
-        //         // return _downloadLink(_uploadTasks[index].snapshot.ref);
-        //       },
-        //       onDownload: () async {
-        //         // if (kIsWeb) {
-        //         //   return _downloadBytes(_uploadTasks[index].snapshot.ref);
-        //         // } else {
-        //         //   return _downloadFile(_uploadTasks[index].snapshot.ref);
-        //         // }
-        //       },
-        //       onDelete: () async {
-        //         // return _delete(_uploadTasks[index].snapshot.ref);
-        //       },
-        //     ),
-        //   ),
-        // ElevatedButton(
-        //   onPressed: () async {
-        //     final picker = ImagePicker();
-        //     final pickedFile =
-        //         await picker.pickImage(source: ImageSource.gallery);
-
-        //     if (pickedFile != null) {
-        //       final tmp = await uploadImage(pickedFile);
-        //       setState(() {
-        //         logger.i('$className => pickedFile.path: ${pickedFile.path}');
-        //         _uploadTask = tmp;
-        //         logger.i('$className => _uploadTask: $_uploadTask');
-        //       });
-        //     } else {
-        //       logger.i('$className => No image selected.');
-        //     }
-        //   },
-        //   child: const Padding(
-        //     padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-        //     child: Text('Upload image'),
-        //   ),
-        // ),
-      ],
-    );
-  }
-
-  Widget generateCheckboxField<T>(FormInputFieldInfoCheckbox<T> field) {
-    return FormBuilderCheckbox(
-      autovalidateMode: AutovalidateMode.always,
-      name: field.id,
-      decoration: InputDecoration(
-        labelText: field.label,
-        suffixIcon: field.hasError
-            ? const Icon(Icons.error, color: Colors.red)
-            : const Icon(Icons.check, color: Colors.green),
-      ),
-      // valueTransformer: (text) => num.tryParse(text),
-      validator: FormBuilderValidators.compose(field.validators),
-      title: Text(field.label),
-    );
   }
 }

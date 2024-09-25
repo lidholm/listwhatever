@@ -1,0 +1,27 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:listwhatever/standard/form/form_input_field_info.dart';
+
+class FormInputFieldCheckbox<T> extends StatelessWidget {
+  const FormInputFieldCheckbox({required this.field, super.key});
+
+  final FormInputFieldInfoCheckbox<T> field;
+
+  @override
+  Widget build(BuildContext context) {
+    return FormBuilderCheckbox(
+      autovalidateMode: AutovalidateMode.always,
+      name: field.id,
+      decoration: InputDecoration(
+        labelText: field.label,
+        suffixIcon: field.hasError
+            ? const Icon(Icons.error, color: Colors.red)
+            : const Icon(Icons.check, color: Colors.green),
+      ),
+      // valueTransformer: (text) => num.tryParse(text),
+      validator: FormBuilderValidators.compose(field.validators),
+      title: Text(field.label),
+    );
+  }
+}
