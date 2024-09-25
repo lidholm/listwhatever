@@ -9,16 +9,21 @@ import 'package:listwhatever/standard/form/form_input_field_submit_button.dart';
 import 'package:listwhatever/standard/form/form_input_field_text_area.dart';
 import 'package:listwhatever/standard/widgets/vStack/v_stack.dart';
 
+enum SectionDirection {
+  horizontal,
+  vertical,
+}
+
 class FormGenerator extends StatefulWidget {
   const FormGenerator({
     required this.formKey,
-    required this.sectionNames,
+    required this.sections,
     required this.fields,
     super.key,
   });
 
   final GlobalKey<FormBuilderState> formKey;
-  final List<String> sectionNames;
+  final Map<String, SectionDirection> sections;
   // ignore: strict_raw_type
   final List<FormInputFieldInfo> fields;
 
@@ -57,8 +62,8 @@ class _FormGeneratorState extends State<FormGenerator> {
       // },
       skipDisabled: true,
       child: VStack(
-        children: widget.sectionNames
-            .map((section) => generateSection(widget.formKey, section))
+        children: widget.sections.entries
+            .map(generateSection)
             .expand((innerList) => innerList)
             .toList(),
       ),
@@ -66,22 +71,19 @@ class _FormGeneratorState extends State<FormGenerator> {
   }
 
   List<Widget> generateSection(
-    GlobalKey<FormBuilderState> formKey,
-    String sectionName,
+    MapEntry<String, SectionDirection> section,
   ) {
     final sectionFields =
-        formInputFields.where((f) => f.sectionName == sectionName);
-    final fields =
-        sectionFields.map((field) => generateField(formKey, field)).toList();
+        formInputFields.where((f) => f.sectionName == section.key);
+    final fields = sectionFields.map(generateField).toList();
 
     return [
-      Text(sectionName),
+      Text(section.key),
       ...fields,
     ];
   }
 
   Widget generateField<T>(
-    GlobalKey<FormBuilderState> formKey,
     FormInputFieldInfo<T> field,
   ) {
     return switch (field) {
@@ -91,9 +93,9 @@ class _FormGeneratorState extends State<FormGenerator> {
       FormInputFieldInfoImagePicker<T>() =>
         FormInputFieldImagePicker(field: field),
       FormInputFieldInfoCancelButton<T>() =>
-        FormInputFieldCancelButton(formKey: formKey, field: field),
+        FormInputFieldCancelButton(formKey: widget.formKey, field: field),
       FormInputFieldInfoSubmitButton<T>() =>
-        FormInputFieldSubmitButton(formKey: formKey, field: field),
+        FormInputFieldSubmitButton(formKey: widget.formKey, field: field),
     };
   }
 }

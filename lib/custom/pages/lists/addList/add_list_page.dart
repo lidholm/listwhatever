@@ -156,16 +156,16 @@ class _AddListPageState extends State<AddListPage> {
       ),
     ];
 
-    final sectionNames = [
-      SectionName.basic.value,
-      SectionName.options.value,
-      SectionName.shared.value,
-      SectionName.submit.value,
-    ];
+    final sections = {
+      SectionName.basic.value: SectionDirection.vertical,
+      SectionName.options.value: SectionDirection.vertical,
+      SectionName.shared.value: SectionDirection.vertical,
+      SectionName.submit.value: SectionDirection.horizontal,
+    };
 
     final formGenerator = FormGenerator(
       formKey: _formKey,
-      sectionNames: sectionNames,
+      sections: sections,
       fields: fields,
     );
 
