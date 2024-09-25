@@ -7,6 +7,7 @@ import 'package:listwhatever/standard/form/form_input_field_image_picker.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 import 'package:listwhatever/standard/form/form_input_field_submit_button.dart';
 import 'package:listwhatever/standard/form/form_input_field_text_area.dart';
+import 'package:listwhatever/standard/widgets/border_with_header.dart';
 import 'package:listwhatever/standard/widgets/vStack/v_stack.dart';
 
 enum SectionDirection {
@@ -62,25 +63,34 @@ class _FormGeneratorState extends State<FormGenerator> {
       // },
       skipDisabled: true,
       child: VStack(
-        children: widget.sections.entries
-            .map(generateSection)
-            .expand((innerList) => innerList)
-            .toList(),
+        children: widget.sections.entries.map(generateSection).toList(),
       ),
     );
   }
 
-  List<Widget> generateSection(
+  Widget generateSection(
     MapEntry<String, SectionDirection> section,
   ) {
     final sectionFields =
         formInputFields.where((f) => f.sectionName == section.key);
     final fields = sectionFields.map(generateField).toList();
 
-    return [
-      Text(section.key),
-      ...fields,
-    ];
+    final child = section.value == SectionDirection.horizontal
+        ? Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ...fields,
+            ],
+          )
+        : Column(
+            children: [
+              SizedBox(
+                height: 10,
+              ),
+              ...fields,
+            ],
+          );
+    return BorderWithHeader(title: section.key, child: child);
   }
 
   Widget generateField<T>(
