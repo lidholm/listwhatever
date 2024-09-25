@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:listwhatever/custom/pages/lists/addList/upload_task_tile.dart';
 import 'package:listwhatever/standard/constants.dart';
@@ -26,29 +28,36 @@ class _FormInputFieldImagePickerState<T>
   final String className = 'FormInputFieldImagePicker';
 
   UploadTask? _uploadTask;
-  String? _selectedImageFilename;
+  // String? _selectedImageFilename;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        uploadedImage(),
-        Row(
+    return FormBuilderField(
+      name: widget.field.id,
+      // validator: FormBuilderValidators.compose(widget.field.validators),
+      builder: (FormFieldState<String> field) {
+        logger.i('field: $field');
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // if (_uploadTask == null)
-            //   const Center(
-            //       child: Text("Press the '+' button to add a new file."))
-            // else
-            //   uploadedStatus(),
-            uploadButton(),
+            uploadedImage(field),
+            Row(
+              children: [
+                // if (_uploadTask == null)
+                //   const Center(
+                //       child: Text("Press the '+' button to add a new file."))
+                // else
+                //   uploadedStatus(),
+                uploadButton(field),
+              ],
+            ),
           ],
-        ),
-      ],
+        );
+      },
     );
   }
 
-  Widget uploadedImage() {
+  Widget uploadedImage(FormFieldState<String> field) {
     return FutureBuilder(
       future: getFirebaseStorage(),
       builder: (context, snapshot) {
@@ -56,7 +65,7 @@ class _FormInputFieldImagePickerState<T>
         if (firebaseStorage == null) {
           return Container();
         }
-        final imageFilename = getImageFilename();
+        final imageFilename = getImageFilename(field);
         logger.i('$className => imageFilename: $imageFilename');
         final imageUrlFuture = firebaseStorage
             .ref()
@@ -84,12 +93,8 @@ class _FormInputFieldImagePickerState<T>
     );
   }
 
-  String getImageFilename() {
-    return
-        // _selectedImageFilename ??
-        //     ((selectedListType != null && selectedListType != ListType.other)
-        //         ? selectedListType!.getImagePath() :
-        'generic.jpg';
+  String getImageFilename(FormFieldState<String> field) {
+    return field.value ?? widget.field.currentValue ?? 'generic.jpg';
   }
 
   Widget uploadedStatus() {
@@ -114,14 +119,14 @@ class _FormInputFieldImagePickerState<T>
     );
   }
 
-  Widget uploadButton() {
+  Widget uploadButton(FormFieldState<String> field) {
     return ElevatedButton(
       onPressed: () async {
         final picker = ImagePicker();
         final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
         if (pickedFile != null) {
-          final tmp = await uploadImage(pickedFile);
+          final tmp = await uploadImage(pickedFile, field);
           setState(() {
             logger.i('$className => pickedFile.path: ${pickedFile.path}');
             _uploadTask = tmp;
@@ -138,7 +143,10 @@ class _FormInputFieldImagePickerState<T>
     );
   }
 
-  Future<UploadTask> uploadImage(XFile pickedFile) async {
+  Future<UploadTask> uploadImage(
+    XFile pickedFile,
+    FormFieldState<String> field,
+  ) async {
     final storage = await getFirebaseStorage();
     try {
       // Create a unique file name for the upload
@@ -159,25 +167,20 @@ class _FormInputFieldImagePickerState<T>
       } else {
         uploadTask = ref.putFile(File(pickedFile.path), metadata);
       }
-      // logger
-      //   ..i('fullPath: ${uploadTask.snapshot.ref.fullPath}')
-      //   ..i(uploadTask.snapshot.state)
-      //   ..i(uploadTask.snapshot.bytesTransferred)
-      //   ..i(uploadTask.snapshot.metadata)
-      //   ..i(uploadTask.snapshot.totalBytes)
-      //   ..i(uploadTask.snapshot.ref);
 
       uploadTask.snapshotEvents.listen((event) {}).onData((data) {
         logger.i('$className => ${data.bytesTransferred} - ${data.totalBytes}');
 
         if (data.bytesTransferred >= data.totalBytes) {
           logger.i('$className => upload is done!');
+          logger.i('$className => fileName: $fileName');
           setState(() {
-            _selectedImageFilename = fileName;
+            field.didChange(fileName);
+            // _selectedImageFilename = fileName;
           });
-          logger.i(
-            '$className => _selectedImageFilename: $_selectedImageFilename',
-          );
+          // logger.i(
+          //   '$className => _selectedImageFilename: $_selectedImageFilename',
+          // );
         }
       });
 

@@ -93,7 +93,7 @@ class _AddListPageState extends State<AddListPage> {
         sectionName: SectionName.basic.value,
         hasError: false,
       ),
-      FormInputFieldInfo<ListType>.imagePicker(
+      FormInputFieldInfo<String>.imagePicker(
         id: 'listTypeImage',
         label: 'Image',
         currentValue: null,
