@@ -15,7 +15,8 @@ class FormInputFieldCancelButton<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton(
       onPressed: () {
-        formKey.currentState?.reset();
+        // formKey.currentState?.reset();
+        field.cancel();
       },
       // color: Theme.of(context).colorScheme.secondary,
       child: Text(

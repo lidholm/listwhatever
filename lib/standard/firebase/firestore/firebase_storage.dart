@@ -7,13 +7,13 @@ const port = 9199;
 
 Future<FirebaseStorage> getFirebaseStorage() async {
   final emulatorInfo = await getEmulatorInfo();
-
+// Todo: Singleton here
   final instance = FirebaseStorage.instance;
   if (emulatorInfo.type != EmulatorType.none) {
-    logger.i('firebaseStorage. Using emulator ${emulatorInfo.address}');
+    // logger.i('firebaseStorage. Using emulator ${emulatorInfo.address}');
     _connectToFirebaseEmulator(instance, emulatorInfo.address!);
   } else {
-    logger.i('firebaseStorage. Using firebase storage without emulator');
+    // logger.i('firebaseStorage. Using firebase storage without emulator');
   }
 
   return instance;

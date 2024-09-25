@@ -55,10 +55,12 @@ mixin _$FormInputFieldInfo<T> {
             String sectionName,
             bool hasError)
         imagePicker,
-    required TResult Function(String id, String label, String sectionName)
-        submitButton,
-    required TResult Function(String id, String label, String sectionName)
+    required TResult Function(
+            String id, String label, String sectionName, Function cancel)
         cancelButton,
+    required TResult Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)
+        submitButton,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -97,10 +99,12 @@ mixin _$FormInputFieldInfo<T> {
             String sectionName,
             bool hasError)?
         imagePicker,
-    TResult? Function(String id, String label, String sectionName)?
-        submitButton,
-    TResult? Function(String id, String label, String sectionName)?
+    TResult? Function(
+            String id, String label, String sectionName, Function cancel)?
         cancelButton,
+    TResult? Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)?
+        submitButton,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -139,8 +143,12 @@ mixin _$FormInputFieldInfo<T> {
             String sectionName,
             bool hasError)?
         imagePicker,
-    TResult Function(String id, String label, String sectionName)? submitButton,
-    TResult Function(String id, String label, String sectionName)? cancelButton,
+    TResult Function(
+            String id, String label, String sectionName, Function cancel)?
+        cancelButton,
+    TResult Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)?
+        submitButton,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -151,10 +159,10 @@ mixin _$FormInputFieldInfo<T> {
     required TResult Function(FormInputFieldInfoCheckbox<T> value) checkbox,
     required TResult Function(FormInputFieldInfoImagePicker<T> value)
         imagePicker,
-    required TResult Function(FormInputFieldInfoSubmitButton<T> value)
-        submitButton,
     required TResult Function(FormInputFieldInfoCancelButton<T> value)
         cancelButton,
+    required TResult Function(FormInputFieldInfoSubmitButton<T> value)
+        submitButton,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -163,8 +171,8 @@ mixin _$FormInputFieldInfo<T> {
     TResult? Function(FormInputFieldInfoDropDown<T> value)? dropdown,
     TResult? Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
     TResult? Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
-    TResult? Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
     TResult? Function(FormInputFieldInfoCancelButton<T> value)? cancelButton,
+    TResult? Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -173,8 +181,8 @@ mixin _$FormInputFieldInfo<T> {
     TResult Function(FormInputFieldInfoDropDown<T> value)? dropdown,
     TResult Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
     TResult Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
-    TResult Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
     TResult Function(FormInputFieldInfoCancelButton<T> value)? cancelButton,
+    TResult Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -426,10 +434,12 @@ class _$FormInputFieldInfoTextAreaImpl<T>
             String sectionName,
             bool hasError)
         imagePicker,
-    required TResult Function(String id, String label, String sectionName)
-        submitButton,
-    required TResult Function(String id, String label, String sectionName)
+    required TResult Function(
+            String id, String label, String sectionName, Function cancel)
         cancelButton,
+    required TResult Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)
+        submitButton,
   }) {
     return textArea(id, label, currentValue, validators, sectionName, hasError);
   }
@@ -471,10 +481,12 @@ class _$FormInputFieldInfoTextAreaImpl<T>
             String sectionName,
             bool hasError)?
         imagePicker,
-    TResult? Function(String id, String label, String sectionName)?
-        submitButton,
-    TResult? Function(String id, String label, String sectionName)?
+    TResult? Function(
+            String id, String label, String sectionName, Function cancel)?
         cancelButton,
+    TResult? Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)?
+        submitButton,
   }) {
     return textArea?.call(
         id, label, currentValue, validators, sectionName, hasError);
@@ -517,8 +529,12 @@ class _$FormInputFieldInfoTextAreaImpl<T>
             String sectionName,
             bool hasError)?
         imagePicker,
-    TResult Function(String id, String label, String sectionName)? submitButton,
-    TResult Function(String id, String label, String sectionName)? cancelButton,
+    TResult Function(
+            String id, String label, String sectionName, Function cancel)?
+        cancelButton,
+    TResult Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)?
+        submitButton,
     required TResult orElse(),
   }) {
     if (textArea != null) {
@@ -536,10 +552,10 @@ class _$FormInputFieldInfoTextAreaImpl<T>
     required TResult Function(FormInputFieldInfoCheckbox<T> value) checkbox,
     required TResult Function(FormInputFieldInfoImagePicker<T> value)
         imagePicker,
-    required TResult Function(FormInputFieldInfoSubmitButton<T> value)
-        submitButton,
     required TResult Function(FormInputFieldInfoCancelButton<T> value)
         cancelButton,
+    required TResult Function(FormInputFieldInfoSubmitButton<T> value)
+        submitButton,
   }) {
     return textArea(this);
   }
@@ -551,8 +567,8 @@ class _$FormInputFieldInfoTextAreaImpl<T>
     TResult? Function(FormInputFieldInfoDropDown<T> value)? dropdown,
     TResult? Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
     TResult? Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
-    TResult? Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
     TResult? Function(FormInputFieldInfoCancelButton<T> value)? cancelButton,
+    TResult? Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
   }) {
     return textArea?.call(this);
   }
@@ -564,8 +580,8 @@ class _$FormInputFieldInfoTextAreaImpl<T>
     TResult Function(FormInputFieldInfoDropDown<T> value)? dropdown,
     TResult Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
     TResult Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
-    TResult Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
     TResult Function(FormInputFieldInfoCancelButton<T> value)? cancelButton,
+    TResult Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
     required TResult orElse(),
   }) {
     if (textArea != null) {
@@ -829,10 +845,12 @@ class _$FormInputFieldInfoDropDownImpl<T>
             String sectionName,
             bool hasError)
         imagePicker,
-    required TResult Function(String id, String label, String sectionName)
-        submitButton,
-    required TResult Function(String id, String label, String sectionName)
+    required TResult Function(
+            String id, String label, String sectionName, Function cancel)
         cancelButton,
+    required TResult Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)
+        submitButton,
   }) {
     return dropdown(id, label, currentValue, options, optionToString,
         validators, sectionName, hasError);
@@ -875,10 +893,12 @@ class _$FormInputFieldInfoDropDownImpl<T>
             String sectionName,
             bool hasError)?
         imagePicker,
-    TResult? Function(String id, String label, String sectionName)?
-        submitButton,
-    TResult? Function(String id, String label, String sectionName)?
+    TResult? Function(
+            String id, String label, String sectionName, Function cancel)?
         cancelButton,
+    TResult? Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)?
+        submitButton,
   }) {
     return dropdown?.call(id, label, currentValue, options, optionToString,
         validators, sectionName, hasError);
@@ -921,8 +941,12 @@ class _$FormInputFieldInfoDropDownImpl<T>
             String sectionName,
             bool hasError)?
         imagePicker,
-    TResult Function(String id, String label, String sectionName)? submitButton,
-    TResult Function(String id, String label, String sectionName)? cancelButton,
+    TResult Function(
+            String id, String label, String sectionName, Function cancel)?
+        cancelButton,
+    TResult Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)?
+        submitButton,
     required TResult orElse(),
   }) {
     if (dropdown != null) {
@@ -940,10 +964,10 @@ class _$FormInputFieldInfoDropDownImpl<T>
     required TResult Function(FormInputFieldInfoCheckbox<T> value) checkbox,
     required TResult Function(FormInputFieldInfoImagePicker<T> value)
         imagePicker,
-    required TResult Function(FormInputFieldInfoSubmitButton<T> value)
-        submitButton,
     required TResult Function(FormInputFieldInfoCancelButton<T> value)
         cancelButton,
+    required TResult Function(FormInputFieldInfoSubmitButton<T> value)
+        submitButton,
   }) {
     return dropdown(this);
   }
@@ -955,8 +979,8 @@ class _$FormInputFieldInfoDropDownImpl<T>
     TResult? Function(FormInputFieldInfoDropDown<T> value)? dropdown,
     TResult? Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
     TResult? Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
-    TResult? Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
     TResult? Function(FormInputFieldInfoCancelButton<T> value)? cancelButton,
+    TResult? Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
   }) {
     return dropdown?.call(this);
   }
@@ -968,8 +992,8 @@ class _$FormInputFieldInfoDropDownImpl<T>
     TResult Function(FormInputFieldInfoDropDown<T> value)? dropdown,
     TResult Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
     TResult Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
-    TResult Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
     TResult Function(FormInputFieldInfoCancelButton<T> value)? cancelButton,
+    TResult Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
     required TResult orElse(),
   }) {
     if (dropdown != null) {
@@ -1199,10 +1223,12 @@ class _$FormInputFieldInfoCheckboxImpl<T>
             String sectionName,
             bool hasError)
         imagePicker,
-    required TResult Function(String id, String label, String sectionName)
-        submitButton,
-    required TResult Function(String id, String label, String sectionName)
+    required TResult Function(
+            String id, String label, String sectionName, Function cancel)
         cancelButton,
+    required TResult Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)
+        submitButton,
   }) {
     return checkbox(id, label, currentValue, validators, sectionName, hasError);
   }
@@ -1244,10 +1270,12 @@ class _$FormInputFieldInfoCheckboxImpl<T>
             String sectionName,
             bool hasError)?
         imagePicker,
-    TResult? Function(String id, String label, String sectionName)?
-        submitButton,
-    TResult? Function(String id, String label, String sectionName)?
+    TResult? Function(
+            String id, String label, String sectionName, Function cancel)?
         cancelButton,
+    TResult? Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)?
+        submitButton,
   }) {
     return checkbox?.call(
         id, label, currentValue, validators, sectionName, hasError);
@@ -1290,8 +1318,12 @@ class _$FormInputFieldInfoCheckboxImpl<T>
             String sectionName,
             bool hasError)?
         imagePicker,
-    TResult Function(String id, String label, String sectionName)? submitButton,
-    TResult Function(String id, String label, String sectionName)? cancelButton,
+    TResult Function(
+            String id, String label, String sectionName, Function cancel)?
+        cancelButton,
+    TResult Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)?
+        submitButton,
     required TResult orElse(),
   }) {
     if (checkbox != null) {
@@ -1309,10 +1341,10 @@ class _$FormInputFieldInfoCheckboxImpl<T>
     required TResult Function(FormInputFieldInfoCheckbox<T> value) checkbox,
     required TResult Function(FormInputFieldInfoImagePicker<T> value)
         imagePicker,
-    required TResult Function(FormInputFieldInfoSubmitButton<T> value)
-        submitButton,
     required TResult Function(FormInputFieldInfoCancelButton<T> value)
         cancelButton,
+    required TResult Function(FormInputFieldInfoSubmitButton<T> value)
+        submitButton,
   }) {
     return checkbox(this);
   }
@@ -1324,8 +1356,8 @@ class _$FormInputFieldInfoCheckboxImpl<T>
     TResult? Function(FormInputFieldInfoDropDown<T> value)? dropdown,
     TResult? Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
     TResult? Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
-    TResult? Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
     TResult? Function(FormInputFieldInfoCancelButton<T> value)? cancelButton,
+    TResult? Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
   }) {
     return checkbox?.call(this);
   }
@@ -1337,8 +1369,8 @@ class _$FormInputFieldInfoCheckboxImpl<T>
     TResult Function(FormInputFieldInfoDropDown<T> value)? dropdown,
     TResult Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
     TResult Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
-    TResult Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
     TResult Function(FormInputFieldInfoCancelButton<T> value)? cancelButton,
+    TResult Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
     required TResult orElse(),
   }) {
     if (checkbox != null) {
@@ -1564,10 +1596,12 @@ class _$FormInputFieldInfoImagePickerImpl<T>
             String sectionName,
             bool hasError)
         imagePicker,
-    required TResult Function(String id, String label, String sectionName)
-        submitButton,
-    required TResult Function(String id, String label, String sectionName)
+    required TResult Function(
+            String id, String label, String sectionName, Function cancel)
         cancelButton,
+    required TResult Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)
+        submitButton,
   }) {
     return imagePicker(
         id, label, currentValue, validators, sectionName, hasError);
@@ -1610,10 +1644,12 @@ class _$FormInputFieldInfoImagePickerImpl<T>
             String sectionName,
             bool hasError)?
         imagePicker,
-    TResult? Function(String id, String label, String sectionName)?
-        submitButton,
-    TResult? Function(String id, String label, String sectionName)?
+    TResult? Function(
+            String id, String label, String sectionName, Function cancel)?
         cancelButton,
+    TResult? Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)?
+        submitButton,
   }) {
     return imagePicker?.call(
         id, label, currentValue, validators, sectionName, hasError);
@@ -1656,8 +1692,12 @@ class _$FormInputFieldInfoImagePickerImpl<T>
             String sectionName,
             bool hasError)?
         imagePicker,
-    TResult Function(String id, String label, String sectionName)? submitButton,
-    TResult Function(String id, String label, String sectionName)? cancelButton,
+    TResult Function(
+            String id, String label, String sectionName, Function cancel)?
+        cancelButton,
+    TResult Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)?
+        submitButton,
     required TResult orElse(),
   }) {
     if (imagePicker != null) {
@@ -1675,10 +1715,10 @@ class _$FormInputFieldInfoImagePickerImpl<T>
     required TResult Function(FormInputFieldInfoCheckbox<T> value) checkbox,
     required TResult Function(FormInputFieldInfoImagePicker<T> value)
         imagePicker,
-    required TResult Function(FormInputFieldInfoSubmitButton<T> value)
-        submitButton,
     required TResult Function(FormInputFieldInfoCancelButton<T> value)
         cancelButton,
+    required TResult Function(FormInputFieldInfoSubmitButton<T> value)
+        submitButton,
   }) {
     return imagePicker(this);
   }
@@ -1690,8 +1730,8 @@ class _$FormInputFieldInfoImagePickerImpl<T>
     TResult? Function(FormInputFieldInfoDropDown<T> value)? dropdown,
     TResult? Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
     TResult? Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
-    TResult? Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
     TResult? Function(FormInputFieldInfoCancelButton<T> value)? cancelButton,
+    TResult? Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
   }) {
     return imagePicker?.call(this);
   }
@@ -1703,8 +1743,8 @@ class _$FormInputFieldInfoImagePickerImpl<T>
     TResult Function(FormInputFieldInfoDropDown<T> value)? dropdown,
     TResult Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
     TResult Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
-    TResult Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
     TResult Function(FormInputFieldInfoCancelButton<T> value)? cancelButton,
+    TResult Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
     required TResult orElse(),
   }) {
     if (imagePicker != null) {
@@ -1744,316 +1784,6 @@ abstract class FormInputFieldInfoImagePicker<T>
 }
 
 /// @nodoc
-abstract class _$$FormInputFieldInfoSubmitButtonImplCopyWith<T, $Res>
-    implements $FormInputFieldInfoCopyWith<T, $Res> {
-  factory _$$FormInputFieldInfoSubmitButtonImplCopyWith(
-          _$FormInputFieldInfoSubmitButtonImpl<T> value,
-          $Res Function(_$FormInputFieldInfoSubmitButtonImpl<T>) then) =
-      __$$FormInputFieldInfoSubmitButtonImplCopyWithImpl<T, $Res>;
-  @override
-  @useResult
-  $Res call({String id, String label, String sectionName});
-}
-
-/// @nodoc
-class __$$FormInputFieldInfoSubmitButtonImplCopyWithImpl<T, $Res>
-    extends _$FormInputFieldInfoCopyWithImpl<T, $Res,
-        _$FormInputFieldInfoSubmitButtonImpl<T>>
-    implements _$$FormInputFieldInfoSubmitButtonImplCopyWith<T, $Res> {
-  __$$FormInputFieldInfoSubmitButtonImplCopyWithImpl(
-      _$FormInputFieldInfoSubmitButtonImpl<T> _value,
-      $Res Function(_$FormInputFieldInfoSubmitButtonImpl<T>) _then)
-      : super(_value, _then);
-
-  /// Create a copy of FormInputFieldInfo
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? label = null,
-    Object? sectionName = null,
-  }) {
-    return _then(_$FormInputFieldInfoSubmitButtonImpl<T>(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      label: null == label
-          ? _value.label
-          : label // ignore: cast_nullable_to_non_nullable
-              as String,
-      sectionName: null == sectionName
-          ? _value.sectionName
-          : sectionName // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$FormInputFieldInfoSubmitButtonImpl<T>
-    with DiagnosticableTreeMixin
-    implements FormInputFieldInfoSubmitButton<T> {
-  const _$FormInputFieldInfoSubmitButtonImpl(
-      {required this.id, required this.label, required this.sectionName});
-
-  @override
-  final String id;
-  @override
-  final String label;
-  @override
-  final String sectionName;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo<$T>.submitButton(id: $id, label: $label, sectionName: $sectionName)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'FormInputFieldInfo<$T>.submitButton'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('label', label))
-      ..add(DiagnosticsProperty('sectionName', sectionName));
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$FormInputFieldInfoSubmitButtonImpl<T> &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.label, label) || other.label == label) &&
-            (identical(other.sectionName, sectionName) ||
-                other.sectionName == sectionName));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, id, label, sectionName);
-
-  /// Create a copy of FormInputFieldInfo
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$FormInputFieldInfoSubmitButtonImplCopyWith<T,
-          _$FormInputFieldInfoSubmitButtonImpl<T>>
-      get copyWith => __$$FormInputFieldInfoSubmitButtonImplCopyWithImpl<T,
-          _$FormInputFieldInfoSubmitButtonImpl<T>>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String id,
-            String label,
-            T currentValue,
-            List<String? Function(String?)> validators,
-            String sectionName,
-            bool hasError)
-        textArea,
-    required TResult Function(
-            String id,
-            String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
-            String sectionName,
-            bool hasError)
-        dropdown,
-    required TResult Function(
-            String id,
-            String label,
-            bool currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)
-        checkbox,
-    required TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)
-        imagePicker,
-    required TResult Function(String id, String label, String sectionName)
-        submitButton,
-    required TResult Function(String id, String label, String sectionName)
-        cancelButton,
-  }) {
-    return submitButton(id, label, sectionName);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String id,
-            String label,
-            T currentValue,
-            List<String? Function(String?)> validators,
-            String sectionName,
-            bool hasError)?
-        textArea,
-    TResult? Function(
-            String id,
-            String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
-            String sectionName,
-            bool hasError)?
-        dropdown,
-    TResult? Function(
-            String id,
-            String label,
-            bool currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
-        checkbox,
-    TResult? Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
-        imagePicker,
-    TResult? Function(String id, String label, String sectionName)?
-        submitButton,
-    TResult? Function(String id, String label, String sectionName)?
-        cancelButton,
-  }) {
-    return submitButton?.call(id, label, sectionName);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String id,
-            String label,
-            T currentValue,
-            List<String? Function(String?)> validators,
-            String sectionName,
-            bool hasError)?
-        textArea,
-    TResult Function(
-            String id,
-            String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
-            String sectionName,
-            bool hasError)?
-        dropdown,
-    TResult Function(
-            String id,
-            String label,
-            bool currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
-        checkbox,
-    TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
-        imagePicker,
-    TResult Function(String id, String label, String sectionName)? submitButton,
-    TResult Function(String id, String label, String sectionName)? cancelButton,
-    required TResult orElse(),
-  }) {
-    if (submitButton != null) {
-      return submitButton(id, label, sectionName);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(FormInputFieldInfoTextArea<T> value) textArea,
-    required TResult Function(FormInputFieldInfoDropDown<T> value) dropdown,
-    required TResult Function(FormInputFieldInfoCheckbox<T> value) checkbox,
-    required TResult Function(FormInputFieldInfoImagePicker<T> value)
-        imagePicker,
-    required TResult Function(FormInputFieldInfoSubmitButton<T> value)
-        submitButton,
-    required TResult Function(FormInputFieldInfoCancelButton<T> value)
-        cancelButton,
-  }) {
-    return submitButton(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FormInputFieldInfoTextArea<T> value)? textArea,
-    TResult? Function(FormInputFieldInfoDropDown<T> value)? dropdown,
-    TResult? Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
-    TResult? Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
-    TResult? Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
-    TResult? Function(FormInputFieldInfoCancelButton<T> value)? cancelButton,
-  }) {
-    return submitButton?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(FormInputFieldInfoTextArea<T> value)? textArea,
-    TResult Function(FormInputFieldInfoDropDown<T> value)? dropdown,
-    TResult Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
-    TResult Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
-    TResult Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
-    TResult Function(FormInputFieldInfoCancelButton<T> value)? cancelButton,
-    required TResult orElse(),
-  }) {
-    if (submitButton != null) {
-      return submitButton(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class FormInputFieldInfoSubmitButton<T>
-    implements FormInputFieldInfo<T> {
-  const factory FormInputFieldInfoSubmitButton(
-          {required final String id,
-          required final String label,
-          required final String sectionName}) =
-      _$FormInputFieldInfoSubmitButtonImpl<T>;
-
-  @override
-  String get id;
-  @override
-  String get label;
-  @override
-  String get sectionName;
-
-  /// Create a copy of FormInputFieldInfo
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FormInputFieldInfoSubmitButtonImplCopyWith<T,
-          _$FormInputFieldInfoSubmitButtonImpl<T>>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
 abstract class _$$FormInputFieldInfoCancelButtonImplCopyWith<T, $Res>
     implements $FormInputFieldInfoCopyWith<T, $Res> {
   factory _$$FormInputFieldInfoCancelButtonImplCopyWith(
@@ -2062,7 +1792,7 @@ abstract class _$$FormInputFieldInfoCancelButtonImplCopyWith<T, $Res>
       __$$FormInputFieldInfoCancelButtonImplCopyWithImpl<T, $Res>;
   @override
   @useResult
-  $Res call({String id, String label, String sectionName});
+  $Res call({String id, String label, String sectionName, Function cancel});
 }
 
 /// @nodoc
@@ -2083,6 +1813,7 @@ class __$$FormInputFieldInfoCancelButtonImplCopyWithImpl<T, $Res>
     Object? id = null,
     Object? label = null,
     Object? sectionName = null,
+    Object? cancel = null,
   }) {
     return _then(_$FormInputFieldInfoCancelButtonImpl<T>(
       id: null == id
@@ -2097,6 +1828,10 @@ class __$$FormInputFieldInfoCancelButtonImplCopyWithImpl<T, $Res>
           ? _value.sectionName
           : sectionName // ignore: cast_nullable_to_non_nullable
               as String,
+      cancel: null == cancel
+          ? _value.cancel
+          : cancel // ignore: cast_nullable_to_non_nullable
+              as Function,
     ));
   }
 }
@@ -2107,7 +1842,10 @@ class _$FormInputFieldInfoCancelButtonImpl<T>
     with DiagnosticableTreeMixin
     implements FormInputFieldInfoCancelButton<T> {
   const _$FormInputFieldInfoCancelButtonImpl(
-      {required this.id, required this.label, required this.sectionName});
+      {required this.id,
+      required this.label,
+      required this.sectionName,
+      required this.cancel});
 
   @override
   final String id;
@@ -2115,10 +1853,12 @@ class _$FormInputFieldInfoCancelButtonImpl<T>
   final String label;
   @override
   final String sectionName;
+  @override
+  final Function cancel;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo<$T>.cancelButton(id: $id, label: $label, sectionName: $sectionName)';
+    return 'FormInputFieldInfo<$T>.cancelButton(id: $id, label: $label, sectionName: $sectionName, cancel: $cancel)';
   }
 
   @override
@@ -2128,7 +1868,8 @@ class _$FormInputFieldInfoCancelButtonImpl<T>
       ..add(DiagnosticsProperty('type', 'FormInputFieldInfo<$T>.cancelButton'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('label', label))
-      ..add(DiagnosticsProperty('sectionName', sectionName));
+      ..add(DiagnosticsProperty('sectionName', sectionName))
+      ..add(DiagnosticsProperty('cancel', cancel));
   }
 
   @override
@@ -2139,11 +1880,12 @@ class _$FormInputFieldInfoCancelButtonImpl<T>
             (identical(other.id, id) || other.id == id) &&
             (identical(other.label, label) || other.label == label) &&
             (identical(other.sectionName, sectionName) ||
-                other.sectionName == sectionName));
+                other.sectionName == sectionName) &&
+            (identical(other.cancel, cancel) || other.cancel == cancel));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, label, sectionName);
+  int get hashCode => Object.hash(runtimeType, id, label, sectionName, cancel);
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -2192,12 +1934,14 @@ class _$FormInputFieldInfoCancelButtonImpl<T>
             String sectionName,
             bool hasError)
         imagePicker,
-    required TResult Function(String id, String label, String sectionName)
-        submitButton,
-    required TResult Function(String id, String label, String sectionName)
+    required TResult Function(
+            String id, String label, String sectionName, Function cancel)
         cancelButton,
+    required TResult Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)
+        submitButton,
   }) {
-    return cancelButton(id, label, sectionName);
+    return cancelButton(id, label, sectionName, cancel);
   }
 
   @override
@@ -2237,12 +1981,14 @@ class _$FormInputFieldInfoCancelButtonImpl<T>
             String sectionName,
             bool hasError)?
         imagePicker,
-    TResult? Function(String id, String label, String sectionName)?
-        submitButton,
-    TResult? Function(String id, String label, String sectionName)?
+    TResult? Function(
+            String id, String label, String sectionName, Function cancel)?
         cancelButton,
+    TResult? Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)?
+        submitButton,
   }) {
-    return cancelButton?.call(id, label, sectionName);
+    return cancelButton?.call(id, label, sectionName, cancel);
   }
 
   @override
@@ -2282,12 +2028,16 @@ class _$FormInputFieldInfoCancelButtonImpl<T>
             String sectionName,
             bool hasError)?
         imagePicker,
-    TResult Function(String id, String label, String sectionName)? submitButton,
-    TResult Function(String id, String label, String sectionName)? cancelButton,
+    TResult Function(
+            String id, String label, String sectionName, Function cancel)?
+        cancelButton,
+    TResult Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)?
+        submitButton,
     required TResult orElse(),
   }) {
     if (cancelButton != null) {
-      return cancelButton(id, label, sectionName);
+      return cancelButton(id, label, sectionName, cancel);
     }
     return orElse();
   }
@@ -2300,10 +2050,10 @@ class _$FormInputFieldInfoCancelButtonImpl<T>
     required TResult Function(FormInputFieldInfoCheckbox<T> value) checkbox,
     required TResult Function(FormInputFieldInfoImagePicker<T> value)
         imagePicker,
-    required TResult Function(FormInputFieldInfoSubmitButton<T> value)
-        submitButton,
     required TResult Function(FormInputFieldInfoCancelButton<T> value)
         cancelButton,
+    required TResult Function(FormInputFieldInfoSubmitButton<T> value)
+        submitButton,
   }) {
     return cancelButton(this);
   }
@@ -2315,8 +2065,8 @@ class _$FormInputFieldInfoCancelButtonImpl<T>
     TResult? Function(FormInputFieldInfoDropDown<T> value)? dropdown,
     TResult? Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
     TResult? Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
-    TResult? Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
     TResult? Function(FormInputFieldInfoCancelButton<T> value)? cancelButton,
+    TResult? Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
   }) {
     return cancelButton?.call(this);
   }
@@ -2328,8 +2078,8 @@ class _$FormInputFieldInfoCancelButtonImpl<T>
     TResult Function(FormInputFieldInfoDropDown<T> value)? dropdown,
     TResult Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
     TResult Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
-    TResult Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
     TResult Function(FormInputFieldInfoCancelButton<T> value)? cancelButton,
+    TResult Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
     required TResult orElse(),
   }) {
     if (cancelButton != null) {
@@ -2344,7 +2094,8 @@ abstract class FormInputFieldInfoCancelButton<T>
   const factory FormInputFieldInfoCancelButton(
           {required final String id,
           required final String label,
-          required final String sectionName}) =
+          required final String sectionName,
+          required final Function cancel}) =
       _$FormInputFieldInfoCancelButtonImpl<T>;
 
   @override
@@ -2353,6 +2104,7 @@ abstract class FormInputFieldInfoCancelButton<T>
   String get label;
   @override
   String get sectionName;
+  Function get cancel;
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -2360,5 +2112,341 @@ abstract class FormInputFieldInfoCancelButton<T>
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FormInputFieldInfoCancelButtonImplCopyWith<T,
           _$FormInputFieldInfoCancelButtonImpl<T>>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FormInputFieldInfoSubmitButtonImplCopyWith<T, $Res>
+    implements $FormInputFieldInfoCopyWith<T, $Res> {
+  factory _$$FormInputFieldInfoSubmitButtonImplCopyWith(
+          _$FormInputFieldInfoSubmitButtonImpl<T> value,
+          $Res Function(_$FormInputFieldInfoSubmitButtonImpl<T>) then) =
+      __$$FormInputFieldInfoSubmitButtonImplCopyWithImpl<T, $Res>;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String label,
+      String sectionName,
+      void Function(Map<String, dynamic>?) save});
+}
+
+/// @nodoc
+class __$$FormInputFieldInfoSubmitButtonImplCopyWithImpl<T, $Res>
+    extends _$FormInputFieldInfoCopyWithImpl<T, $Res,
+        _$FormInputFieldInfoSubmitButtonImpl<T>>
+    implements _$$FormInputFieldInfoSubmitButtonImplCopyWith<T, $Res> {
+  __$$FormInputFieldInfoSubmitButtonImplCopyWithImpl(
+      _$FormInputFieldInfoSubmitButtonImpl<T> _value,
+      $Res Function(_$FormInputFieldInfoSubmitButtonImpl<T>) _then)
+      : super(_value, _then);
+
+  /// Create a copy of FormInputFieldInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? label = null,
+    Object? sectionName = null,
+    Object? save = null,
+  }) {
+    return _then(_$FormInputFieldInfoSubmitButtonImpl<T>(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      label: null == label
+          ? _value.label
+          : label // ignore: cast_nullable_to_non_nullable
+              as String,
+      sectionName: null == sectionName
+          ? _value.sectionName
+          : sectionName // ignore: cast_nullable_to_non_nullable
+              as String,
+      save: null == save
+          ? _value.save
+          : save // ignore: cast_nullable_to_non_nullable
+              as void Function(Map<String, dynamic>?),
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$FormInputFieldInfoSubmitButtonImpl<T>
+    with DiagnosticableTreeMixin
+    implements FormInputFieldInfoSubmitButton<T> {
+  const _$FormInputFieldInfoSubmitButtonImpl(
+      {required this.id,
+      required this.label,
+      required this.sectionName,
+      required this.save});
+
+  @override
+  final String id;
+  @override
+  final String label;
+  @override
+  final String sectionName;
+  @override
+  final void Function(Map<String, dynamic>?) save;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'FormInputFieldInfo<$T>.submitButton(id: $id, label: $label, sectionName: $sectionName, save: $save)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'FormInputFieldInfo<$T>.submitButton'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('label', label))
+      ..add(DiagnosticsProperty('sectionName', sectionName))
+      ..add(DiagnosticsProperty('save', save));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FormInputFieldInfoSubmitButtonImpl<T> &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.label, label) || other.label == label) &&
+            (identical(other.sectionName, sectionName) ||
+                other.sectionName == sectionName) &&
+            (identical(other.save, save) || other.save == save));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id, label, sectionName, save);
+
+  /// Create a copy of FormInputFieldInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FormInputFieldInfoSubmitButtonImplCopyWith<T,
+          _$FormInputFieldInfoSubmitButtonImpl<T>>
+      get copyWith => __$$FormInputFieldInfoSubmitButtonImplCopyWithImpl<T,
+          _$FormInputFieldInfoSubmitButtonImpl<T>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String id,
+            String label,
+            T currentValue,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError)
+        textArea,
+    required TResult Function(
+            String id,
+            String label,
+            T currentValue,
+            List<T> options,
+            String Function(dynamic) optionToString,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError)
+        dropdown,
+    required TResult Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)
+        checkbox,
+    required TResult Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)
+        imagePicker,
+    required TResult Function(
+            String id, String label, String sectionName, Function cancel)
+        cancelButton,
+    required TResult Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)
+        submitButton,
+  }) {
+    return submitButton(id, label, sectionName, save);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String id,
+            String label,
+            T currentValue,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError)?
+        textArea,
+    TResult? Function(
+            String id,
+            String label,
+            T currentValue,
+            List<T> options,
+            String Function(dynamic) optionToString,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError)?
+        dropdown,
+    TResult? Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        checkbox,
+    TResult? Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        imagePicker,
+    TResult? Function(
+            String id, String label, String sectionName, Function cancel)?
+        cancelButton,
+    TResult? Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)?
+        submitButton,
+  }) {
+    return submitButton?.call(id, label, sectionName, save);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String id,
+            String label,
+            T currentValue,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError)?
+        textArea,
+    TResult Function(
+            String id,
+            String label,
+            T currentValue,
+            List<T> options,
+            String Function(dynamic) optionToString,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError)?
+        dropdown,
+    TResult Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        checkbox,
+    TResult Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        imagePicker,
+    TResult Function(
+            String id, String label, String sectionName, Function cancel)?
+        cancelButton,
+    TResult Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)?
+        submitButton,
+    required TResult orElse(),
+  }) {
+    if (submitButton != null) {
+      return submitButton(id, label, sectionName, save);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(FormInputFieldInfoTextArea<T> value) textArea,
+    required TResult Function(FormInputFieldInfoDropDown<T> value) dropdown,
+    required TResult Function(FormInputFieldInfoCheckbox<T> value) checkbox,
+    required TResult Function(FormInputFieldInfoImagePicker<T> value)
+        imagePicker,
+    required TResult Function(FormInputFieldInfoCancelButton<T> value)
+        cancelButton,
+    required TResult Function(FormInputFieldInfoSubmitButton<T> value)
+        submitButton,
+  }) {
+    return submitButton(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(FormInputFieldInfoTextArea<T> value)? textArea,
+    TResult? Function(FormInputFieldInfoDropDown<T> value)? dropdown,
+    TResult? Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
+    TResult? Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
+    TResult? Function(FormInputFieldInfoCancelButton<T> value)? cancelButton,
+    TResult? Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
+  }) {
+    return submitButton?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(FormInputFieldInfoTextArea<T> value)? textArea,
+    TResult Function(FormInputFieldInfoDropDown<T> value)? dropdown,
+    TResult Function(FormInputFieldInfoCheckbox<T> value)? checkbox,
+    TResult Function(FormInputFieldInfoImagePicker<T> value)? imagePicker,
+    TResult Function(FormInputFieldInfoCancelButton<T> value)? cancelButton,
+    TResult Function(FormInputFieldInfoSubmitButton<T> value)? submitButton,
+    required TResult orElse(),
+  }) {
+    if (submitButton != null) {
+      return submitButton(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FormInputFieldInfoSubmitButton<T>
+    implements FormInputFieldInfo<T> {
+  const factory FormInputFieldInfoSubmitButton(
+          {required final String id,
+          required final String label,
+          required final String sectionName,
+          required final void Function(Map<String, dynamic>?) save}) =
+      _$FormInputFieldInfoSubmitButtonImpl<T>;
+
+  @override
+  String get id;
+  @override
+  String get label;
+  @override
+  String get sectionName;
+  void Function(Map<String, dynamic>?) get save;
+
+  /// Create a copy of FormInputFieldInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FormInputFieldInfoSubmitButtonImplCopyWith<T,
+          _$FormInputFieldInfoSubmitButtonImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
 }

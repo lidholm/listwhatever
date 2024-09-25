@@ -44,15 +44,17 @@ sealed class FormInputFieldInfo<T> with _$FormInputFieldInfo<T> {
     required bool hasError,
   }) = FormInputFieldInfoImagePicker<T>;
 
-  const factory FormInputFieldInfo.submitButton({
-    required String id,
-    required String label,
-    required String sectionName,
-  }) = FormInputFieldInfoSubmitButton<T>;
-
   const factory FormInputFieldInfo.cancelButton({
     required String id,
     required String label,
     required String sectionName,
+    required Function cancel,
   }) = FormInputFieldInfoCancelButton<T>;
+
+  const factory FormInputFieldInfo.submitButton({
+    required String id,
+    required String label,
+    required String sectionName,
+    required void Function(Map<String, dynamic>?) save,
+  }) = FormInputFieldInfoSubmitButton<T>;
 }

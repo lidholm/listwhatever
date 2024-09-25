@@ -142,11 +142,17 @@ class _AddListPageState extends State<AddListPage> {
         id: 'cancel',
         label: 'Cancel',
         sectionName: SectionName.submit.value,
+        cancel: () {
+          print('cancelled');
+        },
       ),
       FormInputFieldInfo<ListType>.submitButton(
         id: 'submit',
         label: 'Submit',
         sectionName: SectionName.submit.value,
+        save: (Map<String, dynamic>? values) {
+          print('save');
+        },
       ),
     ];
 

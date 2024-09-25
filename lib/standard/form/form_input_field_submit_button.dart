@@ -18,7 +18,7 @@ class FormInputFieldSubmitButton<T> extends StatelessWidget {
       onPressed: () {
         if (formKey.currentState?.saveAndValidate() ?? false) {
           logger.d(formKey.currentState?.value.toString());
-          // save(formKey.currentState);
+          field.save(formKey.currentState?.value);
         } else {
           logger
             ..d(formKey.currentState?.value.toString())
