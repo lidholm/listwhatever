@@ -43,4 +43,16 @@ sealed class FormInputFieldInfo<T> with _$FormInputFieldInfo<T> {
     required String sectionName,
     required bool hasError,
   }) = FormInputFieldInfoImagePicker<T>;
+
+  const factory FormInputFieldInfo.submitButton({
+    required String id,
+    required String label,
+    required String sectionName,
+  }) = FormInputFieldInfoSubmitButton<T>;
+
+  const factory FormInputFieldInfo.cancelButton({
+    required String id,
+    required String label,
+    required String sectionName,
+  }) = FormInputFieldInfoCancelButton<T>;
 }

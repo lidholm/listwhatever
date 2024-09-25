@@ -4,7 +4,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:listwhatever/custom/pages/lists/addList/upload_task_tile.dart';
 import 'package:listwhatever/standard/constants.dart';
@@ -27,7 +26,7 @@ class _FormInputFieldImagePickerState<T>
     extends State<FormInputFieldImagePicker<T>> {
   final String className = 'FormInputFieldImagePicker';
 
-  UploadTask? _uploadTask;
+  late UploadTask? _uploadTask;
   // String? _selectedImageFilename;
 
   @override
@@ -36,7 +35,7 @@ class _FormInputFieldImagePickerState<T>
       name: widget.field.id,
       // validator: FormBuilderValidators.compose(widget.field.validators),
       builder: (FormFieldState<String> field) {
-        logger.i('field: $field');
+        // logger.i('field: $field');
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -66,7 +65,7 @@ class _FormInputFieldImagePickerState<T>
           return Container();
         }
         final imageFilename = getImageFilename(field);
-        logger.i('$className => imageFilename: $imageFilename');
+        // logger.i('$className => imageFilename: $imageFilename');
         final imageUrlFuture = firebaseStorage
             .ref()
             .child('images')
@@ -76,7 +75,7 @@ class _FormInputFieldImagePickerState<T>
           future: imageUrlFuture,
           builder: (context, snapshot) {
             final imageUrl = snapshot.data;
-            logger.i('$className => imageUrl: $imageUrl');
+            // logger.i('$className => imageUrl: $imageUrl');
             return SizedBox(
               width: imageSize,
               height: imageSize,
@@ -128,9 +127,9 @@ class _FormInputFieldImagePickerState<T>
         if (pickedFile != null) {
           final tmp = await uploadImage(pickedFile, field);
           setState(() {
-            logger.i('$className => pickedFile.path: ${pickedFile.path}');
+            // logger.i('$className => pickedFile.path: ${pickedFile.path}');
             _uploadTask = tmp;
-            logger.i('$className => _uploadTask: $_uploadTask');
+            // logger.i('$className => _uploadTask: $_uploadTask');
           });
         } else {
           logger.i('$className => No image selected.');
@@ -169,18 +168,14 @@ class _FormInputFieldImagePickerState<T>
       }
 
       uploadTask.snapshotEvents.listen((event) {}).onData((data) {
-        logger.i('$className => ${data.bytesTransferred} - ${data.totalBytes}');
+        // logger.i('$className => ${data.bytesTransferred} - ${data.totalBytes}');
 
         if (data.bytesTransferred >= data.totalBytes) {
-          logger.i('$className => upload is done!');
-          logger.i('$className => fileName: $fileName');
+          // logger.i('$className => upload is done!');
+          // logger.i('$className => fileName: $fileName');
           setState(() {
             field.didChange(fileName);
-            // _selectedImageFilename = fileName;
           });
-          // logger.i(
-          //   '$className => _selectedImageFilename: $_selectedImageFilename',
-          // );
         }
       });
 

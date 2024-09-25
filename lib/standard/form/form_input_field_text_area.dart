@@ -19,6 +19,9 @@ class FormInputFieldTextArea<T> extends StatelessWidget {
             ? const Icon(Icons.error, color: Colors.red)
             : const Icon(Icons.check, color: Colors.green),
       ),
+      onChanged: (value) {
+        print('value: $value');
+      },
       // valueTransformer: (text) => num.tryParse(text),
       validator: FormBuilderValidators.compose(field.validators),
       keyboardType: TextInputType.name,

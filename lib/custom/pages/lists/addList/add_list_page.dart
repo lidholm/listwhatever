@@ -16,7 +16,8 @@ import '/standard/widgets/appBar/common_app_bar.dart';
 enum SectionName {
   basic._('Basic information'),
   options._('Options'),
-  shared._('Share information');
+  shared._('Share information'),
+  submit._('Submit');
 
   const SectionName._(this.value);
 
@@ -137,12 +138,23 @@ class _AddListPageState extends State<AddListPage> {
         sectionName: SectionName.options.value,
         hasError: false,
       ),
+      // FormInputFieldInfo<ListType>.cancelButton(
+      //   id: 'cancel',
+      //   label: 'Cancel',
+      //   sectionName: SectionName.submit.value,
+      // ),
+      FormInputFieldInfo<ListType>.submitButton(
+        id: 'submit',
+        label: 'Submit',
+        sectionName: SectionName.submit.value,
+      ),
     ];
 
     final sectionNames = [
       SectionName.basic.value,
       SectionName.options.value,
       SectionName.shared.value,
+      SectionName.submit.value,
     ];
 
     final formGenerator = FormGenerator(
@@ -174,26 +186,6 @@ class _AddListPageState extends State<AddListPage> {
   //         style: TextStyle(
   //           color: Theme.of(context).colorScheme.secondary,
   //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  // Widget getSubmitButton() {
-  //   return Expanded(
-  //     child: ElevatedButton(
-  //       onPressed: () {
-  //         if (_formKey.currentState?.saveAndValidate() ?? false) {
-  //           // logger.d(_formKey.currentState?.value.toString());
-  //           save(_formKey.currentState);
-  //         } else {
-  //           logger
-  //             ..d(_formKey.currentState?.value.toString())
-  //             ..d('validation failed');
-  //         }
-  //       },
-  //       child: const Text(
-  //         'Save',
   //       ),
   //     ),
   //   );
