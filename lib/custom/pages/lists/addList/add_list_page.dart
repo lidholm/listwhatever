@@ -267,7 +267,7 @@ class _AddListPageState extends State<AddListPage> {
     final storage = await getFirebaseStorage();
     try {
       // Create a unique file name for the upload
-      final fileName = '${DateTime.now().millisecondsSinceEpoch}.png';
+      final fileName = '${getRandomString(6)}.png';
 
       // Create a reference to the location you want to upload to in Firebase Storage
       final ref = storage.ref().child('images').child('/$fileName');
