@@ -58,7 +58,8 @@ class InnerListItemsPage extends StatefulWidget {
 
 class _InnerListItemsPageState extends State<InnerListItemsPage> {
   bool showSideWidget = false;
-  (ListItemsSortOrder, SortOrder) sortOrder = (ListItemsSortOrder.name, SortOrder.ascending);
+  (ListItemsSortOrder, SortOrder) sortOrder =
+      (ListItemsSortOrder.name, SortOrder.ascending);
 
   @override
   Widget build(BuildContext context) {
@@ -105,8 +106,12 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
           : showSideWidget
               ? MediaQuery.of(context).size.height - heightForBottomView
               : MediaQuery.of(context).size.height,
-      height: onRightHandSide ? MediaQuery.of(context).size.height : heightForBottomView,
-      width: onRightHandSide ? widthForRightHandSideView : MediaQuery.of(context).size.width,
+      height: onRightHandSide
+          ? MediaQuery.of(context).size.height
+          : heightForBottomView,
+      width: onRightHandSide
+          ? widthForRightHandSideView
+          : MediaQuery.of(context).size.width,
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -126,16 +131,16 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
   }
 
   Widget showLoadedItems() {
-    logger
-          ..d('=======================')
-          ..d('number of items: ${widget.listItems.length}')
-        // ..d('items: $listItems')
-        // ..d('items:\n${listItems.map((i) => '${i.latLong} - ${i.name} ').join('\n')}');
-        ;
+    // logger
+    //       ..d('=======================')
+    //       ..d('number of items: ${widget.listItems.length}')
+    // ..d('items: $listItems')
+    // ..d('items:\n${listItems.map((i) => '${i.latLong} - ${i.name} ').join('\n')}');
+    // ;
     final filteredItems = filterItems();
-    logger
-      ..d('filters: ${widget.filters}')
-      ..d('filteredItems: ${filteredItems.length}');
+    // logger
+    //   ..d('filters: ${widget.filters}')
+    //   ..d('filteredItems: ${filteredItems.length}');
 
     if (widget.viewToShow == ListItemsPageView.listView) {
       final multiplier = sortOrder.$2 == SortOrder.ascending ? 1 : -1;
@@ -143,8 +148,11 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
         ..sort(
           (a, b) => switch (sortOrder.$1) {
             ListItemsSortOrder.name => a.name.compareTo(b.name) * multiplier,
-            ListItemsSortOrder.date => (a.datetime ?? DateTime(1)).compareTo(b.datetime ?? DateTime(1)) * multiplier,
-            ListItemsSortOrder.distance => a.name.compareTo(b.name) * multiplier,
+            ListItemsSortOrder.date =>
+              (a.datetime ?? DateTime(1)).compareTo(b.datetime ?? DateTime(1)) *
+                  multiplier,
+            ListItemsSortOrder.distance =>
+              a.name.compareTo(b.name) * multiplier,
           },
         );
       return ListItemsListView(
@@ -167,7 +175,8 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
   void showDetailsView(String itemId) {
     showModalBottomSheet<ListItemInfoView>(
       context: context,
-      builder: (context) => ListItemInfoView(actualListId: widget.list.id, itemId: itemId),
+      builder: (context) =>
+          ListItemInfoView(actualListId: widget.list.id, itemId: itemId),
     );
   }
 
@@ -240,7 +249,9 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
         icon: Icons.sort,
         tooltip: context.l10n.sortActionText,
         callback: (dynamic value) {
-          context.read<ListItemsSortOrderCubit>().select(value as ListItemsSortOrder);
+          context
+              .read<ListItemsSortOrderCubit>()
+              .select(value as ListItemsSortOrder);
           // logger.d('value: $value');
         },
         menuItems: [
@@ -254,7 +265,9 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
                 Row(
                   children: [
                     if (a.$1 == sortOrder.$1)
-                      Icon(sortOrder.$2 == SortOrder.ascending ? Icons.arrow_downward : Icons.arrow_upward),
+                      Icon(sortOrder.$2 == SortOrder.ascending
+                          ? Icons.arrow_downward
+                          : Icons.arrow_upward),
                     Text(a.$2),
                   ],
                 ),
@@ -356,7 +369,8 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
         title: context.l10n.listAsSpreadsheetsMenuItem,
         icon: Icons.list_alt,
         callback: () async {
-          await ListAsSpreadsheetsPageRoute(widget.list.id!).push<void>(context);
+          await ListAsSpreadsheetsPageRoute(widget.list.id!)
+              .push<void>(context);
         },
         key: const Key('listAsSpreadsheet'),
       ),
@@ -370,7 +384,9 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
       listHasDates: widget.list.withDates,
       listHasMap: widget.list.withMap,
       distanceFilterCenter: (widget.currentLocation != null)
-          ? LatLong(lat: widget.currentLocation!.latitude, lng: widget.currentLocation!.longitude)
+          ? LatLong(
+              lat: widget.currentLocation!.latitude,
+              lng: widget.currentLocation!.longitude)
           : null,
     );
   }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_image_picker/form_builder_image_picker.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_bloc.dart';
@@ -9,7 +8,6 @@ import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_event
 import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/form/form_generator.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
-import 'package:listwhatever/standard/widgets/vStack/v_stack.dart';
 
 import '/custom/pages/list_or_list_item_not_loaded_handler.dart';
 import '/custom/pages/lists/list_load_events/list_load_bloc.dart';
@@ -57,15 +55,12 @@ class AddListPage extends StatefulWidget {
 }
 
 class _AddListPageState extends State<AddListPage> {
-  bool autoValidate = true;
-  bool readOnly = false;
-  bool showSegmentedControl = true;
   final _formKey = GlobalKey<FormBuilderState>();
 
   // ignore: strict_raw_type
   late List<FormInputFieldInfo> fields;
 
-  ListOfThings? list;
+  late ListOfThings? list;
   ListType? selectedListType;
   bool? showImage = false;
 
@@ -75,11 +70,12 @@ class _AddListPageState extends State<AddListPage> {
       BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.listId!));
     }
     super.initState();
+    list = null;
   }
 
   @override
   Widget build(BuildContext context) {
-    logger.i('$className: showImage: $showImage');
+    logger.i('$className: list: $list');
 
     if (widget.listId != null) {
       final listState = context.watch<ListLoadBloc>().state;
@@ -230,24 +226,24 @@ class _AddListPageState extends State<AddListPage> {
         .first;
 
     logger.d('values: $values');
-    final list = ListOfThings(
-        id: widget.listId,
-        name: values[FieldId.name.value]! as String,
-        listType: listType,
-        // imageFilename: getImageFilename(),
-        withMap: values[FieldId.withMap.value] as bool,
-        withDates: values[FieldId.withDates.value] as bool,
-        withTimes: values[FieldId.withTimes.value] as bool,
-        shared: false, //values[AddListValues.share.toString()] as bool,
-        shareCodeForViewer: null,
-        shareCodeForEditor: null,
-        sharedWith: {},
-        ownerId: '' // initialValue[list] as String?,
-        );
+    final newList = ListOfThings(
+      id: widget.listId,
+      name: values[FieldId.name.value]! as String,
+      listType: listType,
+      // imageFilename: getImageFilename(),
+      withMap: values[FieldId.withMap.value] as bool,
+      withDates: values[FieldId.withDates.value] as bool,
+      withTimes: values[FieldId.withTimes.value] as bool,
+      shared: false, //values[AddListValues.share.toString()] as bool,
+      // shareCodeForViewer: null,
+      // shareCodeForEditor: null,
+      sharedWith: {},
+      ownerId: list?.ownerId, // initialValue[list] as String?,
+    );
     if (widget.listId == null) {
-      BlocProvider.of<ListCrudBloc>(context).add(AddList(list));
+      BlocProvider.of<ListCrudBloc>(context).add(AddList(newList));
     } else {
-      BlocProvider.of<ListCrudBloc>(context).add(UpdateList(list));
+      BlocProvider.of<ListCrudBloc>(context).add(UpdateList(newList));
     }
     logger.i('$className -> popping once');
     GoRouter.of(context).pop();
