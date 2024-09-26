@@ -25,7 +25,6 @@ import '/custom/pages/lists/list_load_events/list_load_event.dart';
 import '/custom/pages/lists/models/list_of_things.dart';
 import '/custom/pages/shareList/share_list_page_route.dart';
 import '/l10n/l10n.dart';
-import '/standard/constants.dart';
 import '/standard/userRepository/models/user.dart';
 import '/standard/widgets/appBar/app_bar_action.dart';
 import '/standard/widgets/appBar/app_bar_action_dropdown.dart';
@@ -265,9 +264,11 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
                 Row(
                   children: [
                     if (a.$1 == sortOrder.$1)
-                      Icon(sortOrder.$2 == SortOrder.ascending
-                          ? Icons.arrow_downward
-                          : Icons.arrow_upward),
+                      Icon(
+                        sortOrder.$2 == SortOrder.ascending
+                            ? Icons.arrow_downward
+                            : Icons.arrow_upward,
+                      ),
                     Text(a.$2),
                   ],
                 ),
@@ -386,7 +387,8 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
       distanceFilterCenter: (widget.currentLocation != null)
           ? LatLong(
               lat: widget.currentLocation!.latitude,
-              lng: widget.currentLocation!.longitude)
+              lng: widget.currentLocation!.longitude,
+            )
           : null,
     );
   }

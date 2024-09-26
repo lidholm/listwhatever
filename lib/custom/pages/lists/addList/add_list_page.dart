@@ -1,11 +1,17 @@
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_image_picker/form_builder_image_picker.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_event.dart';
 import 'package:listwhatever/standard/constants.dart';
+import 'package:listwhatever/standard/firebase/firestore/firebase_storage.dart';
 import 'package:listwhatever/standard/form/form_generator.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 
@@ -63,6 +69,7 @@ class _AddListPageState extends State<AddListPage> {
   late ListOfThings? list;
   ListType? selectedListType;
   bool? showImage = false;
+  bool imageUploaded = false;
 
   @override
   void initState() {
@@ -183,15 +190,6 @@ class _AddListPageState extends State<AddListPage> {
             return;
           }
           save(values);
-          // print(values);
-          // if (values?.containsKey('listTypeImage') ?? false) {
-          //   final images = values?['listTypeImage'] as List;
-          //   if (images.isNotEmpty) {
-          //     final image = images[0] as XFile;
-          //     print(image.path);
-          //     print(image.name);
-          //   }
-          // }
         },
       ),
     ];
@@ -219,18 +217,28 @@ class _AddListPageState extends State<AddListPage> {
     );
   }
 
-  void save(Map<String, dynamic> values) {
+  Future<void> save(Map<String, dynamic> values) async {
+    final listCrudBloc = BlocProvider.of<ListCrudBloc>(context);
+    final goRouter = GoRouter.of(context);
+
     final listTypeName = values[FieldId.listType.value] as String;
     final listType = ListType.values
         .where((l) => l.name == listTypeName.split('.').last)
         .first;
+
+    String? imageFilename;
+    if (values.containsKey(FieldId.listTypeImage.value)) {
+      imageFilename =
+          await uploadImage(values[FieldId.listTypeImage.value] as List);
+      logger.i('$className: imageFilename: $imageFilename');
+    }
 
     logger.d('values: $values');
     final newList = ListOfThings(
       id: widget.listId,
       name: values[FieldId.name.value]! as String,
       listType: listType,
-      // imageFilename: getImageFilename(),
+      imageFilename: imageFilename,
       withMap: values[FieldId.withMap.value] as bool,
       withDates: values[FieldId.withDates.value] as bool,
       withTimes: values[FieldId.withTimes.value] as bool,
@@ -241,11 +249,59 @@ class _AddListPageState extends State<AddListPage> {
       ownerId: list?.ownerId, // initialValue[list] as String?,
     );
     if (widget.listId == null) {
-      BlocProvider.of<ListCrudBloc>(context).add(AddList(newList));
+      listCrudBloc.add(AddList(newList));
     } else {
-      BlocProvider.of<ListCrudBloc>(context).add(UpdateList(newList));
+      listCrudBloc.add(UpdateList(newList));
     }
     logger.i('$className -> popping once');
-    GoRouter.of(context).pop();
+    goRouter.pop();
+  }
+
+  Future<String?> uploadImage(
+    List<dynamic> images,
+  ) async {
+    if (images.isEmpty) {
+      logger.w('No image');
+    }
+    final image = images[0] as XFile;
+    final storage = await getFirebaseStorage();
+    try {
+      // Create a unique file name for the upload
+      final fileName = '${DateTime.now().millisecondsSinceEpoch}.png';
+
+      // Create a reference to the location you want to upload to in Firebase Storage
+      final ref = storage.ref().child('images').child('/$fileName');
+
+      final metadata = SettableMetadata(
+        contentType: 'image/jpeg',
+        customMetadata: {'picked-file-path': image.path},
+      );
+
+      UploadTask uploadTask;
+      if (kIsWeb) {
+        final bytes = await image.readAsBytes();
+        uploadTask = ref.putData(bytes, metadata);
+      } else {
+        uploadTask = ref.putFile(File(image.path), metadata);
+      }
+
+      await uploadTask.whenComplete(() {
+        // Check if the upload is completed
+        if (uploadTask.snapshot.bytesTransferred ==
+            uploadTask.snapshot.totalBytes) {
+          imageUploaded = true;
+        } else {
+          imageUploaded = false;
+        }
+      });
+
+      return imageUploaded ? fileName : null;
+    } on FirebaseException catch (e) {
+      logger.e(e);
+      rethrow;
+    } on Exception catch (e) {
+      logger.e(e);
+      rethrow;
+    }
   }
 }
