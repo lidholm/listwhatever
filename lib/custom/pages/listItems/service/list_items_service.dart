@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/custom/pages/listItems/models/list_item.dart';
 import '/standard/constants.dart';
-import '/standard/firebaseService/firebase_service.dart';
+import '../../../../standard/firebase/firestore_service.dart';
 
 class ListItemsService extends FirestoreService {
   ListItemsService({super.userId});

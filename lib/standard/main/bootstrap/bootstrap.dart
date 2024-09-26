@@ -15,7 +15,7 @@ import '/standard/app/view/app.dart';
 import '/standard/authenticationClient/firebase_authentication_client.dart';
 import '/standard/authenticationClient/token_storage.dart';
 import '/standard/firebase/firebase_options.dart';
-import '/standard/firebase/firestore/firebase_auth.dart';
+import '../../firebase/firebase_auth.dart';
 import '/standard/main/bootstrap/app_bloc_observer.dart';
 import '/standard/storage/persistentStorage/persistent_storage.dart';
 import '/standard/userRepository/user_repository.dart';

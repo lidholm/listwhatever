@@ -11,7 +11,7 @@ import 'package:go_router/go_router.dart';
 import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_event.dart';
 import 'package:listwhatever/standard/constants.dart';
-import 'package:listwhatever/standard/firebase/firestore/firebase_storage.dart';
+import 'package:listwhatever/standard/firebase/firebase_storage.dart';
 import 'package:listwhatever/standard/form/form_generator.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 
@@ -96,6 +96,7 @@ class _AddListPageState extends State<AddListPage> {
         list = (listState as ListLoadLoaded).list;
       });
     }
+    showImage = list?.listType == ListType.other;
 
     fields = [
       FormInputFieldInfo.textArea(
@@ -130,7 +131,7 @@ class _AddListPageState extends State<AddListPage> {
         FormInputFieldInfo<String>.imagePicker(
           id: FieldId.listTypeImage.value,
           label: 'Image',
-          currentValue: null,
+          currentValue: list?.imageFilename,
           validators: [
             FormBuilderValidators.required(),
             FormBuilderValidators.maxLength(70),
@@ -246,7 +247,7 @@ class _AddListPageState extends State<AddListPage> {
       // shareCodeForViewer: null,
       // shareCodeForEditor: null,
       sharedWith: {},
-      ownerId: list?.ownerId, // initialValue[list] as String?,
+      ownerId: list?.ownerId,
     );
     if (widget.listId == null) {
       listCrudBloc.add(AddList(newList));

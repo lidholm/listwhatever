@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/custom/pages/lists/models/list_of_things.dart';
 import '/standard/constants.dart';
-import '/standard/firebaseService/firebase_service.dart';
+import '../../../standard/firebase/firestore_service.dart';
 
 class ListsService extends FirestoreService {
   ListsService({super.userId});
@@ -33,7 +33,8 @@ class ListsService extends FirestoreService {
     final list = ListOfThings.fromJson(data);
     return list.copyWith(
       id: id,
-      shareType: list.ownerId == userId ? ShareType.editor : list.sharedWith[userId]!,
+      shareType:
+          list.ownerId == userId ? ShareType.editor : list.sharedWith[userId]!,
     );
   }
 

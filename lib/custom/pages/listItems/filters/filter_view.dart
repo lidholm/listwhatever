@@ -129,9 +129,9 @@ class _FilterViewState extends State<FilterView> {
   }
 
   Widget getDistanceFilter(double? initialValue, Settings settings) {
-    logger
-      ..i('distanceValue: $distanceValue')
-      ..i('initialValue: $initialValue');
+    // logger
+    //   ..i('$className: distanceValue: $distanceValue')
+    //   ..i('$className: initialValue: $initialValue');
     final values = (distanceValue == distanceMax)
         ? [initialValue ?? distanceValue]
         : [distanceValue];

@@ -44,15 +44,6 @@ class _FormGeneratorState extends State<FormGenerator> {
     // logger.i('$className: fields: ${widget.fields.length}.');
     return FormBuilder(
       key: widget.formKey,
-      // enabled: false,
-      // autovalidateMode: AutovalidateMode.disabled,
-      // initialValue: const {
-      //   'movie_rating': 5,
-      //   'best_language': 'Dart',
-      //   'age': '13',
-      //   'gender': 'Male',
-      //   'languages_filter': ['Dart']
-      // },
       skipDisabled: true,
       child: VStack(
         spacing: 25,
