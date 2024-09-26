@@ -43,29 +43,22 @@ class _FormInputFieldImagePickerState<T>
 
   @override
   Widget build(BuildContext context) {
-    // final initialValue = [
-    //   'https://images.pexels.com/photos/7078045/pexels-photo-7078045.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
-    // ];
-    // logger.i('$className: initialValue: $initialValue');
-
     final firebaseStorageState = context.watch<FirebaseStorageBloc>().state;
-    logger.i('$className firebaseStorageState: $firebaseStorageState');
 
     return switch (firebaseStorageState) {
-      Initial() => const CircularProgressIndicator(),
+      Initial() => showImagePicker(null),
       Loading() => const CircularProgressIndicator(),
       FileLoaded(:final imageUrl) => showImagePicker(imageUrl),
     };
   }
 
-  Widget showImagePicker(String imageUrl) {
-    final initialValue = [imageUrl];
-    logger.i('$className: initialValue: $initialValue');
+  Widget showImagePicker(String? imageUrl) {
+    final initialValue = imageUrl == null ? null : [imageUrl];
     return FormBuilderImagePicker(
-      name: 'singlePhotoWithDecoration',
+      name: widget.field.id,
       displayCustomType: (obj) => obj is ApiImage ? obj.imageUrl : obj,
       decoration: const InputDecoration(
-        labelText: 'Pick Single Photo With Decoration Visible',
+        labelText: 'Pick list image',
       ),
       showDecoration: true,
       maxImages: 1,

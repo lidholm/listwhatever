@@ -9,6 +9,8 @@ import 'package:listwhatever/standard/appUi/theme/app_theme.dart';
 import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/widgets/imageButton/image_button.dart';
 
+const String className = 'ListList';
+
 class ListList extends StatelessWidget {
   const ListList({
     required this.firebaseStorage,
@@ -30,6 +32,8 @@ class ListList extends StatelessWidget {
           SliverList.list(
             children: lists.map(
               (list) {
+                logger
+                    .i('$className: list.imageFilename: ${list.imageFilename}');
                 final imageUrlFuture = firebaseStorage
                     .ref()
                     .child('images')

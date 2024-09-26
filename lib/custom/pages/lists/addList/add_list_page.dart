@@ -82,7 +82,7 @@ class _AddListPageState extends State<AddListPage> {
 
   @override
   Widget build(BuildContext context) {
-    logger.i('$className: list: $list');
+    // logger.i('$className: list: $list');
 
     if (widget.listId != null) {
       final listState = context.watch<ListLoadBloc>().state;
@@ -249,6 +249,7 @@ class _AddListPageState extends State<AddListPage> {
       sharedWith: {},
       ownerId: list?.ownerId,
     );
+    logger.d('newList: $newList');
     if (widget.listId == null) {
       listCrudBloc.add(AddList(newList));
     } else {
