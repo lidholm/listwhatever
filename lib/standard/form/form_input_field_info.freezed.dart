@@ -60,7 +60,7 @@ mixin _$FormInputFieldInfo<T> {
             void Function(T)? onChange)
         imagePicker,
     required TResult Function(
-            String id, String label, String sectionName, Function cancel)
+            String id, String label, String sectionName, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
             void Function(Map<String, dynamic>?) save)
@@ -107,8 +107,8 @@ mixin _$FormInputFieldInfo<T> {
             bool hasError,
             void Function(T)? onChange)?
         imagePicker,
-    TResult? Function(
-            String id, String label, String sectionName, Function cancel)?
+    TResult? Function(String id, String label, String sectionName,
+            void Function() cancel)?
         cancelButton,
     TResult? Function(String id, String label, String sectionName,
             void Function(Map<String, dynamic>?) save)?
@@ -155,8 +155,8 @@ mixin _$FormInputFieldInfo<T> {
             bool hasError,
             void Function(T)? onChange)?
         imagePicker,
-    TResult Function(
-            String id, String label, String sectionName, Function cancel)?
+    TResult Function(String id, String label, String sectionName,
+            void Function() cancel)?
         cancelButton,
     TResult Function(String id, String label, String sectionName,
             void Function(Map<String, dynamic>?) save)?
@@ -465,7 +465,7 @@ class _$FormInputFieldInfoTextAreaImpl<T>
             void Function(T)? onChange)
         imagePicker,
     required TResult Function(
-            String id, String label, String sectionName, Function cancel)
+            String id, String label, String sectionName, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
             void Function(Map<String, dynamic>?) save)
@@ -516,8 +516,8 @@ class _$FormInputFieldInfoTextAreaImpl<T>
             bool hasError,
             void Function(T)? onChange)?
         imagePicker,
-    TResult? Function(
-            String id, String label, String sectionName, Function cancel)?
+    TResult? Function(String id, String label, String sectionName,
+            void Function() cancel)?
         cancelButton,
     TResult? Function(String id, String label, String sectionName,
             void Function(Map<String, dynamic>?) save)?
@@ -568,8 +568,8 @@ class _$FormInputFieldInfoTextAreaImpl<T>
             bool hasError,
             void Function(T)? onChange)?
         imagePicker,
-    TResult Function(
-            String id, String label, String sectionName, Function cancel)?
+    TResult Function(String id, String label, String sectionName,
+            void Function() cancel)?
         cancelButton,
     TResult Function(String id, String label, String sectionName,
             void Function(Map<String, dynamic>?) save)?
@@ -905,7 +905,7 @@ class _$FormInputFieldInfoDropDownImpl<T>
             void Function(T)? onChange)
         imagePicker,
     required TResult Function(
-            String id, String label, String sectionName, Function cancel)
+            String id, String label, String sectionName, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
             void Function(Map<String, dynamic>?) save)
@@ -956,8 +956,8 @@ class _$FormInputFieldInfoDropDownImpl<T>
             bool hasError,
             void Function(T)? onChange)?
         imagePicker,
-    TResult? Function(
-            String id, String label, String sectionName, Function cancel)?
+    TResult? Function(String id, String label, String sectionName,
+            void Function() cancel)?
         cancelButton,
     TResult? Function(String id, String label, String sectionName,
             void Function(Map<String, dynamic>?) save)?
@@ -1008,8 +1008,8 @@ class _$FormInputFieldInfoDropDownImpl<T>
             bool hasError,
             void Function(T)? onChange)?
         imagePicker,
-    TResult Function(
-            String id, String label, String sectionName, Function cancel)?
+    TResult Function(String id, String label, String sectionName,
+            void Function() cancel)?
         cancelButton,
     TResult Function(String id, String label, String sectionName,
             void Function(Map<String, dynamic>?) save)?
@@ -1318,7 +1318,7 @@ class _$FormInputFieldInfoCheckboxImpl<T>
             void Function(T)? onChange)
         imagePicker,
     required TResult Function(
-            String id, String label, String sectionName, Function cancel)
+            String id, String label, String sectionName, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
             void Function(Map<String, dynamic>?) save)
@@ -1369,8 +1369,8 @@ class _$FormInputFieldInfoCheckboxImpl<T>
             bool hasError,
             void Function(T)? onChange)?
         imagePicker,
-    TResult? Function(
-            String id, String label, String sectionName, Function cancel)?
+    TResult? Function(String id, String label, String sectionName,
+            void Function() cancel)?
         cancelButton,
     TResult? Function(String id, String label, String sectionName,
             void Function(Map<String, dynamic>?) save)?
@@ -1421,8 +1421,8 @@ class _$FormInputFieldInfoCheckboxImpl<T>
             bool hasError,
             void Function(T)? onChange)?
         imagePicker,
-    TResult Function(
-            String id, String label, String sectionName, Function cancel)?
+    TResult Function(String id, String label, String sectionName,
+            void Function() cancel)?
         cancelButton,
     TResult Function(String id, String label, String sectionName,
             void Function(Map<String, dynamic>?) save)?
@@ -1726,7 +1726,7 @@ class _$FormInputFieldInfoImagePickerImpl<T>
             void Function(T)? onChange)
         imagePicker,
     required TResult Function(
-            String id, String label, String sectionName, Function cancel)
+            String id, String label, String sectionName, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
             void Function(Map<String, dynamic>?) save)
@@ -1777,8 +1777,8 @@ class _$FormInputFieldInfoImagePickerImpl<T>
             bool hasError,
             void Function(T)? onChange)?
         imagePicker,
-    TResult? Function(
-            String id, String label, String sectionName, Function cancel)?
+    TResult? Function(String id, String label, String sectionName,
+            void Function() cancel)?
         cancelButton,
     TResult? Function(String id, String label, String sectionName,
             void Function(Map<String, dynamic>?) save)?
@@ -1829,8 +1829,8 @@ class _$FormInputFieldInfoImagePickerImpl<T>
             bool hasError,
             void Function(T)? onChange)?
         imagePicker,
-    TResult Function(
-            String id, String label, String sectionName, Function cancel)?
+    TResult Function(String id, String label, String sectionName,
+            void Function() cancel)?
         cancelButton,
     TResult Function(String id, String label, String sectionName,
             void Function(Map<String, dynamic>?) save)?
@@ -1932,7 +1932,8 @@ abstract class _$$FormInputFieldInfoCancelButtonImplCopyWith<T, $Res>
       __$$FormInputFieldInfoCancelButtonImplCopyWithImpl<T, $Res>;
   @override
   @useResult
-  $Res call({String id, String label, String sectionName, Function cancel});
+  $Res call(
+      {String id, String label, String sectionName, void Function() cancel});
 }
 
 /// @nodoc
@@ -1971,7 +1972,7 @@ class __$$FormInputFieldInfoCancelButtonImplCopyWithImpl<T, $Res>
       cancel: null == cancel
           ? _value.cancel
           : cancel // ignore: cast_nullable_to_non_nullable
-              as Function,
+              as void Function(),
     ));
   }
 }
@@ -1994,7 +1995,7 @@ class _$FormInputFieldInfoCancelButtonImpl<T>
   @override
   final String sectionName;
   @override
-  final Function cancel;
+  final void Function() cancel;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -2079,7 +2080,7 @@ class _$FormInputFieldInfoCancelButtonImpl<T>
             void Function(T)? onChange)
         imagePicker,
     required TResult Function(
-            String id, String label, String sectionName, Function cancel)
+            String id, String label, String sectionName, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
             void Function(Map<String, dynamic>?) save)
@@ -2129,8 +2130,8 @@ class _$FormInputFieldInfoCancelButtonImpl<T>
             bool hasError,
             void Function(T)? onChange)?
         imagePicker,
-    TResult? Function(
-            String id, String label, String sectionName, Function cancel)?
+    TResult? Function(String id, String label, String sectionName,
+            void Function() cancel)?
         cancelButton,
     TResult? Function(String id, String label, String sectionName,
             void Function(Map<String, dynamic>?) save)?
@@ -2180,8 +2181,8 @@ class _$FormInputFieldInfoCancelButtonImpl<T>
             bool hasError,
             void Function(T)? onChange)?
         imagePicker,
-    TResult Function(
-            String id, String label, String sectionName, Function cancel)?
+    TResult Function(String id, String label, String sectionName,
+            void Function() cancel)?
         cancelButton,
     TResult Function(String id, String label, String sectionName,
             void Function(Map<String, dynamic>?) save)?
@@ -2247,7 +2248,7 @@ abstract class FormInputFieldInfoCancelButton<T>
           {required final String id,
           required final String label,
           required final String sectionName,
-          required final Function cancel}) =
+          required final void Function() cancel}) =
       _$FormInputFieldInfoCancelButtonImpl<T>;
 
   @override
@@ -2256,7 +2257,7 @@ abstract class FormInputFieldInfoCancelButton<T>
   String get label;
   @override
   String get sectionName;
-  Function get cancel;
+  void Function() get cancel;
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -2427,7 +2428,7 @@ class _$FormInputFieldInfoSubmitButtonImpl<T>
             void Function(T)? onChange)
         imagePicker,
     required TResult Function(
-            String id, String label, String sectionName, Function cancel)
+            String id, String label, String sectionName, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
             void Function(Map<String, dynamic>?) save)
@@ -2477,8 +2478,8 @@ class _$FormInputFieldInfoSubmitButtonImpl<T>
             bool hasError,
             void Function(T)? onChange)?
         imagePicker,
-    TResult? Function(
-            String id, String label, String sectionName, Function cancel)?
+    TResult? Function(String id, String label, String sectionName,
+            void Function() cancel)?
         cancelButton,
     TResult? Function(String id, String label, String sectionName,
             void Function(Map<String, dynamic>?) save)?
@@ -2528,8 +2529,8 @@ class _$FormInputFieldInfoSubmitButtonImpl<T>
             bool hasError,
             void Function(T)? onChange)?
         imagePicker,
-    TResult Function(
-            String id, String label, String sectionName, Function cancel)?
+    TResult Function(String id, String label, String sectionName,
+            void Function() cancel)?
         cancelButton,
     TResult Function(String id, String label, String sectionName,
             void Function(Map<String, dynamic>?) save)?

@@ -52,7 +52,7 @@ sealed class FormInputFieldInfo<T> with _$FormInputFieldInfo<T> {
     required String id,
     required String label,
     required String sectionName,
-    required Function cancel,
+    required void Function() cancel,
   }) = FormInputFieldInfoCancelButton<T>;
 
   const factory FormInputFieldInfo.submitButton({
