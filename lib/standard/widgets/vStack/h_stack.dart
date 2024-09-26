@@ -58,7 +58,7 @@ class HStack extends StatelessWidget {
       SpacingPosition.after => null,
       SpacingPosition.beforeAndAfter => getSpacer(),
     };
-    logger.i('$className: Spacer at $currentIndex: $w');
+    // logger.i('$className: Spacer at $currentIndex: $w');
     return w;
   }
 
@@ -75,7 +75,7 @@ class HStack extends StatelessWidget {
       SpacingPosition.after => null,
       SpacingPosition.beforeAndAfter => null,
     };
-    logger.i('$className: Spacer at $currentIndex: $w');
+    // logger.i('$className: Spacer at $currentIndex: $w');
     return w;
   }
 
@@ -92,7 +92,7 @@ class HStack extends StatelessWidget {
       SpacingPosition.after => getSpacer(),
       SpacingPosition.beforeAndAfter => getSpacer(),
     };
-    logger.i('$className: Spacer at $currentIndex: $w');
+    // logger.i('$className: Spacer at $currentIndex: $w');
     return w;
   }
 }

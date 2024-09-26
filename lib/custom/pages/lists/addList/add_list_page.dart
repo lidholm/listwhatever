@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/form/form_generator.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
+import 'package:listwhatever/standard/widgets/vStack/v_stack.dart';
 
 import '/custom/pages/list_or_list_item_not_loaded_handler.dart';
 import '/custom/pages/lists/list_load_events/list_load_bloc.dart';
@@ -46,8 +48,7 @@ class _AddListPageState extends State<AddListPage> {
 
   ListOfThings? list;
   ListType? selectedListType;
-
-  // void _onChanged(dynamic val) => logger.d(val.toString());
+  bool showImage = false;
 
   @override
   void initState() {
@@ -59,6 +60,8 @@ class _AddListPageState extends State<AddListPage> {
 
   @override
   Widget build(BuildContext context) {
+    logger.i('$className: showImage: $showImage');
+
     if (widget.listId != null) {
       final listState = context.watch<ListLoadBloc>().state;
 
@@ -94,18 +97,23 @@ class _AddListPageState extends State<AddListPage> {
         optionToString: (listType) => (listType as ListType).name,
         sectionName: SectionName.basic.value,
         hasError: false,
+        onChange: (listType) => setState(() {
+          logger.i('$className: onChange ListType: $listType');
+          showImage = listType == ListType.other;
+        }),
       ),
-      FormInputFieldInfo<String>.imagePicker(
-        id: 'listTypeImage',
-        label: 'Image',
-        currentValue: null,
-        validators: [
-          FormBuilderValidators.required(),
-          FormBuilderValidators.maxLength(70),
-        ],
-        sectionName: SectionName.basic.value,
-        hasError: false,
-      ),
+      if (showImage)
+        FormInputFieldInfo<String>.imagePicker(
+          id: 'listTypeImage',
+          label: 'Image',
+          currentValue: null,
+          validators: [
+            FormBuilderValidators.required(),
+            FormBuilderValidators.maxLength(70),
+          ],
+          sectionName: SectionName.basic.value,
+          hasError: false,
+        ),
       FormInputFieldInfo<ListType>.checkbox(
         id: 'withMap',
         label: 'Use a map',
@@ -156,6 +164,7 @@ class _AddListPageState extends State<AddListPage> {
         },
       ),
     ];
+    logger.i('$className: number of fields: ${fields.length}');
 
     final sections = {
       SectionName.basic.value: x_stack.AxisDirection.vertical,

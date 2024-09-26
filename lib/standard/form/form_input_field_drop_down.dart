@@ -30,7 +30,9 @@ class FormInputFieldDropDown<T> extends StatelessWidget {
             ),
           )
           .toList(),
-      onChanged: (val) {},
+      onChanged: (val) {
+        field.onChange?.call(val);
+      },
       valueTransformer: (val) => val?.toString(),
     );
   }

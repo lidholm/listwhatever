@@ -13,6 +13,7 @@ sealed class FormInputFieldInfo<T> with _$FormInputFieldInfo<T> {
     required List<FormFieldValidator<String>> validators,
     required String sectionName,
     required bool hasError,
+    @Default(null) void Function(T)? onChange,
   }) = FormInputFieldInfoTextArea<T>;
 
   const factory FormInputFieldInfo.dropdown({
@@ -24,6 +25,7 @@ sealed class FormInputFieldInfo<T> with _$FormInputFieldInfo<T> {
     required List<FormFieldValidator<String>> validators,
     required String sectionName,
     required bool hasError,
+    @Default(null) void Function(dynamic)? onChange,
   }) = FormInputFieldInfoDropDown<T>;
 
   const factory FormInputFieldInfo.checkbox({
@@ -33,6 +35,7 @@ sealed class FormInputFieldInfo<T> with _$FormInputFieldInfo<T> {
     required List<FormFieldValidator<bool>> validators,
     required String sectionName,
     required bool hasError,
+    @Default(null) void Function(T)? onChange,
   }) = FormInputFieldInfoCheckbox<T>;
 
   const factory FormInputFieldInfo.imagePicker({
@@ -42,6 +45,7 @@ sealed class FormInputFieldInfo<T> with _$FormInputFieldInfo<T> {
     required List<FormFieldValidator<bool>> validators,
     required String sectionName,
     required bool hasError,
+    @Default(null) void Function(T)? onChange,
   }) = FormInputFieldInfoImagePicker<T>;
 
   const factory FormInputFieldInfo.cancelButton({

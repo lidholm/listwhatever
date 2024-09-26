@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/form/form_input_field_cancel_button.dart';
 import 'package:listwhatever/standard/form/form_input_field_checkbox.dart';
 import 'package:listwhatever/standard/form/form_input_field_drop_down.dart';
@@ -33,17 +34,15 @@ class FormGenerator extends StatefulWidget {
 }
 
 class _FormGeneratorState extends State<FormGenerator> {
-  // ignore: strict_raw_type
-  late final List<FormInputFieldInfo> formInputFields;
-
   @override
   void initState() {
     super.initState();
-    formInputFields = widget.fields;
   }
 
   @override
   Widget build(BuildContext context) {
+    logger.i('$className: building.');
+    logger.i('$className: fields: ${widget.fields.length}.');
     return FormBuilder(
       key: widget.formKey,
       // enabled: false,
@@ -71,8 +70,12 @@ class _FormGeneratorState extends State<FormGenerator> {
     MapEntry<String, x_stack.AxisDirection> section,
   ) {
     final sectionFields =
-        formInputFields.where((f) => f.sectionName == section.key);
+        widget.fields.where((f) => f.sectionName == section.key);
     final fields = sectionFields.map(generateField).toList();
+
+    logger.i(
+      '$className: generateSection ${section.key}: fields: ${fields.length}.',
+    );
 
     final child = XStack(
       axisDirection: section.value,
@@ -94,6 +97,8 @@ class _FormGeneratorState extends State<FormGenerator> {
   Widget generateField<T>(
     FormInputFieldInfo<T> field,
   ) {
+    logger.i('$className: generateField ${field.label}.');
+
     return switch (field) {
       FormInputFieldInfoTextArea() => FormInputFieldTextArea(field: field),
       FormInputFieldInfoDropDown() => FormInputFieldDropDown(field: field),
