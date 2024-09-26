@@ -9,11 +9,9 @@ import 'package:listwhatever/standard/form/form_input_field_submit_button.dart';
 import 'package:listwhatever/standard/form/form_input_field_text_area.dart';
 import 'package:listwhatever/standard/widgets/border_with_header.dart';
 import 'package:listwhatever/standard/widgets/vStack/v_stack.dart';
+import 'package:listwhatever/standard/widgets/vStack/x_stack.dart';
 
-enum SectionDirection {
-  horizontal,
-  vertical,
-}
+import '/standard/widgets/vStack/x_stack.dart' as x_stack;
 
 class FormGenerator extends StatefulWidget {
   const FormGenerator({
@@ -24,7 +22,7 @@ class FormGenerator extends StatefulWidget {
   });
 
   final GlobalKey<FormBuilderState> formKey;
-  final Map<String, SectionDirection> sections;
+  final Map<String, x_stack.AxisDirection> sections;
   // ignore: strict_raw_type
   final List<FormInputFieldInfo> fields;
 
@@ -63,33 +61,33 @@ class _FormGeneratorState extends State<FormGenerator> {
       // },
       skipDisabled: true,
       child: VStack(
+        spacing: 25,
         children: widget.sections.entries.map(generateSection).toList(),
       ),
     );
   }
 
   Widget generateSection(
-    MapEntry<String, SectionDirection> section,
+    MapEntry<String, x_stack.AxisDirection> section,
   ) {
     final sectionFields =
         formInputFields.where((f) => f.sectionName == section.key);
     final fields = sectionFields.map(generateField).toList();
 
-    final child = section.value == SectionDirection.horizontal
-        ? Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ...fields,
-            ],
-          )
-        : Column(
-            children: [
-              SizedBox(
-                height: 10,
-              ),
-              ...fields,
-            ],
-          );
+    final child = XStack(
+      axisDirection: section.value,
+      mainAxisAlignment: section.value == x_stack.AxisDirection.horizontal
+          ? MainAxisAlignment.spaceEvenly
+          : MainAxisAlignment.center,
+      spacing: section.value == x_stack.AxisDirection.horizontal ? 0 : 10,
+      spacingPosition: section.value == x_stack.AxisDirection.horizontal
+          ? SpacingPosition.none
+          : SpacingPosition.beforeAndBetween,
+      children: [
+        ...fields,
+      ],
+    );
+
     return BorderWithHeader(title: section.key, child: child);
   }
 

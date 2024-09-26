@@ -250,7 +250,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
       initialValue: initialValue,
       skipDisabled: true,
       child: VStack(
-        verticalAlignment: VerticalAlignment.leading,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: children,
       ),
     );

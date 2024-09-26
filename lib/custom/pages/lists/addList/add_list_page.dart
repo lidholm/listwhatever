@@ -12,6 +12,7 @@ import '/custom/pages/lists/list_load_events/list_load_state.dart';
 import '/custom/pages/lists/models/list_of_things.dart';
 import '/custom/pages/lists/models/list_type.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
+import '/standard/widgets/vStack/x_stack.dart' as x_stack;
 
 enum SectionName {
   basic._('Basic information'),
@@ -157,10 +158,10 @@ class _AddListPageState extends State<AddListPage> {
     ];
 
     final sections = {
-      SectionName.basic.value: SectionDirection.vertical,
-      SectionName.options.value: SectionDirection.vertical,
-      SectionName.shared.value: SectionDirection.vertical,
-      SectionName.submit.value: SectionDirection.horizontal,
+      SectionName.basic.value: x_stack.AxisDirection.vertical,
+      SectionName.options.value: x_stack.AxisDirection.vertical,
+      SectionName.shared.value: x_stack.AxisDirection.vertical,
+      SectionName.submit.value: x_stack.AxisDirection.horizontal,
     };
 
     final formGenerator = FormGenerator(

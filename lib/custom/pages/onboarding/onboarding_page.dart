@@ -100,7 +100,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       initialValue: initialValue,
       skipDisabled: true,
       child: VStack(
-        verticalAlignment: VerticalAlignment.leading,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: children,
       ),
     );
