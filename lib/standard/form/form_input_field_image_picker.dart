@@ -21,9 +21,9 @@ class _FormInputFieldImagePickerState<T>
   @override
   Widget build(BuildContext context) {
     return FormBuilderImagePicker(
-      name: 'photos',
+      name: widget.field.id,
       initialValue: [widget.field.currentValue],
-      decoration: const InputDecoration(labelText: 'Pick Photos'),
+      decoration: const InputDecoration(labelText: 'Pick Image'),
       maxImages: 1,
     );
   }

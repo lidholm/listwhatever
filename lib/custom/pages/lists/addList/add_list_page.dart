@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_image_picker/form_builder_image_picker.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:go_router/go_router.dart';
+import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_bloc.dart';
+import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_event.dart';
 import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/form/form_generator.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
@@ -16,6 +20,8 @@ import '/custom/pages/lists/models/list_type.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
 import '/standard/widgets/vStack/x_stack.dart' as x_stack;
 
+const String className = 'AddListPage';
+
 enum SectionName {
   basic._('Basic information'),
   options._('Options'),
@@ -23,6 +29,21 @@ enum SectionName {
   submit._('Submit');
 
   const SectionName._(this.value);
+
+  final String value;
+}
+
+enum FieldId {
+  name._('name'),
+  listType._('listType'),
+  listTypeImage._('listTypeImage'),
+  withMap._('withMap'),
+  withDates._('withDates'),
+  withTimes._('withTimes'),
+  cancel._('cancel'),
+  submit._('submit');
+
+  const FieldId._(this.value);
 
   final String value;
 }
@@ -36,8 +57,6 @@ class AddListPage extends StatefulWidget {
 }
 
 class _AddListPageState extends State<AddListPage> {
-  // static String className = 'AddListPage';
-
   bool autoValidate = true;
   bool readOnly = false;
   bool showSegmentedControl = true;
@@ -70,12 +89,14 @@ class _AddListPageState extends State<AddListPage> {
       if (listStateView != null) {
         return listStateView;
       }
-      list = (listState as ListLoadLoaded).list;
+      setState(() {
+        list = (listState as ListLoadLoaded).list;
+      });
     }
 
     fields = [
       FormInputFieldInfo.textArea(
-        id: 'name',
+        id: FieldId.name.value,
         label: 'Name',
         currentValue: list?.name ?? '',
         validators: [
@@ -86,7 +107,7 @@ class _AddListPageState extends State<AddListPage> {
         hasError: false,
       ),
       FormInputFieldInfo<ListType>.dropdown(
-        id: 'listType',
+        id: FieldId.listType.value,
         label: 'List type',
         currentValue: list?.listType ?? ListType.generic,
         validators: [
@@ -104,7 +125,7 @@ class _AddListPageState extends State<AddListPage> {
       ),
       if (showImage ?? list?.listType == ListType.other)
         FormInputFieldInfo<String>.imagePicker(
-          id: 'listTypeImage',
+          id: FieldId.listTypeImage.value,
           label: 'Image',
           currentValue: null,
           validators: [
@@ -115,7 +136,7 @@ class _AddListPageState extends State<AddListPage> {
           hasError: false,
         ),
       FormInputFieldInfo<bool>.checkbox(
-        id: 'withMap',
+        id: FieldId.withMap.value,
         label: 'Use a map',
         currentValue: list?.withMap ?? false,
         validators: [
@@ -126,7 +147,7 @@ class _AddListPageState extends State<AddListPage> {
         hasError: false,
       ),
       FormInputFieldInfo<bool>.checkbox(
-        id: 'withDate',
+        id: FieldId.withDates.value,
         label: 'Use dates',
         currentValue: list?.withDates ?? false,
         validators: [
@@ -137,7 +158,7 @@ class _AddListPageState extends State<AddListPage> {
         hasError: false,
       ),
       FormInputFieldInfo<bool>.checkbox(
-        id: 'withTime',
+        id: FieldId.withTimes.value,
         label: 'Use time',
         currentValue: list?.withTimes ?? false,
         validators: [
@@ -148,7 +169,7 @@ class _AddListPageState extends State<AddListPage> {
         hasError: false,
       ),
       FormInputFieldInfo<ListType>.cancelButton(
-        id: 'cancel',
+        id: FieldId.cancel.value,
         label: 'Cancel',
         sectionName: SectionName.submit.value,
         cancel: () {
@@ -156,15 +177,28 @@ class _AddListPageState extends State<AddListPage> {
         },
       ),
       FormInputFieldInfo<ListType>.submitButton(
-        id: 'submit',
+        id: FieldId.submit.value,
         label: 'Submit',
         sectionName: SectionName.submit.value,
         save: (Map<String, dynamic>? values) {
           print('save');
+          if (values == null) {
+            print('No values to save');
+            return;
+          }
+          save(values);
+          // print(values);
+          // if (values?.containsKey('listTypeImage') ?? false) {
+          //   final images = values?['listTypeImage'] as List;
+          //   if (images.isNotEmpty) {
+          //     final image = images[0] as XFile;
+          //     print(image.path);
+          //     print(image.name);
+          //   }
+          // }
         },
       ),
     ];
-    logger.i('$className: number of fields: ${fields.length}');
 
     final sections = {
       SectionName.basic.value: x_stack.AxisDirection.vertical,
@@ -189,33 +223,33 @@ class _AddListPageState extends State<AddListPage> {
     );
   }
 
-  void save(FormBuilderState? currentState) {
-    final values = <String, dynamic>{};
-    for (final entry in currentState!.fields.entries) {
-      values[entry.key] = entry.value.value;
+  void save(Map<String, dynamic> values) {
+    final listTypeName = values[FieldId.listType.value] as String;
+    final listType = ListType.values
+        .where((l) => l.name == listTypeName.split('.').last)
+        .first;
+
+    logger.d('values: $values');
+    final list = ListOfThings(
+        id: widget.listId,
+        name: values[FieldId.name.value]! as String,
+        listType: listType,
+        // imageFilename: getImageFilename(),
+        withMap: values[FieldId.withMap.value] as bool,
+        withDates: values[FieldId.withDates.value] as bool,
+        withTimes: values[FieldId.withTimes.value] as bool,
+        shared: false, //values[AddListValues.share.toString()] as bool,
+        shareCodeForViewer: null,
+        shareCodeForEditor: null,
+        sharedWith: {},
+        ownerId: '' // initialValue[list] as String?,
+        );
+    if (widget.listId == null) {
+      BlocProvider.of<ListCrudBloc>(context).add(AddList(list));
+    } else {
+      BlocProvider.of<ListCrudBloc>(context).add(UpdateList(list));
     }
-    // final listType = values[AddListValues.type.toString()] as ListType;
-    // logger.d('values: $values');
-    // final list = ListOfThings(
-    //   id: initialValue[AddListValues.id.toString()] as String?,
-    //   name: values[AddListValues.name.toString()]! as String,
-    //   listType: listType,
-    //   // imageFilename: getImageFilename(),
-    //   withMap: values[AddListValues.withMap.toString()] as bool,
-    //   withDates: values[AddListValues.withDates.toString()] as bool,
-    //   withTimes: values[AddListValues.withTimes.toString()] as bool,
-    //   shared: false, //values[AddListValues.share.toString()] as bool,
-    //   shareCodeForViewer: null,
-    //   shareCodeForEditor: null,
-    //   sharedWith: {},
-    //   ownerId: initialValue[AddListValues.ownerId.toString()] as String?,
-    // );
-    // if (widget.listId == null) {
-    //   BlocProvider.of<ListCrudBloc>(context).add(AddList(list));
-    // } else {
-    //   BlocProvider.of<ListCrudBloc>(context).add(UpdateList(list));
-    // }
-    // logger.i('$className -> popping once');
-    // GoRouter.of(context).pop();
+    logger.i('$className -> popping once');
+    GoRouter.of(context).pop();
   }
 }
