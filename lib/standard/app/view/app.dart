@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listwhatever/custom/pages/lists/page/list_type_cubit/list_type_cubit.dart';
+import 'package:listwhatever/standard/firebase/firebaseStorageBloc/bloc/firebase_storage_bloc.dart';
 
 import '/custom/currentLocationBloc/current_location_bloc.dart';
 import '/custom/navigation/get_router_provider_information.dart';
@@ -94,6 +95,7 @@ class App extends StatelessWidget {
               ],
             ),
           ),
+          BlocProvider(create: (_) => FirebaseStorageBloc()),
           BlocProvider(create: (_) => ThemeModeBloc()),
           BlocProvider<ListTypeCubit>(create: (context) => ListTypeCubit()),
           BlocProvider<OnScreenLogsCubit>(
