@@ -19,10 +19,13 @@ class FormInputFieldCancelButton<T> extends StatelessWidget {
         field.cancel();
       },
       // color: Theme.of(context).colorScheme.secondary,
-      child: Text(
-        'Reset',
-        style: TextStyle(
-          color: Theme.of(context).colorScheme.secondary,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+        child: Text(
+          'Reset',
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.secondary,
+          ),
         ),
       ),
     );

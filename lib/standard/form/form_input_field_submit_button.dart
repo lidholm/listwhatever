@@ -25,8 +25,11 @@ class FormInputFieldSubmitButton<T> extends StatelessWidget {
             ..d('validation failed');
         }
       },
-      child: Text(
-        field.label,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+        child: Text(
+          field.label,
+        ),
       ),
     );
   }

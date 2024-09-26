@@ -22,6 +22,7 @@ class _FormInputFieldImagePickerState<T>
   Widget build(BuildContext context) {
     return FormBuilderImagePicker(
       name: 'photos',
+      initialValue: [widget.field.currentValue],
       decoration: const InputDecoration(labelText: 'Pick Photos'),
       maxImages: 1,
     );

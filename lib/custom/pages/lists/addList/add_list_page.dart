@@ -48,7 +48,7 @@ class _AddListPageState extends State<AddListPage> {
 
   ListOfThings? list;
   ListType? selectedListType;
-  bool showImage = false;
+  bool? showImage = false;
 
   @override
   void initState() {
@@ -77,7 +77,7 @@ class _AddListPageState extends State<AddListPage> {
       FormInputFieldInfo.textArea(
         id: 'name',
         label: 'Name',
-        currentValue: list?.name,
+        currentValue: list?.name ?? '',
         validators: [
           FormBuilderValidators.required(),
           FormBuilderValidators.maxLength(70),
@@ -88,7 +88,7 @@ class _AddListPageState extends State<AddListPage> {
       FormInputFieldInfo<ListType>.dropdown(
         id: 'listType',
         label: 'List type',
-        currentValue: list?.listType ?? ListType.other,
+        currentValue: list?.listType ?? ListType.generic,
         validators: [
           FormBuilderValidators.required(),
           FormBuilderValidators.maxLength(70),
@@ -102,7 +102,7 @@ class _AddListPageState extends State<AddListPage> {
           showImage = listType == ListType.other;
         }),
       ),
-      if (showImage)
+      if (showImage ?? list?.listType == ListType.other)
         FormInputFieldInfo<String>.imagePicker(
           id: 'listTypeImage',
           label: 'Image',
@@ -114,10 +114,10 @@ class _AddListPageState extends State<AddListPage> {
           sectionName: SectionName.basic.value,
           hasError: false,
         ),
-      FormInputFieldInfo<ListType>.checkbox(
+      FormInputFieldInfo<bool>.checkbox(
         id: 'withMap',
         label: 'Use a map',
-        currentValue: false,
+        currentValue: list?.withMap ?? false,
         validators: [
           FormBuilderValidators.required(),
           FormBuilderValidators.maxLength(70),
@@ -125,10 +125,10 @@ class _AddListPageState extends State<AddListPage> {
         sectionName: SectionName.options.value,
         hasError: false,
       ),
-      FormInputFieldInfo<ListType>.checkbox(
+      FormInputFieldInfo<bool>.checkbox(
         id: 'withDate',
         label: 'Use dates',
-        currentValue: false,
+        currentValue: list?.withDates ?? false,
         validators: [
           FormBuilderValidators.required(),
           FormBuilderValidators.maxLength(70),
@@ -136,10 +136,10 @@ class _AddListPageState extends State<AddListPage> {
         sectionName: SectionName.options.value,
         hasError: false,
       ),
-      FormInputFieldInfo<ListType>.checkbox(
+      FormInputFieldInfo<bool>.checkbox(
         id: 'withTime',
         label: 'Use time',
-        currentValue: false,
+        currentValue: list?.withTimes ?? false,
         validators: [
           FormBuilderValidators.required(),
           FormBuilderValidators.maxLength(70),
@@ -169,7 +169,6 @@ class _AddListPageState extends State<AddListPage> {
     final sections = {
       SectionName.basic.value: x_stack.AxisDirection.vertical,
       SectionName.options.value: x_stack.AxisDirection.vertical,
-      SectionName.shared.value: x_stack.AxisDirection.vertical,
       SectionName.submit.value: x_stack.AxisDirection.horizontal,
     };
 

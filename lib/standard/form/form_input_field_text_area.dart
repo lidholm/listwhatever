@@ -13,6 +13,7 @@ class FormInputFieldTextArea<T> extends StatelessWidget {
     return FormBuilderTextField(
       autovalidateMode: AutovalidateMode.always,
       name: field.id,
+      initialValue: field.currentValue.toString(),
       decoration: InputDecoration(
         labelText: field.label,
         suffixIcon: field.hasError

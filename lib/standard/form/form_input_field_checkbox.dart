@@ -13,6 +13,7 @@ class FormInputFieldCheckbox<T> extends StatelessWidget {
     return FormBuilderCheckbox(
       autovalidateMode: AutovalidateMode.always,
       name: field.id,
+      initialValue: field.currentValue,
       decoration: InputDecoration(
         labelText: field.label,
         suffixIcon: field.hasError

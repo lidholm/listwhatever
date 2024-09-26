@@ -12,6 +12,7 @@ class FormInputFieldDropDown<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return FormBuilderDropdown<T>(
       name: field.id,
+      initialValue: field.currentValue,
       decoration: InputDecoration(
         labelText: 'Type',
         suffix:
