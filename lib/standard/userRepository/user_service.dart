@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/standard/constants.dart';
-import '../firebase/firestore_service.dart';
+import '/standard/firebase/firestore_service.dart';
 import '/standard/userRepository/models/user.dart';
 
 class UserService extends FirestoreService {

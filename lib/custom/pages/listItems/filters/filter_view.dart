@@ -17,6 +17,8 @@ import 'bloc/filter_bloc.dart';
 import 'bloc/filter_event.dart';
 import 'date_filter.dart';
 
+const String className = 'FilterView';
+
 class SelectedChipsCubit extends Cubit<Set<String>> {
   SelectedChipsCubit() : super({});
   void update(Set<String> selected) => emit(selected);
@@ -45,7 +47,6 @@ class FilterView extends StatefulWidget {
 }
 
 class _FilterViewState extends State<FilterView> {
-  static String className = 'FilterView';
   double distanceValue = distanceMax;
   final _formKey = GlobalKey<FormBuilderState>();
 
@@ -135,14 +136,14 @@ class _FilterViewState extends State<FilterView> {
     final values = (distanceValue == distanceMax)
         ? [initialValue ?? distanceValue]
         : [distanceValue];
-    logger.i('$className => values: $values');
+    // logger.i('$className => values: $values');
     return BorderWithHeader(
       title: context.l10n.distanceFilterText(settings.distanceUnit.toString()),
       child: FormBuilderField(
         name: distanceFieldName,
         key: const Key(distanceFieldName),
         builder: (FormFieldState<dynamic> field) {
-          logger.i('$className => field: $field');
+          // logger.i('$className => field: $field');
           return FlutterSlider(
             values: values,
             max: distanceMax,
@@ -237,7 +238,7 @@ class _FilterViewState extends State<FilterView> {
         if (d != distanceMax) {
           maxDistance = convertDistanceToMeters(settings.distanceUnit, d);
         }
-        logger.i('$className => Distance: $d, $maxDistance');
+        // logger.i('$className => Distance: $d, $maxDistance');
       } else {
         final values = field.value.value as List<String>?;
         if (values != null && values.isNotEmpty) {

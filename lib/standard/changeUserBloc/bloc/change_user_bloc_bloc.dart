@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import '../../firebase/firestore_service.dart';
+import '/standard/firebase/firestore_service.dart';
 import '/standard/userRepository/models/user.dart';
 
 part 'change_user_bloc_event.dart';

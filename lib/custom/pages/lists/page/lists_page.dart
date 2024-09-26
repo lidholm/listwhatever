@@ -13,7 +13,7 @@ import '/custom/pages/lists/lists_load_events/lists_bloc.dart';
 import '/custom/pages/lists/lists_load_events/lists_event.dart';
 import '/custom/pages/lists/lists_load_events/lists_state.dart';
 import '/l10n/l10n.dart';
-import '../../../../standard/firebase/firebase_storage.dart';
+import '/standard/firebase/firebase_storage.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
 
 class ListsPage extends StatefulWidget {
