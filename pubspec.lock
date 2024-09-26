@@ -802,6 +802,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "10.7.0"
+  form_builder_image_picker:
+    dependency: "direct main"
+    description:
+      name: form_builder_image_picker
+      sha256: "90c861157a367bfd1259368e61b04daef805df1ee7c53667391bc470ad4768c6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.1.0"
   form_builder_validators:
     dependency: "direct main"
     description:
