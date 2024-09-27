@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_builder_image_picker/form_builder_image_picker.dart';
-import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/firebase/firebaseStorageBloc/bloc/firebase_storage_bloc.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 
@@ -60,9 +59,7 @@ class _FormInputFieldImagePickerState<T>
       decoration: const InputDecoration(
         labelText: 'Pick list image',
       ),
-      showDecoration: true,
       maxImages: 1,
-      previewAutoSizeWidth: true,
       initialValue: initialValue,
     );
   }
