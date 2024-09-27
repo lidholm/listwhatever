@@ -39,6 +39,8 @@ class FirebaseStorageBloc
         logger.i('$className: imageUrl: $imageUrl');
         loadedFiles[filename] = imageUrl;
       }
+
+      urls.add(loadedFiles[filename]!);
     }
 
     emit(FilesLoaded(urls));

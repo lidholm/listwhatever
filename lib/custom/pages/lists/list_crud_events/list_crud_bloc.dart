@@ -62,6 +62,17 @@ class ListCrudBloc extends Bloc<ListCrudEvent, ListCrudState> {
     try {
       emit(ListCrudLoading());
       await _listsService.updateList(event.list);
+      final list = event.list;
+      final userList = UserList(
+        id: '',
+        imageFilename: list.imageFilename,
+        listId: list.id!,
+        listName: list.name,
+        listType: list.listType,
+        ownerId: list.ownerId!,
+        isOwnList: true,
+      );
+      await _userListsService.updateList(userList);
       emit(ListCrudUpdated(event.list));
     } catch (e) {
       logger.e('Error: $e');
