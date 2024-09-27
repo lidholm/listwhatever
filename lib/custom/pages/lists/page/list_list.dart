@@ -49,7 +49,7 @@ class ListList extends StatelessWidget {
                         ListItemsPageRoute(actualListId: list.listId)
                             .push<void>(userListContext);
                       },
-                      leading: imageWidget(imageUrl ?? ''),
+                      leading: imageUrl == null ? null : imageWidget(imageUrl),
                       title: Text(
                         list.listName,
                         style: const TextStyle(fontWeight: FontWeight.bold),
