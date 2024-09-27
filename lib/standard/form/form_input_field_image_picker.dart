@@ -36,7 +36,7 @@ class _FormInputFieldImagePickerState<T>
     super.initState();
     if (widget.field.currentValue != null) {
       BlocProvider.of<FirebaseStorageBloc>(context)
-          .add(FirebaseStorageEvent.loadFile(widget.field.currentValue!));
+          .add(FirebaseStorageEvent.loadFiles([widget.field.currentValue!]));
     }
   }
 
@@ -47,8 +47,15 @@ class _FormInputFieldImagePickerState<T>
     return switch (firebaseStorageState) {
       Initial() => showImagePicker(null),
       Loading() => const CircularProgressIndicator(),
-      FileLoaded(:final imageUrl) => showImagePicker(imageUrl),
+      FilesLoaded(:final imageUrls) => showImagePickerForList(imageUrls),
     };
+  }
+
+  Widget showImagePickerForList(List<String?> imageUrls) {
+    if (imageUrls.isEmpty || imageUrls.first == null) {
+      return const CircularProgressIndicator();
+    }
+    return showImagePicker(imageUrls.first);
   }
 
   Widget showImagePicker(String? imageUrl) {

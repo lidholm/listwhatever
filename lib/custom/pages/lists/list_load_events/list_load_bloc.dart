@@ -18,7 +18,7 @@ class ListLoadBloc extends Bloc<ListLoadEvent, ListLoadState> {
     Emitter<ListLoadState> emit,
   ) async {
     try {
-      logger.e('$className: event: $event');
+      // logger.e('$className: event: $event');
       emit(ListLoadLoading());
       _listsService.changeUser(event.userId);
       emit(ListLoadLoaded(null));

@@ -68,7 +68,7 @@ class _AddListPageState extends State<AddListPage> {
 
   late ListOfThings? list;
   ListType? selectedListType;
-  bool? showImage = false;
+  bool? showImage;
   bool imageUploaded = false;
 
   @override
@@ -96,7 +96,9 @@ class _AddListPageState extends State<AddListPage> {
         list = (listState as ListLoadLoaded).list;
       });
     }
-    showImage = list?.listType == ListType.other;
+
+    showImage ??= list?.listType == ListType.other;
+    logger.i('$className: showImage: $showImage');
 
     fields = [
       FormInputFieldInfo.textArea(
@@ -124,7 +126,10 @@ class _AddListPageState extends State<AddListPage> {
         hasError: false,
         onChange: (listType) => setState(() {
           logger.i('$className: onChange ListType: $listType');
-          showImage = listType == ListType.other;
+          setState(() {
+            showImage = listType == ListType.other;
+            logger.i('$className: showImage: $showImage');
+          });
         }),
       ),
       if (showImage ?? list?.listType == ListType.other)
@@ -231,10 +236,10 @@ class _AddListPageState extends State<AddListPage> {
     if (values.containsKey(FieldId.listTypeImage.value)) {
       imageFilename =
           await uploadImage(values[FieldId.listTypeImage.value] as List);
-      logger.i('$className: imageFilename: $imageFilename');
+      // logger.i('$className: imageFilename: $imageFilename');
     }
 
-    logger.d('values: $values');
+    // logger.d('values: $values');
     final newList = ListOfThings(
       id: widget.listId,
       name: values[FieldId.name.value]! as String,
@@ -249,13 +254,13 @@ class _AddListPageState extends State<AddListPage> {
       sharedWith: {},
       ownerId: list?.ownerId,
     );
-    logger.d('newList: $newList');
+    // logger.d('newList: $newList');
     if (widget.listId == null) {
       listCrudBloc.add(AddList(newList));
     } else {
       listCrudBloc.add(UpdateList(newList));
     }
-    logger.i('$className -> popping once');
+    // logger.i('$className -> popping once');
     goRouter.pop();
   }
 

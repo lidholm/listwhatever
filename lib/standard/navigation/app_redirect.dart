@@ -17,12 +17,12 @@ class AppRedirect {
     GoRouterState state,
     RouterProviderInformation routerProviderInformation,
   ) async {
-    logger.d('===================\n');
+    // logger.d('===================\n');
     final appBloc = BlocProvider.of<AppBloc>(context);
     final appState = appBloc.state;
-    logger
-      ..i('$className => state.uri.path: ${state.uri.path}')
-      ..i('$className => appState: ${getFirstXChars(appState.toString(), 100)}   QQQ10');
+    // logger
+    //   ..i('$className => state.uri.path: ${state.uri.path}')
+    //   ..i('$className => appState: ${getFirstXChars(appState.toString(), 100)}   QQQ10');
 
     if (state.uri.path == const LoginPageRoute().location &&
         appState is LoggedOut) {
@@ -52,7 +52,7 @@ class AppRedirect {
       context.read<RedirectCubit>().setRedirect(fromParam);
 
       final redirectUri = routerProviderInformation.signInRouteLocation;
-      logger.i('$className => redirectUri: $redirectUri    QQQ13');
+      // logger.i('$className => redirectUri: $redirectUri    QQQ13');
       return redirectUri;
     }
 

@@ -12,33 +12,35 @@ const String className = 'FirebaseStorageBloc';
 class FirebaseStorageBloc
     extends Bloc<FirebaseStorageEvent, FirebaseStorageState> {
   FirebaseStorageBloc() : super(const Initial()) {
-    on<_LoadFile>(_onLoadFile);
+    on<_LoadFiles>(_onLoadFiles);
   }
   final Map<String, String> loadedFiles = {};
 
-  Future<void> _onLoadFile(
-    _LoadFile event,
+  Future<void> _onLoadFiles(
+    _LoadFiles event,
     Emitter<FirebaseStorageState> emit,
   ) async {
     emit(const Loading());
-    logger.i('$className: onLoadFile: ${event.filename}');
+    logger.i('$className: onLoadFile: ${event.filenames}');
 
-    if (loadedFiles.containsKey(event.filename)) {
-      logger.i(
-        '$className: already loaded, just returning: ${event.filename} => ${loadedFiles[event.filename]}',
-      );
-      emit(FileLoaded(loadedFiles[event.filename]!));
-      return;
+    final urls = <String>[];
+
+    for (final filename in event.filenames) {
+      if (loadedFiles.containsKey(filename)) {
+        logger.i(
+          '$className: already loaded, just returning: $filename => ${loadedFiles[filename]}',
+        );
+      } else {
+        final imageUrl = await (await getFirebaseStorage())
+            .ref()
+            .child('images')
+            .child(filename)
+            .getDownloadURL();
+        logger.i('$className: imageUrl: $imageUrl');
+        loadedFiles[filename] = imageUrl;
+      }
     }
 
-    final imageUrl = await (await getFirebaseStorage())
-        .ref()
-        .child('images')
-        .child(event.filename)
-        .getDownloadURL();
-    logger.i('$className: imageUrl: $imageUrl');
-
-    loadedFiles[event.filename] = imageUrl;
-    emit(FileLoaded(imageUrl));
+    emit(FilesLoaded(urls));
   }
 }

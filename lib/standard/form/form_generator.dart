@@ -62,9 +62,9 @@ class _FormGeneratorState extends State<FormGenerator> {
         widget.fields.where((f) => f.sectionName == section.key);
     final fields = sectionFields.map(generateField).toList();
 
-    logger.i(
-      '$className: generateSection ${section.key}: fields: ${fields.length}.',
-    );
+    // logger.i(
+    //     '$className: generateSection ${section.key}: fields: ${fields.length}.',
+    //     );
 
     final child = XStack(
       axisDirection: section.value,
@@ -86,7 +86,7 @@ class _FormGeneratorState extends State<FormGenerator> {
   Widget generateField<T>(
     FormInputFieldInfo<T> field,
   ) {
-    logger.i('$className: generateField ${field.label}.');
+    // logger.i('$className: generateField ${field.label}.');
 
     return switch (field) {
       FormInputFieldInfoTextArea() => FormInputFieldTextArea(field: field),
