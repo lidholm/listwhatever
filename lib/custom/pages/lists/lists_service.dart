@@ -2,14 +2,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/custom/pages/lists/models/list_of_things.dart';
 import '/standard/constants.dart';
-import '../../../standard/firebase/firestore_service.dart';
+import '/standard/firebase/firestore_service.dart';
+
+const String className = 'ListsService';
 
 class ListsService extends FirestoreService {
   ListsService({super.userId});
 
   Future<CollectionReference<Map<String, dynamic>>> getCollection() async {
     const path = '/lists';
-    // logger.d('actual lists path: $path');
+    logger.d('actual lists path: $path');
     return firestore.collection(path);
   }
 
@@ -60,9 +62,12 @@ class ListsService extends FirestoreService {
   }
 
   Future<void> updateList(ListOfThings list) async {
-    // logger.d('updating actual list: $list');
+    logger.d('$className: updating actual list: $list');
     final listsCollection = await getCollection();
-    return listsCollection.doc(list.id).update(list.toJson());
+    final doc = listsCollection.doc(list.id);
+    logger.d('$className: doc: $doc');
+    await doc.update(list.toJson());
+    return;
   }
 
   Future<void> deleteList(String actualListId) async {
