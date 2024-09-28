@@ -59,8 +59,9 @@ class _FormGeneratorState extends State<FormGenerator> {
   Widget generateSection(
     FormInputSection section,
   ) {
+    logger.d('widget.fields: ${widget.fields}');
     final sectionFields =
-        widget.fields.where((f) => f!.sectionName == section.name);
+        widget.fields.where((f) => f?.sectionName == section.name);
     final fields = sectionFields.map(generateField).toList();
 
     // logger.i(
@@ -103,7 +104,7 @@ class _FormGeneratorState extends State<FormGenerator> {
       return const CircularProgressIndicator();
     }
 
-    return switch (field) {
+    final response = switch (field) {
       FormInputFieldInfoTextArea() =>
         FormInputFieldTextArea<T, S>(field: field),
       FormInputFieldInfoDropDown() =>
@@ -121,5 +122,6 @@ class _FormGeneratorState extends State<FormGenerator> {
       FormInputFieldInfoCustomButton<T, S>() => throw UnimplementedError(),
       FormInputFieldInfoDate<T, S>() => throw UnimplementedError(),
     };
+    return response;
   }
 }
