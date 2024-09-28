@@ -10,9 +10,9 @@ class TestMain(unittest.TestCase):
         stringUtils = StringUtils()
 
         # Call the function being tested
-        response = stringUtils.get_random_string(request)
+        response = stringUtils.get_random_string(5)
 
         # Assert the response
-        self.assertEqual(response, b"Hello world!")
+        self.assertEqual(len(response), 5)
 
         
