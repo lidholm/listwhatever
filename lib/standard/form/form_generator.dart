@@ -7,6 +7,7 @@ import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/form/form_input_field_cancel_button.dart';
 import 'package:listwhatever/standard/form/form_input_field_checkbox.dart';
 import 'package:listwhatever/standard/form/form_input_field_custom_button.dart';
+import 'package:listwhatever/standard/form/form_input_field_date.dart';
 import 'package:listwhatever/standard/form/form_input_field_drop_down.dart';
 import 'package:listwhatever/standard/form/form_input_field_image_picker.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
@@ -125,7 +126,7 @@ class _FormGeneratorState extends State<FormGenerator> {
         const Text('TwoFreeTextDropdown'),
       FormInputFieldInfoCustomButton<T, S>() =>
         FormInputFieldCustomButton<T, S>(formKey: widget.formKey, field: field),
-      FormInputFieldInfoDate<T, S>() => const Text('Date'),
+      FormInputFieldInfoDate<T, S>() => FormInputFieldDate<T, S>(field: field),
     };
     return response;
   }
