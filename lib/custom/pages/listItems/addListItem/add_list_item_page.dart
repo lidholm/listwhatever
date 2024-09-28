@@ -129,26 +129,8 @@ class _AddListItemPageState extends State<AddListItemPage> {
     list = (listState as ListLoadLoaded).list;
     return BlocListener<ListItemCrudBloc, ListItemCrudState>(
       listener: (context, state) {
-        logger.i('$className => state: $state');
-        if (state is ListItemCrudDeleted) {
-          setState(() {
-            listItemId = null;
-          });
-          logger.i('$className -> popping twice');
-          GoRouter.of(context).pop();
-          GoRouter.of(context).pop();
-        } else if (state is ListItemCrudUpdated) {
-          logger
-            ..i('$className => popping GoRouter after updated')
-            ..i('$className -> popping twice');
-          GoRouter.of(context).pop();
-          GoRouter.of(context).pop();
-        } else if (state is ListItemCrudAdded) {
-          logger
-            ..i('$className => popping GoRouter after added')
-            ..i('$className -> popping once');
-          GoRouter.of(context).pop();
-        }
+        final goRouter = GoRouter.of(context);
+        return listItemChangedListener(goRouter, state);
       },
       child: Scaffold(
         appBar: CommonAppBar(
@@ -741,5 +723,30 @@ class _AddListItemPageState extends State<AddListItemPage> {
       }
     }
     return null;
+  }
+
+  void listItemChangedListener(GoRouter goRouter, ListItemCrudState state) {
+    logger.i('$className => state: $state');
+    if (state is ListItemCrudDeleted) {
+      setState(() {
+        listItemId = null;
+      });
+      logger.i('$className -> popping twice');
+      goRouter
+        ..pop()
+        ..pop();
+    } else if (state is ListItemCrudUpdated) {
+      logger
+        ..i('$className => popping GoRouter after updated')
+        ..i('$className -> popping twice');
+      goRouter
+        ..pop()
+        ..pop();
+    } else if (state is ListItemCrudAdded) {
+      logger
+        ..i('$className => popping GoRouter after added')
+        ..i('$className -> popping once');
+      goRouter.pop();
+    }
   }
 }
