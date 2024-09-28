@@ -12,7 +12,13 @@ from firebase_functions.firestore_fn import (
   DocumentSnapshot,
 )
 
-initialize_app()
+from  add_user_to_shared_list import adding_user_to_shared_list
+
+
+@on_document_written(document='sharedLists/{shareCode}/users/{userId}')
+def add_user_to_shared_list_funct(event: Event[Change[DocumentSnapshot]]) -> None:
+    adding_user_to_shared_list(event)
+
 @on_document_written(document="messages/{messageId}")
 def uppercase(event: Event[Change[DocumentSnapshot]]) -> None:
     new_value = event.data.after
