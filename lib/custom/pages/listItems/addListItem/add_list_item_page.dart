@@ -32,6 +32,8 @@ import '/standard/widgets/appBar/app_bar_action_icon.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
 import '/standard/widgets/vStack/v_stack.dart';
 
+const String className = 'AddListItemPage';
+
 enum AddListItemValues {
   name,
   info,
@@ -83,22 +85,8 @@ class AddListItemPage extends StatefulWidget {
 }
 
 class _AddListItemPageState extends State<AddListItemPage> {
-  static String className = 'AddListItemPage';
   String? listItemId;
-  bool autoValidate = true;
-  bool readOnly = false;
-  bool showSegmentedControl = true;
   final _formKey = GlobalKey<FormBuilderState>();
-  bool _nameHasError = false;
-  bool _infoHasError = false;
-  bool _addressHasError = false;
-  bool _latLongHasError = false;
-  List<String> urls = [];
-  List<String> categoryKeys = [];
-  List<String> categoryValues = [];
-  List<bool> _categoryHasError = [];
-  List<bool> _categoryValueHasError = [];
-  List<bool> _urlHasError = [];
 
   ListOfThings? list;
   ListItem? listItem;
@@ -135,29 +123,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
         return listItemChangedListener(goRouter, state);
       },
       child: Scaffold(
-        appBar: CommonAppBar(
-          title: listItem == null ? 'Add item' : 'Edit item',
-          actions: [
-            if (listItem != null)
-              AppBarAction(
-                type: AppBarActionType.icon,
-                iconAction: AppBarActionIcon(
-                  title: context.l10n.deleteListItem,
-                  icon: Icons.delete,
-                  key: const Key('deleteListItemAction'),
-                  callback: () async {
-                    context
-                        .read<ListItemCrudBloc>()
-                        .add(DeleteListItem(widget.actualListId, listItem.id!));
-                    context.read<RedirectCubit>().setRedirect(
-                          ListItemsPageRoute(actualListId: widget.actualListId)
-                              .location,
-                        );
-                  },
-                ),
-              ),
-          ],
-        ),
+        appBar: getAppBar(),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(24),
@@ -198,6 +164,32 @@ class _AddListItemPageState extends State<AddListItemPage> {
           ),
         ),
       ),
+    );
+  }
+
+  CommonAppBar getAppBar() {
+    return CommonAppBar(
+      title: listItem == null ? 'Add item' : 'Edit item',
+      actions: [
+        if (listItem != null)
+          AppBarAction(
+            type: AppBarActionType.icon,
+            iconAction: AppBarActionIcon(
+              title: context.l10n.deleteListItem,
+              icon: Icons.delete,
+              key: const Key('deleteListItemAction'),
+              callback: () async {
+                context
+                    .read<ListItemCrudBloc>()
+                    .add(DeleteListItem(widget.actualListId, listItem.id!));
+                context.read<RedirectCubit>().setRedirect(
+                      ListItemsPageRoute(actualListId: widget.actualListId)
+                          .location,
+                    );
+              },
+            ),
+          ),
+      ],
     );
   }
 
