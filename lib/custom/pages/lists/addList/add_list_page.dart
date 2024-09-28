@@ -65,7 +65,7 @@ class _AddListPageState extends State<AddListPage> {
   final _formKey = GlobalKey<FormBuilderState>();
 
   // ignore: strict_raw_type
-  late List<FormInputFieldInfo> fields;
+  late List<FormInputFieldInfo?> fields;
 
   late ListOfThings? list;
   ListType? selectedListType;
@@ -102,103 +102,14 @@ class _AddListPageState extends State<AddListPage> {
     logger.i('$className: showImage: $showImage');
 
     fields = [
-      FormInputFieldInfo.textArea(
-        id: FieldId.name.value,
-        label: 'Name',
-        currentValue: list?.name ?? '',
-        validators: [
-          FormBuilderValidators.required(),
-          FormBuilderValidators.maxLength(70),
-        ],
-        sectionName: SectionName.basic.value,
-        hasError: false,
-      ),
-      FormInputFieldInfo<ListType>.dropdown(
-        id: FieldId.listType.value,
-        label: 'List type',
-        currentValue: list?.listType ?? ListType.generic,
-        validators: [
-          FormBuilderValidators.required(),
-          FormBuilderValidators.maxLength(70),
-        ],
-        options: ListType.values,
-        optionToString: (listType) => (listType as ListType).name,
-        sectionName: SectionName.basic.value,
-        hasError: false,
-        onChange: (listType) => setState(() {
-          logger.i('$className: onChange ListType: $listType');
-          setState(() {
-            showImage = listType == ListType.other;
-            logger.i('$className: showImage: $showImage');
-          });
-        }),
-      ),
-      if (showImage ?? list?.listType == ListType.other)
-        FormInputFieldInfo<String>.imagePicker(
-          id: FieldId.listTypeImage.value,
-          label: 'Image',
-          currentValue: list?.imageFilename,
-          validators: [
-            FormBuilderValidators.required(),
-            FormBuilderValidators.maxLength(70),
-          ],
-          sectionName: SectionName.basic.value,
-          hasError: false,
-        ),
-      FormInputFieldInfo<bool>.checkbox(
-        id: FieldId.withMap.value,
-        label: 'Use a map',
-        currentValue: list?.withMap ?? false,
-        validators: [
-          FormBuilderValidators.required(),
-          FormBuilderValidators.maxLength(70),
-        ],
-        sectionName: SectionName.options.value,
-        hasError: false,
-      ),
-      FormInputFieldInfo<bool>.checkbox(
-        id: FieldId.withDates.value,
-        label: 'Use dates',
-        currentValue: list?.withDates ?? false,
-        validators: [
-          FormBuilderValidators.required(),
-          FormBuilderValidators.maxLength(70),
-        ],
-        sectionName: SectionName.options.value,
-        hasError: false,
-      ),
-      FormInputFieldInfo<bool>.checkbox(
-        id: FieldId.withTimes.value,
-        label: 'Use time',
-        currentValue: list?.withTimes ?? false,
-        validators: [
-          FormBuilderValidators.required(),
-          FormBuilderValidators.maxLength(70),
-        ],
-        sectionName: SectionName.options.value,
-        hasError: false,
-      ),
-      FormInputFieldInfo<ListType>.cancelButton(
-        id: FieldId.cancel.value,
-        label: 'Cancel',
-        sectionName: SectionName.submit.value,
-        cancel: () {
-          print('cancelled');
-        },
-      ),
-      FormInputFieldInfo<ListType>.submitButton(
-        id: FieldId.submit.value,
-        label: 'Submit',
-        sectionName: SectionName.submit.value,
-        save: (Map<String, dynamic>? values) {
-          print('save');
-          if (values == null) {
-            print('No values to save');
-            return;
-          }
-          save(values);
-        },
-      ),
+      nameField(),
+      listTypeField(),
+      imagePickerField(),
+      mapCheckboxField(),
+      dateCheckboxField(),
+      timeCheckboxField(),
+      cancelButton(),
+      submitButton(),
     ];
 
     final sections = [
@@ -323,5 +234,128 @@ class _AddListPageState extends State<AddListPage> {
       logger.e(e);
       rethrow;
     }
+  }
+
+  FormInputFieldInfo<String> nameField() {
+    return FormInputFieldInfo.textArea(
+      id: FieldId.name.value,
+      label: 'Name',
+      currentValue: list?.name ?? '',
+      validators: [
+        FormBuilderValidators.required(),
+        FormBuilderValidators.maxLength(70),
+      ],
+      sectionName: SectionName.basic.value,
+      hasError: false,
+    );
+  }
+
+  FormInputFieldInfo<ListType> listTypeField() {
+    return FormInputFieldInfo<ListType>.dropdown(
+      id: FieldId.listType.value,
+      label: 'List type',
+      currentValue: list?.listType ?? ListType.generic,
+      validators: [
+        FormBuilderValidators.required(),
+        FormBuilderValidators.maxLength(70),
+      ],
+      options: ListType.values,
+      optionToString: (listType) => (listType as ListType).name,
+      sectionName: SectionName.basic.value,
+      hasError: false,
+      onChange: (listType) => setState(() {
+        logger.i('$className: onChange ListType: $listType');
+        setState(() {
+          showImage = listType == ListType.other;
+          logger.i('$className: showImage: $showImage');
+        });
+      }),
+    );
+  }
+
+  FormInputFieldInfo<String>? imagePickerField() {
+    if (showImage ?? list?.listType == ListType.other) {
+      return FormInputFieldInfo<String>.imagePicker(
+        id: FieldId.listTypeImage.value,
+        label: 'Image',
+        currentValue: list?.imageFilename,
+        validators: [
+          FormBuilderValidators.required(),
+          FormBuilderValidators.maxLength(70),
+        ],
+        sectionName: SectionName.basic.value,
+        hasError: false,
+      );
+    }
+    return null;
+  }
+
+  FormInputFieldInfo<bool> mapCheckboxField() {
+    return FormInputFieldInfo<bool>.checkbox(
+      id: FieldId.withMap.value,
+      label: 'Use a map',
+      currentValue: list?.withMap ?? false,
+      validators: [
+        FormBuilderValidators.required(),
+        FormBuilderValidators.maxLength(70),
+      ],
+      sectionName: SectionName.options.value,
+      hasError: false,
+    );
+  }
+
+  FormInputFieldInfo<bool> dateCheckboxField() {
+    return FormInputFieldInfo<bool>.checkbox(
+      id: FieldId.withDates.value,
+      label: 'Use dates',
+      currentValue: list?.withDates ?? false,
+      validators: [
+        FormBuilderValidators.required(),
+        FormBuilderValidators.maxLength(70),
+      ],
+      sectionName: SectionName.options.value,
+      hasError: false,
+    );
+  }
+
+  FormInputFieldInfo<bool> timeCheckboxField() {
+    return FormInputFieldInfo<bool>.checkbox(
+      id: FieldId.withTimes.value,
+      label: 'Use time',
+      currentValue: list?.withTimes ?? false,
+      validators: [
+        FormBuilderValidators.required(),
+        FormBuilderValidators.maxLength(70),
+      ],
+      sectionName: SectionName.options.value,
+      hasError: false,
+    );
+  }
+
+  FormInputFieldInfo<ListType> cancelButton() {
+    return FormInputFieldInfo<ListType>.cancelButton(
+      id: FieldId.cancel.value,
+      label: 'Cancel',
+      sectionName: SectionName.submit.value,
+      cancel: () {
+        print('cancelled');
+      },
+    );
+  }
+
+  FormInputFieldInfo<ListType> submitButton() {
+    return FormInputFieldInfo<ListType>.submitButton(
+      id: FieldId.submit.value,
+      label: 'Submit',
+      sectionName: SectionName.submit.value,
+      save: (Map<String, dynamic>? values) {
+        print('save');
+        if (values == null) {
+          print('No values to save');
+          return;
+        }
+        save(values);
+      },
+    );
   }
 }
