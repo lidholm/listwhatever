@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+
+// ignore: unused_import
 import 'package:listwhatever/standard/constants.dart';
+
 import 'package:listwhatever/standard/form/form_input_field_cancel_button.dart';
 import 'package:listwhatever/standard/form/form_input_field_checkbox.dart';
 import 'package:listwhatever/standard/form/form_input_field_drop_down.dart';
@@ -45,7 +48,7 @@ class _FormGeneratorState extends State<FormGenerator> {
   @override
   Widget build(BuildContext context) {
     // logger.i('$className: building.');
-    logger.i('$className: fields: ${widget.fields.length}.');
+    // logger.i('$className: fields: ${widget.fields.length}.');
     return FormBuilder(
       key: widget.formKey,
       skipDisabled: true,
@@ -59,7 +62,7 @@ class _FormGeneratorState extends State<FormGenerator> {
   Widget generateSection(
     FormInputSection section,
   ) {
-    logger.d('widget.fields: ${widget.fields}');
+    // logger.d('widget.fields: ${widget.fields}');
     final sectionFields =
         widget.fields.where((f) => f?.sectionName == section.name);
     final fields = sectionFields.map(generateField).toList();
