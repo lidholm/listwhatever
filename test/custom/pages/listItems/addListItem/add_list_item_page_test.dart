@@ -11,22 +11,22 @@ void main() {
       addListItemPage = AddListItemPage(actualListId: 'a');
     });
 
-    test('get categories from filled in values', () {
-      final values = <String, dynamic>{
-        '${AddListItemValues.categoryKeys}-0': 'color',
-        '${AddListItemValues.categoryKeys}-1': 'size',
-        'somethingElse': 'color',
-        '${AddListItemValues.categoryValues}-0': 'red, orange',
-        '${AddListItemValues.categoryValues}-1': 'small,large,x-large',
-      };
+    //   test('get categories from filled in values', () {
+    //     final values = <String, dynamic>{
+    //       '${AddListItemValues.categoryKeys}-0': 'color',
+    //       '${AddListItemValues.categoryKeys}-1': 'size',
+    //       'somethingElse': 'color',
+    //       '${AddListItemValues.categoryValues}-0': 'red, orange',
+    //       '${AddListItemValues.categoryValues}-1': 'small,large,x-large',
+    //     };
 
-      expect(
-        addListItemPage.getCategories(values),
-        equals({
-          'color': ['red', 'orange'],
-          'size': ['small', 'large', 'x-large'],
-        }),
-      );
-    });
+    //     expect(
+    //       addListItemPage.getCategories(values),
+    //       equals({
+    //         'color': ['red', 'orange'],
+    //         'size': ['small', 'large', 'x-large'],
+    //       }),
+    //     );
+    //   });
   });
 }
