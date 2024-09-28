@@ -10,7 +10,7 @@ class FormInputFieldDropDown<T, S> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilderDropdown<T>(
+    final dropdown = FormBuilderDropdown<T>(
       name: field.id,
       initialValue: field.currentValue,
       decoration: InputDecoration(
@@ -36,5 +36,19 @@ class FormInputFieldDropDown<T, S> extends StatelessWidget {
       },
       valueTransformer: (val) => val?.toString(),
     );
+
+    if (field.deletable) {
+      return Row(
+        children: [
+          Expanded(child: dropdown),
+          IconButton(
+            onPressed: field.onDelete,
+            icon: const Icon(Icons.delete),
+            padding: const EdgeInsets.only(bottom: 25),
+          ),
+        ],
+      );
+    }
+    return dropdown;
   }
 }

@@ -10,7 +10,7 @@ class FormInputFieldCheckbox<T, S> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilderCheckbox(
+    final checkbox = FormBuilderCheckbox(
       autovalidateMode: AutovalidateMode.always,
       name: field.id,
       initialValue: field.currentValue,
@@ -24,5 +24,18 @@ class FormInputFieldCheckbox<T, S> extends StatelessWidget {
       validator: FormBuilderValidators.compose(field.validators),
       title: Text(field.label),
     );
+    if (field.deletable) {
+      return Row(
+        children: [
+          Expanded(child: checkbox),
+          IconButton(
+            onPressed: field.onDelete,
+            icon: const Icon(Icons.delete),
+            padding: const EdgeInsets.only(bottom: 25),
+          ),
+        ],
+      );
+    }
+    return checkbox;
   }
 }

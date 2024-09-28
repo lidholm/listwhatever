@@ -1,4 +1,4 @@
-alias startEmulators="firebase emulators:start --import ./emulatorData --project listwhatever-ad43ed --inject-functions"
+alias startEmulators="firebase emulators:start --import ./emulatorData --project listwhatever-ad43ed --inspect-functions"
 alias exportEmulatorData="firebase emulators:export ./emulatorData --project listwhatever-ad43ed"
 alias buildImage="docker build -t lidholm/flutter:0.0.25 ."
 alias uploadImage="docker push lidholm/flutter:0.0.25"

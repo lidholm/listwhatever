@@ -10,7 +10,7 @@ class FormInputFieldTextArea<T, S> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilderTextField(
+    final textField = FormBuilderTextField(
       autovalidateMode: AutovalidateMode.always,
       name: field.id,
       initialValue: field.currentValue.toString(),
@@ -25,5 +25,19 @@ class FormInputFieldTextArea<T, S> extends StatelessWidget {
       keyboardType: TextInputType.name,
       textInputAction: TextInputAction.next,
     );
+
+    if (field.deletable) {
+      return Row(
+        children: [
+          Expanded(child: textField),
+          IconButton(
+            onPressed: field.onDelete,
+            icon: const Icon(Icons.delete),
+            padding: const EdgeInsets.only(bottom: 25),
+          ),
+        ],
+      );
+    }
+    return textField;
   }
 }

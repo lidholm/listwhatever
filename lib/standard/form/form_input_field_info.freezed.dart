@@ -27,7 +27,9 @@ mixin _$FormInputFieldInfo<T, S> {
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         textArea,
     required TResult Function(
             String id,
@@ -38,7 +40,9 @@ mixin _$FormInputFieldInfo<T, S> {
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         dropdown,
     required TResult Function(
             String id,
@@ -47,7 +51,9 @@ mixin _$FormInputFieldInfo<T, S> {
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         checkbox,
     required TResult Function(
             String id,
@@ -79,7 +85,9 @@ mixin _$FormInputFieldInfo<T, S> {
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         twoFreeTextDropdown,
     required TResult Function(String id, String label, String sectionName,
             void Function() callback)
@@ -91,7 +99,9 @@ mixin _$FormInputFieldInfo<T, S> {
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         date,
   }) =>
       throw _privateConstructorUsedError;
@@ -104,7 +114,9 @@ mixin _$FormInputFieldInfo<T, S> {
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         textArea,
     TResult? Function(
             String id,
@@ -115,7 +127,9 @@ mixin _$FormInputFieldInfo<T, S> {
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         dropdown,
     TResult? Function(
             String id,
@@ -124,7 +138,9 @@ mixin _$FormInputFieldInfo<T, S> {
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         checkbox,
     TResult? Function(
             String id,
@@ -156,7 +172,9 @@ mixin _$FormInputFieldInfo<T, S> {
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         twoFreeTextDropdown,
     TResult? Function(String id, String label, String sectionName,
             void Function() callback)?
@@ -168,7 +186,9 @@ mixin _$FormInputFieldInfo<T, S> {
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         date,
   }) =>
       throw _privateConstructorUsedError;
@@ -181,7 +201,9 @@ mixin _$FormInputFieldInfo<T, S> {
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         textArea,
     TResult Function(
             String id,
@@ -192,7 +214,9 @@ mixin _$FormInputFieldInfo<T, S> {
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         dropdown,
     TResult Function(
             String id,
@@ -201,7 +225,9 @@ mixin _$FormInputFieldInfo<T, S> {
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         checkbox,
     TResult Function(
             String id,
@@ -233,7 +259,9 @@ mixin _$FormInputFieldInfo<T, S> {
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         twoFreeTextDropdown,
     TResult Function(String id, String label, String sectionName,
             void Function() callback)?
@@ -245,7 +273,9 @@ mixin _$FormInputFieldInfo<T, S> {
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         date,
     required TResult orElse(),
   }) =>
@@ -362,7 +392,9 @@ abstract class _$$FormInputFieldInfoTextAreaImplCopyWith<T, S, $Res>
       List<String? Function(String?)> validators,
       String sectionName,
       bool hasError,
-      void Function(T)? onChange});
+      void Function(T)? onChange,
+      bool deletable,
+      void Function()? onDelete});
 }
 
 /// @nodoc
@@ -387,6 +419,8 @@ class __$$FormInputFieldInfoTextAreaImplCopyWithImpl<T, S, $Res>
     Object? sectionName = null,
     Object? hasError = null,
     Object? onChange = freezed,
+    Object? deletable = null,
+    Object? onDelete = freezed,
   }) {
     return _then(_$FormInputFieldInfoTextAreaImpl<T, S>(
       id: null == id
@@ -417,6 +451,14 @@ class __$$FormInputFieldInfoTextAreaImplCopyWithImpl<T, S, $Res>
           ? _value.onChange
           : onChange // ignore: cast_nullable_to_non_nullable
               as void Function(T)?,
+      deletable: null == deletable
+          ? _value.deletable
+          : deletable // ignore: cast_nullable_to_non_nullable
+              as bool,
+      onDelete: freezed == onDelete
+          ? _value.onDelete
+          : onDelete // ignore: cast_nullable_to_non_nullable
+              as void Function()?,
     ));
   }
 }
@@ -433,7 +475,9 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
       required final List<String? Function(String?)> validators,
       required this.sectionName,
       required this.hasError,
-      this.onChange = null})
+      this.onChange = null,
+      this.deletable = false,
+      this.onDelete = null})
       : _validators = validators;
 
   @override
@@ -457,10 +501,16 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
   @override
   @JsonKey()
   final void Function(T)? onChange;
+  @override
+  @JsonKey()
+  final bool deletable;
+  @override
+  @JsonKey()
+  final void Function()? onDelete;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo<$T, $S>.textArea(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError, onChange: $onChange)';
+    return 'FormInputFieldInfo<$T, $S>.textArea(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
   }
 
   @override
@@ -474,7 +524,9 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
       ..add(DiagnosticsProperty('validators', validators))
       ..add(DiagnosticsProperty('sectionName', sectionName))
       ..add(DiagnosticsProperty('hasError', hasError))
-      ..add(DiagnosticsProperty('onChange', onChange));
+      ..add(DiagnosticsProperty('onChange', onChange))
+      ..add(DiagnosticsProperty('deletable', deletable))
+      ..add(DiagnosticsProperty('onDelete', onDelete));
   }
 
   @override
@@ -493,7 +545,11 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             (identical(other.hasError, hasError) ||
                 other.hasError == hasError) &&
             (identical(other.onChange, onChange) ||
-                other.onChange == onChange));
+                other.onChange == onChange) &&
+            (identical(other.deletable, deletable) ||
+                other.deletable == deletable) &&
+            (identical(other.onDelete, onDelete) ||
+                other.onDelete == onDelete));
   }
 
   @override
@@ -505,7 +561,9 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
       const DeepCollectionEquality().hash(_validators),
       sectionName,
       hasError,
-      onChange);
+      onChange,
+      deletable,
+      onDelete);
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -527,7 +585,9 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         textArea,
     required TResult Function(
             String id,
@@ -538,7 +598,9 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         dropdown,
     required TResult Function(
             String id,
@@ -547,7 +609,9 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         checkbox,
     required TResult Function(
             String id,
@@ -579,7 +643,9 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         twoFreeTextDropdown,
     required TResult Function(String id, String label, String sectionName,
             void Function() callback)
@@ -591,11 +657,13 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         date,
   }) {
-    return textArea(
-        id, label, currentValue, validators, sectionName, hasError, onChange);
+    return textArea(id, label, currentValue, validators, sectionName, hasError,
+        onChange, deletable, onDelete);
   }
 
   @override
@@ -608,7 +676,9 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         textArea,
     TResult? Function(
             String id,
@@ -619,7 +689,9 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         dropdown,
     TResult? Function(
             String id,
@@ -628,7 +700,9 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         checkbox,
     TResult? Function(
             String id,
@@ -660,7 +734,9 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         twoFreeTextDropdown,
     TResult? Function(String id, String label, String sectionName,
             void Function() callback)?
@@ -672,11 +748,13 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         date,
   }) {
-    return textArea?.call(
-        id, label, currentValue, validators, sectionName, hasError, onChange);
+    return textArea?.call(id, label, currentValue, validators, sectionName,
+        hasError, onChange, deletable, onDelete);
   }
 
   @override
@@ -689,7 +767,9 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         textArea,
     TResult Function(
             String id,
@@ -700,7 +780,9 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         dropdown,
     TResult Function(
             String id,
@@ -709,7 +791,9 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         checkbox,
     TResult Function(
             String id,
@@ -741,7 +825,9 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         twoFreeTextDropdown,
     TResult Function(String id, String label, String sectionName,
             void Function() callback)?
@@ -753,13 +839,15 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         date,
     required TResult orElse(),
   }) {
     if (textArea != null) {
-      return textArea(
-          id, label, currentValue, validators, sectionName, hasError, onChange);
+      return textArea(id, label, currentValue, validators, sectionName,
+          hasError, onChange, deletable, onDelete);
     }
     return orElse();
   }
@@ -833,7 +921,9 @@ abstract class FormInputFieldInfoTextArea<T, S>
           required final List<String? Function(String?)> validators,
           required final String sectionName,
           required final bool hasError,
-          final void Function(T)? onChange}) =
+          final void Function(T)? onChange,
+          final bool deletable,
+          final void Function()? onDelete}) =
       _$FormInputFieldInfoTextAreaImpl<T, S>;
 
   @override
@@ -845,6 +935,8 @@ abstract class FormInputFieldInfoTextArea<T, S>
   String get sectionName;
   bool get hasError;
   void Function(T)? get onChange;
+  bool get deletable;
+  void Function()? get onDelete;
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -873,7 +965,9 @@ abstract class _$$FormInputFieldInfoDropDownImplCopyWith<T, S, $Res>
       List<String? Function(String?)> validators,
       String sectionName,
       bool hasError,
-      void Function(dynamic)? onChange});
+      void Function(dynamic)? onChange,
+      bool deletable,
+      void Function()? onDelete});
 }
 
 /// @nodoc
@@ -900,6 +994,8 @@ class __$$FormInputFieldInfoDropDownImplCopyWithImpl<T, S, $Res>
     Object? sectionName = null,
     Object? hasError = null,
     Object? onChange = freezed,
+    Object? deletable = null,
+    Object? onDelete = freezed,
   }) {
     return _then(_$FormInputFieldInfoDropDownImpl<T, S>(
       id: null == id
@@ -938,6 +1034,14 @@ class __$$FormInputFieldInfoDropDownImplCopyWithImpl<T, S, $Res>
           ? _value.onChange
           : onChange // ignore: cast_nullable_to_non_nullable
               as void Function(dynamic)?,
+      deletable: null == deletable
+          ? _value.deletable
+          : deletable // ignore: cast_nullable_to_non_nullable
+              as bool,
+      onDelete: freezed == onDelete
+          ? _value.onDelete
+          : onDelete // ignore: cast_nullable_to_non_nullable
+              as void Function()?,
     ));
   }
 }
@@ -956,7 +1060,9 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
       required final List<String? Function(String?)> validators,
       required this.sectionName,
       required this.hasError,
-      this.onChange = null})
+      this.onChange = null,
+      this.deletable = false,
+      this.onDelete = null})
       : _options = options,
         _validators = validators;
 
@@ -991,10 +1097,16 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
   @override
   @JsonKey()
   final void Function(dynamic)? onChange;
+  @override
+  @JsonKey()
+  final bool deletable;
+  @override
+  @JsonKey()
+  final void Function()? onDelete;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo<$T, $S>.dropdown(id: $id, label: $label, currentValue: $currentValue, options: $options, optionToString: $optionToString, validators: $validators, sectionName: $sectionName, hasError: $hasError, onChange: $onChange)';
+    return 'FormInputFieldInfo<$T, $S>.dropdown(id: $id, label: $label, currentValue: $currentValue, options: $options, optionToString: $optionToString, validators: $validators, sectionName: $sectionName, hasError: $hasError, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
   }
 
   @override
@@ -1010,7 +1122,9 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
       ..add(DiagnosticsProperty('validators', validators))
       ..add(DiagnosticsProperty('sectionName', sectionName))
       ..add(DiagnosticsProperty('hasError', hasError))
-      ..add(DiagnosticsProperty('onChange', onChange));
+      ..add(DiagnosticsProperty('onChange', onChange))
+      ..add(DiagnosticsProperty('deletable', deletable))
+      ..add(DiagnosticsProperty('onDelete', onDelete));
   }
 
   @override
@@ -1032,7 +1146,11 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             (identical(other.hasError, hasError) ||
                 other.hasError == hasError) &&
             (identical(other.onChange, onChange) ||
-                other.onChange == onChange));
+                other.onChange == onChange) &&
+            (identical(other.deletable, deletable) ||
+                other.deletable == deletable) &&
+            (identical(other.onDelete, onDelete) ||
+                other.onDelete == onDelete));
   }
 
   @override
@@ -1046,7 +1164,9 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
       const DeepCollectionEquality().hash(_validators),
       sectionName,
       hasError,
-      onChange);
+      onChange,
+      deletable,
+      onDelete);
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -1068,7 +1188,9 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         textArea,
     required TResult Function(
             String id,
@@ -1079,7 +1201,9 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         dropdown,
     required TResult Function(
             String id,
@@ -1088,7 +1212,9 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         checkbox,
     required TResult Function(
             String id,
@@ -1120,7 +1246,9 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         twoFreeTextDropdown,
     required TResult Function(String id, String label, String sectionName,
             void Function() callback)
@@ -1132,11 +1260,13 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         date,
   }) {
     return dropdown(id, label, currentValue, options, optionToString,
-        validators, sectionName, hasError, onChange);
+        validators, sectionName, hasError, onChange, deletable, onDelete);
   }
 
   @override
@@ -1149,7 +1279,9 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         textArea,
     TResult? Function(
             String id,
@@ -1160,7 +1292,9 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         dropdown,
     TResult? Function(
             String id,
@@ -1169,7 +1303,9 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         checkbox,
     TResult? Function(
             String id,
@@ -1201,7 +1337,9 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         twoFreeTextDropdown,
     TResult? Function(String id, String label, String sectionName,
             void Function() callback)?
@@ -1213,11 +1351,13 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         date,
   }) {
     return dropdown?.call(id, label, currentValue, options, optionToString,
-        validators, sectionName, hasError, onChange);
+        validators, sectionName, hasError, onChange, deletable, onDelete);
   }
 
   @override
@@ -1230,7 +1370,9 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         textArea,
     TResult Function(
             String id,
@@ -1241,7 +1383,9 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         dropdown,
     TResult Function(
             String id,
@@ -1250,7 +1394,9 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         checkbox,
     TResult Function(
             String id,
@@ -1282,7 +1428,9 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         twoFreeTextDropdown,
     TResult Function(String id, String label, String sectionName,
             void Function() callback)?
@@ -1294,13 +1442,15 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         date,
     required TResult orElse(),
   }) {
     if (dropdown != null) {
       return dropdown(id, label, currentValue, options, optionToString,
-          validators, sectionName, hasError, onChange);
+          validators, sectionName, hasError, onChange, deletable, onDelete);
     }
     return orElse();
   }
@@ -1376,7 +1526,9 @@ abstract class FormInputFieldInfoDropDown<T, S>
           required final List<String? Function(String?)> validators,
           required final String sectionName,
           required final bool hasError,
-          final void Function(dynamic)? onChange}) =
+          final void Function(dynamic)? onChange,
+          final bool deletable,
+          final void Function()? onDelete}) =
       _$FormInputFieldInfoDropDownImpl<T, S>;
 
   @override
@@ -1390,6 +1542,8 @@ abstract class FormInputFieldInfoDropDown<T, S>
   String get sectionName;
   bool get hasError;
   void Function(dynamic)? get onChange;
+  bool get deletable;
+  void Function()? get onDelete;
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -1416,7 +1570,9 @@ abstract class _$$FormInputFieldInfoCheckboxImplCopyWith<T, S, $Res>
       List<String? Function(bool?)> validators,
       String sectionName,
       bool hasError,
-      void Function(T)? onChange});
+      void Function(T)? onChange,
+      bool deletable,
+      void Function()? onDelete});
 }
 
 /// @nodoc
@@ -1441,6 +1597,8 @@ class __$$FormInputFieldInfoCheckboxImplCopyWithImpl<T, S, $Res>
     Object? sectionName = null,
     Object? hasError = null,
     Object? onChange = freezed,
+    Object? deletable = null,
+    Object? onDelete = freezed,
   }) {
     return _then(_$FormInputFieldInfoCheckboxImpl<T, S>(
       id: null == id
@@ -1471,6 +1629,14 @@ class __$$FormInputFieldInfoCheckboxImplCopyWithImpl<T, S, $Res>
           ? _value.onChange
           : onChange // ignore: cast_nullable_to_non_nullable
               as void Function(T)?,
+      deletable: null == deletable
+          ? _value.deletable
+          : deletable // ignore: cast_nullable_to_non_nullable
+              as bool,
+      onDelete: freezed == onDelete
+          ? _value.onDelete
+          : onDelete // ignore: cast_nullable_to_non_nullable
+              as void Function()?,
     ));
   }
 }
@@ -1487,7 +1653,9 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
       required final List<String? Function(bool?)> validators,
       required this.sectionName,
       required this.hasError,
-      this.onChange = null})
+      this.onChange = null,
+      this.deletable = false,
+      this.onDelete = null})
       : _validators = validators;
 
   @override
@@ -1511,10 +1679,16 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
   @override
   @JsonKey()
   final void Function(T)? onChange;
+  @override
+  @JsonKey()
+  final bool deletable;
+  @override
+  @JsonKey()
+  final void Function()? onDelete;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo<$T, $S>.checkbox(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError, onChange: $onChange)';
+    return 'FormInputFieldInfo<$T, $S>.checkbox(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
   }
 
   @override
@@ -1528,7 +1702,9 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
       ..add(DiagnosticsProperty('validators', validators))
       ..add(DiagnosticsProperty('sectionName', sectionName))
       ..add(DiagnosticsProperty('hasError', hasError))
-      ..add(DiagnosticsProperty('onChange', onChange));
+      ..add(DiagnosticsProperty('onChange', onChange))
+      ..add(DiagnosticsProperty('deletable', deletable))
+      ..add(DiagnosticsProperty('onDelete', onDelete));
   }
 
   @override
@@ -1547,7 +1723,11 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             (identical(other.hasError, hasError) ||
                 other.hasError == hasError) &&
             (identical(other.onChange, onChange) ||
-                other.onChange == onChange));
+                other.onChange == onChange) &&
+            (identical(other.deletable, deletable) ||
+                other.deletable == deletable) &&
+            (identical(other.onDelete, onDelete) ||
+                other.onDelete == onDelete));
   }
 
   @override
@@ -1559,7 +1739,9 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
       const DeepCollectionEquality().hash(_validators),
       sectionName,
       hasError,
-      onChange);
+      onChange,
+      deletable,
+      onDelete);
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -1581,7 +1763,9 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         textArea,
     required TResult Function(
             String id,
@@ -1592,7 +1776,9 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         dropdown,
     required TResult Function(
             String id,
@@ -1601,7 +1787,9 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         checkbox,
     required TResult Function(
             String id,
@@ -1633,7 +1821,9 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         twoFreeTextDropdown,
     required TResult Function(String id, String label, String sectionName,
             void Function() callback)
@@ -1645,11 +1835,13 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         date,
   }) {
-    return checkbox(
-        id, label, currentValue, validators, sectionName, hasError, onChange);
+    return checkbox(id, label, currentValue, validators, sectionName, hasError,
+        onChange, deletable, onDelete);
   }
 
   @override
@@ -1662,7 +1854,9 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         textArea,
     TResult? Function(
             String id,
@@ -1673,7 +1867,9 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         dropdown,
     TResult? Function(
             String id,
@@ -1682,7 +1878,9 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         checkbox,
     TResult? Function(
             String id,
@@ -1714,7 +1912,9 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         twoFreeTextDropdown,
     TResult? Function(String id, String label, String sectionName,
             void Function() callback)?
@@ -1726,11 +1926,13 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         date,
   }) {
-    return checkbox?.call(
-        id, label, currentValue, validators, sectionName, hasError, onChange);
+    return checkbox?.call(id, label, currentValue, validators, sectionName,
+        hasError, onChange, deletable, onDelete);
   }
 
   @override
@@ -1743,7 +1945,9 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         textArea,
     TResult Function(
             String id,
@@ -1754,7 +1958,9 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         dropdown,
     TResult Function(
             String id,
@@ -1763,7 +1969,9 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         checkbox,
     TResult Function(
             String id,
@@ -1795,7 +2003,9 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         twoFreeTextDropdown,
     TResult Function(String id, String label, String sectionName,
             void Function() callback)?
@@ -1807,13 +2017,15 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         date,
     required TResult orElse(),
   }) {
     if (checkbox != null) {
-      return checkbox(
-          id, label, currentValue, validators, sectionName, hasError, onChange);
+      return checkbox(id, label, currentValue, validators, sectionName,
+          hasError, onChange, deletable, onDelete);
     }
     return orElse();
   }
@@ -1887,7 +2099,9 @@ abstract class FormInputFieldInfoCheckbox<T, S>
           required final List<String? Function(bool?)> validators,
           required final String sectionName,
           required final bool hasError,
-          final void Function(T)? onChange}) =
+          final void Function(T)? onChange,
+          final bool deletable,
+          final void Function()? onDelete}) =
       _$FormInputFieldInfoCheckboxImpl<T, S>;
 
   @override
@@ -1899,6 +2113,8 @@ abstract class FormInputFieldInfoCheckbox<T, S>
   String get sectionName;
   bool get hasError;
   void Function(T)? get onChange;
+  bool get deletable;
+  void Function()? get onDelete;
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -2091,7 +2307,9 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         textArea,
     required TResult Function(
             String id,
@@ -2102,7 +2320,9 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         dropdown,
     required TResult Function(
             String id,
@@ -2111,7 +2331,9 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         checkbox,
     required TResult Function(
             String id,
@@ -2143,7 +2365,9 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         twoFreeTextDropdown,
     required TResult Function(String id, String label, String sectionName,
             void Function() callback)
@@ -2155,7 +2379,9 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         date,
   }) {
     return imagePicker(
@@ -2172,7 +2398,9 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         textArea,
     TResult? Function(
             String id,
@@ -2183,7 +2411,9 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         dropdown,
     TResult? Function(
             String id,
@@ -2192,7 +2422,9 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         checkbox,
     TResult? Function(
             String id,
@@ -2224,7 +2456,9 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         twoFreeTextDropdown,
     TResult? Function(String id, String label, String sectionName,
             void Function() callback)?
@@ -2236,7 +2470,9 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         date,
   }) {
     return imagePicker?.call(
@@ -2253,7 +2489,9 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         textArea,
     TResult Function(
             String id,
@@ -2264,7 +2502,9 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         dropdown,
     TResult Function(
             String id,
@@ -2273,7 +2513,9 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         checkbox,
     TResult Function(
             String id,
@@ -2305,7 +2547,9 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         twoFreeTextDropdown,
     TResult Function(String id, String label, String sectionName,
             void Function() callback)?
@@ -2317,7 +2561,9 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         date,
     required TResult orElse(),
   }) {
@@ -2545,7 +2791,9 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         textArea,
     required TResult Function(
             String id,
@@ -2556,7 +2804,9 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         dropdown,
     required TResult Function(
             String id,
@@ -2565,7 +2815,9 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         checkbox,
     required TResult Function(
             String id,
@@ -2597,7 +2849,9 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         twoFreeTextDropdown,
     required TResult Function(String id, String label, String sectionName,
             void Function() callback)
@@ -2609,7 +2863,9 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         date,
   }) {
     return cancelButton(id, label, sectionName, cancel);
@@ -2625,7 +2881,9 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         textArea,
     TResult? Function(
             String id,
@@ -2636,7 +2894,9 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         dropdown,
     TResult? Function(
             String id,
@@ -2645,7 +2905,9 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         checkbox,
     TResult? Function(
             String id,
@@ -2677,7 +2939,9 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         twoFreeTextDropdown,
     TResult? Function(String id, String label, String sectionName,
             void Function() callback)?
@@ -2689,7 +2953,9 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         date,
   }) {
     return cancelButton?.call(id, label, sectionName, cancel);
@@ -2705,7 +2971,9 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         textArea,
     TResult Function(
             String id,
@@ -2716,7 +2984,9 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         dropdown,
     TResult Function(
             String id,
@@ -2725,7 +2995,9 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         checkbox,
     TResult Function(
             String id,
@@ -2757,7 +3029,9 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         twoFreeTextDropdown,
     TResult Function(String id, String label, String sectionName,
             void Function() callback)?
@@ -2769,7 +3043,9 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         date,
     required TResult orElse(),
   }) {
@@ -2993,7 +3269,9 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         textArea,
     required TResult Function(
             String id,
@@ -3004,7 +3282,9 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         dropdown,
     required TResult Function(
             String id,
@@ -3013,7 +3293,9 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         checkbox,
     required TResult Function(
             String id,
@@ -3045,7 +3327,9 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         twoFreeTextDropdown,
     required TResult Function(String id, String label, String sectionName,
             void Function() callback)
@@ -3057,7 +3341,9 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         date,
   }) {
     return submitButton(id, label, sectionName, save);
@@ -3073,7 +3359,9 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         textArea,
     TResult? Function(
             String id,
@@ -3084,7 +3372,9 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         dropdown,
     TResult? Function(
             String id,
@@ -3093,7 +3383,9 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         checkbox,
     TResult? Function(
             String id,
@@ -3125,7 +3417,9 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         twoFreeTextDropdown,
     TResult? Function(String id, String label, String sectionName,
             void Function() callback)?
@@ -3137,7 +3431,9 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         date,
   }) {
     return submitButton?.call(id, label, sectionName, save);
@@ -3153,7 +3449,9 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         textArea,
     TResult Function(
             String id,
@@ -3164,7 +3462,9 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         dropdown,
     TResult Function(
             String id,
@@ -3173,7 +3473,9 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         checkbox,
     TResult Function(
             String id,
@@ -3205,7 +3507,9 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         twoFreeTextDropdown,
     TResult Function(String id, String label, String sectionName,
             void Function() callback)?
@@ -3217,7 +3521,9 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         date,
     required TResult orElse(),
   }) {
@@ -3337,7 +3643,9 @@ abstract class _$$FormInputFieldInfoTwoFreeTextDropdownImplCopyWith<T, S, $Res>
       String sectionName,
       bool hasErrorleft,
       bool hasErrorRight,
-      void Function(dynamic)? onChange});
+      void Function(dynamic)? onChange,
+      bool deletable,
+      void Function()? onDelete});
 }
 
 /// @nodoc
@@ -3371,6 +3679,8 @@ class __$$FormInputFieldInfoTwoFreeTextDropdownImplCopyWithImpl<T, S, $Res>
     Object? hasErrorleft = null,
     Object? hasErrorRight = null,
     Object? onChange = freezed,
+    Object? deletable = null,
+    Object? onDelete = freezed,
   }) {
     return _then(_$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>(
       id: null == id
@@ -3433,6 +3743,14 @@ class __$$FormInputFieldInfoTwoFreeTextDropdownImplCopyWithImpl<T, S, $Res>
           ? _value.onChange
           : onChange // ignore: cast_nullable_to_non_nullable
               as void Function(dynamic)?,
+      deletable: null == deletable
+          ? _value.deletable
+          : deletable // ignore: cast_nullable_to_non_nullable
+              as bool,
+      onDelete: freezed == onDelete
+          ? _value.onDelete
+          : onDelete // ignore: cast_nullable_to_non_nullable
+              as void Function()?,
     ));
   }
 }
@@ -3457,7 +3775,9 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
       required this.sectionName,
       required this.hasErrorleft,
       required this.hasErrorRight,
-      this.onChange = null})
+      this.onChange = null,
+      this.deletable = false,
+      this.onDelete = null})
       : _optionsLeft = optionsLeft,
         _optionsRight = optionsRight,
         _validatorsLeft = validatorsLeft,
@@ -3518,10 +3838,16 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
   @override
   @JsonKey()
   final void Function(dynamic)? onChange;
+  @override
+  @JsonKey()
+  final bool deletable;
+  @override
+  @JsonKey()
+  final void Function()? onDelete;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo<$T, $S>.twoFreeTextDropdown(id: $id, labelLeft: $labelLeft, labelRight: $labelRight, currentValueLeft: $currentValueLeft, currentValueRight: $currentValueRight, optionsLeft: $optionsLeft, optionsRight: $optionsRight, optionLeftToString: $optionLeftToString, optionRightToString: $optionRightToString, validatorsLeft: $validatorsLeft, validatorsRight: $validatorsRight, sectionName: $sectionName, hasErrorleft: $hasErrorleft, hasErrorRight: $hasErrorRight, onChange: $onChange)';
+    return 'FormInputFieldInfo<$T, $S>.twoFreeTextDropdown(id: $id, labelLeft: $labelLeft, labelRight: $labelRight, currentValueLeft: $currentValueLeft, currentValueRight: $currentValueRight, optionsLeft: $optionsLeft, optionsRight: $optionsRight, optionLeftToString: $optionLeftToString, optionRightToString: $optionRightToString, validatorsLeft: $validatorsLeft, validatorsRight: $validatorsRight, sectionName: $sectionName, hasErrorleft: $hasErrorleft, hasErrorRight: $hasErrorRight, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
   }
 
   @override
@@ -3544,7 +3870,9 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
       ..add(DiagnosticsProperty('sectionName', sectionName))
       ..add(DiagnosticsProperty('hasErrorleft', hasErrorleft))
       ..add(DiagnosticsProperty('hasErrorRight', hasErrorRight))
-      ..add(DiagnosticsProperty('onChange', onChange));
+      ..add(DiagnosticsProperty('onChange', onChange))
+      ..add(DiagnosticsProperty('deletable', deletable))
+      ..add(DiagnosticsProperty('onDelete', onDelete));
   }
 
   @override
@@ -3580,7 +3908,11 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             (identical(other.hasErrorRight, hasErrorRight) ||
                 other.hasErrorRight == hasErrorRight) &&
             (identical(other.onChange, onChange) ||
-                other.onChange == onChange));
+                other.onChange == onChange) &&
+            (identical(other.deletable, deletable) ||
+                other.deletable == deletable) &&
+            (identical(other.onDelete, onDelete) ||
+                other.onDelete == onDelete));
   }
 
   @override
@@ -3600,7 +3932,9 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
       sectionName,
       hasErrorleft,
       hasErrorRight,
-      onChange);
+      onChange,
+      deletable,
+      onDelete);
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -3624,7 +3958,9 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         textArea,
     required TResult Function(
             String id,
@@ -3635,7 +3971,9 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         dropdown,
     required TResult Function(
             String id,
@@ -3644,7 +3982,9 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         checkbox,
     required TResult Function(
             String id,
@@ -3676,7 +4016,9 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         twoFreeTextDropdown,
     required TResult Function(String id, String label, String sectionName,
             void Function() callback)
@@ -3688,7 +4030,9 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         date,
   }) {
     return twoFreeTextDropdown(
@@ -3706,7 +4050,9 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
         sectionName,
         hasErrorleft,
         hasErrorRight,
-        onChange);
+        onChange,
+        deletable,
+        onDelete);
   }
 
   @override
@@ -3719,7 +4065,9 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         textArea,
     TResult? Function(
             String id,
@@ -3730,7 +4078,9 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         dropdown,
     TResult? Function(
             String id,
@@ -3739,7 +4089,9 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         checkbox,
     TResult? Function(
             String id,
@@ -3771,7 +4123,9 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         twoFreeTextDropdown,
     TResult? Function(String id, String label, String sectionName,
             void Function() callback)?
@@ -3783,7 +4137,9 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         date,
   }) {
     return twoFreeTextDropdown?.call(
@@ -3801,7 +4157,9 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
         sectionName,
         hasErrorleft,
         hasErrorRight,
-        onChange);
+        onChange,
+        deletable,
+        onDelete);
   }
 
   @override
@@ -3814,7 +4172,9 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         textArea,
     TResult Function(
             String id,
@@ -3825,7 +4185,9 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         dropdown,
     TResult Function(
             String id,
@@ -3834,7 +4196,9 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         checkbox,
     TResult Function(
             String id,
@@ -3866,7 +4230,9 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         twoFreeTextDropdown,
     TResult Function(String id, String label, String sectionName,
             void Function() callback)?
@@ -3878,7 +4244,9 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         date,
     required TResult orElse(),
   }) {
@@ -3898,7 +4266,9 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
           sectionName,
           hasErrorleft,
           hasErrorRight,
-          onChange);
+          onChange,
+          deletable,
+          onDelete);
     }
     return orElse();
   }
@@ -3980,7 +4350,9 @@ abstract class FormInputFieldInfoTwoFreeTextDropdown<T, S>
           required final String sectionName,
           required final bool hasErrorleft,
           required final bool hasErrorRight,
-          final void Function(dynamic)? onChange}) =
+          final void Function(dynamic)? onChange,
+          final bool deletable,
+          final void Function()? onDelete}) =
       _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>;
 
   @override
@@ -4000,6 +4372,8 @@ abstract class FormInputFieldInfoTwoFreeTextDropdown<T, S>
   bool get hasErrorleft;
   bool get hasErrorRight;
   void Function(dynamic)? get onChange;
+  bool get deletable;
+  void Function()? get onDelete;
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -4138,7 +4512,9 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         textArea,
     required TResult Function(
             String id,
@@ -4149,7 +4525,9 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         dropdown,
     required TResult Function(
             String id,
@@ -4158,7 +4536,9 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         checkbox,
     required TResult Function(
             String id,
@@ -4190,7 +4570,9 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         twoFreeTextDropdown,
     required TResult Function(String id, String label, String sectionName,
             void Function() callback)
@@ -4202,7 +4584,9 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         date,
   }) {
     return customButton(id, label, sectionName, callback);
@@ -4218,7 +4602,9 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         textArea,
     TResult? Function(
             String id,
@@ -4229,7 +4615,9 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         dropdown,
     TResult? Function(
             String id,
@@ -4238,7 +4626,9 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         checkbox,
     TResult? Function(
             String id,
@@ -4270,7 +4660,9 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         twoFreeTextDropdown,
     TResult? Function(String id, String label, String sectionName,
             void Function() callback)?
@@ -4282,7 +4674,9 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         date,
   }) {
     return customButton?.call(id, label, sectionName, callback);
@@ -4298,7 +4692,9 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         textArea,
     TResult Function(
             String id,
@@ -4309,7 +4705,9 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         dropdown,
     TResult Function(
             String id,
@@ -4318,7 +4716,9 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         checkbox,
     TResult Function(
             String id,
@@ -4350,7 +4750,9 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         twoFreeTextDropdown,
     TResult Function(String id, String label, String sectionName,
             void Function() callback)?
@@ -4362,7 +4764,9 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         date,
     required TResult orElse(),
   }) {
@@ -4473,7 +4877,9 @@ abstract class _$$FormInputFieldInfoDateImplCopyWith<T, S, $Res>
       List<String? Function(String?)> validators,
       String sectionName,
       bool hasError,
-      void Function(T)? onChange});
+      void Function(T)? onChange,
+      bool deletable,
+      void Function()? onDelete});
 }
 
 /// @nodoc
@@ -4498,6 +4904,8 @@ class __$$FormInputFieldInfoDateImplCopyWithImpl<T, S, $Res>
     Object? sectionName = null,
     Object? hasError = null,
     Object? onChange = freezed,
+    Object? deletable = null,
+    Object? onDelete = freezed,
   }) {
     return _then(_$FormInputFieldInfoDateImpl<T, S>(
       id: null == id
@@ -4528,6 +4936,14 @@ class __$$FormInputFieldInfoDateImplCopyWithImpl<T, S, $Res>
           ? _value.onChange
           : onChange // ignore: cast_nullable_to_non_nullable
               as void Function(T)?,
+      deletable: null == deletable
+          ? _value.deletable
+          : deletable // ignore: cast_nullable_to_non_nullable
+              as bool,
+      onDelete: freezed == onDelete
+          ? _value.onDelete
+          : onDelete // ignore: cast_nullable_to_non_nullable
+              as void Function()?,
     ));
   }
 }
@@ -4544,7 +4960,9 @@ class _$FormInputFieldInfoDateImpl<T, S>
       required final List<String? Function(String?)> validators,
       required this.sectionName,
       required this.hasError,
-      this.onChange = null})
+      this.onChange = null,
+      this.deletable = false,
+      this.onDelete = null})
       : _validators = validators;
 
   @override
@@ -4568,10 +4986,16 @@ class _$FormInputFieldInfoDateImpl<T, S>
   @override
   @JsonKey()
   final void Function(T)? onChange;
+  @override
+  @JsonKey()
+  final bool deletable;
+  @override
+  @JsonKey()
+  final void Function()? onDelete;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo<$T, $S>.date(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError, onChange: $onChange)';
+    return 'FormInputFieldInfo<$T, $S>.date(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
   }
 
   @override
@@ -4585,7 +5009,9 @@ class _$FormInputFieldInfoDateImpl<T, S>
       ..add(DiagnosticsProperty('validators', validators))
       ..add(DiagnosticsProperty('sectionName', sectionName))
       ..add(DiagnosticsProperty('hasError', hasError))
-      ..add(DiagnosticsProperty('onChange', onChange));
+      ..add(DiagnosticsProperty('onChange', onChange))
+      ..add(DiagnosticsProperty('deletable', deletable))
+      ..add(DiagnosticsProperty('onDelete', onDelete));
   }
 
   @override
@@ -4604,7 +5030,11 @@ class _$FormInputFieldInfoDateImpl<T, S>
             (identical(other.hasError, hasError) ||
                 other.hasError == hasError) &&
             (identical(other.onChange, onChange) ||
-                other.onChange == onChange));
+                other.onChange == onChange) &&
+            (identical(other.deletable, deletable) ||
+                other.deletable == deletable) &&
+            (identical(other.onDelete, onDelete) ||
+                other.onDelete == onDelete));
   }
 
   @override
@@ -4616,7 +5046,9 @@ class _$FormInputFieldInfoDateImpl<T, S>
       const DeepCollectionEquality().hash(_validators),
       sectionName,
       hasError,
-      onChange);
+      onChange,
+      deletable,
+      onDelete);
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -4638,7 +5070,9 @@ class _$FormInputFieldInfoDateImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         textArea,
     required TResult Function(
             String id,
@@ -4649,7 +5083,9 @@ class _$FormInputFieldInfoDateImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         dropdown,
     required TResult Function(
             String id,
@@ -4658,7 +5094,9 @@ class _$FormInputFieldInfoDateImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         checkbox,
     required TResult Function(
             String id,
@@ -4690,7 +5128,9 @@ class _$FormInputFieldInfoDateImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         twoFreeTextDropdown,
     required TResult Function(String id, String label, String sectionName,
             void Function() callback)
@@ -4702,11 +5142,13 @@ class _$FormInputFieldInfoDateImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)
         date,
   }) {
-    return date(
-        id, label, currentValue, validators, sectionName, hasError, onChange);
+    return date(id, label, currentValue, validators, sectionName, hasError,
+        onChange, deletable, onDelete);
   }
 
   @override
@@ -4719,7 +5161,9 @@ class _$FormInputFieldInfoDateImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         textArea,
     TResult? Function(
             String id,
@@ -4730,7 +5174,9 @@ class _$FormInputFieldInfoDateImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         dropdown,
     TResult? Function(
             String id,
@@ -4739,7 +5185,9 @@ class _$FormInputFieldInfoDateImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         checkbox,
     TResult? Function(
             String id,
@@ -4771,7 +5219,9 @@ class _$FormInputFieldInfoDateImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         twoFreeTextDropdown,
     TResult? Function(String id, String label, String sectionName,
             void Function() callback)?
@@ -4783,11 +5233,13 @@ class _$FormInputFieldInfoDateImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         date,
   }) {
-    return date?.call(
-        id, label, currentValue, validators, sectionName, hasError, onChange);
+    return date?.call(id, label, currentValue, validators, sectionName,
+        hasError, onChange, deletable, onDelete);
   }
 
   @override
@@ -4800,7 +5252,9 @@ class _$FormInputFieldInfoDateImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         textArea,
     TResult Function(
             String id,
@@ -4811,7 +5265,9 @@ class _$FormInputFieldInfoDateImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         dropdown,
     TResult Function(
             String id,
@@ -4820,7 +5276,9 @@ class _$FormInputFieldInfoDateImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         checkbox,
     TResult Function(
             String id,
@@ -4852,7 +5310,9 @@ class _$FormInputFieldInfoDateImpl<T, S>
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(dynamic)? onChange)?
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         twoFreeTextDropdown,
     TResult Function(String id, String label, String sectionName,
             void Function() callback)?
@@ -4864,13 +5324,15 @@ class _$FormInputFieldInfoDateImpl<T, S>
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(T)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
         date,
     required TResult orElse(),
   }) {
     if (date != null) {
-      return date(
-          id, label, currentValue, validators, sectionName, hasError, onChange);
+      return date(id, label, currentValue, validators, sectionName, hasError,
+          onChange, deletable, onDelete);
     }
     return orElse();
   }
@@ -4944,7 +5406,9 @@ abstract class FormInputFieldInfoDate<T, S>
       required final List<String? Function(String?)> validators,
       required final String sectionName,
       required final bool hasError,
-      final void Function(T)? onChange}) = _$FormInputFieldInfoDateImpl<T, S>;
+      final void Function(T)? onChange,
+      final bool deletable,
+      final void Function()? onDelete}) = _$FormInputFieldInfoDateImpl<T, S>;
 
   @override
   String get id;
@@ -4955,6 +5419,8 @@ abstract class FormInputFieldInfoDate<T, S>
   String get sectionName;
   bool get hasError;
   void Function(T)? get onChange;
+  bool get deletable;
+  void Function()? get onDelete;
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.

@@ -713,14 +713,18 @@ class _AddListItemPageState extends State<AddListItemPage> {
       validatorsRight: [],
       hasErrorleft: false,
       hasErrorRight: false,
+      deletable: true,
+      onDelete: () {
+        print('deleted category');
+      },
     );
   }
 
   FormInputFieldInfo<dynamic, dynamic> addCategoryButton() {
     return FormInputFieldInfo<dynamic, dynamic>.customButton(
-      id: FieldId.cancel.value,
-      label: 'Cancel',
-      sectionName: SectionName.submit.value,
+      id: FieldId.addCategory.value,
+      label: 'Add category',
+      sectionName: SectionName.categories.value,
       callback: () {
         print('adding category');
       },
@@ -729,14 +733,19 @@ class _AddListItemPageState extends State<AddListItemPage> {
 
   FormInputFieldInfo<String, dynamic> urlField() {
     return FormInputFieldInfo.textArea(
-      id: FieldId.name.value,
+      id: FieldId.urls.value,
       label: 'Url',
       currentValue: '', // TODO: fix
       validators: [
+        FormBuilderValidators.required(),
         FormBuilderValidators.maxLength(200),
       ],
       sectionName: SectionName.urls.value,
       hasError: false,
+      deletable: true,
+      onDelete: () {
+        print('deleted url');
+      },
     );
   }
 
@@ -744,7 +753,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
     return FormInputFieldInfo<dynamic, dynamic>.customButton(
       id: FieldId.addUrl.value,
       label: 'Add url',
-      sectionName: SectionName.submit.value,
+      sectionName: SectionName.urls.value,
       callback: () {
         print('adding url');
       },

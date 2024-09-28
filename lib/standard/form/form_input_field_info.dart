@@ -14,6 +14,8 @@ sealed class FormInputFieldInfo<T, S> with _$FormInputFieldInfo<T, S> {
     required String sectionName,
     required bool hasError,
     @Default(null) void Function(T)? onChange,
+    @Default(false) bool deletable,
+    @Default(null) void Function()? onDelete,
   }) = FormInputFieldInfoTextArea<T, S>;
 
   const factory FormInputFieldInfo.dropdown({
@@ -26,6 +28,8 @@ sealed class FormInputFieldInfo<T, S> with _$FormInputFieldInfo<T, S> {
     required String sectionName,
     required bool hasError,
     @Default(null) void Function(dynamic)? onChange,
+    @Default(false) bool deletable,
+    @Default(null) void Function()? onDelete,
   }) = FormInputFieldInfoDropDown<T, S>;
 
   const factory FormInputFieldInfo.checkbox({
@@ -36,6 +40,8 @@ sealed class FormInputFieldInfo<T, S> with _$FormInputFieldInfo<T, S> {
     required String sectionName,
     required bool hasError,
     @Default(null) void Function(T)? onChange,
+    @Default(false) bool deletable,
+    @Default(null) void Function()? onDelete,
   }) = FormInputFieldInfoCheckbox<T, S>;
 
   const factory FormInputFieldInfo.imagePicker({
@@ -78,6 +84,8 @@ sealed class FormInputFieldInfo<T, S> with _$FormInputFieldInfo<T, S> {
     required bool hasErrorleft,
     required bool hasErrorRight,
     @Default(null) void Function(dynamic)? onChange,
+    @Default(false) bool deletable,
+    @Default(null) void Function()? onDelete,
   }) = FormInputFieldInfoTwoFreeTextDropdown<T, S>;
 
   const factory FormInputFieldInfo.customButton({
@@ -95,5 +103,7 @@ sealed class FormInputFieldInfo<T, S> with _$FormInputFieldInfo<T, S> {
     required String sectionName,
     required bool hasError,
     @Default(null) void Function(T)? onChange,
+    @Default(false) bool deletable,
+    @Default(null) void Function()? onDelete,
   }) = FormInputFieldInfoDate<T, S>;
 }
