@@ -3,10 +3,10 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 
-class FormInputFieldCheckbox<T> extends StatelessWidget {
+class FormInputFieldCheckbox<T, S> extends StatelessWidget {
   const FormInputFieldCheckbox({required this.field, super.key});
 
-  final FormInputFieldInfoCheckbox<T> field;
+  final FormInputFieldInfoCheckbox<T, S> field;
 
   @override
   Widget build(BuildContext context) {

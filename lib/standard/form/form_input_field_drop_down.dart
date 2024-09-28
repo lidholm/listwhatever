@@ -3,10 +3,10 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 
-class FormInputFieldDropDown<T> extends StatelessWidget {
+class FormInputFieldDropDown<T, S> extends StatelessWidget {
   const FormInputFieldDropDown({required this.field, super.key});
 
-  final FormInputFieldInfoDropDown<T> field;
+  final FormInputFieldInfoDropDown<T, S> field;
 
   @override
   Widget build(BuildContext context) {

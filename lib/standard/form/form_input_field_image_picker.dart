@@ -18,18 +18,18 @@ class ApiImage {
   final String id;
 }
 
-class FormInputFieldImagePicker<T> extends StatefulWidget {
+class FormInputFieldImagePicker<T, S> extends StatefulWidget {
   const FormInputFieldImagePicker({required this.field, super.key});
 
-  final FormInputFieldInfoImagePicker<T> field;
+  final FormInputFieldInfoImagePicker<T, S> field;
 
   @override
-  State<FormInputFieldImagePicker<T>> createState() =>
-      _FormInputFieldImagePickerState<T>();
+  State<FormInputFieldImagePicker<T, S>> createState() =>
+      _FormInputFieldImagePickerState<T, S>();
 }
 
-class _FormInputFieldImagePickerState<T>
-    extends State<FormInputFieldImagePicker<T>> {
+class _FormInputFieldImagePickerState<T, S>
+    extends State<FormInputFieldImagePicker<T, S>> {
   final String className = 'FormInputFieldImagePicker';
 
   @override

@@ -3,13 +3,13 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 
-class FormInputFieldSubmitButton<T> extends StatelessWidget {
+class FormInputFieldSubmitButton<T, S> extends StatelessWidget {
   const FormInputFieldSubmitButton({
     required this.formKey,
     required this.field,
     super.key,
   });
-  final FormInputFieldInfoSubmitButton<T> field;
+  final FormInputFieldInfoSubmitButton<T, S> field;
   final GlobalKey<FormBuilderState> formKey;
 
   @override

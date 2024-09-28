@@ -28,7 +28,7 @@ class FormGenerator extends StatefulWidget {
   final GlobalKey<FormBuilderState> formKey;
   final List<FormInputSection> sections;
   // ignore: strict_raw_type
-  final List<FormInputFieldInfo> fields;
+  final List<FormInputFieldInfo?> fields;
 
   @override
   State<StatefulWidget> createState() {
@@ -60,7 +60,7 @@ class _FormGeneratorState extends State<FormGenerator> {
     FormInputSection section,
   ) {
     final sectionFields =
-        widget.fields.where((f) => f.sectionName == section.name);
+        widget.fields.where((f) => f!.sectionName == section.name);
     final fields = sectionFields.map(generateField).toList();
 
     // logger.i(
@@ -95,21 +95,31 @@ class _FormGeneratorState extends State<FormGenerator> {
     }
   }
 
-  Widget generateField<T>(
-    FormInputFieldInfo<T> field,
+  Widget generateField<T, S>(
+    FormInputFieldInfo<T, S>? field,
   ) {
     // logger.i('$className: generateField ${field.label}.');
+    if (field == null) {
+      return const CircularProgressIndicator();
+    }
 
     return switch (field) {
-      FormInputFieldInfoTextArea() => FormInputFieldTextArea(field: field),
-      FormInputFieldInfoDropDown() => FormInputFieldDropDown(field: field),
-      FormInputFieldInfoCheckbox<T>() => FormInputFieldCheckbox(field: field),
-      FormInputFieldInfoImagePicker<T>() =>
-        FormInputFieldImagePicker(field: field),
-      FormInputFieldInfoCancelButton<T>() =>
-        FormInputFieldCancelButton(formKey: widget.formKey, field: field),
-      FormInputFieldInfoSubmitButton<T>() =>
-        FormInputFieldSubmitButton(formKey: widget.formKey, field: field),
+      FormInputFieldInfoTextArea() =>
+        FormInputFieldTextArea<T, S>(field: field),
+      FormInputFieldInfoDropDown() =>
+        FormInputFieldDropDown<T, S>(field: field),
+      FormInputFieldInfoCheckbox<T, S>() =>
+        FormInputFieldCheckbox<T, S>(field: field),
+      FormInputFieldInfoImagePicker<T, S>() =>
+        FormInputFieldImagePicker<T, S>(field: field),
+      FormInputFieldInfoCancelButton<T, S>() =>
+        FormInputFieldCancelButton<T, S>(formKey: widget.formKey, field: field),
+      FormInputFieldInfoSubmitButton<T, S>() =>
+        FormInputFieldSubmitButton<T, S>(formKey: widget.formKey, field: field),
+      FormInputFieldInfoTwoFreeTextDropdown<T, S>() =>
+        throw UnimplementedError(),
+      FormInputFieldInfoCustomButton<T, S>() => throw UnimplementedError(),
+      FormInputFieldInfoDate<T, S>() => throw UnimplementedError(),
     };
   }
 }

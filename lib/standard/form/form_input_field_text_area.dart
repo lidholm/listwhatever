@@ -3,10 +3,10 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 
-class FormInputFieldTextArea<T> extends StatelessWidget {
+class FormInputFieldTextArea<T, S> extends StatelessWidget {
   const FormInputFieldTextArea({required this.field, super.key});
 
-  final FormInputFieldInfoTextArea<T> field;
+  final FormInputFieldInfoTextArea<T, S> field;
 
   @override
   Widget build(BuildContext context) {
