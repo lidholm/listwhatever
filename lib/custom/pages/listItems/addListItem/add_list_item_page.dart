@@ -136,8 +136,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
     final listItemState = context.watch<ListItemLoadBloc>().state;
     // final listItem = getMaybeListItem(listItemState);
 
-    final notLoadedView =
-        ListOrListItemNotLoadedHandler.handleListAndListItemState(
+    final notLoadedView = getNotLoadedView(
       listState,
       listItemState,
     );
@@ -211,6 +210,25 @@ class _AddListItemPageState extends State<AddListItemPage> {
           ),
       ],
     );
+  }
+
+  Widget? getNotLoadedView(
+    ListLoadState listState,
+    ListItemLoadState listItemState,
+  ) {
+    final listStateView =
+        ListOrListItemNotLoadedHandler.handleListState(listState);
+    if (listStateView != null) {
+      return listStateView;
+    }
+    if (listItemId != null) {
+      final listItemStateView =
+          ListOrListItemNotLoadedHandler.handleListItemState(listItemState);
+      if (listItemStateView != null) {
+        return listItemStateView;
+      }
+    }
+    return null;
   }
 
   // FormBuilder createForm(
@@ -682,7 +700,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
   FormInputFieldInfo<String, dynamic> categoryField() {
     return FormInputFieldInfo.twoFreeTextDropdown(
       id: FieldId.categories.value,
-      sectionName: SectionName.mainInfo.value,
+      sectionName: SectionName.categories.value,
       labelLeft: 'Left',
       labelRight: 'Right',
       currentValueLeft: listItem?.name ?? '',
@@ -734,7 +752,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
   }
 
   FormInputFieldInfo<DateTime, dynamic> dateInputField() {
-    return FormInputFieldInfo.textArea(
+    return FormInputFieldInfo.date(
       id: FieldId.date.value,
       label: 'Date',
       currentValue: listItem?.datetime ?? DateTime.now(),

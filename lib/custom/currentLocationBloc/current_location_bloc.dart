@@ -10,14 +10,19 @@ class CurrentLocationCubit extends Cubit<Position?> {
   StreamSubscription<void>? _locationSubscription;
 
   void _startLocationUpdates() {
-    _locationSubscription = Stream<void>.periodic(const Duration(seconds: 5)).listen((_) {
+    _locationSubscription =
+        Stream<void>.periodic(const Duration(seconds: 5)).listen((_) {
       _getCurrentLocation();
     });
   }
 
   Future<void> _getCurrentLocation() async {
     try {
-      final position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+      final position = await Geolocator.getCurrentPosition(
+        // TODO: Fix
+        // ignore: deprecated_member_use
+        desiredAccuracy: LocationAccuracy.high,
+      );
       emit(position);
     } catch (e) {
       // handle exception

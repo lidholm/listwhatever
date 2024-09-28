@@ -121,9 +121,9 @@ class _FormGeneratorState extends State<FormGenerator> {
       FormInputFieldInfoSubmitButton<T, S>() =>
         FormInputFieldSubmitButton<T, S>(formKey: widget.formKey, field: field),
       FormInputFieldInfoTwoFreeTextDropdown<T, S>() =>
-        throw UnimplementedError(),
-      FormInputFieldInfoCustomButton<T, S>() => throw UnimplementedError(),
-      FormInputFieldInfoDate<T, S>() => throw UnimplementedError(),
+        const Text('TwoFreeTextDropdown'),
+      FormInputFieldInfoCustomButton<T, S>() => const Text('CustomButton'),
+      FormInputFieldInfoDate<T, S>() => const Text('Date'),
     };
     return response;
   }
