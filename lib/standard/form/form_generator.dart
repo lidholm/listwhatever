@@ -8,6 +8,7 @@ import 'package:listwhatever/standard/form/form_input_field_image_picker.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 import 'package:listwhatever/standard/form/form_input_field_submit_button.dart';
 import 'package:listwhatever/standard/form/form_input_field_text_area.dart';
+import 'package:listwhatever/standard/form/form_input_section.dart';
 import 'package:listwhatever/standard/widgets/border_with_header.dart';
 import 'package:listwhatever/standard/widgets/vStack/v_stack.dart';
 import 'package:listwhatever/standard/widgets/vStack/x_stack.dart';
@@ -25,7 +26,7 @@ class FormGenerator extends StatefulWidget {
   });
 
   final GlobalKey<FormBuilderState> formKey;
-  final Map<String, x_stack.AxisDirection> sections;
+  final List<FormInputSection> sections;
   // ignore: strict_raw_type
   final List<FormInputFieldInfo> fields;
 
@@ -50,16 +51,16 @@ class _FormGeneratorState extends State<FormGenerator> {
       skipDisabled: true,
       child: VStack(
         spacing: 25,
-        children: widget.sections.entries.map(generateSection).toList(),
+        children: widget.sections.map(generateSection).toList(),
       ),
     );
   }
 
   Widget generateSection(
-    MapEntry<String, x_stack.AxisDirection> section,
+    FormInputSection section,
   ) {
     final sectionFields =
-        widget.fields.where((f) => f.sectionName == section.key);
+        widget.fields.where((f) => f.sectionName == section.name);
     final fields = sectionFields.map(generateField).toList();
 
     // logger.i(
@@ -67,12 +68,12 @@ class _FormGeneratorState extends State<FormGenerator> {
     //     );
 
     final child = XStack(
-      axisDirection: section.value,
-      mainAxisAlignment: section.value == x_stack.AxisDirection.horizontal
+      axisDirection: section.direction,
+      mainAxisAlignment: section.direction == x_stack.AxisDirection.horizontal
           ? MainAxisAlignment.spaceEvenly
           : MainAxisAlignment.center,
-      spacing: section.value == x_stack.AxisDirection.horizontal ? 0 : 10,
-      spacingPosition: section.value == x_stack.AxisDirection.horizontal
+      spacing: section.direction == x_stack.AxisDirection.horizontal ? 0 : 10,
+      spacingPosition: section.direction == x_stack.AxisDirection.horizontal
           ? SpacingPosition.none
           : SpacingPosition.beforeAndBetween,
       children: [
@@ -80,7 +81,18 @@ class _FormGeneratorState extends State<FormGenerator> {
       ],
     );
 
-    return BorderWithHeader(title: section.key, child: child);
+    if (section.showBorder) {
+      return BorderWithHeader(title: section.name, child: child);
+    } else {
+      // ignore: use_colored_box
+      return Row(
+        children: [
+          Expanded(
+            child: child,
+          ),
+        ],
+      );
+    }
   }
 
   Widget generateField<T>(

@@ -14,6 +14,7 @@ import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/firebase/firebase_storage.dart';
 import 'package:listwhatever/standard/form/form_generator.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
+import 'package:listwhatever/standard/form/form_input_section.dart';
 
 import '/custom/pages/list_or_list_item_not_loaded_handler.dart';
 import '/custom/pages/lists/list_load_events/list_load_bloc.dart';
@@ -200,11 +201,23 @@ class _AddListPageState extends State<AddListPage> {
       ),
     ];
 
-    final sections = {
-      SectionName.basic.value: x_stack.AxisDirection.vertical,
-      SectionName.options.value: x_stack.AxisDirection.vertical,
-      SectionName.submit.value: x_stack.AxisDirection.horizontal,
-    };
+    final sections = [
+      FormInputSection(
+        name: SectionName.basic.value,
+        direction: x_stack.AxisDirection.vertical,
+        showBorder: true,
+      ),
+      FormInputSection(
+        name: SectionName.options.value,
+        direction: x_stack.AxisDirection.vertical,
+        showBorder: true,
+      ),
+      FormInputSection(
+        name: SectionName.submit.value,
+        direction: x_stack.AxisDirection.horizontal,
+        showBorder: false,
+      ),
+    ];
 
     final formGenerator = FormGenerator(
       formKey: _formKey,
