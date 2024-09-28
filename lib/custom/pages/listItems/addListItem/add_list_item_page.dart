@@ -121,7 +121,9 @@ class _AddListItemPageState extends State<AddListItemPage> {
     final listItemState = context.watch<ListItemLoadBloc>().state;
     final listItem = getMaybeListItem(listItemState);
 
-    final notLoadedView = getNotLoadedView(listState, listItemState);
+    final notLoadedView =
+        ListOrListItemNotLoadedHandler.handleListAndListItemState(
+            listState, listItemState);
     if (notLoadedView != null) {
       return notLoadedView;
     }
@@ -701,25 +703,6 @@ class _AddListItemPageState extends State<AddListItemPage> {
     if (listItemId != null) {
       if (listItemState is ListItemLoadLoaded) {
         return listItemState.listItem;
-      }
-    }
-    return null;
-  }
-
-  Widget? getNotLoadedView(
-    ListLoadState listState,
-    ListItemLoadState listItemState,
-  ) {
-    final listStateView =
-        ListOrListItemNotLoadedHandler.handleListState(listState);
-    if (listStateView != null) {
-      return listStateView;
-    }
-    if (listItemId != null) {
-      final listItemStateView =
-          ListOrListItemNotLoadedHandler.handleListItemState(listItemState);
-      if (listItemStateView != null) {
-        return listItemStateView;
       }
     }
     return null;
