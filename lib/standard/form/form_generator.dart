@@ -13,6 +13,7 @@ import 'package:listwhatever/standard/form/form_input_field_image_picker.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 import 'package:listwhatever/standard/form/form_input_field_submit_button.dart';
 import 'package:listwhatever/standard/form/form_input_field_text_area.dart';
+import 'package:listwhatever/standard/form/form_input_field_two_auto_complete_fields.dart';
 import 'package:listwhatever/standard/form/form_input_section.dart';
 import 'package:listwhatever/standard/widgets/border_with_header.dart';
 import 'package:listwhatever/standard/widgets/vStack/v_stack.dart';
@@ -122,8 +123,10 @@ class _FormGeneratorState extends State<FormGenerator> {
         FormInputFieldCancelButton<T, S>(formKey: widget.formKey, field: field),
       FormInputFieldInfoSubmitButton<T, S>() =>
         FormInputFieldSubmitButton<T, S>(formKey: widget.formKey, field: field),
-      FormInputFieldInfoTwoFreeTextDropdown<T, S>() =>
-        const Text('TwoFreeTextDropdown'),
+      FormInputFieldInfoTwoAutoCompleteFields<T, S>() =>
+        FormInputFieldTwoAutoCompleteFields<T, S>(
+          field: field,
+        ),
       FormInputFieldInfoCustomButton<T, S>() =>
         FormInputFieldCustomButton<T, S>(formKey: widget.formKey, field: field),
       FormInputFieldInfoDate<T, S>() => FormInputFieldDate<T, S>(field: field),

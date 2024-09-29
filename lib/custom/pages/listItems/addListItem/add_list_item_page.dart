@@ -141,8 +141,8 @@ class _AddListItemPageState extends State<AddListItemPage> {
     list = (listState as ListLoadLoaded).list;
 
     fields = [
-      nameInputField(),
-      extraInfoField(),
+      // nameInputField(),
+      // extraInfoField(),
       categoryField(),
       addCategoryButton(),
       urlField(),
@@ -692,7 +692,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
   }
 
   FormInputFieldInfo<String, dynamic> categoryField() {
-    return FormInputFieldInfo.twoFreeTextDropdown(
+    return FormInputFieldInfo.twoAutoCompleteFields(
       id: FieldId.categories.value,
       sectionName: SectionName.categories.value,
       labelLeft: 'Left',
@@ -701,8 +701,6 @@ class _AddListItemPageState extends State<AddListItemPage> {
       currentValueRight: listItem?.name ?? '',
       optionsLeft: [],
       optionsRight: [],
-      optionLeftToString: (o) => '',
-      optionRightToString: (o) => '',
       validatorsLeft: [],
       validatorsRight: [],
       hasErrorleft: false,

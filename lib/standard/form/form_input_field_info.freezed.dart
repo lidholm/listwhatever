@@ -78,8 +78,6 @@ mixin _$FormInputFieldInfo<T, S> {
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -88,7 +86,7 @@ mixin _$FormInputFieldInfo<T, S> {
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     required TResult Function(String id, String label, String sectionName,
             void Function() callback)
         customButton,
@@ -96,7 +94,7 @@ mixin _$FormInputFieldInfo<T, S> {
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -165,8 +163,6 @@ mixin _$FormInputFieldInfo<T, S> {
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -175,7 +171,7 @@ mixin _$FormInputFieldInfo<T, S> {
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     TResult? Function(String id, String label, String sectionName,
             void Function() callback)?
         customButton,
@@ -183,7 +179,7 @@ mixin _$FormInputFieldInfo<T, S> {
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -252,8 +248,6 @@ mixin _$FormInputFieldInfo<T, S> {
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -262,7 +256,7 @@ mixin _$FormInputFieldInfo<T, S> {
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     TResult Function(String id, String label, String sectionName,
             void Function() callback)?
         customButton,
@@ -270,7 +264,7 @@ mixin _$FormInputFieldInfo<T, S> {
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -291,8 +285,9 @@ mixin _$FormInputFieldInfo<T, S> {
         cancelButton,
     required TResult Function(FormInputFieldInfoSubmitButton<T, S> value)
         submitButton,
-    required TResult Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)
-        twoFreeTextDropdown,
+    required TResult Function(
+            FormInputFieldInfoTwoAutoCompleteFields<T, S> value)
+        twoAutoCompleteFields,
     required TResult Function(FormInputFieldInfoCustomButton<T, S> value)
         customButton,
     required TResult Function(FormInputFieldInfoDate<T, S> value) date,
@@ -306,8 +301,8 @@ mixin _$FormInputFieldInfo<T, S> {
     TResult? Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
     TResult? Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
     TResult? Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult? Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)?
-        twoFreeTextDropdown,
+    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+        twoAutoCompleteFields,
     TResult? Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
     TResult? Function(FormInputFieldInfoDate<T, S> value)? date,
   }) =>
@@ -320,8 +315,8 @@ mixin _$FormInputFieldInfo<T, S> {
     TResult Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
     TResult Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
     TResult Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)?
-        twoFreeTextDropdown,
+    TResult Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+        twoAutoCompleteFields,
     TResult Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
     TResult Function(FormInputFieldInfoDate<T, S> value)? date,
     required TResult orElse(),
@@ -636,8 +631,6 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -646,7 +639,7 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     required TResult Function(String id, String label, String sectionName,
             void Function() callback)
         customButton,
@@ -654,7 +647,7 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -727,8 +720,6 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -737,7 +728,7 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     TResult? Function(String id, String label, String sectionName,
             void Function() callback)?
         customButton,
@@ -745,7 +736,7 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -818,8 +809,6 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -828,7 +817,7 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     TResult Function(String id, String label, String sectionName,
             void Function() callback)?
         customButton,
@@ -836,7 +825,7 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -864,8 +853,9 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
         cancelButton,
     required TResult Function(FormInputFieldInfoSubmitButton<T, S> value)
         submitButton,
-    required TResult Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)
-        twoFreeTextDropdown,
+    required TResult Function(
+            FormInputFieldInfoTwoAutoCompleteFields<T, S> value)
+        twoAutoCompleteFields,
     required TResult Function(FormInputFieldInfoCustomButton<T, S> value)
         customButton,
     required TResult Function(FormInputFieldInfoDate<T, S> value) date,
@@ -882,8 +872,8 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
     TResult? Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
     TResult? Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
     TResult? Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult? Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)?
-        twoFreeTextDropdown,
+    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+        twoAutoCompleteFields,
     TResult? Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
     TResult? Function(FormInputFieldInfoDate<T, S> value)? date,
   }) {
@@ -899,8 +889,8 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
     TResult Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
     TResult Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
     TResult Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)?
-        twoFreeTextDropdown,
+    TResult Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+        twoAutoCompleteFields,
     TResult Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
     TResult Function(FormInputFieldInfoDate<T, S> value)? date,
     required TResult orElse(),
@@ -1239,8 +1229,6 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -1249,7 +1237,7 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     required TResult Function(String id, String label, String sectionName,
             void Function() callback)
         customButton,
@@ -1257,7 +1245,7 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -1330,8 +1318,6 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -1340,7 +1326,7 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     TResult? Function(String id, String label, String sectionName,
             void Function() callback)?
         customButton,
@@ -1348,7 +1334,7 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -1421,8 +1407,6 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -1431,7 +1415,7 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     TResult Function(String id, String label, String sectionName,
             void Function() callback)?
         customButton,
@@ -1439,7 +1423,7 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -1467,8 +1451,9 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
         cancelButton,
     required TResult Function(FormInputFieldInfoSubmitButton<T, S> value)
         submitButton,
-    required TResult Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)
-        twoFreeTextDropdown,
+    required TResult Function(
+            FormInputFieldInfoTwoAutoCompleteFields<T, S> value)
+        twoAutoCompleteFields,
     required TResult Function(FormInputFieldInfoCustomButton<T, S> value)
         customButton,
     required TResult Function(FormInputFieldInfoDate<T, S> value) date,
@@ -1485,8 +1470,8 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
     TResult? Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
     TResult? Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
     TResult? Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult? Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)?
-        twoFreeTextDropdown,
+    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+        twoAutoCompleteFields,
     TResult? Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
     TResult? Function(FormInputFieldInfoDate<T, S> value)? date,
   }) {
@@ -1502,8 +1487,8 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
     TResult Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
     TResult Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
     TResult Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)?
-        twoFreeTextDropdown,
+    TResult Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+        twoAutoCompleteFields,
     TResult Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
     TResult Function(FormInputFieldInfoDate<T, S> value)? date,
     required TResult orElse(),
@@ -1814,8 +1799,6 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -1824,7 +1807,7 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     required TResult Function(String id, String label, String sectionName,
             void Function() callback)
         customButton,
@@ -1832,7 +1815,7 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -1905,8 +1888,6 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -1915,7 +1896,7 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     TResult? Function(String id, String label, String sectionName,
             void Function() callback)?
         customButton,
@@ -1923,7 +1904,7 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -1996,8 +1977,6 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -2006,7 +1985,7 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     TResult Function(String id, String label, String sectionName,
             void Function() callback)?
         customButton,
@@ -2014,7 +1993,7 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -2042,8 +2021,9 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
         cancelButton,
     required TResult Function(FormInputFieldInfoSubmitButton<T, S> value)
         submitButton,
-    required TResult Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)
-        twoFreeTextDropdown,
+    required TResult Function(
+            FormInputFieldInfoTwoAutoCompleteFields<T, S> value)
+        twoAutoCompleteFields,
     required TResult Function(FormInputFieldInfoCustomButton<T, S> value)
         customButton,
     required TResult Function(FormInputFieldInfoDate<T, S> value) date,
@@ -2060,8 +2040,8 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
     TResult? Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
     TResult? Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
     TResult? Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult? Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)?
-        twoFreeTextDropdown,
+    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+        twoAutoCompleteFields,
     TResult? Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
     TResult? Function(FormInputFieldInfoDate<T, S> value)? date,
   }) {
@@ -2077,8 +2057,8 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
     TResult Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
     TResult Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
     TResult Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)?
-        twoFreeTextDropdown,
+    TResult Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+        twoAutoCompleteFields,
     TResult Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
     TResult Function(FormInputFieldInfoDate<T, S> value)? date,
     required TResult orElse(),
@@ -2358,8 +2338,6 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -2368,7 +2346,7 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     required TResult Function(String id, String label, String sectionName,
             void Function() callback)
         customButton,
@@ -2376,7 +2354,7 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -2449,8 +2427,6 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -2459,7 +2435,7 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     TResult? Function(String id, String label, String sectionName,
             void Function() callback)?
         customButton,
@@ -2467,7 +2443,7 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -2540,8 +2516,6 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -2550,7 +2524,7 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     TResult Function(String id, String label, String sectionName,
             void Function() callback)?
         customButton,
@@ -2558,7 +2532,7 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -2586,8 +2560,9 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
         cancelButton,
     required TResult Function(FormInputFieldInfoSubmitButton<T, S> value)
         submitButton,
-    required TResult Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)
-        twoFreeTextDropdown,
+    required TResult Function(
+            FormInputFieldInfoTwoAutoCompleteFields<T, S> value)
+        twoAutoCompleteFields,
     required TResult Function(FormInputFieldInfoCustomButton<T, S> value)
         customButton,
     required TResult Function(FormInputFieldInfoDate<T, S> value) date,
@@ -2604,8 +2579,8 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
     TResult? Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
     TResult? Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
     TResult? Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult? Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)?
-        twoFreeTextDropdown,
+    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+        twoAutoCompleteFields,
     TResult? Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
     TResult? Function(FormInputFieldInfoDate<T, S> value)? date,
   }) {
@@ -2621,8 +2596,8 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
     TResult Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
     TResult Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
     TResult Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)?
-        twoFreeTextDropdown,
+    TResult Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+        twoAutoCompleteFields,
     TResult Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
     TResult Function(FormInputFieldInfoDate<T, S> value)? date,
     required TResult orElse(),
@@ -2842,8 +2817,6 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -2852,7 +2825,7 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     required TResult Function(String id, String label, String sectionName,
             void Function() callback)
         customButton,
@@ -2860,7 +2833,7 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -2932,8 +2905,6 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -2942,7 +2913,7 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     TResult? Function(String id, String label, String sectionName,
             void Function() callback)?
         customButton,
@@ -2950,7 +2921,7 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -3022,8 +2993,6 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -3032,7 +3001,7 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     TResult Function(String id, String label, String sectionName,
             void Function() callback)?
         customButton,
@@ -3040,7 +3009,7 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -3067,8 +3036,9 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
         cancelButton,
     required TResult Function(FormInputFieldInfoSubmitButton<T, S> value)
         submitButton,
-    required TResult Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)
-        twoFreeTextDropdown,
+    required TResult Function(
+            FormInputFieldInfoTwoAutoCompleteFields<T, S> value)
+        twoAutoCompleteFields,
     required TResult Function(FormInputFieldInfoCustomButton<T, S> value)
         customButton,
     required TResult Function(FormInputFieldInfoDate<T, S> value) date,
@@ -3085,8 +3055,8 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
     TResult? Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
     TResult? Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
     TResult? Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult? Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)?
-        twoFreeTextDropdown,
+    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+        twoAutoCompleteFields,
     TResult? Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
     TResult? Function(FormInputFieldInfoDate<T, S> value)? date,
   }) {
@@ -3102,8 +3072,8 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
     TResult Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
     TResult Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
     TResult Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)?
-        twoFreeTextDropdown,
+    TResult Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+        twoAutoCompleteFields,
     TResult Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
     TResult Function(FormInputFieldInfoDate<T, S> value)? date,
     required TResult orElse(),
@@ -3320,8 +3290,6 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -3330,7 +3298,7 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     required TResult Function(String id, String label, String sectionName,
             void Function() callback)
         customButton,
@@ -3338,7 +3306,7 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -3410,8 +3378,6 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -3420,7 +3386,7 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     TResult? Function(String id, String label, String sectionName,
             void Function() callback)?
         customButton,
@@ -3428,7 +3394,7 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -3500,8 +3466,6 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -3510,7 +3474,7 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     TResult Function(String id, String label, String sectionName,
             void Function() callback)?
         customButton,
@@ -3518,7 +3482,7 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -3545,8 +3509,9 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
         cancelButton,
     required TResult Function(FormInputFieldInfoSubmitButton<T, S> value)
         submitButton,
-    required TResult Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)
-        twoFreeTextDropdown,
+    required TResult Function(
+            FormInputFieldInfoTwoAutoCompleteFields<T, S> value)
+        twoAutoCompleteFields,
     required TResult Function(FormInputFieldInfoCustomButton<T, S> value)
         customButton,
     required TResult Function(FormInputFieldInfoDate<T, S> value) date,
@@ -3563,8 +3528,8 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
     TResult? Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
     TResult? Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
     TResult? Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult? Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)?
-        twoFreeTextDropdown,
+    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+        twoAutoCompleteFields,
     TResult? Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
     TResult? Function(FormInputFieldInfoDate<T, S> value)? date,
   }) {
@@ -3580,8 +3545,8 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
     TResult Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
     TResult Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
     TResult Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)?
-        twoFreeTextDropdown,
+    TResult Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+        twoAutoCompleteFields,
     TResult Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
     TResult Function(FormInputFieldInfoDate<T, S> value)? date,
     required TResult orElse(),
@@ -3619,13 +3584,13 @@ abstract class FormInputFieldInfoSubmitButton<T, S>
 }
 
 /// @nodoc
-abstract class _$$FormInputFieldInfoTwoFreeTextDropdownImplCopyWith<T, S, $Res>
-    implements $FormInputFieldInfoCopyWith<T, S, $Res> {
-  factory _$$FormInputFieldInfoTwoFreeTextDropdownImplCopyWith(
-          _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S> value,
-          $Res Function(_$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>)
+abstract class _$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWith<T, S,
+    $Res> implements $FormInputFieldInfoCopyWith<T, S, $Res> {
+  factory _$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWith(
+          _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S> value,
+          $Res Function(_$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>)
               then) =
-      __$$FormInputFieldInfoTwoFreeTextDropdownImplCopyWithImpl<T, S, $Res>;
+      __$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWithImpl<T, S, $Res>;
   @override
   @useResult
   $Res call(
@@ -3636,8 +3601,6 @@ abstract class _$$FormInputFieldInfoTwoFreeTextDropdownImplCopyWith<T, S, $Res>
       S currentValueRight,
       List<T> optionsLeft,
       List<S> optionsRight,
-      String Function(T) optionLeftToString,
-      String Function(S) optionRightToString,
       List<String? Function(String?)> validatorsLeft,
       List<String? Function(String?)> validatorsRight,
       String sectionName,
@@ -3649,14 +3612,14 @@ abstract class _$$FormInputFieldInfoTwoFreeTextDropdownImplCopyWith<T, S, $Res>
 }
 
 /// @nodoc
-class __$$FormInputFieldInfoTwoFreeTextDropdownImplCopyWithImpl<T, S, $Res>
+class __$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWithImpl<T, S, $Res>
     extends _$FormInputFieldInfoCopyWithImpl<T, S, $Res,
-        _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>>
+        _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>>
     implements
-        _$$FormInputFieldInfoTwoFreeTextDropdownImplCopyWith<T, S, $Res> {
-  __$$FormInputFieldInfoTwoFreeTextDropdownImplCopyWithImpl(
-      _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S> _value,
-      $Res Function(_$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>) _then)
+        _$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWith<T, S, $Res> {
+  __$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWithImpl(
+      _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S> _value,
+      $Res Function(_$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>) _then)
       : super(_value, _then);
 
   /// Create a copy of FormInputFieldInfo
@@ -3671,8 +3634,6 @@ class __$$FormInputFieldInfoTwoFreeTextDropdownImplCopyWithImpl<T, S, $Res>
     Object? currentValueRight = freezed,
     Object? optionsLeft = null,
     Object? optionsRight = null,
-    Object? optionLeftToString = null,
-    Object? optionRightToString = null,
     Object? validatorsLeft = null,
     Object? validatorsRight = null,
     Object? sectionName = null,
@@ -3682,7 +3643,7 @@ class __$$FormInputFieldInfoTwoFreeTextDropdownImplCopyWithImpl<T, S, $Res>
     Object? deletable = null,
     Object? onDelete = freezed,
   }) {
-    return _then(_$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>(
+    return _then(_$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -3711,14 +3672,6 @@ class __$$FormInputFieldInfoTwoFreeTextDropdownImplCopyWithImpl<T, S, $Res>
           ? _value._optionsRight
           : optionsRight // ignore: cast_nullable_to_non_nullable
               as List<S>,
-      optionLeftToString: null == optionLeftToString
-          ? _value.optionLeftToString
-          : optionLeftToString // ignore: cast_nullable_to_non_nullable
-              as String Function(T),
-      optionRightToString: null == optionRightToString
-          ? _value.optionRightToString
-          : optionRightToString // ignore: cast_nullable_to_non_nullable
-              as String Function(S),
       validatorsLeft: null == validatorsLeft
           ? _value._validatorsLeft
           : validatorsLeft // ignore: cast_nullable_to_non_nullable
@@ -3757,10 +3710,10 @@ class __$$FormInputFieldInfoTwoFreeTextDropdownImplCopyWithImpl<T, S, $Res>
 
 /// @nodoc
 
-class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
+class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
     with DiagnosticableTreeMixin
-    implements FormInputFieldInfoTwoFreeTextDropdown<T, S> {
-  const _$FormInputFieldInfoTwoFreeTextDropdownImpl(
+    implements FormInputFieldInfoTwoAutoCompleteFields<T, S> {
+  const _$FormInputFieldInfoTwoAutoCompleteFieldsImpl(
       {required this.id,
       required this.labelLeft,
       required this.labelRight,
@@ -3768,8 +3721,6 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
       required this.currentValueRight,
       required final List<T> optionsLeft,
       required final List<S> optionsRight,
-      required this.optionLeftToString,
-      required this.optionRightToString,
       required final List<String? Function(String?)> validatorsLeft,
       required final List<String? Function(String?)> validatorsRight,
       required this.sectionName,
@@ -3809,10 +3760,6 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
     return EqualUnmodifiableListView(_optionsRight);
   }
 
-  @override
-  final String Function(T) optionLeftToString;
-  @override
-  final String Function(S) optionRightToString;
   final List<String? Function(String?)> _validatorsLeft;
   @override
   List<String? Function(String?)> get validatorsLeft {
@@ -3847,7 +3794,7 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo<$T, $S>.twoFreeTextDropdown(id: $id, labelLeft: $labelLeft, labelRight: $labelRight, currentValueLeft: $currentValueLeft, currentValueRight: $currentValueRight, optionsLeft: $optionsLeft, optionsRight: $optionsRight, optionLeftToString: $optionLeftToString, optionRightToString: $optionRightToString, validatorsLeft: $validatorsLeft, validatorsRight: $validatorsRight, sectionName: $sectionName, hasErrorleft: $hasErrorleft, hasErrorRight: $hasErrorRight, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
+    return 'FormInputFieldInfo<$T, $S>.twoAutoCompleteFields(id: $id, labelLeft: $labelLeft, labelRight: $labelRight, currentValueLeft: $currentValueLeft, currentValueRight: $currentValueRight, optionsLeft: $optionsLeft, optionsRight: $optionsRight, validatorsLeft: $validatorsLeft, validatorsRight: $validatorsRight, sectionName: $sectionName, hasErrorleft: $hasErrorleft, hasErrorRight: $hasErrorRight, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
   }
 
   @override
@@ -3855,7 +3802,7 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty(
-          'type', 'FormInputFieldInfo<$T, $S>.twoFreeTextDropdown'))
+          'type', 'FormInputFieldInfo<$T, $S>.twoAutoCompleteFields'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('labelLeft', labelLeft))
       ..add(DiagnosticsProperty('labelRight', labelRight))
@@ -3863,8 +3810,6 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
       ..add(DiagnosticsProperty('currentValueRight', currentValueRight))
       ..add(DiagnosticsProperty('optionsLeft', optionsLeft))
       ..add(DiagnosticsProperty('optionsRight', optionsRight))
-      ..add(DiagnosticsProperty('optionLeftToString', optionLeftToString))
-      ..add(DiagnosticsProperty('optionRightToString', optionRightToString))
       ..add(DiagnosticsProperty('validatorsLeft', validatorsLeft))
       ..add(DiagnosticsProperty('validatorsRight', validatorsRight))
       ..add(DiagnosticsProperty('sectionName', sectionName))
@@ -3879,7 +3824,7 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S> &&
+            other is _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S> &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.labelLeft, labelLeft) ||
                 other.labelLeft == labelLeft) &&
@@ -3893,10 +3838,6 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
                 .equals(other._optionsLeft, _optionsLeft) &&
             const DeepCollectionEquality()
                 .equals(other._optionsRight, _optionsRight) &&
-            (identical(other.optionLeftToString, optionLeftToString) ||
-                other.optionLeftToString == optionLeftToString) &&
-            (identical(other.optionRightToString, optionRightToString) ||
-                other.optionRightToString == optionRightToString) &&
             const DeepCollectionEquality()
                 .equals(other._validatorsLeft, _validatorsLeft) &&
             const DeepCollectionEquality()
@@ -3925,8 +3866,6 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
       const DeepCollectionEquality().hash(currentValueRight),
       const DeepCollectionEquality().hash(_optionsLeft),
       const DeepCollectionEquality().hash(_optionsRight),
-      optionLeftToString,
-      optionRightToString,
       const DeepCollectionEquality().hash(_validatorsLeft),
       const DeepCollectionEquality().hash(_validatorsRight),
       sectionName,
@@ -3941,12 +3880,12 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FormInputFieldInfoTwoFreeTextDropdownImplCopyWith<T, S,
-          _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>>
-      get copyWith => __$$FormInputFieldInfoTwoFreeTextDropdownImplCopyWithImpl<
-          T,
-          S,
-          _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>>(this, _$identity);
+  _$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWith<T, S,
+          _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>>
+      get copyWith =>
+          __$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWithImpl<T, S,
+                  _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -4009,8 +3948,6 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -4019,7 +3956,7 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     required TResult Function(String id, String label, String sectionName,
             void Function() callback)
         customButton,
@@ -4027,7 +3964,7 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -4035,7 +3972,7 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             void Function()? onDelete)
         date,
   }) {
-    return twoFreeTextDropdown(
+    return twoAutoCompleteFields(
         id,
         labelLeft,
         labelRight,
@@ -4043,8 +3980,6 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
         currentValueRight,
         optionsLeft,
         optionsRight,
-        optionLeftToString,
-        optionRightToString,
         validatorsLeft,
         validatorsRight,
         sectionName,
@@ -4116,8 +4051,6 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -4126,7 +4059,7 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     TResult? Function(String id, String label, String sectionName,
             void Function() callback)?
         customButton,
@@ -4134,7 +4067,7 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -4142,7 +4075,7 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             void Function()? onDelete)?
         date,
   }) {
-    return twoFreeTextDropdown?.call(
+    return twoAutoCompleteFields?.call(
         id,
         labelLeft,
         labelRight,
@@ -4150,8 +4083,6 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
         currentValueRight,
         optionsLeft,
         optionsRight,
-        optionLeftToString,
-        optionRightToString,
         validatorsLeft,
         validatorsRight,
         sectionName,
@@ -4223,8 +4154,6 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -4233,7 +4162,7 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     TResult Function(String id, String label, String sectionName,
             void Function() callback)?
         customButton,
@@ -4241,7 +4170,7 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -4250,8 +4179,8 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
         date,
     required TResult orElse(),
   }) {
-    if (twoFreeTextDropdown != null) {
-      return twoFreeTextDropdown(
+    if (twoAutoCompleteFields != null) {
+      return twoAutoCompleteFields(
           id,
           labelLeft,
           labelRight,
@@ -4259,8 +4188,6 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
           currentValueRight,
           optionsLeft,
           optionsRight,
-          optionLeftToString,
-          optionRightToString,
           validatorsLeft,
           validatorsRight,
           sectionName,
@@ -4285,13 +4212,14 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
         cancelButton,
     required TResult Function(FormInputFieldInfoSubmitButton<T, S> value)
         submitButton,
-    required TResult Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)
-        twoFreeTextDropdown,
+    required TResult Function(
+            FormInputFieldInfoTwoAutoCompleteFields<T, S> value)
+        twoAutoCompleteFields,
     required TResult Function(FormInputFieldInfoCustomButton<T, S> value)
         customButton,
     required TResult Function(FormInputFieldInfoDate<T, S> value) date,
   }) {
-    return twoFreeTextDropdown(this);
+    return twoAutoCompleteFields(this);
   }
 
   @override
@@ -4303,12 +4231,12 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
     TResult? Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
     TResult? Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
     TResult? Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult? Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)?
-        twoFreeTextDropdown,
+    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+        twoAutoCompleteFields,
     TResult? Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
     TResult? Function(FormInputFieldInfoDate<T, S> value)? date,
   }) {
-    return twoFreeTextDropdown?.call(this);
+    return twoAutoCompleteFields?.call(this);
   }
 
   @override
@@ -4320,22 +4248,22 @@ class _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>
     TResult Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
     TResult Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
     TResult Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)?
-        twoFreeTextDropdown,
+    TResult Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+        twoAutoCompleteFields,
     TResult Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
     TResult Function(FormInputFieldInfoDate<T, S> value)? date,
     required TResult orElse(),
   }) {
-    if (twoFreeTextDropdown != null) {
-      return twoFreeTextDropdown(this);
+    if (twoAutoCompleteFields != null) {
+      return twoAutoCompleteFields(this);
     }
     return orElse();
   }
 }
 
-abstract class FormInputFieldInfoTwoFreeTextDropdown<T, S>
+abstract class FormInputFieldInfoTwoAutoCompleteFields<T, S>
     implements FormInputFieldInfo<T, S> {
-  const factory FormInputFieldInfoTwoFreeTextDropdown(
+  const factory FormInputFieldInfoTwoAutoCompleteFields(
           {required final String id,
           required final String labelLeft,
           required final String labelRight,
@@ -4343,8 +4271,6 @@ abstract class FormInputFieldInfoTwoFreeTextDropdown<T, S>
           required final S currentValueRight,
           required final List<T> optionsLeft,
           required final List<S> optionsRight,
-          required final String Function(T) optionLeftToString,
-          required final String Function(S) optionRightToString,
           required final List<String? Function(String?)> validatorsLeft,
           required final List<String? Function(String?)> validatorsRight,
           required final String sectionName,
@@ -4353,7 +4279,7 @@ abstract class FormInputFieldInfoTwoFreeTextDropdown<T, S>
           final void Function(dynamic)? onChange,
           final bool deletable,
           final void Function()? onDelete}) =
-      _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>;
+      _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>;
 
   @override
   String get id;
@@ -4363,8 +4289,6 @@ abstract class FormInputFieldInfoTwoFreeTextDropdown<T, S>
   S get currentValueRight;
   List<T> get optionsLeft;
   List<S> get optionsRight;
-  String Function(T) get optionLeftToString;
-  String Function(S) get optionRightToString;
   List<String? Function(String?)> get validatorsLeft;
   List<String? Function(String?)> get validatorsRight;
   @override
@@ -4379,8 +4303,8 @@ abstract class FormInputFieldInfoTwoFreeTextDropdown<T, S>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FormInputFieldInfoTwoFreeTextDropdownImplCopyWith<T, S,
-          _$FormInputFieldInfoTwoFreeTextDropdownImpl<T, S>>
+  _$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWith<T, S,
+          _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -4563,8 +4487,6 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -4573,7 +4495,7 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     required TResult Function(String id, String label, String sectionName,
             void Function() callback)
         customButton,
@@ -4581,7 +4503,7 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -4653,8 +4575,6 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -4663,7 +4583,7 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     TResult? Function(String id, String label, String sectionName,
             void Function() callback)?
         customButton,
@@ -4671,7 +4591,7 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -4743,8 +4663,6 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -4753,7 +4671,7 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     TResult Function(String id, String label, String sectionName,
             void Function() callback)?
         customButton,
@@ -4761,7 +4679,7 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -4788,8 +4706,9 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
         cancelButton,
     required TResult Function(FormInputFieldInfoSubmitButton<T, S> value)
         submitButton,
-    required TResult Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)
-        twoFreeTextDropdown,
+    required TResult Function(
+            FormInputFieldInfoTwoAutoCompleteFields<T, S> value)
+        twoAutoCompleteFields,
     required TResult Function(FormInputFieldInfoCustomButton<T, S> value)
         customButton,
     required TResult Function(FormInputFieldInfoDate<T, S> value) date,
@@ -4806,8 +4725,8 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
     TResult? Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
     TResult? Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
     TResult? Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult? Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)?
-        twoFreeTextDropdown,
+    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+        twoAutoCompleteFields,
     TResult? Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
     TResult? Function(FormInputFieldInfoDate<T, S> value)? date,
   }) {
@@ -4823,8 +4742,8 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
     TResult Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
     TResult Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
     TResult Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)?
-        twoFreeTextDropdown,
+    TResult Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+        twoAutoCompleteFields,
     TResult Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
     TResult Function(FormInputFieldInfoDate<T, S> value)? date,
     required TResult orElse(),
@@ -4874,7 +4793,7 @@ abstract class _$$FormInputFieldInfoDateImplCopyWith<T, S, $Res>
       {String id,
       String label,
       T currentValue,
-      List<String? Function(String?)> validators,
+      List<String? Function(DateTime?)> validators,
       String sectionName,
       bool hasError,
       void Function(T)? onChange,
@@ -4923,7 +4842,7 @@ class __$$FormInputFieldInfoDateImplCopyWithImpl<T, S, $Res>
       validators: null == validators
           ? _value._validators
           : validators // ignore: cast_nullable_to_non_nullable
-              as List<String? Function(String?)>,
+              as List<String? Function(DateTime?)>,
       sectionName: null == sectionName
           ? _value.sectionName
           : sectionName // ignore: cast_nullable_to_non_nullable
@@ -4957,7 +4876,7 @@ class _$FormInputFieldInfoDateImpl<T, S>
       {required this.id,
       required this.label,
       required this.currentValue,
-      required final List<String? Function(String?)> validators,
+      required final List<String? Function(DateTime?)> validators,
       required this.sectionName,
       required this.hasError,
       this.onChange = null,
@@ -4971,9 +4890,9 @@ class _$FormInputFieldInfoDateImpl<T, S>
   final String label;
   @override
   final T currentValue;
-  final List<String? Function(String?)> _validators;
+  final List<String? Function(DateTime?)> _validators;
   @override
-  List<String? Function(String?)> get validators {
+  List<String? Function(DateTime?)> get validators {
     if (_validators is EqualUnmodifiableListView) return _validators;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_validators);
@@ -5121,8 +5040,6 @@ class _$FormInputFieldInfoDateImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -5131,7 +5048,7 @@ class _$FormInputFieldInfoDateImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     required TResult Function(String id, String label, String sectionName,
             void Function() callback)
         customButton,
@@ -5139,7 +5056,7 @@ class _$FormInputFieldInfoDateImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -5212,8 +5129,6 @@ class _$FormInputFieldInfoDateImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -5222,7 +5137,7 @@ class _$FormInputFieldInfoDateImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     TResult? Function(String id, String label, String sectionName,
             void Function() callback)?
         customButton,
@@ -5230,7 +5145,7 @@ class _$FormInputFieldInfoDateImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -5303,8 +5218,6 @@ class _$FormInputFieldInfoDateImpl<T, S>
             S currentValueRight,
             List<T> optionsLeft,
             List<S> optionsRight,
-            String Function(T) optionLeftToString,
-            String Function(S) optionRightToString,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -5313,7 +5226,7 @@ class _$FormInputFieldInfoDateImpl<T, S>
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
-        twoFreeTextDropdown,
+        twoAutoCompleteFields,
     TResult Function(String id, String label, String sectionName,
             void Function() callback)?
         customButton,
@@ -5321,7 +5234,7 @@ class _$FormInputFieldInfoDateImpl<T, S>
             String id,
             String label,
             T currentValue,
-            List<String? Function(String?)> validators,
+            List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
             void Function(T)? onChange,
@@ -5349,8 +5262,9 @@ class _$FormInputFieldInfoDateImpl<T, S>
         cancelButton,
     required TResult Function(FormInputFieldInfoSubmitButton<T, S> value)
         submitButton,
-    required TResult Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)
-        twoFreeTextDropdown,
+    required TResult Function(
+            FormInputFieldInfoTwoAutoCompleteFields<T, S> value)
+        twoAutoCompleteFields,
     required TResult Function(FormInputFieldInfoCustomButton<T, S> value)
         customButton,
     required TResult Function(FormInputFieldInfoDate<T, S> value) date,
@@ -5367,8 +5281,8 @@ class _$FormInputFieldInfoDateImpl<T, S>
     TResult? Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
     TResult? Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
     TResult? Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult? Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)?
-        twoFreeTextDropdown,
+    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+        twoAutoCompleteFields,
     TResult? Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
     TResult? Function(FormInputFieldInfoDate<T, S> value)? date,
   }) {
@@ -5384,8 +5298,8 @@ class _$FormInputFieldInfoDateImpl<T, S>
     TResult Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
     TResult Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
     TResult Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult Function(FormInputFieldInfoTwoFreeTextDropdown<T, S> value)?
-        twoFreeTextDropdown,
+    TResult Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+        twoAutoCompleteFields,
     TResult Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
     TResult Function(FormInputFieldInfoDate<T, S> value)? date,
     required TResult orElse(),
@@ -5403,7 +5317,7 @@ abstract class FormInputFieldInfoDate<T, S>
       {required final String id,
       required final String label,
       required final T currentValue,
-      required final List<String? Function(String?)> validators,
+      required final List<String? Function(DateTime?)> validators,
       required final String sectionName,
       required final bool hasError,
       final void Function(T)? onChange,
@@ -5414,7 +5328,7 @@ abstract class FormInputFieldInfoDate<T, S>
   String get id;
   String get label;
   T get currentValue;
-  List<String? Function(String?)> get validators;
+  List<String? Function(DateTime?)> get validators;
   @override
   String get sectionName;
   bool get hasError;
