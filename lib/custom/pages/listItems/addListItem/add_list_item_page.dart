@@ -145,12 +145,12 @@ class _AddListItemPageState extends State<AddListItemPage> {
       // extraInfoField(),
       categoryField(),
       addCategoryButton(),
-      urlField(),
-      addUrlButton(),
-      dateInputField(),
-      searchLocationButton(),
-      addressField(),
-      latLongField(),
+      // urlField(),
+      // addUrlButton(),
+      // dateInputField(),
+      // searchLocationButton(),
+      // addressField(),
+      // latLongField(),
       cancelButton(),
       submitButton(),
     ];
@@ -699,7 +699,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
       labelRight: 'Right',
       currentValueLeft: listItem?.name ?? '',
       currentValueRight: listItem?.name ?? '',
-      optionsLeft: [],
+      optionsLeft: ['one', 'two', 'three'],
       optionsRight: [],
       validatorsLeft: [],
       validatorsRight: [],
@@ -822,6 +822,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
       sectionName: SectionName.submit.value,
       save: (Map<String, dynamic>? values) {
         print('save');
+        print(values);
         if (values == null) {
           print('No values to save');
           return;
