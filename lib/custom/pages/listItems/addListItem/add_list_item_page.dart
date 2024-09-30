@@ -110,6 +110,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
 
   // ignore: strict_raw_type
   late List<FormInputFieldInfo> fields;
+  List<String> valuesForCategory = [];
 
   @override
   void initState() {
@@ -700,11 +701,12 @@ class _AddListItemPageState extends State<AddListItemPage> {
       currentValueLeft: listItem?.name ?? '',
       currentValueRight: listItem?.name ?? '',
       optionsLeft: ['one', 'two', 'three'],
-      optionsRight: [],
+      optionsRight: valuesForCategory,
       validatorsLeft: [],
       validatorsRight: [],
       hasErrorleft: false,
       hasErrorRight: false,
+      onChangeLeft: setValuesForCategory,
       deletable: true,
       onDelete: () {
         print('deleted category');
@@ -865,5 +867,12 @@ class _AddListItemPageState extends State<AddListItemPage> {
         showBorder: false,
       ),
     ];
+  }
+
+  void setValuesForCategory(String category) {
+    print('setValuesForCategory');
+    setState(() {
+      valuesForCategory = ['ad'];
+    });
   }
 }

@@ -81,7 +81,8 @@ sealed class FormInputFieldInfo<T, S> with _$FormInputFieldInfo<T, S> {
     required String sectionName,
     required bool hasErrorleft,
     required bool hasErrorRight,
-    @Default(null) void Function(dynamic)? onChange,
+    @Default(null) void Function(String value)? onChangeLeft,
+    @Default(null) void Function(String value)? onChangeRight,
     @Default(false) bool deletable,
     @Default(null) void Function()? onDelete,
   }) = FormInputFieldInfoTwoAutoCompleteFields<T, S>;

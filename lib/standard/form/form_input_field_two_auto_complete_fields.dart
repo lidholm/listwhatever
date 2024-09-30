@@ -21,33 +21,73 @@ class _FormInputFieldTwoAutoCompleteFieldsState<T, S>
     extends State<FormInputFieldTwoAutoCompleteFields<T, S>> {
   final fieldKey = GlobalKey<AutoCompleteTextFieldState<String>>();
 
-  List<String> options = [];
-
-  String leftValue = '';
+  List<String> optionsLeft = [];
+  List<String> optionsRight = [];
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilderTypeAhead<String>(
-      name: widget.field.id,
-      suggestionsCallback: getSuggestions,
-      itemBuilder: (context, city) {
-        return ListTile(
-          title: Text(city),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Row(
+          children: [
+            SizedBox(
+              width: constraints.maxWidth * 0.48,
+              child: FormBuilderTypeAhead<String>(
+                name: widget.field.id,
+                suggestionsCallback: (_) => Future.value(
+                  widget.field.optionsLeft.map((e) => e.toString()).toList(),
+                ),
+                itemBuilder: (context, item) {
+                  return ListTile(
+                    title: Text(item),
+                  );
+                },
+                onSelected: widget.field.onChangeLeft,
+              ),
+            ),
+            SizedBox(width: constraints.maxWidth * 0.04),
+            SizedBox(
+              width: constraints.maxWidth * 0.48,
+              child: FormBuilderTypeAhead<String>(
+                name: widget.field.id,
+                suggestionsCallback: (_) => Future.value(
+                  widget.field.optionsRight.map((e) => e.toString()).toList(),
+                ),
+                itemBuilder: (context, item) {
+                  return ListTile(
+                    title: Text(item),
+                  );
+                },
+                onSelected: widget.field.onChangeRight,
+              ),
+            ),
+          ],
         );
       },
-      onSelected: print,
     );
   }
 
-  FutureOr<List<String>> getSuggestions(String search) {
+  FutureOr<List<String>> getSuggestionsLeft(String search) {
     setState(() {
-      options = [
+      optionsLeft = [
         ...widget.field.optionsLeft
             .map((e) => e.toString())
             .where((e) => e.startsWith(search)),
         search,
       ];
     });
-    return Future.value(options);
+    return Future.value(optionsLeft);
+  }
+
+  FutureOr<List<String>> getSuggestionsRight(String search) {
+    setState(() {
+      optionsLeft = [
+        ...widget.field.optionsRight
+            .map((e) => e.toString())
+            .where((e) => e.startsWith(search)),
+        search,
+      ];
+    });
+    return Future.value(optionsRight);
   }
 }
