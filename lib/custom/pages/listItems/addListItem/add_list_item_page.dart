@@ -871,8 +871,13 @@ class _AddListItemPageState extends State<AddListItemPage> {
 
   void setValuesForCategory(String category) {
     print('setValuesForCategory');
+    final values = listItem?.categories.entries
+        .where((e) => e.key == category)
+        .firstOrNull
+        ?.value;
+    print('values: $values');
     setState(() {
-      valuesForCategory = ['ad'];
+      valuesForCategory = values ?? [];
     });
   }
 }
