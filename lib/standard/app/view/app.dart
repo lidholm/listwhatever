@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/custom/pages/lists/categories_for_list/categories_for_list_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/page/list_type_cubit/list_type_cubit.dart';
 import 'package:listwhatever/standard/firebase/firebaseStorageBloc/bloc/firebase_storage_bloc.dart';
 
@@ -113,6 +114,9 @@ class App extends StatelessWidget {
           ),
           BlocProvider<ListLoadBloc>(
             create: (context) => ListLoadBloc(listsService),
+          ),
+          BlocProvider<CategoriesForListBloc>(
+            create: (context) => CategoriesForListBloc(listsService),
           ),
           BlocProvider<ListsLoadBloc>(
             create: (context) => ListsLoadBloc(userListsService),

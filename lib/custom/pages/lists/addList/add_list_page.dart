@@ -266,7 +266,7 @@ class _AddListPageState extends State<AddListPage> {
       onChange: (listType) => setState(() {
         logger.i('$className: onChange ListType: $listType');
         setState(() {
-          showImage = listType == ListType.other;
+          showImage = listType == ListType.other.name;
           logger.i('$className: showImage: $showImage');
         });
       }),

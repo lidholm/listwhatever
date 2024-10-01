@@ -5,9 +5,10 @@ import '/standard/constants.dart';
 import 'categories_for_list_event.dart';
 import 'categories_for_list_state.dart';
 
-class ListLoadBloc
+class CategoriesForListBloc
     extends Bloc<CategoriesForListEvent, CategoriesForListState> {
-  ListLoadBloc(this._listsService) : super(CategoriesForListInitial()) {
+  CategoriesForListBloc(this._listsService)
+      : super(CategoriesForListInitial()) {
     on<ChangeUserForCategoriesForList>(_onChangeUserForCategoriesForList);
     on<LoadCategoriesForList>(_onLoadCategoriesForList);
   }

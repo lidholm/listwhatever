@@ -77,6 +77,22 @@ class ListsService extends FirestoreService {
   }
 
   Future<Map<String, List<String>>> getCategoriesForList(String listId) async {
-    return Future.value({});
+    if (userId == null) {
+      logger.d('no user yet');
+      return Future.value({});
+    }
+    final itemsCollection =
+        (await getCollection()).doc(listId).collection('items');
+
+    // Get the documents from the collection
+    QuerySnapshot querySnapshot = await itemsCollection.get();
+
+    // Extract the 'city' field from each document
+    List<String> fetchedCities =
+        querySnapshot.docs.map((doc) => doc['name'] as String).toList();
+
+    print('fetchedCities: $fetchedCities');
+
+    return {};
   }
 }

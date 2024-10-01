@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/custom/pages/lists/categories_for_list/categories_for_list_bloc.dart';
+import 'package:listwhatever/custom/pages/lists/categories_for_list/categories_for_list_event.dart';
+import 'package:listwhatever/custom/pages/lists/categories_for_list/categories_for_list_state.dart';
 import 'package:listwhatever/standard/form/form_generator.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 import 'package:listwhatever/standard/form/form_input_section.dart';
@@ -107,6 +110,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
 
   ListOfThings? list;
   ListItem? listItem;
+  Map<String, List<String>> categoriesForList = {};
 
   // ignore: strict_raw_type
   late List<FormInputFieldInfo> fields;
@@ -115,6 +119,8 @@ class _AddListItemPageState extends State<AddListItemPage> {
   @override
   void initState() {
     BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.actualListId));
+    BlocProvider.of<CategoriesForListBloc>(context)
+        .add(LoadCategoriesForList(widget.actualListId));
     listItemId = widget.listItemId;
     if (listItemId != null) {
       BlocProvider.of<ListItemLoadBloc>(context)
@@ -129,18 +135,21 @@ class _AddListItemPageState extends State<AddListItemPage> {
 
     final listState = context.watch<ListLoadBloc>().state;
     final listItemState = context.watch<ListItemLoadBloc>().state;
+    final categoriesForListState = context.watch<CategoriesForListBloc>().state;
     listItem = getMaybeListItem(listItemState);
 
     final notLoadedView = getNotLoadedView(
       listState,
       listItemState,
+      categoriesForListState,
     );
     if (notLoadedView != null) {
       return notLoadedView;
     }
 
     list = (listState as ListLoadLoaded).list;
-
+    categoriesForList =
+        (categoriesForListState as CategoriesForListLoaded).categoriesForList;
     fields = [
       // nameInputField(),
       // extraInfoField(),
@@ -210,6 +219,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
   Widget? getNotLoadedView(
     ListLoadState listState,
     ListItemLoadState listItemState,
+    CategoriesForListState categoriesForListState,
   ) {
     final listStateView =
         ListOrListItemNotLoadedHandler.handleListState(listState);
@@ -222,6 +232,9 @@ class _AddListItemPageState extends State<AddListItemPage> {
       if (listItemStateView != null) {
         return listItemStateView;
       }
+    }
+    if (categoriesForListState is! CategoriesForListLoaded) {
+      return const CircularProgressIndicator();
     }
     return null;
   }
