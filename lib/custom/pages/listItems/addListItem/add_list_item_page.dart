@@ -110,7 +110,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
 
   ListOfThings? list;
   ListItem? listItem;
-  Map<String, List<String>> categoriesForList = {};
+  Map<String, Set<String>> categoriesForList = {};
 
   // ignore: strict_raw_type
   late List<FormInputFieldInfo> fields;
@@ -713,7 +713,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
       labelRight: 'Right',
       currentValueLeft: listItem?.name ?? '',
       currentValueRight: listItem?.name ?? '',
-      optionsLeft: ['one', 'two', 'three'],
+      optionsLeft: categoriesForList.keys.toList(),
       optionsRight: getValuesForCategory,
       validatorsLeft: [],
       validatorsRight: [],
@@ -884,6 +884,8 @@ class _AddListItemPageState extends State<AddListItemPage> {
 
   List<String> getValuesForCategory(String t) {
     print('getValuesForCategory($t)');
-    return ['asd', 'bbb'];
+    final values = categoriesForList[t]?.toList() ?? [];
+    print('values: $values');
+    return values;
   }
 }

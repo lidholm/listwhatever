@@ -78,12 +78,15 @@ class _FormInputFieldTwoAutoCompleteFieldsState
     return [
       ...widget.field.optionsLeft.where((e) => e.startsWith(search)),
       search,
-    ];
+    ].where((e) => e.trim() != '').toSet().toList();
   }
 
   FutureOr<List<String>> getSuggestionsRight(String search) {
     final options = widget.field.optionsRight(search).toList();
-    return options.where((o) => o.startsWith(search)).toList();
+    return options
+        .where((o) => o.startsWith(search))
+        .where((e) => e.trim() != '')
+        .toList();
   }
 
   void onChangeLeft(String? value) {

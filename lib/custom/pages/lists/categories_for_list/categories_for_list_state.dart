@@ -9,7 +9,7 @@ class CategoriesForListLoading extends CategoriesForListState {}
 
 class CategoriesForListLoaded extends CategoriesForListState {
   CategoriesForListLoaded(this.categoriesForList);
-  final Map<String, List<String>> categoriesForList;
+  final Map<String, Set<String>> categoriesForList;
 }
 
 class CategoriesForListError extends CategoriesForListState {

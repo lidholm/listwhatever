@@ -76,7 +76,7 @@ class ListsService extends FirestoreService {
     return listsCollection.doc(actualListId).delete();
   }
 
-  Future<Map<String, List<String>>> getCategoriesForList(String listId) async {
+  Future<Map<String, Set<String>>> getCategoriesForList(String listId) async {
     if (userId == null) {
       logger.d('no user yet');
       return Future.value({});
@@ -85,14 +85,28 @@ class ListsService extends FirestoreService {
         (await getCollection()).doc(listId).collection('items');
 
     // Get the documents from the collection
-    QuerySnapshot querySnapshot = await itemsCollection.get();
+    final QuerySnapshot querySnapshot = await itemsCollection.get();
 
     // Extract the 'city' field from each document
-    List<String> fetchedCities =
-        querySnapshot.docs.map((doc) => doc['name'] as String).toList();
+    final allCategories = querySnapshot.docs
+        .map((doc) => doc['categories'] as Map<String, dynamic>)
+        .toList();
+    final categoriesAndValues = <String, Set<String>>{};
 
-    print('fetchedCities: $fetchedCities');
+    for (final m in allCategories) {
+      for (final cat in m.keys.map((e) => e.toLowerCase().trim())) {
+        if (!categoriesAndValues.containsKey(cat)) {
+          categoriesAndValues[cat] = <String>{};
+        }
 
-    return {};
+        for (final value in m[cat] as List<dynamic>) {
+          categoriesAndValues[cat]!.add((value as String).toLowerCase().trim());
+        }
+      }
+    }
+
+    print('categoriesAndValues: $categoriesAndValues');
+
+    return categoriesAndValues;
   }
 }
