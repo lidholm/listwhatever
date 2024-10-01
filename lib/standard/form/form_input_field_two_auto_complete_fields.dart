@@ -3,29 +3,38 @@ import 'dart:async';
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
+import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 
 const String className = 'FormInputFieldTwoAutoCompleteFields';
 
-class FormInputFieldTwoAutoCompleteFields<T, S> extends StatefulWidget {
+class FormInputFieldTwoAutoCompleteFields extends StatefulWidget {
   const FormInputFieldTwoAutoCompleteFields({required this.field, super.key});
 
-  final FormInputFieldInfoTwoAutoCompleteFields<T, S> field;
+  final FormInputFieldInfoTwoAutoCompleteFields field;
 
   @override
-  State<FormInputFieldTwoAutoCompleteFields<T, S>> createState() =>
-      _FormInputFieldTwoAutoCompleteFieldsState<T, S>();
+  State<FormInputFieldTwoAutoCompleteFields> createState() =>
+      _FormInputFieldTwoAutoCompleteFieldsState();
 }
 
-class _FormInputFieldTwoAutoCompleteFieldsState<T, S>
-    extends State<FormInputFieldTwoAutoCompleteFields<T, S>> {
+class _FormInputFieldTwoAutoCompleteFieldsState
+    extends State<FormInputFieldTwoAutoCompleteFields> {
   final fieldKey = GlobalKey<AutoCompleteTextFieldState<String>>();
 
   List<String> optionsLeft = [];
   List<String> optionsRight = [];
 
   @override
+  void initState() {
+    super.initState();
+    optionsLeft = widget.field.optionsLeft;
+    optionsRight = widget.field.optionsRight('');
+  }
+
+  @override
   Widget build(BuildContext context) {
+    logger.i('$className: build');
     return LayoutBuilder(
       builder: (context, constraints) {
         return Row(
@@ -41,6 +50,7 @@ class _FormInputFieldTwoAutoCompleteFieldsState<T, S>
                   );
                 },
                 onSelected: widget.field.onChangeLeft,
+                onChanged: onChangeLeft,
               ),
             ),
             SizedBox(width: constraints.maxWidth * 0.04),
@@ -55,6 +65,7 @@ class _FormInputFieldTwoAutoCompleteFieldsState<T, S>
                   );
                 },
                 onSelected: widget.field.onChangeRight,
+                onChanged: onChangeRight,
               ),
             ),
           ],
@@ -64,26 +75,22 @@ class _FormInputFieldTwoAutoCompleteFieldsState<T, S>
   }
 
   FutureOr<List<String>> getSuggestionsLeft(String search) {
-    setState(() {
-      optionsLeft = [
-        ...widget.field.optionsLeft
-            .map((e) => e.toString())
-            .where((e) => e.startsWith(search)),
-        search,
-      ];
-    });
-    return Future.value(optionsLeft);
+    return [
+      ...widget.field.optionsLeft.where((e) => e.startsWith(search)),
+      search,
+    ];
   }
 
   FutureOr<List<String>> getSuggestionsRight(String search) {
-    setState(() {
-      optionsLeft = [
-        ...widget.field.optionsRight
-            .map((e) => e.toString())
-            .where((e) => e.startsWith(search)),
-        search,
-      ];
-    });
-    return Future.value(optionsRight);
+    final options = widget.field.optionsRight(search).toList();
+    return options.where((o) => o.startsWith(search)).toList();
+  }
+
+  void onChangeLeft(String? value) {
+    widget.field.onChangeLeft?.call(value);
+  }
+
+  void onChangeRight(String? value) {
+    widget.field.onChangeLeft?.call(value);
   }
 }

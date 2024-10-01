@@ -75,4 +75,8 @@ class ListsService extends FirestoreService {
     final listsCollection = await getCollection();
     return listsCollection.doc(actualListId).delete();
   }
+
+  Future<Map<String, List<String>>> getCategoriesForList(String listId) async {
+    return Future.value({});
+  }
 }

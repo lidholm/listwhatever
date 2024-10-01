@@ -83,8 +83,8 @@ mixin _$FormInputFieldInfo {
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -169,8 +169,8 @@ mixin _$FormInputFieldInfo {
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -255,8 +255,8 @@ mixin _$FormInputFieldInfo {
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -635,8 +635,8 @@ class _$FormInputFieldInfoTextAreaImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -725,8 +725,8 @@ class _$FormInputFieldInfoTextAreaImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -815,8 +815,8 @@ class _$FormInputFieldInfoTextAreaImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -1230,8 +1230,8 @@ class _$FormInputFieldInfoDropDownImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -1320,8 +1320,8 @@ class _$FormInputFieldInfoDropDownImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -1410,8 +1410,8 @@ class _$FormInputFieldInfoDropDownImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -1797,8 +1797,8 @@ class _$FormInputFieldInfoCheckboxImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -1887,8 +1887,8 @@ class _$FormInputFieldInfoCheckboxImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -1977,8 +1977,8 @@ class _$FormInputFieldInfoCheckboxImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -2333,8 +2333,8 @@ class _$FormInputFieldInfoImagePickerImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -2423,8 +2423,8 @@ class _$FormInputFieldInfoImagePickerImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -2513,8 +2513,8 @@ class _$FormInputFieldInfoImagePickerImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -2811,8 +2811,8 @@ class _$FormInputFieldInfoCancelButtonImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -2900,8 +2900,8 @@ class _$FormInputFieldInfoCancelButtonImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -2989,8 +2989,8 @@ class _$FormInputFieldInfoCancelButtonImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -3283,8 +3283,8 @@ class _$FormInputFieldInfoSubmitButtonImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -3372,8 +3372,8 @@ class _$FormInputFieldInfoSubmitButtonImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -3461,8 +3461,8 @@ class _$FormInputFieldInfoSubmitButtonImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -3593,8 +3593,8 @@ abstract class _$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWith<$Res>
       String sectionName,
       bool hasErrorleft,
       bool hasErrorRight,
-      void Function(String)? onChangeLeft,
-      void Function(String)? onChangeRight,
+      ValueChanged<String?>? onChangeLeft,
+      ValueChanged<String?>? onChangeRight,
       bool deletable,
       void Function()? onDelete});
 }
@@ -3683,11 +3683,11 @@ class __$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWithImpl<$Res>
       onChangeLeft: freezed == onChangeLeft
           ? _value.onChangeLeft
           : onChangeLeft // ignore: cast_nullable_to_non_nullable
-              as void Function(String)?,
+              as ValueChanged<String?>?,
       onChangeRight: freezed == onChangeRight
           ? _value.onChangeRight
           : onChangeRight // ignore: cast_nullable_to_non_nullable
-              as void Function(String)?,
+              as ValueChanged<String?>?,
       deletable: null == deletable
           ? _value.deletable
           : deletable // ignore: cast_nullable_to_non_nullable
@@ -3770,10 +3770,10 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
   final bool hasErrorRight;
   @override
   @JsonKey()
-  final void Function(String)? onChangeLeft;
+  final ValueChanged<String?>? onChangeLeft;
   @override
   @JsonKey()
-  final void Function(String)? onChangeRight;
+  final ValueChanged<String?>? onChangeRight;
   @override
   @JsonKey()
   final bool deletable;
@@ -3945,8 +3945,8 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -4050,8 +4050,8 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -4155,8 +4155,8 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -4272,8 +4272,8 @@ abstract class FormInputFieldInfoTwoAutoCompleteFields
           required final String sectionName,
           required final bool hasErrorleft,
           required final bool hasErrorRight,
-          final void Function(String)? onChangeLeft,
-          final void Function(String)? onChangeRight,
+          final ValueChanged<String?>? onChangeLeft,
+          final ValueChanged<String?>? onChangeRight,
           final bool deletable,
           final void Function()? onDelete}) =
       _$FormInputFieldInfoTwoAutoCompleteFieldsImpl;
@@ -4292,8 +4292,8 @@ abstract class FormInputFieldInfoTwoAutoCompleteFields
   String get sectionName;
   bool get hasErrorleft;
   bool get hasErrorRight;
-  void Function(String)? get onChangeLeft;
-  void Function(String)? get onChangeRight;
+  ValueChanged<String?>? get onChangeLeft;
+  ValueChanged<String?>? get onChangeRight;
   bool get deletable;
   void Function()? get onDelete;
 
@@ -4489,8 +4489,8 @@ class _$FormInputFieldInfoCustomButtonImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -4578,8 +4578,8 @@ class _$FormInputFieldInfoCustomButtonImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -4667,8 +4667,8 @@ class _$FormInputFieldInfoCustomButtonImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -5040,8 +5040,8 @@ class _$FormInputFieldInfoDateImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -5130,8 +5130,8 @@ class _$FormInputFieldInfoDateImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -5220,8 +5220,8 @@ class _$FormInputFieldInfoDateImpl
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            void Function(String)? onChangeLeft,
-            void Function(String)? onChangeRight,
+            ValueChanged<String?>? onChangeLeft,
+            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,

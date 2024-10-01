@@ -129,7 +129,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
 
     final listState = context.watch<ListLoadBloc>().state;
     final listItemState = context.watch<ListItemLoadBloc>().state;
-    // final listItem = getMaybeListItem(listItemState);
+    listItem = getMaybeListItem(listItemState);
 
     final notLoadedView = getNotLoadedView(
       listState,
@@ -626,14 +626,14 @@ class _AddListItemPageState extends State<AddListItemPage> {
     // }
   }
 
-  // ListItem? getMaybeListItem(ListItemLoadState listItemState) {
-  //   if (listItemId != null) {
-  //     if (listItemState is ListItemLoadLoaded) {
-  //       return listItemState.listItem;
-  //     }
-  //   }
-  //   return null;
-  // }
+  ListItem? getMaybeListItem(ListItemLoadState listItemState) {
+    if (listItemId != null) {
+      if (listItemState is ListItemLoadLoaded) {
+        return listItemState.listItem;
+      }
+    }
+    return null;
+  }
 
   void listItemChangedListener(GoRouter goRouter, ListItemCrudState state) {
     logger.i('$className => state: $state');
@@ -660,7 +660,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
     }
   }
 
-  FormInputFieldInfo<String, dynamic> nameInputField() {
+  FormInputFieldInfo nameInputField() {
     return FormInputFieldInfo.textArea(
       id: FieldId.name.value,
       label: 'Item name',
@@ -674,7 +674,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
     );
   }
 
-  FormInputFieldInfo<String, dynamic> extraInfoField() {
+  FormInputFieldInfo extraInfoField() {
     return FormInputFieldInfo.textArea(
       // TODO: Multiline field
       // minLines: 3,
@@ -692,7 +692,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
     );
   }
 
-  FormInputFieldInfo<String, dynamic> categoryField() {
+  FormInputFieldInfo categoryField() {
     return FormInputFieldInfo.twoAutoCompleteFields(
       id: FieldId.categories.value,
       sectionName: SectionName.categories.value,
@@ -701,12 +701,11 @@ class _AddListItemPageState extends State<AddListItemPage> {
       currentValueLeft: listItem?.name ?? '',
       currentValueRight: listItem?.name ?? '',
       optionsLeft: ['one', 'two', 'three'],
-      optionsRight: valuesForCategory,
+      optionsRight: getValuesForCategory,
       validatorsLeft: [],
       validatorsRight: [],
       hasErrorleft: false,
       hasErrorRight: false,
-      onChangeLeft: setValuesForCategory,
       deletable: true,
       onDelete: () {
         print('deleted category');
@@ -714,8 +713,8 @@ class _AddListItemPageState extends State<AddListItemPage> {
     );
   }
 
-  FormInputFieldInfo<dynamic, dynamic> addCategoryButton() {
-    return FormInputFieldInfo<dynamic, dynamic>.customButton(
+  FormInputFieldInfo addCategoryButton() {
+    return FormInputFieldInfo.customButton(
       id: FieldId.addCategory.value,
       label: 'Add category',
       sectionName: SectionName.categories.value,
@@ -725,7 +724,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
     );
   }
 
-  FormInputFieldInfo<String, dynamic> urlField() {
+  FormInputFieldInfo urlField() {
     return FormInputFieldInfo.textArea(
       id: FieldId.urls.value,
       label: 'Url',
@@ -743,8 +742,8 @@ class _AddListItemPageState extends State<AddListItemPage> {
     );
   }
 
-  FormInputFieldInfo<dynamic, dynamic> addUrlButton() {
-    return FormInputFieldInfo<dynamic, dynamic>.customButton(
+  FormInputFieldInfo addUrlButton() {
+    return FormInputFieldInfo.customButton(
       id: FieldId.addUrl.value,
       label: 'Add url',
       sectionName: SectionName.urls.value,
@@ -754,11 +753,12 @@ class _AddListItemPageState extends State<AddListItemPage> {
     );
   }
 
-  FormInputFieldInfo<DateTime, dynamic> dateInputField() {
+  FormInputFieldInfo dateInputField() {
     return FormInputFieldInfo.date(
       id: FieldId.date.value,
       label: 'Date',
-      currentValue: listItem?.datetime ?? DateTime.now(),
+      currentValue: listItem?.datetime?.toIso8601String() ??
+          DateTime.now().toIso8601String(),
       validators: [
         FormBuilderValidators.required(),
       ],
@@ -767,8 +767,8 @@ class _AddListItemPageState extends State<AddListItemPage> {
     );
   }
 
-  FormInputFieldInfo<dynamic, dynamic> searchLocationButton() {
-    return FormInputFieldInfo<dynamic, dynamic>.customButton(
+  FormInputFieldInfo searchLocationButton() {
+    return FormInputFieldInfo.customButton(
       id: 'searchButton', // TODO: Handled this?
       label: 'Search for a location',
       sectionName: SectionName.location.value,
@@ -778,7 +778,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
     );
   }
 
-  FormInputFieldInfo<String, dynamic> addressField() {
+  FormInputFieldInfo addressField() {
     return FormInputFieldInfo.textArea(
       id: FieldId.address.value,
       label: 'Address',
@@ -792,7 +792,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
     );
   }
 
-  FormInputFieldInfo<String, dynamic> latLongField() {
+  FormInputFieldInfo latLongField() {
     return FormInputFieldInfo.textArea(
       id: FieldId.latlong.value,
       label: 'LatLong',
@@ -806,7 +806,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
     );
   }
 
-  FormInputFieldInfo<dynamic, dynamic> cancelButton() {
+  FormInputFieldInfo cancelButton() {
     return FormInputFieldInfo.cancelButton(
       id: FieldId.cancel.value,
       label: 'Cancel',
@@ -817,7 +817,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
     );
   }
 
-  FormInputFieldInfo<dynamic, dynamic> submitButton() {
+  FormInputFieldInfo submitButton() {
     return FormInputFieldInfo.submitButton(
       id: FieldId.submit.value,
       label: 'Submit',
@@ -869,15 +869,8 @@ class _AddListItemPageState extends State<AddListItemPage> {
     ];
   }
 
-  void setValuesForCategory(String category) {
-    print('setValuesForCategory');
-    final values = listItem?.categories.entries
-        .where((e) => e.key == category)
-        .firstOrNull
-        ?.value;
-    print('values: $values');
-    setState(() {
-      valuesForCategory = values ?? [];
-    });
+  List<String> getValuesForCategory(String t) {
+    print('getValuesForCategory($t)');
+    return ['asd', 'bbb'];
   }
 }
