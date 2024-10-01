@@ -43,6 +43,7 @@ class _FormInputFieldTwoAutoCompleteFieldsState
               width: constraints.maxWidth * 0.48,
               child: FormBuilderTypeAhead<String>(
                 name: widget.field.idLeft,
+                initialValue: widget.field.currentValueLeft,
                 suggestionsCallback: getSuggestionsLeft,
                 itemBuilder: (context, item) {
                   return ListTile(
@@ -57,6 +58,7 @@ class _FormInputFieldTwoAutoCompleteFieldsState
               width: constraints.maxWidth * 0.48,
               child: FormBuilderTypeAhead<String>(
                 name: widget.field.idRight,
+                initialValue: widget.field.currentValueRight,
                 suggestionsCallback: getSuggestionsRight,
                 itemBuilder: (context, item) {
                   return ListTile(

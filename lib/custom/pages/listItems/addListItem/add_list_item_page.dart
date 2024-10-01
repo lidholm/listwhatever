@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listwhatever/custom/pages/lists/categories_for_list/categories_for_list_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/categories_for_list/categories_for_list_event.dart';
@@ -150,10 +151,11 @@ class _AddListItemPageState extends State<AddListItemPage> {
     list = (listState as ListLoadLoaded).list;
     categoriesForList =
         (categoriesForListState as CategoriesForListLoaded).categoriesForList;
+
     fields = [
       nameInputField(),
       extraInfoField(),
-      categoryField(),
+      ...categoryFields(),
       addCategoryButton(),
       urlField(),
       addUrlButton(),
@@ -698,22 +700,31 @@ class _AddListItemPageState extends State<AddListItemPage> {
       label: 'Extra info',
       currentValue: listItem?.info ?? '',
       validators: [
-        FormBuilderValidators.maxLength(1200),
+        FormBuilderValidators.maxLength(1200, checkNullOrEmpty: false),
       ],
       sectionName: SectionName.mainInfo.value,
       hasError: false,
     );
   }
 
-  FormInputFieldInfo categoryField() {
+  List<FormInputFieldInfo> categoryFields() {
+    final keys = listItem?.categories.keys ?? [];
+    final tmp = mapIndexed(keys).toList();
+
+    return [
+      for (final ik in tmp) categoryField(ik.$1, ik.$2),
+    ];
+  }
+
+  FormInputFieldInfo categoryField(int index, String categoryKey) {
     return FormInputFieldInfo.twoAutoCompleteFields(
-      idLeft: '${FieldId.categories.value}-left',
-      idRight: '${FieldId.categories.value}-right',
+      idLeft: '${FieldId.categories.value}-left-$index',
+      idRight: '${FieldId.categories.value}-right-$index',
       sectionName: SectionName.categories.value,
       labelLeft: 'Left',
       labelRight: 'Right',
-      currentValueLeft: listItem?.name ?? '',
-      currentValueRight: listItem?.name ?? '',
+      currentValueLeft: categoryKey,
+      currentValueRight: listItem?.categories[categoryKey]?.join(',') ?? '',
       optionsLeft: categoriesForList.keys.toList(),
       optionsRight: categoriesForList,
       validatorsLeft: [],
