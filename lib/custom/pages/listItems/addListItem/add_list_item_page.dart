@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listwhatever/custom/pages/lists/categories_for_list/categories_for_list_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/categories_for_list/categories_for_list_event.dart';
@@ -118,6 +117,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
   List<String> valuesForCategory = [];
 
   List<String>? urls;
+  Map<String, String>? categories;
 
   @override
   void initState() {
@@ -710,23 +710,31 @@ class _AddListItemPageState extends State<AddListItemPage> {
   }
 
   List<FormInputFieldInfo> categoryFields() {
-    final keys = listItem?.categories.keys ?? [];
-    final tmp = mapIndexed(keys).toList();
+    if (categories == null) {
+      setState(() {
+        categories = {};
+        final keys = listItem?.categories.keys ?? [];
+        for (final key in keys) {
+          categories![key] = listItem?.categories[key]?.join(',') ?? '';
+        }
+      });
+    }
 
     return [
-      for (final ik in tmp) categoryField(ik.$1, ik.$2),
+      for (final ik in mapIndexed(categories!.entries))
+        categoryField(ik.$1, ik.$2.key, ik.$2.value),
     ];
   }
 
-  FormInputFieldInfo categoryField(int index, String categoryKey) {
+  FormInputFieldInfo categoryField(int index, String left, String right) {
     return FormInputFieldInfo.twoAutoCompleteFields(
       idLeft: '${FieldId.categories.value}-left-$index',
       idRight: '${FieldId.categories.value}-right-$index',
       sectionName: SectionName.categories.value,
       labelLeft: 'Left',
       labelRight: 'Right',
-      currentValueLeft: categoryKey,
-      currentValueRight: listItem?.categories[categoryKey]?.join(',') ?? '',
+      currentValueLeft: left,
+      currentValueRight: right,
       optionsLeft: categoriesForList.keys.toList(),
       optionsRight: categoriesForList,
       validatorsLeft: [
@@ -753,6 +761,11 @@ class _AddListItemPageState extends State<AddListItemPage> {
       sectionName: SectionName.categories.value,
       callback: () {
         print('adding category');
+        setState(() {
+          final cs = Map<String, String>.from(categories!);
+          cs[''] = '';
+          categories = cs;
+        });
       },
     );
   }
