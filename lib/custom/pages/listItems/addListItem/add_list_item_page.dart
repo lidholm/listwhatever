@@ -117,7 +117,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
   List<String> valuesForCategory = [];
 
   List<String>? urls;
-  Map<String, String>? categories;
+  List<MapEntry<String, String>>? categories;
 
   @override
   void initState() {
@@ -712,16 +712,17 @@ class _AddListItemPageState extends State<AddListItemPage> {
   List<FormInputFieldInfo> categoryFields() {
     if (categories == null) {
       setState(() {
-        categories = {};
+        categories = [];
         final keys = listItem?.categories.keys ?? [];
         for (final key in keys) {
-          categories![key] = listItem?.categories[key]?.join(',') ?? '';
+          categories!
+              .add(MapEntry(key, listItem?.categories[key]?.join(',') ?? ''));
         }
       });
     }
 
     return [
-      for (final ik in mapIndexed(categories!.entries))
+      for (final ik in mapIndexed(categories!))
         categoryField(ik.$1, ik.$2.key, ik.$2.value),
     ];
   }
@@ -762,9 +763,8 @@ class _AddListItemPageState extends State<AddListItemPage> {
       callback: () {
         print('adding category');
         setState(() {
-          final cs = Map<String, String>.from(categories!);
-          cs[''] = '';
-          categories = cs;
+          final cs = List<MapEntry<String, String>>.from(categories!);
+          categories = cs..add(const MapEntry('', ''));
         });
       },
     );
