@@ -85,7 +85,7 @@ class _FormInputFieldTwoAutoCompleteFieldsState
       ...optionsRight
           // .where((o) => o.startsWith(search))
           .where((e) => e.trim() != ''),
-      search
+      search,
     ];
   }
 

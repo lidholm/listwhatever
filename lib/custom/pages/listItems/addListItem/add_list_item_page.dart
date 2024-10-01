@@ -161,10 +161,12 @@ class _AddListItemPageState extends State<AddListItemPage> {
       addCategoryButton(),
       ...urlFields(),
       addUrlButton(),
-      dateInputField(),
-      searchLocationButton(),
-      addressField(),
-      latLongField(),
+      if (list!.withDates) dateInputField(),
+      if (list!.withMap) ...[
+        searchLocationButton(),
+        addressField(),
+        latLongField(),
+      ],
       cancelButton(),
       submitButton(),
     ];
@@ -558,16 +560,18 @@ class _AddListItemPageState extends State<AddListItemPage> {
         direction: x_stack.AxisDirection.vertical,
         showBorder: true,
       ),
-      FormInputSection(
-        name: SectionName.date.value,
-        direction: x_stack.AxisDirection.vertical,
-        showBorder: true,
-      ),
-      FormInputSection(
-        name: SectionName.location.value,
-        direction: x_stack.AxisDirection.vertical,
-        showBorder: true,
-      ),
+      if (list!.withDates)
+        FormInputSection(
+          name: SectionName.date.value,
+          direction: x_stack.AxisDirection.vertical,
+          showBorder: true,
+        ),
+      if (list!.withMap)
+        FormInputSection(
+          name: SectionName.location.value,
+          direction: x_stack.AxisDirection.vertical,
+          showBorder: true,
+        ),
       FormInputSection(
         name: SectionName.submit.value,
         direction: x_stack.AxisDirection.horizontal,
