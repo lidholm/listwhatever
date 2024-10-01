@@ -13,7 +13,7 @@ class FormInputFieldDate extends StatelessWidget {
     final textField = FormBuilderDateTimePicker(
       autovalidateMode: AutovalidateMode.always,
       name: field.id,
-      initialValue: field.currentValue as DateTime?,
+      initialValue: DateTime.tryParse(field.currentValue),
       decoration: InputDecoration(
         labelText: field.label,
         suffixIcon: field.hasError

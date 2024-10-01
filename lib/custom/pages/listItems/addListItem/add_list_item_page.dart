@@ -151,16 +151,16 @@ class _AddListItemPageState extends State<AddListItemPage> {
     categoriesForList =
         (categoriesForListState as CategoriesForListLoaded).categoriesForList;
     fields = [
-      // nameInputField(),
-      // extraInfoField(),
+      nameInputField(),
+      extraInfoField(),
       categoryField(),
       addCategoryButton(),
-      // urlField(),
-      // addUrlButton(),
-      // dateInputField(),
-      // searchLocationButton(),
-      // addressField(),
-      // latLongField(),
+      urlField(),
+      addUrlButton(),
+      dateInputField(),
+      searchLocationButton(),
+      addressField(),
+      latLongField(),
       cancelButton(),
       submitButton(),
     ];
@@ -707,7 +707,8 @@ class _AddListItemPageState extends State<AddListItemPage> {
 
   FormInputFieldInfo categoryField() {
     return FormInputFieldInfo.twoAutoCompleteFields(
-      id: FieldId.categories.value,
+      idLeft: '${FieldId.categories.value}-left',
+      idRight: '${FieldId.categories.value}-right',
       sectionName: SectionName.categories.value,
       labelLeft: 'Left',
       labelRight: 'Right',

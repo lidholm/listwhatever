@@ -69,7 +69,8 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
   }) = FormInputFieldInfoSubmitButton;
 
   const factory FormInputFieldInfo.twoAutoCompleteFields({
-    required String id,
+    required String idLeft,
+    required String idRight,
     required String labelLeft,
     required String labelRight,
     required String currentValueLeft,
