@@ -29,7 +29,7 @@ class _FormInputFieldTwoAutoCompleteFieldsState
   void initState() {
     super.initState();
     optionsLeft = widget.field.optionsLeft;
-    optionsRight = widget.field.optionsRight('');
+    optionsRight = [];
   }
 
   @override
@@ -49,7 +49,6 @@ class _FormInputFieldTwoAutoCompleteFieldsState
                     title: Text(item),
                   );
                 },
-                onSelected: widget.field.onChangeLeft,
                 onChanged: onChangeLeft,
               ),
             ),
@@ -64,8 +63,6 @@ class _FormInputFieldTwoAutoCompleteFieldsState
                     title: Text(item),
                   );
                 },
-                onSelected: widget.field.onChangeRight,
-                onChanged: onChangeRight,
               ),
             ),
           ],
@@ -76,24 +73,21 @@ class _FormInputFieldTwoAutoCompleteFieldsState
 
   FutureOr<List<String>> getSuggestionsLeft(String search) {
     return [
-      ...widget.field.optionsLeft.where((e) => e.startsWith(search)),
+      ...widget.field.optionsLeft, //.where((e) => e.startsWith(search)),
       search,
     ].where((e) => e.trim() != '').toSet().toList();
   }
 
   FutureOr<List<String>> getSuggestionsRight(String search) {
-    final options = widget.field.optionsRight(search).toList();
-    return options
-        .where((o) => o.startsWith(search))
+    return optionsRight
+        // .where((o) => o.startsWith(search))
         .where((e) => e.trim() != '')
         .toList();
   }
 
   void onChangeLeft(String? value) {
-    widget.field.onChangeLeft?.call(value);
-  }
-
-  void onChangeRight(String? value) {
-    widget.field.onChangeLeft?.call(value);
+    setState(() {
+      optionsRight = widget.field.optionsRight[value]?.toList() ?? [];
+    });
   }
 }

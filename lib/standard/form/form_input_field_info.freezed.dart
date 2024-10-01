@@ -77,14 +77,12 @@ mixin _$FormInputFieldInfo {
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -163,14 +161,12 @@ mixin _$FormInputFieldInfo {
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -249,14 +245,12 @@ mixin _$FormInputFieldInfo {
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -629,14 +623,12 @@ class _$FormInputFieldInfoTextAreaImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -719,14 +711,12 @@ class _$FormInputFieldInfoTextAreaImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -809,14 +799,12 @@ class _$FormInputFieldInfoTextAreaImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -1224,14 +1212,12 @@ class _$FormInputFieldInfoDropDownImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -1314,14 +1300,12 @@ class _$FormInputFieldInfoDropDownImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -1404,14 +1388,12 @@ class _$FormInputFieldInfoDropDownImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -1791,14 +1773,12 @@ class _$FormInputFieldInfoCheckboxImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -1881,14 +1861,12 @@ class _$FormInputFieldInfoCheckboxImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -1971,14 +1949,12 @@ class _$FormInputFieldInfoCheckboxImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -2327,14 +2303,12 @@ class _$FormInputFieldInfoImagePickerImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -2417,14 +2391,12 @@ class _$FormInputFieldInfoImagePickerImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -2507,14 +2479,12 @@ class _$FormInputFieldInfoImagePickerImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -2805,14 +2775,12 @@ class _$FormInputFieldInfoCancelButtonImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -2894,14 +2862,12 @@ class _$FormInputFieldInfoCancelButtonImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -2983,14 +2949,12 @@ class _$FormInputFieldInfoCancelButtonImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -3277,14 +3241,12 @@ class _$FormInputFieldInfoSubmitButtonImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -3366,14 +3328,12 @@ class _$FormInputFieldInfoSubmitButtonImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -3455,14 +3415,12 @@ class _$FormInputFieldInfoSubmitButtonImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -3587,14 +3545,12 @@ abstract class _$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWith<$Res>
       String currentValueLeft,
       String currentValueRight,
       List<String> optionsLeft,
-      List<String> Function(String) optionsRight,
+      Map<String, Set<String>> optionsRight,
       List<String? Function(String?)> validatorsLeft,
       List<String? Function(String?)> validatorsRight,
       String sectionName,
       bool hasErrorleft,
       bool hasErrorRight,
-      ValueChanged<String?>? onChangeLeft,
-      ValueChanged<String?>? onChangeRight,
       bool deletable,
       void Function()? onDelete});
 }
@@ -3626,8 +3582,6 @@ class __$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWithImpl<$Res>
     Object? sectionName = null,
     Object? hasErrorleft = null,
     Object? hasErrorRight = null,
-    Object? onChangeLeft = freezed,
-    Object? onChangeRight = freezed,
     Object? deletable = null,
     Object? onDelete = freezed,
   }) {
@@ -3657,9 +3611,9 @@ class __$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWithImpl<$Res>
           : optionsLeft // ignore: cast_nullable_to_non_nullable
               as List<String>,
       optionsRight: null == optionsRight
-          ? _value.optionsRight
+          ? _value._optionsRight
           : optionsRight // ignore: cast_nullable_to_non_nullable
-              as List<String> Function(String),
+              as Map<String, Set<String>>,
       validatorsLeft: null == validatorsLeft
           ? _value._validatorsLeft
           : validatorsLeft // ignore: cast_nullable_to_non_nullable
@@ -3680,14 +3634,6 @@ class __$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWithImpl<$Res>
           ? _value.hasErrorRight
           : hasErrorRight // ignore: cast_nullable_to_non_nullable
               as bool,
-      onChangeLeft: freezed == onChangeLeft
-          ? _value.onChangeLeft
-          : onChangeLeft // ignore: cast_nullable_to_non_nullable
-              as ValueChanged<String?>?,
-      onChangeRight: freezed == onChangeRight
-          ? _value.onChangeRight
-          : onChangeRight // ignore: cast_nullable_to_non_nullable
-              as ValueChanged<String?>?,
       deletable: null == deletable
           ? _value.deletable
           : deletable // ignore: cast_nullable_to_non_nullable
@@ -3712,17 +3658,16 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
       required this.currentValueLeft,
       required this.currentValueRight,
       required final List<String> optionsLeft,
-      required this.optionsRight,
+      required final Map<String, Set<String>> optionsRight,
       required final List<String? Function(String?)> validatorsLeft,
       required final List<String? Function(String?)> validatorsRight,
       required this.sectionName,
       required this.hasErrorleft,
       required this.hasErrorRight,
-      this.onChangeLeft = null,
-      this.onChangeRight = null,
       this.deletable = false,
       this.onDelete = null})
       : _optionsLeft = optionsLeft,
+        _optionsRight = optionsRight,
         _validatorsLeft = validatorsLeft,
         _validatorsRight = validatorsRight;
 
@@ -3744,8 +3689,14 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     return EqualUnmodifiableListView(_optionsLeft);
   }
 
+  final Map<String, Set<String>> _optionsRight;
   @override
-  final List<String> Function(String) optionsRight;
+  Map<String, Set<String>> get optionsRight {
+    if (_optionsRight is EqualUnmodifiableMapView) return _optionsRight;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_optionsRight);
+  }
+
   final List<String? Function(String?)> _validatorsLeft;
   @override
   List<String? Function(String?)> get validatorsLeft {
@@ -3770,12 +3721,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
   final bool hasErrorRight;
   @override
   @JsonKey()
-  final ValueChanged<String?>? onChangeLeft;
-  @override
-  @JsonKey()
-  final ValueChanged<String?>? onChangeRight;
-  @override
-  @JsonKey()
   final bool deletable;
   @override
   @JsonKey()
@@ -3783,7 +3728,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo.twoAutoCompleteFields(id: $id, labelLeft: $labelLeft, labelRight: $labelRight, currentValueLeft: $currentValueLeft, currentValueRight: $currentValueRight, optionsLeft: $optionsLeft, optionsRight: $optionsRight, validatorsLeft: $validatorsLeft, validatorsRight: $validatorsRight, sectionName: $sectionName, hasErrorleft: $hasErrorleft, hasErrorRight: $hasErrorRight, onChangeLeft: $onChangeLeft, onChangeRight: $onChangeRight, deletable: $deletable, onDelete: $onDelete)';
+    return 'FormInputFieldInfo.twoAutoCompleteFields(id: $id, labelLeft: $labelLeft, labelRight: $labelRight, currentValueLeft: $currentValueLeft, currentValueRight: $currentValueRight, optionsLeft: $optionsLeft, optionsRight: $optionsRight, validatorsLeft: $validatorsLeft, validatorsRight: $validatorsRight, sectionName: $sectionName, hasErrorleft: $hasErrorleft, hasErrorRight: $hasErrorRight, deletable: $deletable, onDelete: $onDelete)';
   }
 
   @override
@@ -3804,8 +3749,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
       ..add(DiagnosticsProperty('sectionName', sectionName))
       ..add(DiagnosticsProperty('hasErrorleft', hasErrorleft))
       ..add(DiagnosticsProperty('hasErrorRight', hasErrorRight))
-      ..add(DiagnosticsProperty('onChangeLeft', onChangeLeft))
-      ..add(DiagnosticsProperty('onChangeRight', onChangeRight))
       ..add(DiagnosticsProperty('deletable', deletable))
       ..add(DiagnosticsProperty('onDelete', onDelete));
   }
@@ -3826,8 +3769,8 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
                 other.currentValueRight == currentValueRight) &&
             const DeepCollectionEquality()
                 .equals(other._optionsLeft, _optionsLeft) &&
-            (identical(other.optionsRight, optionsRight) ||
-                other.optionsRight == optionsRight) &&
+            const DeepCollectionEquality()
+                .equals(other._optionsRight, _optionsRight) &&
             const DeepCollectionEquality()
                 .equals(other._validatorsLeft, _validatorsLeft) &&
             const DeepCollectionEquality()
@@ -3838,10 +3781,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
                 other.hasErrorleft == hasErrorleft) &&
             (identical(other.hasErrorRight, hasErrorRight) ||
                 other.hasErrorRight == hasErrorRight) &&
-            (identical(other.onChangeLeft, onChangeLeft) ||
-                other.onChangeLeft == onChangeLeft) &&
-            (identical(other.onChangeRight, onChangeRight) ||
-                other.onChangeRight == onChangeRight) &&
             (identical(other.deletable, deletable) ||
                 other.deletable == deletable) &&
             (identical(other.onDelete, onDelete) ||
@@ -3857,14 +3796,12 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
       currentValueLeft,
       currentValueRight,
       const DeepCollectionEquality().hash(_optionsLeft),
-      optionsRight,
+      const DeepCollectionEquality().hash(_optionsRight),
       const DeepCollectionEquality().hash(_validatorsLeft),
       const DeepCollectionEquality().hash(_validatorsRight),
       sectionName,
       hasErrorleft,
       hasErrorRight,
-      onChangeLeft,
-      onChangeRight,
       deletable,
       onDelete);
 
@@ -3939,14 +3876,12 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -3978,8 +3913,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
         sectionName,
         hasErrorleft,
         hasErrorRight,
-        onChangeLeft,
-        onChangeRight,
         deletable,
         onDelete);
   }
@@ -4044,14 +3977,12 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -4083,8 +4014,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
         sectionName,
         hasErrorleft,
         hasErrorRight,
-        onChangeLeft,
-        onChangeRight,
         deletable,
         onDelete);
   }
@@ -4149,14 +4078,12 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -4190,8 +4117,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
           sectionName,
           hasErrorleft,
           hasErrorRight,
-          onChangeLeft,
-          onChangeRight,
           deletable,
           onDelete);
     }
@@ -4266,14 +4191,12 @@ abstract class FormInputFieldInfoTwoAutoCompleteFields
           required final String currentValueLeft,
           required final String currentValueRight,
           required final List<String> optionsLeft,
-          required final List<String> Function(String) optionsRight,
+          required final Map<String, Set<String>> optionsRight,
           required final List<String? Function(String?)> validatorsLeft,
           required final List<String? Function(String?)> validatorsRight,
           required final String sectionName,
           required final bool hasErrorleft,
           required final bool hasErrorRight,
-          final ValueChanged<String?>? onChangeLeft,
-          final ValueChanged<String?>? onChangeRight,
           final bool deletable,
           final void Function()? onDelete}) =
       _$FormInputFieldInfoTwoAutoCompleteFieldsImpl;
@@ -4285,15 +4208,13 @@ abstract class FormInputFieldInfoTwoAutoCompleteFields
   String get currentValueLeft;
   String get currentValueRight;
   List<String> get optionsLeft;
-  List<String> Function(String) get optionsRight;
+  Map<String, Set<String>> get optionsRight;
   List<String? Function(String?)> get validatorsLeft;
   List<String? Function(String?)> get validatorsRight;
   @override
   String get sectionName;
   bool get hasErrorleft;
   bool get hasErrorRight;
-  ValueChanged<String?>? get onChangeLeft;
-  ValueChanged<String?>? get onChangeRight;
   bool get deletable;
   void Function()? get onDelete;
 
@@ -4483,14 +4404,12 @@ class _$FormInputFieldInfoCustomButtonImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -4572,14 +4491,12 @@ class _$FormInputFieldInfoCustomButtonImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -4661,14 +4578,12 @@ class _$FormInputFieldInfoCustomButtonImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -5034,14 +4949,12 @@ class _$FormInputFieldInfoDateImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -5124,14 +5037,12 @@ class _$FormInputFieldInfoDateImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -5214,14 +5125,12 @@ class _$FormInputFieldInfoDateImpl
             String currentValueLeft,
             String currentValueRight,
             List<String> optionsLeft,
-            List<String> Function(String) optionsRight,
+            Map<String, Set<String>> optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
             bool hasErrorleft,
             bool hasErrorRight,
-            ValueChanged<String?>? onChangeLeft,
-            ValueChanged<String?>? onChangeRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,

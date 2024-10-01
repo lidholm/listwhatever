@@ -714,7 +714,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
       currentValueLeft: listItem?.name ?? '',
       currentValueRight: listItem?.name ?? '',
       optionsLeft: categoriesForList.keys.toList(),
-      optionsRight: getValuesForCategory,
+      optionsRight: categoriesForList,
       validatorsLeft: [],
       validatorsRight: [],
       hasErrorleft: false,
