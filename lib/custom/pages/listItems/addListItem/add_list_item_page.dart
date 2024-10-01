@@ -117,6 +117,8 @@ class _AddListItemPageState extends State<AddListItemPage> {
   late List<FormInputFieldInfo> fields;
   List<String> valuesForCategory = [];
 
+  List<String>? urls;
+
   @override
   void initState() {
     BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.actualListId));
@@ -157,7 +159,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
       extraInfoField(),
       ...categoryFields(),
       addCategoryButton(),
-      urlField(),
+      ...urlFields(),
       addUrlButton(),
       dateInputField(),
       searchLocationButton(),
@@ -727,8 +729,14 @@ class _AddListItemPageState extends State<AddListItemPage> {
       currentValueRight: listItem?.categories[categoryKey]?.join(',') ?? '',
       optionsLeft: categoriesForList.keys.toList(),
       optionsRight: categoriesForList,
-      validatorsLeft: [],
-      validatorsRight: [],
+      validatorsLeft: [
+        FormBuilderValidators.required(),
+        FormBuilderValidators.maxLength(40, checkNullOrEmpty: false),
+      ],
+      validatorsRight: [
+        FormBuilderValidators.required(),
+        FormBuilderValidators.maxLength(200, checkNullOrEmpty: false),
+      ],
       hasErrorleft: false,
       hasErrorRight: false,
       deletable: true,
@@ -749,14 +757,23 @@ class _AddListItemPageState extends State<AddListItemPage> {
     );
   }
 
-  FormInputFieldInfo urlField() {
+  List<FormInputFieldInfo> urlFields() {
+    final keys = urls ?? listItem?.urls ?? [];
+    final tmp = mapIndexed(keys).toList();
+
+    return [
+      for (final ik in tmp) urlField(ik.$1, ik.$2),
+    ];
+  }
+
+  FormInputFieldInfo urlField(int index, String url) {
     return FormInputFieldInfo.textArea(
-      id: FieldId.urls.value,
+      id: '${FieldId.urls.value}-$index',
       label: 'Url',
-      currentValue: '', // TODO: fix
+      currentValue: url,
       validators: [
         FormBuilderValidators.required(),
-        FormBuilderValidators.maxLength(200),
+        FormBuilderValidators.maxLength(200, checkNullOrEmpty: false),
       ],
       sectionName: SectionName.urls.value,
       hasError: false,
@@ -774,6 +791,16 @@ class _AddListItemPageState extends State<AddListItemPage> {
       sectionName: SectionName.urls.value,
       callback: () {
         print('adding url');
+        setState(() {
+          if (urls == null) {
+            if (listItem?.urls != null) {
+              urls = listItem!.urls;
+            } else {
+              urls = [];
+            }
+          }
+          urls = List<String>.from(urls!)..add('');
+        });
       },
     );
   }
@@ -807,7 +834,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
     return FormInputFieldInfo.textArea(
       id: FieldId.address.value,
       label: 'Address',
-      currentValue: listItem?.name ?? '', // TODO
+      currentValue: listItem?.address ?? '', // TODO
       validators: [
         FormBuilderValidators.required(),
         FormBuilderValidators.maxLength(70),
@@ -821,7 +848,9 @@ class _AddListItemPageState extends State<AddListItemPage> {
     return FormInputFieldInfo.textArea(
       id: FieldId.latlong.value,
       label: 'LatLong',
-      currentValue: listItem?.name ?? '', // TODO
+      currentValue: listItem?.latLong != null
+          ? '${listItem?.latLong?.lat}, ${listItem?.latLong?.lng}'
+          : '',
       validators: [
         FormBuilderValidators.required(),
         FormBuilderValidators.maxLength(70),
