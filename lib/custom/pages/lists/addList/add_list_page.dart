@@ -236,7 +236,7 @@ class _AddListPageState extends State<AddListPage> {
     }
   }
 
-  FormInputFieldInfo<String, dynamic> nameField() {
+  FormInputFieldInfo nameField() {
     return FormInputFieldInfo.textArea(
       id: FieldId.name.value,
       label: 'Name',
@@ -250,17 +250,17 @@ class _AddListPageState extends State<AddListPage> {
     );
   }
 
-  FormInputFieldInfo<ListType, dynamic> listTypeField() {
-    return FormInputFieldInfo<ListType, dynamic>.dropdown(
+  FormInputFieldInfo listTypeField() {
+    return FormInputFieldInfo.dropdown(
       id: FieldId.listType.value,
       label: 'List type',
-      currentValue: list?.listType ?? ListType.generic,
+      currentValue: list?.listType.name ?? ListType.generic.name,
       validators: [
         FormBuilderValidators.required(),
         FormBuilderValidators.maxLength(70),
       ],
-      options: ListType.values,
-      optionToString: (listType) => (listType as ListType).name,
+      options: ListType.values.map((v) => v.name).toList(),
+      optionToString: (listType) => listType,
       sectionName: SectionName.basic.value,
       hasError: false,
       onChange: (listType) => setState(() {
@@ -273,9 +273,9 @@ class _AddListPageState extends State<AddListPage> {
     );
   }
 
-  FormInputFieldInfo<String, dynamic>? imagePickerField() {
+  FormInputFieldInfo? imagePickerField() {
     if (showImage ?? list?.listType == ListType.other) {
-      return FormInputFieldInfo<String, dynamic>.imagePicker(
+      return FormInputFieldInfo.imagePicker(
         id: FieldId.listTypeImage.value,
         label: 'Image',
         currentValue: list?.imageFilename,
@@ -290,8 +290,8 @@ class _AddListPageState extends State<AddListPage> {
     return null;
   }
 
-  FormInputFieldInfo<bool, dynamic> mapCheckboxField() {
-    return FormInputFieldInfo<bool, dynamic>.checkbox(
+  FormInputFieldInfo mapCheckboxField() {
+    return FormInputFieldInfo.checkbox(
       id: FieldId.withMap.value,
       label: 'Use a map',
       currentValue: list?.withMap ?? false,
@@ -304,8 +304,8 @@ class _AddListPageState extends State<AddListPage> {
     );
   }
 
-  FormInputFieldInfo<bool, dynamic> dateCheckboxField() {
-    return FormInputFieldInfo<bool, dynamic>.checkbox(
+  FormInputFieldInfo dateCheckboxField() {
+    return FormInputFieldInfo.checkbox(
       id: FieldId.withDates.value,
       label: 'Use dates',
       currentValue: list?.withDates ?? false,
@@ -318,8 +318,8 @@ class _AddListPageState extends State<AddListPage> {
     );
   }
 
-  FormInputFieldInfo<bool, dynamic> timeCheckboxField() {
-    return FormInputFieldInfo<bool, dynamic>.checkbox(
+  FormInputFieldInfo timeCheckboxField() {
+    return FormInputFieldInfo.checkbox(
       id: FieldId.withTimes.value,
       label: 'Use time',
       currentValue: list?.withTimes ?? false,
@@ -332,8 +332,8 @@ class _AddListPageState extends State<AddListPage> {
     );
   }
 
-  FormInputFieldInfo<ListType, dynamic> cancelButton() {
-    return FormInputFieldInfo<ListType, dynamic>.cancelButton(
+  FormInputFieldInfo cancelButton() {
+    return FormInputFieldInfo.cancelButton(
       id: FieldId.cancel.value,
       label: 'Cancel',
       sectionName: SectionName.submit.value,
@@ -343,8 +343,8 @@ class _AddListPageState extends State<AddListPage> {
     );
   }
 
-  FormInputFieldInfo<ListType, dynamic> submitButton() {
-    return FormInputFieldInfo<ListType, dynamic>.submitButton(
+  FormInputFieldInfo submitButton() {
+    return FormInputFieldInfo.submitButton(
       id: FieldId.submit.value,
       label: 'Submit',
       sectionName: SectionName.submit.value,

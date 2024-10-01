@@ -6,10 +6,10 @@ import 'package:listwhatever/standard/form/form_input_field_info.dart';
 
 const String className = 'FormInputFieldTextArea';
 
-class FormInputFieldTextArea<T, S> extends StatelessWidget {
+class FormInputFieldTextArea extends StatelessWidget {
   const FormInputFieldTextArea({required this.field, super.key});
 
-  final FormInputFieldInfoTextArea<T, S> field;
+  final FormInputFieldInfoTextArea field;
 
   @override
   Widget build(BuildContext context) {

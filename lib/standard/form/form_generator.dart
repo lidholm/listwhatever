@@ -102,8 +102,8 @@ class _FormGeneratorState extends State<FormGenerator> {
     }
   }
 
-  Widget generateField<T, S>(
-    FormInputFieldInfo<T, S>? field,
+  Widget generateField(
+    FormInputFieldInfo? field,
   ) {
     // logger.i('$className: generateField ${field.label}.');
     if (field == null) {
@@ -111,25 +111,22 @@ class _FormGeneratorState extends State<FormGenerator> {
     }
 
     final response = switch (field) {
-      FormInputFieldInfoTextArea() =>
-        FormInputFieldTextArea<T, S>(field: field),
-      FormInputFieldInfoDropDown() =>
-        FormInputFieldDropDown<T, S>(field: field),
-      FormInputFieldInfoCheckbox<T, S>() =>
-        FormInputFieldCheckbox<T, S>(field: field),
-      FormInputFieldInfoImagePicker<T, S>() =>
-        FormInputFieldImagePicker<T, S>(field: field),
-      FormInputFieldInfoCancelButton<T, S>() =>
-        FormInputFieldCancelButton<T, S>(formKey: widget.formKey, field: field),
-      FormInputFieldInfoSubmitButton<T, S>() =>
-        FormInputFieldSubmitButton<T, S>(formKey: widget.formKey, field: field),
-      FormInputFieldInfoTwoAutoCompleteFields<T, S>() =>
-        FormInputFieldTwoAutoCompleteFields<T, S>(
+      FormInputFieldInfoTextArea() => FormInputFieldTextArea(field: field),
+      FormInputFieldInfoDropDown() => FormInputFieldDropDown(field: field),
+      FormInputFieldInfoCheckbox() => FormInputFieldCheckbox(field: field),
+      FormInputFieldInfoImagePicker() =>
+        FormInputFieldImagePicker(field: field),
+      FormInputFieldInfoCancelButton() =>
+        FormInputFieldCancelButton(formKey: widget.formKey, field: field),
+      FormInputFieldInfoSubmitButton() =>
+        FormInputFieldSubmitButton(formKey: widget.formKey, field: field),
+      FormInputFieldInfoTwoAutoCompleteFields() =>
+        FormInputFieldTwoAutoCompleteFields(
           field: field,
         ),
-      FormInputFieldInfoCustomButton<T, S>() =>
-        FormInputFieldCustomButton<T, S>(formKey: widget.formKey, field: field),
-      FormInputFieldInfoDate<T, S>() => FormInputFieldDate<T, S>(field: field),
+      FormInputFieldInfoCustomButton() =>
+        FormInputFieldCustomButton(formKey: widget.formKey, field: field),
+      FormInputFieldInfoDate() => FormInputFieldDate(field: field),
     };
     return response;
   }

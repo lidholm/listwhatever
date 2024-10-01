@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 
-class FormInputFieldCustomButton<T, S> extends StatelessWidget {
+class FormInputFieldCustomButton extends StatelessWidget {
   const FormInputFieldCustomButton({
     required this.formKey,
     required this.field,
     super.key,
   });
-  final FormInputFieldInfoCustomButton<T, S> field;
+  final FormInputFieldInfoCustomButton field;
   final GlobalKey<FormBuilderState> formKey;
 
   @override

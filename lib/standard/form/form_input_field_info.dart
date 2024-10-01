@@ -5,32 +5,32 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'form_input_field_info.freezed.dart';
 
 @freezed
-sealed class FormInputFieldInfo<T, S> with _$FormInputFieldInfo<T, S> {
+sealed class FormInputFieldInfo with _$FormInputFieldInfo {
   const factory FormInputFieldInfo.textArea({
     required String id,
     required String label,
-    required T currentValue,
+    required String currentValue,
     required List<FormFieldValidator<String>> validators,
     required String sectionName,
     required bool hasError,
-    @Default(null) void Function(T)? onChange,
+    @Default(null) void Function(String)? onChange,
     @Default(false) bool deletable,
     @Default(null) void Function()? onDelete,
-  }) = FormInputFieldInfoTextArea<T, S>;
+  }) = FormInputFieldInfoTextArea;
 
   const factory FormInputFieldInfo.dropdown({
     required String id,
     required String label,
-    required T currentValue,
-    required List<T> options,
-    required String Function(dynamic) optionToString,
+    required String currentValue,
+    required List<String> options,
+    required String Function(String) optionToString,
     required List<FormFieldValidator<String>> validators,
     required String sectionName,
     required bool hasError,
-    @Default(null) void Function(dynamic)? onChange,
+    @Default(null) void Function(String?)? onChange,
     @Default(false) bool deletable,
     @Default(null) void Function()? onDelete,
-  }) = FormInputFieldInfoDropDown<T, S>;
+  }) = FormInputFieldInfoDropDown;
 
   const factory FormInputFieldInfo.checkbox({
     required String id,
@@ -39,10 +39,10 @@ sealed class FormInputFieldInfo<T, S> with _$FormInputFieldInfo<T, S> {
     required List<FormFieldValidator<bool>> validators,
     required String sectionName,
     required bool hasError,
-    @Default(null) void Function(T)? onChange,
+    @Default(null) void Function(String)? onChange,
     @Default(false) bool deletable,
     @Default(null) void Function()? onDelete,
-  }) = FormInputFieldInfoCheckbox<T, S>;
+  }) = FormInputFieldInfoCheckbox;
 
   const factory FormInputFieldInfo.imagePicker({
     required String id,
@@ -51,31 +51,31 @@ sealed class FormInputFieldInfo<T, S> with _$FormInputFieldInfo<T, S> {
     required List<FormFieldValidator<bool>> validators,
     required String sectionName,
     required bool hasError,
-    @Default(null) void Function(T)? onChange,
-  }) = FormInputFieldInfoImagePicker<T, S>;
+    @Default(null) void Function(String value)? onChange,
+  }) = FormInputFieldInfoImagePicker;
 
   const factory FormInputFieldInfo.cancelButton({
     required String id,
     required String label,
     required String sectionName,
     required void Function() cancel,
-  }) = FormInputFieldInfoCancelButton<T, S>;
+  }) = FormInputFieldInfoCancelButton;
 
   const factory FormInputFieldInfo.submitButton({
     required String id,
     required String label,
     required String sectionName,
     required void Function(Map<String, dynamic>?) save,
-  }) = FormInputFieldInfoSubmitButton<T, S>;
+  }) = FormInputFieldInfoSubmitButton;
 
   const factory FormInputFieldInfo.twoAutoCompleteFields({
     required String id,
     required String labelLeft,
     required String labelRight,
-    required T currentValueLeft,
-    required S currentValueRight,
-    required List<T> optionsLeft,
-    required List<S> optionsRight,
+    required String currentValueLeft,
+    required String currentValueRight,
+    required List<String> optionsLeft,
+    required List<String> Function(String value) optionsRight,
     required List<FormFieldValidator<String>> validatorsLeft,
     required List<FormFieldValidator<String>> validatorsRight,
     required String sectionName,
@@ -85,24 +85,24 @@ sealed class FormInputFieldInfo<T, S> with _$FormInputFieldInfo<T, S> {
     @Default(null) void Function(String value)? onChangeRight,
     @Default(false) bool deletable,
     @Default(null) void Function()? onDelete,
-  }) = FormInputFieldInfoTwoAutoCompleteFields<T, S>;
+  }) = FormInputFieldInfoTwoAutoCompleteFields;
 
   const factory FormInputFieldInfo.customButton({
     required String id,
     required String label,
     required String sectionName,
     required void Function() callback,
-  }) = FormInputFieldInfoCustomButton<T, S>;
+  }) = FormInputFieldInfoCustomButton;
 
   const factory FormInputFieldInfo.date({
     required String id,
     required String label,
-    required T currentValue,
+    required String currentValue,
     required List<FormFieldValidator<DateTime?>> validators,
     required String sectionName,
     required bool hasError,
-    @Default(null) void Function(T)? onChange,
+    @Default(null) void Function(String value)? onChange,
     @Default(false) bool deletable,
     @Default(null) void Function()? onDelete,
-  }) = FormInputFieldInfoDate<T, S>;
+  }) = FormInputFieldInfoDate;
 }

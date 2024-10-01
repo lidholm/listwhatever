@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$FormInputFieldInfo<T, S> {
+mixin _$FormInputFieldInfo {
   String get id => throw _privateConstructorUsedError;
   String get sectionName => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -23,24 +23,24 @@ mixin _$FormInputFieldInfo<T, S> {
     required TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         textArea,
     required TResult Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)
         dropdown,
@@ -51,7 +51,7 @@ mixin _$FormInputFieldInfo<T, S> {
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         checkbox,
@@ -62,7 +62,7 @@ mixin _$FormInputFieldInfo<T, S> {
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(String)? onChange)
         imagePicker,
     required TResult Function(
             String id, String label, String sectionName, void Function() cancel)
@@ -74,10 +74,10 @@ mixin _$FormInputFieldInfo<T, S> {
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -94,11 +94,11 @@ mixin _$FormInputFieldInfo<T, S> {
     required TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         date,
@@ -109,24 +109,24 @@ mixin _$FormInputFieldInfo<T, S> {
     TResult? Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         textArea,
     TResult? Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -137,7 +137,7 @@ mixin _$FormInputFieldInfo<T, S> {
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
@@ -148,7 +148,7 @@ mixin _$FormInputFieldInfo<T, S> {
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(String)? onChange)?
         imagePicker,
     TResult? Function(String id, String label, String sectionName,
             void Function() cancel)?
@@ -160,10 +160,10 @@ mixin _$FormInputFieldInfo<T, S> {
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -180,11 +180,11 @@ mixin _$FormInputFieldInfo<T, S> {
     TResult? Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -195,24 +195,24 @@ mixin _$FormInputFieldInfo<T, S> {
     TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         textArea,
     TResult Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -223,7 +223,7 @@ mixin _$FormInputFieldInfo<T, S> {
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
@@ -234,7 +234,7 @@ mixin _$FormInputFieldInfo<T, S> {
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(String)? onChange)?
         imagePicker,
     TResult Function(String id, String label, String sectionName,
             void Function() cancel)?
@@ -246,10 +246,10 @@ mixin _$FormInputFieldInfo<T, S> {
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -266,11 +266,11 @@ mixin _$FormInputFieldInfo<T, S> {
     TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -279,49 +279,47 @@ mixin _$FormInputFieldInfo<T, S> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(FormInputFieldInfoTextArea<T, S> value) textArea,
-    required TResult Function(FormInputFieldInfoDropDown<T, S> value) dropdown,
-    required TResult Function(FormInputFieldInfoCheckbox<T, S> value) checkbox,
-    required TResult Function(FormInputFieldInfoImagePicker<T, S> value)
-        imagePicker,
-    required TResult Function(FormInputFieldInfoCancelButton<T, S> value)
+    required TResult Function(FormInputFieldInfoTextArea value) textArea,
+    required TResult Function(FormInputFieldInfoDropDown value) dropdown,
+    required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
+    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
+    required TResult Function(FormInputFieldInfoCancelButton value)
         cancelButton,
-    required TResult Function(FormInputFieldInfoSubmitButton<T, S> value)
+    required TResult Function(FormInputFieldInfoSubmitButton value)
         submitButton,
-    required TResult Function(
-            FormInputFieldInfoTwoAutoCompleteFields<T, S> value)
+    required TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)
         twoAutoCompleteFields,
-    required TResult Function(FormInputFieldInfoCustomButton<T, S> value)
+    required TResult Function(FormInputFieldInfoCustomButton value)
         customButton,
-    required TResult Function(FormInputFieldInfoDate<T, S> value) date,
+    required TResult Function(FormInputFieldInfoDate value) date,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FormInputFieldInfoTextArea<T, S> value)? textArea,
-    TResult? Function(FormInputFieldInfoDropDown<T, S> value)? dropdown,
-    TResult? Function(FormInputFieldInfoCheckbox<T, S> value)? checkbox,
-    TResult? Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
-    TResult? Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
-    TResult? Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+    TResult? Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
         twoAutoCompleteFields,
-    TResult? Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
-    TResult? Function(FormInputFieldInfoDate<T, S> value)? date,
+    TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult? Function(FormInputFieldInfoDate value)? date,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(FormInputFieldInfoTextArea<T, S> value)? textArea,
-    TResult Function(FormInputFieldInfoDropDown<T, S> value)? dropdown,
-    TResult Function(FormInputFieldInfoCheckbox<T, S> value)? checkbox,
-    TResult Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
-    TResult Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
-    TResult Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+    TResult Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?
         twoAutoCompleteFields,
-    TResult Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
-    TResult Function(FormInputFieldInfoDate<T, S> value)? date,
+    TResult Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult Function(FormInputFieldInfoDate value)? date,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -329,23 +327,22 @@ mixin _$FormInputFieldInfo<T, S> {
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $FormInputFieldInfoCopyWith<T, S, FormInputFieldInfo<T, S>> get copyWith =>
+  $FormInputFieldInfoCopyWith<FormInputFieldInfo> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $FormInputFieldInfoCopyWith<T, S, $Res> {
-  factory $FormInputFieldInfoCopyWith(FormInputFieldInfo<T, S> value,
-          $Res Function(FormInputFieldInfo<T, S>) then) =
-      _$FormInputFieldInfoCopyWithImpl<T, S, $Res, FormInputFieldInfo<T, S>>;
+abstract class $FormInputFieldInfoCopyWith<$Res> {
+  factory $FormInputFieldInfoCopyWith(
+          FormInputFieldInfo value, $Res Function(FormInputFieldInfo) then) =
+      _$FormInputFieldInfoCopyWithImpl<$Res, FormInputFieldInfo>;
   @useResult
   $Res call({String id, String sectionName});
 }
 
 /// @nodoc
-class _$FormInputFieldInfoCopyWithImpl<T, S, $Res,
-        $Val extends FormInputFieldInfo<T, S>>
-    implements $FormInputFieldInfoCopyWith<T, S, $Res> {
+class _$FormInputFieldInfoCopyWithImpl<$Res, $Val extends FormInputFieldInfo>
+    implements $FormInputFieldInfoCopyWith<$Res> {
   _$FormInputFieldInfoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -375,34 +372,34 @@ class _$FormInputFieldInfoCopyWithImpl<T, S, $Res,
 }
 
 /// @nodoc
-abstract class _$$FormInputFieldInfoTextAreaImplCopyWith<T, S, $Res>
-    implements $FormInputFieldInfoCopyWith<T, S, $Res> {
+abstract class _$$FormInputFieldInfoTextAreaImplCopyWith<$Res>
+    implements $FormInputFieldInfoCopyWith<$Res> {
   factory _$$FormInputFieldInfoTextAreaImplCopyWith(
-          _$FormInputFieldInfoTextAreaImpl<T, S> value,
-          $Res Function(_$FormInputFieldInfoTextAreaImpl<T, S>) then) =
-      __$$FormInputFieldInfoTextAreaImplCopyWithImpl<T, S, $Res>;
+          _$FormInputFieldInfoTextAreaImpl value,
+          $Res Function(_$FormInputFieldInfoTextAreaImpl) then) =
+      __$$FormInputFieldInfoTextAreaImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {String id,
       String label,
-      T currentValue,
+      String currentValue,
       List<String? Function(String?)> validators,
       String sectionName,
       bool hasError,
-      void Function(T)? onChange,
+      void Function(String)? onChange,
       bool deletable,
       void Function()? onDelete});
 }
 
 /// @nodoc
-class __$$FormInputFieldInfoTextAreaImplCopyWithImpl<T, S, $Res>
-    extends _$FormInputFieldInfoCopyWithImpl<T, S, $Res,
-        _$FormInputFieldInfoTextAreaImpl<T, S>>
-    implements _$$FormInputFieldInfoTextAreaImplCopyWith<T, S, $Res> {
+class __$$FormInputFieldInfoTextAreaImplCopyWithImpl<$Res>
+    extends _$FormInputFieldInfoCopyWithImpl<$Res,
+        _$FormInputFieldInfoTextAreaImpl>
+    implements _$$FormInputFieldInfoTextAreaImplCopyWith<$Res> {
   __$$FormInputFieldInfoTextAreaImplCopyWithImpl(
-      _$FormInputFieldInfoTextAreaImpl<T, S> _value,
-      $Res Function(_$FormInputFieldInfoTextAreaImpl<T, S>) _then)
+      _$FormInputFieldInfoTextAreaImpl _value,
+      $Res Function(_$FormInputFieldInfoTextAreaImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of FormInputFieldInfo
@@ -412,7 +409,7 @@ class __$$FormInputFieldInfoTextAreaImplCopyWithImpl<T, S, $Res>
   $Res call({
     Object? id = null,
     Object? label = null,
-    Object? currentValue = freezed,
+    Object? currentValue = null,
     Object? validators = null,
     Object? sectionName = null,
     Object? hasError = null,
@@ -420,7 +417,7 @@ class __$$FormInputFieldInfoTextAreaImplCopyWithImpl<T, S, $Res>
     Object? deletable = null,
     Object? onDelete = freezed,
   }) {
-    return _then(_$FormInputFieldInfoTextAreaImpl<T, S>(
+    return _then(_$FormInputFieldInfoTextAreaImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -429,10 +426,10 @@ class __$$FormInputFieldInfoTextAreaImplCopyWithImpl<T, S, $Res>
           ? _value.label
           : label // ignore: cast_nullable_to_non_nullable
               as String,
-      currentValue: freezed == currentValue
+      currentValue: null == currentValue
           ? _value.currentValue
           : currentValue // ignore: cast_nullable_to_non_nullable
-              as T,
+              as String,
       validators: null == validators
           ? _value._validators
           : validators // ignore: cast_nullable_to_non_nullable
@@ -448,7 +445,7 @@ class __$$FormInputFieldInfoTextAreaImplCopyWithImpl<T, S, $Res>
       onChange: freezed == onChange
           ? _value.onChange
           : onChange // ignore: cast_nullable_to_non_nullable
-              as void Function(T)?,
+              as void Function(String)?,
       deletable: null == deletable
           ? _value.deletable
           : deletable // ignore: cast_nullable_to_non_nullable
@@ -463,9 +460,9 @@ class __$$FormInputFieldInfoTextAreaImplCopyWithImpl<T, S, $Res>
 
 /// @nodoc
 
-class _$FormInputFieldInfoTextAreaImpl<T, S>
+class _$FormInputFieldInfoTextAreaImpl
     with DiagnosticableTreeMixin
-    implements FormInputFieldInfoTextArea<T, S> {
+    implements FormInputFieldInfoTextArea {
   const _$FormInputFieldInfoTextAreaImpl(
       {required this.id,
       required this.label,
@@ -483,7 +480,7 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
   @override
   final String label;
   @override
-  final T currentValue;
+  final String currentValue;
   final List<String? Function(String?)> _validators;
   @override
   List<String? Function(String?)> get validators {
@@ -498,7 +495,7 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
   final bool hasError;
   @override
   @JsonKey()
-  final void Function(T)? onChange;
+  final void Function(String)? onChange;
   @override
   @JsonKey()
   final bool deletable;
@@ -508,14 +505,14 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo<$T, $S>.textArea(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
+    return 'FormInputFieldInfo.textArea(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'FormInputFieldInfo<$T, $S>.textArea'))
+      ..add(DiagnosticsProperty('type', 'FormInputFieldInfo.textArea'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('label', label))
       ..add(DiagnosticsProperty('currentValue', currentValue))
@@ -531,11 +528,11 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FormInputFieldInfoTextAreaImpl<T, S> &&
+            other is _$FormInputFieldInfoTextAreaImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.label, label) || other.label == label) &&
-            const DeepCollectionEquality()
-                .equals(other.currentValue, currentValue) &&
+            (identical(other.currentValue, currentValue) ||
+                other.currentValue == currentValue) &&
             const DeepCollectionEquality()
                 .equals(other._validators, _validators) &&
             (identical(other.sectionName, sectionName) ||
@@ -555,7 +552,7 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
       runtimeType,
       id,
       label,
-      const DeepCollectionEquality().hash(currentValue),
+      currentValue,
       const DeepCollectionEquality().hash(_validators),
       sectionName,
       hasError,
@@ -568,10 +565,9 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FormInputFieldInfoTextAreaImplCopyWith<T, S,
-          _$FormInputFieldInfoTextAreaImpl<T, S>>
-      get copyWith => __$$FormInputFieldInfoTextAreaImplCopyWithImpl<T, S,
-          _$FormInputFieldInfoTextAreaImpl<T, S>>(this, _$identity);
+  _$$FormInputFieldInfoTextAreaImplCopyWith<_$FormInputFieldInfoTextAreaImpl>
+      get copyWith => __$$FormInputFieldInfoTextAreaImplCopyWithImpl<
+          _$FormInputFieldInfoTextAreaImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -579,24 +575,24 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
     required TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         textArea,
     required TResult Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)
         dropdown,
@@ -607,7 +603,7 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         checkbox,
@@ -618,7 +614,7 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(String)? onChange)
         imagePicker,
     required TResult Function(
             String id, String label, String sectionName, void Function() cancel)
@@ -630,10 +626,10 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -650,11 +646,11 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
     required TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         date,
@@ -669,24 +665,24 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
     TResult? Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         textArea,
     TResult? Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -697,7 +693,7 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
@@ -708,7 +704,7 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(String)? onChange)?
         imagePicker,
     TResult? Function(String id, String label, String sectionName,
             void Function() cancel)?
@@ -720,10 +716,10 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -740,11 +736,11 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
     TResult? Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -759,24 +755,24 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
     TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         textArea,
     TResult Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -787,7 +783,7 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
@@ -798,7 +794,7 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(String)? onChange)?
         imagePicker,
     TResult Function(String id, String label, String sectionName,
             void Function() cancel)?
@@ -810,10 +806,10 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -830,11 +826,11 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
     TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -850,21 +846,19 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(FormInputFieldInfoTextArea<T, S> value) textArea,
-    required TResult Function(FormInputFieldInfoDropDown<T, S> value) dropdown,
-    required TResult Function(FormInputFieldInfoCheckbox<T, S> value) checkbox,
-    required TResult Function(FormInputFieldInfoImagePicker<T, S> value)
-        imagePicker,
-    required TResult Function(FormInputFieldInfoCancelButton<T, S> value)
+    required TResult Function(FormInputFieldInfoTextArea value) textArea,
+    required TResult Function(FormInputFieldInfoDropDown value) dropdown,
+    required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
+    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
+    required TResult Function(FormInputFieldInfoCancelButton value)
         cancelButton,
-    required TResult Function(FormInputFieldInfoSubmitButton<T, S> value)
+    required TResult Function(FormInputFieldInfoSubmitButton value)
         submitButton,
-    required TResult Function(
-            FormInputFieldInfoTwoAutoCompleteFields<T, S> value)
+    required TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)
         twoAutoCompleteFields,
-    required TResult Function(FormInputFieldInfoCustomButton<T, S> value)
+    required TResult Function(FormInputFieldInfoCustomButton value)
         customButton,
-    required TResult Function(FormInputFieldInfoDate<T, S> value) date,
+    required TResult Function(FormInputFieldInfoDate value) date,
   }) {
     return textArea(this);
   }
@@ -872,16 +866,16 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FormInputFieldInfoTextArea<T, S> value)? textArea,
-    TResult? Function(FormInputFieldInfoDropDown<T, S> value)? dropdown,
-    TResult? Function(FormInputFieldInfoCheckbox<T, S> value)? checkbox,
-    TResult? Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
-    TResult? Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
-    TResult? Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+    TResult? Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
         twoAutoCompleteFields,
-    TResult? Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
-    TResult? Function(FormInputFieldInfoDate<T, S> value)? date,
+    TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult? Function(FormInputFieldInfoDate value)? date,
   }) {
     return textArea?.call(this);
   }
@@ -889,16 +883,16 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(FormInputFieldInfoTextArea<T, S> value)? textArea,
-    TResult Function(FormInputFieldInfoDropDown<T, S> value)? dropdown,
-    TResult Function(FormInputFieldInfoCheckbox<T, S> value)? checkbox,
-    TResult Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
-    TResult Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
-    TResult Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+    TResult Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?
         twoAutoCompleteFields,
-    TResult Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
-    TResult Function(FormInputFieldInfoDate<T, S> value)? date,
+    TResult Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult Function(FormInputFieldInfoDate value)? date,
     required TResult orElse(),
   }) {
     if (textArea != null) {
@@ -908,29 +902,27 @@ class _$FormInputFieldInfoTextAreaImpl<T, S>
   }
 }
 
-abstract class FormInputFieldInfoTextArea<T, S>
-    implements FormInputFieldInfo<T, S> {
+abstract class FormInputFieldInfoTextArea implements FormInputFieldInfo {
   const factory FormInputFieldInfoTextArea(
-          {required final String id,
-          required final String label,
-          required final T currentValue,
-          required final List<String? Function(String?)> validators,
-          required final String sectionName,
-          required final bool hasError,
-          final void Function(T)? onChange,
-          final bool deletable,
-          final void Function()? onDelete}) =
-      _$FormInputFieldInfoTextAreaImpl<T, S>;
+      {required final String id,
+      required final String label,
+      required final String currentValue,
+      required final List<String? Function(String?)> validators,
+      required final String sectionName,
+      required final bool hasError,
+      final void Function(String)? onChange,
+      final bool deletable,
+      final void Function()? onDelete}) = _$FormInputFieldInfoTextAreaImpl;
 
   @override
   String get id;
   String get label;
-  T get currentValue;
+  String get currentValue;
   List<String? Function(String?)> get validators;
   @override
   String get sectionName;
   bool get hasError;
-  void Function(T)? get onChange;
+  void Function(String)? get onChange;
   bool get deletable;
   void Function()? get onDelete;
 
@@ -938,42 +930,41 @@ abstract class FormInputFieldInfoTextArea<T, S>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FormInputFieldInfoTextAreaImplCopyWith<T, S,
-          _$FormInputFieldInfoTextAreaImpl<T, S>>
+  _$$FormInputFieldInfoTextAreaImplCopyWith<_$FormInputFieldInfoTextAreaImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FormInputFieldInfoDropDownImplCopyWith<T, S, $Res>
-    implements $FormInputFieldInfoCopyWith<T, S, $Res> {
+abstract class _$$FormInputFieldInfoDropDownImplCopyWith<$Res>
+    implements $FormInputFieldInfoCopyWith<$Res> {
   factory _$$FormInputFieldInfoDropDownImplCopyWith(
-          _$FormInputFieldInfoDropDownImpl<T, S> value,
-          $Res Function(_$FormInputFieldInfoDropDownImpl<T, S>) then) =
-      __$$FormInputFieldInfoDropDownImplCopyWithImpl<T, S, $Res>;
+          _$FormInputFieldInfoDropDownImpl value,
+          $Res Function(_$FormInputFieldInfoDropDownImpl) then) =
+      __$$FormInputFieldInfoDropDownImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {String id,
       String label,
-      T currentValue,
-      List<T> options,
-      String Function(dynamic) optionToString,
+      String currentValue,
+      List<String> options,
+      String Function(String) optionToString,
       List<String? Function(String?)> validators,
       String sectionName,
       bool hasError,
-      void Function(dynamic)? onChange,
+      void Function(String?)? onChange,
       bool deletable,
       void Function()? onDelete});
 }
 
 /// @nodoc
-class __$$FormInputFieldInfoDropDownImplCopyWithImpl<T, S, $Res>
-    extends _$FormInputFieldInfoCopyWithImpl<T, S, $Res,
-        _$FormInputFieldInfoDropDownImpl<T, S>>
-    implements _$$FormInputFieldInfoDropDownImplCopyWith<T, S, $Res> {
+class __$$FormInputFieldInfoDropDownImplCopyWithImpl<$Res>
+    extends _$FormInputFieldInfoCopyWithImpl<$Res,
+        _$FormInputFieldInfoDropDownImpl>
+    implements _$$FormInputFieldInfoDropDownImplCopyWith<$Res> {
   __$$FormInputFieldInfoDropDownImplCopyWithImpl(
-      _$FormInputFieldInfoDropDownImpl<T, S> _value,
-      $Res Function(_$FormInputFieldInfoDropDownImpl<T, S>) _then)
+      _$FormInputFieldInfoDropDownImpl _value,
+      $Res Function(_$FormInputFieldInfoDropDownImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of FormInputFieldInfo
@@ -983,7 +974,7 @@ class __$$FormInputFieldInfoDropDownImplCopyWithImpl<T, S, $Res>
   $Res call({
     Object? id = null,
     Object? label = null,
-    Object? currentValue = freezed,
+    Object? currentValue = null,
     Object? options = null,
     Object? optionToString = null,
     Object? validators = null,
@@ -993,7 +984,7 @@ class __$$FormInputFieldInfoDropDownImplCopyWithImpl<T, S, $Res>
     Object? deletable = null,
     Object? onDelete = freezed,
   }) {
-    return _then(_$FormInputFieldInfoDropDownImpl<T, S>(
+    return _then(_$FormInputFieldInfoDropDownImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1002,18 +993,18 @@ class __$$FormInputFieldInfoDropDownImplCopyWithImpl<T, S, $Res>
           ? _value.label
           : label // ignore: cast_nullable_to_non_nullable
               as String,
-      currentValue: freezed == currentValue
+      currentValue: null == currentValue
           ? _value.currentValue
           : currentValue // ignore: cast_nullable_to_non_nullable
-              as T,
+              as String,
       options: null == options
           ? _value._options
           : options // ignore: cast_nullable_to_non_nullable
-              as List<T>,
+              as List<String>,
       optionToString: null == optionToString
           ? _value.optionToString
           : optionToString // ignore: cast_nullable_to_non_nullable
-              as String Function(dynamic),
+              as String Function(String),
       validators: null == validators
           ? _value._validators
           : validators // ignore: cast_nullable_to_non_nullable
@@ -1029,7 +1020,7 @@ class __$$FormInputFieldInfoDropDownImplCopyWithImpl<T, S, $Res>
       onChange: freezed == onChange
           ? _value.onChange
           : onChange // ignore: cast_nullable_to_non_nullable
-              as void Function(dynamic)?,
+              as void Function(String?)?,
       deletable: null == deletable
           ? _value.deletable
           : deletable // ignore: cast_nullable_to_non_nullable
@@ -1044,14 +1035,14 @@ class __$$FormInputFieldInfoDropDownImplCopyWithImpl<T, S, $Res>
 
 /// @nodoc
 
-class _$FormInputFieldInfoDropDownImpl<T, S>
+class _$FormInputFieldInfoDropDownImpl
     with DiagnosticableTreeMixin
-    implements FormInputFieldInfoDropDown<T, S> {
+    implements FormInputFieldInfoDropDown {
   const _$FormInputFieldInfoDropDownImpl(
       {required this.id,
       required this.label,
       required this.currentValue,
-      required final List<T> options,
+      required final List<String> options,
       required this.optionToString,
       required final List<String? Function(String?)> validators,
       required this.sectionName,
@@ -1067,17 +1058,17 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
   @override
   final String label;
   @override
-  final T currentValue;
-  final List<T> _options;
+  final String currentValue;
+  final List<String> _options;
   @override
-  List<T> get options {
+  List<String> get options {
     if (_options is EqualUnmodifiableListView) return _options;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_options);
   }
 
   @override
-  final String Function(dynamic) optionToString;
+  final String Function(String) optionToString;
   final List<String? Function(String?)> _validators;
   @override
   List<String? Function(String?)> get validators {
@@ -1092,7 +1083,7 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
   final bool hasError;
   @override
   @JsonKey()
-  final void Function(dynamic)? onChange;
+  final void Function(String?)? onChange;
   @override
   @JsonKey()
   final bool deletable;
@@ -1102,14 +1093,14 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo<$T, $S>.dropdown(id: $id, label: $label, currentValue: $currentValue, options: $options, optionToString: $optionToString, validators: $validators, sectionName: $sectionName, hasError: $hasError, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
+    return 'FormInputFieldInfo.dropdown(id: $id, label: $label, currentValue: $currentValue, options: $options, optionToString: $optionToString, validators: $validators, sectionName: $sectionName, hasError: $hasError, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'FormInputFieldInfo<$T, $S>.dropdown'))
+      ..add(DiagnosticsProperty('type', 'FormInputFieldInfo.dropdown'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('label', label))
       ..add(DiagnosticsProperty('currentValue', currentValue))
@@ -1127,11 +1118,11 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FormInputFieldInfoDropDownImpl<T, S> &&
+            other is _$FormInputFieldInfoDropDownImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.label, label) || other.label == label) &&
-            const DeepCollectionEquality()
-                .equals(other.currentValue, currentValue) &&
+            (identical(other.currentValue, currentValue) ||
+                other.currentValue == currentValue) &&
             const DeepCollectionEquality().equals(other._options, _options) &&
             (identical(other.optionToString, optionToString) ||
                 other.optionToString == optionToString) &&
@@ -1154,7 +1145,7 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
       runtimeType,
       id,
       label,
-      const DeepCollectionEquality().hash(currentValue),
+      currentValue,
       const DeepCollectionEquality().hash(_options),
       optionToString,
       const DeepCollectionEquality().hash(_validators),
@@ -1169,10 +1160,9 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FormInputFieldInfoDropDownImplCopyWith<T, S,
-          _$FormInputFieldInfoDropDownImpl<T, S>>
-      get copyWith => __$$FormInputFieldInfoDropDownImplCopyWithImpl<T, S,
-          _$FormInputFieldInfoDropDownImpl<T, S>>(this, _$identity);
+  _$$FormInputFieldInfoDropDownImplCopyWith<_$FormInputFieldInfoDropDownImpl>
+      get copyWith => __$$FormInputFieldInfoDropDownImplCopyWithImpl<
+          _$FormInputFieldInfoDropDownImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1180,24 +1170,24 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
     required TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         textArea,
     required TResult Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)
         dropdown,
@@ -1208,7 +1198,7 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         checkbox,
@@ -1219,7 +1209,7 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(String)? onChange)
         imagePicker,
     required TResult Function(
             String id, String label, String sectionName, void Function() cancel)
@@ -1231,10 +1221,10 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -1251,11 +1241,11 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
     required TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         date,
@@ -1270,24 +1260,24 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
     TResult? Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         textArea,
     TResult? Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -1298,7 +1288,7 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
@@ -1309,7 +1299,7 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(String)? onChange)?
         imagePicker,
     TResult? Function(String id, String label, String sectionName,
             void Function() cancel)?
@@ -1321,10 +1311,10 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -1341,11 +1331,11 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
     TResult? Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -1360,24 +1350,24 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
     TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         textArea,
     TResult Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -1388,7 +1378,7 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
@@ -1399,7 +1389,7 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(String)? onChange)?
         imagePicker,
     TResult Function(String id, String label, String sectionName,
             void Function() cancel)?
@@ -1411,10 +1401,10 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -1431,11 +1421,11 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
     TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -1451,21 +1441,19 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(FormInputFieldInfoTextArea<T, S> value) textArea,
-    required TResult Function(FormInputFieldInfoDropDown<T, S> value) dropdown,
-    required TResult Function(FormInputFieldInfoCheckbox<T, S> value) checkbox,
-    required TResult Function(FormInputFieldInfoImagePicker<T, S> value)
-        imagePicker,
-    required TResult Function(FormInputFieldInfoCancelButton<T, S> value)
+    required TResult Function(FormInputFieldInfoTextArea value) textArea,
+    required TResult Function(FormInputFieldInfoDropDown value) dropdown,
+    required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
+    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
+    required TResult Function(FormInputFieldInfoCancelButton value)
         cancelButton,
-    required TResult Function(FormInputFieldInfoSubmitButton<T, S> value)
+    required TResult Function(FormInputFieldInfoSubmitButton value)
         submitButton,
-    required TResult Function(
-            FormInputFieldInfoTwoAutoCompleteFields<T, S> value)
+    required TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)
         twoAutoCompleteFields,
-    required TResult Function(FormInputFieldInfoCustomButton<T, S> value)
+    required TResult Function(FormInputFieldInfoCustomButton value)
         customButton,
-    required TResult Function(FormInputFieldInfoDate<T, S> value) date,
+    required TResult Function(FormInputFieldInfoDate value) date,
   }) {
     return dropdown(this);
   }
@@ -1473,16 +1461,16 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FormInputFieldInfoTextArea<T, S> value)? textArea,
-    TResult? Function(FormInputFieldInfoDropDown<T, S> value)? dropdown,
-    TResult? Function(FormInputFieldInfoCheckbox<T, S> value)? checkbox,
-    TResult? Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
-    TResult? Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
-    TResult? Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+    TResult? Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
         twoAutoCompleteFields,
-    TResult? Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
-    TResult? Function(FormInputFieldInfoDate<T, S> value)? date,
+    TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult? Function(FormInputFieldInfoDate value)? date,
   }) {
     return dropdown?.call(this);
   }
@@ -1490,16 +1478,16 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(FormInputFieldInfoTextArea<T, S> value)? textArea,
-    TResult Function(FormInputFieldInfoDropDown<T, S> value)? dropdown,
-    TResult Function(FormInputFieldInfoCheckbox<T, S> value)? checkbox,
-    TResult Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
-    TResult Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
-    TResult Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+    TResult Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?
         twoAutoCompleteFields,
-    TResult Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
-    TResult Function(FormInputFieldInfoDate<T, S> value)? date,
+    TResult Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult Function(FormInputFieldInfoDate value)? date,
     required TResult orElse(),
   }) {
     if (dropdown != null) {
@@ -1509,33 +1497,31 @@ class _$FormInputFieldInfoDropDownImpl<T, S>
   }
 }
 
-abstract class FormInputFieldInfoDropDown<T, S>
-    implements FormInputFieldInfo<T, S> {
+abstract class FormInputFieldInfoDropDown implements FormInputFieldInfo {
   const factory FormInputFieldInfoDropDown(
-          {required final String id,
-          required final String label,
-          required final T currentValue,
-          required final List<T> options,
-          required final String Function(dynamic) optionToString,
-          required final List<String? Function(String?)> validators,
-          required final String sectionName,
-          required final bool hasError,
-          final void Function(dynamic)? onChange,
-          final bool deletable,
-          final void Function()? onDelete}) =
-      _$FormInputFieldInfoDropDownImpl<T, S>;
+      {required final String id,
+      required final String label,
+      required final String currentValue,
+      required final List<String> options,
+      required final String Function(String) optionToString,
+      required final List<String? Function(String?)> validators,
+      required final String sectionName,
+      required final bool hasError,
+      final void Function(String?)? onChange,
+      final bool deletable,
+      final void Function()? onDelete}) = _$FormInputFieldInfoDropDownImpl;
 
   @override
   String get id;
   String get label;
-  T get currentValue;
-  List<T> get options;
-  String Function(dynamic) get optionToString;
+  String get currentValue;
+  List<String> get options;
+  String Function(String) get optionToString;
   List<String? Function(String?)> get validators;
   @override
   String get sectionName;
   bool get hasError;
-  void Function(dynamic)? get onChange;
+  void Function(String?)? get onChange;
   bool get deletable;
   void Function()? get onDelete;
 
@@ -1543,18 +1529,17 @@ abstract class FormInputFieldInfoDropDown<T, S>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FormInputFieldInfoDropDownImplCopyWith<T, S,
-          _$FormInputFieldInfoDropDownImpl<T, S>>
+  _$$FormInputFieldInfoDropDownImplCopyWith<_$FormInputFieldInfoDropDownImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FormInputFieldInfoCheckboxImplCopyWith<T, S, $Res>
-    implements $FormInputFieldInfoCopyWith<T, S, $Res> {
+abstract class _$$FormInputFieldInfoCheckboxImplCopyWith<$Res>
+    implements $FormInputFieldInfoCopyWith<$Res> {
   factory _$$FormInputFieldInfoCheckboxImplCopyWith(
-          _$FormInputFieldInfoCheckboxImpl<T, S> value,
-          $Res Function(_$FormInputFieldInfoCheckboxImpl<T, S>) then) =
-      __$$FormInputFieldInfoCheckboxImplCopyWithImpl<T, S, $Res>;
+          _$FormInputFieldInfoCheckboxImpl value,
+          $Res Function(_$FormInputFieldInfoCheckboxImpl) then) =
+      __$$FormInputFieldInfoCheckboxImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1564,19 +1549,19 @@ abstract class _$$FormInputFieldInfoCheckboxImplCopyWith<T, S, $Res>
       List<String? Function(bool?)> validators,
       String sectionName,
       bool hasError,
-      void Function(T)? onChange,
+      void Function(String)? onChange,
       bool deletable,
       void Function()? onDelete});
 }
 
 /// @nodoc
-class __$$FormInputFieldInfoCheckboxImplCopyWithImpl<T, S, $Res>
-    extends _$FormInputFieldInfoCopyWithImpl<T, S, $Res,
-        _$FormInputFieldInfoCheckboxImpl<T, S>>
-    implements _$$FormInputFieldInfoCheckboxImplCopyWith<T, S, $Res> {
+class __$$FormInputFieldInfoCheckboxImplCopyWithImpl<$Res>
+    extends _$FormInputFieldInfoCopyWithImpl<$Res,
+        _$FormInputFieldInfoCheckboxImpl>
+    implements _$$FormInputFieldInfoCheckboxImplCopyWith<$Res> {
   __$$FormInputFieldInfoCheckboxImplCopyWithImpl(
-      _$FormInputFieldInfoCheckboxImpl<T, S> _value,
-      $Res Function(_$FormInputFieldInfoCheckboxImpl<T, S>) _then)
+      _$FormInputFieldInfoCheckboxImpl _value,
+      $Res Function(_$FormInputFieldInfoCheckboxImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of FormInputFieldInfo
@@ -1594,7 +1579,7 @@ class __$$FormInputFieldInfoCheckboxImplCopyWithImpl<T, S, $Res>
     Object? deletable = null,
     Object? onDelete = freezed,
   }) {
-    return _then(_$FormInputFieldInfoCheckboxImpl<T, S>(
+    return _then(_$FormInputFieldInfoCheckboxImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1622,7 +1607,7 @@ class __$$FormInputFieldInfoCheckboxImplCopyWithImpl<T, S, $Res>
       onChange: freezed == onChange
           ? _value.onChange
           : onChange // ignore: cast_nullable_to_non_nullable
-              as void Function(T)?,
+              as void Function(String)?,
       deletable: null == deletable
           ? _value.deletable
           : deletable // ignore: cast_nullable_to_non_nullable
@@ -1637,9 +1622,9 @@ class __$$FormInputFieldInfoCheckboxImplCopyWithImpl<T, S, $Res>
 
 /// @nodoc
 
-class _$FormInputFieldInfoCheckboxImpl<T, S>
+class _$FormInputFieldInfoCheckboxImpl
     with DiagnosticableTreeMixin
-    implements FormInputFieldInfoCheckbox<T, S> {
+    implements FormInputFieldInfoCheckbox {
   const _$FormInputFieldInfoCheckboxImpl(
       {required this.id,
       required this.label,
@@ -1672,7 +1657,7 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
   final bool hasError;
   @override
   @JsonKey()
-  final void Function(T)? onChange;
+  final void Function(String)? onChange;
   @override
   @JsonKey()
   final bool deletable;
@@ -1682,14 +1667,14 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo<$T, $S>.checkbox(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
+    return 'FormInputFieldInfo.checkbox(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'FormInputFieldInfo<$T, $S>.checkbox'))
+      ..add(DiagnosticsProperty('type', 'FormInputFieldInfo.checkbox'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('label', label))
       ..add(DiagnosticsProperty('currentValue', currentValue))
@@ -1705,7 +1690,7 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FormInputFieldInfoCheckboxImpl<T, S> &&
+            other is _$FormInputFieldInfoCheckboxImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.label, label) || other.label == label) &&
             (identical(other.currentValue, currentValue) ||
@@ -1742,10 +1727,9 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FormInputFieldInfoCheckboxImplCopyWith<T, S,
-          _$FormInputFieldInfoCheckboxImpl<T, S>>
-      get copyWith => __$$FormInputFieldInfoCheckboxImplCopyWithImpl<T, S,
-          _$FormInputFieldInfoCheckboxImpl<T, S>>(this, _$identity);
+  _$$FormInputFieldInfoCheckboxImplCopyWith<_$FormInputFieldInfoCheckboxImpl>
+      get copyWith => __$$FormInputFieldInfoCheckboxImplCopyWithImpl<
+          _$FormInputFieldInfoCheckboxImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1753,24 +1737,24 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
     required TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         textArea,
     required TResult Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)
         dropdown,
@@ -1781,7 +1765,7 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         checkbox,
@@ -1792,7 +1776,7 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(String)? onChange)
         imagePicker,
     required TResult Function(
             String id, String label, String sectionName, void Function() cancel)
@@ -1804,10 +1788,10 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -1824,11 +1808,11 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
     required TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         date,
@@ -1843,24 +1827,24 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
     TResult? Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         textArea,
     TResult? Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -1871,7 +1855,7 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
@@ -1882,7 +1866,7 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(String)? onChange)?
         imagePicker,
     TResult? Function(String id, String label, String sectionName,
             void Function() cancel)?
@@ -1894,10 +1878,10 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -1914,11 +1898,11 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
     TResult? Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -1933,24 +1917,24 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
     TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         textArea,
     TResult Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -1961,7 +1945,7 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
@@ -1972,7 +1956,7 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(String)? onChange)?
         imagePicker,
     TResult Function(String id, String label, String sectionName,
             void Function() cancel)?
@@ -1984,10 +1968,10 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -2004,11 +1988,11 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
     TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -2024,21 +2008,19 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(FormInputFieldInfoTextArea<T, S> value) textArea,
-    required TResult Function(FormInputFieldInfoDropDown<T, S> value) dropdown,
-    required TResult Function(FormInputFieldInfoCheckbox<T, S> value) checkbox,
-    required TResult Function(FormInputFieldInfoImagePicker<T, S> value)
-        imagePicker,
-    required TResult Function(FormInputFieldInfoCancelButton<T, S> value)
+    required TResult Function(FormInputFieldInfoTextArea value) textArea,
+    required TResult Function(FormInputFieldInfoDropDown value) dropdown,
+    required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
+    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
+    required TResult Function(FormInputFieldInfoCancelButton value)
         cancelButton,
-    required TResult Function(FormInputFieldInfoSubmitButton<T, S> value)
+    required TResult Function(FormInputFieldInfoSubmitButton value)
         submitButton,
-    required TResult Function(
-            FormInputFieldInfoTwoAutoCompleteFields<T, S> value)
+    required TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)
         twoAutoCompleteFields,
-    required TResult Function(FormInputFieldInfoCustomButton<T, S> value)
+    required TResult Function(FormInputFieldInfoCustomButton value)
         customButton,
-    required TResult Function(FormInputFieldInfoDate<T, S> value) date,
+    required TResult Function(FormInputFieldInfoDate value) date,
   }) {
     return checkbox(this);
   }
@@ -2046,16 +2028,16 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FormInputFieldInfoTextArea<T, S> value)? textArea,
-    TResult? Function(FormInputFieldInfoDropDown<T, S> value)? dropdown,
-    TResult? Function(FormInputFieldInfoCheckbox<T, S> value)? checkbox,
-    TResult? Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
-    TResult? Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
-    TResult? Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+    TResult? Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
         twoAutoCompleteFields,
-    TResult? Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
-    TResult? Function(FormInputFieldInfoDate<T, S> value)? date,
+    TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult? Function(FormInputFieldInfoDate value)? date,
   }) {
     return checkbox?.call(this);
   }
@@ -2063,16 +2045,16 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(FormInputFieldInfoTextArea<T, S> value)? textArea,
-    TResult Function(FormInputFieldInfoDropDown<T, S> value)? dropdown,
-    TResult Function(FormInputFieldInfoCheckbox<T, S> value)? checkbox,
-    TResult Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
-    TResult Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
-    TResult Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+    TResult Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?
         twoAutoCompleteFields,
-    TResult Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
-    TResult Function(FormInputFieldInfoDate<T, S> value)? date,
+    TResult Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult Function(FormInputFieldInfoDate value)? date,
     required TResult orElse(),
   }) {
     if (checkbox != null) {
@@ -2082,19 +2064,17 @@ class _$FormInputFieldInfoCheckboxImpl<T, S>
   }
 }
 
-abstract class FormInputFieldInfoCheckbox<T, S>
-    implements FormInputFieldInfo<T, S> {
+abstract class FormInputFieldInfoCheckbox implements FormInputFieldInfo {
   const factory FormInputFieldInfoCheckbox(
-          {required final String id,
-          required final String label,
-          required final bool currentValue,
-          required final List<String? Function(bool?)> validators,
-          required final String sectionName,
-          required final bool hasError,
-          final void Function(T)? onChange,
-          final bool deletable,
-          final void Function()? onDelete}) =
-      _$FormInputFieldInfoCheckboxImpl<T, S>;
+      {required final String id,
+      required final String label,
+      required final bool currentValue,
+      required final List<String? Function(bool?)> validators,
+      required final String sectionName,
+      required final bool hasError,
+      final void Function(String)? onChange,
+      final bool deletable,
+      final void Function()? onDelete}) = _$FormInputFieldInfoCheckboxImpl;
 
   @override
   String get id;
@@ -2104,7 +2084,7 @@ abstract class FormInputFieldInfoCheckbox<T, S>
   @override
   String get sectionName;
   bool get hasError;
-  void Function(T)? get onChange;
+  void Function(String)? get onChange;
   bool get deletable;
   void Function()? get onDelete;
 
@@ -2112,18 +2092,17 @@ abstract class FormInputFieldInfoCheckbox<T, S>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FormInputFieldInfoCheckboxImplCopyWith<T, S,
-          _$FormInputFieldInfoCheckboxImpl<T, S>>
+  _$$FormInputFieldInfoCheckboxImplCopyWith<_$FormInputFieldInfoCheckboxImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FormInputFieldInfoImagePickerImplCopyWith<T, S, $Res>
-    implements $FormInputFieldInfoCopyWith<T, S, $Res> {
+abstract class _$$FormInputFieldInfoImagePickerImplCopyWith<$Res>
+    implements $FormInputFieldInfoCopyWith<$Res> {
   factory _$$FormInputFieldInfoImagePickerImplCopyWith(
-          _$FormInputFieldInfoImagePickerImpl<T, S> value,
-          $Res Function(_$FormInputFieldInfoImagePickerImpl<T, S>) then) =
-      __$$FormInputFieldInfoImagePickerImplCopyWithImpl<T, S, $Res>;
+          _$FormInputFieldInfoImagePickerImpl value,
+          $Res Function(_$FormInputFieldInfoImagePickerImpl) then) =
+      __$$FormInputFieldInfoImagePickerImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -2133,17 +2112,17 @@ abstract class _$$FormInputFieldInfoImagePickerImplCopyWith<T, S, $Res>
       List<String? Function(bool?)> validators,
       String sectionName,
       bool hasError,
-      void Function(T)? onChange});
+      void Function(String)? onChange});
 }
 
 /// @nodoc
-class __$$FormInputFieldInfoImagePickerImplCopyWithImpl<T, S, $Res>
-    extends _$FormInputFieldInfoCopyWithImpl<T, S, $Res,
-        _$FormInputFieldInfoImagePickerImpl<T, S>>
-    implements _$$FormInputFieldInfoImagePickerImplCopyWith<T, S, $Res> {
+class __$$FormInputFieldInfoImagePickerImplCopyWithImpl<$Res>
+    extends _$FormInputFieldInfoCopyWithImpl<$Res,
+        _$FormInputFieldInfoImagePickerImpl>
+    implements _$$FormInputFieldInfoImagePickerImplCopyWith<$Res> {
   __$$FormInputFieldInfoImagePickerImplCopyWithImpl(
-      _$FormInputFieldInfoImagePickerImpl<T, S> _value,
-      $Res Function(_$FormInputFieldInfoImagePickerImpl<T, S>) _then)
+      _$FormInputFieldInfoImagePickerImpl _value,
+      $Res Function(_$FormInputFieldInfoImagePickerImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of FormInputFieldInfo
@@ -2159,7 +2138,7 @@ class __$$FormInputFieldInfoImagePickerImplCopyWithImpl<T, S, $Res>
     Object? hasError = null,
     Object? onChange = freezed,
   }) {
-    return _then(_$FormInputFieldInfoImagePickerImpl<T, S>(
+    return _then(_$FormInputFieldInfoImagePickerImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -2187,16 +2166,16 @@ class __$$FormInputFieldInfoImagePickerImplCopyWithImpl<T, S, $Res>
       onChange: freezed == onChange
           ? _value.onChange
           : onChange // ignore: cast_nullable_to_non_nullable
-              as void Function(T)?,
+              as void Function(String)?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$FormInputFieldInfoImagePickerImpl<T, S>
+class _$FormInputFieldInfoImagePickerImpl
     with DiagnosticableTreeMixin
-    implements FormInputFieldInfoImagePicker<T, S> {
+    implements FormInputFieldInfoImagePicker {
   const _$FormInputFieldInfoImagePickerImpl(
       {required this.id,
       required this.label,
@@ -2227,19 +2206,18 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
   final bool hasError;
   @override
   @JsonKey()
-  final void Function(T)? onChange;
+  final void Function(String)? onChange;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo<$T, $S>.imagePicker(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError, onChange: $onChange)';
+    return 'FormInputFieldInfo.imagePicker(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError, onChange: $onChange)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(
-          DiagnosticsProperty('type', 'FormInputFieldInfo<$T, $S>.imagePicker'))
+      ..add(DiagnosticsProperty('type', 'FormInputFieldInfo.imagePicker'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('label', label))
       ..add(DiagnosticsProperty('currentValue', currentValue))
@@ -2253,7 +2231,7 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FormInputFieldInfoImagePickerImpl<T, S> &&
+            other is _$FormInputFieldInfoImagePickerImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.label, label) || other.label == label) &&
             (identical(other.currentValue, currentValue) ||
@@ -2284,10 +2262,10 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FormInputFieldInfoImagePickerImplCopyWith<T, S,
-          _$FormInputFieldInfoImagePickerImpl<T, S>>
-      get copyWith => __$$FormInputFieldInfoImagePickerImplCopyWithImpl<T, S,
-          _$FormInputFieldInfoImagePickerImpl<T, S>>(this, _$identity);
+  _$$FormInputFieldInfoImagePickerImplCopyWith<
+          _$FormInputFieldInfoImagePickerImpl>
+      get copyWith => __$$FormInputFieldInfoImagePickerImplCopyWithImpl<
+          _$FormInputFieldInfoImagePickerImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2295,24 +2273,24 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
     required TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         textArea,
     required TResult Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)
         dropdown,
@@ -2323,7 +2301,7 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         checkbox,
@@ -2334,7 +2312,7 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(String)? onChange)
         imagePicker,
     required TResult Function(
             String id, String label, String sectionName, void Function() cancel)
@@ -2346,10 +2324,10 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -2366,11 +2344,11 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
     required TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         date,
@@ -2385,24 +2363,24 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
     TResult? Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         textArea,
     TResult? Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -2413,7 +2391,7 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
@@ -2424,7 +2402,7 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(String)? onChange)?
         imagePicker,
     TResult? Function(String id, String label, String sectionName,
             void Function() cancel)?
@@ -2436,10 +2414,10 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -2456,11 +2434,11 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
     TResult? Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -2475,24 +2453,24 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
     TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         textArea,
     TResult Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -2503,7 +2481,7 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
@@ -2514,7 +2492,7 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(String)? onChange)?
         imagePicker,
     TResult Function(String id, String label, String sectionName,
             void Function() cancel)?
@@ -2526,10 +2504,10 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -2546,11 +2524,11 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
     TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -2566,21 +2544,19 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(FormInputFieldInfoTextArea<T, S> value) textArea,
-    required TResult Function(FormInputFieldInfoDropDown<T, S> value) dropdown,
-    required TResult Function(FormInputFieldInfoCheckbox<T, S> value) checkbox,
-    required TResult Function(FormInputFieldInfoImagePicker<T, S> value)
-        imagePicker,
-    required TResult Function(FormInputFieldInfoCancelButton<T, S> value)
+    required TResult Function(FormInputFieldInfoTextArea value) textArea,
+    required TResult Function(FormInputFieldInfoDropDown value) dropdown,
+    required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
+    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
+    required TResult Function(FormInputFieldInfoCancelButton value)
         cancelButton,
-    required TResult Function(FormInputFieldInfoSubmitButton<T, S> value)
+    required TResult Function(FormInputFieldInfoSubmitButton value)
         submitButton,
-    required TResult Function(
-            FormInputFieldInfoTwoAutoCompleteFields<T, S> value)
+    required TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)
         twoAutoCompleteFields,
-    required TResult Function(FormInputFieldInfoCustomButton<T, S> value)
+    required TResult Function(FormInputFieldInfoCustomButton value)
         customButton,
-    required TResult Function(FormInputFieldInfoDate<T, S> value) date,
+    required TResult Function(FormInputFieldInfoDate value) date,
   }) {
     return imagePicker(this);
   }
@@ -2588,16 +2564,16 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FormInputFieldInfoTextArea<T, S> value)? textArea,
-    TResult? Function(FormInputFieldInfoDropDown<T, S> value)? dropdown,
-    TResult? Function(FormInputFieldInfoCheckbox<T, S> value)? checkbox,
-    TResult? Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
-    TResult? Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
-    TResult? Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+    TResult? Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
         twoAutoCompleteFields,
-    TResult? Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
-    TResult? Function(FormInputFieldInfoDate<T, S> value)? date,
+    TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult? Function(FormInputFieldInfoDate value)? date,
   }) {
     return imagePicker?.call(this);
   }
@@ -2605,16 +2581,16 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(FormInputFieldInfoTextArea<T, S> value)? textArea,
-    TResult Function(FormInputFieldInfoDropDown<T, S> value)? dropdown,
-    TResult Function(FormInputFieldInfoCheckbox<T, S> value)? checkbox,
-    TResult Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
-    TResult Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
-    TResult Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+    TResult Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?
         twoAutoCompleteFields,
-    TResult Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
-    TResult Function(FormInputFieldInfoDate<T, S> value)? date,
+    TResult Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult Function(FormInputFieldInfoDate value)? date,
     required TResult orElse(),
   }) {
     if (imagePicker != null) {
@@ -2624,8 +2600,7 @@ class _$FormInputFieldInfoImagePickerImpl<T, S>
   }
 }
 
-abstract class FormInputFieldInfoImagePicker<T, S>
-    implements FormInputFieldInfo<T, S> {
+abstract class FormInputFieldInfoImagePicker implements FormInputFieldInfo {
   const factory FormInputFieldInfoImagePicker(
           {required final String id,
           required final String label,
@@ -2633,8 +2608,8 @@ abstract class FormInputFieldInfoImagePicker<T, S>
           required final List<String? Function(bool?)> validators,
           required final String sectionName,
           required final bool hasError,
-          final void Function(T)? onChange}) =
-      _$FormInputFieldInfoImagePickerImpl<T, S>;
+          final void Function(String)? onChange}) =
+      _$FormInputFieldInfoImagePickerImpl;
 
   @override
   String get id;
@@ -2644,24 +2619,24 @@ abstract class FormInputFieldInfoImagePicker<T, S>
   @override
   String get sectionName;
   bool get hasError;
-  void Function(T)? get onChange;
+  void Function(String)? get onChange;
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FormInputFieldInfoImagePickerImplCopyWith<T, S,
-          _$FormInputFieldInfoImagePickerImpl<T, S>>
+  _$$FormInputFieldInfoImagePickerImplCopyWith<
+          _$FormInputFieldInfoImagePickerImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FormInputFieldInfoCancelButtonImplCopyWith<T, S, $Res>
-    implements $FormInputFieldInfoCopyWith<T, S, $Res> {
+abstract class _$$FormInputFieldInfoCancelButtonImplCopyWith<$Res>
+    implements $FormInputFieldInfoCopyWith<$Res> {
   factory _$$FormInputFieldInfoCancelButtonImplCopyWith(
-          _$FormInputFieldInfoCancelButtonImpl<T, S> value,
-          $Res Function(_$FormInputFieldInfoCancelButtonImpl<T, S>) then) =
-      __$$FormInputFieldInfoCancelButtonImplCopyWithImpl<T, S, $Res>;
+          _$FormInputFieldInfoCancelButtonImpl value,
+          $Res Function(_$FormInputFieldInfoCancelButtonImpl) then) =
+      __$$FormInputFieldInfoCancelButtonImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -2669,13 +2644,13 @@ abstract class _$$FormInputFieldInfoCancelButtonImplCopyWith<T, S, $Res>
 }
 
 /// @nodoc
-class __$$FormInputFieldInfoCancelButtonImplCopyWithImpl<T, S, $Res>
-    extends _$FormInputFieldInfoCopyWithImpl<T, S, $Res,
-        _$FormInputFieldInfoCancelButtonImpl<T, S>>
-    implements _$$FormInputFieldInfoCancelButtonImplCopyWith<T, S, $Res> {
+class __$$FormInputFieldInfoCancelButtonImplCopyWithImpl<$Res>
+    extends _$FormInputFieldInfoCopyWithImpl<$Res,
+        _$FormInputFieldInfoCancelButtonImpl>
+    implements _$$FormInputFieldInfoCancelButtonImplCopyWith<$Res> {
   __$$FormInputFieldInfoCancelButtonImplCopyWithImpl(
-      _$FormInputFieldInfoCancelButtonImpl<T, S> _value,
-      $Res Function(_$FormInputFieldInfoCancelButtonImpl<T, S>) _then)
+      _$FormInputFieldInfoCancelButtonImpl _value,
+      $Res Function(_$FormInputFieldInfoCancelButtonImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of FormInputFieldInfo
@@ -2688,7 +2663,7 @@ class __$$FormInputFieldInfoCancelButtonImplCopyWithImpl<T, S, $Res>
     Object? sectionName = null,
     Object? cancel = null,
   }) {
-    return _then(_$FormInputFieldInfoCancelButtonImpl<T, S>(
+    return _then(_$FormInputFieldInfoCancelButtonImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -2711,9 +2686,9 @@ class __$$FormInputFieldInfoCancelButtonImplCopyWithImpl<T, S, $Res>
 
 /// @nodoc
 
-class _$FormInputFieldInfoCancelButtonImpl<T, S>
+class _$FormInputFieldInfoCancelButtonImpl
     with DiagnosticableTreeMixin
-    implements FormInputFieldInfoCancelButton<T, S> {
+    implements FormInputFieldInfoCancelButton {
   const _$FormInputFieldInfoCancelButtonImpl(
       {required this.id,
       required this.label,
@@ -2731,15 +2706,14 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo<$T, $S>.cancelButton(id: $id, label: $label, sectionName: $sectionName, cancel: $cancel)';
+    return 'FormInputFieldInfo.cancelButton(id: $id, label: $label, sectionName: $sectionName, cancel: $cancel)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty(
-          'type', 'FormInputFieldInfo<$T, $S>.cancelButton'))
+      ..add(DiagnosticsProperty('type', 'FormInputFieldInfo.cancelButton'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('label', label))
       ..add(DiagnosticsProperty('sectionName', sectionName))
@@ -2750,7 +2724,7 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FormInputFieldInfoCancelButtonImpl<T, S> &&
+            other is _$FormInputFieldInfoCancelButtonImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.label, label) || other.label == label) &&
             (identical(other.sectionName, sectionName) ||
@@ -2766,10 +2740,10 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FormInputFieldInfoCancelButtonImplCopyWith<T, S,
-          _$FormInputFieldInfoCancelButtonImpl<T, S>>
-      get copyWith => __$$FormInputFieldInfoCancelButtonImplCopyWithImpl<T, S,
-          _$FormInputFieldInfoCancelButtonImpl<T, S>>(this, _$identity);
+  _$$FormInputFieldInfoCancelButtonImplCopyWith<
+          _$FormInputFieldInfoCancelButtonImpl>
+      get copyWith => __$$FormInputFieldInfoCancelButtonImplCopyWithImpl<
+          _$FormInputFieldInfoCancelButtonImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2777,24 +2751,24 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
     required TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         textArea,
     required TResult Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)
         dropdown,
@@ -2805,7 +2779,7 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         checkbox,
@@ -2816,7 +2790,7 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(String)? onChange)
         imagePicker,
     required TResult Function(
             String id, String label, String sectionName, void Function() cancel)
@@ -2828,10 +2802,10 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -2848,11 +2822,11 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
     required TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         date,
@@ -2866,24 +2840,24 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
     TResult? Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         textArea,
     TResult? Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -2894,7 +2868,7 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
@@ -2905,7 +2879,7 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(String)? onChange)?
         imagePicker,
     TResult? Function(String id, String label, String sectionName,
             void Function() cancel)?
@@ -2917,10 +2891,10 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -2937,11 +2911,11 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
     TResult? Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -2955,24 +2929,24 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
     TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         textArea,
     TResult Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -2983,7 +2957,7 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
@@ -2994,7 +2968,7 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(String)? onChange)?
         imagePicker,
     TResult Function(String id, String label, String sectionName,
             void Function() cancel)?
@@ -3006,10 +2980,10 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -3026,11 +3000,11 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
     TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -3045,21 +3019,19 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(FormInputFieldInfoTextArea<T, S> value) textArea,
-    required TResult Function(FormInputFieldInfoDropDown<T, S> value) dropdown,
-    required TResult Function(FormInputFieldInfoCheckbox<T, S> value) checkbox,
-    required TResult Function(FormInputFieldInfoImagePicker<T, S> value)
-        imagePicker,
-    required TResult Function(FormInputFieldInfoCancelButton<T, S> value)
+    required TResult Function(FormInputFieldInfoTextArea value) textArea,
+    required TResult Function(FormInputFieldInfoDropDown value) dropdown,
+    required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
+    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
+    required TResult Function(FormInputFieldInfoCancelButton value)
         cancelButton,
-    required TResult Function(FormInputFieldInfoSubmitButton<T, S> value)
+    required TResult Function(FormInputFieldInfoSubmitButton value)
         submitButton,
-    required TResult Function(
-            FormInputFieldInfoTwoAutoCompleteFields<T, S> value)
+    required TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)
         twoAutoCompleteFields,
-    required TResult Function(FormInputFieldInfoCustomButton<T, S> value)
+    required TResult Function(FormInputFieldInfoCustomButton value)
         customButton,
-    required TResult Function(FormInputFieldInfoDate<T, S> value) date,
+    required TResult Function(FormInputFieldInfoDate value) date,
   }) {
     return cancelButton(this);
   }
@@ -3067,16 +3039,16 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FormInputFieldInfoTextArea<T, S> value)? textArea,
-    TResult? Function(FormInputFieldInfoDropDown<T, S> value)? dropdown,
-    TResult? Function(FormInputFieldInfoCheckbox<T, S> value)? checkbox,
-    TResult? Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
-    TResult? Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
-    TResult? Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+    TResult? Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
         twoAutoCompleteFields,
-    TResult? Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
-    TResult? Function(FormInputFieldInfoDate<T, S> value)? date,
+    TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult? Function(FormInputFieldInfoDate value)? date,
   }) {
     return cancelButton?.call(this);
   }
@@ -3084,16 +3056,16 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(FormInputFieldInfoTextArea<T, S> value)? textArea,
-    TResult Function(FormInputFieldInfoDropDown<T, S> value)? dropdown,
-    TResult Function(FormInputFieldInfoCheckbox<T, S> value)? checkbox,
-    TResult Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
-    TResult Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
-    TResult Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+    TResult Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?
         twoAutoCompleteFields,
-    TResult Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
-    TResult Function(FormInputFieldInfoDate<T, S> value)? date,
+    TResult Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult Function(FormInputFieldInfoDate value)? date,
     required TResult orElse(),
   }) {
     if (cancelButton != null) {
@@ -3103,14 +3075,13 @@ class _$FormInputFieldInfoCancelButtonImpl<T, S>
   }
 }
 
-abstract class FormInputFieldInfoCancelButton<T, S>
-    implements FormInputFieldInfo<T, S> {
+abstract class FormInputFieldInfoCancelButton implements FormInputFieldInfo {
   const factory FormInputFieldInfoCancelButton(
           {required final String id,
           required final String label,
           required final String sectionName,
           required final void Function() cancel}) =
-      _$FormInputFieldInfoCancelButtonImpl<T, S>;
+      _$FormInputFieldInfoCancelButtonImpl;
 
   @override
   String get id;
@@ -3123,18 +3094,18 @@ abstract class FormInputFieldInfoCancelButton<T, S>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FormInputFieldInfoCancelButtonImplCopyWith<T, S,
-          _$FormInputFieldInfoCancelButtonImpl<T, S>>
+  _$$FormInputFieldInfoCancelButtonImplCopyWith<
+          _$FormInputFieldInfoCancelButtonImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FormInputFieldInfoSubmitButtonImplCopyWith<T, S, $Res>
-    implements $FormInputFieldInfoCopyWith<T, S, $Res> {
+abstract class _$$FormInputFieldInfoSubmitButtonImplCopyWith<$Res>
+    implements $FormInputFieldInfoCopyWith<$Res> {
   factory _$$FormInputFieldInfoSubmitButtonImplCopyWith(
-          _$FormInputFieldInfoSubmitButtonImpl<T, S> value,
-          $Res Function(_$FormInputFieldInfoSubmitButtonImpl<T, S>) then) =
-      __$$FormInputFieldInfoSubmitButtonImplCopyWithImpl<T, S, $Res>;
+          _$FormInputFieldInfoSubmitButtonImpl value,
+          $Res Function(_$FormInputFieldInfoSubmitButtonImpl) then) =
+      __$$FormInputFieldInfoSubmitButtonImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -3145,13 +3116,13 @@ abstract class _$$FormInputFieldInfoSubmitButtonImplCopyWith<T, S, $Res>
 }
 
 /// @nodoc
-class __$$FormInputFieldInfoSubmitButtonImplCopyWithImpl<T, S, $Res>
-    extends _$FormInputFieldInfoCopyWithImpl<T, S, $Res,
-        _$FormInputFieldInfoSubmitButtonImpl<T, S>>
-    implements _$$FormInputFieldInfoSubmitButtonImplCopyWith<T, S, $Res> {
+class __$$FormInputFieldInfoSubmitButtonImplCopyWithImpl<$Res>
+    extends _$FormInputFieldInfoCopyWithImpl<$Res,
+        _$FormInputFieldInfoSubmitButtonImpl>
+    implements _$$FormInputFieldInfoSubmitButtonImplCopyWith<$Res> {
   __$$FormInputFieldInfoSubmitButtonImplCopyWithImpl(
-      _$FormInputFieldInfoSubmitButtonImpl<T, S> _value,
-      $Res Function(_$FormInputFieldInfoSubmitButtonImpl<T, S>) _then)
+      _$FormInputFieldInfoSubmitButtonImpl _value,
+      $Res Function(_$FormInputFieldInfoSubmitButtonImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of FormInputFieldInfo
@@ -3164,7 +3135,7 @@ class __$$FormInputFieldInfoSubmitButtonImplCopyWithImpl<T, S, $Res>
     Object? sectionName = null,
     Object? save = null,
   }) {
-    return _then(_$FormInputFieldInfoSubmitButtonImpl<T, S>(
+    return _then(_$FormInputFieldInfoSubmitButtonImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -3187,9 +3158,9 @@ class __$$FormInputFieldInfoSubmitButtonImplCopyWithImpl<T, S, $Res>
 
 /// @nodoc
 
-class _$FormInputFieldInfoSubmitButtonImpl<T, S>
+class _$FormInputFieldInfoSubmitButtonImpl
     with DiagnosticableTreeMixin
-    implements FormInputFieldInfoSubmitButton<T, S> {
+    implements FormInputFieldInfoSubmitButton {
   const _$FormInputFieldInfoSubmitButtonImpl(
       {required this.id,
       required this.label,
@@ -3207,15 +3178,14 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo<$T, $S>.submitButton(id: $id, label: $label, sectionName: $sectionName, save: $save)';
+    return 'FormInputFieldInfo.submitButton(id: $id, label: $label, sectionName: $sectionName, save: $save)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty(
-          'type', 'FormInputFieldInfo<$T, $S>.submitButton'))
+      ..add(DiagnosticsProperty('type', 'FormInputFieldInfo.submitButton'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('label', label))
       ..add(DiagnosticsProperty('sectionName', sectionName))
@@ -3226,7 +3196,7 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FormInputFieldInfoSubmitButtonImpl<T, S> &&
+            other is _$FormInputFieldInfoSubmitButtonImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.label, label) || other.label == label) &&
             (identical(other.sectionName, sectionName) ||
@@ -3242,10 +3212,10 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FormInputFieldInfoSubmitButtonImplCopyWith<T, S,
-          _$FormInputFieldInfoSubmitButtonImpl<T, S>>
-      get copyWith => __$$FormInputFieldInfoSubmitButtonImplCopyWithImpl<T, S,
-          _$FormInputFieldInfoSubmitButtonImpl<T, S>>(this, _$identity);
+  _$$FormInputFieldInfoSubmitButtonImplCopyWith<
+          _$FormInputFieldInfoSubmitButtonImpl>
+      get copyWith => __$$FormInputFieldInfoSubmitButtonImplCopyWithImpl<
+          _$FormInputFieldInfoSubmitButtonImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -3253,24 +3223,24 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
     required TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         textArea,
     required TResult Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)
         dropdown,
@@ -3281,7 +3251,7 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         checkbox,
@@ -3292,7 +3262,7 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(String)? onChange)
         imagePicker,
     required TResult Function(
             String id, String label, String sectionName, void Function() cancel)
@@ -3304,10 +3274,10 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -3324,11 +3294,11 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
     required TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         date,
@@ -3342,24 +3312,24 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
     TResult? Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         textArea,
     TResult? Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -3370,7 +3340,7 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
@@ -3381,7 +3351,7 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(String)? onChange)?
         imagePicker,
     TResult? Function(String id, String label, String sectionName,
             void Function() cancel)?
@@ -3393,10 +3363,10 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -3413,11 +3383,11 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
     TResult? Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -3431,24 +3401,24 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
     TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         textArea,
     TResult Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -3459,7 +3429,7 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
@@ -3470,7 +3440,7 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(String)? onChange)?
         imagePicker,
     TResult Function(String id, String label, String sectionName,
             void Function() cancel)?
@@ -3482,10 +3452,10 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -3502,11 +3472,11 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
     TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -3521,21 +3491,19 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(FormInputFieldInfoTextArea<T, S> value) textArea,
-    required TResult Function(FormInputFieldInfoDropDown<T, S> value) dropdown,
-    required TResult Function(FormInputFieldInfoCheckbox<T, S> value) checkbox,
-    required TResult Function(FormInputFieldInfoImagePicker<T, S> value)
-        imagePicker,
-    required TResult Function(FormInputFieldInfoCancelButton<T, S> value)
+    required TResult Function(FormInputFieldInfoTextArea value) textArea,
+    required TResult Function(FormInputFieldInfoDropDown value) dropdown,
+    required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
+    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
+    required TResult Function(FormInputFieldInfoCancelButton value)
         cancelButton,
-    required TResult Function(FormInputFieldInfoSubmitButton<T, S> value)
+    required TResult Function(FormInputFieldInfoSubmitButton value)
         submitButton,
-    required TResult Function(
-            FormInputFieldInfoTwoAutoCompleteFields<T, S> value)
+    required TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)
         twoAutoCompleteFields,
-    required TResult Function(FormInputFieldInfoCustomButton<T, S> value)
+    required TResult Function(FormInputFieldInfoCustomButton value)
         customButton,
-    required TResult Function(FormInputFieldInfoDate<T, S> value) date,
+    required TResult Function(FormInputFieldInfoDate value) date,
   }) {
     return submitButton(this);
   }
@@ -3543,16 +3511,16 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FormInputFieldInfoTextArea<T, S> value)? textArea,
-    TResult? Function(FormInputFieldInfoDropDown<T, S> value)? dropdown,
-    TResult? Function(FormInputFieldInfoCheckbox<T, S> value)? checkbox,
-    TResult? Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
-    TResult? Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
-    TResult? Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+    TResult? Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
         twoAutoCompleteFields,
-    TResult? Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
-    TResult? Function(FormInputFieldInfoDate<T, S> value)? date,
+    TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult? Function(FormInputFieldInfoDate value)? date,
   }) {
     return submitButton?.call(this);
   }
@@ -3560,16 +3528,16 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(FormInputFieldInfoTextArea<T, S> value)? textArea,
-    TResult Function(FormInputFieldInfoDropDown<T, S> value)? dropdown,
-    TResult Function(FormInputFieldInfoCheckbox<T, S> value)? checkbox,
-    TResult Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
-    TResult Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
-    TResult Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+    TResult Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?
         twoAutoCompleteFields,
-    TResult Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
-    TResult Function(FormInputFieldInfoDate<T, S> value)? date,
+    TResult Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult Function(FormInputFieldInfoDate value)? date,
     required TResult orElse(),
   }) {
     if (submitButton != null) {
@@ -3579,14 +3547,13 @@ class _$FormInputFieldInfoSubmitButtonImpl<T, S>
   }
 }
 
-abstract class FormInputFieldInfoSubmitButton<T, S>
-    implements FormInputFieldInfo<T, S> {
+abstract class FormInputFieldInfoSubmitButton implements FormInputFieldInfo {
   const factory FormInputFieldInfoSubmitButton(
           {required final String id,
           required final String label,
           required final String sectionName,
           required final void Function(Map<String, dynamic>?) save}) =
-      _$FormInputFieldInfoSubmitButtonImpl<T, S>;
+      _$FormInputFieldInfoSubmitButtonImpl;
 
   @override
   String get id;
@@ -3599,29 +3566,28 @@ abstract class FormInputFieldInfoSubmitButton<T, S>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FormInputFieldInfoSubmitButtonImplCopyWith<T, S,
-          _$FormInputFieldInfoSubmitButtonImpl<T, S>>
+  _$$FormInputFieldInfoSubmitButtonImplCopyWith<
+          _$FormInputFieldInfoSubmitButtonImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWith<T, S,
-    $Res> implements $FormInputFieldInfoCopyWith<T, S, $Res> {
+abstract class _$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWith<$Res>
+    implements $FormInputFieldInfoCopyWith<$Res> {
   factory _$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWith(
-          _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S> value,
-          $Res Function(_$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>)
-              then) =
-      __$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWithImpl<T, S, $Res>;
+          _$FormInputFieldInfoTwoAutoCompleteFieldsImpl value,
+          $Res Function(_$FormInputFieldInfoTwoAutoCompleteFieldsImpl) then) =
+      __$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {String id,
       String labelLeft,
       String labelRight,
-      T currentValueLeft,
-      S currentValueRight,
-      List<T> optionsLeft,
-      List<S> optionsRight,
+      String currentValueLeft,
+      String currentValueRight,
+      List<String> optionsLeft,
+      List<String> Function(String) optionsRight,
       List<String? Function(String?)> validatorsLeft,
       List<String? Function(String?)> validatorsRight,
       String sectionName,
@@ -3634,14 +3600,13 @@ abstract class _$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWith<T, S,
 }
 
 /// @nodoc
-class __$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWithImpl<T, S, $Res>
-    extends _$FormInputFieldInfoCopyWithImpl<T, S, $Res,
-        _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>>
-    implements
-        _$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWith<T, S, $Res> {
+class __$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWithImpl<$Res>
+    extends _$FormInputFieldInfoCopyWithImpl<$Res,
+        _$FormInputFieldInfoTwoAutoCompleteFieldsImpl>
+    implements _$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWith<$Res> {
   __$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWithImpl(
-      _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S> _value,
-      $Res Function(_$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>) _then)
+      _$FormInputFieldInfoTwoAutoCompleteFieldsImpl _value,
+      $Res Function(_$FormInputFieldInfoTwoAutoCompleteFieldsImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of FormInputFieldInfo
@@ -3652,8 +3617,8 @@ class __$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWithImpl<T, S, $Res>
     Object? id = null,
     Object? labelLeft = null,
     Object? labelRight = null,
-    Object? currentValueLeft = freezed,
-    Object? currentValueRight = freezed,
+    Object? currentValueLeft = null,
+    Object? currentValueRight = null,
     Object? optionsLeft = null,
     Object? optionsRight = null,
     Object? validatorsLeft = null,
@@ -3666,7 +3631,7 @@ class __$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWithImpl<T, S, $Res>
     Object? deletable = null,
     Object? onDelete = freezed,
   }) {
-    return _then(_$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>(
+    return _then(_$FormInputFieldInfoTwoAutoCompleteFieldsImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -3679,22 +3644,22 @@ class __$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWithImpl<T, S, $Res>
           ? _value.labelRight
           : labelRight // ignore: cast_nullable_to_non_nullable
               as String,
-      currentValueLeft: freezed == currentValueLeft
+      currentValueLeft: null == currentValueLeft
           ? _value.currentValueLeft
           : currentValueLeft // ignore: cast_nullable_to_non_nullable
-              as T,
-      currentValueRight: freezed == currentValueRight
+              as String,
+      currentValueRight: null == currentValueRight
           ? _value.currentValueRight
           : currentValueRight // ignore: cast_nullable_to_non_nullable
-              as S,
+              as String,
       optionsLeft: null == optionsLeft
           ? _value._optionsLeft
           : optionsLeft // ignore: cast_nullable_to_non_nullable
-              as List<T>,
+              as List<String>,
       optionsRight: null == optionsRight
-          ? _value._optionsRight
+          ? _value.optionsRight
           : optionsRight // ignore: cast_nullable_to_non_nullable
-              as List<S>,
+              as List<String> Function(String),
       validatorsLeft: null == validatorsLeft
           ? _value._validatorsLeft
           : validatorsLeft // ignore: cast_nullable_to_non_nullable
@@ -3737,17 +3702,17 @@ class __$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWithImpl<T, S, $Res>
 
 /// @nodoc
 
-class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
+class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     with DiagnosticableTreeMixin
-    implements FormInputFieldInfoTwoAutoCompleteFields<T, S> {
+    implements FormInputFieldInfoTwoAutoCompleteFields {
   const _$FormInputFieldInfoTwoAutoCompleteFieldsImpl(
       {required this.id,
       required this.labelLeft,
       required this.labelRight,
       required this.currentValueLeft,
       required this.currentValueRight,
-      required final List<T> optionsLeft,
-      required final List<S> optionsRight,
+      required final List<String> optionsLeft,
+      required this.optionsRight,
       required final List<String? Function(String?)> validatorsLeft,
       required final List<String? Function(String?)> validatorsRight,
       required this.sectionName,
@@ -3758,7 +3723,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
       this.deletable = false,
       this.onDelete = null})
       : _optionsLeft = optionsLeft,
-        _optionsRight = optionsRight,
         _validatorsLeft = validatorsLeft,
         _validatorsRight = validatorsRight;
 
@@ -3769,25 +3733,19 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
   @override
   final String labelRight;
   @override
-  final T currentValueLeft;
+  final String currentValueLeft;
   @override
-  final S currentValueRight;
-  final List<T> _optionsLeft;
+  final String currentValueRight;
+  final List<String> _optionsLeft;
   @override
-  List<T> get optionsLeft {
+  List<String> get optionsLeft {
     if (_optionsLeft is EqualUnmodifiableListView) return _optionsLeft;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_optionsLeft);
   }
 
-  final List<S> _optionsRight;
   @override
-  List<S> get optionsRight {
-    if (_optionsRight is EqualUnmodifiableListView) return _optionsRight;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_optionsRight);
-  }
-
+  final List<String> Function(String) optionsRight;
   final List<String? Function(String?)> _validatorsLeft;
   @override
   List<String? Function(String?)> get validatorsLeft {
@@ -3825,7 +3783,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo<$T, $S>.twoAutoCompleteFields(id: $id, labelLeft: $labelLeft, labelRight: $labelRight, currentValueLeft: $currentValueLeft, currentValueRight: $currentValueRight, optionsLeft: $optionsLeft, optionsRight: $optionsRight, validatorsLeft: $validatorsLeft, validatorsRight: $validatorsRight, sectionName: $sectionName, hasErrorleft: $hasErrorleft, hasErrorRight: $hasErrorRight, onChangeLeft: $onChangeLeft, onChangeRight: $onChangeRight, deletable: $deletable, onDelete: $onDelete)';
+    return 'FormInputFieldInfo.twoAutoCompleteFields(id: $id, labelLeft: $labelLeft, labelRight: $labelRight, currentValueLeft: $currentValueLeft, currentValueRight: $currentValueRight, optionsLeft: $optionsLeft, optionsRight: $optionsRight, validatorsLeft: $validatorsLeft, validatorsRight: $validatorsRight, sectionName: $sectionName, hasErrorleft: $hasErrorleft, hasErrorRight: $hasErrorRight, onChangeLeft: $onChangeLeft, onChangeRight: $onChangeRight, deletable: $deletable, onDelete: $onDelete)';
   }
 
   @override
@@ -3833,7 +3791,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty(
-          'type', 'FormInputFieldInfo<$T, $S>.twoAutoCompleteFields'))
+          'type', 'FormInputFieldInfo.twoAutoCompleteFields'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('labelLeft', labelLeft))
       ..add(DiagnosticsProperty('labelRight', labelRight))
@@ -3856,20 +3814,20 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S> &&
+            other is _$FormInputFieldInfoTwoAutoCompleteFieldsImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.labelLeft, labelLeft) ||
                 other.labelLeft == labelLeft) &&
             (identical(other.labelRight, labelRight) ||
                 other.labelRight == labelRight) &&
-            const DeepCollectionEquality()
-                .equals(other.currentValueLeft, currentValueLeft) &&
-            const DeepCollectionEquality()
-                .equals(other.currentValueRight, currentValueRight) &&
+            (identical(other.currentValueLeft, currentValueLeft) ||
+                other.currentValueLeft == currentValueLeft) &&
+            (identical(other.currentValueRight, currentValueRight) ||
+                other.currentValueRight == currentValueRight) &&
             const DeepCollectionEquality()
                 .equals(other._optionsLeft, _optionsLeft) &&
-            const DeepCollectionEquality()
-                .equals(other._optionsRight, _optionsRight) &&
+            (identical(other.optionsRight, optionsRight) ||
+                other.optionsRight == optionsRight) &&
             const DeepCollectionEquality()
                 .equals(other._validatorsLeft, _validatorsLeft) &&
             const DeepCollectionEquality()
@@ -3896,10 +3854,10 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
       id,
       labelLeft,
       labelRight,
-      const DeepCollectionEquality().hash(currentValueLeft),
-      const DeepCollectionEquality().hash(currentValueRight),
+      currentValueLeft,
+      currentValueRight,
       const DeepCollectionEquality().hash(_optionsLeft),
-      const DeepCollectionEquality().hash(_optionsRight),
+      optionsRight,
       const DeepCollectionEquality().hash(_validatorsLeft),
       const DeepCollectionEquality().hash(_validatorsRight),
       sectionName,
@@ -3915,12 +3873,11 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWith<T, S,
-          _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>>
+  _$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWith<
+          _$FormInputFieldInfoTwoAutoCompleteFieldsImpl>
       get copyWith =>
-          __$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWithImpl<T, S,
-                  _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>>(
-              this, _$identity);
+          __$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWithImpl<
+              _$FormInputFieldInfoTwoAutoCompleteFieldsImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -3928,24 +3885,24 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
     required TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         textArea,
     required TResult Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)
         dropdown,
@@ -3956,7 +3913,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         checkbox,
@@ -3967,7 +3924,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(String)? onChange)
         imagePicker,
     required TResult Function(
             String id, String label, String sectionName, void Function() cancel)
@@ -3979,10 +3936,10 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -3999,11 +3956,11 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
     required TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         date,
@@ -4033,24 +3990,24 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
     TResult? Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         textArea,
     TResult? Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -4061,7 +4018,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
@@ -4072,7 +4029,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(String)? onChange)?
         imagePicker,
     TResult? Function(String id, String label, String sectionName,
             void Function() cancel)?
@@ -4084,10 +4041,10 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -4104,11 +4061,11 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
     TResult? Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -4138,24 +4095,24 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
     TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         textArea,
     TResult Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -4166,7 +4123,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
@@ -4177,7 +4134,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(String)? onChange)?
         imagePicker,
     TResult Function(String id, String label, String sectionName,
             void Function() cancel)?
@@ -4189,10 +4146,10 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -4209,11 +4166,11 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
     TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -4244,21 +4201,19 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(FormInputFieldInfoTextArea<T, S> value) textArea,
-    required TResult Function(FormInputFieldInfoDropDown<T, S> value) dropdown,
-    required TResult Function(FormInputFieldInfoCheckbox<T, S> value) checkbox,
-    required TResult Function(FormInputFieldInfoImagePicker<T, S> value)
-        imagePicker,
-    required TResult Function(FormInputFieldInfoCancelButton<T, S> value)
+    required TResult Function(FormInputFieldInfoTextArea value) textArea,
+    required TResult Function(FormInputFieldInfoDropDown value) dropdown,
+    required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
+    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
+    required TResult Function(FormInputFieldInfoCancelButton value)
         cancelButton,
-    required TResult Function(FormInputFieldInfoSubmitButton<T, S> value)
+    required TResult Function(FormInputFieldInfoSubmitButton value)
         submitButton,
-    required TResult Function(
-            FormInputFieldInfoTwoAutoCompleteFields<T, S> value)
+    required TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)
         twoAutoCompleteFields,
-    required TResult Function(FormInputFieldInfoCustomButton<T, S> value)
+    required TResult Function(FormInputFieldInfoCustomButton value)
         customButton,
-    required TResult Function(FormInputFieldInfoDate<T, S> value) date,
+    required TResult Function(FormInputFieldInfoDate value) date,
   }) {
     return twoAutoCompleteFields(this);
   }
@@ -4266,16 +4221,16 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FormInputFieldInfoTextArea<T, S> value)? textArea,
-    TResult? Function(FormInputFieldInfoDropDown<T, S> value)? dropdown,
-    TResult? Function(FormInputFieldInfoCheckbox<T, S> value)? checkbox,
-    TResult? Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
-    TResult? Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
-    TResult? Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+    TResult? Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
         twoAutoCompleteFields,
-    TResult? Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
-    TResult? Function(FormInputFieldInfoDate<T, S> value)? date,
+    TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult? Function(FormInputFieldInfoDate value)? date,
   }) {
     return twoAutoCompleteFields?.call(this);
   }
@@ -4283,16 +4238,16 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(FormInputFieldInfoTextArea<T, S> value)? textArea,
-    TResult Function(FormInputFieldInfoDropDown<T, S> value)? dropdown,
-    TResult Function(FormInputFieldInfoCheckbox<T, S> value)? checkbox,
-    TResult Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
-    TResult Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
-    TResult Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+    TResult Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?
         twoAutoCompleteFields,
-    TResult Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
-    TResult Function(FormInputFieldInfoDate<T, S> value)? date,
+    TResult Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult Function(FormInputFieldInfoDate value)? date,
     required TResult orElse(),
   }) {
     if (twoAutoCompleteFields != null) {
@@ -4302,16 +4257,16 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>
   }
 }
 
-abstract class FormInputFieldInfoTwoAutoCompleteFields<T, S>
-    implements FormInputFieldInfo<T, S> {
+abstract class FormInputFieldInfoTwoAutoCompleteFields
+    implements FormInputFieldInfo {
   const factory FormInputFieldInfoTwoAutoCompleteFields(
           {required final String id,
           required final String labelLeft,
           required final String labelRight,
-          required final T currentValueLeft,
-          required final S currentValueRight,
-          required final List<T> optionsLeft,
-          required final List<S> optionsRight,
+          required final String currentValueLeft,
+          required final String currentValueRight,
+          required final List<String> optionsLeft,
+          required final List<String> Function(String) optionsRight,
           required final List<String? Function(String?)> validatorsLeft,
           required final List<String? Function(String?)> validatorsRight,
           required final String sectionName,
@@ -4321,16 +4276,16 @@ abstract class FormInputFieldInfoTwoAutoCompleteFields<T, S>
           final void Function(String)? onChangeRight,
           final bool deletable,
           final void Function()? onDelete}) =
-      _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>;
+      _$FormInputFieldInfoTwoAutoCompleteFieldsImpl;
 
   @override
   String get id;
   String get labelLeft;
   String get labelRight;
-  T get currentValueLeft;
-  S get currentValueRight;
-  List<T> get optionsLeft;
-  List<S> get optionsRight;
+  String get currentValueLeft;
+  String get currentValueRight;
+  List<String> get optionsLeft;
+  List<String> Function(String) get optionsRight;
   List<String? Function(String?)> get validatorsLeft;
   List<String? Function(String?)> get validatorsRight;
   @override
@@ -4346,18 +4301,18 @@ abstract class FormInputFieldInfoTwoAutoCompleteFields<T, S>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWith<T, S,
-          _$FormInputFieldInfoTwoAutoCompleteFieldsImpl<T, S>>
+  _$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWith<
+          _$FormInputFieldInfoTwoAutoCompleteFieldsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FormInputFieldInfoCustomButtonImplCopyWith<T, S, $Res>
-    implements $FormInputFieldInfoCopyWith<T, S, $Res> {
+abstract class _$$FormInputFieldInfoCustomButtonImplCopyWith<$Res>
+    implements $FormInputFieldInfoCopyWith<$Res> {
   factory _$$FormInputFieldInfoCustomButtonImplCopyWith(
-          _$FormInputFieldInfoCustomButtonImpl<T, S> value,
-          $Res Function(_$FormInputFieldInfoCustomButtonImpl<T, S>) then) =
-      __$$FormInputFieldInfoCustomButtonImplCopyWithImpl<T, S, $Res>;
+          _$FormInputFieldInfoCustomButtonImpl value,
+          $Res Function(_$FormInputFieldInfoCustomButtonImpl) then) =
+      __$$FormInputFieldInfoCustomButtonImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -4365,13 +4320,13 @@ abstract class _$$FormInputFieldInfoCustomButtonImplCopyWith<T, S, $Res>
 }
 
 /// @nodoc
-class __$$FormInputFieldInfoCustomButtonImplCopyWithImpl<T, S, $Res>
-    extends _$FormInputFieldInfoCopyWithImpl<T, S, $Res,
-        _$FormInputFieldInfoCustomButtonImpl<T, S>>
-    implements _$$FormInputFieldInfoCustomButtonImplCopyWith<T, S, $Res> {
+class __$$FormInputFieldInfoCustomButtonImplCopyWithImpl<$Res>
+    extends _$FormInputFieldInfoCopyWithImpl<$Res,
+        _$FormInputFieldInfoCustomButtonImpl>
+    implements _$$FormInputFieldInfoCustomButtonImplCopyWith<$Res> {
   __$$FormInputFieldInfoCustomButtonImplCopyWithImpl(
-      _$FormInputFieldInfoCustomButtonImpl<T, S> _value,
-      $Res Function(_$FormInputFieldInfoCustomButtonImpl<T, S>) _then)
+      _$FormInputFieldInfoCustomButtonImpl _value,
+      $Res Function(_$FormInputFieldInfoCustomButtonImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of FormInputFieldInfo
@@ -4384,7 +4339,7 @@ class __$$FormInputFieldInfoCustomButtonImplCopyWithImpl<T, S, $Res>
     Object? sectionName = null,
     Object? callback = null,
   }) {
-    return _then(_$FormInputFieldInfoCustomButtonImpl<T, S>(
+    return _then(_$FormInputFieldInfoCustomButtonImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -4407,9 +4362,9 @@ class __$$FormInputFieldInfoCustomButtonImplCopyWithImpl<T, S, $Res>
 
 /// @nodoc
 
-class _$FormInputFieldInfoCustomButtonImpl<T, S>
+class _$FormInputFieldInfoCustomButtonImpl
     with DiagnosticableTreeMixin
-    implements FormInputFieldInfoCustomButton<T, S> {
+    implements FormInputFieldInfoCustomButton {
   const _$FormInputFieldInfoCustomButtonImpl(
       {required this.id,
       required this.label,
@@ -4427,15 +4382,14 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo<$T, $S>.customButton(id: $id, label: $label, sectionName: $sectionName, callback: $callback)';
+    return 'FormInputFieldInfo.customButton(id: $id, label: $label, sectionName: $sectionName, callback: $callback)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty(
-          'type', 'FormInputFieldInfo<$T, $S>.customButton'))
+      ..add(DiagnosticsProperty('type', 'FormInputFieldInfo.customButton'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('label', label))
       ..add(DiagnosticsProperty('sectionName', sectionName))
@@ -4446,7 +4400,7 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FormInputFieldInfoCustomButtonImpl<T, S> &&
+            other is _$FormInputFieldInfoCustomButtonImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.label, label) || other.label == label) &&
             (identical(other.sectionName, sectionName) ||
@@ -4464,10 +4418,10 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FormInputFieldInfoCustomButtonImplCopyWith<T, S,
-          _$FormInputFieldInfoCustomButtonImpl<T, S>>
-      get copyWith => __$$FormInputFieldInfoCustomButtonImplCopyWithImpl<T, S,
-          _$FormInputFieldInfoCustomButtonImpl<T, S>>(this, _$identity);
+  _$$FormInputFieldInfoCustomButtonImplCopyWith<
+          _$FormInputFieldInfoCustomButtonImpl>
+      get copyWith => __$$FormInputFieldInfoCustomButtonImplCopyWithImpl<
+          _$FormInputFieldInfoCustomButtonImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -4475,24 +4429,24 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
     required TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         textArea,
     required TResult Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)
         dropdown,
@@ -4503,7 +4457,7 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         checkbox,
@@ -4514,7 +4468,7 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(String)? onChange)
         imagePicker,
     required TResult Function(
             String id, String label, String sectionName, void Function() cancel)
@@ -4526,10 +4480,10 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -4546,11 +4500,11 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
     required TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         date,
@@ -4564,24 +4518,24 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
     TResult? Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         textArea,
     TResult? Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -4592,7 +4546,7 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
@@ -4603,7 +4557,7 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(String)? onChange)?
         imagePicker,
     TResult? Function(String id, String label, String sectionName,
             void Function() cancel)?
@@ -4615,10 +4569,10 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -4635,11 +4589,11 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
     TResult? Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -4653,24 +4607,24 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
     TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         textArea,
     TResult Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -4681,7 +4635,7 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
@@ -4692,7 +4646,7 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(String)? onChange)?
         imagePicker,
     TResult Function(String id, String label, String sectionName,
             void Function() cancel)?
@@ -4704,10 +4658,10 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -4724,11 +4678,11 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
     TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -4743,21 +4697,19 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(FormInputFieldInfoTextArea<T, S> value) textArea,
-    required TResult Function(FormInputFieldInfoDropDown<T, S> value) dropdown,
-    required TResult Function(FormInputFieldInfoCheckbox<T, S> value) checkbox,
-    required TResult Function(FormInputFieldInfoImagePicker<T, S> value)
-        imagePicker,
-    required TResult Function(FormInputFieldInfoCancelButton<T, S> value)
+    required TResult Function(FormInputFieldInfoTextArea value) textArea,
+    required TResult Function(FormInputFieldInfoDropDown value) dropdown,
+    required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
+    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
+    required TResult Function(FormInputFieldInfoCancelButton value)
         cancelButton,
-    required TResult Function(FormInputFieldInfoSubmitButton<T, S> value)
+    required TResult Function(FormInputFieldInfoSubmitButton value)
         submitButton,
-    required TResult Function(
-            FormInputFieldInfoTwoAutoCompleteFields<T, S> value)
+    required TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)
         twoAutoCompleteFields,
-    required TResult Function(FormInputFieldInfoCustomButton<T, S> value)
+    required TResult Function(FormInputFieldInfoCustomButton value)
         customButton,
-    required TResult Function(FormInputFieldInfoDate<T, S> value) date,
+    required TResult Function(FormInputFieldInfoDate value) date,
   }) {
     return customButton(this);
   }
@@ -4765,16 +4717,16 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FormInputFieldInfoTextArea<T, S> value)? textArea,
-    TResult? Function(FormInputFieldInfoDropDown<T, S> value)? dropdown,
-    TResult? Function(FormInputFieldInfoCheckbox<T, S> value)? checkbox,
-    TResult? Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
-    TResult? Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
-    TResult? Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+    TResult? Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
         twoAutoCompleteFields,
-    TResult? Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
-    TResult? Function(FormInputFieldInfoDate<T, S> value)? date,
+    TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult? Function(FormInputFieldInfoDate value)? date,
   }) {
     return customButton?.call(this);
   }
@@ -4782,16 +4734,16 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(FormInputFieldInfoTextArea<T, S> value)? textArea,
-    TResult Function(FormInputFieldInfoDropDown<T, S> value)? dropdown,
-    TResult Function(FormInputFieldInfoCheckbox<T, S> value)? checkbox,
-    TResult Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
-    TResult Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
-    TResult Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+    TResult Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?
         twoAutoCompleteFields,
-    TResult Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
-    TResult Function(FormInputFieldInfoDate<T, S> value)? date,
+    TResult Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult Function(FormInputFieldInfoDate value)? date,
     required TResult orElse(),
   }) {
     if (customButton != null) {
@@ -4801,14 +4753,13 @@ class _$FormInputFieldInfoCustomButtonImpl<T, S>
   }
 }
 
-abstract class FormInputFieldInfoCustomButton<T, S>
-    implements FormInputFieldInfo<T, S> {
+abstract class FormInputFieldInfoCustomButton implements FormInputFieldInfo {
   const factory FormInputFieldInfoCustomButton(
           {required final String id,
           required final String label,
           required final String sectionName,
           required final void Function() callback}) =
-      _$FormInputFieldInfoCustomButtonImpl<T, S>;
+      _$FormInputFieldInfoCustomButtonImpl;
 
   @override
   String get id;
@@ -4821,40 +4772,39 @@ abstract class FormInputFieldInfoCustomButton<T, S>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FormInputFieldInfoCustomButtonImplCopyWith<T, S,
-          _$FormInputFieldInfoCustomButtonImpl<T, S>>
+  _$$FormInputFieldInfoCustomButtonImplCopyWith<
+          _$FormInputFieldInfoCustomButtonImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FormInputFieldInfoDateImplCopyWith<T, S, $Res>
-    implements $FormInputFieldInfoCopyWith<T, S, $Res> {
+abstract class _$$FormInputFieldInfoDateImplCopyWith<$Res>
+    implements $FormInputFieldInfoCopyWith<$Res> {
   factory _$$FormInputFieldInfoDateImplCopyWith(
-          _$FormInputFieldInfoDateImpl<T, S> value,
-          $Res Function(_$FormInputFieldInfoDateImpl<T, S>) then) =
-      __$$FormInputFieldInfoDateImplCopyWithImpl<T, S, $Res>;
+          _$FormInputFieldInfoDateImpl value,
+          $Res Function(_$FormInputFieldInfoDateImpl) then) =
+      __$$FormInputFieldInfoDateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {String id,
       String label,
-      T currentValue,
+      String currentValue,
       List<String? Function(DateTime?)> validators,
       String sectionName,
       bool hasError,
-      void Function(T)? onChange,
+      void Function(String)? onChange,
       bool deletable,
       void Function()? onDelete});
 }
 
 /// @nodoc
-class __$$FormInputFieldInfoDateImplCopyWithImpl<T, S, $Res>
-    extends _$FormInputFieldInfoCopyWithImpl<T, S, $Res,
-        _$FormInputFieldInfoDateImpl<T, S>>
-    implements _$$FormInputFieldInfoDateImplCopyWith<T, S, $Res> {
+class __$$FormInputFieldInfoDateImplCopyWithImpl<$Res>
+    extends _$FormInputFieldInfoCopyWithImpl<$Res, _$FormInputFieldInfoDateImpl>
+    implements _$$FormInputFieldInfoDateImplCopyWith<$Res> {
   __$$FormInputFieldInfoDateImplCopyWithImpl(
-      _$FormInputFieldInfoDateImpl<T, S> _value,
-      $Res Function(_$FormInputFieldInfoDateImpl<T, S>) _then)
+      _$FormInputFieldInfoDateImpl _value,
+      $Res Function(_$FormInputFieldInfoDateImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of FormInputFieldInfo
@@ -4864,7 +4814,7 @@ class __$$FormInputFieldInfoDateImplCopyWithImpl<T, S, $Res>
   $Res call({
     Object? id = null,
     Object? label = null,
-    Object? currentValue = freezed,
+    Object? currentValue = null,
     Object? validators = null,
     Object? sectionName = null,
     Object? hasError = null,
@@ -4872,7 +4822,7 @@ class __$$FormInputFieldInfoDateImplCopyWithImpl<T, S, $Res>
     Object? deletable = null,
     Object? onDelete = freezed,
   }) {
-    return _then(_$FormInputFieldInfoDateImpl<T, S>(
+    return _then(_$FormInputFieldInfoDateImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -4881,10 +4831,10 @@ class __$$FormInputFieldInfoDateImplCopyWithImpl<T, S, $Res>
           ? _value.label
           : label // ignore: cast_nullable_to_non_nullable
               as String,
-      currentValue: freezed == currentValue
+      currentValue: null == currentValue
           ? _value.currentValue
           : currentValue // ignore: cast_nullable_to_non_nullable
-              as T,
+              as String,
       validators: null == validators
           ? _value._validators
           : validators // ignore: cast_nullable_to_non_nullable
@@ -4900,7 +4850,7 @@ class __$$FormInputFieldInfoDateImplCopyWithImpl<T, S, $Res>
       onChange: freezed == onChange
           ? _value.onChange
           : onChange // ignore: cast_nullable_to_non_nullable
-              as void Function(T)?,
+              as void Function(String)?,
       deletable: null == deletable
           ? _value.deletable
           : deletable // ignore: cast_nullable_to_non_nullable
@@ -4915,9 +4865,9 @@ class __$$FormInputFieldInfoDateImplCopyWithImpl<T, S, $Res>
 
 /// @nodoc
 
-class _$FormInputFieldInfoDateImpl<T, S>
+class _$FormInputFieldInfoDateImpl
     with DiagnosticableTreeMixin
-    implements FormInputFieldInfoDate<T, S> {
+    implements FormInputFieldInfoDate {
   const _$FormInputFieldInfoDateImpl(
       {required this.id,
       required this.label,
@@ -4935,7 +4885,7 @@ class _$FormInputFieldInfoDateImpl<T, S>
   @override
   final String label;
   @override
-  final T currentValue;
+  final String currentValue;
   final List<String? Function(DateTime?)> _validators;
   @override
   List<String? Function(DateTime?)> get validators {
@@ -4950,7 +4900,7 @@ class _$FormInputFieldInfoDateImpl<T, S>
   final bool hasError;
   @override
   @JsonKey()
-  final void Function(T)? onChange;
+  final void Function(String)? onChange;
   @override
   @JsonKey()
   final bool deletable;
@@ -4960,14 +4910,14 @@ class _$FormInputFieldInfoDateImpl<T, S>
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo<$T, $S>.date(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
+    return 'FormInputFieldInfo.date(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'FormInputFieldInfo<$T, $S>.date'))
+      ..add(DiagnosticsProperty('type', 'FormInputFieldInfo.date'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('label', label))
       ..add(DiagnosticsProperty('currentValue', currentValue))
@@ -4983,11 +4933,11 @@ class _$FormInputFieldInfoDateImpl<T, S>
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FormInputFieldInfoDateImpl<T, S> &&
+            other is _$FormInputFieldInfoDateImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.label, label) || other.label == label) &&
-            const DeepCollectionEquality()
-                .equals(other.currentValue, currentValue) &&
+            (identical(other.currentValue, currentValue) ||
+                other.currentValue == currentValue) &&
             const DeepCollectionEquality()
                 .equals(other._validators, _validators) &&
             (identical(other.sectionName, sectionName) ||
@@ -5007,7 +4957,7 @@ class _$FormInputFieldInfoDateImpl<T, S>
       runtimeType,
       id,
       label,
-      const DeepCollectionEquality().hash(currentValue),
+      currentValue,
       const DeepCollectionEquality().hash(_validators),
       sectionName,
       hasError,
@@ -5020,10 +4970,9 @@ class _$FormInputFieldInfoDateImpl<T, S>
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FormInputFieldInfoDateImplCopyWith<T, S,
-          _$FormInputFieldInfoDateImpl<T, S>>
-      get copyWith => __$$FormInputFieldInfoDateImplCopyWithImpl<T, S,
-          _$FormInputFieldInfoDateImpl<T, S>>(this, _$identity);
+  _$$FormInputFieldInfoDateImplCopyWith<_$FormInputFieldInfoDateImpl>
+      get copyWith => __$$FormInputFieldInfoDateImplCopyWithImpl<
+          _$FormInputFieldInfoDateImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -5031,24 +4980,24 @@ class _$FormInputFieldInfoDateImpl<T, S>
     required TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         textArea,
     required TResult Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)
         dropdown,
@@ -5059,7 +5008,7 @@ class _$FormInputFieldInfoDateImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         checkbox,
@@ -5070,7 +5019,7 @@ class _$FormInputFieldInfoDateImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)
+            void Function(String)? onChange)
         imagePicker,
     required TResult Function(
             String id, String label, String sectionName, void Function() cancel)
@@ -5082,10 +5031,10 @@ class _$FormInputFieldInfoDateImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -5102,11 +5051,11 @@ class _$FormInputFieldInfoDateImpl<T, S>
     required TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         date,
@@ -5121,24 +5070,24 @@ class _$FormInputFieldInfoDateImpl<T, S>
     TResult? Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         textArea,
     TResult? Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -5149,7 +5098,7 @@ class _$FormInputFieldInfoDateImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
@@ -5160,7 +5109,7 @@ class _$FormInputFieldInfoDateImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(String)? onChange)?
         imagePicker,
     TResult? Function(String id, String label, String sectionName,
             void Function() cancel)?
@@ -5172,10 +5121,10 @@ class _$FormInputFieldInfoDateImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -5192,11 +5141,11 @@ class _$FormInputFieldInfoDateImpl<T, S>
     TResult? Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -5211,24 +5160,24 @@ class _$FormInputFieldInfoDateImpl<T, S>
     TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         textArea,
     TResult Function(
             String id,
             String label,
-            T currentValue,
-            List<T> options,
-            String Function(dynamic) optionToString,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(dynamic)? onChange,
+            void Function(String?)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -5239,7 +5188,7 @@ class _$FormInputFieldInfoDateImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
@@ -5250,7 +5199,7 @@ class _$FormInputFieldInfoDateImpl<T, S>
             List<String? Function(bool?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange)?
+            void Function(String)? onChange)?
         imagePicker,
     TResult Function(String id, String label, String sectionName,
             void Function() cancel)?
@@ -5262,10 +5211,10 @@ class _$FormInputFieldInfoDateImpl<T, S>
             String id,
             String labelLeft,
             String labelRight,
-            T currentValueLeft,
-            S currentValueRight,
-            List<T> optionsLeft,
-            List<S> optionsRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            List<String> Function(String) optionsRight,
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
@@ -5282,11 +5231,11 @@ class _$FormInputFieldInfoDateImpl<T, S>
     TResult Function(
             String id,
             String label,
-            T currentValue,
+            String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
             bool hasError,
-            void Function(T)? onChange,
+            void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -5302,21 +5251,19 @@ class _$FormInputFieldInfoDateImpl<T, S>
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(FormInputFieldInfoTextArea<T, S> value) textArea,
-    required TResult Function(FormInputFieldInfoDropDown<T, S> value) dropdown,
-    required TResult Function(FormInputFieldInfoCheckbox<T, S> value) checkbox,
-    required TResult Function(FormInputFieldInfoImagePicker<T, S> value)
-        imagePicker,
-    required TResult Function(FormInputFieldInfoCancelButton<T, S> value)
+    required TResult Function(FormInputFieldInfoTextArea value) textArea,
+    required TResult Function(FormInputFieldInfoDropDown value) dropdown,
+    required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
+    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
+    required TResult Function(FormInputFieldInfoCancelButton value)
         cancelButton,
-    required TResult Function(FormInputFieldInfoSubmitButton<T, S> value)
+    required TResult Function(FormInputFieldInfoSubmitButton value)
         submitButton,
-    required TResult Function(
-            FormInputFieldInfoTwoAutoCompleteFields<T, S> value)
+    required TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)
         twoAutoCompleteFields,
-    required TResult Function(FormInputFieldInfoCustomButton<T, S> value)
+    required TResult Function(FormInputFieldInfoCustomButton value)
         customButton,
-    required TResult Function(FormInputFieldInfoDate<T, S> value) date,
+    required TResult Function(FormInputFieldInfoDate value) date,
   }) {
     return date(this);
   }
@@ -5324,16 +5271,16 @@ class _$FormInputFieldInfoDateImpl<T, S>
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FormInputFieldInfoTextArea<T, S> value)? textArea,
-    TResult? Function(FormInputFieldInfoDropDown<T, S> value)? dropdown,
-    TResult? Function(FormInputFieldInfoCheckbox<T, S> value)? checkbox,
-    TResult? Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
-    TResult? Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
-    TResult? Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+    TResult? Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
         twoAutoCompleteFields,
-    TResult? Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
-    TResult? Function(FormInputFieldInfoDate<T, S> value)? date,
+    TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult? Function(FormInputFieldInfoDate value)? date,
   }) {
     return date?.call(this);
   }
@@ -5341,16 +5288,16 @@ class _$FormInputFieldInfoDateImpl<T, S>
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(FormInputFieldInfoTextArea<T, S> value)? textArea,
-    TResult Function(FormInputFieldInfoDropDown<T, S> value)? dropdown,
-    TResult Function(FormInputFieldInfoCheckbox<T, S> value)? checkbox,
-    TResult Function(FormInputFieldInfoImagePicker<T, S> value)? imagePicker,
-    TResult Function(FormInputFieldInfoCancelButton<T, S> value)? cancelButton,
-    TResult Function(FormInputFieldInfoSubmitButton<T, S> value)? submitButton,
-    TResult Function(FormInputFieldInfoTwoAutoCompleteFields<T, S> value)?
+    TResult Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?
         twoAutoCompleteFields,
-    TResult Function(FormInputFieldInfoCustomButton<T, S> value)? customButton,
-    TResult Function(FormInputFieldInfoDate<T, S> value)? date,
+    TResult Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult Function(FormInputFieldInfoDate value)? date,
     required TResult orElse(),
   }) {
     if (date != null) {
@@ -5360,28 +5307,27 @@ class _$FormInputFieldInfoDateImpl<T, S>
   }
 }
 
-abstract class FormInputFieldInfoDate<T, S>
-    implements FormInputFieldInfo<T, S> {
+abstract class FormInputFieldInfoDate implements FormInputFieldInfo {
   const factory FormInputFieldInfoDate(
       {required final String id,
       required final String label,
-      required final T currentValue,
+      required final String currentValue,
       required final List<String? Function(DateTime?)> validators,
       required final String sectionName,
       required final bool hasError,
-      final void Function(T)? onChange,
+      final void Function(String)? onChange,
       final bool deletable,
-      final void Function()? onDelete}) = _$FormInputFieldInfoDateImpl<T, S>;
+      final void Function()? onDelete}) = _$FormInputFieldInfoDateImpl;
 
   @override
   String get id;
   String get label;
-  T get currentValue;
+  String get currentValue;
   List<String? Function(DateTime?)> get validators;
   @override
   String get sectionName;
   bool get hasError;
-  void Function(T)? get onChange;
+  void Function(String)? get onChange;
   bool get deletable;
   void Function()? get onDelete;
 
@@ -5389,7 +5335,6 @@ abstract class FormInputFieldInfoDate<T, S>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FormInputFieldInfoDateImplCopyWith<T, S,
-          _$FormInputFieldInfoDateImpl<T, S>>
+  _$$FormInputFieldInfoDateImplCopyWith<_$FormInputFieldInfoDateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
