@@ -771,8 +771,12 @@ class _AddListItemPageState extends State<AddListItemPage> {
   }
 
   List<FormInputFieldInfo> urlFields() {
-    final keys = urls ?? listItem?.urls ?? [];
-    final tmp = mapIndexed(keys).toList();
+    if (urls == null) {
+      setState(() {
+        urls = listItem?.urls ?? [];
+      });
+    }
+    final tmp = mapIndexed(urls!).toList();
 
     return [
       for (final ik in tmp) urlField(ik.$1, ik.$2),
@@ -805,13 +809,6 @@ class _AddListItemPageState extends State<AddListItemPage> {
       callback: () {
         print('adding url');
         setState(() {
-          if (urls == null) {
-            if (listItem?.urls != null) {
-              urls = listItem!.urls;
-            } else {
-              urls = [];
-            }
-          }
           urls = List<String>.from(urls!)..add('');
         });
       },
