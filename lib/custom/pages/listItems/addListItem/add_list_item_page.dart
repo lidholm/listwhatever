@@ -116,7 +116,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
   late List<FormInputFieldInfo> fields;
   List<String> valuesForCategory = [];
 
-  List<String>? urls;
+  Map<String, String>? urls;
   Map<String, (String, String)>? categories;
 
   @override
@@ -437,19 +437,22 @@ class _AddListItemPageState extends State<AddListItemPage> {
   List<FormInputFieldInfo> urlFields() {
     if (urls == null) {
       setState(() {
-        urls = listItem?.urls ?? [];
+        urls = {};
+        for (final url in listItem?.urls ?? <String>[]) {
+          final indexKey = getRandomString(3);
+          urls![indexKey] = url;
+        }
       });
     }
-    final tmp = mapIndexed(urls!).toList();
 
     return [
-      for (final ik in tmp) urlField(ik.$1, ik.$2),
+      for (final ik in urls!.entries) urlField(ik.key, ik.value),
     ];
   }
 
-  FormInputFieldInfo urlField(int index, String url) {
+  FormInputFieldInfo urlField(String indexKey, String url) {
     return FormInputFieldInfo.textArea(
-      id: '${FieldId.urls.value}-$index',
+      id: getUrlId(indexKey),
       label: 'Url',
       currentValue: url,
       validators: [
@@ -461,8 +464,17 @@ class _AddListItemPageState extends State<AddListItemPage> {
       deletable: true,
       onDelete: () {
         print('deleted url');
+        setState(() {
+          urls!.remove(indexKey);
+          print('urls: $urls');
+        });
+        _formKey.currentState?.value[getUrlId(indexKey)] = null;
       },
     );
+  }
+
+  String getUrlId(String indexKey) {
+    return '${FieldId.urls.value}-$indexKey';
   }
 
   FormInputFieldInfo addUrlButton() {
@@ -473,7 +485,8 @@ class _AddListItemPageState extends State<AddListItemPage> {
       callback: () {
         print('adding url');
         setState(() {
-          urls = List<String>.from(urls!)..add('');
+          final indexKey = getRandomString(3);
+          urls![indexKey] = '';
         });
       },
     );
