@@ -34,15 +34,19 @@ class _FormInputFieldTwoAutoCompleteFieldsState
 
   @override
   Widget build(BuildContext context) {
-    logger.i('$className: build');
+    logger.i(
+      '$className: build ${widget.field.id} - ${widget.field.currentValueLeft}',
+    );
+    final fieldWidth = widget.field.deletable ? 0.44 : 0.48;
     return LayoutBuilder(
       builder: (context, constraints) {
         return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SizedBox(
-              width: constraints.maxWidth * 0.48,
+              width: constraints.maxWidth * fieldWidth,
               child: FormBuilderTypeAhead<String>(
-                name: widget.field.idLeft,
+                name: widget.field.id,
                 initialValue: widget.field.currentValueLeft,
                 suggestionsCallback: getSuggestionsLeft,
                 itemBuilder: (context, item) {
@@ -55,9 +59,9 @@ class _FormInputFieldTwoAutoCompleteFieldsState
             ),
             SizedBox(width: constraints.maxWidth * 0.04),
             SizedBox(
-              width: constraints.maxWidth * 0.48,
+              width: constraints.maxWidth * fieldWidth,
               child: FormBuilderTypeAhead<String>(
-                name: widget.field.idRight,
+                name: widget.field.id2,
                 initialValue: widget.field.currentValueRight,
                 suggestionsCallback: getSuggestionsRight,
                 itemBuilder: (context, item) {
@@ -67,6 +71,12 @@ class _FormInputFieldTwoAutoCompleteFieldsState
                 },
               ),
             ),
+            if (widget.field.deletable)
+              IconButton(
+                onPressed: widget.field.onDelete,
+                icon: const Icon(Icons.delete),
+                padding: const EdgeInsets.only(bottom: 6),
+              ),
           ],
         );
       },

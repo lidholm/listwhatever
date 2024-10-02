@@ -117,7 +117,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
   List<String> valuesForCategory = [];
 
   List<String>? urls;
-  List<MapEntry<String, String>>? categories;
+  Map<String, (String, String)>? categories;
 
   @override
   void initState() {
@@ -170,6 +170,10 @@ class _AddListItemPageState extends State<AddListItemPage> {
       cancelButton(),
       submitButton(),
     ];
+    print('fields: ${fields.length}');
+    // for (final field in fields) {
+    //   print(field.id);
+    // }
 
     final sections = getSections();
 
@@ -357,25 +361,27 @@ class _AddListItemPageState extends State<AddListItemPage> {
   List<FormInputFieldInfo> categoryFields() {
     if (categories == null) {
       setState(() {
-        categories = [];
+        categories = {};
         final keys = listItem?.categories.keys ?? [];
         for (final key in keys) {
-          categories!
-              .add(MapEntry(key, listItem?.categories[key]?.join(',') ?? ''));
+          final indexKey = getRandomString(3);
+          categories![indexKey] =
+              (key, listItem?.categories[key]?.join(',') ?? '');
         }
       });
     }
 
     return [
-      for (final ik in mapIndexed(categories!))
-        categoryField(ik.$1, ik.$2.key, ik.$2.value),
+      for (final ik in categories!.entries)
+        categoryField(ik.key, ik.value.$1, ik.value.$2),
     ];
   }
 
-  FormInputFieldInfo categoryField(int index, String left, String right) {
+  FormInputFieldInfo categoryField(String indexKey, String left, String right) {
+    print('categoryField for $indexKey $left $right');
     return FormInputFieldInfo.twoAutoCompleteFields(
-      idLeft: '${FieldId.categories.value}-left-$index',
-      idRight: '${FieldId.categories.value}-right-$index',
+      id: '${FieldId.categories.value}-left-$indexKey',
+      id2: '${FieldId.categories.value}-right-$indexKey',
       sectionName: SectionName.categories.value,
       labelLeft: 'Left',
       labelRight: 'Right',
@@ -396,6 +402,12 @@ class _AddListItemPageState extends State<AddListItemPage> {
       deletable: true,
       onDelete: () {
         print('deleted category');
+        print('categories: $categories');
+        print('indexKey: $indexKey');
+        setState(() {
+          categories!.remove(indexKey);
+          print('categories: $categories');
+        });
       },
     );
   }
@@ -408,8 +420,8 @@ class _AddListItemPageState extends State<AddListItemPage> {
       callback: () {
         print('adding category');
         setState(() {
-          final cs = List<MapEntry<String, String>>.from(categories!);
-          categories = cs..add(const MapEntry('', ''));
+          final indexKey = getRandomString(3);
+          categories![indexKey] = ('', '');
         });
       },
     );

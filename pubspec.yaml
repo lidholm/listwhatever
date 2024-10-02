@@ -73,7 +73,6 @@ dependencies:
   share_plus_platform_interface: ^5.0.0
   shared_preferences: ^2.2.1
   sign_in_with_apple: ^6.1.1
-  tuple: ^2.0.2
   twitter_login: ^4.2.2
   url_launcher: ^6.1.5
 

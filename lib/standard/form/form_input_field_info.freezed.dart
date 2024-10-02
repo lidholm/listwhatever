@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$FormInputFieldInfo {
+  String get id => throw _privateConstructorUsedError;
   String get sectionName => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -70,8 +71,8 @@ mixin _$FormInputFieldInfo {
             void Function(Map<String, dynamic>?) save)
         submitButton,
     required TResult Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -155,8 +156,8 @@ mixin _$FormInputFieldInfo {
             void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult? Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -240,8 +241,8 @@ mixin _$FormInputFieldInfo {
             void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -333,7 +334,7 @@ abstract class $FormInputFieldInfoCopyWith<$Res> {
           FormInputFieldInfo value, $Res Function(FormInputFieldInfo) then) =
       _$FormInputFieldInfoCopyWithImpl<$Res, FormInputFieldInfo>;
   @useResult
-  $Res call({String sectionName});
+  $Res call({String id, String sectionName});
 }
 
 /// @nodoc
@@ -351,9 +352,14 @@ class _$FormInputFieldInfoCopyWithImpl<$Res, $Val extends FormInputFieldInfo>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? sectionName = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       sectionName: null == sectionName
           ? _value.sectionName
           : sectionName // ignore: cast_nullable_to_non_nullable
@@ -614,8 +620,8 @@ class _$FormInputFieldInfoTextAreaImpl
             void Function(Map<String, dynamic>?) save)
         submitButton,
     required TResult Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -703,8 +709,8 @@ class _$FormInputFieldInfoTextAreaImpl
             void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult? Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -792,8 +798,8 @@ class _$FormInputFieldInfoTextAreaImpl
             void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -902,6 +908,7 @@ abstract class FormInputFieldInfoTextArea implements FormInputFieldInfo {
       final bool deletable,
       final void Function()? onDelete}) = _$FormInputFieldInfoTextAreaImpl;
 
+  @override
   String get id;
   String get label;
   String get currentValue;
@@ -1205,8 +1212,8 @@ class _$FormInputFieldInfoDropDownImpl
             void Function(Map<String, dynamic>?) save)
         submitButton,
     required TResult Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -1294,8 +1301,8 @@ class _$FormInputFieldInfoDropDownImpl
             void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult? Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -1383,8 +1390,8 @@ class _$FormInputFieldInfoDropDownImpl
             void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -1495,6 +1502,7 @@ abstract class FormInputFieldInfoDropDown implements FormInputFieldInfo {
       final bool deletable,
       final void Function()? onDelete}) = _$FormInputFieldInfoDropDownImpl;
 
+  @override
   String get id;
   String get label;
   String get currentValue;
@@ -1768,8 +1776,8 @@ class _$FormInputFieldInfoCheckboxImpl
             void Function(Map<String, dynamic>?) save)
         submitButton,
     required TResult Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -1857,8 +1865,8 @@ class _$FormInputFieldInfoCheckboxImpl
             void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult? Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -1946,8 +1954,8 @@ class _$FormInputFieldInfoCheckboxImpl
             void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -2056,6 +2064,7 @@ abstract class FormInputFieldInfoCheckbox implements FormInputFieldInfo {
       final bool deletable,
       final void Function()? onDelete}) = _$FormInputFieldInfoCheckboxImpl;
 
+  @override
   String get id;
   String get label;
   bool get currentValue;
@@ -2300,8 +2309,8 @@ class _$FormInputFieldInfoImagePickerImpl
             void Function(Map<String, dynamic>?) save)
         submitButton,
     required TResult Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -2389,8 +2398,8 @@ class _$FormInputFieldInfoImagePickerImpl
             void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult? Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -2478,8 +2487,8 @@ class _$FormInputFieldInfoImagePickerImpl
             void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -2587,6 +2596,7 @@ abstract class FormInputFieldInfoImagePicker implements FormInputFieldInfo {
           final void Function(String)? onChange}) =
       _$FormInputFieldInfoImagePickerImpl;
 
+  @override
   String get id;
   String get label;
   String? get currentValue;
@@ -2774,8 +2784,8 @@ class _$FormInputFieldInfoCancelButtonImpl
             void Function(Map<String, dynamic>?) save)
         submitButton,
     required TResult Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -2862,8 +2872,8 @@ class _$FormInputFieldInfoCancelButtonImpl
             void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult? Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -2950,8 +2960,8 @@ class _$FormInputFieldInfoCancelButtonImpl
             void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -3055,6 +3065,7 @@ abstract class FormInputFieldInfoCancelButton implements FormInputFieldInfo {
           required final void Function() cancel}) =
       _$FormInputFieldInfoCancelButtonImpl;
 
+  @override
   String get id;
   String get label;
   @override
@@ -3242,8 +3253,8 @@ class _$FormInputFieldInfoSubmitButtonImpl
             void Function(Map<String, dynamic>?) save)
         submitButton,
     required TResult Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -3330,8 +3341,8 @@ class _$FormInputFieldInfoSubmitButtonImpl
             void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult? Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -3418,8 +3429,8 @@ class _$FormInputFieldInfoSubmitButtonImpl
             void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -3523,6 +3534,7 @@ abstract class FormInputFieldInfoSubmitButton implements FormInputFieldInfo {
           required final void Function(Map<String, dynamic>?) save}) =
       _$FormInputFieldInfoSubmitButtonImpl;
 
+  @override
   String get id;
   String get label;
   @override
@@ -3548,8 +3560,8 @@ abstract class _$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String idLeft,
-      String idRight,
+      {String id,
+      String id2,
       String labelLeft,
       String labelRight,
       String currentValueLeft,
@@ -3580,8 +3592,8 @@ class __$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? idLeft = null,
-    Object? idRight = null,
+    Object? id = null,
+    Object? id2 = null,
     Object? labelLeft = null,
     Object? labelRight = null,
     Object? currentValueLeft = null,
@@ -3597,13 +3609,13 @@ class __$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWithImpl<$Res>
     Object? onDelete = freezed,
   }) {
     return _then(_$FormInputFieldInfoTwoAutoCompleteFieldsImpl(
-      idLeft: null == idLeft
-          ? _value.idLeft
-          : idLeft // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
-      idRight: null == idRight
-          ? _value.idRight
-          : idRight // ignore: cast_nullable_to_non_nullable
+      id2: null == id2
+          ? _value.id2
+          : id2 // ignore: cast_nullable_to_non_nullable
               as String,
       labelLeft: null == labelLeft
           ? _value.labelLeft
@@ -3667,8 +3679,8 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     with DiagnosticableTreeMixin
     implements FormInputFieldInfoTwoAutoCompleteFields {
   const _$FormInputFieldInfoTwoAutoCompleteFieldsImpl(
-      {required this.idLeft,
-      required this.idRight,
+      {required this.id,
+      required this.id2,
       required this.labelLeft,
       required this.labelRight,
       required this.currentValueLeft,
@@ -3688,9 +3700,9 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
         _validatorsRight = validatorsRight;
 
   @override
-  final String idLeft;
+  final String id;
   @override
-  final String idRight;
+  final String id2;
   @override
   final String labelLeft;
   @override
@@ -3746,7 +3758,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo.twoAutoCompleteFields(idLeft: $idLeft, idRight: $idRight, labelLeft: $labelLeft, labelRight: $labelRight, currentValueLeft: $currentValueLeft, currentValueRight: $currentValueRight, optionsLeft: $optionsLeft, optionsRight: $optionsRight, validatorsLeft: $validatorsLeft, validatorsRight: $validatorsRight, sectionName: $sectionName, hasErrorleft: $hasErrorleft, hasErrorRight: $hasErrorRight, deletable: $deletable, onDelete: $onDelete)';
+    return 'FormInputFieldInfo.twoAutoCompleteFields(id: $id, id2: $id2, labelLeft: $labelLeft, labelRight: $labelRight, currentValueLeft: $currentValueLeft, currentValueRight: $currentValueRight, optionsLeft: $optionsLeft, optionsRight: $optionsRight, validatorsLeft: $validatorsLeft, validatorsRight: $validatorsRight, sectionName: $sectionName, hasErrorleft: $hasErrorleft, hasErrorRight: $hasErrorRight, deletable: $deletable, onDelete: $onDelete)';
   }
 
   @override
@@ -3755,8 +3767,8 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     properties
       ..add(DiagnosticsProperty(
           'type', 'FormInputFieldInfo.twoAutoCompleteFields'))
-      ..add(DiagnosticsProperty('idLeft', idLeft))
-      ..add(DiagnosticsProperty('idRight', idRight))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('id2', id2))
       ..add(DiagnosticsProperty('labelLeft', labelLeft))
       ..add(DiagnosticsProperty('labelRight', labelRight))
       ..add(DiagnosticsProperty('currentValueLeft', currentValueLeft))
@@ -3777,8 +3789,8 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FormInputFieldInfoTwoAutoCompleteFieldsImpl &&
-            (identical(other.idLeft, idLeft) || other.idLeft == idLeft) &&
-            (identical(other.idRight, idRight) || other.idRight == idRight) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.id2, id2) || other.id2 == id2) &&
             (identical(other.labelLeft, labelLeft) ||
                 other.labelLeft == labelLeft) &&
             (identical(other.labelRight, labelRight) ||
@@ -3810,8 +3822,8 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      idLeft,
-      idRight,
+      id,
+      id2,
       labelLeft,
       labelRight,
       currentValueLeft,
@@ -3891,8 +3903,8 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             void Function(Map<String, dynamic>?) save)
         submitButton,
     required TResult Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -3923,8 +3935,8 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
         date,
   }) {
     return twoAutoCompleteFields(
-        idLeft,
-        idRight,
+        id,
+        id2,
         labelLeft,
         labelRight,
         currentValueLeft,
@@ -3994,8 +4006,8 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult? Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -4026,8 +4038,8 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
         date,
   }) {
     return twoAutoCompleteFields?.call(
-        idLeft,
-        idRight,
+        id,
+        id2,
         labelLeft,
         labelRight,
         currentValueLeft,
@@ -4097,8 +4109,8 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -4131,8 +4143,8 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
   }) {
     if (twoAutoCompleteFields != null) {
       return twoAutoCompleteFields(
-          idLeft,
-          idRight,
+          id,
+          id2,
           labelLeft,
           labelRight,
           currentValueLeft,
@@ -4212,8 +4224,8 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
 abstract class FormInputFieldInfoTwoAutoCompleteFields
     implements FormInputFieldInfo {
   const factory FormInputFieldInfoTwoAutoCompleteFields(
-          {required final String idLeft,
-          required final String idRight,
+          {required final String id,
+          required final String id2,
           required final String labelLeft,
           required final String labelRight,
           required final String currentValueLeft,
@@ -4229,8 +4241,9 @@ abstract class FormInputFieldInfoTwoAutoCompleteFields
           final void Function()? onDelete}) =
       _$FormInputFieldInfoTwoAutoCompleteFieldsImpl;
 
-  String get idLeft;
-  String get idRight;
+  @override
+  String get id;
+  String get id2;
   String get labelLeft;
   String get labelRight;
   String get currentValueLeft;
@@ -4426,8 +4439,8 @@ class _$FormInputFieldInfoCustomButtonImpl
             void Function(Map<String, dynamic>?) save)
         submitButton,
     required TResult Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -4514,8 +4527,8 @@ class _$FormInputFieldInfoCustomButtonImpl
             void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult? Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -4602,8 +4615,8 @@ class _$FormInputFieldInfoCustomButtonImpl
             void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -4707,6 +4720,7 @@ abstract class FormInputFieldInfoCustomButton implements FormInputFieldInfo {
           required final void Function() callback}) =
       _$FormInputFieldInfoCustomButtonImpl;
 
+  @override
   String get id;
   String get label;
   @override
@@ -4973,8 +4987,8 @@ class _$FormInputFieldInfoDateImpl
             void Function(Map<String, dynamic>?) save)
         submitButton,
     required TResult Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -5062,8 +5076,8 @@ class _$FormInputFieldInfoDateImpl
             void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult? Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -5151,8 +5165,8 @@ class _$FormInputFieldInfoDateImpl
             void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult Function(
-            String idLeft,
-            String idRight,
+            String id,
+            String id2,
             String labelLeft,
             String labelRight,
             String currentValueLeft,
@@ -5261,6 +5275,7 @@ abstract class FormInputFieldInfoDate implements FormInputFieldInfo {
       final bool deletable,
       final void Function()? onDelete}) = _$FormInputFieldInfoDateImpl;
 
+  @override
   String get id;
   String get label;
   String get currentValue;
