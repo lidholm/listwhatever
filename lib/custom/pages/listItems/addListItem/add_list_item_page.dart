@@ -380,8 +380,8 @@ class _AddListItemPageState extends State<AddListItemPage> {
   FormInputFieldInfo categoryField(String indexKey, String left, String right) {
     print('categoryField for $indexKey $left $right');
     return FormInputFieldInfo.twoAutoCompleteFields(
-      id: '${FieldId.categories.value}-left-$indexKey',
-      id2: '${FieldId.categories.value}-right-$indexKey',
+      id: getCategoryId(Side.left, indexKey),
+      id2: getCategoryId(Side.right, indexKey),
       sectionName: SectionName.categories.value,
       labelLeft: 'Left',
       labelRight: 'Right',
@@ -408,8 +408,15 @@ class _AddListItemPageState extends State<AddListItemPage> {
           categories!.remove(indexKey);
           print('categories: $categories');
         });
+        _formKey.currentState?.value[getCategoryId(Side.left, indexKey)] = null;
+        _formKey.currentState?.value[getCategoryId(Side.right, indexKey)] =
+            null;
       },
     );
+  }
+
+  String getCategoryId(Side side, String indexKey) {
+    return '${FieldId.categories.value}-${side.name}-$indexKey';
   }
 
   FormInputFieldInfo addCategoryButton() {

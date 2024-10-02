@@ -11,6 +11,7 @@ class FormInputFieldDate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textField = FormBuilderDateTimePicker(
+      key: Key(field.id),
       autovalidateMode: AutovalidateMode.always,
       name: field.id,
       initialValue: DateTime.tryParse(field.currentValue),

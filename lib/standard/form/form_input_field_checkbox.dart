@@ -11,6 +11,7 @@ class FormInputFieldCheckbox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final checkbox = FormBuilderCheckbox(
+      key: Key(field.id),
       autovalidateMode: AutovalidateMode.always,
       name: field.id,
       initialValue: field.currentValue,

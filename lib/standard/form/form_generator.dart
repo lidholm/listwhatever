@@ -52,8 +52,11 @@ class _FormGeneratorState extends State<FormGenerator> {
   Widget build(BuildContext context) {
     // logger.i('$className: building.');
     // logger.i('$className: fields: ${widget.fields.length}.');
+
     return FormBuilder(
       key: widget.formKey,
+      // IMPORTANT to remove all references from dynamic field when delete
+      clearValueOnUnregister: true,
       skipDisabled: true,
       child: VStack(
         spacing: 25,
@@ -62,13 +65,11 @@ class _FormGeneratorState extends State<FormGenerator> {
     );
   }
 
-  Widget generateSection(
-    FormInputSection section,
-  ) {
+  Widget generateSection(FormInputSection section) {
     // logger.d('widget.fields: ${widget.fields}');
     final sectionFields =
         widget.fields.where((f) => f?.sectionName == section.name);
-    final fields = sectionFields.map(generateField).toList();
+    final actualFields = sectionFields.map(generateField).toList();
 
     // logger.i(
     //     '$className: generateSection ${section.key}: fields: ${fields.length}.',
@@ -84,7 +85,7 @@ class _FormGeneratorState extends State<FormGenerator> {
           ? SpacingPosition.none
           : SpacingPosition.beforeAndBetween,
       children: [
-        ...fields,
+        ...actualFields,
       ],
     );
 

@@ -46,6 +46,7 @@ class _FormInputFieldTwoAutoCompleteFieldsState
             SizedBox(
               width: constraints.maxWidth * fieldWidth,
               child: FormBuilderTypeAhead<String>(
+                key: Key(widget.field.id),
                 name: widget.field.id,
                 initialValue: widget.field.currentValueLeft,
                 suggestionsCallback: getSuggestionsLeft,
@@ -61,6 +62,7 @@ class _FormInputFieldTwoAutoCompleteFieldsState
             SizedBox(
               width: constraints.maxWidth * fieldWidth,
               child: FormBuilderTypeAhead<String>(
+                key: Key(widget.field.id),
                 name: widget.field.id2,
                 initialValue: widget.field.currentValueRight,
                 suggestionsCallback: getSuggestionsRight,

@@ -14,6 +14,7 @@ class FormInputFieldCancelButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
+      key: Key(field.id),
       onPressed: () {
         // formKey.currentState?.reset();
         field.cancel();

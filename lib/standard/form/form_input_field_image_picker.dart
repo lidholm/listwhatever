@@ -65,6 +65,7 @@ class _FormInputFieldImagePickerState extends State<FormInputFieldImagePicker> {
     final initialValue = imageUrl == null ? null : [imageUrl];
     logger.i('$className: initialValue: $initialValue');
     return FormBuilderImagePicker(
+      key: Key(widget.field.id),
       name: widget.field.id,
       displayCustomType: (obj) => obj is ApiImage ? obj.imageUrl : obj,
       decoration: const InputDecoration(
