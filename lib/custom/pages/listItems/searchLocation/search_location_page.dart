@@ -61,7 +61,8 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
   @override
   Widget build(BuildContext context) {
     final searchState = context.watch<SearchLocationBloc>().state;
-    final searchResults = (searchState is SearchLoaded) ? searchState.lists : <GeocoderResult>[];
+    final searchResults =
+        (searchState is SearchLoaded) ? searchState.lists : <GeocoderResult>[];
 
     return Scaffold(
       appBar: const CommonAppBar(title: 'Search location'),
@@ -94,14 +95,16 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
                       onChanged: (val) {
                         setState(() {
                           _searchHasError = !(_formKey
-                                  .currentState?.fields[SearchLocationValues.searchPhrase.toString()]
+                                  .currentState
+                                  ?.fields[SearchLocationValues.searchPhrase
+                                      .toString()]
                                   ?.validate() ??
                               false);
                         });
                       },
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(),
-                        FormBuilderValidators.max(150),
+                        FormBuilderValidators.maxLength(150),
                       ]),
                       keyboardType: TextInputType.name,
                       textInputAction: TextInputAction.next,
@@ -109,8 +112,12 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
                     ElevatedButton(
                       onPressed: () {
                         final phrase = _formKey
-                            .currentState?.fields[SearchLocationValues.searchPhrase.toString()]?.value as String;
-                        BlocProvider.of<SearchLocationBloc>(context).add(Search(phrase));
+                            .currentState
+                            ?.fields[
+                                SearchLocationValues.searchPhrase.toString()]
+                            ?.value as String;
+                        BlocProvider.of<SearchLocationBloc>(context)
+                            .add(Search(phrase));
                       },
                       child: Text(context.l10n.searchButtonText),
                     ),
@@ -118,12 +125,14 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
                       name: SearchLocationValues.results.toString(),
                       decoration: InputDecoration(
                         labelText: 'Results',
-                        suffix: _resultsHasError ? const Icon(Icons.error) : const Icon(Icons.check),
+                        suffix: _resultsHasError
+                            ? const Icon(Icons.error)
+                            : const Icon(Icons.check),
                         hintText: 'Select result',
                       ),
-                      validator: FormBuilderValidators.compose(
-                        [FormBuilderValidators.required()],
-                      ),
+                      // validator: FormBuilderValidators.compose(
+                      //     // [FormBuilderValidators.required()],
+                      //     ),
                       items: (searchResults ?? [])
                           .map(
                             (result) => DropdownMenuItem(
@@ -136,7 +145,8 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
                                   selectedResult = result;
                                 });
                                 _formKey.currentState?.patchValue({
-                                  SearchLocationValues.address.toString(): result.formattedAddress,
+                                  SearchLocationValues.address.toString():
+                                      result.formattedAddress,
                                   SearchLocationValues.latlong.toString():
                                       '${result.geometry.location.lat}, ${result.geometry.location.lng}',
                                 });
@@ -146,9 +156,12 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
                           .toList(),
                       onChanged: (val) {
                         setState(() {
-                          _resultsHasError =
-                              !(_formKey.currentState?.fields[SearchLocationValues.results.toString()]?.validate() ??
-                                  false);
+                          _resultsHasError = !(_formKey
+                                  .currentState
+                                  ?.fields[
+                                      SearchLocationValues.results.toString()]
+                                  ?.validate() ??
+                              false);
                         });
                       },
                       valueTransformer: (val) => val?.toString(),
@@ -174,14 +187,17 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
                       ),
                       onChanged: (val) {
                         setState(() {
-                          _addressHasError =
-                              !(_formKey.currentState?.fields[SearchLocationValues.address.toString()]?.validate() ??
-                                  false);
+                          _addressHasError = !(_formKey
+                                  .currentState
+                                  ?.fields[
+                                      SearchLocationValues.address.toString()]
+                                  ?.validate() ??
+                              false);
                         });
                       },
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(),
-                        FormBuilderValidators.max(150),
+                        FormBuilderValidators.maxLength(150),
                       ]),
                       keyboardType: TextInputType.name,
                       textInputAction: TextInputAction.next,
@@ -197,9 +213,12 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
                       ),
                       onChanged: (val) {
                         setState(() {
-                          _latlongHasError =
-                              !(_formKey.currentState?.fields[SearchLocationValues.latlong.toString()]?.validate() ??
-                                  false);
+                          _latlongHasError = !(_formKey
+                                  .currentState
+                                  ?.fields[
+                                      SearchLocationValues.latlong.toString()]
+                                  ?.validate() ??
+                              false);
                         });
                       },
                       validator: FormBuilderValidators.compose([
@@ -232,7 +251,8 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
                         Expanded(
                           child: ElevatedButton(
                             onPressed: () {
-                              if (_formKey.currentState?.saveAndValidate() ?? false) {
+                              if (_formKey.currentState?.saveAndValidate() ??
+                                  false) {
                                 // logger.d(_formKey.currentState?.value.toString());
                                 closeAndReturnValues(_formKey.currentState);
                               } else {
@@ -265,7 +285,8 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
       values[entry.key] = entry.value.value;
     }
     // logger.d('values: $values');
-    final latLongString = values[SearchLocationValues.latlong.toString()]! as String;
+    final latLongString =
+        values[SearchLocationValues.latlong.toString()]! as String;
     final latLongParts = latLongString.split(',');
     final lat = double.parse(latLongParts.first.trim());
     final lng = double.parse(latLongParts.last.trim());
@@ -274,7 +295,8 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
       address: values[SearchLocationValues.address.toString()]! as String,
       lat: lat,
       long: lng,
-      searchPhrase: values[SearchLocationValues.searchPhrase.toString()]! as String,
+      searchPhrase:
+          values[SearchLocationValues.searchPhrase.toString()]! as String,
     );
     GoRouter.of(context).pop(response);
   }

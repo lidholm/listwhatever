@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/custom/pages/listItems/searchLocation/search_location_page_route.dart';
+import 'package:listwhatever/custom/pages/listItems/searchLocation/search_location_response.dart';
 import 'package:listwhatever/custom/pages/lists/categories_for_list/categories_for_list_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/categories_for_list/categories_for_list_event.dart';
 import 'package:listwhatever/custom/pages/lists/categories_for_list/categories_for_list_state.dart';
@@ -508,11 +510,25 @@ class _AddListItemPageState extends State<AddListItemPage> {
 
   FormInputFieldInfo searchLocationButton() {
     return FormInputFieldInfo.customButton(
-      id: 'searchButton', // TODO: Handled this?
+      id: 'searchButton',
       label: 'Search for a location',
       sectionName: SectionName.location.value,
-      callback: () {
+      callback: () async {
         print('searching for a location');
+        final locationResponse = await const SearchLocationPageRoute()
+            .push<SearchLocationResponse>(context);
+        print('locationResponse: $locationResponse');
+
+        final latlong =
+            (locationResponse?.lat != null && locationResponse?.long != null)
+                ? '${locationResponse?.lat}, ${locationResponse?.long}'
+                : '0.0, 0.0';
+
+        _formKey.currentState?.patchValue({
+          FieldId.address.name: locationResponse?.address ?? '',
+          FieldId.latlong.name: latlong,
+          FieldId.searchPhrase.name: locationResponse?.searchPhrase ?? '',
+        });
       },
     );
   }
