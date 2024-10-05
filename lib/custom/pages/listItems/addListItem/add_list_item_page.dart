@@ -1,8 +1,10 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
 import 'package:listwhatever/custom/pages/listItems/searchLocation/search_location_page_route.dart';
 import 'package:listwhatever/custom/pages/listItems/searchLocation/search_location_response.dart';
 import 'package:listwhatever/custom/pages/lists/categories_for_list/categories_for_list_bloc.dart';
@@ -80,30 +82,30 @@ class AddListItemPage extends StatefulWidget {
   @override
   State<AddListItemPage> createState() => _AddListItemPageState();
 
-  // Map<String, List<String>> getCategories(Map<String, dynamic> values) {
-  //   final categoriesZip = IterableZip([
-  //     values.entries
-  //         .where(
-  //           (element) => element.key
-  //               .startsWith(AddListItemValues.categoryKeys.toString()),
-  //         )
-  //         .toList(),
-  //     values.entries
-  //         .where(
-  //           (element) => element.key
-  //               .startsWith(AddListItemValues.categoryValues.toString()),
-  //         )
-  //         .toList(),
-  //   ]);
-  //   final categories = <String, List<String>>{};
-  //   for (final e in categoriesZip) {
-  //     final category = e[0].value as String;
-  //     final values =
-  //         (e[1].value as String).split(',').map((t) => t.trim()).toList();
-  //     categories[category] = values;
-  //   }
-  //   return categories;
-  // }
+  Map<String, List<String>> getCategories(Map<String, dynamic> values) {
+    final categoriesZip = IterableZip([
+      values.entries
+          .where(
+            (element) =>
+                element.key.startsWith('${FieldId.categories.name}-left-'),
+          )
+          .toList(),
+      values.entries
+          .where(
+            (element) =>
+                element.key.startsWith('${FieldId.categories.name}-right-'),
+          )
+          .toList(),
+    ]);
+    final categories = <String, List<String>>{};
+    for (final e in categoriesZip) {
+      final category = e[0].value as String;
+      final values =
+          (e[1].value as String).split(',').map((t) => t.trim()).toList();
+      categories[category] = values;
+    }
+    return categories;
+  }
 }
 
 class _AddListItemPageState extends State<AddListItemPage> {
@@ -251,47 +253,41 @@ class _AddListItemPageState extends State<AddListItemPage> {
     return null;
   }
 
-  void save(String actualListId, Map<String, dynamic> values) {
-    // final values = <String, dynamic>{};
-    // for (final entry in currentState!.fields.entries) {
-    //   values[entry.key] = entry.value.value;
-    // }
+  void save(Map<String, dynamic> values) {
+    final latLongString = values[FieldId.latlong.name] as String?;
+    final latLongParts = latLongString?.split(',');
+    final lat =
+        latLongParts == null ? null : double.parse(latLongParts.first.trim());
+    final lng =
+        latLongParts == null ? null : double.parse(latLongParts.last.trim());
 
-    // final latLongString =
-    //     values[AddListItemValues.latlong.toString()] as String?;
-    // final latLongParts = latLongString?.split(',');
-    // final lat =
-    //     latLongParts == null ? null : double.parse(latLongParts.first.trim());
-    // final lng =
-    //     latLongParts == null ? null : double.parse(latLongParts.last.trim());
+    final categories = widget.getCategories(values);
 
-    // final categories = widget.getCategories(values);
+    logger.d('$className: values: $values');
+    final listItem = ListItem(
+      id: listItemId,
+      name: values[FieldId.name.name]! as String,
+      info: values[FieldId.info.name] as String?,
+      urls: values.entries
+          .where(
+            (element) => element.key.startsWith(FieldId.urls.name),
+          )
+          .map((entry) => entry.value as String)
+          .toList(),
+      datetime: values[FieldId.date.name] as DateTime?,
+      latLong: lat != null ? LatLong(lat: lat, lng: lng!) : null,
+      address: values[FieldId.address.name] as String?,
+      categories: categories,
+    );
+    logger.d('$className: listItem: $listItem');
 
-    // // logger.d('values: $values');
-    // final listItem = ListItem(
-    //   id: listItemId,
-    //   name: values[AddListItemValues.name.toString()]! as String,
-    //   info: values[AddListItemValues.info.toString()] as String?,
-    //   urls: values.entries
-    //       .where(
-    //         (element) =>
-    //             element.key.startsWith(AddListItemValues.urls.toString()),
-    //       )
-    //       .map((entry) => entry.value as String)
-    //       .toList(),
-    //   datetime: values[AddListItemValues.date.toString()] as DateTime?,
-    //   latLong: lat != null ? LatLong(lat: lat, lng: lng!) : null,
-    //   address: values[AddListItemValues.address.toString()] as String?,
-    //   categories: categories,
-    // );
-
-    // if (listItemId == null) {
-    //   BlocProvider.of<ListItemCrudBloc>(context)
-    //       .add(AddListItem(actualListId, listItem));
-    // } else {
-    //   BlocProvider.of<ListItemCrudBloc>(context)
-    //       .add(UpdateListItem(actualListId, listItem));
-    // }
+    if (listItemId == null) {
+      BlocProvider.of<ListItemCrudBloc>(context)
+          .add(AddListItem(list!.id!, listItem));
+    } else {
+      BlocProvider.of<ListItemCrudBloc>(context)
+          .add(UpdateListItem(list!.id!, listItem));
+    }
   }
 
   ListItem? getMaybeListItem(ListItemLoadState listItemState) {
@@ -586,7 +582,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
           print('No values to save');
           return;
         }
-        save('asd', values); // TODO
+        save(values); // TODO
       },
     );
   }
