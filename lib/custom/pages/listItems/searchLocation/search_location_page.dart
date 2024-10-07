@@ -66,13 +66,11 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
         ? searchState.lists ?? []
         : <GeocoderResult>[];
 
-    // print('searchResults');
-    // print(searchResults);
     final fields = [
       searchPhraseInputField(),
       searchButtonInputField(),
       resultsDropdownField(searchResults),
-      // mapInputField(),
+      mapInputField(),
       addressInputField(),
       latLongInputField(),
       cancelButton(),
@@ -208,14 +206,14 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
     );
   }
 
-  // FormInputFieldInfo mapInputField() {
-  //   return FormInputFieldInfo.map(
-  //     id: FieldId.latlong.value,
-  //     label: 'Map',
-  //     sectionName: SectionName.info.value,
-  //     marker: null,
-  //   );
-  // }
+  FormInputFieldInfo mapInputField() {
+    return FormInputFieldInfo.map(
+      id: FieldId.map.value,
+      label: 'Map',
+      sectionName: SectionName.info.value,
+      marker: null,
+    );
+  }
 
   FormInputFieldInfo cancelButton() {
     return FormInputFieldInfo.cancelButton(
