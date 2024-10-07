@@ -56,8 +56,6 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
 
   GeocoderResult? selectedResult;
   final TextEditingController searchPhraseController = TextEditingController();
-  TextEditingController addressController = TextEditingController(text: '');
-  TextEditingController latLongController = TextEditingController(text: '');
 
   @override
   void initState() {
@@ -93,7 +91,7 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
       fields: fields,
     );
 
-    return Scaffold(
+    return searchResultsListener(Scaffold(
       appBar: const CommonAppBar(title: 'Search location'),
       body: SingleChildScrollView(
         child: Padding(padding: const EdgeInsets.all(24), child: formGenerator
@@ -252,7 +250,7 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
             // ],
             ),
       ),
-    );
+    ));
   }
 
   List<FormInputSection> getSections() {
@@ -322,24 +320,22 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
         logger.i('$className: onChange result: $selection');
         setState(() {
           final sel = selection as GeocoderResult?;
-          addressController =
-              TextEditingController(text: sel?.formattedAddress ?? '');
-          latLongController = TextEditingController(
-              text: sel == null
-                  ? ''
-                  : '${sel?.geometry.location.lat}, ${sel?.geometry.location.lng}');
+          _formKey.currentState?.patchValue({
+            FieldId.address.name: sel?.formattedAddress ?? '',
+            FieldId.latlong.name: sel == null
+                ? ''
+                : '${sel.geometry.location.lat}, ${sel.geometry.location.lng}'
+          });
         });
       }),
     );
   }
 
   FormInputFieldInfo addressInputField() {
-    logger.i('$className: addressXX: $addressController');
-
     return FormInputFieldInfo.textArea(
       id: FieldId.address.value,
       label: 'Address',
-      controller: addressController,
+      currentValue: '',
       validators: [
         FormBuilderValidators.required(),
         FormBuilderValidators.maxLength(150),
@@ -353,7 +349,7 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
     return FormInputFieldInfo.textArea(
       id: FieldId.latlong.value,
       label: 'Coordinates',
-      controller: latLongController,
+      currentValue: '',
       validators: [
         FormBuilderValidators.required(),
         FormBuilderValidators.match(
@@ -416,5 +412,21 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
       searchPhrase: values[FieldId.searchPhrase.name]! as String,
     );
     GoRouter.of(context).pop(response);
+  }
+
+  Widget searchResultsListener(Scaffold child) {
+    return BlocListener<SearchLocationBloc, SearchState>(
+        listener: (context, state) {
+          if (state is SearchLoaded) {
+            final results = state.lists;
+
+            _formKey.currentState?.patchValue({
+              FieldId.address.name: results?.first.formattedAddress,
+              FieldId.latlong.name:
+                  '${results?.first.geometry.location.lat}, ${results?.first.geometry.location.lng}'
+            });
+          }
+        },
+        child: child);
   }
 }
