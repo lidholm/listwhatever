@@ -32,11 +32,14 @@ class SearchLocationBloc extends Bloc<SearchEvent, SearchState> {
                 formattedAddress: 'One street 123',
                 geometry: Geometry(
                   location: const LatLong(
-                      lat: 37.42796133580664, lng: -122.085749655962),
+                    lat: 37.42796133580664,
+                    lng: -122.085749655962,
+                  ),
                   locationType: 'type',
                   viewport: Bounds(
-                      northeast: const LatLong(lat: 123, lng: 234),
-                      southwest: const LatLong(lat: 123, lng: 234)),
+                    northeast: const LatLong(lat: 123, lng: 234),
+                    southwest: const LatLong(lat: 123, lng: 234),
+                  ),
                 ),
                 partialMatch: false,
                 placeId: 'id',
@@ -48,11 +51,14 @@ class SearchLocationBloc extends Bloc<SearchEvent, SearchState> {
                 formattedAddress: 'Main street and 4th',
                 geometry: Geometry(
                   location: const LatLong(
-                      lat: 37.43796133580664, lng: -122.085749655962),
+                    lat: 37.43796133580664,
+                    lng: -122.085749655962,
+                  ),
                   locationType: 'type',
                   viewport: Bounds(
-                      northeast: const LatLong(lat: 123, lng: 234),
-                      southwest: const LatLong(lat: 123, lng: 234)),
+                    northeast: const LatLong(lat: 123, lng: 234),
+                    southwest: const LatLong(lat: 123, lng: 234),
+                  ),
                 ),
                 partialMatch: false,
                 placeId: 'id',

@@ -10,10 +10,10 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
   const factory FormInputFieldInfo.textArea({
     required String id,
     required String label,
-    @Default(null) String? currentValue,
     required List<FormFieldValidator<String>> validators,
     required String sectionName,
     required bool hasError,
+    @Default(null) String? currentValue,
     @Default(null) void Function(String)? onChange,
     @Default(false) bool deletable,
     @Default(null) void Function()? onDelete,
@@ -29,7 +29,7 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     required List<FormFieldValidator<String>> validators,
     required String sectionName,
     required bool hasError,
-    @Default(null) void Function(dynamic?)? onChange,
+    @Default(null) void Function(dynamic)? onChange,
     @Default(false) bool deletable,
     @Default(null) void Function()? onDelete,
   }) = FormInputFieldInfoDropDown;

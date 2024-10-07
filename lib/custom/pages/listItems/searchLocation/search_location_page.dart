@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:listwhatever/standard/form/form_generator.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 import 'package:listwhatever/standard/form/form_input_section.dart';
@@ -12,10 +11,8 @@ import '/custom/pages/listItems/searchLocation/search_location_bloc.dart';
 import '/custom/pages/listItems/searchLocation/search_location_event.dart';
 import '/custom/pages/listItems/searchLocation/search_location_response.dart';
 import '/custom/pages/listItems/searchLocation/search_location_state.dart';
-import '/l10n/l10n.dart';
 import '/standard/constants.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
-import '/standard/widgets/vStack/v_stack.dart';
 import '/standard/widgets/vStack/x_stack.dart' as x_stack;
 
 const String className = 'AddListItemPage';
@@ -91,166 +88,15 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
       fields: fields,
     );
 
-    return searchResultsListener(Scaffold(
-      appBar: const CommonAppBar(title: 'Search location'),
-      body: SingleChildScrollView(
-        child: Padding(padding: const EdgeInsets.all(24), child: formGenerator
-
-            //         FormBuilderDropdown<GeocoderResult>(
-            //           name: SearchLocationValues.results.toString(),
-            //           decoration: InputDecoration(
-            //             labelText: 'Results',
-            //             suffix: _resultsHasError
-            //                 ? const Icon(Icons.error)
-            //                 : const Icon(Icons.check),
-            //             hintText: 'Select result',
-            //           ),
-            //           // validator: FormBuilderValidators.compose(
-            //           //     // [FormBuilderValidators.required()],
-            //           //     ),
-            //           items: (searchResults ?? [])
-            //               .map(
-            //                 (result) => DropdownMenuItem(
-            //                   alignment: AlignmentDirectional.center,
-            //                   value: result,
-            //                   child: Text(result.formattedAddress),
-            //                   onTap: () async {
-            //                     await moveMap(mapController, result);
-            //                     setState(() {
-            //                       selectedResult = result;
-            //                     });
-            //                     _formKey.currentState?.patchValue({
-            //                       SearchLocationValues.address.toString():
-            //                           result.formattedAddress,
-            //                       SearchLocationValues.latlong.toString():
-            //                           '${result.geometry.location.lat}, ${result.geometry.location.lng}',
-            //                     });
-            //                   },
-            //                 ),
-            //               )
-            //               .toList(),
-            //           onChanged: (val) {
-            //             setState(() {
-            //               _resultsHasError = !(_formKey
-            //                       .currentState
-            //                       ?.fields[
-            //                           SearchLocationValues.results.toString()]
-            //                       ?.validate() ??
-            //                   false);
-            //             });
-            //           },
-            //           valueTransformer: (val) => val?.toString(),
-            //         ),
-            //         SizedBox(
-            //           height: 300,
-            //           width: 400,
-            //           child: GoogleMap(
-            //             mapType: MapType.hybrid,
-            //             initialCameraPosition: _kGooglePlex,
-            //             markers: _createMarker(selectedResult),
-            //             onMapCreated: _onMapCreated,
-            //           ),
-            //         ),
-            //         FormBuilderTextField(
-            //           autovalidateMode: AutovalidateMode.always,
-            //           name: SearchLocationValues.address.toString(),
-            //           decoration: InputDecoration(
-            //             labelText: 'Address',
-            //             suffixIcon: _addressHasError
-            //                 ? const Icon(Icons.error, color: Colors.red)
-            //                 : const Icon(Icons.check, color: Colors.green),
-            //           ),
-            //           onChanged: (val) {
-            //             setState(() {
-            //               _addressHasError = !(_formKey
-            //                       .currentState
-            //                       ?.fields[
-            //                           SearchLocationValues.address.toString()]
-            //                       ?.validate() ??
-            //                   false);
-            //             });
-            //           },
-            //           validator: FormBuilderValidators.compose([
-            //             FormBuilderValidators.required(),
-            //             FormBuilderValidators.maxLength(150),
-            //           ]),
-            //           keyboardType: TextInputType.name,
-            //           textInputAction: TextInputAction.next,
-            //         ),
-            //         FormBuilderTextField(
-            //           autovalidateMode: AutovalidateMode.always,
-            //           name: SearchLocationValues.latlong.toString(),
-            //           decoration: InputDecoration(
-            //             labelText: 'LatLong',
-            //             suffixIcon: _latlongHasError
-            //                 ? const Icon(Icons.error, color: Colors.red)
-            //                 : const Icon(Icons.check, color: Colors.green),
-            //           ),
-            //           onChanged: (val) {
-            //             setState(() {
-            //               _latlongHasError = !(_formKey
-            //                       .currentState
-            //                       ?.fields[
-            //                           SearchLocationValues.latlong.toString()]
-            //                       ?.validate() ??
-            //                   false);
-            //             });
-            //           },
-            //           validator: FormBuilderValidators.compose([
-            //             FormBuilderValidators.required(),
-            //             FormBuilderValidators.match(
-            //               RegExp(r'\d*(\.\d*)?,\s*-?\d*(\.\d*)'),
-            //               errorText: "Doesn't match 12.3, 3.45",
-            //             ),
-            //           ]),
-            //           keyboardType: TextInputType.name,
-            //           textInputAction: TextInputAction.next,
-            //         ),
-            //         const SizedBox(height: 40),
-            //         Row(
-            //           children: <Widget>[
-            //             Expanded(
-            //               child: OutlinedButton(
-            //                 onPressed: () {
-            //                   _formKey.currentState?.reset();
-            //                 },
-            //                 child: Text(
-            //                   'Cancel',
-            //                   style: TextStyle(
-            //                     color: Theme.of(context).colorScheme.secondary,
-            //                   ),
-            //                 ),
-            //               ),
-            //             ),
-            //             const SizedBox(width: 20),
-            //             Expanded(
-            //               child: ElevatedButton(
-            //                 onPressed: () {
-            //                   if (_formKey.currentState?.saveAndValidate() ??
-            //                       false) {
-            //                     // logger.d(_formKey.currentState?.value.toString());
-            //                     closeAndReturnValues(_formKey.currentState);
-            //                   } else {
-            //                     logger
-            //                       ..d(_formKey.currentState?.value.toString())
-            //                       ..d('validation failed');
-            //                   }
-            //                 },
-            //                 child: const Text(
-            //                   'Ok',
-            //                   style: TextStyle(color: Colors.white),
-            //                 ),
-            //               ),
-            //             ),
-            //           ],
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // ],
-            ),
+    return searchResultsListener(
+      Scaffold(
+        appBar: const CommonAppBar(title: 'Search location'),
+        body: SingleChildScrollView(
+          child:
+              Padding(padding: const EdgeInsets.all(24), child: formGenerator),
+        ),
       ),
-    ));
+    );
   }
 
   List<FormInputSection> getSections() {
@@ -324,7 +170,7 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
             FieldId.address.name: sel?.formattedAddress ?? '',
             FieldId.latlong.name: sel == null
                 ? ''
-                : '${sel.geometry.location.lat}, ${sel.geometry.location.lng}'
+                : '${sel.geometry.location.lat}, ${sel.geometry.location.lng}',
           });
         });
       }),
@@ -416,17 +262,18 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
 
   Widget searchResultsListener(Scaffold child) {
     return BlocListener<SearchLocationBloc, SearchState>(
-        listener: (context, state) {
-          if (state is SearchLoaded) {
-            final results = state.lists;
+      listener: (context, state) {
+        if (state is SearchLoaded) {
+          final results = state.lists;
 
-            _formKey.currentState?.patchValue({
-              FieldId.address.name: results?.first.formattedAddress,
-              FieldId.latlong.name:
-                  '${results?.first.geometry.location.lat}, ${results?.first.geometry.location.lng}'
-            });
-          }
-        },
-        child: child);
+          _formKey.currentState?.patchValue({
+            FieldId.address.name: results?.first.formattedAddress,
+            FieldId.latlong.name:
+                '${results?.first.geometry.location.lat}, ${results?.first.geometry.location.lng}',
+          });
+        }
+      },
+      child: child,
+    );
   }
 }
