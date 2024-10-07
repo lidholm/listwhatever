@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 part 'form_input_field_info.freezed.dart';
 
@@ -9,13 +10,14 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
   const factory FormInputFieldInfo.textArea({
     required String id,
     required String label,
-    required String currentValue,
+    @Default(null) String? currentValue,
     required List<FormFieldValidator<String>> validators,
     required String sectionName,
     required bool hasError,
     @Default(null) void Function(String)? onChange,
     @Default(false) bool deletable,
     @Default(null) void Function()? onDelete,
+    @Default(null) TextEditingController? controller,
   }) = FormInputFieldInfoTextArea;
 
   const factory FormInputFieldInfo.dropdown({
@@ -104,4 +106,11 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     @Default(false) bool deletable,
     @Default(null) void Function()? onDelete,
   }) = FormInputFieldInfoDate;
+
+  const factory FormInputFieldInfo.map({
+    required String id,
+    required String label,
+    required String sectionName,
+    required Marker? marker,
+  }) = FormInputFieldInfoMap;
 }

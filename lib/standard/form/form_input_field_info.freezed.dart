@@ -23,13 +23,14 @@ mixin _$FormInputFieldInfo {
     required TResult Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)
+            void Function()? onDelete,
+            TextEditingController? controller)
         textArea,
     required TResult Function(
             String id,
@@ -101,6 +102,9 @@ mixin _$FormInputFieldInfo {
             bool deletable,
             void Function()? onDelete)
         date,
+    required TResult Function(
+            String id, String label, String sectionName, Marker? marker)
+        map,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -108,13 +112,14 @@ mixin _$FormInputFieldInfo {
     TResult? Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)?
+            void Function()? onDelete,
+            TextEditingController? controller)?
         textArea,
     TResult? Function(
             String id,
@@ -186,6 +191,9 @@ mixin _$FormInputFieldInfo {
             bool deletable,
             void Function()? onDelete)?
         date,
+    TResult? Function(
+            String id, String label, String sectionName, Marker? marker)?
+        map,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -193,13 +201,14 @@ mixin _$FormInputFieldInfo {
     TResult Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)?
+            void Function()? onDelete,
+            TextEditingController? controller)?
         textArea,
     TResult Function(
             String id,
@@ -271,6 +280,9 @@ mixin _$FormInputFieldInfo {
             bool deletable,
             void Function()? onDelete)?
         date,
+    TResult Function(
+            String id, String label, String sectionName, Marker? marker)?
+        map,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -289,6 +301,7 @@ mixin _$FormInputFieldInfo {
     required TResult Function(FormInputFieldInfoCustomButton value)
         customButton,
     required TResult Function(FormInputFieldInfoDate value) date,
+    required TResult Function(FormInputFieldInfoMap value) map,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -303,6 +316,7 @@ mixin _$FormInputFieldInfo {
         twoAutoCompleteFields,
     TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult? Function(FormInputFieldInfoDate value)? date,
+    TResult? Function(FormInputFieldInfoMap value)? map,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -317,6 +331,7 @@ mixin _$FormInputFieldInfo {
         twoAutoCompleteFields,
     TResult Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult Function(FormInputFieldInfoDate value)? date,
+    TResult Function(FormInputFieldInfoMap value)? map,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -380,13 +395,14 @@ abstract class _$$FormInputFieldInfoTextAreaImplCopyWith<$Res>
   $Res call(
       {String id,
       String label,
-      String currentValue,
+      String? currentValue,
       List<String? Function(String?)> validators,
       String sectionName,
       bool hasError,
       void Function(String)? onChange,
       bool deletable,
-      void Function()? onDelete});
+      void Function()? onDelete,
+      TextEditingController? controller});
 }
 
 /// @nodoc
@@ -406,13 +422,14 @@ class __$$FormInputFieldInfoTextAreaImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? label = null,
-    Object? currentValue = null,
+    Object? currentValue = freezed,
     Object? validators = null,
     Object? sectionName = null,
     Object? hasError = null,
     Object? onChange = freezed,
     Object? deletable = null,
     Object? onDelete = freezed,
+    Object? controller = freezed,
   }) {
     return _then(_$FormInputFieldInfoTextAreaImpl(
       id: null == id
@@ -423,10 +440,10 @@ class __$$FormInputFieldInfoTextAreaImplCopyWithImpl<$Res>
           ? _value.label
           : label // ignore: cast_nullable_to_non_nullable
               as String,
-      currentValue: null == currentValue
+      currentValue: freezed == currentValue
           ? _value.currentValue
           : currentValue // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       validators: null == validators
           ? _value._validators
           : validators // ignore: cast_nullable_to_non_nullable
@@ -451,6 +468,10 @@ class __$$FormInputFieldInfoTextAreaImplCopyWithImpl<$Res>
           ? _value.onDelete
           : onDelete // ignore: cast_nullable_to_non_nullable
               as void Function()?,
+      controller: freezed == controller
+          ? _value.controller
+          : controller // ignore: cast_nullable_to_non_nullable
+              as TextEditingController?,
     ));
   }
 }
@@ -463,13 +484,14 @@ class _$FormInputFieldInfoTextAreaImpl
   const _$FormInputFieldInfoTextAreaImpl(
       {required this.id,
       required this.label,
-      required this.currentValue,
+      this.currentValue = null,
       required final List<String? Function(String?)> validators,
       required this.sectionName,
       required this.hasError,
       this.onChange = null,
       this.deletable = false,
-      this.onDelete = null})
+      this.onDelete = null,
+      this.controller = null})
       : _validators = validators;
 
   @override
@@ -477,7 +499,8 @@ class _$FormInputFieldInfoTextAreaImpl
   @override
   final String label;
   @override
-  final String currentValue;
+  @JsonKey()
+  final String? currentValue;
   final List<String? Function(String?)> _validators;
   @override
   List<String? Function(String?)> get validators {
@@ -499,10 +522,13 @@ class _$FormInputFieldInfoTextAreaImpl
   @override
   @JsonKey()
   final void Function()? onDelete;
+  @override
+  @JsonKey()
+  final TextEditingController? controller;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo.textArea(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
+    return 'FormInputFieldInfo.textArea(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError, onChange: $onChange, deletable: $deletable, onDelete: $onDelete, controller: $controller)';
   }
 
   @override
@@ -518,7 +544,8 @@ class _$FormInputFieldInfoTextAreaImpl
       ..add(DiagnosticsProperty('hasError', hasError))
       ..add(DiagnosticsProperty('onChange', onChange))
       ..add(DiagnosticsProperty('deletable', deletable))
-      ..add(DiagnosticsProperty('onDelete', onDelete));
+      ..add(DiagnosticsProperty('onDelete', onDelete))
+      ..add(DiagnosticsProperty('controller', controller));
   }
 
   @override
@@ -541,7 +568,9 @@ class _$FormInputFieldInfoTextAreaImpl
             (identical(other.deletable, deletable) ||
                 other.deletable == deletable) &&
             (identical(other.onDelete, onDelete) ||
-                other.onDelete == onDelete));
+                other.onDelete == onDelete) &&
+            (identical(other.controller, controller) ||
+                other.controller == controller));
   }
 
   @override
@@ -555,7 +584,8 @@ class _$FormInputFieldInfoTextAreaImpl
       hasError,
       onChange,
       deletable,
-      onDelete);
+      onDelete,
+      controller);
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -572,13 +602,14 @@ class _$FormInputFieldInfoTextAreaImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)
+            void Function()? onDelete,
+            TextEditingController? controller)
         textArea,
     required TResult Function(
             String id,
@@ -650,9 +681,12 @@ class _$FormInputFieldInfoTextAreaImpl
             bool deletable,
             void Function()? onDelete)
         date,
+    required TResult Function(
+            String id, String label, String sectionName, Marker? marker)
+        map,
   }) {
     return textArea(id, label, currentValue, validators, sectionName, hasError,
-        onChange, deletable, onDelete);
+        onChange, deletable, onDelete, controller);
   }
 
   @override
@@ -661,13 +695,14 @@ class _$FormInputFieldInfoTextAreaImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)?
+            void Function()? onDelete,
+            TextEditingController? controller)?
         textArea,
     TResult? Function(
             String id,
@@ -739,9 +774,12 @@ class _$FormInputFieldInfoTextAreaImpl
             bool deletable,
             void Function()? onDelete)?
         date,
+    TResult? Function(
+            String id, String label, String sectionName, Marker? marker)?
+        map,
   }) {
     return textArea?.call(id, label, currentValue, validators, sectionName,
-        hasError, onChange, deletable, onDelete);
+        hasError, onChange, deletable, onDelete, controller);
   }
 
   @override
@@ -750,13 +788,14 @@ class _$FormInputFieldInfoTextAreaImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)?
+            void Function()? onDelete,
+            TextEditingController? controller)?
         textArea,
     TResult Function(
             String id,
@@ -828,11 +867,14 @@ class _$FormInputFieldInfoTextAreaImpl
             bool deletable,
             void Function()? onDelete)?
         date,
+    TResult Function(
+            String id, String label, String sectionName, Marker? marker)?
+        map,
     required TResult orElse(),
   }) {
     if (textArea != null) {
       return textArea(id, label, currentValue, validators, sectionName,
-          hasError, onChange, deletable, onDelete);
+          hasError, onChange, deletable, onDelete, controller);
     }
     return orElse();
   }
@@ -853,6 +895,7 @@ class _$FormInputFieldInfoTextAreaImpl
     required TResult Function(FormInputFieldInfoCustomButton value)
         customButton,
     required TResult Function(FormInputFieldInfoDate value) date,
+    required TResult Function(FormInputFieldInfoMap value) map,
   }) {
     return textArea(this);
   }
@@ -870,6 +913,7 @@ class _$FormInputFieldInfoTextAreaImpl
         twoAutoCompleteFields,
     TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult? Function(FormInputFieldInfoDate value)? date,
+    TResult? Function(FormInputFieldInfoMap value)? map,
   }) {
     return textArea?.call(this);
   }
@@ -887,6 +931,7 @@ class _$FormInputFieldInfoTextAreaImpl
         twoAutoCompleteFields,
     TResult Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult Function(FormInputFieldInfoDate value)? date,
+    TResult Function(FormInputFieldInfoMap value)? map,
     required TResult orElse(),
   }) {
     if (textArea != null) {
@@ -898,20 +943,22 @@ class _$FormInputFieldInfoTextAreaImpl
 
 abstract class FormInputFieldInfoTextArea implements FormInputFieldInfo {
   const factory FormInputFieldInfoTextArea(
-      {required final String id,
-      required final String label,
-      required final String currentValue,
-      required final List<String? Function(String?)> validators,
-      required final String sectionName,
-      required final bool hasError,
-      final void Function(String)? onChange,
-      final bool deletable,
-      final void Function()? onDelete}) = _$FormInputFieldInfoTextAreaImpl;
+          {required final String id,
+          required final String label,
+          final String? currentValue,
+          required final List<String? Function(String?)> validators,
+          required final String sectionName,
+          required final bool hasError,
+          final void Function(String)? onChange,
+          final bool deletable,
+          final void Function()? onDelete,
+          final TextEditingController? controller}) =
+      _$FormInputFieldInfoTextAreaImpl;
 
   @override
   String get id;
   String get label;
-  String get currentValue;
+  String? get currentValue;
   List<String? Function(String?)> get validators;
   @override
   String get sectionName;
@@ -919,6 +966,7 @@ abstract class FormInputFieldInfoTextArea implements FormInputFieldInfo {
   void Function(String)? get onChange;
   bool get deletable;
   void Function()? get onDelete;
+  TextEditingController? get controller;
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -1164,13 +1212,14 @@ class _$FormInputFieldInfoDropDownImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)
+            void Function()? onDelete,
+            TextEditingController? controller)
         textArea,
     required TResult Function(
             String id,
@@ -1242,6 +1291,9 @@ class _$FormInputFieldInfoDropDownImpl
             bool deletable,
             void Function()? onDelete)
         date,
+    required TResult Function(
+            String id, String label, String sectionName, Marker? marker)
+        map,
   }) {
     return dropdown(id, label, currentValue, options, optionToString,
         validators, sectionName, hasError, onChange, deletable, onDelete);
@@ -1253,13 +1305,14 @@ class _$FormInputFieldInfoDropDownImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)?
+            void Function()? onDelete,
+            TextEditingController? controller)?
         textArea,
     TResult? Function(
             String id,
@@ -1331,6 +1384,9 @@ class _$FormInputFieldInfoDropDownImpl
             bool deletable,
             void Function()? onDelete)?
         date,
+    TResult? Function(
+            String id, String label, String sectionName, Marker? marker)?
+        map,
   }) {
     return dropdown?.call(id, label, currentValue, options, optionToString,
         validators, sectionName, hasError, onChange, deletable, onDelete);
@@ -1342,13 +1398,14 @@ class _$FormInputFieldInfoDropDownImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)?
+            void Function()? onDelete,
+            TextEditingController? controller)?
         textArea,
     TResult Function(
             String id,
@@ -1420,6 +1477,9 @@ class _$FormInputFieldInfoDropDownImpl
             bool deletable,
             void Function()? onDelete)?
         date,
+    TResult Function(
+            String id, String label, String sectionName, Marker? marker)?
+        map,
     required TResult orElse(),
   }) {
     if (dropdown != null) {
@@ -1445,6 +1505,7 @@ class _$FormInputFieldInfoDropDownImpl
     required TResult Function(FormInputFieldInfoCustomButton value)
         customButton,
     required TResult Function(FormInputFieldInfoDate value) date,
+    required TResult Function(FormInputFieldInfoMap value) map,
   }) {
     return dropdown(this);
   }
@@ -1462,6 +1523,7 @@ class _$FormInputFieldInfoDropDownImpl
         twoAutoCompleteFields,
     TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult? Function(FormInputFieldInfoDate value)? date,
+    TResult? Function(FormInputFieldInfoMap value)? map,
   }) {
     return dropdown?.call(this);
   }
@@ -1479,6 +1541,7 @@ class _$FormInputFieldInfoDropDownImpl
         twoAutoCompleteFields,
     TResult Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult Function(FormInputFieldInfoDate value)? date,
+    TResult Function(FormInputFieldInfoMap value)? map,
     required TResult orElse(),
   }) {
     if (dropdown != null) {
@@ -1728,13 +1791,14 @@ class _$FormInputFieldInfoCheckboxImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)
+            void Function()? onDelete,
+            TextEditingController? controller)
         textArea,
     required TResult Function(
             String id,
@@ -1806,6 +1870,9 @@ class _$FormInputFieldInfoCheckboxImpl
             bool deletable,
             void Function()? onDelete)
         date,
+    required TResult Function(
+            String id, String label, String sectionName, Marker? marker)
+        map,
   }) {
     return checkbox(id, label, currentValue, validators, sectionName, hasError,
         onChange, deletable, onDelete);
@@ -1817,13 +1884,14 @@ class _$FormInputFieldInfoCheckboxImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)?
+            void Function()? onDelete,
+            TextEditingController? controller)?
         textArea,
     TResult? Function(
             String id,
@@ -1895,6 +1963,9 @@ class _$FormInputFieldInfoCheckboxImpl
             bool deletable,
             void Function()? onDelete)?
         date,
+    TResult? Function(
+            String id, String label, String sectionName, Marker? marker)?
+        map,
   }) {
     return checkbox?.call(id, label, currentValue, validators, sectionName,
         hasError, onChange, deletable, onDelete);
@@ -1906,13 +1977,14 @@ class _$FormInputFieldInfoCheckboxImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)?
+            void Function()? onDelete,
+            TextEditingController? controller)?
         textArea,
     TResult Function(
             String id,
@@ -1984,6 +2056,9 @@ class _$FormInputFieldInfoCheckboxImpl
             bool deletable,
             void Function()? onDelete)?
         date,
+    TResult Function(
+            String id, String label, String sectionName, Marker? marker)?
+        map,
     required TResult orElse(),
   }) {
     if (checkbox != null) {
@@ -2009,6 +2084,7 @@ class _$FormInputFieldInfoCheckboxImpl
     required TResult Function(FormInputFieldInfoCustomButton value)
         customButton,
     required TResult Function(FormInputFieldInfoDate value) date,
+    required TResult Function(FormInputFieldInfoMap value) map,
   }) {
     return checkbox(this);
   }
@@ -2026,6 +2102,7 @@ class _$FormInputFieldInfoCheckboxImpl
         twoAutoCompleteFields,
     TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult? Function(FormInputFieldInfoDate value)? date,
+    TResult? Function(FormInputFieldInfoMap value)? map,
   }) {
     return checkbox?.call(this);
   }
@@ -2043,6 +2120,7 @@ class _$FormInputFieldInfoCheckboxImpl
         twoAutoCompleteFields,
     TResult Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult Function(FormInputFieldInfoDate value)? date,
+    TResult Function(FormInputFieldInfoMap value)? map,
     required TResult orElse(),
   }) {
     if (checkbox != null) {
@@ -2261,13 +2339,14 @@ class _$FormInputFieldInfoImagePickerImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)
+            void Function()? onDelete,
+            TextEditingController? controller)
         textArea,
     required TResult Function(
             String id,
@@ -2339,6 +2418,9 @@ class _$FormInputFieldInfoImagePickerImpl
             bool deletable,
             void Function()? onDelete)
         date,
+    required TResult Function(
+            String id, String label, String sectionName, Marker? marker)
+        map,
   }) {
     return imagePicker(
         id, label, currentValue, validators, sectionName, hasError, onChange);
@@ -2350,13 +2432,14 @@ class _$FormInputFieldInfoImagePickerImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)?
+            void Function()? onDelete,
+            TextEditingController? controller)?
         textArea,
     TResult? Function(
             String id,
@@ -2428,6 +2511,9 @@ class _$FormInputFieldInfoImagePickerImpl
             bool deletable,
             void Function()? onDelete)?
         date,
+    TResult? Function(
+            String id, String label, String sectionName, Marker? marker)?
+        map,
   }) {
     return imagePicker?.call(
         id, label, currentValue, validators, sectionName, hasError, onChange);
@@ -2439,13 +2525,14 @@ class _$FormInputFieldInfoImagePickerImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)?
+            void Function()? onDelete,
+            TextEditingController? controller)?
         textArea,
     TResult Function(
             String id,
@@ -2517,6 +2604,9 @@ class _$FormInputFieldInfoImagePickerImpl
             bool deletable,
             void Function()? onDelete)?
         date,
+    TResult Function(
+            String id, String label, String sectionName, Marker? marker)?
+        map,
     required TResult orElse(),
   }) {
     if (imagePicker != null) {
@@ -2542,6 +2632,7 @@ class _$FormInputFieldInfoImagePickerImpl
     required TResult Function(FormInputFieldInfoCustomButton value)
         customButton,
     required TResult Function(FormInputFieldInfoDate value) date,
+    required TResult Function(FormInputFieldInfoMap value) map,
   }) {
     return imagePicker(this);
   }
@@ -2559,6 +2650,7 @@ class _$FormInputFieldInfoImagePickerImpl
         twoAutoCompleteFields,
     TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult? Function(FormInputFieldInfoDate value)? date,
+    TResult? Function(FormInputFieldInfoMap value)? map,
   }) {
     return imagePicker?.call(this);
   }
@@ -2576,6 +2668,7 @@ class _$FormInputFieldInfoImagePickerImpl
         twoAutoCompleteFields,
     TResult Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult Function(FormInputFieldInfoDate value)? date,
+    TResult Function(FormInputFieldInfoMap value)? map,
     required TResult orElse(),
   }) {
     if (imagePicker != null) {
@@ -2736,13 +2829,14 @@ class _$FormInputFieldInfoCancelButtonImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)
+            void Function()? onDelete,
+            TextEditingController? controller)
         textArea,
     required TResult Function(
             String id,
@@ -2814,6 +2908,9 @@ class _$FormInputFieldInfoCancelButtonImpl
             bool deletable,
             void Function()? onDelete)
         date,
+    required TResult Function(
+            String id, String label, String sectionName, Marker? marker)
+        map,
   }) {
     return cancelButton(id, label, sectionName, cancel);
   }
@@ -2824,13 +2921,14 @@ class _$FormInputFieldInfoCancelButtonImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)?
+            void Function()? onDelete,
+            TextEditingController? controller)?
         textArea,
     TResult? Function(
             String id,
@@ -2902,6 +3000,9 @@ class _$FormInputFieldInfoCancelButtonImpl
             bool deletable,
             void Function()? onDelete)?
         date,
+    TResult? Function(
+            String id, String label, String sectionName, Marker? marker)?
+        map,
   }) {
     return cancelButton?.call(id, label, sectionName, cancel);
   }
@@ -2912,13 +3013,14 @@ class _$FormInputFieldInfoCancelButtonImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)?
+            void Function()? onDelete,
+            TextEditingController? controller)?
         textArea,
     TResult Function(
             String id,
@@ -2990,6 +3092,9 @@ class _$FormInputFieldInfoCancelButtonImpl
             bool deletable,
             void Function()? onDelete)?
         date,
+    TResult Function(
+            String id, String label, String sectionName, Marker? marker)?
+        map,
     required TResult orElse(),
   }) {
     if (cancelButton != null) {
@@ -3014,6 +3119,7 @@ class _$FormInputFieldInfoCancelButtonImpl
     required TResult Function(FormInputFieldInfoCustomButton value)
         customButton,
     required TResult Function(FormInputFieldInfoDate value) date,
+    required TResult Function(FormInputFieldInfoMap value) map,
   }) {
     return cancelButton(this);
   }
@@ -3031,6 +3137,7 @@ class _$FormInputFieldInfoCancelButtonImpl
         twoAutoCompleteFields,
     TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult? Function(FormInputFieldInfoDate value)? date,
+    TResult? Function(FormInputFieldInfoMap value)? map,
   }) {
     return cancelButton?.call(this);
   }
@@ -3048,6 +3155,7 @@ class _$FormInputFieldInfoCancelButtonImpl
         twoAutoCompleteFields,
     TResult Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult Function(FormInputFieldInfoDate value)? date,
+    TResult Function(FormInputFieldInfoMap value)? map,
     required TResult orElse(),
   }) {
     if (cancelButton != null) {
@@ -3205,13 +3313,14 @@ class _$FormInputFieldInfoSubmitButtonImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)
+            void Function()? onDelete,
+            TextEditingController? controller)
         textArea,
     required TResult Function(
             String id,
@@ -3283,6 +3392,9 @@ class _$FormInputFieldInfoSubmitButtonImpl
             bool deletable,
             void Function()? onDelete)
         date,
+    required TResult Function(
+            String id, String label, String sectionName, Marker? marker)
+        map,
   }) {
     return submitButton(id, label, sectionName, save);
   }
@@ -3293,13 +3405,14 @@ class _$FormInputFieldInfoSubmitButtonImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)?
+            void Function()? onDelete,
+            TextEditingController? controller)?
         textArea,
     TResult? Function(
             String id,
@@ -3371,6 +3484,9 @@ class _$FormInputFieldInfoSubmitButtonImpl
             bool deletable,
             void Function()? onDelete)?
         date,
+    TResult? Function(
+            String id, String label, String sectionName, Marker? marker)?
+        map,
   }) {
     return submitButton?.call(id, label, sectionName, save);
   }
@@ -3381,13 +3497,14 @@ class _$FormInputFieldInfoSubmitButtonImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)?
+            void Function()? onDelete,
+            TextEditingController? controller)?
         textArea,
     TResult Function(
             String id,
@@ -3459,6 +3576,9 @@ class _$FormInputFieldInfoSubmitButtonImpl
             bool deletable,
             void Function()? onDelete)?
         date,
+    TResult Function(
+            String id, String label, String sectionName, Marker? marker)?
+        map,
     required TResult orElse(),
   }) {
     if (submitButton != null) {
@@ -3483,6 +3603,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
     required TResult Function(FormInputFieldInfoCustomButton value)
         customButton,
     required TResult Function(FormInputFieldInfoDate value) date,
+    required TResult Function(FormInputFieldInfoMap value) map,
   }) {
     return submitButton(this);
   }
@@ -3500,6 +3621,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
         twoAutoCompleteFields,
     TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult? Function(FormInputFieldInfoDate value)? date,
+    TResult? Function(FormInputFieldInfoMap value)? map,
   }) {
     return submitButton?.call(this);
   }
@@ -3517,6 +3639,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
         twoAutoCompleteFields,
     TResult Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult Function(FormInputFieldInfoDate value)? date,
+    TResult Function(FormInputFieldInfoMap value)? map,
     required TResult orElse(),
   }) {
     if (submitButton != null) {
@@ -3855,13 +3978,14 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)
+            void Function()? onDelete,
+            TextEditingController? controller)
         textArea,
     required TResult Function(
             String id,
@@ -3933,6 +4057,9 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             bool deletable,
             void Function()? onDelete)
         date,
+    required TResult Function(
+            String id, String label, String sectionName, Marker? marker)
+        map,
   }) {
     return twoAutoCompleteFields(
         id,
@@ -3958,13 +4085,14 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)?
+            void Function()? onDelete,
+            TextEditingController? controller)?
         textArea,
     TResult? Function(
             String id,
@@ -4036,6 +4164,9 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             bool deletable,
             void Function()? onDelete)?
         date,
+    TResult? Function(
+            String id, String label, String sectionName, Marker? marker)?
+        map,
   }) {
     return twoAutoCompleteFields?.call(
         id,
@@ -4061,13 +4192,14 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)?
+            void Function()? onDelete,
+            TextEditingController? controller)?
         textArea,
     TResult Function(
             String id,
@@ -4139,6 +4271,9 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             bool deletable,
             void Function()? onDelete)?
         date,
+    TResult Function(
+            String id, String label, String sectionName, Marker? marker)?
+        map,
     required TResult orElse(),
   }) {
     if (twoAutoCompleteFields != null) {
@@ -4178,6 +4313,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     required TResult Function(FormInputFieldInfoCustomButton value)
         customButton,
     required TResult Function(FormInputFieldInfoDate value) date,
+    required TResult Function(FormInputFieldInfoMap value) map,
   }) {
     return twoAutoCompleteFields(this);
   }
@@ -4195,6 +4331,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
         twoAutoCompleteFields,
     TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult? Function(FormInputFieldInfoDate value)? date,
+    TResult? Function(FormInputFieldInfoMap value)? map,
   }) {
     return twoAutoCompleteFields?.call(this);
   }
@@ -4212,6 +4349,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
         twoAutoCompleteFields,
     TResult Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult Function(FormInputFieldInfoDate value)? date,
+    TResult Function(FormInputFieldInfoMap value)? map,
     required TResult orElse(),
   }) {
     if (twoAutoCompleteFields != null) {
@@ -4391,13 +4529,14 @@ class _$FormInputFieldInfoCustomButtonImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)
+            void Function()? onDelete,
+            TextEditingController? controller)
         textArea,
     required TResult Function(
             String id,
@@ -4469,6 +4608,9 @@ class _$FormInputFieldInfoCustomButtonImpl
             bool deletable,
             void Function()? onDelete)
         date,
+    required TResult Function(
+            String id, String label, String sectionName, Marker? marker)
+        map,
   }) {
     return customButton(id, label, sectionName, callback);
   }
@@ -4479,13 +4621,14 @@ class _$FormInputFieldInfoCustomButtonImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)?
+            void Function()? onDelete,
+            TextEditingController? controller)?
         textArea,
     TResult? Function(
             String id,
@@ -4557,6 +4700,9 @@ class _$FormInputFieldInfoCustomButtonImpl
             bool deletable,
             void Function()? onDelete)?
         date,
+    TResult? Function(
+            String id, String label, String sectionName, Marker? marker)?
+        map,
   }) {
     return customButton?.call(id, label, sectionName, callback);
   }
@@ -4567,13 +4713,14 @@ class _$FormInputFieldInfoCustomButtonImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)?
+            void Function()? onDelete,
+            TextEditingController? controller)?
         textArea,
     TResult Function(
             String id,
@@ -4645,6 +4792,9 @@ class _$FormInputFieldInfoCustomButtonImpl
             bool deletable,
             void Function()? onDelete)?
         date,
+    TResult Function(
+            String id, String label, String sectionName, Marker? marker)?
+        map,
     required TResult orElse(),
   }) {
     if (customButton != null) {
@@ -4669,6 +4819,7 @@ class _$FormInputFieldInfoCustomButtonImpl
     required TResult Function(FormInputFieldInfoCustomButton value)
         customButton,
     required TResult Function(FormInputFieldInfoDate value) date,
+    required TResult Function(FormInputFieldInfoMap value) map,
   }) {
     return customButton(this);
   }
@@ -4686,6 +4837,7 @@ class _$FormInputFieldInfoCustomButtonImpl
         twoAutoCompleteFields,
     TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult? Function(FormInputFieldInfoDate value)? date,
+    TResult? Function(FormInputFieldInfoMap value)? map,
   }) {
     return customButton?.call(this);
   }
@@ -4703,6 +4855,7 @@ class _$FormInputFieldInfoCustomButtonImpl
         twoAutoCompleteFields,
     TResult Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult Function(FormInputFieldInfoDate value)? date,
+    TResult Function(FormInputFieldInfoMap value)? map,
     required TResult orElse(),
   }) {
     if (customButton != null) {
@@ -4939,13 +5092,14 @@ class _$FormInputFieldInfoDateImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)
+            void Function()? onDelete,
+            TextEditingController? controller)
         textArea,
     required TResult Function(
             String id,
@@ -5017,6 +5171,9 @@ class _$FormInputFieldInfoDateImpl
             bool deletable,
             void Function()? onDelete)
         date,
+    required TResult Function(
+            String id, String label, String sectionName, Marker? marker)
+        map,
   }) {
     return date(id, label, currentValue, validators, sectionName, hasError,
         onChange, deletable, onDelete);
@@ -5028,13 +5185,14 @@ class _$FormInputFieldInfoDateImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)?
+            void Function()? onDelete,
+            TextEditingController? controller)?
         textArea,
     TResult? Function(
             String id,
@@ -5106,6 +5264,9 @@ class _$FormInputFieldInfoDateImpl
             bool deletable,
             void Function()? onDelete)?
         date,
+    TResult? Function(
+            String id, String label, String sectionName, Marker? marker)?
+        map,
   }) {
     return date?.call(id, label, currentValue, validators, sectionName,
         hasError, onChange, deletable, onDelete);
@@ -5117,13 +5278,14 @@ class _$FormInputFieldInfoDateImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
+            String? currentValue,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
             void Function(String)? onChange,
             bool deletable,
-            void Function()? onDelete)?
+            void Function()? onDelete,
+            TextEditingController? controller)?
         textArea,
     TResult Function(
             String id,
@@ -5195,6 +5357,9 @@ class _$FormInputFieldInfoDateImpl
             bool deletable,
             void Function()? onDelete)?
         date,
+    TResult Function(
+            String id, String label, String sectionName, Marker? marker)?
+        map,
     required TResult orElse(),
   }) {
     if (date != null) {
@@ -5220,6 +5385,7 @@ class _$FormInputFieldInfoDateImpl
     required TResult Function(FormInputFieldInfoCustomButton value)
         customButton,
     required TResult Function(FormInputFieldInfoDate value) date,
+    required TResult Function(FormInputFieldInfoMap value) map,
   }) {
     return date(this);
   }
@@ -5237,6 +5403,7 @@ class _$FormInputFieldInfoDateImpl
         twoAutoCompleteFields,
     TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult? Function(FormInputFieldInfoDate value)? date,
+    TResult? Function(FormInputFieldInfoMap value)? map,
   }) {
     return date?.call(this);
   }
@@ -5254,6 +5421,7 @@ class _$FormInputFieldInfoDateImpl
         twoAutoCompleteFields,
     TResult Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult Function(FormInputFieldInfoDate value)? date,
+    TResult Function(FormInputFieldInfoMap value)? map,
     required TResult orElse(),
   }) {
     if (date != null) {
@@ -5292,5 +5460,480 @@ abstract class FormInputFieldInfoDate implements FormInputFieldInfo {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FormInputFieldInfoDateImplCopyWith<_$FormInputFieldInfoDateImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FormInputFieldInfoMapImplCopyWith<$Res>
+    implements $FormInputFieldInfoCopyWith<$Res> {
+  factory _$$FormInputFieldInfoMapImplCopyWith(
+          _$FormInputFieldInfoMapImpl value,
+          $Res Function(_$FormInputFieldInfoMapImpl) then) =
+      __$$FormInputFieldInfoMapImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String id, String label, String sectionName, Marker? marker});
+}
+
+/// @nodoc
+class __$$FormInputFieldInfoMapImplCopyWithImpl<$Res>
+    extends _$FormInputFieldInfoCopyWithImpl<$Res, _$FormInputFieldInfoMapImpl>
+    implements _$$FormInputFieldInfoMapImplCopyWith<$Res> {
+  __$$FormInputFieldInfoMapImplCopyWithImpl(_$FormInputFieldInfoMapImpl _value,
+      $Res Function(_$FormInputFieldInfoMapImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of FormInputFieldInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? label = null,
+    Object? sectionName = null,
+    Object? marker = freezed,
+  }) {
+    return _then(_$FormInputFieldInfoMapImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      label: null == label
+          ? _value.label
+          : label // ignore: cast_nullable_to_non_nullable
+              as String,
+      sectionName: null == sectionName
+          ? _value.sectionName
+          : sectionName // ignore: cast_nullable_to_non_nullable
+              as String,
+      marker: freezed == marker
+          ? _value.marker
+          : marker // ignore: cast_nullable_to_non_nullable
+              as Marker?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$FormInputFieldInfoMapImpl
+    with DiagnosticableTreeMixin
+    implements FormInputFieldInfoMap {
+  const _$FormInputFieldInfoMapImpl(
+      {required this.id,
+      required this.label,
+      required this.sectionName,
+      required this.marker});
+
+  @override
+  final String id;
+  @override
+  final String label;
+  @override
+  final String sectionName;
+  @override
+  final Marker? marker;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'FormInputFieldInfo.map(id: $id, label: $label, sectionName: $sectionName, marker: $marker)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'FormInputFieldInfo.map'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('label', label))
+      ..add(DiagnosticsProperty('sectionName', sectionName))
+      ..add(DiagnosticsProperty('marker', marker));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FormInputFieldInfoMapImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.label, label) || other.label == label) &&
+            (identical(other.sectionName, sectionName) ||
+                other.sectionName == sectionName) &&
+            (identical(other.marker, marker) || other.marker == marker));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id, label, sectionName, marker);
+
+  /// Create a copy of FormInputFieldInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FormInputFieldInfoMapImplCopyWith<_$FormInputFieldInfoMapImpl>
+      get copyWith => __$$FormInputFieldInfoMapImplCopyWithImpl<
+          _$FormInputFieldInfoMapImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(String)? onChange,
+            bool deletable,
+            void Function()? onDelete,
+            TextEditingController? controller)
+        textArea,
+    required TResult Function(
+            String id,
+            String label,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(String?)? onChange,
+            bool deletable,
+            void Function()? onDelete)
+        dropdown,
+    required TResult Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(String)? onChange,
+            bool deletable,
+            void Function()? onDelete)
+        checkbox,
+    required TResult Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(String)? onChange)
+        imagePicker,
+    required TResult Function(
+            String id, String label, String sectionName, void Function() cancel)
+        cancelButton,
+    required TResult Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)
+        submitButton,
+    required TResult Function(
+            String id,
+            String id2,
+            String labelLeft,
+            String labelRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            Map<String, Set<String>> optionsRight,
+            List<String? Function(String?)> validatorsLeft,
+            List<String? Function(String?)> validatorsRight,
+            String sectionName,
+            bool hasErrorleft,
+            bool hasErrorRight,
+            bool deletable,
+            void Function()? onDelete)
+        twoAutoCompleteFields,
+    required TResult Function(String id, String label, String sectionName,
+            void Function() callback)
+        customButton,
+    required TResult Function(
+            String id,
+            String label,
+            String currentValue,
+            List<String? Function(DateTime?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(String)? onChange,
+            bool deletable,
+            void Function()? onDelete)
+        date,
+    required TResult Function(
+            String id, String label, String sectionName, Marker? marker)
+        map,
+  }) {
+    return map(id, label, sectionName, marker);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(String)? onChange,
+            bool deletable,
+            void Function()? onDelete,
+            TextEditingController? controller)?
+        textArea,
+    TResult? Function(
+            String id,
+            String label,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(String?)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
+        dropdown,
+    TResult? Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(String)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
+        checkbox,
+    TResult? Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(String)? onChange)?
+        imagePicker,
+    TResult? Function(String id, String label, String sectionName,
+            void Function() cancel)?
+        cancelButton,
+    TResult? Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)?
+        submitButton,
+    TResult? Function(
+            String id,
+            String id2,
+            String labelLeft,
+            String labelRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            Map<String, Set<String>> optionsRight,
+            List<String? Function(String?)> validatorsLeft,
+            List<String? Function(String?)> validatorsRight,
+            String sectionName,
+            bool hasErrorleft,
+            bool hasErrorRight,
+            bool deletable,
+            void Function()? onDelete)?
+        twoAutoCompleteFields,
+    TResult? Function(String id, String label, String sectionName,
+            void Function() callback)?
+        customButton,
+    TResult? Function(
+            String id,
+            String label,
+            String currentValue,
+            List<String? Function(DateTime?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(String)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
+        date,
+    TResult? Function(
+            String id, String label, String sectionName, Marker? marker)?
+        map,
+  }) {
+    return map?.call(id, label, sectionName, marker);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(String)? onChange,
+            bool deletable,
+            void Function()? onDelete,
+            TextEditingController? controller)?
+        textArea,
+    TResult Function(
+            String id,
+            String label,
+            String currentValue,
+            List<String> options,
+            String Function(String) optionToString,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(String?)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
+        dropdown,
+    TResult Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(String)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
+        checkbox,
+    TResult Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(String)? onChange)?
+        imagePicker,
+    TResult Function(String id, String label, String sectionName,
+            void Function() cancel)?
+        cancelButton,
+    TResult Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)?
+        submitButton,
+    TResult Function(
+            String id,
+            String id2,
+            String labelLeft,
+            String labelRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            Map<String, Set<String>> optionsRight,
+            List<String? Function(String?)> validatorsLeft,
+            List<String? Function(String?)> validatorsRight,
+            String sectionName,
+            bool hasErrorleft,
+            bool hasErrorRight,
+            bool deletable,
+            void Function()? onDelete)?
+        twoAutoCompleteFields,
+    TResult Function(String id, String label, String sectionName,
+            void Function() callback)?
+        customButton,
+    TResult Function(
+            String id,
+            String label,
+            String currentValue,
+            List<String? Function(DateTime?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(String)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
+        date,
+    TResult Function(
+            String id, String label, String sectionName, Marker? marker)?
+        map,
+    required TResult orElse(),
+  }) {
+    if (map != null) {
+      return map(id, label, sectionName, marker);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(FormInputFieldInfoTextArea value) textArea,
+    required TResult Function(FormInputFieldInfoDropDown value) dropdown,
+    required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
+    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
+    required TResult Function(FormInputFieldInfoCancelButton value)
+        cancelButton,
+    required TResult Function(FormInputFieldInfoSubmitButton value)
+        submitButton,
+    required TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)
+        twoAutoCompleteFields,
+    required TResult Function(FormInputFieldInfoCustomButton value)
+        customButton,
+    required TResult Function(FormInputFieldInfoDate value) date,
+    required TResult Function(FormInputFieldInfoMap value) map,
+  }) {
+    return map(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
+        twoAutoCompleteFields,
+    TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult? Function(FormInputFieldInfoDate value)? date,
+    TResult? Function(FormInputFieldInfoMap value)? map,
+  }) {
+    return map?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?
+        twoAutoCompleteFields,
+    TResult Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult Function(FormInputFieldInfoDate value)? date,
+    TResult Function(FormInputFieldInfoMap value)? map,
+    required TResult orElse(),
+  }) {
+    if (map != null) {
+      return map(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FormInputFieldInfoMap implements FormInputFieldInfo {
+  const factory FormInputFieldInfoMap(
+      {required final String id,
+      required final String label,
+      required final String sectionName,
+      required final Marker? marker}) = _$FormInputFieldInfoMapImpl;
+
+  @override
+  String get id;
+  String get label;
+  @override
+  String get sectionName;
+  Marker? get marker;
+
+  /// Create a copy of FormInputFieldInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FormInputFieldInfoMapImplCopyWith<_$FormInputFieldInfoMapImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

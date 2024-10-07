@@ -19,6 +19,7 @@ class FormInputFieldTextArea extends StatelessWidget {
       autovalidateMode: AutovalidateMode.always,
       name: field.id,
       initialValue: field.currentValue,
+      controller: field.controller,
       decoration: InputDecoration(
         labelText: field.label,
         suffixIcon: field.hasError

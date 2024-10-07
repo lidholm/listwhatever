@@ -11,6 +11,7 @@ import 'package:listwhatever/standard/form/form_input_field_date.dart';
 import 'package:listwhatever/standard/form/form_input_field_drop_down.dart';
 import 'package:listwhatever/standard/form/form_input_field_image_picker.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
+import 'package:listwhatever/standard/form/form_input_field_map.dart';
 import 'package:listwhatever/standard/form/form_input_field_submit_button.dart';
 import 'package:listwhatever/standard/form/form_input_field_text_area.dart';
 import 'package:listwhatever/standard/form/form_input_field_two_auto_complete_fields.dart';
@@ -93,13 +94,7 @@ class _FormGeneratorState extends State<FormGenerator> {
       return BorderWithHeader(title: section.name, child: child);
     } else {
       // ignore: use_colored_box
-      return Row(
-        children: [
-          Expanded(
-            child: child,
-          ),
-        ],
-      );
+      return child;
     }
   }
 
@@ -128,6 +123,7 @@ class _FormGeneratorState extends State<FormGenerator> {
       FormInputFieldInfoCustomButton() =>
         FormInputFieldCustomButton(formKey: widget.formKey, field: field),
       FormInputFieldInfoDate() => FormInputFieldDate(field: field),
+      FormInputFieldInfoMap() => FormInputFieldMap(field: field),
     };
     return response;
   }
