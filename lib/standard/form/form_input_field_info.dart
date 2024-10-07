@@ -23,13 +23,13 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
   const factory FormInputFieldInfo.dropdown({
     required String id,
     required String label,
-    required String currentValue,
-    required List<String> options,
-    required String Function(String) optionToString,
+    required dynamic currentValue,
+    required List<dynamic> options,
+    required String Function(dynamic) optionToString,
     required List<FormFieldValidator<String>> validators,
     required String sectionName,
     required bool hasError,
-    @Default(null) void Function(String?)? onChange,
+    @Default(null) void Function(dynamic?)? onChange,
     @Default(false) bool deletable,
     @Default(null) void Function()? onDelete,
   }) = FormInputFieldInfoDropDown;

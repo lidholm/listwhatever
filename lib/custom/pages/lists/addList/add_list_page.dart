@@ -260,7 +260,7 @@ class _AddListPageState extends State<AddListPage> {
         FormBuilderValidators.maxLength(70),
       ],
       options: ListType.values.map((v) => v.name).toList(),
-      optionToString: (listType) => listType,
+      optionToString: (listType) => (listType as ListType?)?.name ?? '',
       sectionName: SectionName.basic.value,
       hasError: false,
       onChange: (listType) => setState(() {

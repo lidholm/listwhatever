@@ -35,13 +35,13 @@ mixin _$FormInputFieldInfo {
     required TResult Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
         dropdown,
@@ -124,13 +124,13 @@ mixin _$FormInputFieldInfo {
     TResult? Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -213,13 +213,13 @@ mixin _$FormInputFieldInfo {
     TResult Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -614,13 +614,13 @@ class _$FormInputFieldInfoTextAreaImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
         dropdown,
@@ -707,13 +707,13 @@ class _$FormInputFieldInfoTextAreaImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -800,13 +800,13 @@ class _$FormInputFieldInfoTextAreaImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -988,13 +988,13 @@ abstract class _$$FormInputFieldInfoDropDownImplCopyWith<$Res>
   $Res call(
       {String id,
       String label,
-      String currentValue,
-      List<String> options,
-      String Function(String) optionToString,
+      dynamic currentValue,
+      List<dynamic> options,
+      String Function(dynamic) optionToString,
       List<String? Function(String?)> validators,
       String sectionName,
       bool hasError,
-      void Function(String?)? onChange,
+      void Function(dynamic)? onChange,
       bool deletable,
       void Function()? onDelete});
 }
@@ -1016,7 +1016,7 @@ class __$$FormInputFieldInfoDropDownImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? label = null,
-    Object? currentValue = null,
+    Object? currentValue = freezed,
     Object? options = null,
     Object? optionToString = null,
     Object? validators = null,
@@ -1035,18 +1035,18 @@ class __$$FormInputFieldInfoDropDownImplCopyWithImpl<$Res>
           ? _value.label
           : label // ignore: cast_nullable_to_non_nullable
               as String,
-      currentValue: null == currentValue
+      currentValue: freezed == currentValue
           ? _value.currentValue
           : currentValue // ignore: cast_nullable_to_non_nullable
-              as String,
+              as dynamic,
       options: null == options
           ? _value._options
           : options // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<dynamic>,
       optionToString: null == optionToString
           ? _value.optionToString
           : optionToString // ignore: cast_nullable_to_non_nullable
-              as String Function(String),
+              as String Function(dynamic),
       validators: null == validators
           ? _value._validators
           : validators // ignore: cast_nullable_to_non_nullable
@@ -1062,7 +1062,7 @@ class __$$FormInputFieldInfoDropDownImplCopyWithImpl<$Res>
       onChange: freezed == onChange
           ? _value.onChange
           : onChange // ignore: cast_nullable_to_non_nullable
-              as void Function(String?)?,
+              as void Function(dynamic)?,
       deletable: null == deletable
           ? _value.deletable
           : deletable // ignore: cast_nullable_to_non_nullable
@@ -1084,7 +1084,7 @@ class _$FormInputFieldInfoDropDownImpl
       {required this.id,
       required this.label,
       required this.currentValue,
-      required final List<String> options,
+      required final List<dynamic> options,
       required this.optionToString,
       required final List<String? Function(String?)> validators,
       required this.sectionName,
@@ -1100,17 +1100,17 @@ class _$FormInputFieldInfoDropDownImpl
   @override
   final String label;
   @override
-  final String currentValue;
-  final List<String> _options;
+  final dynamic currentValue;
+  final List<dynamic> _options;
   @override
-  List<String> get options {
+  List<dynamic> get options {
     if (_options is EqualUnmodifiableListView) return _options;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_options);
   }
 
   @override
-  final String Function(String) optionToString;
+  final String Function(dynamic) optionToString;
   final List<String? Function(String?)> _validators;
   @override
   List<String? Function(String?)> get validators {
@@ -1125,7 +1125,7 @@ class _$FormInputFieldInfoDropDownImpl
   final bool hasError;
   @override
   @JsonKey()
-  final void Function(String?)? onChange;
+  final void Function(dynamic)? onChange;
   @override
   @JsonKey()
   final bool deletable;
@@ -1163,8 +1163,8 @@ class _$FormInputFieldInfoDropDownImpl
             other is _$FormInputFieldInfoDropDownImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.label, label) || other.label == label) &&
-            (identical(other.currentValue, currentValue) ||
-                other.currentValue == currentValue) &&
+            const DeepCollectionEquality()
+                .equals(other.currentValue, currentValue) &&
             const DeepCollectionEquality().equals(other._options, _options) &&
             (identical(other.optionToString, optionToString) ||
                 other.optionToString == optionToString) &&
@@ -1187,7 +1187,7 @@ class _$FormInputFieldInfoDropDownImpl
       runtimeType,
       id,
       label,
-      currentValue,
+      const DeepCollectionEquality().hash(currentValue),
       const DeepCollectionEquality().hash(_options),
       optionToString,
       const DeepCollectionEquality().hash(_validators),
@@ -1224,13 +1224,13 @@ class _$FormInputFieldInfoDropDownImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
         dropdown,
@@ -1317,13 +1317,13 @@ class _$FormInputFieldInfoDropDownImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -1410,13 +1410,13 @@ class _$FormInputFieldInfoDropDownImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -1555,27 +1555,27 @@ abstract class FormInputFieldInfoDropDown implements FormInputFieldInfo {
   const factory FormInputFieldInfoDropDown(
       {required final String id,
       required final String label,
-      required final String currentValue,
-      required final List<String> options,
-      required final String Function(String) optionToString,
+      required final dynamic currentValue,
+      required final List<dynamic> options,
+      required final String Function(dynamic) optionToString,
       required final List<String? Function(String?)> validators,
       required final String sectionName,
       required final bool hasError,
-      final void Function(String?)? onChange,
+      final void Function(dynamic)? onChange,
       final bool deletable,
       final void Function()? onDelete}) = _$FormInputFieldInfoDropDownImpl;
 
   @override
   String get id;
   String get label;
-  String get currentValue;
-  List<String> get options;
-  String Function(String) get optionToString;
+  dynamic get currentValue;
+  List<dynamic> get options;
+  String Function(dynamic) get optionToString;
   List<String? Function(String?)> get validators;
   @override
   String get sectionName;
   bool get hasError;
-  void Function(String?)? get onChange;
+  void Function(dynamic)? get onChange;
   bool get deletable;
   void Function()? get onDelete;
 
@@ -1803,13 +1803,13 @@ class _$FormInputFieldInfoCheckboxImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
         dropdown,
@@ -1896,13 +1896,13 @@ class _$FormInputFieldInfoCheckboxImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -1989,13 +1989,13 @@ class _$FormInputFieldInfoCheckboxImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -2351,13 +2351,13 @@ class _$FormInputFieldInfoImagePickerImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
         dropdown,
@@ -2444,13 +2444,13 @@ class _$FormInputFieldInfoImagePickerImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -2537,13 +2537,13 @@ class _$FormInputFieldInfoImagePickerImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -2841,13 +2841,13 @@ class _$FormInputFieldInfoCancelButtonImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
         dropdown,
@@ -2933,13 +2933,13 @@ class _$FormInputFieldInfoCancelButtonImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -3025,13 +3025,13 @@ class _$FormInputFieldInfoCancelButtonImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -3325,13 +3325,13 @@ class _$FormInputFieldInfoSubmitButtonImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
         dropdown,
@@ -3417,13 +3417,13 @@ class _$FormInputFieldInfoSubmitButtonImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -3509,13 +3509,13 @@ class _$FormInputFieldInfoSubmitButtonImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -3990,13 +3990,13 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
         dropdown,
@@ -4097,13 +4097,13 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -4204,13 +4204,13 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -4541,13 +4541,13 @@ class _$FormInputFieldInfoCustomButtonImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
         dropdown,
@@ -4633,13 +4633,13 @@ class _$FormInputFieldInfoCustomButtonImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -4725,13 +4725,13 @@ class _$FormInputFieldInfoCustomButtonImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -5104,13 +5104,13 @@ class _$FormInputFieldInfoDateImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
         dropdown,
@@ -5197,13 +5197,13 @@ class _$FormInputFieldInfoDateImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -5290,13 +5290,13 @@ class _$FormInputFieldInfoDateImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -5592,13 +5592,13 @@ class _$FormInputFieldInfoMapImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
         dropdown,
@@ -5684,13 +5684,13 @@ class _$FormInputFieldInfoMapImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,
@@ -5776,13 +5776,13 @@ class _$FormInputFieldInfoMapImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
-            List<String> options,
-            String Function(String) optionToString,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
             bool hasError,
-            void Function(String?)? onChange,
+            void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
         dropdown,

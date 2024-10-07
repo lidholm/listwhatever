@@ -57,7 +57,7 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
   GeocoderResult? selectedResult;
   final TextEditingController searchPhraseController = TextEditingController();
   TextEditingController addressController = TextEditingController(text: '');
-  String latlong = '';
+  TextEditingController latLongController = TextEditingController(text: '');
 
   @override
   void initState() {
@@ -308,19 +308,26 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
     return FormInputFieldInfo.dropdown(
       id: FieldId.results.value,
       label: 'Search result',
-      currentValue: searchResults.firstOrNull?.formattedAddress ?? '',
+      currentValue: searchResults.firstOrNull,
       validators: [
         FormBuilderValidators.required(),
         FormBuilderValidators.maxLength(70),
       ],
-      options: searchResults.map((e) => e.formattedAddress).toList(),
-      optionToString: (listType) => listType,
+      options: searchResults,
+      optionToString: (result) =>
+          (result as GeocoderResult?)?.formattedAddress ?? '',
       sectionName: SectionName.info.value,
       hasError: false,
       onChange: (selection) => setState(() {
         logger.i('$className: onChange result: $selection');
         setState(() {
-          addressController = TextEditingController(text: selection ?? 'asd');
+          final sel = selection as GeocoderResult?;
+          addressController =
+              TextEditingController(text: sel?.formattedAddress ?? '');
+          latLongController = TextEditingController(
+              text: sel == null
+                  ? ''
+                  : '${sel?.geometry.location.lat}, ${sel?.geometry.location.lng}');
         });
       }),
     );
@@ -346,7 +353,7 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
     return FormInputFieldInfo.textArea(
       id: FieldId.latlong.value,
       label: 'Coordinates',
-      currentValue: latlong,
+      controller: latLongController,
       validators: [
         FormBuilderValidators.required(),
         FormBuilderValidators.match(
