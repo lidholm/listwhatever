@@ -1,4 +1,3 @@
-import 'package:listwhatever/custom/pages/listItems/searchLocation/search_location_page_route.dart';
 import 'package:listwhatever/custom/pages/onboarding/onboarding_page_route.dart';
 import 'package:listwhatever/standard/user_profile/page/user_profile_page_route.dart';
 

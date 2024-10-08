@@ -147,7 +147,16 @@ class _FilterViewState extends State<FilterView> {
       id: FieldId.startdate.name,
       label: 'Start date',
       currentValue: '',
-      validators: [],
+      validator: (d) {
+        if (d == null) {
+          return "Can't be empty";
+        }
+        if (d.compareTo(DateTime.now()) < 0) {
+          return 'Has to be in future';
+        }
+
+        return null;
+      },
       sectionName: SectionName.dates.name,
     );
   }
@@ -157,7 +166,7 @@ class _FilterViewState extends State<FilterView> {
       id: FieldId.enddate.name,
       label: 'End date',
       currentValue: '',
-      validators: [],
+      validator: (e) => null,
       sectionName: SectionName.dates.name,
     );
   }

@@ -20,7 +20,7 @@ class FormInputFieldDropDown extends StatelessWidget {
       //   hintText: 'Select Type',
       // ),
       validator: FormBuilderValidators.compose(
-        [FormBuilderValidators.required()],
+        [FormBuilderValidators.required<dynamic>()],
       ),
       items: field.options
           .map(

@@ -491,9 +491,9 @@ class _AddListItemPageState extends State<AddListItemPage> {
       label: 'Date',
       currentValue: listItem?.datetime?.toIso8601String() ??
           DateTime.now().toIso8601String(),
-      validators: [
-        FormBuilderValidators.required(),
-      ],
+      validator: (d) => d != null && d.compareTo(DateTime(2024, 10, 8)) > 1
+          ? null
+          : 'Has to be in future',
       sectionName: SectionName.date.value,
     );
   }
