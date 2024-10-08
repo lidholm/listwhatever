@@ -100,17 +100,17 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
   List<FormInputSection> getSections() {
     return [
       FormInputSection(
-        name: SectionName.search.value,
+        name: SectionName.search.name,
         direction: x_stack.AxisDirection.vertical,
         showBorder: false,
       ),
       FormInputSection(
-        name: SectionName.info.value,
+        name: SectionName.info.name,
         direction: x_stack.AxisDirection.vertical,
         showBorder: false,
       ),
       FormInputSection(
-        name: SectionName.submit.value,
+        name: SectionName.submit.name,
         direction: x_stack.AxisDirection.vertical,
         showBorder: false,
       ),
@@ -119,23 +119,23 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
 
   FormInputFieldInfo searchPhraseInputField() {
     return FormInputFieldInfo.textArea(
-      id: FieldId.searchPhrase.value,
+      id: FieldId.searchPhrase.name,
       label: 'Search',
       controller: searchPhraseController,
       validators: [
         FormBuilderValidators.required(),
         FormBuilderValidators.maxLength(150),
       ],
-      sectionName: SectionName.search.value,
+      sectionName: SectionName.search.name,
       hasError: false,
     );
   }
 
   FormInputFieldInfo searchButtonInputField() {
     return FormInputFieldInfo.customButton(
-      id: FieldId.submit.value,
+      id: FieldId.submit.name,
       label: 'Search',
-      sectionName: SectionName.search.value,
+      sectionName: SectionName.search.name,
       callback: () {
         print('search');
         print(searchPhraseController);
@@ -148,7 +148,7 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
 
   FormInputFieldInfo resultsDropdownField(List<GeocoderResult> searchResults) {
     return FormInputFieldInfo.dropdown(
-      id: FieldId.results.value,
+      id: FieldId.results.name,
       label: 'Search result',
       currentValue: searchResults.firstOrNull,
       validators: [
@@ -158,18 +158,26 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
       options: searchResults,
       optionToString: (result) =>
           (result as GeocoderResult?)?.formattedAddress ?? '',
-      sectionName: SectionName.info.value,
+      sectionName: SectionName.info.name,
       hasError: false,
       onChange: (selection) => setState(() {
-        logger.i('$className: onChange result: $selection');
+        // logger.i('$className: onChange result: $selection');
         setState(() {
           final sel = selection as GeocoderResult?;
+
+          print('$className: sel: $sel');
+
           _formKey.currentState?.patchValue({
+            FieldId.map.name: sel,
             FieldId.address.name: sel?.formattedAddress ?? '',
             FieldId.latlong.name: sel == null
                 ? ''
                 : '${sel.geometry.location.lat}, ${sel.geometry.location.lng}',
           });
+
+          logger.i(
+            '$className: _formKey.currentState: ${_formKey.currentState?.value}',
+          );
         });
       }),
     );
@@ -177,21 +185,21 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
 
   FormInputFieldInfo addressInputField() {
     return FormInputFieldInfo.textArea(
-      id: FieldId.address.value,
+      id: FieldId.address.name,
       label: 'Address',
       currentValue: '',
       validators: [
         FormBuilderValidators.required(),
         FormBuilderValidators.maxLength(150),
       ],
-      sectionName: SectionName.info.value,
+      sectionName: SectionName.info.name,
       hasError: false,
     );
   }
 
   FormInputFieldInfo latLongInputField() {
     return FormInputFieldInfo.textArea(
-      id: FieldId.latlong.value,
+      id: FieldId.latlong.name,
       label: 'Coordinates',
       currentValue: '',
       validators: [
@@ -201,25 +209,24 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
           errorText: "Doesn't match 12.3, 3.45",
         ),
       ],
-      sectionName: SectionName.info.value,
+      sectionName: SectionName.info.name,
       hasError: false,
     );
   }
 
   FormInputFieldInfo mapInputField() {
     return FormInputFieldInfo.map(
-      id: FieldId.map.value,
+      id: FieldId.map.name,
       label: 'Map',
-      sectionName: SectionName.info.value,
-      marker: null,
+      sectionName: SectionName.info.name,
     );
   }
 
   FormInputFieldInfo cancelButton() {
     return FormInputFieldInfo.cancelButton(
-      id: FieldId.cancel.value,
+      id: FieldId.cancel.name,
       label: 'Cancel',
-      sectionName: SectionName.submit.value,
+      sectionName: SectionName.submit.name,
       cancel: () {
         print('cancelled');
       },
@@ -228,9 +235,9 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
 
   FormInputFieldInfo submitButton() {
     return FormInputFieldInfo.submitButton(
-      id: FieldId.submit.value,
+      id: FieldId.submit.name,
       label: 'Submit',
-      sectionName: SectionName.submit.value,
+      sectionName: SectionName.submit.name,
       save: (Map<String, dynamic>? values) {
         print('save');
         if (values == null) {
@@ -264,7 +271,10 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
         if (state is SearchLoaded) {
           final results = state.lists;
 
+          print('$className: results: ${results?.first}');
+
           _formKey.currentState?.patchValue({
+            FieldId.map.name: results?.first,
             FieldId.address.name: results?.first.formattedAddress,
             FieldId.latlong.name:
                 '${results?.first.geometry.location.lat}, ${results?.first.geometry.location.lng}',

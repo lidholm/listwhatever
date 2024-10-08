@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:listwhatever/custom/pages/listItems/searchLocation/geocoder/geocoderresult.dart';
 
 part 'form_input_field_info.freezed.dart';
 
@@ -111,6 +111,6 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     required String id,
     required String label,
     required String sectionName,
-    required Marker? marker,
+    @Default(null) GeocoderResult? value,
   }) = FormInputFieldInfoMap;
 }
