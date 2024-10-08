@@ -10,14 +10,12 @@ import '/l10n/l10n.dart';
 import '/standard/app/bloc/app_bloc.dart';
 import '/standard/app/bloc/app_event.dart';
 import '/standard/app/bloc/app_state.dart';
-import '/standard/appUi/typography/app_text_styles.dart';
 import '/standard/constants.dart';
 import '/standard/settings/settings.dart';
 import '/standard/userRepository/models/user.dart';
 import '/standard/widgets/appBar/app_bar_action.dart';
 import '/standard/widgets/appBar/app_bar_action_icon.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
-import '/standard/widgets/vStack/v_stack.dart';
 import '/standard/widgets/vStack/x_stack.dart' as x_stack;
 
 const String className = 'AddListItemPage';
@@ -51,7 +49,6 @@ class OnboardingPage extends StatefulWidget {
 class _OnboardingPageState extends State<OnboardingPage> {
   static String className = 'OnboardingPage';
   final _formKey = GlobalKey<FormBuilderState>();
-  bool _nameHasError = false;
 
   @override
   Widget build(BuildContext context) {
