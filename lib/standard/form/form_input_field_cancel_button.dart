@@ -23,7 +23,7 @@ class FormInputFieldCancelButton extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
         child: Text(
-          'Reset',
+          field.label,
           style: TextStyle(
             color: Theme.of(context).colorScheme.secondary,
           ),

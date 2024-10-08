@@ -54,16 +54,20 @@ class _FormGeneratorState extends State<FormGenerator> {
     // logger.i('$className: building.');
     // logger.i('$className: fields: ${widget.fields.length}.');
 
-    return FormBuilder(
-      key: widget.formKey,
-      // IMPORTANT to remove all references from dynamic field when delete
-      clearValueOnUnregister: true,
-      skipDisabled: true,
-      child: VStack(
-        spacing: 25,
-        children: widget.sections.map(generateSection).toList(),
+    return SafeArea(
+        child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: FormBuilder(
+        key: widget.formKey,
+        // IMPORTANT to remove all references from dynamic field when delete
+        clearValueOnUnregister: true,
+        skipDisabled: true,
+        child: VStack(
+          spacing: 25,
+          children: widget.sections.map(generateSection).toList(),
+        ),
       ),
-    );
+    ));
   }
 
   Widget generateSection(FormInputSection section) {
@@ -81,9 +85,9 @@ class _FormGeneratorState extends State<FormGenerator> {
       mainAxisAlignment: section.direction == x_stack.AxisDirection.horizontal
           ? MainAxisAlignment.spaceEvenly
           : MainAxisAlignment.center,
-      spacing: section.direction == x_stack.AxisDirection.horizontal ? 0 : 10,
+      spacing: section.direction == x_stack.AxisDirection.horizontal ? 10 : 10,
       spacingPosition: section.direction == x_stack.AxisDirection.horizontal
-          ? SpacingPosition.none
+          ? SpacingPosition.beforeAndBetweenAndAfter
           : SpacingPosition.beforeAndBetween,
       children: [
         ...actualFields,

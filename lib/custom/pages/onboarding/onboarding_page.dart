@@ -2,6 +2,9 @@ import 'package:flutter/material.dart'; // hide Page;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:listwhatever/standard/form/form_generator.dart';
+import 'package:listwhatever/standard/form/form_input_field_info.dart';
+import 'package:listwhatever/standard/form/form_input_section.dart';
 
 import '/l10n/l10n.dart';
 import '/standard/app/bloc/app_bloc.dart';
@@ -15,9 +18,27 @@ import '/standard/widgets/appBar/app_bar_action.dart';
 import '/standard/widgets/appBar/app_bar_action_icon.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
 import '/standard/widgets/vStack/v_stack.dart';
+import '/standard/widgets/vStack/x_stack.dart' as x_stack;
 
-enum OnboardingValues {
-  name,
+const String className = 'AddListItemPage';
+
+enum SectionName {
+  personalinfo._('personalinfo'),
+  submit._('submit');
+
+  const SectionName._(this.value);
+
+  final String value;
+}
+
+enum FieldId {
+  name._('name'),
+  cancel._('cancel'),
+  submit._('submit');
+
+  const FieldId._(this.value);
+
+  final String value;
 }
 
 class OnboardingPage extends StatefulWidget {
@@ -42,158 +63,103 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
     final originalUser = appState.user;
 
+    final fields = [
+      nameInputField(),
+      cancelButton(),
+      submitButton(originalUser),
+    ];
+    print('fields: ${fields.length}');
+
+    final sections = getSections();
+
+    final formGenerator = FormGenerator(
+      formKey: _formKey,
+      sections: sections,
+      fields: fields,
+    );
+
     return SafeArea(
       child: Scaffold(
-        appBar: CommonAppBar(
-          title: AppLocalizations.of(context).onboardingHeader,
-          actions: [
-            AppBarAction(
-              type: AppBarActionType.icon,
-              iconAction: AppBarActionIcon(
-                title: 'Log out',
-                icon: Icons.logout,
-                key: const Key('logoutAction'),
-                callback: () async {
-                  context.read<AppBloc>().add(const AppLogoutRequested());
-                },
-              ),
-            ),
-          ],
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: createForm(
-              originalUser,
-              [
-                header('Personal info'),
-                padLeft(createNameField()),
-                createDivider(),
-                const SizedBox(height: 40),
-                Row(
-                  children: <Widget>[
-                    createResetButton(context),
-                    const SizedBox(width: 20),
-                    createSaveButton(originalUser),
-                  ],
+          appBar: CommonAppBar(
+            title: AppLocalizations.of(context).onboardingHeader,
+            actions: [
+              AppBarAction(
+                type: AppBarActionType.icon,
+                iconAction: AppBarActionIcon(
+                  title: 'Log out',
+                  icon: Icons.logout,
+                  key: const Key('logoutAction'),
+                  callback: () async {
+                    context.read<AppBloc>().add(const AppLogoutRequested());
+                  },
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ),
-      ),
+          body: formGenerator),
     );
   }
 
-  FormBuilder createForm(User user, List<Widget> children) {
-    final initialValue = {
-      OnboardingValues.name.toString(): user.name,
-    };
-
-    return FormBuilder(
-      key: _formKey,
-      onChanged: () {
-        _formKey.currentState!.save();
-        // logger.d(_formKey.currentState!.value.toString());
-      },
-      autovalidateMode: AutovalidateMode.disabled,
-      initialValue: initialValue,
-      skipDisabled: true,
-      child: VStack(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: children,
+  List<FormInputSection> getSections() {
+    return [
+      FormInputSection(
+        name: SectionName.personalinfo.name,
+        direction: x_stack.AxisDirection.vertical,
+        showBorder: false,
       ),
-    );
+      FormInputSection(
+        name: SectionName.submit.name,
+        direction: x_stack.AxisDirection.horizontal,
+        showBorder: false,
+      ),
+    ];
   }
 
-  Widget header(String header, [Widget? button]) {
-    final text = Text(
-      header,
-      style: UITextStyle.subtitle1,
-    );
-    if (button != null) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [text, button],
-      );
-    } else {
-      return text;
-    }
-  }
-
-  FormBuilderTextField createNameField() {
-    return FormBuilderTextField(
-      autovalidateMode: AutovalidateMode.always,
-      name: OnboardingValues.name.toString(),
-      decoration: InputDecoration(
-        labelText: 'Name',
-        suffixIcon: _nameHasError
-            ? const Icon(Icons.error, color: Colors.red)
-            : const Icon(Icons.check, color: Colors.green),
-      ),
-      onChanged: (val) {
-        setState(() {
-          _nameHasError = !(_formKey
-                  .currentState?.fields[OnboardingValues.name.toString()]
-                  ?.validate() ??
-              false);
-        });
-      },
-      validator: FormBuilderValidators.compose([
+  FormInputFieldInfo nameInputField() {
+    return FormInputFieldInfo.textArea(
+      id: FieldId.name.name,
+      label: 'Name',
+      currentValue: '',
+      validators: [
         FormBuilderValidators.required(),
-        FormBuilderValidators.maxLength(70),
-      ]),
-      keyboardType: TextInputType.name,
-      textInputAction: TextInputAction.next,
+        FormBuilderValidators.maxLength(150),
+      ],
+      sectionName: SectionName.personalinfo.name,
+      hasError: false,
     );
   }
 
-  Expanded createSaveButton(User originalUser) {
-    return Expanded(
-      child: ElevatedButton(
-        onPressed: () {
-          if (_formKey.currentState?.saveAndValidate() ?? false) {
-            // logger.d(_formKey.currentState?.value.toString());
-            save(originalUser, _formKey.currentState);
-          } else {
-            logger
-              ..i(_formKey.currentState?.value.toString())
-              ..i('validation failed');
-          }
-        },
-        child: const Text(
-          'Save',
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
+  FormInputFieldInfo cancelButton() {
+    return FormInputFieldInfo.cancelButton(
+      id: FieldId.cancel.name,
+      label: 'Cancel',
+      sectionName: SectionName.submit.name,
+      cancel: () {
+        print('cancelled');
+      },
     );
   }
 
-  Expanded createResetButton(BuildContext context) {
-    return Expanded(
-      child: OutlinedButton(
-        onPressed: () {
-          _formKey.currentState?.reset();
-        },
-        child: Text(
-          'Reset',
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.secondary,
-          ),
-        ),
-      ),
+  FormInputFieldInfo submitButton(User originalUser) {
+    return FormInputFieldInfo.submitButton(
+      id: FieldId.submit.name,
+      label: 'Submit',
+      sectionName: SectionName.submit.name,
+      save: (Map<String, dynamic>? values) {
+        print('save');
+        if (values == null) {
+          print('No values to save');
+          return;
+        }
+        save(originalUser, values);
+      },
     );
   }
 
-  void save(User originalUser, FormBuilderState? currentState) {
-    final values = <String, dynamic>{};
-    for (final entry in currentState!.fields.entries) {
-      values[entry.key] = entry.value.value;
-    }
-
+  void save(User originalUser, Map<String, dynamic> values) {
     logger.d('values: $values   ');
     final user = User(
-      name: values[OnboardingValues.name.toString()]! as String,
+      name: values[FieldId.name.name]! as String,
       settings: defaultSettings,
       id: originalUser.id,
       email: originalUser.email,
@@ -207,22 +173,5 @@ class _OnboardingPageState extends State<OnboardingPage> {
       logger.d('$className => updating firestoreUser $user   ');
       BlocProvider.of<AppBloc>(context).add(UpdateUser(user: user));
     }
-  }
-
-  Widget padLeft(Widget child) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 8),
-      child: child,
-    );
-  }
-
-  Divider createDivider() {
-    return const Divider(
-      height: 20,
-      thickness: 2,
-      indent: 24,
-      endIndent: 24,
-      color: Colors.black,
-    );
   }
 }
