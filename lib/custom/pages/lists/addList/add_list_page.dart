@@ -253,12 +253,12 @@ class _AddListPageState extends State<AddListPage> {
     return FormInputFieldInfo.dropdown(
       id: FieldId.listType.value,
       label: 'List type',
-      currentValue: list?.listType.name ?? ListType.generic.name,
+      currentValue: list?.listType ?? ListType.generic,
       validators: [
         FormBuilderValidators.required(),
         FormBuilderValidators.maxLength(70),
       ],
-      options: ListType.values.map((v) => v.name).toList(),
+      options: ListType.values.toList(),
       optionToString: (listType) => (listType as ListType?)?.name ?? '',
       sectionName: SectionName.basic.value,
       onChange: (listType) => setState(() {
