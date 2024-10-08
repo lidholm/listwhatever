@@ -12,6 +12,7 @@ import 'package:listwhatever/standard/form/form_input_field_drop_down.dart';
 import 'package:listwhatever/standard/form/form_input_field_image_picker.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 import 'package:listwhatever/standard/form/form_input_field_map.dart';
+import 'package:listwhatever/standard/form/form_input_field_slider.dart';
 import 'package:listwhatever/standard/form/form_input_field_submit_button.dart';
 import 'package:listwhatever/standard/form/form_input_field_text_area.dart';
 import 'package:listwhatever/standard/form/form_input_field_two_auto_complete_fields.dart';
@@ -55,19 +56,20 @@ class _FormGeneratorState extends State<FormGenerator> {
     // logger.i('$className: fields: ${widget.fields.length}.');
 
     return SafeArea(
-        child: Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: FormBuilder(
-        key: widget.formKey,
-        // IMPORTANT to remove all references from dynamic field when delete
-        clearValueOnUnregister: true,
-        skipDisabled: true,
-        child: VStack(
-          spacing: 25,
-          children: widget.sections.map(generateSection).toList(),
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: FormBuilder(
+          key: widget.formKey,
+          // IMPORTANT to remove all references from dynamic field when delete
+          clearValueOnUnregister: true,
+          skipDisabled: true,
+          child: VStack(
+            spacing: 25,
+            children: widget.sections.map(generateSection).toList(),
+          ),
         ),
       ),
-    ));
+    );
   }
 
   Widget generateSection(FormInputSection section) {
@@ -128,6 +130,7 @@ class _FormGeneratorState extends State<FormGenerator> {
         FormInputFieldCustomButton(formKey: widget.formKey, field: field),
       FormInputFieldInfoDate() => FormInputFieldDate(field: field),
       FormInputFieldInfoMap() => FormInputFieldMap(field: field),
+      FormInputFieldInfoSlider() => FormInputFieldSlider(field: field),
     };
     return response;
   }

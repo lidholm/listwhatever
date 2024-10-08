@@ -113,4 +113,14 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     required String sectionName,
     @Default(null) GeocoderResult? value,
   }) = FormInputFieldInfoMap;
+
+  const factory FormInputFieldInfo.slider({
+    required String id,
+    required String label,
+    required (double, double) range,
+    required double currentValue,
+    required List<FormFieldValidator<bool>> validators,
+    required String sectionName,
+    required bool hasError,
+  }) = FormInputFieldInfoSlider;
 }

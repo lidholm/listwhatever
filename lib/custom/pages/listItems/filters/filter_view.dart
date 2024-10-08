@@ -90,7 +90,7 @@ class _FilterViewState extends State<FilterView> {
     final fields = [
       startDateInputField(),
       endDateInputField(),
-      // distanceInputField(),
+      distanceInputField(),
       cancelButton(),
       submitButton(),
     ];
@@ -169,6 +169,18 @@ class _FilterViewState extends State<FilterView> {
       currentValue: '',
       validators: [],
       sectionName: SectionName.dates.name,
+      hasError: false,
+    );
+  }
+
+  FormInputFieldInfo distanceInputField() {
+    return FormInputFieldInfo.slider(
+      id: FieldId.distance.name,
+      label: 'End date',
+      currentValue: 0,
+      range: (distanceMin, distanceMax),
+      validators: [],
+      sectionName: SectionName.distance.name,
       hasError: false,
     );
   }

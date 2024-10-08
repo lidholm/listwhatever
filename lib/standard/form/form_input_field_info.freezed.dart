@@ -105,6 +105,15 @@ mixin _$FormInputFieldInfo {
     required TResult Function(
             String id, String label, String sectionName, GeocoderResult? value)
         map,
+    required TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)
+        slider,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -194,6 +203,15 @@ mixin _$FormInputFieldInfo {
     TResult? Function(
             String id, String label, String sectionName, GeocoderResult? value)?
         map,
+    TResult? Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        slider,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -283,6 +301,15 @@ mixin _$FormInputFieldInfo {
     TResult Function(
             String id, String label, String sectionName, GeocoderResult? value)?
         map,
+    TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        slider,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -302,6 +329,7 @@ mixin _$FormInputFieldInfo {
         customButton,
     required TResult Function(FormInputFieldInfoDate value) date,
     required TResult Function(FormInputFieldInfoMap value) map,
+    required TResult Function(FormInputFieldInfoSlider value) slider,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -317,6 +345,7 @@ mixin _$FormInputFieldInfo {
     TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult? Function(FormInputFieldInfoDate value)? date,
     TResult? Function(FormInputFieldInfoMap value)? map,
+    TResult? Function(FormInputFieldInfoSlider value)? slider,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -332,6 +361,7 @@ mixin _$FormInputFieldInfo {
     TResult Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult Function(FormInputFieldInfoDate value)? date,
     TResult Function(FormInputFieldInfoMap value)? map,
+    TResult Function(FormInputFieldInfoSlider value)? slider,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -684,6 +714,15 @@ class _$FormInputFieldInfoTextAreaImpl
     required TResult Function(
             String id, String label, String sectionName, GeocoderResult? value)
         map,
+    required TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)
+        slider,
   }) {
     return textArea(id, label, validators, sectionName, hasError, currentValue,
         onChange, deletable, onDelete, controller);
@@ -777,6 +816,15 @@ class _$FormInputFieldInfoTextAreaImpl
     TResult? Function(
             String id, String label, String sectionName, GeocoderResult? value)?
         map,
+    TResult? Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        slider,
   }) {
     return textArea?.call(id, label, validators, sectionName, hasError,
         currentValue, onChange, deletable, onDelete, controller);
@@ -870,6 +918,15 @@ class _$FormInputFieldInfoTextAreaImpl
     TResult Function(
             String id, String label, String sectionName, GeocoderResult? value)?
         map,
+    TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        slider,
     required TResult orElse(),
   }) {
     if (textArea != null) {
@@ -896,6 +953,7 @@ class _$FormInputFieldInfoTextAreaImpl
         customButton,
     required TResult Function(FormInputFieldInfoDate value) date,
     required TResult Function(FormInputFieldInfoMap value) map,
+    required TResult Function(FormInputFieldInfoSlider value) slider,
   }) {
     return textArea(this);
   }
@@ -914,6 +972,7 @@ class _$FormInputFieldInfoTextAreaImpl
     TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult? Function(FormInputFieldInfoDate value)? date,
     TResult? Function(FormInputFieldInfoMap value)? map,
+    TResult? Function(FormInputFieldInfoSlider value)? slider,
   }) {
     return textArea?.call(this);
   }
@@ -932,6 +991,7 @@ class _$FormInputFieldInfoTextAreaImpl
     TResult Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult Function(FormInputFieldInfoDate value)? date,
     TResult Function(FormInputFieldInfoMap value)? map,
+    TResult Function(FormInputFieldInfoSlider value)? slider,
     required TResult orElse(),
   }) {
     if (textArea != null) {
@@ -1294,6 +1354,15 @@ class _$FormInputFieldInfoDropDownImpl
     required TResult Function(
             String id, String label, String sectionName, GeocoderResult? value)
         map,
+    required TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)
+        slider,
   }) {
     return dropdown(id, label, currentValue, options, optionToString,
         validators, sectionName, hasError, onChange, deletable, onDelete);
@@ -1387,6 +1456,15 @@ class _$FormInputFieldInfoDropDownImpl
     TResult? Function(
             String id, String label, String sectionName, GeocoderResult? value)?
         map,
+    TResult? Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        slider,
   }) {
     return dropdown?.call(id, label, currentValue, options, optionToString,
         validators, sectionName, hasError, onChange, deletable, onDelete);
@@ -1480,6 +1558,15 @@ class _$FormInputFieldInfoDropDownImpl
     TResult Function(
             String id, String label, String sectionName, GeocoderResult? value)?
         map,
+    TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        slider,
     required TResult orElse(),
   }) {
     if (dropdown != null) {
@@ -1506,6 +1593,7 @@ class _$FormInputFieldInfoDropDownImpl
         customButton,
     required TResult Function(FormInputFieldInfoDate value) date,
     required TResult Function(FormInputFieldInfoMap value) map,
+    required TResult Function(FormInputFieldInfoSlider value) slider,
   }) {
     return dropdown(this);
   }
@@ -1524,6 +1612,7 @@ class _$FormInputFieldInfoDropDownImpl
     TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult? Function(FormInputFieldInfoDate value)? date,
     TResult? Function(FormInputFieldInfoMap value)? map,
+    TResult? Function(FormInputFieldInfoSlider value)? slider,
   }) {
     return dropdown?.call(this);
   }
@@ -1542,6 +1631,7 @@ class _$FormInputFieldInfoDropDownImpl
     TResult Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult Function(FormInputFieldInfoDate value)? date,
     TResult Function(FormInputFieldInfoMap value)? map,
+    TResult Function(FormInputFieldInfoSlider value)? slider,
     required TResult orElse(),
   }) {
     if (dropdown != null) {
@@ -1873,6 +1963,15 @@ class _$FormInputFieldInfoCheckboxImpl
     required TResult Function(
             String id, String label, String sectionName, GeocoderResult? value)
         map,
+    required TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)
+        slider,
   }) {
     return checkbox(id, label, currentValue, validators, sectionName, hasError,
         onChange, deletable, onDelete);
@@ -1966,6 +2065,15 @@ class _$FormInputFieldInfoCheckboxImpl
     TResult? Function(
             String id, String label, String sectionName, GeocoderResult? value)?
         map,
+    TResult? Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        slider,
   }) {
     return checkbox?.call(id, label, currentValue, validators, sectionName,
         hasError, onChange, deletable, onDelete);
@@ -2059,6 +2167,15 @@ class _$FormInputFieldInfoCheckboxImpl
     TResult Function(
             String id, String label, String sectionName, GeocoderResult? value)?
         map,
+    TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        slider,
     required TResult orElse(),
   }) {
     if (checkbox != null) {
@@ -2085,6 +2202,7 @@ class _$FormInputFieldInfoCheckboxImpl
         customButton,
     required TResult Function(FormInputFieldInfoDate value) date,
     required TResult Function(FormInputFieldInfoMap value) map,
+    required TResult Function(FormInputFieldInfoSlider value) slider,
   }) {
     return checkbox(this);
   }
@@ -2103,6 +2221,7 @@ class _$FormInputFieldInfoCheckboxImpl
     TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult? Function(FormInputFieldInfoDate value)? date,
     TResult? Function(FormInputFieldInfoMap value)? map,
+    TResult? Function(FormInputFieldInfoSlider value)? slider,
   }) {
     return checkbox?.call(this);
   }
@@ -2121,6 +2240,7 @@ class _$FormInputFieldInfoCheckboxImpl
     TResult Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult Function(FormInputFieldInfoDate value)? date,
     TResult Function(FormInputFieldInfoMap value)? map,
+    TResult Function(FormInputFieldInfoSlider value)? slider,
     required TResult orElse(),
   }) {
     if (checkbox != null) {
@@ -2421,6 +2541,15 @@ class _$FormInputFieldInfoImagePickerImpl
     required TResult Function(
             String id, String label, String sectionName, GeocoderResult? value)
         map,
+    required TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)
+        slider,
   }) {
     return imagePicker(
         id, label, currentValue, validators, sectionName, hasError, onChange);
@@ -2514,6 +2643,15 @@ class _$FormInputFieldInfoImagePickerImpl
     TResult? Function(
             String id, String label, String sectionName, GeocoderResult? value)?
         map,
+    TResult? Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        slider,
   }) {
     return imagePicker?.call(
         id, label, currentValue, validators, sectionName, hasError, onChange);
@@ -2607,6 +2745,15 @@ class _$FormInputFieldInfoImagePickerImpl
     TResult Function(
             String id, String label, String sectionName, GeocoderResult? value)?
         map,
+    TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        slider,
     required TResult orElse(),
   }) {
     if (imagePicker != null) {
@@ -2633,6 +2780,7 @@ class _$FormInputFieldInfoImagePickerImpl
         customButton,
     required TResult Function(FormInputFieldInfoDate value) date,
     required TResult Function(FormInputFieldInfoMap value) map,
+    required TResult Function(FormInputFieldInfoSlider value) slider,
   }) {
     return imagePicker(this);
   }
@@ -2651,6 +2799,7 @@ class _$FormInputFieldInfoImagePickerImpl
     TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult? Function(FormInputFieldInfoDate value)? date,
     TResult? Function(FormInputFieldInfoMap value)? map,
+    TResult? Function(FormInputFieldInfoSlider value)? slider,
   }) {
     return imagePicker?.call(this);
   }
@@ -2669,6 +2818,7 @@ class _$FormInputFieldInfoImagePickerImpl
     TResult Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult Function(FormInputFieldInfoDate value)? date,
     TResult Function(FormInputFieldInfoMap value)? map,
+    TResult Function(FormInputFieldInfoSlider value)? slider,
     required TResult orElse(),
   }) {
     if (imagePicker != null) {
@@ -2911,6 +3061,15 @@ class _$FormInputFieldInfoCancelButtonImpl
     required TResult Function(
             String id, String label, String sectionName, GeocoderResult? value)
         map,
+    required TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)
+        slider,
   }) {
     return cancelButton(id, label, sectionName, cancel);
   }
@@ -3003,6 +3162,15 @@ class _$FormInputFieldInfoCancelButtonImpl
     TResult? Function(
             String id, String label, String sectionName, GeocoderResult? value)?
         map,
+    TResult? Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        slider,
   }) {
     return cancelButton?.call(id, label, sectionName, cancel);
   }
@@ -3095,6 +3263,15 @@ class _$FormInputFieldInfoCancelButtonImpl
     TResult Function(
             String id, String label, String sectionName, GeocoderResult? value)?
         map,
+    TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        slider,
     required TResult orElse(),
   }) {
     if (cancelButton != null) {
@@ -3120,6 +3297,7 @@ class _$FormInputFieldInfoCancelButtonImpl
         customButton,
     required TResult Function(FormInputFieldInfoDate value) date,
     required TResult Function(FormInputFieldInfoMap value) map,
+    required TResult Function(FormInputFieldInfoSlider value) slider,
   }) {
     return cancelButton(this);
   }
@@ -3138,6 +3316,7 @@ class _$FormInputFieldInfoCancelButtonImpl
     TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult? Function(FormInputFieldInfoDate value)? date,
     TResult? Function(FormInputFieldInfoMap value)? map,
+    TResult? Function(FormInputFieldInfoSlider value)? slider,
   }) {
     return cancelButton?.call(this);
   }
@@ -3156,6 +3335,7 @@ class _$FormInputFieldInfoCancelButtonImpl
     TResult Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult Function(FormInputFieldInfoDate value)? date,
     TResult Function(FormInputFieldInfoMap value)? map,
+    TResult Function(FormInputFieldInfoSlider value)? slider,
     required TResult orElse(),
   }) {
     if (cancelButton != null) {
@@ -3395,6 +3575,15 @@ class _$FormInputFieldInfoSubmitButtonImpl
     required TResult Function(
             String id, String label, String sectionName, GeocoderResult? value)
         map,
+    required TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)
+        slider,
   }) {
     return submitButton(id, label, sectionName, save);
   }
@@ -3487,6 +3676,15 @@ class _$FormInputFieldInfoSubmitButtonImpl
     TResult? Function(
             String id, String label, String sectionName, GeocoderResult? value)?
         map,
+    TResult? Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        slider,
   }) {
     return submitButton?.call(id, label, sectionName, save);
   }
@@ -3579,6 +3777,15 @@ class _$FormInputFieldInfoSubmitButtonImpl
     TResult Function(
             String id, String label, String sectionName, GeocoderResult? value)?
         map,
+    TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        slider,
     required TResult orElse(),
   }) {
     if (submitButton != null) {
@@ -3604,6 +3811,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
         customButton,
     required TResult Function(FormInputFieldInfoDate value) date,
     required TResult Function(FormInputFieldInfoMap value) map,
+    required TResult Function(FormInputFieldInfoSlider value) slider,
   }) {
     return submitButton(this);
   }
@@ -3622,6 +3830,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
     TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult? Function(FormInputFieldInfoDate value)? date,
     TResult? Function(FormInputFieldInfoMap value)? map,
+    TResult? Function(FormInputFieldInfoSlider value)? slider,
   }) {
     return submitButton?.call(this);
   }
@@ -3640,6 +3849,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
     TResult Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult Function(FormInputFieldInfoDate value)? date,
     TResult Function(FormInputFieldInfoMap value)? map,
+    TResult Function(FormInputFieldInfoSlider value)? slider,
     required TResult orElse(),
   }) {
     if (submitButton != null) {
@@ -4060,6 +4270,15 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     required TResult Function(
             String id, String label, String sectionName, GeocoderResult? value)
         map,
+    required TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)
+        slider,
   }) {
     return twoAutoCompleteFields(
         id,
@@ -4167,6 +4386,15 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     TResult? Function(
             String id, String label, String sectionName, GeocoderResult? value)?
         map,
+    TResult? Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        slider,
   }) {
     return twoAutoCompleteFields?.call(
         id,
@@ -4274,6 +4502,15 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     TResult Function(
             String id, String label, String sectionName, GeocoderResult? value)?
         map,
+    TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        slider,
     required TResult orElse(),
   }) {
     if (twoAutoCompleteFields != null) {
@@ -4314,6 +4551,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
         customButton,
     required TResult Function(FormInputFieldInfoDate value) date,
     required TResult Function(FormInputFieldInfoMap value) map,
+    required TResult Function(FormInputFieldInfoSlider value) slider,
   }) {
     return twoAutoCompleteFields(this);
   }
@@ -4332,6 +4570,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult? Function(FormInputFieldInfoDate value)? date,
     TResult? Function(FormInputFieldInfoMap value)? map,
+    TResult? Function(FormInputFieldInfoSlider value)? slider,
   }) {
     return twoAutoCompleteFields?.call(this);
   }
@@ -4350,6 +4589,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     TResult Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult Function(FormInputFieldInfoDate value)? date,
     TResult Function(FormInputFieldInfoMap value)? map,
+    TResult Function(FormInputFieldInfoSlider value)? slider,
     required TResult orElse(),
   }) {
     if (twoAutoCompleteFields != null) {
@@ -4611,6 +4851,15 @@ class _$FormInputFieldInfoCustomButtonImpl
     required TResult Function(
             String id, String label, String sectionName, GeocoderResult? value)
         map,
+    required TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)
+        slider,
   }) {
     return customButton(id, label, sectionName, callback);
   }
@@ -4703,6 +4952,15 @@ class _$FormInputFieldInfoCustomButtonImpl
     TResult? Function(
             String id, String label, String sectionName, GeocoderResult? value)?
         map,
+    TResult? Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        slider,
   }) {
     return customButton?.call(id, label, sectionName, callback);
   }
@@ -4795,6 +5053,15 @@ class _$FormInputFieldInfoCustomButtonImpl
     TResult Function(
             String id, String label, String sectionName, GeocoderResult? value)?
         map,
+    TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        slider,
     required TResult orElse(),
   }) {
     if (customButton != null) {
@@ -4820,6 +5087,7 @@ class _$FormInputFieldInfoCustomButtonImpl
         customButton,
     required TResult Function(FormInputFieldInfoDate value) date,
     required TResult Function(FormInputFieldInfoMap value) map,
+    required TResult Function(FormInputFieldInfoSlider value) slider,
   }) {
     return customButton(this);
   }
@@ -4838,6 +5106,7 @@ class _$FormInputFieldInfoCustomButtonImpl
     TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult? Function(FormInputFieldInfoDate value)? date,
     TResult? Function(FormInputFieldInfoMap value)? map,
+    TResult? Function(FormInputFieldInfoSlider value)? slider,
   }) {
     return customButton?.call(this);
   }
@@ -4856,6 +5125,7 @@ class _$FormInputFieldInfoCustomButtonImpl
     TResult Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult Function(FormInputFieldInfoDate value)? date,
     TResult Function(FormInputFieldInfoMap value)? map,
+    TResult Function(FormInputFieldInfoSlider value)? slider,
     required TResult orElse(),
   }) {
     if (customButton != null) {
@@ -5174,6 +5444,15 @@ class _$FormInputFieldInfoDateImpl
     required TResult Function(
             String id, String label, String sectionName, GeocoderResult? value)
         map,
+    required TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)
+        slider,
   }) {
     return date(id, label, currentValue, validators, sectionName, hasError,
         onChange, deletable, onDelete);
@@ -5267,6 +5546,15 @@ class _$FormInputFieldInfoDateImpl
     TResult? Function(
             String id, String label, String sectionName, GeocoderResult? value)?
         map,
+    TResult? Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        slider,
   }) {
     return date?.call(id, label, currentValue, validators, sectionName,
         hasError, onChange, deletable, onDelete);
@@ -5360,6 +5648,15 @@ class _$FormInputFieldInfoDateImpl
     TResult Function(
             String id, String label, String sectionName, GeocoderResult? value)?
         map,
+    TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        slider,
     required TResult orElse(),
   }) {
     if (date != null) {
@@ -5386,6 +5683,7 @@ class _$FormInputFieldInfoDateImpl
         customButton,
     required TResult Function(FormInputFieldInfoDate value) date,
     required TResult Function(FormInputFieldInfoMap value) map,
+    required TResult Function(FormInputFieldInfoSlider value) slider,
   }) {
     return date(this);
   }
@@ -5404,6 +5702,7 @@ class _$FormInputFieldInfoDateImpl
     TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult? Function(FormInputFieldInfoDate value)? date,
     TResult? Function(FormInputFieldInfoMap value)? map,
+    TResult? Function(FormInputFieldInfoSlider value)? slider,
   }) {
     return date?.call(this);
   }
@@ -5422,6 +5721,7 @@ class _$FormInputFieldInfoDateImpl
     TResult Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult Function(FormInputFieldInfoDate value)? date,
     TResult Function(FormInputFieldInfoMap value)? map,
+    TResult Function(FormInputFieldInfoSlider value)? slider,
     required TResult orElse(),
   }) {
     if (date != null) {
@@ -5680,6 +5980,15 @@ class _$FormInputFieldInfoMapImpl
     required TResult Function(
             String id, String label, String sectionName, GeocoderResult? value)
         map,
+    required TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)
+        slider,
   }) {
     return map(id, label, sectionName, value);
   }
@@ -5772,6 +6081,15 @@ class _$FormInputFieldInfoMapImpl
     TResult? Function(
             String id, String label, String sectionName, GeocoderResult? value)?
         map,
+    TResult? Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        slider,
   }) {
     return map?.call(id, label, sectionName, value);
   }
@@ -5864,6 +6182,15 @@ class _$FormInputFieldInfoMapImpl
     TResult Function(
             String id, String label, String sectionName, GeocoderResult? value)?
         map,
+    TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        slider,
     required TResult orElse(),
   }) {
     if (map != null) {
@@ -5889,6 +6216,7 @@ class _$FormInputFieldInfoMapImpl
         customButton,
     required TResult Function(FormInputFieldInfoDate value) date,
     required TResult Function(FormInputFieldInfoMap value) map,
+    required TResult Function(FormInputFieldInfoSlider value) slider,
   }) {
     return map(this);
   }
@@ -5907,6 +6235,7 @@ class _$FormInputFieldInfoMapImpl
     TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult? Function(FormInputFieldInfoDate value)? date,
     TResult? Function(FormInputFieldInfoMap value)? map,
+    TResult? Function(FormInputFieldInfoSlider value)? slider,
   }) {
     return map?.call(this);
   }
@@ -5925,6 +6254,7 @@ class _$FormInputFieldInfoMapImpl
     TResult Function(FormInputFieldInfoCustomButton value)? customButton,
     TResult Function(FormInputFieldInfoDate value)? date,
     TResult Function(FormInputFieldInfoMap value)? map,
+    TResult Function(FormInputFieldInfoSlider value)? slider,
     required TResult orElse(),
   }) {
     if (map != null) {
@@ -5953,5 +6283,569 @@ abstract class FormInputFieldInfoMap implements FormInputFieldInfo {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FormInputFieldInfoMapImplCopyWith<_$FormInputFieldInfoMapImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FormInputFieldInfoSliderImplCopyWith<$Res>
+    implements $FormInputFieldInfoCopyWith<$Res> {
+  factory _$$FormInputFieldInfoSliderImplCopyWith(
+          _$FormInputFieldInfoSliderImpl value,
+          $Res Function(_$FormInputFieldInfoSliderImpl) then) =
+      __$$FormInputFieldInfoSliderImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String label,
+      (double, double) range,
+      double currentValue,
+      List<String? Function(bool?)> validators,
+      String sectionName,
+      bool hasError});
+}
+
+/// @nodoc
+class __$$FormInputFieldInfoSliderImplCopyWithImpl<$Res>
+    extends _$FormInputFieldInfoCopyWithImpl<$Res,
+        _$FormInputFieldInfoSliderImpl>
+    implements _$$FormInputFieldInfoSliderImplCopyWith<$Res> {
+  __$$FormInputFieldInfoSliderImplCopyWithImpl(
+      _$FormInputFieldInfoSliderImpl _value,
+      $Res Function(_$FormInputFieldInfoSliderImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of FormInputFieldInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? label = null,
+    Object? range = null,
+    Object? currentValue = null,
+    Object? validators = null,
+    Object? sectionName = null,
+    Object? hasError = null,
+  }) {
+    return _then(_$FormInputFieldInfoSliderImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      label: null == label
+          ? _value.label
+          : label // ignore: cast_nullable_to_non_nullable
+              as String,
+      range: null == range
+          ? _value.range
+          : range // ignore: cast_nullable_to_non_nullable
+              as (double, double),
+      currentValue: null == currentValue
+          ? _value.currentValue
+          : currentValue // ignore: cast_nullable_to_non_nullable
+              as double,
+      validators: null == validators
+          ? _value._validators
+          : validators // ignore: cast_nullable_to_non_nullable
+              as List<String? Function(bool?)>,
+      sectionName: null == sectionName
+          ? _value.sectionName
+          : sectionName // ignore: cast_nullable_to_non_nullable
+              as String,
+      hasError: null == hasError
+          ? _value.hasError
+          : hasError // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$FormInputFieldInfoSliderImpl
+    with DiagnosticableTreeMixin
+    implements FormInputFieldInfoSlider {
+  const _$FormInputFieldInfoSliderImpl(
+      {required this.id,
+      required this.label,
+      required this.range,
+      required this.currentValue,
+      required final List<String? Function(bool?)> validators,
+      required this.sectionName,
+      required this.hasError})
+      : _validators = validators;
+
+  @override
+  final String id;
+  @override
+  final String label;
+  @override
+  final (double, double) range;
+  @override
+  final double currentValue;
+  final List<String? Function(bool?)> _validators;
+  @override
+  List<String? Function(bool?)> get validators {
+    if (_validators is EqualUnmodifiableListView) return _validators;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_validators);
+  }
+
+  @override
+  final String sectionName;
+  @override
+  final bool hasError;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'FormInputFieldInfo.slider(id: $id, label: $label, range: $range, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'FormInputFieldInfo.slider'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('label', label))
+      ..add(DiagnosticsProperty('range', range))
+      ..add(DiagnosticsProperty('currentValue', currentValue))
+      ..add(DiagnosticsProperty('validators', validators))
+      ..add(DiagnosticsProperty('sectionName', sectionName))
+      ..add(DiagnosticsProperty('hasError', hasError));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FormInputFieldInfoSliderImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.label, label) || other.label == label) &&
+            (identical(other.range, range) || other.range == range) &&
+            (identical(other.currentValue, currentValue) ||
+                other.currentValue == currentValue) &&
+            const DeepCollectionEquality()
+                .equals(other._validators, _validators) &&
+            (identical(other.sectionName, sectionName) ||
+                other.sectionName == sectionName) &&
+            (identical(other.hasError, hasError) ||
+                other.hasError == hasError));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id, label, range, currentValue,
+      const DeepCollectionEquality().hash(_validators), sectionName, hasError);
+
+  /// Create a copy of FormInputFieldInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FormInputFieldInfoSliderImplCopyWith<_$FormInputFieldInfoSliderImpl>
+      get copyWith => __$$FormInputFieldInfoSliderImplCopyWithImpl<
+          _$FormInputFieldInfoSliderImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String id,
+            String label,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError,
+            String? currentValue,
+            void Function(String)? onChange,
+            bool deletable,
+            void Function()? onDelete,
+            TextEditingController? controller)
+        textArea,
+    required TResult Function(
+            String id,
+            String label,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)
+        dropdown,
+    required TResult Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(String)? onChange,
+            bool deletable,
+            void Function()? onDelete)
+        checkbox,
+    required TResult Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(String)? onChange)
+        imagePicker,
+    required TResult Function(
+            String id, String label, String sectionName, void Function() cancel)
+        cancelButton,
+    required TResult Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)
+        submitButton,
+    required TResult Function(
+            String id,
+            String id2,
+            String labelLeft,
+            String labelRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            Map<String, Set<String>> optionsRight,
+            List<String? Function(String?)> validatorsLeft,
+            List<String? Function(String?)> validatorsRight,
+            String sectionName,
+            bool hasErrorleft,
+            bool hasErrorRight,
+            bool deletable,
+            void Function()? onDelete)
+        twoAutoCompleteFields,
+    required TResult Function(String id, String label, String sectionName,
+            void Function() callback)
+        customButton,
+    required TResult Function(
+            String id,
+            String label,
+            String currentValue,
+            List<String? Function(DateTime?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(String)? onChange,
+            bool deletable,
+            void Function()? onDelete)
+        date,
+    required TResult Function(
+            String id, String label, String sectionName, GeocoderResult? value)
+        map,
+    required TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)
+        slider,
+  }) {
+    return slider(
+        id, label, range, currentValue, validators, sectionName, hasError);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String id,
+            String label,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError,
+            String? currentValue,
+            void Function(String)? onChange,
+            bool deletable,
+            void Function()? onDelete,
+            TextEditingController? controller)?
+        textArea,
+    TResult? Function(
+            String id,
+            String label,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
+        dropdown,
+    TResult? Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(String)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
+        checkbox,
+    TResult? Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(String)? onChange)?
+        imagePicker,
+    TResult? Function(String id, String label, String sectionName,
+            void Function() cancel)?
+        cancelButton,
+    TResult? Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)?
+        submitButton,
+    TResult? Function(
+            String id,
+            String id2,
+            String labelLeft,
+            String labelRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            Map<String, Set<String>> optionsRight,
+            List<String? Function(String?)> validatorsLeft,
+            List<String? Function(String?)> validatorsRight,
+            String sectionName,
+            bool hasErrorleft,
+            bool hasErrorRight,
+            bool deletable,
+            void Function()? onDelete)?
+        twoAutoCompleteFields,
+    TResult? Function(String id, String label, String sectionName,
+            void Function() callback)?
+        customButton,
+    TResult? Function(
+            String id,
+            String label,
+            String currentValue,
+            List<String? Function(DateTime?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(String)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
+        date,
+    TResult? Function(
+            String id, String label, String sectionName, GeocoderResult? value)?
+        map,
+    TResult? Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        slider,
+  }) {
+    return slider?.call(
+        id, label, range, currentValue, validators, sectionName, hasError);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String id,
+            String label,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError,
+            String? currentValue,
+            void Function(String)? onChange,
+            bool deletable,
+            void Function()? onDelete,
+            TextEditingController? controller)?
+        textArea,
+    TResult Function(
+            String id,
+            String label,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
+        dropdown,
+    TResult Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(String)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
+        checkbox,
+    TResult Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(String)? onChange)?
+        imagePicker,
+    TResult Function(String id, String label, String sectionName,
+            void Function() cancel)?
+        cancelButton,
+    TResult Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)?
+        submitButton,
+    TResult Function(
+            String id,
+            String id2,
+            String labelLeft,
+            String labelRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            Map<String, Set<String>> optionsRight,
+            List<String? Function(String?)> validatorsLeft,
+            List<String? Function(String?)> validatorsRight,
+            String sectionName,
+            bool hasErrorleft,
+            bool hasErrorRight,
+            bool deletable,
+            void Function()? onDelete)?
+        twoAutoCompleteFields,
+    TResult Function(String id, String label, String sectionName,
+            void Function() callback)?
+        customButton,
+    TResult Function(
+            String id,
+            String label,
+            String currentValue,
+            List<String? Function(DateTime?)> validators,
+            String sectionName,
+            bool hasError,
+            void Function(String)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
+        date,
+    TResult Function(
+            String id, String label, String sectionName, GeocoderResult? value)?
+        map,
+    TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            double currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            bool hasError)?
+        slider,
+    required TResult orElse(),
+  }) {
+    if (slider != null) {
+      return slider(
+          id, label, range, currentValue, validators, sectionName, hasError);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(FormInputFieldInfoTextArea value) textArea,
+    required TResult Function(FormInputFieldInfoDropDown value) dropdown,
+    required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
+    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
+    required TResult Function(FormInputFieldInfoCancelButton value)
+        cancelButton,
+    required TResult Function(FormInputFieldInfoSubmitButton value)
+        submitButton,
+    required TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)
+        twoAutoCompleteFields,
+    required TResult Function(FormInputFieldInfoCustomButton value)
+        customButton,
+    required TResult Function(FormInputFieldInfoDate value) date,
+    required TResult Function(FormInputFieldInfoMap value) map,
+    required TResult Function(FormInputFieldInfoSlider value) slider,
+  }) {
+    return slider(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
+        twoAutoCompleteFields,
+    TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult? Function(FormInputFieldInfoDate value)? date,
+    TResult? Function(FormInputFieldInfoMap value)? map,
+    TResult? Function(FormInputFieldInfoSlider value)? slider,
+  }) {
+    return slider?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?
+        twoAutoCompleteFields,
+    TResult Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult Function(FormInputFieldInfoDate value)? date,
+    TResult Function(FormInputFieldInfoMap value)? map,
+    TResult Function(FormInputFieldInfoSlider value)? slider,
+    required TResult orElse(),
+  }) {
+    if (slider != null) {
+      return slider(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FormInputFieldInfoSlider implements FormInputFieldInfo {
+  const factory FormInputFieldInfoSlider(
+      {required final String id,
+      required final String label,
+      required final (double, double) range,
+      required final double currentValue,
+      required final List<String? Function(bool?)> validators,
+      required final String sectionName,
+      required final bool hasError}) = _$FormInputFieldInfoSliderImpl;
+
+  @override
+  String get id;
+  String get label;
+  (double, double) get range;
+  double get currentValue;
+  List<String? Function(bool?)> get validators;
+  @override
+  String get sectionName;
+  bool get hasError;
+
+  /// Create a copy of FormInputFieldInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FormInputFieldInfoSliderImplCopyWith<_$FormInputFieldInfoSliderImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
