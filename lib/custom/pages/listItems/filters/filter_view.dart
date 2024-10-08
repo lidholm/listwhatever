@@ -67,11 +67,14 @@ class _FilterViewState extends State<FilterView> {
           convertDistanceToMeters(widget.settings.distanceUnit, 1);
     }
 
-    return getFormBuilderWrapper(
-      widget.list,
-      widget.listItems,
-      initialValues,
-      widget.settings,
+    return ColoredBox(
+      color: Theme.of(context).canvasColor.withOpacity(0.85),
+      child: getFormBuilderWrapper(
+        widget.list,
+        widget.listItems,
+        initialValues,
+        widget.settings,
+      ),
     );
   }
 
