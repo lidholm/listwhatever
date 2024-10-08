@@ -12,7 +12,6 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     required String label,
     required List<FormFieldValidator<String>> validators,
     required String sectionName,
-    required bool hasError,
     @Default(null) String? currentValue,
     @Default(null) void Function(String)? onChange,
     @Default(false) bool deletable,
@@ -28,7 +27,6 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     required String Function(dynamic) optionToString,
     required List<FormFieldValidator<String>> validators,
     required String sectionName,
-    required bool hasError,
     @Default(null) void Function(dynamic)? onChange,
     @Default(false) bool deletable,
     @Default(null) void Function()? onDelete,
@@ -40,7 +38,6 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     required bool currentValue,
     required List<FormFieldValidator<bool>> validators,
     required String sectionName,
-    required bool hasError,
     @Default(null) void Function(String)? onChange,
     @Default(false) bool deletable,
     @Default(null) void Function()? onDelete,
@@ -52,7 +49,6 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     required String? currentValue,
     required List<FormFieldValidator<bool>> validators,
     required String sectionName,
-    required bool hasError,
     @Default(null) void Function(String value)? onChange,
   }) = FormInputFieldInfoImagePicker;
 
@@ -82,8 +78,6 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     required List<FormFieldValidator<String>> validatorsLeft,
     required List<FormFieldValidator<String>> validatorsRight,
     required String sectionName,
-    required bool hasErrorleft,
-    required bool hasErrorRight,
     @Default(false) bool deletable,
     @Default(null) void Function()? onDelete,
   }) = FormInputFieldInfoTwoAutoCompleteFields;
@@ -101,7 +95,6 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     required String currentValue,
     required List<FormFieldValidator<DateTime?>> validators,
     required String sectionName,
-    required bool hasError,
     @Default(null) void Function(String value)? onChange,
     @Default(false) bool deletable,
     @Default(null) void Function()? onDelete,
@@ -121,6 +114,5 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     required double currentValue,
     required List<FormFieldValidator<bool>> validators,
     required String sectionName,
-    required bool hasError,
   }) = FormInputFieldInfoSlider;
 }

@@ -20,12 +20,12 @@ class FormInputFieldTextArea extends StatelessWidget {
       name: field.id,
       initialValue: field.currentValue,
       controller: field.controller,
-      decoration: InputDecoration(
-        labelText: field.label,
-        suffixIcon: field.hasError
-            ? const Icon(Icons.error, color: Colors.red)
-            : const Icon(Icons.check, color: Colors.green),
-      ),
+      // decoration: InputDecoration(
+      //   labelText: field.label,
+      //   suffixIcon: field.hasError
+      //       ? const Icon(Icons.error, color: Colors.red)
+      //       : const Icon(Icons.check, color: Colors.green),
+      // ),
       // valueTransformer: (text) => num.tryParse(text),
       validator: FormBuilderValidators.compose(field.validators),
       keyboardType: TextInputType.name,

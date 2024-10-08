@@ -127,7 +127,6 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
         FormBuilderValidators.maxLength(150),
       ],
       sectionName: SectionName.search.name,
-      hasError: false,
     );
   }
 
@@ -159,7 +158,6 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
       optionToString: (result) =>
           (result as GeocoderResult?)?.formattedAddress ?? '',
       sectionName: SectionName.info.name,
-      hasError: false,
       onChange: (selection) => setState(() {
         // logger.i('$className: onChange result: $selection');
         setState(() {
@@ -193,7 +191,6 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
         FormBuilderValidators.maxLength(150),
       ],
       sectionName: SectionName.info.name,
-      hasError: false,
     );
   }
 
@@ -210,7 +207,6 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
         ),
       ],
       sectionName: SectionName.info.name,
-      hasError: false,
     );
   }
 

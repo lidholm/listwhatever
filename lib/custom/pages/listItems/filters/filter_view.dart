@@ -1,12 +1,6 @@
-import 'package:another_xlider/another_xlider.dart';
-import 'package:another_xlider/models/handler.dart';
-import 'package:another_xlider/models/tooltip/tooltip.dart';
-import 'package:another_xlider/models/trackbar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:listwhatever/standard/form/form_generator.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 import 'package:listwhatever/standard/form/form_input_section.dart';
@@ -14,14 +8,11 @@ import 'package:listwhatever/standard/form/form_input_section.dart';
 import '/custom/pages/listItems/filters/filters.dart';
 import '/custom/pages/listItems/models/list_item.dart';
 import '/custom/pages/lists/models/list_of_things.dart';
-import '/l10n/l10n.dart';
-import '/standard/constants.dart';
 import '/standard/settings/settings.dart';
-import '/standard/widgets/border_with_header.dart';
+import '/standard/widgets/vStack/x_stack.dart' as x_stack;
 import 'bloc/filter_bloc.dart';
 import 'bloc/filter_event.dart';
 import 'date_filter.dart';
-import '/standard/widgets/vStack/x_stack.dart' as x_stack;
 
 const String className = 'FilterView';
 
@@ -115,15 +106,15 @@ class _FilterViewState extends State<FilterView> {
     // }
 
     return ColoredBox(
-        color: Theme.of(context).canvasColor.withOpacity(0.85),
-        child: formGenerator
-        // getFormBuilderWrapper(
-        //   widget.list,
-        //   widget.listItems,
-        //   initialValues,
-        //   widget.settings,
-        // ),
-        );
+      color: Theme.of(context).canvasColor.withOpacity(0.85),
+      child: formGenerator,
+      // getFormBuilderWrapper(
+      //   widget.list,
+      //   widget.listItems,
+      //   initialValues,
+      //   widget.settings,
+      // ),
+    );
   }
 
   List<FormInputSection> getSections() {
@@ -158,7 +149,6 @@ class _FilterViewState extends State<FilterView> {
       currentValue: '',
       validators: [],
       sectionName: SectionName.dates.name,
-      hasError: false,
     );
   }
 
@@ -169,7 +159,6 @@ class _FilterViewState extends State<FilterView> {
       currentValue: '',
       validators: [],
       sectionName: SectionName.dates.name,
-      hasError: false,
     );
   }
 
@@ -181,7 +170,6 @@ class _FilterViewState extends State<FilterView> {
       range: (distanceMin, distanceMax),
       validators: [],
       sectionName: SectionName.distance.name,
-      hasError: false,
     );
   }
 

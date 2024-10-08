@@ -4,8 +4,6 @@ import 'package:another_xlider/models/tooltip/tooltip.dart';
 import 'package:another_xlider/models/trackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 
 const String className = 'FormInputFieldSlider';

@@ -13,12 +13,12 @@ class FormInputFieldDropDown extends StatelessWidget {
     final dropdown = FormBuilderDropdown(
       name: field.id,
       initialValue: field.currentValue,
-      decoration: InputDecoration(
-        labelText: 'Type',
-        suffix:
-            field.hasError ? const Icon(Icons.error) : const Icon(Icons.check),
-        hintText: 'Select Type',
-      ),
+      // decoration: InputDecoration(
+      //   labelText: 'Type',
+      //   suffix:
+      //       field.hasError ? const Icon(Icons.error) : const Icon(Icons.check),
+      //   hintText: 'Select Type',
+      // ),
       validator: FormBuilderValidators.compose(
         [FormBuilderValidators.required()],
       ),

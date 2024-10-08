@@ -334,7 +334,6 @@ class _AddListItemPageState extends State<AddListItemPage> {
         FormBuilderValidators.maxLength(70),
       ],
       sectionName: SectionName.mainInfo.value,
-      hasError: false,
     );
   }
 
@@ -352,7 +351,6 @@ class _AddListItemPageState extends State<AddListItemPage> {
         FormBuilderValidators.maxLength(1200, checkNullOrEmpty: false),
       ],
       sectionName: SectionName.mainInfo.value,
-      hasError: false,
     );
   }
 
@@ -395,8 +393,6 @@ class _AddListItemPageState extends State<AddListItemPage> {
         FormBuilderValidators.required(),
         FormBuilderValidators.maxLength(200, checkNullOrEmpty: false),
       ],
-      hasErrorleft: false,
-      hasErrorRight: false,
       deletable: true,
       onDelete: () {
         print('deleted category');
@@ -458,7 +454,6 @@ class _AddListItemPageState extends State<AddListItemPage> {
         FormBuilderValidators.maxLength(200, checkNullOrEmpty: false),
       ],
       sectionName: SectionName.urls.value,
-      hasError: false,
       deletable: true,
       onDelete: () {
         print('deleted url');
@@ -500,7 +495,6 @@ class _AddListItemPageState extends State<AddListItemPage> {
         FormBuilderValidators.required(),
       ],
       sectionName: SectionName.date.value,
-      hasError: false,
     );
   }
 
@@ -539,7 +533,6 @@ class _AddListItemPageState extends State<AddListItemPage> {
         FormBuilderValidators.maxLength(70),
       ],
       sectionName: SectionName.location.value,
-      hasError: false,
     );
   }
 
@@ -555,7 +548,6 @@ class _AddListItemPageState extends State<AddListItemPage> {
         FormBuilderValidators.maxLength(70),
       ],
       sectionName: SectionName.location.value,
-      hasError: false,
     );
   }
 

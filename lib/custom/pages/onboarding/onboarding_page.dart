@@ -77,23 +77,24 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
     return SafeArea(
       child: Scaffold(
-          appBar: CommonAppBar(
-            title: AppLocalizations.of(context).onboardingHeader,
-            actions: [
-              AppBarAction(
-                type: AppBarActionType.icon,
-                iconAction: AppBarActionIcon(
-                  title: 'Log out',
-                  icon: Icons.logout,
-                  key: const Key('logoutAction'),
-                  callback: () async {
-                    context.read<AppBloc>().add(const AppLogoutRequested());
-                  },
-                ),
+        appBar: CommonAppBar(
+          title: AppLocalizations.of(context).onboardingHeader,
+          actions: [
+            AppBarAction(
+              type: AppBarActionType.icon,
+              iconAction: AppBarActionIcon(
+                title: 'Log out',
+                icon: Icons.logout,
+                key: const Key('logoutAction'),
+                callback: () async {
+                  context.read<AppBloc>().add(const AppLogoutRequested());
+                },
               ),
-            ],
-          ),
-          body: formGenerator),
+            ),
+          ],
+        ),
+        body: formGenerator,
+      ),
     );
   }
 
@@ -122,7 +123,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
         FormBuilderValidators.maxLength(150),
       ],
       sectionName: SectionName.personalinfo.name,
-      hasError: false,
     );
   }
 

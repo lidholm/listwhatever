@@ -15,12 +15,12 @@ class FormInputFieldCheckbox extends StatelessWidget {
       autovalidateMode: AutovalidateMode.always,
       name: field.id,
       initialValue: field.currentValue,
-      decoration: InputDecoration(
-        labelText: field.label,
-        suffixIcon: field.hasError
-            ? const Icon(Icons.error, color: Colors.red)
-            : const Icon(Icons.check, color: Colors.green),
-      ),
+      // decoration: InputDecoration(
+      //   labelText: field.label,
+      //   suffixIcon: field.hasError
+      //       ? const Icon(Icons.error, color: Colors.red)
+      //       : const Icon(Icons.check, color: Colors.green),
+      // ),
       // valueTransformer: (text) => num.tryParse(text),
       validator: FormBuilderValidators.compose(field.validators),
       title: Text(field.label),

@@ -246,7 +246,6 @@ class _AddListPageState extends State<AddListPage> {
         FormBuilderValidators.maxLength(70),
       ],
       sectionName: SectionName.basic.value,
-      hasError: false,
     );
   }
 
@@ -262,7 +261,6 @@ class _AddListPageState extends State<AddListPage> {
       options: ListType.values.map((v) => v.name).toList(),
       optionToString: (listType) => (listType as ListType?)?.name ?? '',
       sectionName: SectionName.basic.value,
-      hasError: false,
       onChange: (listType) => setState(() {
         logger.i('$className: onChange ListType: $listType');
         setState(() {
@@ -284,7 +282,6 @@ class _AddListPageState extends State<AddListPage> {
           FormBuilderValidators.maxLength(70),
         ],
         sectionName: SectionName.basic.value,
-        hasError: false,
       );
     }
     return null;
@@ -300,7 +297,6 @@ class _AddListPageState extends State<AddListPage> {
         FormBuilderValidators.maxLength(70),
       ],
       sectionName: SectionName.options.value,
-      hasError: false,
     );
   }
 
@@ -314,7 +310,6 @@ class _AddListPageState extends State<AddListPage> {
         FormBuilderValidators.maxLength(70),
       ],
       sectionName: SectionName.options.value,
-      hasError: false,
     );
   }
 
@@ -328,7 +323,6 @@ class _AddListPageState extends State<AddListPage> {
         FormBuilderValidators.maxLength(70),
       ],
       sectionName: SectionName.options.value,
-      hasError: false,
     );
   }
 

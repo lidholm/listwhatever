@@ -25,7 +25,6 @@ mixin _$FormInputFieldInfo {
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -40,7 +39,6 @@ mixin _$FormInputFieldInfo {
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -51,7 +49,6 @@ mixin _$FormInputFieldInfo {
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -62,7 +59,6 @@ mixin _$FormInputFieldInfo {
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)
         imagePicker,
     required TResult Function(
@@ -83,8 +79,6 @@ mixin _$FormInputFieldInfo {
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -97,7 +91,6 @@ mixin _$FormInputFieldInfo {
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -111,8 +104,7 @@ mixin _$FormInputFieldInfo {
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)
+            String sectionName)
         slider,
   }) =>
       throw _privateConstructorUsedError;
@@ -123,7 +115,6 @@ mixin _$FormInputFieldInfo {
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -138,7 +129,6 @@ mixin _$FormInputFieldInfo {
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -149,7 +139,6 @@ mixin _$FormInputFieldInfo {
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -160,7 +149,6 @@ mixin _$FormInputFieldInfo {
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)?
         imagePicker,
     TResult? Function(String id, String label, String sectionName,
@@ -181,8 +169,6 @@ mixin _$FormInputFieldInfo {
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -195,7 +181,6 @@ mixin _$FormInputFieldInfo {
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -209,8 +194,7 @@ mixin _$FormInputFieldInfo {
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
+            String sectionName)?
         slider,
   }) =>
       throw _privateConstructorUsedError;
@@ -221,7 +205,6 @@ mixin _$FormInputFieldInfo {
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -236,7 +219,6 @@ mixin _$FormInputFieldInfo {
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -247,7 +229,6 @@ mixin _$FormInputFieldInfo {
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -258,7 +239,6 @@ mixin _$FormInputFieldInfo {
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)?
         imagePicker,
     TResult Function(String id, String label, String sectionName,
@@ -279,8 +259,6 @@ mixin _$FormInputFieldInfo {
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -293,7 +271,6 @@ mixin _$FormInputFieldInfo {
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -307,8 +284,7 @@ mixin _$FormInputFieldInfo {
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
+            String sectionName)?
         slider,
     required TResult orElse(),
   }) =>
@@ -427,7 +403,6 @@ abstract class _$$FormInputFieldInfoTextAreaImplCopyWith<$Res>
       String label,
       List<String? Function(String?)> validators,
       String sectionName,
-      bool hasError,
       String? currentValue,
       void Function(String)? onChange,
       bool deletable,
@@ -454,7 +429,6 @@ class __$$FormInputFieldInfoTextAreaImplCopyWithImpl<$Res>
     Object? label = null,
     Object? validators = null,
     Object? sectionName = null,
-    Object? hasError = null,
     Object? currentValue = freezed,
     Object? onChange = freezed,
     Object? deletable = null,
@@ -478,10 +452,6 @@ class __$$FormInputFieldInfoTextAreaImplCopyWithImpl<$Res>
           ? _value.sectionName
           : sectionName // ignore: cast_nullable_to_non_nullable
               as String,
-      hasError: null == hasError
-          ? _value.hasError
-          : hasError // ignore: cast_nullable_to_non_nullable
-              as bool,
       currentValue: freezed == currentValue
           ? _value.currentValue
           : currentValue // ignore: cast_nullable_to_non_nullable
@@ -516,7 +486,6 @@ class _$FormInputFieldInfoTextAreaImpl
       required this.label,
       required final List<String? Function(String?)> validators,
       required this.sectionName,
-      required this.hasError,
       this.currentValue = null,
       this.onChange = null,
       this.deletable = false,
@@ -539,8 +508,6 @@ class _$FormInputFieldInfoTextAreaImpl
   @override
   final String sectionName;
   @override
-  final bool hasError;
-  @override
   @JsonKey()
   final String? currentValue;
   @override
@@ -558,7 +525,7 @@ class _$FormInputFieldInfoTextAreaImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo.textArea(id: $id, label: $label, validators: $validators, sectionName: $sectionName, hasError: $hasError, currentValue: $currentValue, onChange: $onChange, deletable: $deletable, onDelete: $onDelete, controller: $controller)';
+    return 'FormInputFieldInfo.textArea(id: $id, label: $label, validators: $validators, sectionName: $sectionName, currentValue: $currentValue, onChange: $onChange, deletable: $deletable, onDelete: $onDelete, controller: $controller)';
   }
 
   @override
@@ -570,7 +537,6 @@ class _$FormInputFieldInfoTextAreaImpl
       ..add(DiagnosticsProperty('label', label))
       ..add(DiagnosticsProperty('validators', validators))
       ..add(DiagnosticsProperty('sectionName', sectionName))
-      ..add(DiagnosticsProperty('hasError', hasError))
       ..add(DiagnosticsProperty('currentValue', currentValue))
       ..add(DiagnosticsProperty('onChange', onChange))
       ..add(DiagnosticsProperty('deletable', deletable))
@@ -589,8 +555,6 @@ class _$FormInputFieldInfoTextAreaImpl
                 .equals(other._validators, _validators) &&
             (identical(other.sectionName, sectionName) ||
                 other.sectionName == sectionName) &&
-            (identical(other.hasError, hasError) ||
-                other.hasError == hasError) &&
             (identical(other.currentValue, currentValue) ||
                 other.currentValue == currentValue) &&
             (identical(other.onChange, onChange) ||
@@ -610,7 +574,6 @@ class _$FormInputFieldInfoTextAreaImpl
       label,
       const DeepCollectionEquality().hash(_validators),
       sectionName,
-      hasError,
       currentValue,
       onChange,
       deletable,
@@ -634,7 +597,6 @@ class _$FormInputFieldInfoTextAreaImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -649,7 +611,6 @@ class _$FormInputFieldInfoTextAreaImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -660,7 +621,6 @@ class _$FormInputFieldInfoTextAreaImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -671,7 +631,6 @@ class _$FormInputFieldInfoTextAreaImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)
         imagePicker,
     required TResult Function(
@@ -692,8 +651,6 @@ class _$FormInputFieldInfoTextAreaImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -706,7 +663,6 @@ class _$FormInputFieldInfoTextAreaImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -720,12 +676,11 @@ class _$FormInputFieldInfoTextAreaImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)
+            String sectionName)
         slider,
   }) {
-    return textArea(id, label, validators, sectionName, hasError, currentValue,
-        onChange, deletable, onDelete, controller);
+    return textArea(id, label, validators, sectionName, currentValue, onChange,
+        deletable, onDelete, controller);
   }
 
   @override
@@ -736,7 +691,6 @@ class _$FormInputFieldInfoTextAreaImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -751,7 +705,6 @@ class _$FormInputFieldInfoTextAreaImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -762,7 +715,6 @@ class _$FormInputFieldInfoTextAreaImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -773,7 +725,6 @@ class _$FormInputFieldInfoTextAreaImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)?
         imagePicker,
     TResult? Function(String id, String label, String sectionName,
@@ -794,8 +745,6 @@ class _$FormInputFieldInfoTextAreaImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -808,7 +757,6 @@ class _$FormInputFieldInfoTextAreaImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -822,12 +770,11 @@ class _$FormInputFieldInfoTextAreaImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
+            String sectionName)?
         slider,
   }) {
-    return textArea?.call(id, label, validators, sectionName, hasError,
-        currentValue, onChange, deletable, onDelete, controller);
+    return textArea?.call(id, label, validators, sectionName, currentValue,
+        onChange, deletable, onDelete, controller);
   }
 
   @override
@@ -838,7 +785,6 @@ class _$FormInputFieldInfoTextAreaImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -853,7 +799,6 @@ class _$FormInputFieldInfoTextAreaImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -864,7 +809,6 @@ class _$FormInputFieldInfoTextAreaImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -875,7 +819,6 @@ class _$FormInputFieldInfoTextAreaImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)?
         imagePicker,
     TResult Function(String id, String label, String sectionName,
@@ -896,8 +839,6 @@ class _$FormInputFieldInfoTextAreaImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -910,7 +851,6 @@ class _$FormInputFieldInfoTextAreaImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -924,14 +864,13 @@ class _$FormInputFieldInfoTextAreaImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
+            String sectionName)?
         slider,
     required TResult orElse(),
   }) {
     if (textArea != null) {
-      return textArea(id, label, validators, sectionName, hasError,
-          currentValue, onChange, deletable, onDelete, controller);
+      return textArea(id, label, validators, sectionName, currentValue,
+          onChange, deletable, onDelete, controller);
     }
     return orElse();
   }
@@ -1007,7 +946,6 @@ abstract class FormInputFieldInfoTextArea implements FormInputFieldInfo {
           required final String label,
           required final List<String? Function(String?)> validators,
           required final String sectionName,
-          required final bool hasError,
           final String? currentValue,
           final void Function(String)? onChange,
           final bool deletable,
@@ -1021,7 +959,6 @@ abstract class FormInputFieldInfoTextArea implements FormInputFieldInfo {
   List<String? Function(String?)> get validators;
   @override
   String get sectionName;
-  bool get hasError;
   String? get currentValue;
   void Function(String)? get onChange;
   bool get deletable;
@@ -1053,7 +990,6 @@ abstract class _$$FormInputFieldInfoDropDownImplCopyWith<$Res>
       String Function(dynamic) optionToString,
       List<String? Function(String?)> validators,
       String sectionName,
-      bool hasError,
       void Function(dynamic)? onChange,
       bool deletable,
       void Function()? onDelete});
@@ -1081,7 +1017,6 @@ class __$$FormInputFieldInfoDropDownImplCopyWithImpl<$Res>
     Object? optionToString = null,
     Object? validators = null,
     Object? sectionName = null,
-    Object? hasError = null,
     Object? onChange = freezed,
     Object? deletable = null,
     Object? onDelete = freezed,
@@ -1115,10 +1050,6 @@ class __$$FormInputFieldInfoDropDownImplCopyWithImpl<$Res>
           ? _value.sectionName
           : sectionName // ignore: cast_nullable_to_non_nullable
               as String,
-      hasError: null == hasError
-          ? _value.hasError
-          : hasError // ignore: cast_nullable_to_non_nullable
-              as bool,
       onChange: freezed == onChange
           ? _value.onChange
           : onChange // ignore: cast_nullable_to_non_nullable
@@ -1148,7 +1079,6 @@ class _$FormInputFieldInfoDropDownImpl
       required this.optionToString,
       required final List<String? Function(String?)> validators,
       required this.sectionName,
-      required this.hasError,
       this.onChange = null,
       this.deletable = false,
       this.onDelete = null})
@@ -1182,8 +1112,6 @@ class _$FormInputFieldInfoDropDownImpl
   @override
   final String sectionName;
   @override
-  final bool hasError;
-  @override
   @JsonKey()
   final void Function(dynamic)? onChange;
   @override
@@ -1195,7 +1123,7 @@ class _$FormInputFieldInfoDropDownImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo.dropdown(id: $id, label: $label, currentValue: $currentValue, options: $options, optionToString: $optionToString, validators: $validators, sectionName: $sectionName, hasError: $hasError, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
+    return 'FormInputFieldInfo.dropdown(id: $id, label: $label, currentValue: $currentValue, options: $options, optionToString: $optionToString, validators: $validators, sectionName: $sectionName, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
   }
 
   @override
@@ -1210,7 +1138,6 @@ class _$FormInputFieldInfoDropDownImpl
       ..add(DiagnosticsProperty('optionToString', optionToString))
       ..add(DiagnosticsProperty('validators', validators))
       ..add(DiagnosticsProperty('sectionName', sectionName))
-      ..add(DiagnosticsProperty('hasError', hasError))
       ..add(DiagnosticsProperty('onChange', onChange))
       ..add(DiagnosticsProperty('deletable', deletable))
       ..add(DiagnosticsProperty('onDelete', onDelete));
@@ -1232,8 +1159,6 @@ class _$FormInputFieldInfoDropDownImpl
                 .equals(other._validators, _validators) &&
             (identical(other.sectionName, sectionName) ||
                 other.sectionName == sectionName) &&
-            (identical(other.hasError, hasError) ||
-                other.hasError == hasError) &&
             (identical(other.onChange, onChange) ||
                 other.onChange == onChange) &&
             (identical(other.deletable, deletable) ||
@@ -1252,7 +1177,6 @@ class _$FormInputFieldInfoDropDownImpl
       optionToString,
       const DeepCollectionEquality().hash(_validators),
       sectionName,
-      hasError,
       onChange,
       deletable,
       onDelete);
@@ -1274,7 +1198,6 @@ class _$FormInputFieldInfoDropDownImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -1289,7 +1212,6 @@ class _$FormInputFieldInfoDropDownImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -1300,7 +1222,6 @@ class _$FormInputFieldInfoDropDownImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -1311,7 +1232,6 @@ class _$FormInputFieldInfoDropDownImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)
         imagePicker,
     required TResult Function(
@@ -1332,8 +1252,6 @@ class _$FormInputFieldInfoDropDownImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -1346,7 +1264,6 @@ class _$FormInputFieldInfoDropDownImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -1360,12 +1277,11 @@ class _$FormInputFieldInfoDropDownImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)
+            String sectionName)
         slider,
   }) {
     return dropdown(id, label, currentValue, options, optionToString,
-        validators, sectionName, hasError, onChange, deletable, onDelete);
+        validators, sectionName, onChange, deletable, onDelete);
   }
 
   @override
@@ -1376,7 +1292,6 @@ class _$FormInputFieldInfoDropDownImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -1391,7 +1306,6 @@ class _$FormInputFieldInfoDropDownImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -1402,7 +1316,6 @@ class _$FormInputFieldInfoDropDownImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -1413,7 +1326,6 @@ class _$FormInputFieldInfoDropDownImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)?
         imagePicker,
     TResult? Function(String id, String label, String sectionName,
@@ -1434,8 +1346,6 @@ class _$FormInputFieldInfoDropDownImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -1448,7 +1358,6 @@ class _$FormInputFieldInfoDropDownImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -1462,12 +1371,11 @@ class _$FormInputFieldInfoDropDownImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
+            String sectionName)?
         slider,
   }) {
     return dropdown?.call(id, label, currentValue, options, optionToString,
-        validators, sectionName, hasError, onChange, deletable, onDelete);
+        validators, sectionName, onChange, deletable, onDelete);
   }
 
   @override
@@ -1478,7 +1386,6 @@ class _$FormInputFieldInfoDropDownImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -1493,7 +1400,6 @@ class _$FormInputFieldInfoDropDownImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -1504,7 +1410,6 @@ class _$FormInputFieldInfoDropDownImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -1515,7 +1420,6 @@ class _$FormInputFieldInfoDropDownImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)?
         imagePicker,
     TResult Function(String id, String label, String sectionName,
@@ -1536,8 +1440,6 @@ class _$FormInputFieldInfoDropDownImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -1550,7 +1452,6 @@ class _$FormInputFieldInfoDropDownImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -1564,14 +1465,13 @@ class _$FormInputFieldInfoDropDownImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
+            String sectionName)?
         slider,
     required TResult orElse(),
   }) {
     if (dropdown != null) {
       return dropdown(id, label, currentValue, options, optionToString,
-          validators, sectionName, hasError, onChange, deletable, onDelete);
+          validators, sectionName, onChange, deletable, onDelete);
     }
     return orElse();
   }
@@ -1650,7 +1550,6 @@ abstract class FormInputFieldInfoDropDown implements FormInputFieldInfo {
       required final String Function(dynamic) optionToString,
       required final List<String? Function(String?)> validators,
       required final String sectionName,
-      required final bool hasError,
       final void Function(dynamic)? onChange,
       final bool deletable,
       final void Function()? onDelete}) = _$FormInputFieldInfoDropDownImpl;
@@ -1664,7 +1563,6 @@ abstract class FormInputFieldInfoDropDown implements FormInputFieldInfo {
   List<String? Function(String?)> get validators;
   @override
   String get sectionName;
-  bool get hasError;
   void Function(dynamic)? get onChange;
   bool get deletable;
   void Function()? get onDelete;
@@ -1692,7 +1590,6 @@ abstract class _$$FormInputFieldInfoCheckboxImplCopyWith<$Res>
       bool currentValue,
       List<String? Function(bool?)> validators,
       String sectionName,
-      bool hasError,
       void Function(String)? onChange,
       bool deletable,
       void Function()? onDelete});
@@ -1718,7 +1615,6 @@ class __$$FormInputFieldInfoCheckboxImplCopyWithImpl<$Res>
     Object? currentValue = null,
     Object? validators = null,
     Object? sectionName = null,
-    Object? hasError = null,
     Object? onChange = freezed,
     Object? deletable = null,
     Object? onDelete = freezed,
@@ -1744,10 +1640,6 @@ class __$$FormInputFieldInfoCheckboxImplCopyWithImpl<$Res>
           ? _value.sectionName
           : sectionName // ignore: cast_nullable_to_non_nullable
               as String,
-      hasError: null == hasError
-          ? _value.hasError
-          : hasError // ignore: cast_nullable_to_non_nullable
-              as bool,
       onChange: freezed == onChange
           ? _value.onChange
           : onChange // ignore: cast_nullable_to_non_nullable
@@ -1775,7 +1667,6 @@ class _$FormInputFieldInfoCheckboxImpl
       required this.currentValue,
       required final List<String? Function(bool?)> validators,
       required this.sectionName,
-      required this.hasError,
       this.onChange = null,
       this.deletable = false,
       this.onDelete = null})
@@ -1798,8 +1689,6 @@ class _$FormInputFieldInfoCheckboxImpl
   @override
   final String sectionName;
   @override
-  final bool hasError;
-  @override
   @JsonKey()
   final void Function(String)? onChange;
   @override
@@ -1811,7 +1700,7 @@ class _$FormInputFieldInfoCheckboxImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo.checkbox(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
+    return 'FormInputFieldInfo.checkbox(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
   }
 
   @override
@@ -1824,7 +1713,6 @@ class _$FormInputFieldInfoCheckboxImpl
       ..add(DiagnosticsProperty('currentValue', currentValue))
       ..add(DiagnosticsProperty('validators', validators))
       ..add(DiagnosticsProperty('sectionName', sectionName))
-      ..add(DiagnosticsProperty('hasError', hasError))
       ..add(DiagnosticsProperty('onChange', onChange))
       ..add(DiagnosticsProperty('deletable', deletable))
       ..add(DiagnosticsProperty('onDelete', onDelete));
@@ -1843,8 +1731,6 @@ class _$FormInputFieldInfoCheckboxImpl
                 .equals(other._validators, _validators) &&
             (identical(other.sectionName, sectionName) ||
                 other.sectionName == sectionName) &&
-            (identical(other.hasError, hasError) ||
-                other.hasError == hasError) &&
             (identical(other.onChange, onChange) ||
                 other.onChange == onChange) &&
             (identical(other.deletable, deletable) ||
@@ -1861,7 +1747,6 @@ class _$FormInputFieldInfoCheckboxImpl
       currentValue,
       const DeepCollectionEquality().hash(_validators),
       sectionName,
-      hasError,
       onChange,
       deletable,
       onDelete);
@@ -1883,7 +1768,6 @@ class _$FormInputFieldInfoCheckboxImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -1898,7 +1782,6 @@ class _$FormInputFieldInfoCheckboxImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -1909,7 +1792,6 @@ class _$FormInputFieldInfoCheckboxImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -1920,7 +1802,6 @@ class _$FormInputFieldInfoCheckboxImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)
         imagePicker,
     required TResult Function(
@@ -1941,8 +1822,6 @@ class _$FormInputFieldInfoCheckboxImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -1955,7 +1834,6 @@ class _$FormInputFieldInfoCheckboxImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -1969,12 +1847,11 @@ class _$FormInputFieldInfoCheckboxImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)
+            String sectionName)
         slider,
   }) {
-    return checkbox(id, label, currentValue, validators, sectionName, hasError,
-        onChange, deletable, onDelete);
+    return checkbox(id, label, currentValue, validators, sectionName, onChange,
+        deletable, onDelete);
   }
 
   @override
@@ -1985,7 +1862,6 @@ class _$FormInputFieldInfoCheckboxImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -2000,7 +1876,6 @@ class _$FormInputFieldInfoCheckboxImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -2011,7 +1886,6 @@ class _$FormInputFieldInfoCheckboxImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -2022,7 +1896,6 @@ class _$FormInputFieldInfoCheckboxImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)?
         imagePicker,
     TResult? Function(String id, String label, String sectionName,
@@ -2043,8 +1916,6 @@ class _$FormInputFieldInfoCheckboxImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -2057,7 +1928,6 @@ class _$FormInputFieldInfoCheckboxImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -2071,12 +1941,11 @@ class _$FormInputFieldInfoCheckboxImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
+            String sectionName)?
         slider,
   }) {
     return checkbox?.call(id, label, currentValue, validators, sectionName,
-        hasError, onChange, deletable, onDelete);
+        onChange, deletable, onDelete);
   }
 
   @override
@@ -2087,7 +1956,6 @@ class _$FormInputFieldInfoCheckboxImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -2102,7 +1970,6 @@ class _$FormInputFieldInfoCheckboxImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -2113,7 +1980,6 @@ class _$FormInputFieldInfoCheckboxImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -2124,7 +1990,6 @@ class _$FormInputFieldInfoCheckboxImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)?
         imagePicker,
     TResult Function(String id, String label, String sectionName,
@@ -2145,8 +2010,6 @@ class _$FormInputFieldInfoCheckboxImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -2159,7 +2022,6 @@ class _$FormInputFieldInfoCheckboxImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -2173,14 +2035,13 @@ class _$FormInputFieldInfoCheckboxImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
+            String sectionName)?
         slider,
     required TResult orElse(),
   }) {
     if (checkbox != null) {
       return checkbox(id, label, currentValue, validators, sectionName,
-          hasError, onChange, deletable, onDelete);
+          onChange, deletable, onDelete);
     }
     return orElse();
   }
@@ -2257,7 +2118,6 @@ abstract class FormInputFieldInfoCheckbox implements FormInputFieldInfo {
       required final bool currentValue,
       required final List<String? Function(bool?)> validators,
       required final String sectionName,
-      required final bool hasError,
       final void Function(String)? onChange,
       final bool deletable,
       final void Function()? onDelete}) = _$FormInputFieldInfoCheckboxImpl;
@@ -2269,7 +2129,6 @@ abstract class FormInputFieldInfoCheckbox implements FormInputFieldInfo {
   List<String? Function(bool?)> get validators;
   @override
   String get sectionName;
-  bool get hasError;
   void Function(String)? get onChange;
   bool get deletable;
   void Function()? get onDelete;
@@ -2297,7 +2156,6 @@ abstract class _$$FormInputFieldInfoImagePickerImplCopyWith<$Res>
       String? currentValue,
       List<String? Function(bool?)> validators,
       String sectionName,
-      bool hasError,
       void Function(String)? onChange});
 }
 
@@ -2321,7 +2179,6 @@ class __$$FormInputFieldInfoImagePickerImplCopyWithImpl<$Res>
     Object? currentValue = freezed,
     Object? validators = null,
     Object? sectionName = null,
-    Object? hasError = null,
     Object? onChange = freezed,
   }) {
     return _then(_$FormInputFieldInfoImagePickerImpl(
@@ -2345,10 +2202,6 @@ class __$$FormInputFieldInfoImagePickerImplCopyWithImpl<$Res>
           ? _value.sectionName
           : sectionName // ignore: cast_nullable_to_non_nullable
               as String,
-      hasError: null == hasError
-          ? _value.hasError
-          : hasError // ignore: cast_nullable_to_non_nullable
-              as bool,
       onChange: freezed == onChange
           ? _value.onChange
           : onChange // ignore: cast_nullable_to_non_nullable
@@ -2368,7 +2221,6 @@ class _$FormInputFieldInfoImagePickerImpl
       required this.currentValue,
       required final List<String? Function(bool?)> validators,
       required this.sectionName,
-      required this.hasError,
       this.onChange = null})
       : _validators = validators;
 
@@ -2389,14 +2241,12 @@ class _$FormInputFieldInfoImagePickerImpl
   @override
   final String sectionName;
   @override
-  final bool hasError;
-  @override
   @JsonKey()
   final void Function(String)? onChange;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo.imagePicker(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError, onChange: $onChange)';
+    return 'FormInputFieldInfo.imagePicker(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, onChange: $onChange)';
   }
 
   @override
@@ -2409,7 +2259,6 @@ class _$FormInputFieldInfoImagePickerImpl
       ..add(DiagnosticsProperty('currentValue', currentValue))
       ..add(DiagnosticsProperty('validators', validators))
       ..add(DiagnosticsProperty('sectionName', sectionName))
-      ..add(DiagnosticsProperty('hasError', hasError))
       ..add(DiagnosticsProperty('onChange', onChange));
   }
 
@@ -2426,22 +2275,13 @@ class _$FormInputFieldInfoImagePickerImpl
                 .equals(other._validators, _validators) &&
             (identical(other.sectionName, sectionName) ||
                 other.sectionName == sectionName) &&
-            (identical(other.hasError, hasError) ||
-                other.hasError == hasError) &&
             (identical(other.onChange, onChange) ||
                 other.onChange == onChange));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      label,
-      currentValue,
-      const DeepCollectionEquality().hash(_validators),
-      sectionName,
-      hasError,
-      onChange);
+  int get hashCode => Object.hash(runtimeType, id, label, currentValue,
+      const DeepCollectionEquality().hash(_validators), sectionName, onChange);
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -2461,7 +2301,6 @@ class _$FormInputFieldInfoImagePickerImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -2476,7 +2315,6 @@ class _$FormInputFieldInfoImagePickerImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -2487,7 +2325,6 @@ class _$FormInputFieldInfoImagePickerImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -2498,7 +2335,6 @@ class _$FormInputFieldInfoImagePickerImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)
         imagePicker,
     required TResult Function(
@@ -2519,8 +2355,6 @@ class _$FormInputFieldInfoImagePickerImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -2533,7 +2367,6 @@ class _$FormInputFieldInfoImagePickerImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -2547,12 +2380,11 @@ class _$FormInputFieldInfoImagePickerImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)
+            String sectionName)
         slider,
   }) {
     return imagePicker(
-        id, label, currentValue, validators, sectionName, hasError, onChange);
+        id, label, currentValue, validators, sectionName, onChange);
   }
 
   @override
@@ -2563,7 +2395,6 @@ class _$FormInputFieldInfoImagePickerImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -2578,7 +2409,6 @@ class _$FormInputFieldInfoImagePickerImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -2589,7 +2419,6 @@ class _$FormInputFieldInfoImagePickerImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -2600,7 +2429,6 @@ class _$FormInputFieldInfoImagePickerImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)?
         imagePicker,
     TResult? Function(String id, String label, String sectionName,
@@ -2621,8 +2449,6 @@ class _$FormInputFieldInfoImagePickerImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -2635,7 +2461,6 @@ class _$FormInputFieldInfoImagePickerImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -2649,12 +2474,11 @@ class _$FormInputFieldInfoImagePickerImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
+            String sectionName)?
         slider,
   }) {
     return imagePicker?.call(
-        id, label, currentValue, validators, sectionName, hasError, onChange);
+        id, label, currentValue, validators, sectionName, onChange);
   }
 
   @override
@@ -2665,7 +2489,6 @@ class _$FormInputFieldInfoImagePickerImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -2680,7 +2503,6 @@ class _$FormInputFieldInfoImagePickerImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -2691,7 +2513,6 @@ class _$FormInputFieldInfoImagePickerImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -2702,7 +2523,6 @@ class _$FormInputFieldInfoImagePickerImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)?
         imagePicker,
     TResult Function(String id, String label, String sectionName,
@@ -2723,8 +2543,6 @@ class _$FormInputFieldInfoImagePickerImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -2737,7 +2555,6 @@ class _$FormInputFieldInfoImagePickerImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -2751,14 +2568,13 @@ class _$FormInputFieldInfoImagePickerImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
+            String sectionName)?
         slider,
     required TResult orElse(),
   }) {
     if (imagePicker != null) {
       return imagePicker(
-          id, label, currentValue, validators, sectionName, hasError, onChange);
+          id, label, currentValue, validators, sectionName, onChange);
     }
     return orElse();
   }
@@ -2835,7 +2651,6 @@ abstract class FormInputFieldInfoImagePicker implements FormInputFieldInfo {
           required final String? currentValue,
           required final List<String? Function(bool?)> validators,
           required final String sectionName,
-          required final bool hasError,
           final void Function(String)? onChange}) =
       _$FormInputFieldInfoImagePickerImpl;
 
@@ -2846,7 +2661,6 @@ abstract class FormInputFieldInfoImagePicker implements FormInputFieldInfo {
   List<String? Function(bool?)> get validators;
   @override
   String get sectionName;
-  bool get hasError;
   void Function(String)? get onChange;
 
   /// Create a copy of FormInputFieldInfo
@@ -2981,7 +2795,6 @@ class _$FormInputFieldInfoCancelButtonImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -2996,7 +2809,6 @@ class _$FormInputFieldInfoCancelButtonImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -3007,7 +2819,6 @@ class _$FormInputFieldInfoCancelButtonImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -3018,7 +2829,6 @@ class _$FormInputFieldInfoCancelButtonImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)
         imagePicker,
     required TResult Function(
@@ -3039,8 +2849,6 @@ class _$FormInputFieldInfoCancelButtonImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -3053,7 +2861,6 @@ class _$FormInputFieldInfoCancelButtonImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -3067,8 +2874,7 @@ class _$FormInputFieldInfoCancelButtonImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)
+            String sectionName)
         slider,
   }) {
     return cancelButton(id, label, sectionName, cancel);
@@ -3082,7 +2888,6 @@ class _$FormInputFieldInfoCancelButtonImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -3097,7 +2902,6 @@ class _$FormInputFieldInfoCancelButtonImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -3108,7 +2912,6 @@ class _$FormInputFieldInfoCancelButtonImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -3119,7 +2922,6 @@ class _$FormInputFieldInfoCancelButtonImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)?
         imagePicker,
     TResult? Function(String id, String label, String sectionName,
@@ -3140,8 +2942,6 @@ class _$FormInputFieldInfoCancelButtonImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -3154,7 +2954,6 @@ class _$FormInputFieldInfoCancelButtonImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -3168,8 +2967,7 @@ class _$FormInputFieldInfoCancelButtonImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
+            String sectionName)?
         slider,
   }) {
     return cancelButton?.call(id, label, sectionName, cancel);
@@ -3183,7 +2981,6 @@ class _$FormInputFieldInfoCancelButtonImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -3198,7 +2995,6 @@ class _$FormInputFieldInfoCancelButtonImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -3209,7 +3005,6 @@ class _$FormInputFieldInfoCancelButtonImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -3220,7 +3015,6 @@ class _$FormInputFieldInfoCancelButtonImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)?
         imagePicker,
     TResult Function(String id, String label, String sectionName,
@@ -3241,8 +3035,6 @@ class _$FormInputFieldInfoCancelButtonImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -3255,7 +3047,6 @@ class _$FormInputFieldInfoCancelButtonImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -3269,8 +3060,7 @@ class _$FormInputFieldInfoCancelButtonImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
+            String sectionName)?
         slider,
     required TResult orElse(),
   }) {
@@ -3495,7 +3285,6 @@ class _$FormInputFieldInfoSubmitButtonImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -3510,7 +3299,6 @@ class _$FormInputFieldInfoSubmitButtonImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -3521,7 +3309,6 @@ class _$FormInputFieldInfoSubmitButtonImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -3532,7 +3319,6 @@ class _$FormInputFieldInfoSubmitButtonImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)
         imagePicker,
     required TResult Function(
@@ -3553,8 +3339,6 @@ class _$FormInputFieldInfoSubmitButtonImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -3567,7 +3351,6 @@ class _$FormInputFieldInfoSubmitButtonImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -3581,8 +3364,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)
+            String sectionName)
         slider,
   }) {
     return submitButton(id, label, sectionName, save);
@@ -3596,7 +3378,6 @@ class _$FormInputFieldInfoSubmitButtonImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -3611,7 +3392,6 @@ class _$FormInputFieldInfoSubmitButtonImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -3622,7 +3402,6 @@ class _$FormInputFieldInfoSubmitButtonImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -3633,7 +3412,6 @@ class _$FormInputFieldInfoSubmitButtonImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)?
         imagePicker,
     TResult? Function(String id, String label, String sectionName,
@@ -3654,8 +3432,6 @@ class _$FormInputFieldInfoSubmitButtonImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -3668,7 +3444,6 @@ class _$FormInputFieldInfoSubmitButtonImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -3682,8 +3457,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
+            String sectionName)?
         slider,
   }) {
     return submitButton?.call(id, label, sectionName, save);
@@ -3697,7 +3471,6 @@ class _$FormInputFieldInfoSubmitButtonImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -3712,7 +3485,6 @@ class _$FormInputFieldInfoSubmitButtonImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -3723,7 +3495,6 @@ class _$FormInputFieldInfoSubmitButtonImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -3734,7 +3505,6 @@ class _$FormInputFieldInfoSubmitButtonImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)?
         imagePicker,
     TResult Function(String id, String label, String sectionName,
@@ -3755,8 +3525,6 @@ class _$FormInputFieldInfoSubmitButtonImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -3769,7 +3537,6 @@ class _$FormInputFieldInfoSubmitButtonImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -3783,8 +3550,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
+            String sectionName)?
         slider,
     required TResult orElse(),
   }) {
@@ -3904,8 +3670,6 @@ abstract class _$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWith<$Res>
       List<String? Function(String?)> validatorsLeft,
       List<String? Function(String?)> validatorsRight,
       String sectionName,
-      bool hasErrorleft,
-      bool hasErrorRight,
       bool deletable,
       void Function()? onDelete});
 }
@@ -3936,8 +3700,6 @@ class __$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWithImpl<$Res>
     Object? validatorsLeft = null,
     Object? validatorsRight = null,
     Object? sectionName = null,
-    Object? hasErrorleft = null,
-    Object? hasErrorRight = null,
     Object? deletable = null,
     Object? onDelete = freezed,
   }) {
@@ -3986,14 +3748,6 @@ class __$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWithImpl<$Res>
           ? _value.sectionName
           : sectionName // ignore: cast_nullable_to_non_nullable
               as String,
-      hasErrorleft: null == hasErrorleft
-          ? _value.hasErrorleft
-          : hasErrorleft // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hasErrorRight: null == hasErrorRight
-          ? _value.hasErrorRight
-          : hasErrorRight // ignore: cast_nullable_to_non_nullable
-              as bool,
       deletable: null == deletable
           ? _value.deletable
           : deletable // ignore: cast_nullable_to_non_nullable
@@ -4023,8 +3777,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
       required final List<String? Function(String?)> validatorsLeft,
       required final List<String? Function(String?)> validatorsRight,
       required this.sectionName,
-      required this.hasErrorleft,
-      required this.hasErrorRight,
       this.deletable = false,
       this.onDelete = null})
       : _optionsLeft = optionsLeft,
@@ -4079,10 +3831,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
   @override
   final String sectionName;
   @override
-  final bool hasErrorleft;
-  @override
-  final bool hasErrorRight;
-  @override
   @JsonKey()
   final bool deletable;
   @override
@@ -4091,7 +3839,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo.twoAutoCompleteFields(id: $id, id2: $id2, labelLeft: $labelLeft, labelRight: $labelRight, currentValueLeft: $currentValueLeft, currentValueRight: $currentValueRight, optionsLeft: $optionsLeft, optionsRight: $optionsRight, validatorsLeft: $validatorsLeft, validatorsRight: $validatorsRight, sectionName: $sectionName, hasErrorleft: $hasErrorleft, hasErrorRight: $hasErrorRight, deletable: $deletable, onDelete: $onDelete)';
+    return 'FormInputFieldInfo.twoAutoCompleteFields(id: $id, id2: $id2, labelLeft: $labelLeft, labelRight: $labelRight, currentValueLeft: $currentValueLeft, currentValueRight: $currentValueRight, optionsLeft: $optionsLeft, optionsRight: $optionsRight, validatorsLeft: $validatorsLeft, validatorsRight: $validatorsRight, sectionName: $sectionName, deletable: $deletable, onDelete: $onDelete)';
   }
 
   @override
@@ -4111,8 +3859,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
       ..add(DiagnosticsProperty('validatorsLeft', validatorsLeft))
       ..add(DiagnosticsProperty('validatorsRight', validatorsRight))
       ..add(DiagnosticsProperty('sectionName', sectionName))
-      ..add(DiagnosticsProperty('hasErrorleft', hasErrorleft))
-      ..add(DiagnosticsProperty('hasErrorRight', hasErrorRight))
       ..add(DiagnosticsProperty('deletable', deletable))
       ..add(DiagnosticsProperty('onDelete', onDelete));
   }
@@ -4142,10 +3888,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
                 .equals(other._validatorsRight, _validatorsRight) &&
             (identical(other.sectionName, sectionName) ||
                 other.sectionName == sectionName) &&
-            (identical(other.hasErrorleft, hasErrorleft) ||
-                other.hasErrorleft == hasErrorleft) &&
-            (identical(other.hasErrorRight, hasErrorRight) ||
-                other.hasErrorRight == hasErrorRight) &&
             (identical(other.deletable, deletable) ||
                 other.deletable == deletable) &&
             (identical(other.onDelete, onDelete) ||
@@ -4166,8 +3908,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
       const DeepCollectionEquality().hash(_validatorsLeft),
       const DeepCollectionEquality().hash(_validatorsRight),
       sectionName,
-      hasErrorleft,
-      hasErrorRight,
       deletable,
       onDelete);
 
@@ -4190,7 +3930,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -4205,7 +3944,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -4216,7 +3954,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -4227,7 +3964,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)
         imagePicker,
     required TResult Function(
@@ -4248,8 +3984,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -4262,7 +3996,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -4276,8 +4009,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)
+            String sectionName)
         slider,
   }) {
     return twoAutoCompleteFields(
@@ -4292,8 +4024,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
         validatorsLeft,
         validatorsRight,
         sectionName,
-        hasErrorleft,
-        hasErrorRight,
         deletable,
         onDelete);
   }
@@ -4306,7 +4036,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -4321,7 +4050,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -4332,7 +4060,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -4343,7 +4070,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)?
         imagePicker,
     TResult? Function(String id, String label, String sectionName,
@@ -4364,8 +4090,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -4378,7 +4102,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -4392,8 +4115,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
+            String sectionName)?
         slider,
   }) {
     return twoAutoCompleteFields?.call(
@@ -4408,8 +4130,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
         validatorsLeft,
         validatorsRight,
         sectionName,
-        hasErrorleft,
-        hasErrorRight,
         deletable,
         onDelete);
   }
@@ -4422,7 +4142,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -4437,7 +4156,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -4448,7 +4166,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -4459,7 +4176,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)?
         imagePicker,
     TResult Function(String id, String label, String sectionName,
@@ -4480,8 +4196,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -4494,7 +4208,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -4508,8 +4221,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
+            String sectionName)?
         slider,
     required TResult orElse(),
   }) {
@@ -4526,8 +4238,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
           validatorsLeft,
           validatorsRight,
           sectionName,
-          hasErrorleft,
-          hasErrorRight,
           deletable,
           onDelete);
     }
@@ -4613,8 +4323,6 @@ abstract class FormInputFieldInfoTwoAutoCompleteFields
           required final List<String? Function(String?)> validatorsLeft,
           required final List<String? Function(String?)> validatorsRight,
           required final String sectionName,
-          required final bool hasErrorleft,
-          required final bool hasErrorRight,
           final bool deletable,
           final void Function()? onDelete}) =
       _$FormInputFieldInfoTwoAutoCompleteFieldsImpl;
@@ -4632,8 +4340,6 @@ abstract class FormInputFieldInfoTwoAutoCompleteFields
   List<String? Function(String?)> get validatorsRight;
   @override
   String get sectionName;
-  bool get hasErrorleft;
-  bool get hasErrorRight;
   bool get deletable;
   void Function()? get onDelete;
 
@@ -4771,7 +4477,6 @@ class _$FormInputFieldInfoCustomButtonImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -4786,7 +4491,6 @@ class _$FormInputFieldInfoCustomButtonImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -4797,7 +4501,6 @@ class _$FormInputFieldInfoCustomButtonImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -4808,7 +4511,6 @@ class _$FormInputFieldInfoCustomButtonImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)
         imagePicker,
     required TResult Function(
@@ -4829,8 +4531,6 @@ class _$FormInputFieldInfoCustomButtonImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -4843,7 +4543,6 @@ class _$FormInputFieldInfoCustomButtonImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -4857,8 +4556,7 @@ class _$FormInputFieldInfoCustomButtonImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)
+            String sectionName)
         slider,
   }) {
     return customButton(id, label, sectionName, callback);
@@ -4872,7 +4570,6 @@ class _$FormInputFieldInfoCustomButtonImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -4887,7 +4584,6 @@ class _$FormInputFieldInfoCustomButtonImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -4898,7 +4594,6 @@ class _$FormInputFieldInfoCustomButtonImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -4909,7 +4604,6 @@ class _$FormInputFieldInfoCustomButtonImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)?
         imagePicker,
     TResult? Function(String id, String label, String sectionName,
@@ -4930,8 +4624,6 @@ class _$FormInputFieldInfoCustomButtonImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -4944,7 +4636,6 @@ class _$FormInputFieldInfoCustomButtonImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -4958,8 +4649,7 @@ class _$FormInputFieldInfoCustomButtonImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
+            String sectionName)?
         slider,
   }) {
     return customButton?.call(id, label, sectionName, callback);
@@ -4973,7 +4663,6 @@ class _$FormInputFieldInfoCustomButtonImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -4988,7 +4677,6 @@ class _$FormInputFieldInfoCustomButtonImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -4999,7 +4687,6 @@ class _$FormInputFieldInfoCustomButtonImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -5010,7 +4697,6 @@ class _$FormInputFieldInfoCustomButtonImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)?
         imagePicker,
     TResult Function(String id, String label, String sectionName,
@@ -5031,8 +4717,6 @@ class _$FormInputFieldInfoCustomButtonImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -5045,7 +4729,6 @@ class _$FormInputFieldInfoCustomButtonImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -5059,8 +4742,7 @@ class _$FormInputFieldInfoCustomButtonImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
+            String sectionName)?
         slider,
     required TResult orElse(),
   }) {
@@ -5174,7 +4856,6 @@ abstract class _$$FormInputFieldInfoDateImplCopyWith<$Res>
       String currentValue,
       List<String? Function(DateTime?)> validators,
       String sectionName,
-      bool hasError,
       void Function(String)? onChange,
       bool deletable,
       void Function()? onDelete});
@@ -5199,7 +4880,6 @@ class __$$FormInputFieldInfoDateImplCopyWithImpl<$Res>
     Object? currentValue = null,
     Object? validators = null,
     Object? sectionName = null,
-    Object? hasError = null,
     Object? onChange = freezed,
     Object? deletable = null,
     Object? onDelete = freezed,
@@ -5225,10 +4905,6 @@ class __$$FormInputFieldInfoDateImplCopyWithImpl<$Res>
           ? _value.sectionName
           : sectionName // ignore: cast_nullable_to_non_nullable
               as String,
-      hasError: null == hasError
-          ? _value.hasError
-          : hasError // ignore: cast_nullable_to_non_nullable
-              as bool,
       onChange: freezed == onChange
           ? _value.onChange
           : onChange // ignore: cast_nullable_to_non_nullable
@@ -5256,7 +4932,6 @@ class _$FormInputFieldInfoDateImpl
       required this.currentValue,
       required final List<String? Function(DateTime?)> validators,
       required this.sectionName,
-      required this.hasError,
       this.onChange = null,
       this.deletable = false,
       this.onDelete = null})
@@ -5279,8 +4954,6 @@ class _$FormInputFieldInfoDateImpl
   @override
   final String sectionName;
   @override
-  final bool hasError;
-  @override
   @JsonKey()
   final void Function(String)? onChange;
   @override
@@ -5292,7 +4965,7 @@ class _$FormInputFieldInfoDateImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo.date(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
+    return 'FormInputFieldInfo.date(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
   }
 
   @override
@@ -5305,7 +4978,6 @@ class _$FormInputFieldInfoDateImpl
       ..add(DiagnosticsProperty('currentValue', currentValue))
       ..add(DiagnosticsProperty('validators', validators))
       ..add(DiagnosticsProperty('sectionName', sectionName))
-      ..add(DiagnosticsProperty('hasError', hasError))
       ..add(DiagnosticsProperty('onChange', onChange))
       ..add(DiagnosticsProperty('deletable', deletable))
       ..add(DiagnosticsProperty('onDelete', onDelete));
@@ -5324,8 +4996,6 @@ class _$FormInputFieldInfoDateImpl
                 .equals(other._validators, _validators) &&
             (identical(other.sectionName, sectionName) ||
                 other.sectionName == sectionName) &&
-            (identical(other.hasError, hasError) ||
-                other.hasError == hasError) &&
             (identical(other.onChange, onChange) ||
                 other.onChange == onChange) &&
             (identical(other.deletable, deletable) ||
@@ -5342,7 +5012,6 @@ class _$FormInputFieldInfoDateImpl
       currentValue,
       const DeepCollectionEquality().hash(_validators),
       sectionName,
-      hasError,
       onChange,
       deletable,
       onDelete);
@@ -5364,7 +5033,6 @@ class _$FormInputFieldInfoDateImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -5379,7 +5047,6 @@ class _$FormInputFieldInfoDateImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -5390,7 +5057,6 @@ class _$FormInputFieldInfoDateImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -5401,7 +5067,6 @@ class _$FormInputFieldInfoDateImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)
         imagePicker,
     required TResult Function(
@@ -5422,8 +5087,6 @@ class _$FormInputFieldInfoDateImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -5436,7 +5099,6 @@ class _$FormInputFieldInfoDateImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -5450,12 +5112,11 @@ class _$FormInputFieldInfoDateImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)
+            String sectionName)
         slider,
   }) {
-    return date(id, label, currentValue, validators, sectionName, hasError,
-        onChange, deletable, onDelete);
+    return date(id, label, currentValue, validators, sectionName, onChange,
+        deletable, onDelete);
   }
 
   @override
@@ -5466,7 +5127,6 @@ class _$FormInputFieldInfoDateImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -5481,7 +5141,6 @@ class _$FormInputFieldInfoDateImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -5492,7 +5151,6 @@ class _$FormInputFieldInfoDateImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -5503,7 +5161,6 @@ class _$FormInputFieldInfoDateImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)?
         imagePicker,
     TResult? Function(String id, String label, String sectionName,
@@ -5524,8 +5181,6 @@ class _$FormInputFieldInfoDateImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -5538,7 +5193,6 @@ class _$FormInputFieldInfoDateImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -5552,12 +5206,11 @@ class _$FormInputFieldInfoDateImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
+            String sectionName)?
         slider,
   }) {
     return date?.call(id, label, currentValue, validators, sectionName,
-        hasError, onChange, deletable, onDelete);
+        onChange, deletable, onDelete);
   }
 
   @override
@@ -5568,7 +5221,6 @@ class _$FormInputFieldInfoDateImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -5583,7 +5235,6 @@ class _$FormInputFieldInfoDateImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -5594,7 +5245,6 @@ class _$FormInputFieldInfoDateImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -5605,7 +5255,6 @@ class _$FormInputFieldInfoDateImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)?
         imagePicker,
     TResult Function(String id, String label, String sectionName,
@@ -5626,8 +5275,6 @@ class _$FormInputFieldInfoDateImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -5640,7 +5287,6 @@ class _$FormInputFieldInfoDateImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -5654,14 +5300,13 @@ class _$FormInputFieldInfoDateImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
+            String sectionName)?
         slider,
     required TResult orElse(),
   }) {
     if (date != null) {
-      return date(id, label, currentValue, validators, sectionName, hasError,
-          onChange, deletable, onDelete);
+      return date(id, label, currentValue, validators, sectionName, onChange,
+          deletable, onDelete);
     }
     return orElse();
   }
@@ -5738,7 +5383,6 @@ abstract class FormInputFieldInfoDate implements FormInputFieldInfo {
       required final String currentValue,
       required final List<String? Function(DateTime?)> validators,
       required final String sectionName,
-      required final bool hasError,
       final void Function(String)? onChange,
       final bool deletable,
       final void Function()? onDelete}) = _$FormInputFieldInfoDateImpl;
@@ -5750,7 +5394,6 @@ abstract class FormInputFieldInfoDate implements FormInputFieldInfo {
   List<String? Function(DateTime?)> get validators;
   @override
   String get sectionName;
-  bool get hasError;
   void Function(String)? get onChange;
   bool get deletable;
   void Function()? get onDelete;
@@ -5900,7 +5543,6 @@ class _$FormInputFieldInfoMapImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -5915,7 +5557,6 @@ class _$FormInputFieldInfoMapImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -5926,7 +5567,6 @@ class _$FormInputFieldInfoMapImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -5937,7 +5577,6 @@ class _$FormInputFieldInfoMapImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)
         imagePicker,
     required TResult Function(
@@ -5958,8 +5597,6 @@ class _$FormInputFieldInfoMapImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -5972,7 +5609,6 @@ class _$FormInputFieldInfoMapImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -5986,8 +5622,7 @@ class _$FormInputFieldInfoMapImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)
+            String sectionName)
         slider,
   }) {
     return map(id, label, sectionName, value);
@@ -6001,7 +5636,6 @@ class _$FormInputFieldInfoMapImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -6016,7 +5650,6 @@ class _$FormInputFieldInfoMapImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -6027,7 +5660,6 @@ class _$FormInputFieldInfoMapImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -6038,7 +5670,6 @@ class _$FormInputFieldInfoMapImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)?
         imagePicker,
     TResult? Function(String id, String label, String sectionName,
@@ -6059,8 +5690,6 @@ class _$FormInputFieldInfoMapImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -6073,7 +5702,6 @@ class _$FormInputFieldInfoMapImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -6087,8 +5715,7 @@ class _$FormInputFieldInfoMapImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
+            String sectionName)?
         slider,
   }) {
     return map?.call(id, label, sectionName, value);
@@ -6102,7 +5729,6 @@ class _$FormInputFieldInfoMapImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -6117,7 +5743,6 @@ class _$FormInputFieldInfoMapImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -6128,7 +5753,6 @@ class _$FormInputFieldInfoMapImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -6139,7 +5763,6 @@ class _$FormInputFieldInfoMapImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)?
         imagePicker,
     TResult Function(String id, String label, String sectionName,
@@ -6160,8 +5783,6 @@ class _$FormInputFieldInfoMapImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -6174,7 +5795,6 @@ class _$FormInputFieldInfoMapImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -6188,8 +5808,7 @@ class _$FormInputFieldInfoMapImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
+            String sectionName)?
         slider,
     required TResult orElse(),
   }) {
@@ -6301,8 +5920,7 @@ abstract class _$$FormInputFieldInfoSliderImplCopyWith<$Res>
       (double, double) range,
       double currentValue,
       List<String? Function(bool?)> validators,
-      String sectionName,
-      bool hasError});
+      String sectionName});
 }
 
 /// @nodoc
@@ -6326,7 +5944,6 @@ class __$$FormInputFieldInfoSliderImplCopyWithImpl<$Res>
     Object? currentValue = null,
     Object? validators = null,
     Object? sectionName = null,
-    Object? hasError = null,
   }) {
     return _then(_$FormInputFieldInfoSliderImpl(
       id: null == id
@@ -6353,10 +5970,6 @@ class __$$FormInputFieldInfoSliderImplCopyWithImpl<$Res>
           ? _value.sectionName
           : sectionName // ignore: cast_nullable_to_non_nullable
               as String,
-      hasError: null == hasError
-          ? _value.hasError
-          : hasError // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -6372,8 +5985,7 @@ class _$FormInputFieldInfoSliderImpl
       required this.range,
       required this.currentValue,
       required final List<String? Function(bool?)> validators,
-      required this.sectionName,
-      required this.hasError})
+      required this.sectionName})
       : _validators = validators;
 
   @override
@@ -6394,12 +6006,10 @@ class _$FormInputFieldInfoSliderImpl
 
   @override
   final String sectionName;
-  @override
-  final bool hasError;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo.slider(id: $id, label: $label, range: $range, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, hasError: $hasError)';
+    return 'FormInputFieldInfo.slider(id: $id, label: $label, range: $range, currentValue: $currentValue, validators: $validators, sectionName: $sectionName)';
   }
 
   @override
@@ -6412,8 +6022,7 @@ class _$FormInputFieldInfoSliderImpl
       ..add(DiagnosticsProperty('range', range))
       ..add(DiagnosticsProperty('currentValue', currentValue))
       ..add(DiagnosticsProperty('validators', validators))
-      ..add(DiagnosticsProperty('sectionName', sectionName))
-      ..add(DiagnosticsProperty('hasError', hasError));
+      ..add(DiagnosticsProperty('sectionName', sectionName));
   }
 
   @override
@@ -6429,14 +6038,12 @@ class _$FormInputFieldInfoSliderImpl
             const DeepCollectionEquality()
                 .equals(other._validators, _validators) &&
             (identical(other.sectionName, sectionName) ||
-                other.sectionName == sectionName) &&
-            (identical(other.hasError, hasError) ||
-                other.hasError == hasError));
+                other.sectionName == sectionName));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, id, label, range, currentValue,
-      const DeepCollectionEquality().hash(_validators), sectionName, hasError);
+      const DeepCollectionEquality().hash(_validators), sectionName);
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -6455,7 +6062,6 @@ class _$FormInputFieldInfoSliderImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -6470,7 +6076,6 @@ class _$FormInputFieldInfoSliderImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -6481,7 +6086,6 @@ class _$FormInputFieldInfoSliderImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -6492,7 +6096,6 @@ class _$FormInputFieldInfoSliderImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)
         imagePicker,
     required TResult Function(
@@ -6513,8 +6116,6 @@ class _$FormInputFieldInfoSliderImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
@@ -6527,7 +6128,6 @@ class _$FormInputFieldInfoSliderImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -6541,12 +6141,10 @@ class _$FormInputFieldInfoSliderImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)
+            String sectionName)
         slider,
   }) {
-    return slider(
-        id, label, range, currentValue, validators, sectionName, hasError);
+    return slider(id, label, range, currentValue, validators, sectionName);
   }
 
   @override
@@ -6557,7 +6155,6 @@ class _$FormInputFieldInfoSliderImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -6572,7 +6169,6 @@ class _$FormInputFieldInfoSliderImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -6583,7 +6179,6 @@ class _$FormInputFieldInfoSliderImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -6594,7 +6189,6 @@ class _$FormInputFieldInfoSliderImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)?
         imagePicker,
     TResult? Function(String id, String label, String sectionName,
@@ -6615,8 +6209,6 @@ class _$FormInputFieldInfoSliderImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -6629,7 +6221,6 @@ class _$FormInputFieldInfoSliderImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -6643,12 +6234,11 @@ class _$FormInputFieldInfoSliderImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
+            String sectionName)?
         slider,
   }) {
     return slider?.call(
-        id, label, range, currentValue, validators, sectionName, hasError);
+        id, label, range, currentValue, validators, sectionName);
   }
 
   @override
@@ -6659,7 +6249,6 @@ class _$FormInputFieldInfoSliderImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -6674,7 +6263,6 @@ class _$FormInputFieldInfoSliderImpl
             String Function(dynamic) optionToString,
             List<String? Function(String?)> validators,
             String sectionName,
-            bool hasError,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -6685,7 +6273,6 @@ class _$FormInputFieldInfoSliderImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -6696,7 +6283,6 @@ class _$FormInputFieldInfoSliderImpl
             String? currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange)?
         imagePicker,
     TResult Function(String id, String label, String sectionName,
@@ -6717,8 +6303,6 @@ class _$FormInputFieldInfoSliderImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
-            bool hasErrorleft,
-            bool hasErrorRight,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
@@ -6731,7 +6315,6 @@ class _$FormInputFieldInfoSliderImpl
             String currentValue,
             List<String? Function(DateTime?)> validators,
             String sectionName,
-            bool hasError,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -6745,14 +6328,12 @@ class _$FormInputFieldInfoSliderImpl
             (double, double) range,
             double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName,
-            bool hasError)?
+            String sectionName)?
         slider,
     required TResult orElse(),
   }) {
     if (slider != null) {
-      return slider(
-          id, label, range, currentValue, validators, sectionName, hasError);
+      return slider(id, label, range, currentValue, validators, sectionName);
     }
     return orElse();
   }
@@ -6829,8 +6410,7 @@ abstract class FormInputFieldInfoSlider implements FormInputFieldInfo {
       required final (double, double) range,
       required final double currentValue,
       required final List<String? Function(bool?)> validators,
-      required final String sectionName,
-      required final bool hasError}) = _$FormInputFieldInfoSliderImpl;
+      required final String sectionName}) = _$FormInputFieldInfoSliderImpl;
 
   @override
   String get id;
@@ -6840,7 +6420,6 @@ abstract class FormInputFieldInfoSlider implements FormInputFieldInfo {
   List<String? Function(bool?)> get validators;
   @override
   String get sectionName;
-  bool get hasError;
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
