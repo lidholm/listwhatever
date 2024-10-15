@@ -30,6 +30,7 @@ class FormGenerator extends StatefulWidget {
     required this.formKey,
     required this.sections,
     required this.fields,
+    this.focusFieldName,
     super.key,
   });
 
@@ -37,6 +38,7 @@ class FormGenerator extends StatefulWidget {
   final List<FormInputSection> sections;
   // ignore: strict_raw_type
   final List<FormInputFieldInfo?> fields;
+  final String? focusFieldName;
 
   @override
   State<StatefulWidget> createState() {

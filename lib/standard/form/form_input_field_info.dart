@@ -92,10 +92,10 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
   const factory FormInputFieldInfo.date({
     required String id,
     required String label,
-    required String currentValue,
+    required DateTime currentValue,
     required String sectionName,
     required FormFieldValidator<DateTime?> validator,
-    @Default(null) void Function(String value)? onChange,
+    @Default(null) void Function(DateTime value)? onChange,
     @Default(false) bool deletable,
     @Default(null) void Function()? onDelete,
   }) = FormInputFieldInfoDate;

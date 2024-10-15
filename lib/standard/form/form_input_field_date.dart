@@ -9,26 +9,19 @@ class FormInputFieldDate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textField = FormBuilderDateTimePicker(
+    final dateField = FormBuilderDateTimePicker(
       key: Key(field.id),
-      autovalidateMode: AutovalidateMode.always,
       name: field.id,
-      initialValue: DateTime.tryParse(field.currentValue),
+      initialValue: field.currentValue,
       validator: field.validator,
-      // decoration: InputDecoration(
-      //   labelText: field.label,
-      //   suffixIcon: field.hasError
-      //       ? const Icon(Icons.error, color: Colors.red)
-      //       : const Icon(Icons.check, color: Colors.green),
-      // ),
-      keyboardType: TextInputType.name,
       textInputAction: TextInputAction.next,
+      initialTime: const TimeOfDay(hour: 8, minute: 0),
     );
 
     if (field.deletable) {
       return Row(
         children: [
-          Expanded(child: textField),
+          Expanded(child: dateField),
           IconButton(
             onPressed: field.onDelete,
             icon: const Icon(Icons.delete),
@@ -37,6 +30,6 @@ class FormInputFieldDate extends StatelessWidget {
         ],
       );
     }
-    return textField;
+    return dateField;
   }
 }

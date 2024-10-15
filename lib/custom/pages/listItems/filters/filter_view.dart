@@ -93,27 +93,12 @@ class _FilterViewState extends State<FilterView> {
       formKey: _formKey,
       sections: sections,
       fields: fields,
+      focusFieldName: FieldId.submit.name,
     );
-
-    // final initialValues = {
-    //   ...widget.filters.categoryFilters,
-    //   startDateFieldName: widget.filters.startDate,
-    //   endDateFieldName: widget.filters.endDate,
-    // };
-    // if (widget.filters.distance != null) {
-    //   initialValues[distanceFieldName] = widget.filters.distance! /
-    //       convertDistanceToMeters(widget.settings.distanceUnit, 1);
-    // }
 
     return ColoredBox(
       color: Theme.of(context).canvasColor.withOpacity(0.85),
       child: formGenerator,
-      // getFormBuilderWrapper(
-      //   widget.list,
-      //   widget.listItems,
-      //   initialValues,
-      //   widget.settings,
-      // ),
     );
   }
 
@@ -146,7 +131,7 @@ class _FilterViewState extends State<FilterView> {
     return FormInputFieldInfo.date(
       id: FieldId.startdate.name,
       label: 'Start date',
-      currentValue: '',
+      currentValue: DateTime.now(),
       validator: (d) {
         if (d == null) {
           return "Can't be empty";
@@ -165,7 +150,7 @@ class _FilterViewState extends State<FilterView> {
     return FormInputFieldInfo.date(
       id: FieldId.enddate.name,
       label: 'End date',
-      currentValue: '',
+      currentValue: DateTime.now(),
       validator: (e) => null,
       sectionName: SectionName.dates.name,
     );

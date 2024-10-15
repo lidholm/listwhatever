@@ -88,10 +88,10 @@ mixin _$FormInputFieldInfo {
     required TResult Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)
         date,
@@ -178,10 +178,10 @@ mixin _$FormInputFieldInfo {
     TResult? Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -268,10 +268,10 @@ mixin _$FormInputFieldInfo {
     TResult Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -660,10 +660,10 @@ class _$FormInputFieldInfoTextAreaImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)
         date,
@@ -754,10 +754,10 @@ class _$FormInputFieldInfoTextAreaImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -848,10 +848,10 @@ class _$FormInputFieldInfoTextAreaImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -1261,10 +1261,10 @@ class _$FormInputFieldInfoDropDownImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)
         date,
@@ -1355,10 +1355,10 @@ class _$FormInputFieldInfoDropDownImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -1449,10 +1449,10 @@ class _$FormInputFieldInfoDropDownImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -1831,10 +1831,10 @@ class _$FormInputFieldInfoCheckboxImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)
         date,
@@ -1925,10 +1925,10 @@ class _$FormInputFieldInfoCheckboxImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -2019,10 +2019,10 @@ class _$FormInputFieldInfoCheckboxImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -2364,10 +2364,10 @@ class _$FormInputFieldInfoImagePickerImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)
         date,
@@ -2458,10 +2458,10 @@ class _$FormInputFieldInfoImagePickerImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -2552,10 +2552,10 @@ class _$FormInputFieldInfoImagePickerImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -2858,10 +2858,10 @@ class _$FormInputFieldInfoCancelButtonImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)
         date,
@@ -2951,10 +2951,10 @@ class _$FormInputFieldInfoCancelButtonImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -3044,10 +3044,10 @@ class _$FormInputFieldInfoCancelButtonImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -3348,10 +3348,10 @@ class _$FormInputFieldInfoSubmitButtonImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)
         date,
@@ -3441,10 +3441,10 @@ class _$FormInputFieldInfoSubmitButtonImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -3534,10 +3534,10 @@ class _$FormInputFieldInfoSubmitButtonImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -3993,10 +3993,10 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)
         date,
@@ -4099,10 +4099,10 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -4205,10 +4205,10 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -4540,10 +4540,10 @@ class _$FormInputFieldInfoCustomButtonImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)
         date,
@@ -4633,10 +4633,10 @@ class _$FormInputFieldInfoCustomButtonImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -4726,10 +4726,10 @@ class _$FormInputFieldInfoCustomButtonImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -4853,10 +4853,10 @@ abstract class _$$FormInputFieldInfoDateImplCopyWith<$Res>
   $Res call(
       {String id,
       String label,
-      String currentValue,
+      DateTime currentValue,
       String sectionName,
       FormFieldValidator<DateTime?> validator,
-      void Function(String)? onChange,
+      void Function(DateTime)? onChange,
       bool deletable,
       void Function()? onDelete});
 }
@@ -4896,7 +4896,7 @@ class __$$FormInputFieldInfoDateImplCopyWithImpl<$Res>
       currentValue: null == currentValue
           ? _value.currentValue
           : currentValue // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
       sectionName: null == sectionName
           ? _value.sectionName
           : sectionName // ignore: cast_nullable_to_non_nullable
@@ -4908,7 +4908,7 @@ class __$$FormInputFieldInfoDateImplCopyWithImpl<$Res>
       onChange: freezed == onChange
           ? _value.onChange
           : onChange // ignore: cast_nullable_to_non_nullable
-              as void Function(String)?,
+              as void Function(DateTime)?,
       deletable: null == deletable
           ? _value.deletable
           : deletable // ignore: cast_nullable_to_non_nullable
@@ -4941,14 +4941,14 @@ class _$FormInputFieldInfoDateImpl
   @override
   final String label;
   @override
-  final String currentValue;
+  final DateTime currentValue;
   @override
   final String sectionName;
   @override
   final FormFieldValidator<DateTime?> validator;
   @override
   @JsonKey()
-  final void Function(String)? onChange;
+  final void Function(DateTime)? onChange;
   @override
   @JsonKey()
   final bool deletable;
@@ -5081,10 +5081,10 @@ class _$FormInputFieldInfoDateImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)
         date,
@@ -5175,10 +5175,10 @@ class _$FormInputFieldInfoDateImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -5269,10 +5269,10 @@ class _$FormInputFieldInfoDateImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -5365,21 +5365,21 @@ abstract class FormInputFieldInfoDate implements FormInputFieldInfo {
   const factory FormInputFieldInfoDate(
       {required final String id,
       required final String label,
-      required final String currentValue,
+      required final DateTime currentValue,
       required final String sectionName,
       required final FormFieldValidator<DateTime?> validator,
-      final void Function(String)? onChange,
+      final void Function(DateTime)? onChange,
       final bool deletable,
       final void Function()? onDelete}) = _$FormInputFieldInfoDateImpl;
 
   @override
   String get id;
   String get label;
-  String get currentValue;
+  DateTime get currentValue;
   @override
   String get sectionName;
   FormFieldValidator<DateTime?> get validator;
-  void Function(String)? get onChange;
+  void Function(DateTime)? get onChange;
   bool get deletable;
   void Function()? get onDelete;
 
@@ -5591,10 +5591,10 @@ class _$FormInputFieldInfoMapImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)
         date,
@@ -5684,10 +5684,10 @@ class _$FormInputFieldInfoMapImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -5777,10 +5777,10 @@ class _$FormInputFieldInfoMapImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -6110,10 +6110,10 @@ class _$FormInputFieldInfoSliderImpl
     required TResult Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)
         date,
@@ -6203,10 +6203,10 @@ class _$FormInputFieldInfoSliderImpl
     TResult? Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,
@@ -6297,10 +6297,10 @@ class _$FormInputFieldInfoSliderImpl
     TResult Function(
             String id,
             String label,
-            String currentValue,
+            DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
-            void Function(String)? onChange,
+            void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
         date,

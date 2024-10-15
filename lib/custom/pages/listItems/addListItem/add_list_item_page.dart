@@ -489,8 +489,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
     return FormInputFieldInfo.date(
       id: FieldId.date.value,
       label: 'Date',
-      currentValue: listItem?.datetime?.toIso8601String() ??
-          DateTime.now().toIso8601String(),
+      currentValue: listItem?.datetime ?? DateTime.now(),
       validator: (d) => d != null && d.compareTo(DateTime(2024, 10, 8)) > 1
           ? null
           : 'Has to be in future',
