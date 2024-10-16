@@ -6,6 +6,7 @@ import 'package:listwhatever/standard/constants.dart';
 
 import 'package:listwhatever/standard/form/form_input_field_cancel_button.dart';
 import 'package:listwhatever/standard/form/form_input_field_checkbox.dart';
+import 'package:listwhatever/standard/form/form_input_field_chips.dart';
 import 'package:listwhatever/standard/form/form_input_field_custom_button.dart';
 import 'package:listwhatever/standard/form/form_input_field_date.dart';
 import 'package:listwhatever/standard/form/form_input_field_drop_down.dart';
@@ -133,6 +134,7 @@ class _FormGeneratorState extends State<FormGenerator> {
       FormInputFieldInfoDate() => FormInputFieldDate(field: field),
       FormInputFieldInfoMap() => FormInputFieldMap(field: field),
       FormInputFieldInfoSlider() => FormInputFieldSlider(field: field),
+      FormInputFieldInfoChips() => FormInputFieldChips(field: field),
     };
     return response;
   }

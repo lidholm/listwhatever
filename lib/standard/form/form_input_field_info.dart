@@ -115,4 +115,13 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     required List<FormFieldValidator<bool>> validators,
     required String sectionName,
   }) = FormInputFieldInfoSlider;
+
+  const factory FormInputFieldInfo.chips({
+    required String id,
+    required String label,
+    required Iterable<String> values,
+    required Iterable<String> currentValue,
+    required List<FormFieldValidator<bool>> validators,
+    required String sectionName,
+  }) = FormInputFieldInfoChips;
 }

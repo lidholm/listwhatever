@@ -9,7 +9,6 @@ import '/custom/currentLocationBloc/current_location_bloc.dart';
 import '/custom/navigation/get_router_provider_information.dart';
 import '/custom/navigation/routes.dart';
 import '/custom/pages/listItems/filters/bloc/filter_bloc.dart';
-import '/custom/pages/listItems/filters/filter_view.dart';
 import '/custom/pages/listItems/listItemsListView/list_items_sort_order_cubit.dart';
 import '/custom/pages/listItems/listItemsPage/list_items_page_view_cubit.dart';
 import '/custom/pages/listItems/list_item_crud_bloc/list_item_crud_bloc.dart';
@@ -139,9 +138,6 @@ class App extends StatelessWidget {
           ),
           BlocProvider<ListItemsSortOrderCubit>(
             create: (context) => ListItemsSortOrderCubit(),
-          ),
-          BlocProvider<SelectedChipsCubit>(
-            create: (context) => SelectedChipsCubit(),
           ),
           BlocProvider<RedirectCubit>(create: (context) => RedirectCubit()),
           BlocProvider<CurrentLocationCubit>(
