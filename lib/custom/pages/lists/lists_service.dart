@@ -94,13 +94,13 @@ class ListsService extends FirestoreService {
     final categoriesAndValues = <String, Set<String>>{};
 
     for (final m in allCategories) {
-      for (final cat in m.keys.map((e) => e.toLowerCase().trim())) {
+      for (final cat in m.keys.map((e) => e.trim())) {
         if (!categoriesAndValues.containsKey(cat)) {
           categoriesAndValues[cat] = <String>{};
         }
 
         for (final value in m[cat] as List<dynamic>) {
-          categoriesAndValues[cat]!.add((value as String).toLowerCase().trim());
+          categoriesAndValues[cat]!.add((value as String).trim());
         }
       }
     }

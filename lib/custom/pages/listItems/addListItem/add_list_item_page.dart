@@ -132,6 +132,8 @@ class _AddListItemPageState extends State<AddListItemPage> {
     if (listItemId != null) {
       BlocProvider.of<ListItemLoadBloc>(context)
           .add(LoadListItem(widget.actualListId, listItemId!));
+      BlocProvider.of<CategoriesForListBloc>(context)
+          .add(LoadCategoriesForList(widget.actualListId));
     }
     super.initState();
   }
