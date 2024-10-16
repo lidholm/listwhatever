@@ -17,21 +17,15 @@ class FormInputFieldChips extends StatelessWidget {
         labelText: field.label,
       ),
       name: field.id,
-      onChanged: (List<String>? selected) {
-        // final chips = selected?.map((s) => '$categoryName-$s').toSet();
-        // context.read<SelectedChipsCubit>().update(chips ?? <String>{});
-      },
       spacing: 8,
       selectedColor: Theme.of(context).primaryColor,
       backgroundColor: Theme.of(context).primaryColor.withAlpha(100),
       options: field.values.map(
         (c) {
           const iconText = 'S';
-          // isSelected(categoryName, c, selectedChips) ? '' : c[0];
           return FormBuilderChipOption<String>(
             value: c,
             avatar: const CircleAvatar(
-              // backgroundColor: mainColor,
               child: Text(iconText),
             ),
           );

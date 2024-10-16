@@ -16,6 +16,7 @@ class FormInputFieldDate extends StatelessWidget {
       validator: field.validator,
       textInputAction: TextInputAction.next,
       initialTime: const TimeOfDay(hour: 8, minute: 0),
+      inputType: field.inputType,
     );
 
     if (field.deletable) {

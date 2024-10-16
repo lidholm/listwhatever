@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:listwhatever/custom/pages/listItems/searchLocation/geocoder/geocoderresult.dart';
 
@@ -95,6 +96,7 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     required DateTime currentValue,
     required String sectionName,
     required FormFieldValidator<DateTime?> validator,
+    required InputType inputType,
     @Default(null) void Function(DateTime value)? onChange,
     @Default(false) bool deletable,
     @Default(null) void Function()? onDelete,

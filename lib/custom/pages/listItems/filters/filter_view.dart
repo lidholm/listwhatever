@@ -128,6 +128,7 @@ class _FilterViewState extends State<FilterView> {
       id: FieldId.startdate.name,
       label: 'Start date',
       currentValue: DateTime.now(),
+      inputType: widget.list.withTimes ? InputType.both : InputType.date,
       validator: (d) {
         // if (d == null) {
         //   return "Can't be empty";
@@ -147,6 +148,7 @@ class _FilterViewState extends State<FilterView> {
       id: FieldId.enddate.name,
       label: 'End date',
       currentValue: DateTime.now(),
+      inputType: widget.list.withTimes ? InputType.both : InputType.date,
       validator: (e) => null,
       sectionName: SectionName.dates.name,
     );

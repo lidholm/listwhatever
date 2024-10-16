@@ -91,6 +91,7 @@ mixin _$FormInputFieldInfo {
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -189,6 +190,7 @@ mixin _$FormInputFieldInfo {
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -287,6 +289,7 @@ mixin _$FormInputFieldInfo {
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -690,6 +693,7 @@ class _$FormInputFieldInfoTextAreaImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -792,6 +796,7 @@ class _$FormInputFieldInfoTextAreaImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -894,6 +899,7 @@ class _$FormInputFieldInfoTextAreaImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -1318,6 +1324,7 @@ class _$FormInputFieldInfoDropDownImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -1420,6 +1427,7 @@ class _$FormInputFieldInfoDropDownImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -1522,6 +1530,7 @@ class _$FormInputFieldInfoDropDownImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -1915,6 +1924,7 @@ class _$FormInputFieldInfoCheckboxImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -2017,6 +2027,7 @@ class _$FormInputFieldInfoCheckboxImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -2119,6 +2130,7 @@ class _$FormInputFieldInfoCheckboxImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -2475,6 +2487,7 @@ class _$FormInputFieldInfoImagePickerImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -2577,6 +2590,7 @@ class _$FormInputFieldInfoImagePickerImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -2679,6 +2693,7 @@ class _$FormInputFieldInfoImagePickerImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -2996,6 +3011,7 @@ class _$FormInputFieldInfoCancelButtonImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -3097,6 +3113,7 @@ class _$FormInputFieldInfoCancelButtonImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -3198,6 +3215,7 @@ class _$FormInputFieldInfoCancelButtonImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -3513,6 +3531,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -3614,6 +3633,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -3715,6 +3735,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -4185,6 +4206,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -4299,6 +4321,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -4413,6 +4436,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -4759,6 +4783,7 @@ class _$FormInputFieldInfoCustomButtonImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -4860,6 +4885,7 @@ class _$FormInputFieldInfoCustomButtonImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -4961,6 +4987,7 @@ class _$FormInputFieldInfoCustomButtonImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -5099,6 +5126,7 @@ abstract class _$$FormInputFieldInfoDateImplCopyWith<$Res>
       DateTime currentValue,
       String sectionName,
       FormFieldValidator<DateTime?> validator,
+      InputType inputType,
       void Function(DateTime)? onChange,
       bool deletable,
       void Function()? onDelete});
@@ -5123,6 +5151,7 @@ class __$$FormInputFieldInfoDateImplCopyWithImpl<$Res>
     Object? currentValue = null,
     Object? sectionName = null,
     Object? validator = null,
+    Object? inputType = null,
     Object? onChange = freezed,
     Object? deletable = null,
     Object? onDelete = freezed,
@@ -5148,6 +5177,10 @@ class __$$FormInputFieldInfoDateImplCopyWithImpl<$Res>
           ? _value.validator
           : validator // ignore: cast_nullable_to_non_nullable
               as FormFieldValidator<DateTime?>,
+      inputType: null == inputType
+          ? _value.inputType
+          : inputType // ignore: cast_nullable_to_non_nullable
+              as InputType,
       onChange: freezed == onChange
           ? _value.onChange
           : onChange // ignore: cast_nullable_to_non_nullable
@@ -5175,6 +5208,7 @@ class _$FormInputFieldInfoDateImpl
       required this.currentValue,
       required this.sectionName,
       required this.validator,
+      required this.inputType,
       this.onChange = null,
       this.deletable = false,
       this.onDelete = null});
@@ -5190,6 +5224,8 @@ class _$FormInputFieldInfoDateImpl
   @override
   final FormFieldValidator<DateTime?> validator;
   @override
+  final InputType inputType;
+  @override
   @JsonKey()
   final void Function(DateTime)? onChange;
   @override
@@ -5201,7 +5237,7 @@ class _$FormInputFieldInfoDateImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo.date(id: $id, label: $label, currentValue: $currentValue, sectionName: $sectionName, validator: $validator, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
+    return 'FormInputFieldInfo.date(id: $id, label: $label, currentValue: $currentValue, sectionName: $sectionName, validator: $validator, inputType: $inputType, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
   }
 
   @override
@@ -5214,6 +5250,7 @@ class _$FormInputFieldInfoDateImpl
       ..add(DiagnosticsProperty('currentValue', currentValue))
       ..add(DiagnosticsProperty('sectionName', sectionName))
       ..add(DiagnosticsProperty('validator', validator))
+      ..add(DiagnosticsProperty('inputType', inputType))
       ..add(DiagnosticsProperty('onChange', onChange))
       ..add(DiagnosticsProperty('deletable', deletable))
       ..add(DiagnosticsProperty('onDelete', onDelete));
@@ -5232,6 +5269,8 @@ class _$FormInputFieldInfoDateImpl
                 other.sectionName == sectionName) &&
             (identical(other.validator, validator) ||
                 other.validator == validator) &&
+            (identical(other.inputType, inputType) ||
+                other.inputType == inputType) &&
             (identical(other.onChange, onChange) ||
                 other.onChange == onChange) &&
             (identical(other.deletable, deletable) ||
@@ -5242,7 +5281,7 @@ class _$FormInputFieldInfoDateImpl
 
   @override
   int get hashCode => Object.hash(runtimeType, id, label, currentValue,
-      sectionName, validator, onChange, deletable, onDelete);
+      sectionName, validator, inputType, onChange, deletable, onDelete);
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -5327,6 +5366,7 @@ class _$FormInputFieldInfoDateImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -5351,8 +5391,8 @@ class _$FormInputFieldInfoDateImpl
             String sectionName)
         chips,
   }) {
-    return date(id, label, currentValue, sectionName, validator, onChange,
-        deletable, onDelete);
+    return date(id, label, currentValue, sectionName, validator, inputType,
+        onChange, deletable, onDelete);
   }
 
   @override
@@ -5429,6 +5469,7 @@ class _$FormInputFieldInfoDateImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -5453,8 +5494,8 @@ class _$FormInputFieldInfoDateImpl
             String sectionName)?
         chips,
   }) {
-    return date?.call(id, label, currentValue, sectionName, validator, onChange,
-        deletable, onDelete);
+    return date?.call(id, label, currentValue, sectionName, validator,
+        inputType, onChange, deletable, onDelete);
   }
 
   @override
@@ -5531,6 +5572,7 @@ class _$FormInputFieldInfoDateImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -5557,8 +5599,8 @@ class _$FormInputFieldInfoDateImpl
     required TResult orElse(),
   }) {
     if (date != null) {
-      return date(id, label, currentValue, sectionName, validator, onChange,
-          deletable, onDelete);
+      return date(id, label, currentValue, sectionName, validator, inputType,
+          onChange, deletable, onDelete);
     }
     return orElse();
   }
@@ -5638,6 +5680,7 @@ abstract class FormInputFieldInfoDate implements FormInputFieldInfo {
       required final DateTime currentValue,
       required final String sectionName,
       required final FormFieldValidator<DateTime?> validator,
+      required final InputType inputType,
       final void Function(DateTime)? onChange,
       final bool deletable,
       final void Function()? onDelete}) = _$FormInputFieldInfoDateImpl;
@@ -5649,6 +5692,7 @@ abstract class FormInputFieldInfoDate implements FormInputFieldInfo {
   @override
   String get sectionName;
   FormFieldValidator<DateTime?> get validator;
+  InputType get inputType;
   void Function(DateTime)? get onChange;
   bool get deletable;
   void Function()? get onDelete;
@@ -5864,6 +5908,7 @@ class _$FormInputFieldInfoMapImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -5965,6 +6010,7 @@ class _$FormInputFieldInfoMapImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -6066,6 +6112,7 @@ class _$FormInputFieldInfoMapImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -6410,6 +6457,7 @@ class _$FormInputFieldInfoSliderImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -6511,6 +6559,7 @@ class _$FormInputFieldInfoSliderImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -6613,6 +6662,7 @@ class _$FormInputFieldInfoSliderImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -6967,6 +7017,7 @@ class _$FormInputFieldInfoChipsImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -7068,6 +7119,7 @@ class _$FormInputFieldInfoChipsImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -7170,6 +7222,7 @@ class _$FormInputFieldInfoChipsImpl
             DateTime currentValue,
             String sectionName,
             FormFieldValidator<DateTime?> validator,
+            InputType inputType,
             void Function(DateTime)? onChange,
             bool deletable,
             void Function()? onDelete)?
