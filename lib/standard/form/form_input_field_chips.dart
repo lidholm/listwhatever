@@ -21,6 +21,7 @@ class FormInputFieldChips extends StatelessWidget {
         // final chips = selected?.map((s) => '$categoryName-$s').toSet();
         // context.read<SelectedChipsCubit>().update(chips ?? <String>{});
       },
+      spacing: 8,
       selectedColor: Theme.of(context).primaryColor,
       backgroundColor: Theme.of(context).primaryColor.withAlpha(100),
       options: field.values.map(
