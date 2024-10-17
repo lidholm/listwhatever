@@ -92,8 +92,16 @@ class _FilterViewState extends State<FilterView> {
       focusFieldName: FieldId.submit.name,
     );
 
-    return ColoredBox(
-      color: Theme.of(context).canvasColor.withOpacity(0.85),
+    return Container(
+      decoration: BoxDecoration(
+        color: Theme.of(context).canvasColor.withOpacity(0.85),
+        border: Border(
+          left: BorderSide(
+            color: Theme.of(context).primaryColor.withOpacity(0.6),
+            width: 3,
+          ),
+        ),
+      ),
       child: formGenerator,
     );
   }
@@ -130,13 +138,6 @@ class _FilterViewState extends State<FilterView> {
       currentValue: DateTime.now(),
       inputType: widget.list.withTimes ? InputType.both : InputType.date,
       validator: (d) {
-        // if (d == null) {
-        //   return "Can't be empty";
-        // }
-        // if (d.compareTo(DateTime.now()) < 0) {
-        //   return 'Has to be in future';
-        // }
-
         return null;
       },
       sectionName: SectionName.dates.name,
