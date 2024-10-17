@@ -28,8 +28,12 @@ mixin _$SharedList {
   ShareType get shareType => throw _privateConstructorUsedError;
   ListType get listType => throw _privateConstructorUsedError;
 
+  /// Serializes this SharedList to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SharedList
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SharedListCopyWith<SharedList> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -60,6 +64,8 @@ class _$SharedListCopyWithImpl<$Res, $Val extends SharedList>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SharedList
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -130,6 +136,8 @@ class __$$SharedListImplCopyWithImpl<$Res>
       _$SharedListImpl _value, $Res Function(_$SharedListImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SharedList
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -229,12 +237,14 @@ class _$SharedListImpl implements _SharedList {
                 other.listType == listType));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, listName, ownerName,
       ownerUserId, ownerListId, shareType, listType);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SharedList
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SharedListImplCopyWith<_$SharedListImpl> get copyWith =>
@@ -275,8 +285,11 @@ abstract class _SharedList implements SharedList {
   ShareType get shareType;
   @override
   ListType get listType;
+
+  /// Create a copy of SharedList
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SharedListImplCopyWith<_$SharedListImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

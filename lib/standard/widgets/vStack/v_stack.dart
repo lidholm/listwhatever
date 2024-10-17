@@ -1,81 +1,97 @@
 import 'package:flutter/material.dart';
+import 'package:listwhatever/standard/widgets/vStack/x_stack.dart';
 import '/standard/constants.dart';
 
-class VStack extends StatelessWidget {
+const className = 'VStack';
 
+class VStack extends StatelessWidget {
   const VStack({
     required this.children,
-    this.horizontalAlignment = HorizontalAlignment.center,
-    this.verticalAlignment = VerticalAlignment.center,
+    this.mainAxisAlignment = MainAxisAlignment.center,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
     this.spacing = 10,
+    this.spacingPosition = SpacingPosition.between,
     super.key,
   });
   final List<Widget> children;
-  final VerticalAlignment verticalAlignment;
-  final HorizontalAlignment horizontalAlignment;
+  final MainAxisAlignment mainAxisAlignment;
+  final CrossAxisAlignment crossAxisAlignment;
   final double spacing;
+  final SpacingPosition spacingPosition;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: verticalAlignment.alignmentForColumn,
-      mainAxisAlignment: horizontalAlignment.alignmentForColumn,
+      crossAxisAlignment: crossAxisAlignment,
+      mainAxisAlignment: mainAxisAlignment,
       mainAxisSize: MainAxisSize.min,
-      children: mapIndexed(children).expand((c) {
-        return [
-          c.$2,
-          if (c.$1 != children.length - 1)
-            SizedBox(
-              height: spacing,
-            ),
-        ];
-      }).toList(),
+      children: mapIndexed(children)
+          .expand((c) {
+            return [
+              spacingBefore(c.$1),
+              c.$2,
+              spacingBetween(c.$1, children.length),
+              spacingAfter(c.$1, children.length),
+            ];
+          })
+          .where((c) => c != null)
+          .map((c) => c!)
+          .toList(),
     );
   }
-}
 
-enum HorizontalAlignment {
-  leading,
-  center,
-  trailing;
-}
-
-extension HorizontalAlignmentExtension on HorizontalAlignment {
-  MainAxisAlignment get alignmentForColumn {
-    return switch (this) {
-      HorizontalAlignment.leading => MainAxisAlignment.start,
-      HorizontalAlignment.center => MainAxisAlignment.center,
-      HorizontalAlignment.trailing => MainAxisAlignment.end,
-    };
+  Widget getSpacer() {
+    return SizedBox(height: spacing);
   }
-  CrossAxisAlignment get alignmentForRow {
-    return switch (this) {
-      HorizontalAlignment.leading => CrossAxisAlignment.start,
-      HorizontalAlignment.center => CrossAxisAlignment.center,
-      HorizontalAlignment.trailing => CrossAxisAlignment.end,
-    };
-  }
-}
 
-enum VerticalAlignment {
-  leading,
-  center,
-  trailing;
-}
+  Widget? spacingBefore(int currentIndex) {
+    if (currentIndex > 0) return null;
 
-extension VerticalAlignmentExtension on VerticalAlignment {
-  CrossAxisAlignment get alignmentForColumn {
-    return switch (this) {
-      VerticalAlignment.leading => CrossAxisAlignment.start,
-      VerticalAlignment.center => CrossAxisAlignment.center,
-      VerticalAlignment.trailing => CrossAxisAlignment.end,
+    final w = switch (spacingPosition) {
+      SpacingPosition.none => null,
+      SpacingPosition.before => getSpacer(),
+      SpacingPosition.beforeAndBetween => getSpacer(),
+      SpacingPosition.beforeAndBetweenAndAfter => getSpacer(),
+      SpacingPosition.between => null,
+      SpacingPosition.betweenAndAfter => null,
+      SpacingPosition.after => null,
+      SpacingPosition.beforeAndAfter => getSpacer(),
     };
+    // logger.i('$className: Spacer at $currentIndex: $w');
+    return w;
   }
-  MainAxisAlignment get alignmentForRow {
-    return switch (this) {
-      VerticalAlignment.leading => MainAxisAlignment.start,
-      VerticalAlignment.center => MainAxisAlignment.center,
-      VerticalAlignment.trailing => MainAxisAlignment.end,
+
+  Widget? spacingBetween(int currentIndex, int numberInList) {
+    if (currentIndex == 0 && currentIndex == numberInList - 1) return null;
+
+    final w = switch (spacingPosition) {
+      SpacingPosition.none => null,
+      SpacingPosition.before => null,
+      SpacingPosition.beforeAndBetween => getSpacer(),
+      SpacingPosition.beforeAndBetweenAndAfter => getSpacer(),
+      SpacingPosition.between => getSpacer(),
+      SpacingPosition.betweenAndAfter => getSpacer(),
+      SpacingPosition.after => null,
+      SpacingPosition.beforeAndAfter => null,
     };
+    // logger.i('$className: Spacer at $currentIndex: $w');
+    return w;
+  }
+
+  Widget? spacingAfter(int currentIndex, int numberInList) {
+    if (currentIndex < numberInList - 1) return null;
+
+    final w = switch (spacingPosition) {
+      SpacingPosition.none => null,
+      SpacingPosition.before => null,
+      SpacingPosition.beforeAndBetween => null,
+      SpacingPosition.beforeAndBetweenAndAfter => getSpacer(),
+      SpacingPosition.between => null,
+      SpacingPosition.betweenAndAfter => getSpacer(),
+      SpacingPosition.after => getSpacer(),
+      SpacingPosition.beforeAndAfter => getSpacer(),
+    };
+    // logger.i('$className: Spacer at $currentIndex: $w');
+    return w;
   }
 }

@@ -26,8 +26,12 @@ mixin _$SearchLocationResponse {
   double get long => throw _privateConstructorUsedError;
   String get searchPhrase => throw _privateConstructorUsedError;
 
+  /// Serializes this SearchLocationResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SearchLocationResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SearchLocationResponseCopyWith<SearchLocationResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,6 +56,8 @@ class _$SearchLocationResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SearchLocationResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -103,6 +109,8 @@ class __$$SearchLocationResponseImplCopyWithImpl<$Res>
       $Res Function(_$SearchLocationResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SearchLocationResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -170,12 +178,14 @@ class _$SearchLocationResponseImpl implements _SearchLocationResponse {
                 other.searchPhrase == searchPhrase));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, address, lat, long, searchPhrase);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SearchLocationResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SearchLocationResponseImplCopyWith<_$SearchLocationResponseImpl>
@@ -208,8 +218,11 @@ abstract class _SearchLocationResponse implements SearchLocationResponse {
   double get long;
   @override
   String get searchPhrase;
+
+  /// Create a copy of SearchLocationResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SearchLocationResponseImplCopyWith<_$SearchLocationResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

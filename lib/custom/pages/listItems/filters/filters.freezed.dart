@@ -22,7 +22,9 @@ mixin _$Filters {
   DateTime? get startDate => throw _privateConstructorUsedError;
   DateTime? get endDate => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Filters
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FiltersCopyWith<Filters> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -48,6 +50,8 @@ class _$FiltersCopyWithImpl<$Res, $Val extends Filters>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Filters
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -99,6 +103,8 @@ class __$$FiltersImplCopyWithImpl<$Res>
       _$FiltersImpl _value, $Res Function(_$FiltersImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Filters
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -181,7 +187,9 @@ class _$FiltersImpl extends _Filters {
       startDate,
       endDate);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Filters
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FiltersImplCopyWith<_$FiltersImpl> get copyWith =>
@@ -204,8 +212,11 @@ abstract class _Filters extends Filters {
   DateTime? get startDate;
   @override
   DateTime? get endDate;
+
+  /// Create a copy of Filters
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FiltersImplCopyWith<_$FiltersImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -5,36 +5,52 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_image_picker/form_builder_image_picker.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_bloc.dart';
+import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_event.dart';
+import 'package:listwhatever/standard/constants.dart';
+import 'package:listwhatever/standard/firebase/firebase_storage.dart';
+import 'package:listwhatever/standard/form/form_generator.dart';
+import 'package:listwhatever/standard/form/form_input_field_info.dart';
+import 'package:listwhatever/standard/form/form_input_section.dart';
 
 import '/custom/pages/list_or_list_item_not_loaded_handler.dart';
-import '/custom/pages/lists/addList/upload_task_tile.dart';
-import '/custom/pages/lists/list_crud_events/list_crud_bloc.dart';
-import '/custom/pages/lists/list_crud_events/list_crud_event.dart';
 import '/custom/pages/lists/list_load_events/list_load_bloc.dart';
 import '/custom/pages/lists/list_load_events/list_load_event.dart';
 import '/custom/pages/lists/list_load_events/list_load_state.dart';
 import '/custom/pages/lists/models/list_of_things.dart';
 import '/custom/pages/lists/models/list_type.dart';
-import '/standard/appUi/theme/app_theme.dart';
-import '/standard/constants.dart';
-import '/standard/firebase/firestore/firebase_storage.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
-import '/standard/widgets/vStack/v_stack.dart';
+import '/standard/widgets/vStack/x_stack.dart' as x_stack;
 
-const imageSize = 80.0;
+const String className = 'AddListPage';
 
-enum AddListValues {
-  id,
-  name,
-  type,
-  withMap,
-  withDates,
-  withTimes,
-  ownerId,
-  // share
+enum SectionName {
+  basic._('Basic information'),
+  options._('Options'),
+  shared._('Share information'),
+  submit._('Submit');
+
+  const SectionName._(this.value);
+
+  final String value;
+}
+
+enum FieldId {
+  name._('name'),
+  listType._('listType'),
+  listTypeImage._('listTypeImage'),
+  withMap._('withMap'),
+  withDates._('withDates'),
+  withTimes._('withTimes'),
+  cancel._('cancel'),
+  submit._('submit');
+
+  const FieldId._(this.value);
+
+  final String value;
 }
 
 class AddListPage extends StatefulWidget {
@@ -46,23 +62,15 @@ class AddListPage extends StatefulWidget {
 }
 
 class _AddListPageState extends State<AddListPage> {
-  static String className = 'AddListPage';
-  bool autoValidate = true;
-  bool readOnly = false;
-  bool showSegmentedControl = true;
   final _formKey = GlobalKey<FormBuilderState>();
-  bool _nameHasError = false;
-  bool _typeHasError = false;
 
-  final _typeOptions = ListType.values;
-  late Map<String, dynamic> initialValue;
-  ListOfThings? list;
+  // ignore: strict_raw_type
+  late List<FormInputFieldInfo?> fields;
+
+  late ListOfThings? list;
   ListType? selectedListType;
-  String? _selectedImageFilename;
-
-  UploadTask? _uploadTask;
-
-  void _onChanged(dynamic val) => logger.d(val.toString());
+  bool? showImage;
+  bool imageUploaded = false;
 
   @override
   void initState() {
@@ -70,10 +78,13 @@ class _AddListPageState extends State<AddListPage> {
       BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.listId!));
     }
     super.initState();
+    list = null;
   }
 
   @override
   Widget build(BuildContext context) {
+    // logger.i('$className: list: $list');
+
     if (widget.listId != null) {
       final listState = context.watch<ListLoadBloc>().state;
 
@@ -82,316 +93,140 @@ class _AddListPageState extends State<AddListPage> {
       if (listStateView != null) {
         return listStateView;
       }
-      list = (listState as ListLoadLoaded).list;
+      setState(() {
+        list = (listState as ListLoadLoaded).list;
+      });
     }
 
-    initialValue = {
-      AddListValues.id.toString(): list?.id,
-      AddListValues.name.toString(): list?.name,
-      AddListValues.type.toString(): list?.listType ?? ListType.other,
-      AddListValues.withMap.toString(): list?.withMap ?? false,
-      AddListValues.withDates.toString(): list?.withDates ?? false,
-      AddListValues.withTimes.toString(): list?.withTimes ?? false,
-      AddListValues.ownerId.toString(): list?.ownerId,
-      // AddListValues.share.toString(): list?.shared ?? false,
-    };
+    showImage ??= list?.listType == ListType.other;
+    logger.i('$className: showImage: $showImage');
+
+    fields = [
+      nameField(),
+      listTypeField(),
+      imagePickerField(),
+      mapCheckboxField(),
+      dateCheckboxField(),
+      timeCheckboxField(),
+      cancelButton(),
+      submitButton(),
+    ];
+
+    final sections = [
+      FormInputSection(
+        name: SectionName.basic.value,
+        direction: x_stack.AxisDirection.vertical,
+        showBorder: true,
+      ),
+      FormInputSection(
+        name: SectionName.options.value,
+        direction: x_stack.AxisDirection.vertical,
+        showBorder: true,
+      ),
+      FormInputSection(
+        name: SectionName.submit.value,
+        direction: x_stack.AxisDirection.horizontal,
+        showBorder: false,
+      ),
+    ];
+
+    final formGenerator = FormGenerator(
+      formKey: _formKey,
+      sections: sections,
+      fields: fields,
+    );
+
     return Scaffold(
       appBar: const CommonAppBar(title: 'Add list'),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(24),
-          child: FormBuilder(
-            key: _formKey,
-            onChanged: () {
-              _formKey.currentState!.save();
-              // logger.d(_formKey.currentState!.value.toString());
-            },
-            autovalidateMode: AutovalidateMode.disabled,
-            initialValue: initialValue,
-            skipDisabled: true,
-            child: VStack(
-              children: <Widget>[
-                const SizedBox(height: 15),
-                getListNameField(),
-                getListTypeField(),
-                getWithMapCheckbox(),
-                getWithDatesCheckbox(),
-                getWithTimesCheckbox(),
-                Row(
-                  children: <Widget>[
-                    getCancelButton(),
-                    const SizedBox(width: 20),
-                    getSubmitButton(),
-                  ],
-                ),
-              ],
-            ),
-          ),
+          child: formGenerator,
         ),
       ),
     );
   }
 
-  FormBuilderTextField getListNameField() {
-    return FormBuilderTextField(
-      autovalidateMode: AutovalidateMode.always,
-      name: AddListValues.name.toString(),
-      decoration: InputDecoration(
-        labelText: 'List name',
-        suffixIcon: _nameHasError
-            ? const Icon(Icons.error, color: Colors.red)
-            : const Icon(Icons.check, color: Colors.green),
-      ),
-      onChanged: (val) {
-        setState(() {
-          _nameHasError = !(_formKey
-                  .currentState?.fields[AddListValues.name.toString()]
-                  ?.validate() ??
-              false);
-        });
-      },
-      // valueTransformer: (text) => num.tryParse(text),
-      validator: FormBuilderValidators.compose([
-        FormBuilderValidators.required(),
-        FormBuilderValidators.maxLength(70),
-      ]),
-      keyboardType: TextInputType.name,
-      textInputAction: TextInputAction.next,
+  Future<void> save(Map<String, dynamic> values) async {
+    final listCrudBloc = BlocProvider.of<ListCrudBloc>(context);
+    final goRouter = GoRouter.of(context);
+
+    final listTypeName = values[FieldId.listType.value] as String;
+    final listType = ListType.values
+        .where((l) => l.name == listTypeName.split('.').last)
+        .first;
+
+    String? imageFilename;
+    if (values.containsKey(FieldId.listTypeImage.value)) {
+      imageFilename =
+          await uploadImage(values[FieldId.listTypeImage.value] as List);
+      // logger.i('$className: imageFilename: $imageFilename');
+    }
+
+    // logger.d('values: $values');
+    final newList = ListOfThings(
+      id: widget.listId,
+      name: values[FieldId.name.value]! as String,
+      listType: listType,
+      imageFilename: imageFilename,
+      withMap: values[FieldId.withMap.value] as bool,
+      withDates: values[FieldId.withDates.value] as bool,
+      withTimes: values[FieldId.withTimes.value] as bool,
+      shared: false, //values[AddListValues.share.toString()] as bool,
+      // shareCodeForViewer: null,
+      // shareCodeForEditor: null,
+      sharedWith: {},
+      ownerId: list?.ownerId,
     );
+    // logger.d('newList: $newList');
+    if (widget.listId == null) {
+      listCrudBloc.add(AddList(newList));
+    } else {
+      listCrudBloc.add(UpdateList(newList));
+    }
+    // logger.i('$className -> popping once');
+    goRouter.pop();
   }
 
-  Widget getListTypeField() {
-    return Row(
-      children: [
-        Expanded(
-          child: FormBuilderDropdown<ListType>(
-            name: AddListValues.type.toString(),
-            decoration: InputDecoration(
-              labelText: 'Type',
-              suffix: _typeHasError
-                  ? const Icon(Icons.error)
-                  : const Icon(Icons.check),
-              hintText: 'Select Type',
-            ),
-            validator: FormBuilderValidators.compose(
-              [FormBuilderValidators.required()],
-            ),
-            items: _typeOptions
-                .map(
-                  (type) => DropdownMenuItem(
-                    alignment: AlignmentDirectional.center,
-                    value: type,
-                    child: Text(type.readable()),
-                  ),
-                )
-                .toList(),
-            onChanged: (val) {
-              setState(() {
-                _typeHasError = !(_formKey
-                        .currentState?.fields[AddListValues.type.toString()]
-                        ?.validate() ??
-                    false);
-                selectedListType = val;
-              });
-            },
-            valueTransformer: (val) => val?.toString(),
-          ),
-        ),
-        const SizedBox(width: 16),
-        FutureBuilder(
-          future: getFirebaseStorage(),
-          builder: (context, snapshot) {
-            final firebaseStorage = snapshot.data;
-            if (firebaseStorage == null) {
-              return Container();
-            }
-            final imageFilename = getImageFilename();
-            logger.i('$className => imageFilename: $imageFilename');
-            final imageUrlFuture = firebaseStorage
-                .ref()
-                .child('images')
-                .child(imageFilename)
-                .getDownloadURL();
-            return FutureBuilder(
-              future: imageUrlFuture,
-              builder: (context, snapshot) {
-                final imageUrl = snapshot.data;
-                logger.i('$className => imageUrl: $imageUrl');
-                return SizedBox(
-                  width: imageSize,
-                  height: imageSize,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: imageUrl != null
-                        ? Image.network(imageUrl, fit: BoxFit.cover)
-                        : Container(),
-                  ),
-                );
-              },
-            );
-          },
-        ),
-        const SizedBox(width: 16),
-        if (_uploadTask == null)
-          const Center(child: Text("Press the '+' button to add a new file."))
-        else
-          Expanded(
-            child: UploadTaskListTile(
-              task: _uploadTask!,
-              onDismissed: () {}, // => _removeTaskAtIndex(index),
-              onDownloadLink: () async {
-                // return _downloadLink(_uploadTasks[index].snapshot.ref);
-              },
-              onDownload: () async {
-                // if (kIsWeb) {
-                //   return _downloadBytes(_uploadTasks[index].snapshot.ref);
-                // } else {
-                //   return _downloadFile(_uploadTasks[index].snapshot.ref);
-                // }
-              },
-              onDelete: () async {
-                // return _delete(_uploadTasks[index].snapshot.ref);
-              },
-            ),
-          ),
-        ElevatedButton(
-          onPressed: () async {
-            final picker = ImagePicker();
-            final pickedFile =
-                await picker.pickImage(source: ImageSource.gallery);
-
-            if (pickedFile != null) {
-              final tmp = await uploadImage(pickedFile);
-              setState(() {
-                logger.i('$className => pickedFile.path: ${pickedFile.path}');
-                _uploadTask = tmp;
-                logger.i('$className => _uploadTask: $_uploadTask');
-              });
-            } else {
-              logger.i('$className => No image selected.');
-            }
-          },
-          child: const Padding(
-            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-            child: Text('Upload image'),
-          ),
-        ),
-      ],
-    );
-  }
-
-  String getImageFilename() {
-    return _selectedImageFilename ??
-        ((selectedListType != null && selectedListType != ListType.other)
-            ? selectedListType!.getImagePath()
-            : 'generic.jpg');
-  }
-
-  Widget getWithMapCheckbox() {
-    return AppTheme.getCheckbox(
-      AddListValues.withMap.toString(),
-      'With Map',
-      _onChanged,
-    );
-  }
-
-  Widget getWithDatesCheckbox() {
-    return AppTheme.getCheckbox(
-      AddListValues.withDates.toString(),
-      'With Dates',
-      _onChanged,
-    );
-  }
-
-  Widget getWithTimesCheckbox() {
-    return AppTheme.getCheckbox(
-      AddListValues.withTimes.toString(),
-      'With Times',
-      _onChanged,
-    );
-  }
-
-  Widget getCancelButton() {
-    return Expanded(
-      child: OutlinedButton(
-        onPressed: () {
-          _formKey.currentState?.reset();
-        },
-        // color: Theme.of(context).colorScheme.secondary,
-        child: Text(
-          'Reset',
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.secondary,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget getSubmitButton() {
-    return Expanded(
-      child: ElevatedButton(
-        onPressed: () {
-          if (_formKey.currentState?.saveAndValidate() ?? false) {
-            // logger.d(_formKey.currentState?.value.toString());
-            save(_formKey.currentState);
-          } else {
-            logger
-              ..d(_formKey.currentState?.value.toString())
-              ..d('validation failed');
-          }
-        },
-        child: const Text(
-          'Save',
-        ),
-      ),
-    );
-  }
-
-  Future<UploadTask> uploadImage(XFile pickedFile) async {
+  Future<String?> uploadImage(
+    List<dynamic> images,
+  ) async {
+    if (images.isEmpty) {
+      logger.w('No image');
+    }
+    final image = images[0] as XFile;
     final storage = await getFirebaseStorage();
     try {
       // Create a unique file name for the upload
-      final fileName = '${DateTime.now().millisecondsSinceEpoch}.png';
+      final fileName = '${getRandomString(6)}.png';
 
       // Create a reference to the location you want to upload to in Firebase Storage
       final ref = storage.ref().child('images').child('/$fileName');
 
       final metadata = SettableMetadata(
         contentType: 'image/jpeg',
-        customMetadata: {'picked-file-path': pickedFile.path},
+        customMetadata: {'picked-file-path': image.path},
       );
 
       UploadTask uploadTask;
       if (kIsWeb) {
-        final bytes = await pickedFile.readAsBytes();
+        final bytes = await image.readAsBytes();
         uploadTask = ref.putData(bytes, metadata);
       } else {
-        uploadTask = ref.putFile(File(pickedFile.path), metadata);
+        uploadTask = ref.putFile(File(image.path), metadata);
       }
-      logger
-        ..i('fullPath: ${uploadTask.snapshot.ref.fullPath}')
-        ..i(uploadTask.snapshot.state)
-        ..i(uploadTask.snapshot.bytesTransferred)
-        ..i(uploadTask.snapshot.metadata)
-        ..i(uploadTask.snapshot.totalBytes)
-        ..i(uploadTask.snapshot.ref);
 
-      uploadTask.snapshotEvents.listen((event) {}).onData((data) {
-        logger.i('$className => ${data.bytesTransferred} - ${data.totalBytes}');
-
-        if (data.bytesTransferred >= data.totalBytes) {
-          logger.i('$className => upload is done!');
-          setState(() {
-            _selectedImageFilename = fileName;
-          });
-          logger.i(
-            '$className => _selectedImageFilename: $_selectedImageFilename',
-          );
+      await uploadTask.whenComplete(() {
+        // Check if the upload is completed
+        if (uploadTask.snapshot.bytesTransferred ==
+            uploadTask.snapshot.totalBytes) {
+          imageUploaded = true;
+        } else {
+          imageUploaded = false;
         }
       });
 
-      return Future.value(uploadTask);
+      return imageUploaded ? fileName : null;
     } on FirebaseException catch (e) {
       logger.e(e);
       rethrow;
@@ -401,33 +236,120 @@ class _AddListPageState extends State<AddListPage> {
     }
   }
 
-  void save(FormBuilderState? currentState) {
-    final values = <String, dynamic>{};
-    for (final entry in currentState!.fields.entries) {
-      values[entry.key] = entry.value.value;
-    }
-    final listType = values[AddListValues.type.toString()] as ListType;
-    // logger.d('values: $values');
-    final list = ListOfThings(
-      id: initialValue[AddListValues.id.toString()] as String?,
-      name: values[AddListValues.name.toString()]! as String,
-      listType: listType,
-      imageFilename: getImageFilename(),
-      withMap: values[AddListValues.withMap.toString()] as bool,
-      withDates: values[AddListValues.withDates.toString()] as bool,
-      withTimes: values[AddListValues.withTimes.toString()] as bool,
-      shared: false, //values[AddListValues.share.toString()] as bool,
-      shareCodeForViewer: null,
-      shareCodeForEditor: null,
-      sharedWith: {},
-      ownerId: initialValue[AddListValues.ownerId.toString()] as String?,
+  FormInputFieldInfo nameField() {
+    return FormInputFieldInfo.textArea(
+      id: FieldId.name.value,
+      label: 'Name',
+      currentValue: list?.name ?? '',
+      validators: [
+        FormBuilderValidators.required(),
+        FormBuilderValidators.maxLength(70),
+      ],
+      sectionName: SectionName.basic.value,
     );
-    if (widget.listId == null) {
-      BlocProvider.of<ListCrudBloc>(context).add(AddList(list));
-    } else {
-      BlocProvider.of<ListCrudBloc>(context).add(UpdateList(list));
+  }
+
+  FormInputFieldInfo listTypeField() {
+    return FormInputFieldInfo.dropdown(
+      id: FieldId.listType.value,
+      label: 'List type',
+      currentValue: list?.listType ?? ListType.generic,
+      validators: [
+        FormBuilderValidators.required(),
+        FormBuilderValidators.maxLength(70),
+      ],
+      options: ListType.values.toList(),
+      optionToString: (listType) => (listType as ListType?)?.name ?? '',
+      sectionName: SectionName.basic.value,
+      onChange: (listType) => setState(() {
+        logger.i('$className: onChange ListType: $listType');
+        setState(() {
+          showImage = listType == ListType.other.name;
+          logger.i('$className: showImage: $showImage');
+        });
+      }),
+    );
+  }
+
+  FormInputFieldInfo? imagePickerField() {
+    if (showImage ?? list?.listType == ListType.other) {
+      return FormInputFieldInfo.imagePicker(
+        id: FieldId.listTypeImage.value,
+        label: 'Image',
+        currentValue: list?.imageFilename,
+        validators: [
+          FormBuilderValidators.required(),
+          FormBuilderValidators.maxLength(70),
+        ],
+        sectionName: SectionName.basic.value,
+      );
     }
-    logger.i('$className -> popping once');
-    GoRouter.of(context).pop();
+    return null;
+  }
+
+  FormInputFieldInfo mapCheckboxField() {
+    return FormInputFieldInfo.checkbox(
+      id: FieldId.withMap.value,
+      label: 'Use a map',
+      currentValue: list?.withMap ?? false,
+      validators: [
+        FormBuilderValidators.required(),
+        FormBuilderValidators.maxLength(70),
+      ],
+      sectionName: SectionName.options.value,
+    );
+  }
+
+  FormInputFieldInfo dateCheckboxField() {
+    return FormInputFieldInfo.checkbox(
+      id: FieldId.withDates.value,
+      label: 'Use dates',
+      currentValue: list?.withDates ?? false,
+      validators: [
+        FormBuilderValidators.required(),
+        FormBuilderValidators.maxLength(70),
+      ],
+      sectionName: SectionName.options.value,
+    );
+  }
+
+  FormInputFieldInfo timeCheckboxField() {
+    return FormInputFieldInfo.checkbox(
+      id: FieldId.withTimes.value,
+      label: 'Use time',
+      currentValue: list?.withTimes ?? false,
+      validators: [
+        FormBuilderValidators.required(),
+        FormBuilderValidators.maxLength(70),
+      ],
+      sectionName: SectionName.options.value,
+    );
+  }
+
+  FormInputFieldInfo cancelButton() {
+    return FormInputFieldInfo.cancelButton(
+      id: FieldId.cancel.value,
+      label: 'Cancel',
+      sectionName: SectionName.submit.value,
+      cancel: () {
+        print('cancelled');
+      },
+    );
+  }
+
+  FormInputFieldInfo submitButton() {
+    return FormInputFieldInfo.submitButton(
+      id: FieldId.submit.value,
+      label: 'Submit',
+      sectionName: SectionName.submit.value,
+      save: (Map<String, dynamic>? values) {
+        print('save');
+        if (values == null) {
+          print('No values to save');
+          return;
+        }
+        save(values);
+      },
+    );
   }
 }

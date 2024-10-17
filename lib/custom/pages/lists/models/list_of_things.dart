@@ -15,17 +15,18 @@ class ListOfThings with _$ListOfThings {
     required String? id,
     required String name,
     required ListType listType,
-    required String imageFilename,
     required bool withMap,
     required bool withDates,
     required bool withTimes,
     required bool shared,
-    required String? shareCodeForViewer,
-    required String? shareCodeForEditor,
     required Map<String, ShareType> sharedWith,
     required String? ownerId,
+    @Default(null) String? imageFilename,
+    @Default(null) String? shareCodeForViewer,
+    @Default(null) String? shareCodeForEditor,
     @Default(ShareType.viewer) ShareType shareType,
   }) = _ListOfThings;
 
-  factory ListOfThings.fromJson(Map<String, Object?> json) => _$ListOfThingsFromJson(json);
+  factory ListOfThings.fromJson(Map<String, Object?> json) =>
+      _$ListOfThingsFromJson(json);
 }

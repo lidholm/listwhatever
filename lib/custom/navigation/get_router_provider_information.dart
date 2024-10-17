@@ -18,6 +18,7 @@ RouterProviderInformation getRouterProviderInformation() {
     ],
     requireLoginRouteLocations: [],
     initialRouteLocation: const ListsPageRoute().location,
+    // initialRouteLocation: const SearchLocationPageRoute().location,
     signUpRouteLocation: const OnboardingPageRoute().location,
     signInRouteLocation: const LoginPageRoute().location,
     errorLoadingUserRouteLocation: MainPageRoute().location,

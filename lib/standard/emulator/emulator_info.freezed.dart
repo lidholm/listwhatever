@@ -19,7 +19,9 @@ mixin _$EmulatorInfo {
   EmulatorType get type => throw _privateConstructorUsedError;
   String? get address => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EmulatorInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $EmulatorInfoCopyWith<EmulatorInfo> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,6 +45,8 @@ class _$EmulatorInfoCopyWithImpl<$Res, $Val extends EmulatorInfo>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of EmulatorInfo
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,6 +85,8 @@ class __$$EmulatorInfoImplCopyWithImpl<$Res>
       _$EmulatorInfoImpl _value, $Res Function(_$EmulatorInfoImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of EmulatorInfo
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -127,7 +133,9 @@ class _$EmulatorInfoImpl implements _EmulatorInfo {
   @override
   int get hashCode => Object.hash(runtimeType, type, address);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EmulatorInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$EmulatorInfoImplCopyWith<_$EmulatorInfoImpl> get copyWith =>
@@ -143,8 +151,11 @@ abstract class _EmulatorInfo implements EmulatorInfo {
   EmulatorType get type;
   @override
   String? get address;
+
+  /// Create a copy of EmulatorInfo
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$EmulatorInfoImplCopyWith<_$EmulatorInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -49,7 +49,7 @@ class ListItemsLoadBloc extends Bloc<ListItemsLoadEvent, ListItemsLoadState> {
     WatchListItems event,
     Emitter<ListItemsLoadState> emit,
   ) async {
-    logger.i('$className => loading list item for list ${event.actualListId}');
+    // logger.i('$className => loading list item for list ${event.actualListId}');
     try {
       emit(ListItemsLoadLoading());
       await emit.forEach(

@@ -28,8 +28,12 @@ mixin _$UserList {
   String get ownerId => throw _privateConstructorUsedError;
   bool? get isOwnList => throw _privateConstructorUsedError;
 
+  /// Serializes this UserList to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserList
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserListCopyWith<UserList> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -59,6 +63,8 @@ class _$UserListCopyWithImpl<$Res, $Val extends UserList>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UserList
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -129,6 +135,8 @@ class __$$UserListImplCopyWithImpl<$Res>
       _$UserListImpl _value, $Res Function(_$UserListImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserList
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -226,12 +234,14 @@ class _$UserListImpl implements _UserList {
                 other.isOwnList == isOwnList));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, listId, listName, listType,
       imageFilename, ownerId, isOwnList);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserList
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserListImplCopyWith<_$UserListImpl> get copyWith =>
@@ -272,8 +282,11 @@ abstract class _UserList implements UserList {
   String get ownerId;
   @override
   bool? get isOwnList;
+
+  /// Create a copy of UserList
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserListImplCopyWith<_$UserListImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

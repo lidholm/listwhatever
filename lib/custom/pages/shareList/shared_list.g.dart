@@ -34,6 +34,7 @@ const _$ShareTypeEnumMap = {
 };
 
 const _$ListTypeEnumMap = {
+  ListType.generic: 'generic',
   ListType.restaurants: 'restaurants',
   ListType.food: 'food',
   ListType.activities: 'activities',

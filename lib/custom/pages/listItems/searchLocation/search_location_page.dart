@@ -3,18 +3,43 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:listwhatever/standard/form/form_generator.dart';
+import 'package:listwhatever/standard/form/form_input_field_info.dart';
+import 'package:listwhatever/standard/form/form_input_section.dart';
 import '/custom/pages/listItems/searchLocation/geocoder/geocoderresult.dart';
 import '/custom/pages/listItems/searchLocation/search_location_bloc.dart';
 import '/custom/pages/listItems/searchLocation/search_location_event.dart';
 import '/custom/pages/listItems/searchLocation/search_location_response.dart';
 import '/custom/pages/listItems/searchLocation/search_location_state.dart';
-import '/l10n/l10n.dart';
 import '/standard/constants.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
-import '/standard/widgets/vStack/v_stack.dart';
+import '/standard/widgets/vStack/x_stack.dart' as x_stack;
 
-enum SearchLocationValues { searchPhrase, results, address, latlong }
+const String className = 'AddListItemPage';
+
+enum SectionName {
+  search._('search'),
+  info._('info'),
+  submit._('submit');
+
+  const SectionName._(this.value);
+
+  final String value;
+}
+
+enum FieldId {
+  searchPhrase._('searchPhrase'),
+  results._('results'),
+  map._('map'),
+  address._('address'),
+  latlong._('latlong'),
+  cancel._('cancel'),
+  submit._('submit');
+
+  const FieldId._(this.value);
+
+  final String value;
+}
 
 class SearchLocationPage extends StatefulWidget {
   const SearchLocationPage({super.key});
@@ -24,299 +49,235 @@ class SearchLocationPage extends StatefulWidget {
 }
 
 class _SearchLocationPageState extends State<SearchLocationPage> {
-  bool autoValidate = true;
-  bool readOnly = false;
-  bool showSegmentedControl = true;
   final _formKey = GlobalKey<FormBuilderState>();
-  bool _searchHasError = false;
-  bool _resultsHasError = false;
-  bool _addressHasError = false;
-  bool _latlongHasError = false;
-  GoogleMapController? mapController;
 
   GeocoderResult? selectedResult;
-
-  Map<String, dynamic> initialValues = {
-    SearchLocationValues.searchPhrase.toString(): null,
-    SearchLocationValues.results.toString(): null,
-    SearchLocationValues.address.toString(): null,
-    SearchLocationValues.latlong.toString(): null,
-  };
+  final TextEditingController searchPhraseController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
   }
 
-  static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 10.4746,
-  );
-
-  // ignore: use_setters_to_change_properties
-  void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
-  }
-
   @override
   Widget build(BuildContext context) {
     final searchState = context.watch<SearchLocationBloc>().state;
-    final searchResults = (searchState is SearchLoaded) ? searchState.lists : <GeocoderResult>[];
+    final searchResults = (searchState is SearchLoaded)
+        ? searchState.lists ?? []
+        : <GeocoderResult>[];
 
-    return Scaffold(
-      appBar: const CommonAppBar(title: 'Search location'),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            children: <Widget>[
-              FormBuilder(
-                key: _formKey,
-                onChanged: () {
-                  _formKey.currentState!.save();
-                  // logger.d(_formKey.currentState!.value.toString());
-                },
-                autovalidateMode: AutovalidateMode.disabled,
-                initialValue: initialValues,
-                skipDisabled: true,
-                child: VStack(
-                  children: <Widget>[
-                    const SizedBox(height: 15),
-                    FormBuilderTextField(
-                      autovalidateMode: AutovalidateMode.always,
-                      name: SearchLocationValues.searchPhrase.toString(),
-                      decoration: InputDecoration(
-                        labelText: 'Search',
-                        suffixIcon: _searchHasError
-                            ? const Icon(Icons.error, color: Colors.red)
-                            : const Icon(Icons.check, color: Colors.green),
-                      ),
-                      onChanged: (val) {
-                        setState(() {
-                          _searchHasError = !(_formKey
-                                  .currentState?.fields[SearchLocationValues.searchPhrase.toString()]
-                                  ?.validate() ??
-                              false);
-                        });
-                      },
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(),
-                        FormBuilderValidators.max(150),
-                      ]),
-                      keyboardType: TextInputType.name,
-                      textInputAction: TextInputAction.next,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        final phrase = _formKey
-                            .currentState?.fields[SearchLocationValues.searchPhrase.toString()]?.value as String;
-                        BlocProvider.of<SearchLocationBloc>(context).add(Search(phrase));
-                      },
-                      child: Text(context.l10n.searchButtonText),
-                    ),
-                    FormBuilderDropdown<GeocoderResult>(
-                      name: SearchLocationValues.results.toString(),
-                      decoration: InputDecoration(
-                        labelText: 'Results',
-                        suffix: _resultsHasError ? const Icon(Icons.error) : const Icon(Icons.check),
-                        hintText: 'Select result',
-                      ),
-                      validator: FormBuilderValidators.compose(
-                        [FormBuilderValidators.required()],
-                      ),
-                      items: (searchResults ?? [])
-                          .map(
-                            (result) => DropdownMenuItem(
-                              alignment: AlignmentDirectional.center,
-                              value: result,
-                              child: Text(result.formattedAddress),
-                              onTap: () async {
-                                await moveMap(mapController, result);
-                                setState(() {
-                                  selectedResult = result;
-                                });
-                                _formKey.currentState?.patchValue({
-                                  SearchLocationValues.address.toString(): result.formattedAddress,
-                                  SearchLocationValues.latlong.toString():
-                                      '${result.geometry.location.lat}, ${result.geometry.location.lng}',
-                                });
-                              },
-                            ),
-                          )
-                          .toList(),
-                      onChanged: (val) {
-                        setState(() {
-                          _resultsHasError =
-                              !(_formKey.currentState?.fields[SearchLocationValues.results.toString()]?.validate() ??
-                                  false);
-                        });
-                      },
-                      valueTransformer: (val) => val?.toString(),
-                    ),
-                    SizedBox(
-                      height: 300,
-                      width: 400,
-                      child: GoogleMap(
-                        mapType: MapType.hybrid,
-                        initialCameraPosition: _kGooglePlex,
-                        markers: _createMarker(selectedResult),
-                        onMapCreated: _onMapCreated,
-                      ),
-                    ),
-                    FormBuilderTextField(
-                      autovalidateMode: AutovalidateMode.always,
-                      name: SearchLocationValues.address.toString(),
-                      decoration: InputDecoration(
-                        labelText: 'Address',
-                        suffixIcon: _addressHasError
-                            ? const Icon(Icons.error, color: Colors.red)
-                            : const Icon(Icons.check, color: Colors.green),
-                      ),
-                      onChanged: (val) {
-                        setState(() {
-                          _addressHasError =
-                              !(_formKey.currentState?.fields[SearchLocationValues.address.toString()]?.validate() ??
-                                  false);
-                        });
-                      },
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(),
-                        FormBuilderValidators.max(150),
-                      ]),
-                      keyboardType: TextInputType.name,
-                      textInputAction: TextInputAction.next,
-                    ),
-                    FormBuilderTextField(
-                      autovalidateMode: AutovalidateMode.always,
-                      name: SearchLocationValues.latlong.toString(),
-                      decoration: InputDecoration(
-                        labelText: 'LatLong',
-                        suffixIcon: _latlongHasError
-                            ? const Icon(Icons.error, color: Colors.red)
-                            : const Icon(Icons.check, color: Colors.green),
-                      ),
-                      onChanged: (val) {
-                        setState(() {
-                          _latlongHasError =
-                              !(_formKey.currentState?.fields[SearchLocationValues.latlong.toString()]?.validate() ??
-                                  false);
-                        });
-                      },
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(),
-                        FormBuilderValidators.match(
-                          RegExp(r'\d*(\.\d*)?,\s*-?\d*(\.\d*)'),
-                          errorText: "Doesn't match 12.3, 3.45",
-                        ),
-                      ]),
-                      keyboardType: TextInputType.name,
-                      textInputAction: TextInputAction.next,
-                    ),
-                    const SizedBox(height: 40),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: OutlinedButton(
-                            onPressed: () {
-                              _formKey.currentState?.reset();
-                            },
-                            child: Text(
-                              'Cancel',
-                              style: TextStyle(
-                                color: Theme.of(context).colorScheme.secondary,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 20),
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: () {
-                              if (_formKey.currentState?.saveAndValidate() ?? false) {
-                                // logger.d(_formKey.currentState?.value.toString());
-                                closeAndReturnValues(_formKey.currentState);
-                              } else {
-                                logger
-                                  ..d(_formKey.currentState?.value.toString())
-                                  ..d('validation failed');
-                              }
-                            },
-                            child: const Text(
-                              'Ok',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+    final fields = [
+      searchPhraseInputField(),
+      searchButtonInputField(),
+      resultsDropdownField(searchResults),
+      mapInputField(),
+      addressInputField(),
+      latLongInputField(),
+      cancelButton(),
+      submitButton(),
+    ];
+    print('fields: ${fields.length}');
+
+    final sections = getSections();
+
+    final formGenerator = FormGenerator(
+      formKey: _formKey,
+      sections: sections,
+      fields: fields,
+    );
+
+    return searchResultsListener(
+      Scaffold(
+        appBar: const CommonAppBar(title: 'Search location'),
+        body: SingleChildScrollView(
+          child:
+              Padding(padding: const EdgeInsets.all(24), child: formGenerator),
         ),
       ),
     );
   }
 
-  void closeAndReturnValues(FormBuilderState? currentState) {
-    final values = <String, dynamic>{};
-    for (final entry in currentState!.fields.entries) {
-      values[entry.key] = entry.value.value;
-    }
+  List<FormInputSection> getSections() {
+    return [
+      FormInputSection(
+        name: SectionName.search.name,
+        direction: x_stack.AxisDirection.vertical,
+        showBorder: false,
+      ),
+      FormInputSection(
+        name: SectionName.info.name,
+        direction: x_stack.AxisDirection.vertical,
+        showBorder: false,
+      ),
+      FormInputSection(
+        name: SectionName.submit.name,
+        direction: x_stack.AxisDirection.vertical,
+        showBorder: false,
+      ),
+    ];
+  }
+
+  FormInputFieldInfo searchPhraseInputField() {
+    return FormInputFieldInfo.textArea(
+      id: FieldId.searchPhrase.name,
+      label: 'Search',
+      controller: searchPhraseController,
+      validators: [
+        FormBuilderValidators.required(),
+        FormBuilderValidators.maxLength(150),
+      ],
+      sectionName: SectionName.search.name,
+    );
+  }
+
+  FormInputFieldInfo searchButtonInputField() {
+    return FormInputFieldInfo.customButton(
+      id: FieldId.submit.name,
+      label: 'Search',
+      sectionName: SectionName.search.name,
+      callback: () {
+        print('search');
+        print(searchPhraseController);
+
+        BlocProvider.of<SearchLocationBloc>(context)
+            .add(Search(searchPhraseController.text));
+      },
+    );
+  }
+
+  FormInputFieldInfo resultsDropdownField(List<GeocoderResult> searchResults) {
+    return FormInputFieldInfo.dropdown(
+      id: FieldId.results.name,
+      label: 'Search result',
+      currentValue: searchResults.firstOrNull,
+      validators: [
+        FormBuilderValidators.required(),
+        FormBuilderValidators.maxLength(70),
+      ],
+      options: searchResults,
+      optionToString: (result) =>
+          (result as GeocoderResult?)?.formattedAddress ?? '',
+      sectionName: SectionName.info.name,
+      onChange: (selection) => setState(() {
+        // logger.i('$className: onChange result: $selection');
+        setState(() {
+          final sel = selection as GeocoderResult?;
+
+          print('$className: sel: $sel');
+
+          _formKey.currentState?.patchValue({
+            FieldId.map.name: sel,
+            FieldId.address.name: sel?.formattedAddress ?? '',
+            FieldId.latlong.name: sel == null
+                ? ''
+                : '${sel.geometry.location.lat}, ${sel.geometry.location.lng}',
+          });
+
+          logger.i(
+            '$className: _formKey.currentState: ${_formKey.currentState?.value}',
+          );
+        });
+      }),
+    );
+  }
+
+  FormInputFieldInfo addressInputField() {
+    return FormInputFieldInfo.textArea(
+      id: FieldId.address.name,
+      label: 'Address',
+      currentValue: '',
+      validators: [
+        FormBuilderValidators.required(),
+        FormBuilderValidators.maxLength(150),
+      ],
+      sectionName: SectionName.info.name,
+    );
+  }
+
+  FormInputFieldInfo latLongInputField() {
+    return FormInputFieldInfo.textArea(
+      id: FieldId.latlong.name,
+      label: 'Coordinates',
+      currentValue: '',
+      validators: [
+        FormBuilderValidators.required(),
+        FormBuilderValidators.match(
+          RegExp(r'\d*(\.\d*)?,\s*-?\d*(\.\d*)'),
+          errorText: "Doesn't match 12.3, 3.45",
+        ),
+      ],
+      sectionName: SectionName.info.name,
+    );
+  }
+
+  FormInputFieldInfo mapInputField() {
+    return FormInputFieldInfo.map(
+      id: FieldId.map.name,
+      label: 'Map',
+      sectionName: SectionName.info.name,
+    );
+  }
+
+  FormInputFieldInfo cancelButton() {
+    return FormInputFieldInfo.cancelButton(
+      id: FieldId.cancel.name,
+      label: 'Cancel',
+      sectionName: SectionName.submit.name,
+      cancel: () {
+        print('cancelled');
+      },
+    );
+  }
+
+  FormInputFieldInfo submitButton() {
+    return FormInputFieldInfo.submitButton(
+      id: FieldId.submit.name,
+      label: 'Submit',
+      sectionName: SectionName.submit.name,
+      save: (Map<String, dynamic>? values) {
+        print('save');
+        if (values == null) {
+          print('No values to save');
+          return;
+        }
+        closeAndReturnValues(values);
+      },
+    );
+  }
+
+  void closeAndReturnValues(Map<String, dynamic> values) {
     // logger.d('values: $values');
-    final latLongString = values[SearchLocationValues.latlong.toString()]! as String;
+    final latLongString = values[FieldId.latlong.name]! as String;
     final latLongParts = latLongString.split(',');
     final lat = double.parse(latLongParts.first.trim());
     final lng = double.parse(latLongParts.last.trim());
 
     final response = SearchLocationResponse(
-      address: values[SearchLocationValues.address.toString()]! as String,
+      address: values[FieldId.address.name]! as String,
       lat: lat,
       long: lng,
-      searchPhrase: values[SearchLocationValues.searchPhrase.toString()]! as String,
+      searchPhrase: values[FieldId.searchPhrase.name]! as String,
     );
     GoRouter.of(context).pop(response);
   }
 
-  Set<Marker> _createMarker(GeocoderResult? result) {
-    if (result == null) return Set.of({});
+  Widget searchResultsListener(Scaffold child) {
+    return BlocListener<SearchLocationBloc, SearchState>(
+      listener: (context, state) {
+        if (state is SearchLoaded) {
+          final results = state.lists;
 
-    return Set.of({
-      Marker(
-        markerId: MarkerId(result.formattedAddress),
-        position: LatLng(
-          result.geometry.location.lat,
-          result.geometry.location.lng,
-        ),
-      ),
-    });
-  }
+          print('$className: results: ${results?.first}');
 
-  Future<void> moveMap(
-    GoogleMapController? mapController,
-    GeocoderResult result,
-  ) async {
-    if (mapController == null) {
-      return;
-    }
-
-    const cameraBuffer = 0.01;
-
-    await mapController.moveCamera(
-      CameraUpdate.newLatLngBounds(
-        LatLngBounds(
-          southwest: LatLng(
-            result.geometry.location.lat - cameraBuffer,
-            result.geometry.location.lng - cameraBuffer,
-          ),
-          northeast: LatLng(
-            result.geometry.location.lat + cameraBuffer,
-            result.geometry.location.lng + cameraBuffer,
-          ),
-        ),
-        18,
-      ),
+          _formKey.currentState?.patchValue({
+            FieldId.map.name: results?.first,
+            FieldId.address.name: results?.first.formattedAddress,
+            FieldId.latlong.name:
+                '${results?.first.geometry.location.lat}, ${results?.first.geometry.location.lng}',
+          });
+        }
+      },
+      child: child,
     );
   }
 }

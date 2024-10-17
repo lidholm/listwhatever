@@ -50,12 +50,12 @@ bool matchesFilter({
     filters: filters,
   );
 
-  logger
-    ..d('distanceFilterCenter: $distanceFilterCenter')
-    ..d('filters.distance: ${filters.distance}')
-    ..d('matchesDate: $matchesDate')
-    ..d('matchesCategories: $matchesCategories')
-    ..d('matchesDistance: $matchesDistance');
+  // logger
+  //   ..d('distanceFilterCenter: $distanceFilterCenter')
+  //   ..d('filters.distance: ${filters.distance}')
+  //   ..d('matchesDate: $matchesDate')
+  //   ..d('matchesCategories: $matchesCategories')
+  //   ..d('matchesDistance: $matchesDistance');
   return matchesDate && matchesCategories && matchesDistance;
 }
 
@@ -75,8 +75,9 @@ bool matchesDatesFilter({
   if (item.datetime == null) {
     return true;
   }
-  final response = item.datetime!.compareTo(filters.startDate ?? minDateTime) >= 0 &&
-      item.datetime!.compareTo(filters.endDate ?? maxDateTime) <= 0;
+  final response =
+      item.datetime!.compareTo(filters.startDate ?? minDateTime) >= 0 &&
+          item.datetime!.compareTo(filters.endDate ?? maxDateTime) <= 0;
   if (!response) {
     // logger.d('not matching date filter');
   }
@@ -94,16 +95,20 @@ bool matchesCategoriesFilter(ListItem item, Filters filters) {
     // logger.d('no filters, so a match');
     return true;
   }
-  if (filters.categoryFilters.values.expand((e) => e).isNotEmpty && item.categories.isEmpty) {
+  if (filters.categoryFilters.values.expand((e) => e).isNotEmpty &&
+      item.categories.isEmpty) {
     // logger.d("filters but no categories, so can't be a match");
     return false;
   }
   // items without a date set will match even if a start or end date has been set
 
   for (final categoryName in filters.categoryFilters.keys) {
-    final acceptedFilterValues = getFilterValuesForCategory(filters.categoryFilters, categoryName) ?? [];
-    final valuesForCategory =
-        item.categories.entries.where((c) => c.key == categoryName).expand((c) => c.value).toList();
+    final acceptedFilterValues =
+        getFilterValuesForCategory(filters.categoryFilters, categoryName) ?? [];
+    final valuesForCategory = item.categories.entries
+        .where((c) => c.key == categoryName)
+        .expand((c) => c.value)
+        .toList();
     var matches = false;
     if (valuesForCategory.isEmpty) {
       matches = true;
@@ -114,7 +119,8 @@ bool matchesCategoriesFilter(ListItem item, Filters filters) {
       }
     }
     if (filters.startDate != null) {
-      if (item.datetime != null && item.datetime!.compareTo(filters.startDate!) < 0) {
+      if (item.datetime != null &&
+          item.datetime!.compareTo(filters.startDate!) < 0) {
         matches = false;
       }
     }
@@ -143,7 +149,9 @@ bool matchesDistanceFilter({
   required ListItem item,
   required Filters filters,
 }) {
-  if (item.latLong == null || filters.distance == null || distanceFilterCenter == null) return true;
+  if (item.latLong == null ||
+      filters.distance == null ||
+      distanceFilterCenter == null) return true;
 
   final gcd = GreatCircleDistance.fromDegrees(
     latitude1: item.latLong!.lat,

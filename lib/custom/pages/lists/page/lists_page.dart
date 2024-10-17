@@ -13,8 +13,7 @@ import '/custom/pages/lists/lists_load_events/lists_bloc.dart';
 import '/custom/pages/lists/lists_load_events/lists_event.dart';
 import '/custom/pages/lists/lists_load_events/lists_state.dart';
 import '/l10n/l10n.dart';
-import '/standard/constants.dart';
-import '/standard/firebase/firestore/firebase_storage.dart';
+import '/standard/firebase/firebase_storage.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
 
 class ListsPage extends StatefulWidget {
@@ -33,83 +32,76 @@ class _ListsPageState extends State<ListsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ListTypeCubit, ListViewType>(
-      builder: (listTypeContext, listType) {
-        return Scaffold(
-          appBar: CommonAppBar(
-            title: context.l10n.listsHeader,
-            actions: [
-              if (listType == ListViewType.tiles)
-                AppBarAction(
-                  type: AppBarActionType.icon,
-                  iconAction: AppBarActionIcon(
-                    title: 'Show as list',
-                    icon: Icons.list,
-                    callback: () {
-                      context.read<ListTypeCubit>().toggle();
-                    },
-                    key: const Key('show_list_as_list'),
-                  ),
-                ),
-              if (listType == ListViewType.list)
-                AppBarAction(
-                  type: AppBarActionType.icon,
-                  iconAction: AppBarActionIcon(
-                    title: 'Show as tiles',
-                    icon: Icons.square_outlined,
-                    callback: () {
-                      context.read<ListTypeCubit>().toggle();
-                    },
-                    key: const Key('show_list_as_tiles'),
-                  ),
-                ),
-            ],
-          ),
-          body: BlocBuilder<ListsLoadBloc, ListsLoadState>(
-            builder: (userListContext, userListState) {
-              return FutureBuilder(
-                future: getFirebaseStorage(),
-                builder: (context, snapshot) {
-                  final firebaseStorage = snapshot.data;
-                  if (firebaseStorage == null) {
-                    return Container();
-                  }
-                  // logger.d('userListState: $userListState');
-                  final userListStateView =
-                      ListOrListItemNotLoadedHandler.handleUserListsState(
-                    userListState,
-                  );
-                  if (userListStateView != null) {
-                    return userListStateView;
-                  }
-                  final lists = (userListState as ListsLoadLoaded).lists;
+    final listsState = context.watch<ListsLoadBloc>().state;
+    final listType = context.watch<ListTypeCubit>().state;
 
-                  print('listType: $listType');
-                  if (listType == ListViewType.tiles) {
-                    return ListTiles(
-                      firebaseStorage: firebaseStorage,
-                      lists: lists,
-                      userListContext: userListContext,
-                    );
-                  } else {
-                    return ListList(
-                      firebaseStorage: firebaseStorage,
-                      lists: lists,
-                      userListContext: userListContext,
-                    );
-                  }
+    final listsStateView =
+        ListOrListItemNotLoadedHandler.handleUserListsState(listsState);
+    if (listsStateView != null) {
+      return listsStateView;
+    }
+
+    return Scaffold(
+      appBar: CommonAppBar(
+        title: context.l10n.listsHeader,
+        actions: [
+          if (listType == ListViewType.tiles)
+            AppBarAction(
+              type: AppBarActionType.icon,
+              iconAction: AppBarActionIcon(
+                title: 'Show as list',
+                icon: Icons.list,
+                callback: () {
+                  context.read<ListTypeCubit>().toggle();
                 },
-              );
-            },
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              const AddListPageRoute().push<void>(context);
-            },
-            child: const Icon(Icons.add),
-          ),
-        );
-      },
+                key: const Key('show_list_as_list'),
+              ),
+            ),
+          if (listType == ListViewType.list)
+            AppBarAction(
+              type: AppBarActionType.icon,
+              iconAction: AppBarActionIcon(
+                title: 'Show as tiles',
+                icon: Icons.square_outlined,
+                callback: () {
+                  context.read<ListTypeCubit>().toggle();
+                },
+                key: const Key('show_list_as_tiles'),
+              ),
+            ),
+        ],
+      ),
+      body: FutureBuilder(
+        future: getFirebaseStorage(),
+        builder: (context, snapshot) {
+          final firebaseStorage = snapshot.data;
+          if (firebaseStorage == null) {
+            return Container();
+          }
+          final lists = (listsState as ListsLoadLoaded).lists;
+
+          print('listType: $listType');
+          if (listType == ListViewType.tiles) {
+            return ListTiles(
+              firebaseStorage: firebaseStorage,
+              lists: lists,
+              userListContext: context,
+            );
+          } else {
+            return ListList(
+              firebaseStorage: firebaseStorage,
+              lists: lists,
+              userListContext: context,
+            );
+          }
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          const AddListPageRoute().push<void>(context);
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }

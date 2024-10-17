@@ -23,7 +23,9 @@ mixin _$AppBarAction<T> {
   AppBarActionOverflowIcon? get overflowIcon =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppBarAction
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AppBarActionCopyWith<T, AppBarAction<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -55,6 +57,8 @@ class _$AppBarActionCopyWithImpl<T, $Res, $Val extends AppBarAction<T>>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AppBarAction
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -83,6 +87,8 @@ class _$AppBarActionCopyWithImpl<T, $Res, $Val extends AppBarAction<T>>
     ) as $Val);
   }
 
+  /// Create a copy of AppBarAction
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AppBarActionIconCopyWith<$Res>? get iconAction {
@@ -95,6 +101,8 @@ class _$AppBarActionCopyWithImpl<T, $Res, $Val extends AppBarAction<T>>
     });
   }
 
+  /// Create a copy of AppBarAction
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AppBarActionDropdownCopyWith<T, $Res>? get dropdownAction {
@@ -108,6 +116,8 @@ class _$AppBarActionCopyWithImpl<T, $Res, $Val extends AppBarAction<T>>
     });
   }
 
+  /// Create a copy of AppBarAction
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AppBarActionOverflowIconCopyWith<$Res>? get overflowIcon {
@@ -152,6 +162,8 @@ class __$$AppBarActionImplCopyWithImpl<T, $Res>
       _$AppBarActionImpl<T> _value, $Res Function(_$AppBarActionImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of AppBarAction
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -225,7 +237,9 @@ class _$AppBarActionImpl<T> implements _AppBarAction<T> {
   int get hashCode =>
       Object.hash(runtimeType, type, iconAction, dropdownAction, overflowIcon);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppBarAction
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AppBarActionImplCopyWith<T, _$AppBarActionImpl<T>> get copyWith =>
@@ -248,8 +262,11 @@ abstract class _AppBarAction<T> implements AppBarAction<T> {
   AppBarActionDropdown<T>? get dropdownAction;
   @override
   AppBarActionOverflowIcon? get overflowIcon;
+
+  /// Create a copy of AppBarAction
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AppBarActionImplCopyWith<T, _$AppBarActionImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

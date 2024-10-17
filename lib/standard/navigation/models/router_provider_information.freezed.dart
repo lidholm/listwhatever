@@ -27,7 +27,9 @@ mixin _$RouterProviderInformation {
       throw _privateConstructorUsedError;
   String get loadingUserRouteLocation => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RouterProviderInformation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $RouterProviderInformationCopyWith<RouterProviderInformation> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -59,6 +61,8 @@ class _$RouterProviderInformationCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of RouterProviderInformation
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -132,6 +136,8 @@ class __$$RouterProviderInformationImplCopyWithImpl<$Res>
       $Res Function(_$RouterProviderInformationImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of RouterProviderInformation
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -261,7 +267,9 @@ class _$RouterProviderInformationImpl implements _RouterProviderInformation {
       errorLoadingUserRouteLocation,
       loadingUserRouteLocation);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RouterProviderInformation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$RouterProviderInformationImplCopyWith<_$RouterProviderInformationImpl>
@@ -294,8 +302,11 @@ abstract class _RouterProviderInformation implements RouterProviderInformation {
   String get errorLoadingUserRouteLocation;
   @override
   String get loadingUserRouteLocation;
+
+  /// Create a copy of RouterProviderInformation
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RouterProviderInformationImplCopyWith<_$RouterProviderInformationImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

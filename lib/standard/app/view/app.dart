@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/custom/pages/lists/categories_for_list/categories_for_list_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/page/list_type_cubit/list_type_cubit.dart';
+import 'package:listwhatever/standard/firebase/firebaseStorageBloc/bloc/firebase_storage_bloc.dart';
 
 import '/custom/currentLocationBloc/current_location_bloc.dart';
 import '/custom/navigation/get_router_provider_information.dart';
 import '/custom/navigation/routes.dart';
 import '/custom/pages/listItems/filters/bloc/filter_bloc.dart';
-import '/custom/pages/listItems/filters/filter_view.dart';
 import '/custom/pages/listItems/listItemsListView/list_items_sort_order_cubit.dart';
 import '/custom/pages/listItems/listItemsPage/list_items_page_view_cubit.dart';
 import '/custom/pages/listItems/list_item_crud_bloc/list_item_crud_bloc.dart';
@@ -94,6 +95,7 @@ class App extends StatelessWidget {
               ],
             ),
           ),
+          BlocProvider(create: (_) => FirebaseStorageBloc()),
           BlocProvider(create: (_) => ThemeModeBloc()),
           BlocProvider<ListTypeCubit>(create: (context) => ListTypeCubit()),
           BlocProvider<OnScreenLogsCubit>(
@@ -111,6 +113,9 @@ class App extends StatelessWidget {
           ),
           BlocProvider<ListLoadBloc>(
             create: (context) => ListLoadBloc(listsService),
+          ),
+          BlocProvider<CategoriesForListBloc>(
+            create: (context) => CategoriesForListBloc(listsService),
           ),
           BlocProvider<ListsLoadBloc>(
             create: (context) => ListsLoadBloc(userListsService),
@@ -133,9 +138,6 @@ class App extends StatelessWidget {
           ),
           BlocProvider<ListItemsSortOrderCubit>(
             create: (context) => ListItemsSortOrderCubit(),
-          ),
-          BlocProvider<SelectedChipsCubit>(
-            create: (context) => SelectedChipsCubit(),
           ),
           BlocProvider<RedirectCubit>(create: (context) => RedirectCubit()),
           BlocProvider<CurrentLocationCubit>(

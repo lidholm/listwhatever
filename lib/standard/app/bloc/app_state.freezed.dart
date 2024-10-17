@@ -83,6 +83,9 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -104,6 +107,8 @@ class __$$LoggedInImplCopyWithImpl<$Res>
       _$LoggedInImpl _value, $Res Function(_$LoggedInImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -117,6 +122,8 @@ class __$$LoggedInImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
@@ -150,7 +157,9 @@ class _$LoggedInImpl implements LoggedIn {
   @override
   int get hashCode => Object.hash(runtimeType, user);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LoggedInImplCopyWith<_$LoggedInImpl> get copyWith =>
@@ -235,7 +244,10 @@ abstract class LoggedIn implements AppState {
   factory LoggedIn(final User user) = _$LoggedInImpl;
 
   User get user;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoggedInImplCopyWith<_$LoggedInImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -259,6 +271,8 @@ class __$$LoggedInWithDataImplCopyWithImpl<$Res>
       $Res Function(_$LoggedInWithDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -272,6 +286,8 @@ class __$$LoggedInWithDataImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
@@ -305,7 +321,9 @@ class _$LoggedInWithDataImpl implements LoggedInWithData {
   @override
   int get hashCode => Object.hash(runtimeType, user);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LoggedInWithDataImplCopyWith<_$LoggedInWithDataImpl> get copyWith =>
@@ -391,7 +409,10 @@ abstract class LoggedInWithData implements AppState {
   factory LoggedInWithData(final User user) = _$LoggedInWithDataImpl;
 
   User get user;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoggedInWithDataImplCopyWith<_$LoggedInWithDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -415,6 +436,8 @@ class __$$OnboardingRequiredImplCopyWithImpl<$Res>
       $Res Function(_$OnboardingRequiredImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -428,6 +451,8 @@ class __$$OnboardingRequiredImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
@@ -461,7 +486,9 @@ class _$OnboardingRequiredImpl implements OnboardingRequired {
   @override
   int get hashCode => Object.hash(runtimeType, user);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$OnboardingRequiredImplCopyWith<_$OnboardingRequiredImpl> get copyWith =>
@@ -547,7 +574,10 @@ abstract class OnboardingRequired implements AppState {
   factory OnboardingRequired(final User user) = _$OnboardingRequiredImpl;
 
   User get user;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$OnboardingRequiredImplCopyWith<_$OnboardingRequiredImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -566,6 +596,9 @@ class __$$LoggedOutImplCopyWithImpl<$Res>
   __$$LoggedOutImplCopyWithImpl(
       _$LoggedOutImpl _value, $Res Function(_$LoggedOutImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

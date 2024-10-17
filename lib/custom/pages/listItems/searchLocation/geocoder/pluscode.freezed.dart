@@ -25,8 +25,12 @@ mixin _$PlusCode {
   @JsonKey(name: 'global_code')
   String get globalCode => throw _privateConstructorUsedError;
 
+  /// Serializes this PlusCode to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PlusCode
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PlusCodeCopyWith<PlusCode> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -51,6 +55,8 @@ class _$PlusCodeCopyWithImpl<$Res, $Val extends PlusCode>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PlusCode
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -91,6 +97,8 @@ class __$$PlusCodeImplCopyWithImpl<$Res>
       _$PlusCodeImpl _value, $Res Function(_$PlusCodeImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PlusCode
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -143,11 +151,13 @@ class _$PlusCodeImpl implements _PlusCode {
                 other.globalCode == globalCode));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, compoundCode, globalCode);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PlusCode
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PlusCodeImplCopyWith<_$PlusCodeImpl> get copyWith =>
@@ -176,8 +186,11 @@ abstract class _PlusCode implements PlusCode {
   @override
   @JsonKey(name: 'global_code')
   String get globalCode;
+
+  /// Create a copy of PlusCode
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PlusCodeImplCopyWith<_$PlusCodeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

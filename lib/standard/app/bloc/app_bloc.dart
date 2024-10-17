@@ -61,7 +61,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
     emit(AppState.loggedIn(user));
     final userWithData = await tryReadUser(user);
-    logger.i('$className => userWithData: $userWithData');
+    // logger.i('$className => userWithData: $userWithData');
 
     if (userWithData == null) {
       emit(AppState.onboardingRequired(user));
@@ -109,9 +109,9 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
     try {
       final firestoreUser = await _userService.getUser(user.id);
-      logger
-        ..i('$className => loaded firestoreUser: $firestoreUser')
-        ..i('$className => in firestoreUser $firestoreUser QQQQ 31');
+      // logger
+      //   ..i('$className => loaded firestoreUser: $firestoreUser')
+      //   ..i('$className => in firestoreUser $firestoreUser QQQQ 31');
 
       if (firestoreUser == null) {
         logger.i('$className => return null');
@@ -119,7 +119,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       }
 
       final fullUser = user.copyWith(settings: firestoreUser.settings);
-      logger.i('$className => return fullUser: $fullUser');
+      // logger.i('$className => return fullUser: $fullUser');
       return fullUser;
     } catch (e) {
       return null;

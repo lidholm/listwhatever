@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/custom/pages/shareList/shared_list.dart';
-import '/standard/firebaseService/firebase_service.dart';
+import '../../../standard/firebase/firestore_service.dart';
 
 class SharedListsService extends FirestoreService {
   SharedListsService({super.userId});
@@ -21,7 +21,11 @@ class SharedListsService extends FirestoreService {
 
   Future<void> addUser(String id, String userId) async {
     final sharedListsCollection = await getCollection();
-    return sharedListsCollection.doc(id).collection('users').doc(userId).set({'userId': userId});
+    return sharedListsCollection
+        .doc(id)
+        .collection('users')
+        .doc(userId)
+        .set({'userId': userId});
   }
 
   // TODO:

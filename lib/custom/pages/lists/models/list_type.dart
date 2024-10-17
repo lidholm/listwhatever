@@ -1,4 +1,5 @@
 enum ListType {
+  generic,
   restaurants,
   food,
   activities,
@@ -11,10 +12,12 @@ extension ListTypename on ListType {
   String getImagePath() => images[this] ?? 'generic.jpg';
 }
 
-String toCapitalized(String text) =>
-    text.isNotEmpty ? '${text[0].toUpperCase()}${text.substring(1).toLowerCase()}' : '';
+String toCapitalized(String text) => text.isNotEmpty
+    ? '${text[0].toUpperCase()}${text.substring(1).toLowerCase()}'
+    : '';
 
 const images = {
+  ListType.generic: 'generic.jpg',
   ListType.restaurants: 'restaurants.jpeg',
   ListType.food: 'food.webp',
   ListType.movies: 'movies.webp',

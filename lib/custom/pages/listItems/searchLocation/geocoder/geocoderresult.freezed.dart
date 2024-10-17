@@ -35,8 +35,12 @@ mixin _$GeocoderResult {
   List<String> get types => throw _privateConstructorUsedError;
   String get searchPhrase => throw _privateConstructorUsedError;
 
+  /// Serializes this GeocoderResult to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GeocoderResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GeocoderResultCopyWith<GeocoderResult> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -72,6 +76,8 @@ class _$GeocoderResultCopyWithImpl<$Res, $Val extends GeocoderResult>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GeocoderResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -120,6 +126,8 @@ class _$GeocoderResultCopyWithImpl<$Res, $Val extends GeocoderResult>
     ) as $Val);
   }
 
+  /// Create a copy of GeocoderResult
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $GeometryCopyWith<$Res> get geometry {
@@ -128,6 +136,8 @@ class _$GeocoderResultCopyWithImpl<$Res, $Val extends GeocoderResult>
     });
   }
 
+  /// Create a copy of GeocoderResult
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PlusCodeCopyWith<$Res> get plusCode {
@@ -170,6 +180,8 @@ class __$$GeocoderResultImplCopyWithImpl<$Res>
       _$GeocoderResultImpl _value, $Res Function(_$GeocoderResultImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GeocoderResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -300,7 +312,7 @@ class _$GeocoderResultImpl implements _GeocoderResult {
                 other.searchPhrase == searchPhrase));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -313,7 +325,9 @@ class _$GeocoderResultImpl implements _GeocoderResult {
       const DeepCollectionEquality().hash(_types),
       searchPhrase);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GeocoderResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GeocoderResultImplCopyWith<_$GeocoderResultImpl> get copyWith =>
@@ -365,8 +379,11 @@ abstract class _GeocoderResult implements GeocoderResult {
   List<String> get types;
   @override
   String get searchPhrase;
+
+  /// Create a copy of GeocoderResult
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GeocoderResultImplCopyWith<_$GeocoderResultImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

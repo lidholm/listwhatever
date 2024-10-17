@@ -17,7 +17,8 @@ Future<EmulatorInfo> getEmulatorInfo() async {
   // logger
   //   ..d('isPhysicalDevice: ${deviceInfo['isPhysicalDevice']}')
   //   ..d('foundation.kDebugMode: ${foundation.kDebugMode}');
-  final useEmulator = deviceInfo['isPhysicalDevice'] == false || foundation.kDebugMode;
+  final useEmulator =
+      deviceInfo['isPhysicalDevice'] == false || foundation.kDebugMode;
   // logger
   //   ..d('useEmulator: $useEmulator')
   //   ..d('override: $override');

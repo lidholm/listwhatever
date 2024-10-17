@@ -22,7 +22,9 @@ mixin _$AppBarActionDropdown<T> {
   List<(T, Widget)> get menuItems => throw _privateConstructorUsedError;
   Key get key => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppBarActionDropdown
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AppBarActionDropdownCopyWith<T, AppBarActionDropdown<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,6 +54,8 @@ class _$AppBarActionDropdownCopyWithImpl<T, $Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AppBarActionDropdown
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -112,6 +116,8 @@ class __$$AppBarActionDropdownImplCopyWithImpl<T, $Res>
       $Res Function(_$AppBarActionDropdownImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of AppBarActionDropdown
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -197,7 +203,9 @@ class _$AppBarActionDropdownImpl<T> implements _AppBarActionDropdown<T> {
   int get hashCode => Object.hash(runtimeType, icon, tooltip, callback,
       const DeepCollectionEquality().hash(_menuItems), key);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppBarActionDropdown
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AppBarActionDropdownImplCopyWith<T, _$AppBarActionDropdownImpl<T>>
@@ -223,8 +231,11 @@ abstract class _AppBarActionDropdown<T> implements AppBarActionDropdown<T> {
   List<(T, Widget)> get menuItems;
   @override
   Key get key;
+
+  /// Create a copy of AppBarActionDropdown
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AppBarActionDropdownImplCopyWith<T, _$AppBarActionDropdownImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
 }

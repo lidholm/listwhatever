@@ -17,6 +17,15 @@ Logger logger = Logger(
   filter: ProductionFilter(),
 );
 
+enum Side {
+  left._('left'),
+  right._('rights');
+
+  const Side._(this.value);
+
+  final String value;
+}
+
 class PrintLogOutput extends LogOutput {
   @override
   void output(OutputEvent event) {
