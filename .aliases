@@ -16,7 +16,7 @@ alias getRandomHash="openssl rand -hex 3"
 
 alias buildProductionAab="flutter build appbundle --release --no-tree-shake-icons --flavor production -t lib/standard/main/main_production.dart"
 alias buildProductionWebBundle="flutter build web --no-tree-shake-icons --release -t lib/standard/main/main_production.dart"
-alias deployWebBundle="firebase deploy --only firestore:hosting"
+alias deployWebBundle="firebase deploy --only firestore,hosting"
 alias deployProductionAabToGoolePlay="sh scripts/gitlabci/deployToGooglePlayStore.sh"
 # alias deployProductionAabToFirebase="firebase appdistribution:distribute build/app/outputs/bundle/productionRelease/app-production-release.aab --app `grep mobilesdk_app_id android/app/google-services.json | head -1 | cut -d '"' -f 4` --testers-file deploy/android/testers.txt --release-notes-file deploy/release_notes.txt"
 

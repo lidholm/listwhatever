@@ -97,12 +97,18 @@ class ListItemsListView extends StatelessWidget {
     if (selectedItemId != item.id || selectedItemId == null) {
       return [];
     }
-    return [
+    final list = [
       if (item.address != null) Text('Address: ${item.address}'),
       for (final category in item.categories.entries)
         Text('${category.key}: ${category.value.join(', ')}'),
       for (final url in item.urls) Text(url),
+      if (item.info != null)
+        Text(
+          '${item.info?.substring(0, 100)} ${item.info!.length > 100 ? '...' : ''}',
+        ),
     ];
+    if (list.isEmpty) return [const Text('No information')];
+    return list;
   }
 
   IconButton getActionIcon(String? selectListItemId, ListItem item) {
