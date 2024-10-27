@@ -24,7 +24,7 @@ class ListItemsService extends FirestoreService {
       logger.d('number of getListItems: ${snapshot.docs.length}');
       return snapshot.docs.map((doc) {
         final data = doc.data();
-        logger.d('$className data: ${data}');
+        logger.d('$className data: $data');
         try {
           final listItem = ListItem.fromJson(data);
           return listItem;

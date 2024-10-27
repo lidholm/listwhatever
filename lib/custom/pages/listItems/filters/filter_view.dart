@@ -192,7 +192,9 @@ class _FilterViewState extends State<FilterView> {
 
   String getCategoryName(String categoryFieldKey) {
     return categoryFieldKey.substring(
-        categoryFieldKey.indexOf('-') + 1, categoryFieldKey.lastIndexOf('-'));
+      categoryFieldKey.indexOf('-') + 1,
+      categoryFieldKey.lastIndexOf('-'),
+    );
   }
 
   FormInputFieldInfo cancelButton() {
