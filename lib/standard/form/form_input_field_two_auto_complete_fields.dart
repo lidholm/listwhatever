@@ -58,7 +58,7 @@ class _FormInputFieldTwoAutoCompleteFieldsState
                 onChanged: onChangeLeft,
               ),
             ),
-            SizedBox(width: constraints.maxWidth * 0.04),
+            SizedBox(width: constraints.maxWidth * 0.02),
             SizedBox(
               width: constraints.maxWidth * fieldWidth,
               child: FormBuilderTypeAhead<String>(

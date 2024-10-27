@@ -2,6 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:listwhatever/custom/pages/listItems/addListItem/edit_list_item_page_route.dart';
+import 'package:listwhatever/custom/pages/listItems/list_item_load_bloc/list_item_load_bloc.dart';
+import 'package:listwhatever/custom/pages/listItems/list_item_load_bloc/list_item_load_event.dart';
 
 import '/custom/navigation/routes.dart';
 import '/custom/pages/import/csv/import_csv_page_route.dart';
@@ -158,6 +161,12 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
         actualListId: widget.list.id,
         items: sortedItems,
         onTap: showDetailsView,
+        onEdit: (listItemId) async {
+          final listItemBloc = context.read<ListItemLoadBloc>();
+          await EditListItemPageRoute(widget.list.id!, listItemId)
+              .push<void>(context);
+          listItemBloc.add(LoadListItem(widget.list.id!, listItemId));
+        },
       );
     } else {
       return FlutterMapsView(
