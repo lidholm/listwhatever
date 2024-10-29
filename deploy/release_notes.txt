@@ -1,3 +1,6 @@
+0.0.46
+* Change color palette
+
 0.0.45
 * More details for list item in "subtitle"
 

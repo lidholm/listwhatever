@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
+
 import '/standard/appUi/colors/app_colors.dart';
 import '/standard/appUi/spacing/app_spacing.dart';
 import '/standard/appUi/typography/app_font_weight.dart';
@@ -16,7 +16,7 @@ class AppTheme {
   /// Default `ThemeData` for App UI.
   ThemeData get themeData {
     return ThemeData(
-      primaryColor: AppColors.darkPurple,
+      primaryColor: AppColors.blue,
       canvasColor: _backgroundColor,
       scaffoldBackgroundColor: _backgroundColor,
       iconTheme: _iconTheme,
@@ -64,15 +64,16 @@ class AppTheme {
     );
   }
 
-  Color get _backgroundColor => AppColors.lavender;
+  Color get _backgroundColor => AppColors.white;
 
   AppBarTheme get _appBarTheme {
     return AppBarTheme(
+      centerTitle: true,
       iconTheme: _iconTheme,
       titleTextStyle: _textTheme.titleLarge,
       elevation: 0,
       toolbarHeight: 64,
-      backgroundColor: AppColors.lavender,
+      backgroundColor: AppColors.white,
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarIconBrightness: Brightness.dark,
         statusBarBrightness: Brightness.light,
@@ -211,7 +212,7 @@ class AppTheme {
 
   FloatingActionButtonThemeData get _floatingActionButtonTheme {
     return const FloatingActionButtonThemeData(
-      backgroundColor: AppColors.darkPurple,
+      backgroundColor: AppColors.blue,
       foregroundColor: Colors.white,
       splashColor: Colors.white,
     );
@@ -280,20 +281,6 @@ class AppTheme {
       indicatorSize: TabBarIndicatorSize.label,
     );
   }
-
-  // ignore: avoid_positional_boolean_parameters
-  static FormBuilderCheckbox getCheckbox(String name, String text, void Function(bool? val)? onChanged) {
-    return FormBuilderCheckbox(
-      name: name,
-      onChanged: onChanged,
-      title: Text(text),
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        filled: true,
-        fillColor: AppColors.inputEnabled,
-      ),
-    );
-  }
 }
 
 OutlineInputBorder _buildOutlineInputBorder(Color color) => OutlineInputBorder(
@@ -332,7 +319,7 @@ class AppDarkTheme extends AppTheme {
   ColorScheme get _colorScheme {
     return const ColorScheme.dark().copyWith(
       primary: AppColors.white,
-      secondary: AppColors.secondary,
+      secondary: AppColors.green,
       surface: AppColors.grey.shade900,
     );
   }

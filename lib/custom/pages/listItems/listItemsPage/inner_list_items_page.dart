@@ -5,6 +5,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:listwhatever/custom/pages/listItems/addListItem/edit_list_item_page_route.dart';
 import 'package:listwhatever/custom/pages/listItems/list_item_load_bloc/list_item_load_bloc.dart';
 import 'package:listwhatever/custom/pages/listItems/list_item_load_bloc/list_item_load_event.dart';
+import 'package:listwhatever/standard/firebase/firebase_storage.dart';
+import 'package:listwhatever/standard/widgets/appBar/image_background_common_app_bar.dart';
 
 import '/custom/navigation/routes.dart';
 import '/custom/pages/import/csv/import_csv_page_route.dart';
@@ -36,6 +38,8 @@ import '/standard/widgets/appBar/app_bar_action_overflow_icon.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
 import 'list_items_page_view_cubit.dart';
 
+const toolbarHeight = 140.0;
+
 class InnerListItemsPage extends StatefulWidget {
   const InnerListItemsPage(
     this.user,
@@ -66,10 +70,7 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonAppBar(
-        title: context.l10n.listItemsHeader(widget.list.name),
-        actions: getAppBarActions(),
-      ),
+      appBar: getAppBar(widget.list),
       body: Stack(
         children: [
           SizedBox(
@@ -399,6 +400,50 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
               lng: widget.currentLocation!.longitude,
             )
           : null,
+    );
+  }
+
+  CommonAppBar getAppBar(ListOfThings list) {
+    return CommonAppBar(
+      toolbarHeight: toolbarHeight,
+      title: context.l10n.listItemsHeader(widget.list.name),
+      titleWidget: StreamBuilder(
+        stream: getImageAppBar(widget.list),
+        builder: (buildContext, snapshot) {
+          return snapshot.data ?? getDefaultImageAppBar(widget.list.name);
+        },
+      ),
+      actions: getAppBarActions(),
+    );
+  }
+
+  Stream<ImageBackgroundCommonAppBar?> getImageAppBar(
+    ListOfThings list,
+  ) async* {
+    final title = list.name;
+
+    yield null;
+
+    // Wait for the future to complete
+    final imageUrl = await (await getFirebaseStorage())
+        .ref()
+        .child('images')
+        .child(list.imageFilename!)
+        .getDownloadURL();
+
+    // Emit the second widget once the future is done
+    yield ImageBackgroundCommonAppBar(
+      title: title,
+      imageUrl: imageUrl,
+      toolbarHeight: toolbarHeight,
+    );
+  }
+
+  Widget getDefaultImageAppBar(String title) {
+    return ImageBackgroundCommonAppBar(
+      title: title,
+      imageUrl: null,
+      toolbarHeight: toolbarHeight,
     );
   }
 }

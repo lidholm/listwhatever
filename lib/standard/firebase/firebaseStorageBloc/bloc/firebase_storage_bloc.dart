@@ -36,7 +36,7 @@ class FirebaseStorageBloc
             .child('images')
             .child(filename)
             .getDownloadURL();
-        logger.i('$className: imageUrl: $imageUrl');
+        // logger.i('$className: imageUrl: $imageUrl');
         loadedFiles[filename] = imageUrl;
       }
 
