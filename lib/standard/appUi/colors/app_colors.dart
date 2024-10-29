@@ -38,6 +38,9 @@ abstract class AppColors {
   /// The ocean blue color.
   static const Color oceanBlue = Color(0xFF02569B);
 
+  /// The blue primary color and swatch.
+  static const Color navyBlue = Color(0xFF00007f);
+
   /// The light blue color.
   static const MaterialColor lightBlue = Colors.lightBlue;
 

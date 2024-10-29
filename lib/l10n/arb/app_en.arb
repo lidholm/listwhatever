@@ -1,5 +1,12 @@
 {
   "@@locale": "en",
+
+  "appTitle": "List whatever",
+  "@appTitle": {
+    "description": "Text for 'List whatever'",
+    "type": "text",
+    "placeholders": {}
+  },
   "authenticationFailure": "Authentication failure",
   "@authenticationFailure": {
     "description": "Message shown when there is an error at login",

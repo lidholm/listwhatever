@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import '/standard/appUi/colors/app_colors.dart';
 import '/standard/navigation/widgets/shimmer/shimmer_loading.dart';
 
-const imageRadius = 16.0;
+const imageRadius = 4.0;
 const roundedRadius = 20.0;
 
 const mainColor = AppColors.darkPurple;
 const background = Colors.white;
+
+const className = 'ImageButton';
 
 class ImageButton<T> extends StatelessWidget {
   const ImageButton({
@@ -79,6 +81,8 @@ class ImageButton<T> extends StatelessWidget {
   }
 
   Widget imageWidget() {
+    // logger.i('$className: imageUrl: $imageUrl');
+
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         return Padding(
@@ -97,7 +101,10 @@ class ImageButton<T> extends StatelessWidget {
   }
 
   Text headerWidget() {
-    return Text(text, style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold));
+    return Text(
+      text,
+      style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+    );
   }
 
   Widget? typeWidget() {

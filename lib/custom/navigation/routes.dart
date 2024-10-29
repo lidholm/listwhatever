@@ -6,7 +6,6 @@ import '/custom/pages/crashlytics/crashlytics_page_route.dart';
 import '/custom/pages/deleteAccount/delete_account_page_route.dart';
 import '/custom/pages/firebase_in_app_messaging/firebase_in_app_messaging_page_route.dart';
 import '/custom/pages/firebase_performance/firebase_performance_page_route.dart';
-import '/custom/pages/home/view/home_page.dart';
 import '/custom/pages/import/csv/import_csv_page_route.dart';
 import '/custom/pages/import/spreadsheet/list_as_spreadsheets_page_route.dart';
 import '/custom/pages/listItems/addListItem/add_list_item_page_route.dart';
@@ -135,6 +134,6 @@ part 'routes.g.dart';
 class MainPageRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const HomePage();
+    return const Text('');
   }
 }

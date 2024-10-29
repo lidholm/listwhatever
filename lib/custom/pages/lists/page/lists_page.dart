@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/page/list_list.dart';
 import 'package:listwhatever/custom/pages/lists/page/list_tiles.dart';
 import 'package:listwhatever/custom/pages/lists/page/list_type_cubit/list_type_cubit.dart';
+import 'package:listwhatever/standard/navigation/view/nav_drawer.dart';
 import 'package:listwhatever/standard/widgets/appBar/app_bar_action.dart';
 import 'package:listwhatever/standard/widgets/appBar/app_bar_action_icon.dart';
 
@@ -42,8 +43,9 @@ class _ListsPageState extends State<ListsPage> {
     }
 
     return Scaffold(
+      drawer: const NavDrawer(),
       appBar: CommonAppBar(
-        title: context.l10n.listsHeader,
+        title: context.l10n.appTitle,
         actions: [
           if (listType == ListViewType.tiles)
             AppBarAction(

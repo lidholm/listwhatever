@@ -10,41 +10,38 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     this.actions = const <AppBarAction<dynamic>>[],
     this.titleWidget,
+    this.toolbarHeight = 56,
     super.key,
-  })
-  // ignore: avoid_field_initializers_in_const_classes
-  : preferredSize = const Size.fromHeight(kToolbarHeight);
+  });
 
+  final double toolbarHeight;
   final String title;
   final Widget? titleWidget;
   final List<AppBarAction<dynamic>> actions;
+
   @override
-  final Size preferredSize; // default is 56.0
+  Size get preferredSize => Size.fromHeight(toolbarHeight);
 
   @override
   Widget build(BuildContext context) {
     final overflowMenu = getOverflowMenu();
     final actionButtons = getActionButtons();
-    final theme = Theme.of(context);
+
     return AppBar(
-      title: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          titleWidget ?? Text(title),
-        ],
-      ),
+      flexibleSpace: titleWidget,
+      title: titleWidget == null ? Text(title) : null,
       actions: [
         ...actionButtons,
         if (overflowMenu != null) overflowMenu,
       ],
-      backgroundColor: theme.primaryColor.withAlpha(50),
     );
   }
 
   PopupMenuButton<AppBarActionOverflowIcon>? getOverflowMenu() {
-    final overflowActions =
-        actions.where((a) => a.type == AppBarActionType.overflowIcon).map((a) => a.overflowIcon!).toList();
+    final overflowActions = actions
+        .where((a) => a.type == AppBarActionType.overflowIcon)
+        .map((a) => a.overflowIcon!)
+        .toList();
     if (overflowActions.isEmpty) {
       return null;
     }
@@ -98,7 +95,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   Widget getDropdownButton<T>(AppBarActionDropdown<T> a) {
     return PopupMenuButton(
-      icon:  Icon(a.icon),
+      icon: Icon(a.icon),
       tooltip: a.tooltip,
       onSelected: a.callback,
       itemBuilder: (BuildContext context) {

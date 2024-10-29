@@ -4,8 +4,6 @@ import 'package:listwhatever/custom/navigation/routes.dart';
 import 'package:listwhatever/custom/pages/listItems/route/list_items_page_route.dart';
 import 'package:listwhatever/custom/pages/lists/models/list_type.dart';
 import 'package:listwhatever/custom/pages/lists/models/user_list.dart';
-import 'package:listwhatever/standard/appUi/colors/app_colors.dart';
-import 'package:listwhatever/standard/appUi/theme/app_theme.dart';
 import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/widgets/imageButton/image_button.dart';
 
@@ -30,108 +28,94 @@ class ListList extends StatelessWidget {
       child: CustomScrollView(
         slivers: [
           SliverList.list(
-            children: lists.map(
-              (list) {
-                logger
-                    .i('$className: list.imageFilename: ${list.imageFilename}');
-                final imageUrlFuture = firebaseStorage
-                    .ref()
-                    .child('images')
-                    .child(list.imageFilename ?? defaultImageFilename)
-                    .getDownloadURL();
-                return FutureBuilder(
-                  future: imageUrlFuture,
-                  builder: (context, snapshot) {
-                    final imageUrl = snapshot.data;
-                    // logger.i('$className => imageUrl: $imageUrl');
-                    return ListTile(
-                      onTap: () {
-                        ListItemsPageRoute(actualListId: list.listId)
-                            .push<void>(userListContext);
-                      },
-                      leading: imageUrl == null ? null : imageWidget(imageUrl),
-                      title: Text(
-                        list.listName,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Row(
-                        children: [
-                          typeWidget(list.listType.readable()),
-                          const Spacer(),
-                          sharedInfoWidget(
-                            list.isOwnList!
-                                ? const Icon(
-                                    Icons.verified_user_outlined,
-                                    color: mainColor,
-                                  )
-                                : const Icon(
-                                    Icons.supervised_user_circle,
-                                    color: AppColors.casablanca,
-                                  ),
-                            list.isOwnList!
-                                ? const AppTheme().themeData.primaryColor
-                                : AppColors.casablanca,
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                );
-              },
-            ).toList(),
+            children: lists.map(_buildItem).toList(),
           ),
         ],
       ),
     );
   }
 
-  Widget typeWidget(String? chipText) {
-    if (chipText == null) {
-      return Container();
-    }
+  Widget _buildItem(UserList list) {
+    logger
+      ..i('$className: list.listName: ${list.listName}')
+      ..i('$className: list.imageFilename: ${list.imageFilename}')
+      ..i('$className: list.isOwnList: ${list.isOwnList}');
 
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: mainColor,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: IntrinsicWidth(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
-          child: Text(chipText, style: const TextStyle(color: Colors.white)),
-        ),
-      ),
-    );
-  }
+    final imageUrlFuture = firebaseStorage
+        .ref()
+        .child('images')
+        .child(list.imageFilename ?? defaultImageFilename)
+        .getDownloadURL();
 
-  Widget imageWidget(String imageUrl) {
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(imageRadius),
-          child: SizedBox(
-            width: 60,
-            child: Image.network(imageUrl, fit: BoxFit.cover),
+    return FutureBuilder(
+      future: imageUrlFuture,
+      builder: (context, snapshot) {
+        final imageUrl = snapshot.data;
+
+        const textStyle = TextStyle(fontSize: 14, color: Colors.grey);
+        return GestureDetector(
+          onTap: () {
+            ListItemsPageRoute(actualListId: list.listId)
+                .push<void>(userListContext);
+          },
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                imageWidget(imageUrl),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        list.listName,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Row(
+                        children: [
+                          Text(list.listType.readable(), style: textStyle),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            child: Text('•', style: textStyle),
+                          ),
+                          // TODO: Should it say Private, Shared with others, Shared with me (or something similar)
+                          Text(
+                            (list.isOwnList ?? false) ? 'Private' : 'Shared',
+                            style: textStyle,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },
     );
   }
 
-  Widget sharedInfoWidget(Widget icon, Color iconBorderColor) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: background,
-        border: Border.all(
-          color: iconBorderColor,
-          width: 4,
-        ),
-      ),
-      child: IconButton(
-        icon: icon,
-        onPressed: () {},
-      ),
+  Widget imageWidget(String? imageUrl) {
+    // logger.i('$className: imageUrl: $imageUrl');
+
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(imageRadius),
+          child: SizedBox(
+            width: 80,
+            child: (imageUrl == null)
+                ? Container()
+                : Image.network(imageUrl, fit: BoxFit.cover),
+          ),
+        );
+      },
     );
   }
 }
