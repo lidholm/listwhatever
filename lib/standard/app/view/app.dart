@@ -104,7 +104,9 @@ class App extends StatelessWidget {
           BlocProvider<SearchLocationBloc>(
             create: (context) => SearchLocationBloc(),
           ),
-          BlocProvider<FilterBloc>(create: (context) => FilterBloc()),
+          BlocProvider<FilterBloc>(
+            create: (context) => FilterBloc(listItemsService),
+          ),
           BlocProvider<SharedListBloc>(
             create: (context) => SharedListBloc(sharedListsService),
           ),

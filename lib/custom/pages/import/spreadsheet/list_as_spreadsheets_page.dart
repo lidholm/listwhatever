@@ -329,7 +329,7 @@ class _ListAsSpreadsheetsPageInnerState
         final values = getValueFromRow<String>(row, cellName, false)
             .split(',')
             .map((e) => e.trim())
-            .where((e) => e != '')
+            .where((e) => e.trim() != '')
             .toList();
         if (values.isNotEmpty) {
           categories[cellName] = values;

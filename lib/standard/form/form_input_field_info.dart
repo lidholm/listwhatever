@@ -6,6 +6,12 @@ import 'package:listwhatever/custom/pages/listItems/searchLocation/geocoder/geoc
 
 part 'form_input_field_info.freezed.dart';
 
+enum SliderType {
+  numeric,
+  date,
+  timeOfDay,
+}
+
 @freezed
 sealed class FormInputFieldInfo with _$FormInputFieldInfo {
   const factory FormInputFieldInfo.textArea({
@@ -113,9 +119,12 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     required String id,
     required String label,
     required (double, double) range,
-    required double currentValue,
     required List<FormFieldValidator<bool>> validators,
     required String sectionName,
+    @Default(null) double? currentValue,
+    @Default(null) (double, double)? currentValues,
+    @Default(false) bool rangeSlider,
+    @Default(SliderType.numeric) SliderType type,
   }) = FormInputFieldInfoSlider;
 
   const factory FormInputFieldInfo.chips({

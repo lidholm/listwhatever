@@ -5,10 +5,14 @@ part 'filters.freezed.dart';
 @freezed
 class Filters with _$Filters {
   factory Filters({
-    required Map<String, List<String>> categoryFilters,
-    double? distance,
-    DateTime? startDate,
-    DateTime? endDate,
+    @Default(null) String? itemName,
+    @Default(null) double? distance,
+    @Default(null) DateTime? startDate,
+    @Default(null) DateTime? endDate,
+    @Default(null) Map<String, Set<String>>? regularCategoryFilters,
+    @Default(null) Map<String, (int, int)>? dateCategoryFilters,
+    @Default(null) Map<String, (int, int)>? timeOfDayCategoryFilters,
+    @Default(null) Map<String, (int, int)>? numericCategoryFilters,
   }) = _Filters;
   // Added constructor. Must not have any parameter
   const Filters._();
@@ -17,7 +21,17 @@ class Filters with _$Filters {
     required bool listHasDates,
     required bool listHasMap,
   }) {
-    if (categoryFilters.entries.any((element) => element.value.isNotEmpty)) {
+    if (regularCategoryFilters != null &&
+        regularCategoryFilters!.entries
+            .any((element) => element.value.isNotEmpty)) {
+      return true;
+    }
+    if (dateCategoryFilters != null &&
+        dateCategoryFilters!.entries.isNotEmpty) {
+      return true;
+    }
+    if (timeOfDayCategoryFilters != null &&
+        timeOfDayCategoryFilters!.entries.isNotEmpty) {
       return true;
     }
     if (listHasDates && startDate != null || endDate != null) {

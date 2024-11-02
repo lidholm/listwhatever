@@ -20,6 +20,7 @@ class FormInputFieldChips extends StatelessWidget {
       spacing: 8,
       selectedColor: Theme.of(context).primaryColor,
       backgroundColor: Theme.of(context).primaryColor.withAlpha(100),
+      initialValue: field.currentValue.toList(),
       options: field.values.map(
         (c) {
           const iconText = 'S';

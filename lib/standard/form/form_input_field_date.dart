@@ -10,6 +10,7 @@ class FormInputFieldDate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dateField = FormBuilderDateTimePicker(
+      decoration: InputDecoration(labelText: field.label),
       key: Key(field.id),
       name: field.id,
       initialValue: field.currentValue,

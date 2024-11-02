@@ -103,9 +103,12 @@ mixin _$FormInputFieldInfo {
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)
         slider,
     required TResult Function(
             String id,
@@ -202,9 +205,12 @@ mixin _$FormInputFieldInfo {
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult? Function(
             String id,
@@ -301,9 +307,12 @@ mixin _$FormInputFieldInfo {
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult Function(
             String id,
@@ -705,9 +714,12 @@ class _$FormInputFieldInfoTextAreaImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)
         slider,
     required TResult Function(
             String id,
@@ -808,9 +820,12 @@ class _$FormInputFieldInfoTextAreaImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult? Function(
             String id,
@@ -911,9 +926,12 @@ class _$FormInputFieldInfoTextAreaImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult Function(
             String id,
@@ -1336,9 +1354,12 @@ class _$FormInputFieldInfoDropDownImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)
         slider,
     required TResult Function(
             String id,
@@ -1439,9 +1460,12 @@ class _$FormInputFieldInfoDropDownImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult? Function(
             String id,
@@ -1542,9 +1566,12 @@ class _$FormInputFieldInfoDropDownImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult Function(
             String id,
@@ -1936,9 +1963,12 @@ class _$FormInputFieldInfoCheckboxImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)
         slider,
     required TResult Function(
             String id,
@@ -2039,9 +2069,12 @@ class _$FormInputFieldInfoCheckboxImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult? Function(
             String id,
@@ -2142,9 +2175,12 @@ class _$FormInputFieldInfoCheckboxImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult Function(
             String id,
@@ -2499,9 +2535,12 @@ class _$FormInputFieldInfoImagePickerImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)
         slider,
     required TResult Function(
             String id,
@@ -2602,9 +2641,12 @@ class _$FormInputFieldInfoImagePickerImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult? Function(
             String id,
@@ -2705,9 +2747,12 @@ class _$FormInputFieldInfoImagePickerImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult Function(
             String id,
@@ -3023,9 +3068,12 @@ class _$FormInputFieldInfoCancelButtonImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)
         slider,
     required TResult Function(
             String id,
@@ -3125,9 +3173,12 @@ class _$FormInputFieldInfoCancelButtonImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult? Function(
             String id,
@@ -3227,9 +3278,12 @@ class _$FormInputFieldInfoCancelButtonImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult Function(
             String id,
@@ -3543,9 +3597,12 @@ class _$FormInputFieldInfoSubmitButtonImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)
         slider,
     required TResult Function(
             String id,
@@ -3645,9 +3702,12 @@ class _$FormInputFieldInfoSubmitButtonImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult? Function(
             String id,
@@ -3747,9 +3807,12 @@ class _$FormInputFieldInfoSubmitButtonImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult Function(
             String id,
@@ -4218,9 +4281,12 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)
         slider,
     required TResult Function(
             String id,
@@ -4333,9 +4399,12 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult? Function(
             String id,
@@ -4448,9 +4517,12 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult Function(
             String id,
@@ -4795,9 +4867,12 @@ class _$FormInputFieldInfoCustomButtonImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)
         slider,
     required TResult Function(
             String id,
@@ -4897,9 +4972,12 @@ class _$FormInputFieldInfoCustomButtonImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult? Function(
             String id,
@@ -4999,9 +5077,12 @@ class _$FormInputFieldInfoCustomButtonImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult Function(
             String id,
@@ -5379,9 +5460,12 @@ class _$FormInputFieldInfoDateImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)
         slider,
     required TResult Function(
             String id,
@@ -5482,9 +5566,12 @@ class _$FormInputFieldInfoDateImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult? Function(
             String id,
@@ -5585,9 +5672,12 @@ class _$FormInputFieldInfoDateImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult Function(
             String id,
@@ -5921,9 +6011,12 @@ class _$FormInputFieldInfoMapImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)
         slider,
     required TResult Function(
             String id,
@@ -6023,9 +6116,12 @@ class _$FormInputFieldInfoMapImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult? Function(
             String id,
@@ -6125,9 +6221,12 @@ class _$FormInputFieldInfoMapImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult Function(
             String id,
@@ -6248,9 +6347,12 @@ abstract class _$$FormInputFieldInfoSliderImplCopyWith<$Res>
       {String id,
       String label,
       (double, double) range,
-      double currentValue,
       List<String? Function(bool?)> validators,
-      String sectionName});
+      String sectionName,
+      double? currentValue,
+      (double, double)? currentValues,
+      bool rangeSlider,
+      SliderType type});
 }
 
 /// @nodoc
@@ -6271,9 +6373,12 @@ class __$$FormInputFieldInfoSliderImplCopyWithImpl<$Res>
     Object? id = null,
     Object? label = null,
     Object? range = null,
-    Object? currentValue = null,
     Object? validators = null,
     Object? sectionName = null,
+    Object? currentValue = freezed,
+    Object? currentValues = freezed,
+    Object? rangeSlider = null,
+    Object? type = null,
   }) {
     return _then(_$FormInputFieldInfoSliderImpl(
       id: null == id
@@ -6288,10 +6393,6 @@ class __$$FormInputFieldInfoSliderImplCopyWithImpl<$Res>
           ? _value.range
           : range // ignore: cast_nullable_to_non_nullable
               as (double, double),
-      currentValue: null == currentValue
-          ? _value.currentValue
-          : currentValue // ignore: cast_nullable_to_non_nullable
-              as double,
       validators: null == validators
           ? _value._validators
           : validators // ignore: cast_nullable_to_non_nullable
@@ -6300,6 +6401,22 @@ class __$$FormInputFieldInfoSliderImplCopyWithImpl<$Res>
           ? _value.sectionName
           : sectionName // ignore: cast_nullable_to_non_nullable
               as String,
+      currentValue: freezed == currentValue
+          ? _value.currentValue
+          : currentValue // ignore: cast_nullable_to_non_nullable
+              as double?,
+      currentValues: freezed == currentValues
+          ? _value.currentValues
+          : currentValues // ignore: cast_nullable_to_non_nullable
+              as (double, double)?,
+      rangeSlider: null == rangeSlider
+          ? _value.rangeSlider
+          : rangeSlider // ignore: cast_nullable_to_non_nullable
+              as bool,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as SliderType,
     ));
   }
 }
@@ -6313,9 +6430,12 @@ class _$FormInputFieldInfoSliderImpl
       {required this.id,
       required this.label,
       required this.range,
-      required this.currentValue,
       required final List<String? Function(bool?)> validators,
-      required this.sectionName})
+      required this.sectionName,
+      this.currentValue = null,
+      this.currentValues = null,
+      this.rangeSlider = false,
+      this.type = SliderType.numeric})
       : _validators = validators;
 
   @override
@@ -6324,8 +6444,6 @@ class _$FormInputFieldInfoSliderImpl
   final String label;
   @override
   final (double, double) range;
-  @override
-  final double currentValue;
   final List<String? Function(bool?)> _validators;
   @override
   List<String? Function(bool?)> get validators {
@@ -6336,10 +6454,22 @@ class _$FormInputFieldInfoSliderImpl
 
   @override
   final String sectionName;
+  @override
+  @JsonKey()
+  final double? currentValue;
+  @override
+  @JsonKey()
+  final (double, double)? currentValues;
+  @override
+  @JsonKey()
+  final bool rangeSlider;
+  @override
+  @JsonKey()
+  final SliderType type;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo.slider(id: $id, label: $label, range: $range, currentValue: $currentValue, validators: $validators, sectionName: $sectionName)';
+    return 'FormInputFieldInfo.slider(id: $id, label: $label, range: $range, validators: $validators, sectionName: $sectionName, currentValue: $currentValue, currentValues: $currentValues, rangeSlider: $rangeSlider, type: $type)';
   }
 
   @override
@@ -6350,9 +6480,12 @@ class _$FormInputFieldInfoSliderImpl
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('label', label))
       ..add(DiagnosticsProperty('range', range))
-      ..add(DiagnosticsProperty('currentValue', currentValue))
       ..add(DiagnosticsProperty('validators', validators))
-      ..add(DiagnosticsProperty('sectionName', sectionName));
+      ..add(DiagnosticsProperty('sectionName', sectionName))
+      ..add(DiagnosticsProperty('currentValue', currentValue))
+      ..add(DiagnosticsProperty('currentValues', currentValues))
+      ..add(DiagnosticsProperty('rangeSlider', rangeSlider))
+      ..add(DiagnosticsProperty('type', type));
   }
 
   @override
@@ -6363,17 +6496,31 @@ class _$FormInputFieldInfoSliderImpl
             (identical(other.id, id) || other.id == id) &&
             (identical(other.label, label) || other.label == label) &&
             (identical(other.range, range) || other.range == range) &&
-            (identical(other.currentValue, currentValue) ||
-                other.currentValue == currentValue) &&
             const DeepCollectionEquality()
                 .equals(other._validators, _validators) &&
             (identical(other.sectionName, sectionName) ||
-                other.sectionName == sectionName));
+                other.sectionName == sectionName) &&
+            (identical(other.currentValue, currentValue) ||
+                other.currentValue == currentValue) &&
+            (identical(other.currentValues, currentValues) ||
+                other.currentValues == currentValues) &&
+            (identical(other.rangeSlider, rangeSlider) ||
+                other.rangeSlider == rangeSlider) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, label, range, currentValue,
-      const DeepCollectionEquality().hash(_validators), sectionName);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      label,
+      range,
+      const DeepCollectionEquality().hash(_validators),
+      sectionName,
+      currentValue,
+      currentValues,
+      rangeSlider,
+      type);
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -6470,9 +6617,12 @@ class _$FormInputFieldInfoSliderImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)
         slider,
     required TResult Function(
             String id,
@@ -6483,7 +6633,8 @@ class _$FormInputFieldInfoSliderImpl
             String sectionName)
         chips,
   }) {
-    return slider(id, label, range, currentValue, validators, sectionName);
+    return slider(id, label, range, validators, sectionName, currentValue,
+        currentValues, rangeSlider, type);
   }
 
   @override
@@ -6572,9 +6723,12 @@ class _$FormInputFieldInfoSliderImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult? Function(
             String id,
@@ -6585,8 +6739,8 @@ class _$FormInputFieldInfoSliderImpl
             String sectionName)?
         chips,
   }) {
-    return slider?.call(
-        id, label, range, currentValue, validators, sectionName);
+    return slider?.call(id, label, range, validators, sectionName, currentValue,
+        currentValues, rangeSlider, type);
   }
 
   @override
@@ -6675,9 +6829,12 @@ class _$FormInputFieldInfoSliderImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult Function(
             String id,
@@ -6690,7 +6847,8 @@ class _$FormInputFieldInfoSliderImpl
     required TResult orElse(),
   }) {
     if (slider != null) {
-      return slider(id, label, range, currentValue, validators, sectionName);
+      return slider(id, label, range, validators, sectionName, currentValue,
+          currentValues, rangeSlider, type);
     }
     return orElse();
   }
@@ -6768,18 +6926,24 @@ abstract class FormInputFieldInfoSlider implements FormInputFieldInfo {
       {required final String id,
       required final String label,
       required final (double, double) range,
-      required final double currentValue,
       required final List<String? Function(bool?)> validators,
-      required final String sectionName}) = _$FormInputFieldInfoSliderImpl;
+      required final String sectionName,
+      final double? currentValue,
+      final (double, double)? currentValues,
+      final bool rangeSlider,
+      final SliderType type}) = _$FormInputFieldInfoSliderImpl;
 
   @override
   String get id;
   String get label;
   (double, double) get range;
-  double get currentValue;
   List<String? Function(bool?)> get validators;
   @override
   String get sectionName;
+  double? get currentValue;
+  (double, double)? get currentValues;
+  bool get rangeSlider;
+  SliderType get type;
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -7030,9 +7194,12 @@ class _$FormInputFieldInfoChipsImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)
         slider,
     required TResult Function(
             String id,
@@ -7132,9 +7299,12 @@ class _$FormInputFieldInfoChipsImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult? Function(
             String id,
@@ -7235,9 +7405,12 @@ class _$FormInputFieldInfoChipsImpl
             String id,
             String label,
             (double, double) range,
-            double currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
         slider,
     TResult Function(
             String id,

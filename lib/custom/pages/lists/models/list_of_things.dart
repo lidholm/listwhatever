@@ -9,6 +9,19 @@ enum ShareType {
   editor,
 }
 
+enum FilterType {
+  regular._('Values'),
+  numericRange._('Numeric range'),
+  dateRange._('Date range'),
+  timeOfDayRange._('Time range');
+
+  const FilterType._(this.value);
+
+  final String value;
+}
+
+// TODO: Allow order of category filers
+
 @freezed
 class ListOfThings with _$ListOfThings {
   const factory ListOfThings({
@@ -21,6 +34,7 @@ class ListOfThings with _$ListOfThings {
     required bool shared,
     required Map<String, ShareType> sharedWith,
     required String? ownerId,
+    @Default({}) Map<String, FilterType> filterTypes,
     @Default(null) String? imageFilename,
     @Default(null) String? shareCodeForViewer,
     @Default(null) String? shareCodeForEditor,

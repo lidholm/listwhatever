@@ -19,6 +19,10 @@ _$ListOfThingsImpl _$$ListOfThingsImplFromJson(Map<String, dynamic> json) =>
         (k, e) => MapEntry(k, $enumDecode(_$ShareTypeEnumMap, e)),
       ),
       ownerId: json['ownerId'] as String?,
+      filterTypes: (json['filterTypes'] as Map<String, dynamic>?)?.map(
+            (k, e) => MapEntry(k, $enumDecode(_$FilterTypeEnumMap, e)),
+          ) ??
+          const {},
       imageFilename: json['imageFilename'] as String? ?? null,
       shareCodeForViewer: json['shareCodeForViewer'] as String? ?? null,
       shareCodeForEditor: json['shareCodeForEditor'] as String? ?? null,
@@ -38,6 +42,8 @@ Map<String, dynamic> _$$ListOfThingsImplToJson(_$ListOfThingsImpl instance) =>
       'sharedWith': instance.sharedWith
           .map((k, e) => MapEntry(k, _$ShareTypeEnumMap[e]!)),
       'ownerId': instance.ownerId,
+      'filterTypes': instance.filterTypes
+          .map((k, e) => MapEntry(k, _$FilterTypeEnumMap[e]!)),
       'imageFilename': instance.imageFilename,
       'shareCodeForViewer': instance.shareCodeForViewer,
       'shareCodeForEditor': instance.shareCodeForEditor,
@@ -56,4 +62,11 @@ const _$ListTypeEnumMap = {
 const _$ShareTypeEnumMap = {
   ShareType.viewer: 'viewer',
   ShareType.editor: 'editor',
+};
+
+const _$FilterTypeEnumMap = {
+  FilterType.regular: 'regular',
+  FilterType.numericRange: 'numericRange',
+  FilterType.dateRange: 'dateRange',
+  FilterType.timeOfDayRange: 'timeOfDayRange',
 };

@@ -64,18 +64,18 @@ class InnerListItemsPage extends StatefulWidget {
 
 class _InnerListItemsPageState extends State<InnerListItemsPage> {
   bool showSideWidget = false;
-  (ListItemsSortOrder, SortOrder) sortOrder =
-      (ListItemsSortOrder.name, SortOrder.ascending);
 
   @override
   Widget build(BuildContext context) {
+    final sortOrder = context.watch<ListItemsSortOrderCubit>().state;
+
     return Scaffold(
-      appBar: getAppBar(widget.list),
+      appBar: getAppBar(widget.list, sortOrder),
       body: Stack(
         children: [
           SizedBox(
             height: MediaQuery.of(context).size.height - 10,
-            child: showLoadedItems(),
+            child: showLoadedItems(sortOrder),
           ),
           filterWidget(),
         ],
@@ -133,7 +133,7 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
     );
   }
 
-  Widget showLoadedItems() {
+  Widget showLoadedItems((ListItemsSortOrder, SortOrder) sortOrder) {
     // logger
     //       ..d('=======================')
     //       ..d('number of items: ${widget.listItems.length}')
@@ -189,10 +189,13 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
     );
   }
 
-  List<AppBarAction<dynamic>> getAppBarActions() {
+  List<AppBarAction<dynamic>> getAppBarActions(
+    (ListItemsSortOrder, SortOrder) sortOrder,
+    ListOfThings list,
+  ) {
     final actions = [
       getShowListViewAction(),
-      getShowSortAction(),
+      getShowSortAction(sortOrder, list),
       getShowMapViewAction(),
       getShowFilterAction(),
       getShowShareListAction(),
@@ -245,7 +248,10 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
     );
   }
 
-  AppBarAction<dynamic>? getShowSortAction() {
+  AppBarAction<dynamic>? getShowSortAction(
+    (ListItemsSortOrder, SortOrder) sortOrder,
+    ListOfThings list,
+  ) {
     if (!shouldShowListOrMapAction()) {
       return null;
     }
@@ -265,8 +271,10 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
         },
         menuItems: [
           (ListItemsSortOrder.name, context.l10n.sortActionItemName),
-          (ListItemsSortOrder.date, context.l10n.sortActionItemDate),
-          (ListItemsSortOrder.distance, context.l10n.sortActionItemDistance),
+          if (list.withDates)
+            (ListItemsSortOrder.date, context.l10n.sortActionItemDate),
+          if (list.withMap)
+            (ListItemsSortOrder.distance, context.l10n.sortActionItemDistance),
         ]
             .map(
               (a) => (
@@ -403,7 +411,10 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
     );
   }
 
-  CommonAppBar getAppBar(ListOfThings list) {
+  CommonAppBar getAppBar(
+    ListOfThings list,
+    (ListItemsSortOrder, SortOrder) sortOrder,
+  ) {
     return CommonAppBar(
       toolbarHeight: toolbarHeight,
       title: context.l10n.listItemsHeader(widget.list.name),
@@ -413,7 +424,7 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
           return snapshot.data ?? getDefaultImageAppBar(widget.list.name);
         },
       ),
-      actions: getAppBarActions(),
+      actions: getAppBarActions(sortOrder, list),
     );
   }
 

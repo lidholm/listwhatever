@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:listwhatever/custom/pages/listItems/filters/bloc/filter_bloc.dart';
+import 'package:listwhatever/custom/pages/listItems/filters/bloc/filter_event.dart';
+import 'package:listwhatever/custom/pages/listItems/route/list_items_page_route.dart';
 import 'package:listwhatever/custom/pages/lists/page/list_list.dart';
 import 'package:listwhatever/custom/pages/lists/page/list_tiles.dart';
 import 'package:listwhatever/custom/pages/lists/page/list_type_cubit/list_type_cubit.dart';
@@ -88,12 +91,14 @@ class _ListsPageState extends State<ListsPage> {
               firebaseStorage: firebaseStorage,
               lists: lists,
               userListContext: context,
+              onTap: (listId) => onTap(context, listId),
             );
           } else {
             return ListList(
               firebaseStorage: firebaseStorage,
               lists: lists,
               userListContext: context,
+              onTap: (listId) => onTap(context, listId),
             );
           }
         },
@@ -105,5 +110,10 @@ class _ListsPageState extends State<ListsPage> {
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  void onTap(BuildContext context, String listId) {
+    context.read<FilterBloc>().add(UpdateFiltersForSelectedList(listId));
+    ListItemsPageRoute(actualListId: listId).push<void>(context);
   }
 }

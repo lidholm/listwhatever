@@ -11,6 +11,7 @@ class FormInputFieldDropDown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dropdown = FormBuilderDropdown(
+      decoration: InputDecoration(labelText: field.label),
       name: field.id,
       initialValue: field.currentValue,
       // decoration: InputDecoration(
@@ -34,7 +35,6 @@ class FormInputFieldDropDown extends StatelessWidget {
       onChanged: (val) {
         field.onChange?.call(val);
       },
-      valueTransformer: (val) => val?.toString(),
     );
 
     if (field.deletable) {

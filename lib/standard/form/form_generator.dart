@@ -9,11 +9,12 @@ import 'package:listwhatever/standard/form/form_input_field_checkbox.dart';
 import 'package:listwhatever/standard/form/form_input_field_chips.dart';
 import 'package:listwhatever/standard/form/form_input_field_custom_button.dart';
 import 'package:listwhatever/standard/form/form_input_field_date.dart';
+import 'package:listwhatever/standard/form/form_input_field_double_slider.dart';
 import 'package:listwhatever/standard/form/form_input_field_drop_down.dart';
 import 'package:listwhatever/standard/form/form_input_field_image_picker.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 import 'package:listwhatever/standard/form/form_input_field_map.dart';
-import 'package:listwhatever/standard/form/form_input_field_slider.dart';
+import 'package:listwhatever/standard/form/form_input_field_single_slider.dart';
 import 'package:listwhatever/standard/form/form_input_field_submit_button.dart';
 import 'package:listwhatever/standard/form/form_input_field_text_area.dart';
 import 'package:listwhatever/standard/form/form_input_field_two_auto_complete_fields.dart';
@@ -32,6 +33,7 @@ class FormGenerator extends StatefulWidget {
     required this.sections,
     required this.fields,
     this.focusFieldName,
+    this.changeCallback,
     super.key,
   });
 
@@ -40,6 +42,7 @@ class FormGenerator extends StatefulWidget {
   // ignore: strict_raw_type
   final List<FormInputFieldInfo?> fields;
   final String? focusFieldName;
+  final void Function(Map<String, dynamic> values)? changeCallback;
 
   @override
   State<StatefulWidget> createState() {
@@ -66,6 +69,19 @@ class _FormGeneratorState extends State<FormGenerator> {
           // IMPORTANT to remove all references from dynamic field when delete
           clearValueOnUnregister: true,
           skipDisabled: true,
+
+          onChanged: () {
+            if (widget.changeCallback != null) {
+              final fields = widget.formKey.currentState?.fields;
+              final mapEntriesValues =
+                  fields?.entries.map((e) => MapEntry(e.key, e.value.value));
+
+              final values = (mapEntriesValues != null)
+                  ? Map.fromEntries(mapEntriesValues)
+                  : <String, dynamic>{};
+              widget.changeCallback?.call(values);
+            }
+          },
           child: VStack(
             spacing: 25,
             children: widget.sections.map(generateSection).toList(),
@@ -121,8 +137,10 @@ class _FormGeneratorState extends State<FormGenerator> {
       FormInputFieldInfoCheckbox() => FormInputFieldCheckbox(field: field),
       FormInputFieldInfoImagePicker() =>
         FormInputFieldImagePicker(field: field),
-      FormInputFieldInfoCancelButton() =>
-        FormInputFieldCancelButton(formKey: widget.formKey, field: field),
+      FormInputFieldInfoCancelButton() => FormInputFieldCancelButton(
+          formKey: widget.formKey,
+          field: field,
+        ),
       FormInputFieldInfoSubmitButton() =>
         FormInputFieldSubmitButton(formKey: widget.formKey, field: field),
       FormInputFieldInfoTwoAutoCompleteFields() =>
@@ -133,7 +151,9 @@ class _FormGeneratorState extends State<FormGenerator> {
         FormInputFieldCustomButton(formKey: widget.formKey, field: field),
       FormInputFieldInfoDate() => FormInputFieldDate(field: field),
       FormInputFieldInfoMap() => FormInputFieldMap(field: field),
-      FormInputFieldInfoSlider() => FormInputFieldSlider(field: field),
+      FormInputFieldInfoSlider() => field.rangeSlider
+          ? FormInputFieldDoubleSlider(field: field)
+          : FormInputFieldSingleSlider(field: field),
       FormInputFieldInfoChips() => FormInputFieldChips(field: field),
     };
     return response;
