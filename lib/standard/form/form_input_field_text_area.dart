@@ -15,6 +15,7 @@ class FormInputFieldTextArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textField = FormBuilderTextField(
+      decoration: InputDecoration(labelText: field.label),
       key: Key(field.id),
       autovalidateMode: AutovalidateMode.always,
       name: field.id,

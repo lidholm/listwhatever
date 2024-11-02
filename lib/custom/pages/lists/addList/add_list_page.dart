@@ -8,6 +8,10 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_image_picker/form_builder_image_picker.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/custom/pages/listItems/filters/categories_helper.dart';
+import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_bloc.dart';
+import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
+import 'package:listwhatever/custom/pages/listItems/models/list_item.dart';
 import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/list_crud_events/list_crud_event.dart';
 import 'package:listwhatever/standard/constants.dart';
@@ -31,6 +35,7 @@ enum SectionName {
   basic._('Basic information'),
   options._('Options'),
   shared._('Share information'),
+  categoryFilterSettings._('Category filter settings'),
   submit._('Submit');
 
   const SectionName._(this.value);
@@ -45,6 +50,7 @@ enum FieldId {
   withMap._('withMap'),
   withDates._('withDates'),
   withTimes._('withTimes'),
+  categoryFilter._('categoryFilter'),
   cancel._('cancel'),
   submit._('submit');
 
@@ -68,6 +74,7 @@ class _AddListPageState extends State<AddListPage> {
   late List<FormInputFieldInfo?> fields;
 
   late ListOfThings? list;
+  late List<ListItem>? listItems;
   ListType? selectedListType;
   bool? showImage;
   bool imageUploaded = false;
@@ -87,14 +94,19 @@ class _AddListPageState extends State<AddListPage> {
 
     if (widget.listId != null) {
       final listState = context.watch<ListLoadBloc>().state;
+      final listItemsState = context.watch<ListItemsLoadBloc>().state;
 
       final listStateView =
-          ListOrListItemNotLoadedHandler.handleListState(listState);
+          ListOrListItemNotLoadedHandler.handleListAndListItemsState(
+        listState,
+        listItemsState,
+      );
       if (listStateView != null) {
         return listStateView;
       }
       setState(() {
         list = (listState as ListLoadLoaded).list;
+        listItems = (listItemsState as ListItemsLoadLoaded).listItems;
       });
     }
 
@@ -108,6 +120,7 @@ class _AddListPageState extends State<AddListPage> {
       mapCheckboxField(),
       dateCheckboxField(),
       timeCheckboxField(),
+      ...categoryFilterSettings(),
       cancelButton(),
       submitButton(),
     ];
@@ -120,6 +133,11 @@ class _AddListPageState extends State<AddListPage> {
       ),
       FormInputSection(
         name: SectionName.options.value,
+        direction: x_stack.AxisDirection.vertical,
+        showBorder: true,
+      ),
+      FormInputSection(
+        name: SectionName.categoryFilterSettings.value,
         direction: x_stack.AxisDirection.vertical,
         showBorder: true,
       ),
@@ -151,10 +169,7 @@ class _AddListPageState extends State<AddListPage> {
     final listCrudBloc = BlocProvider.of<ListCrudBloc>(context);
     final goRouter = GoRouter.of(context);
 
-    final listTypeName = values[FieldId.listType.value] as String;
-    final listType = ListType.values
-        .where((l) => l.name == listTypeName.split('.').last)
-        .first;
+    final listType = values[FieldId.listType.value] as ListType;
 
     String? imageFilename;
     if (values.containsKey(FieldId.listTypeImage.value)) {
@@ -163,6 +178,7 @@ class _AddListPageState extends State<AddListPage> {
       // logger.i('$className: imageFilename: $imageFilename');
     }
 
+    final filterTypes = getFilterTypes(values);
     // logger.d('values: $values');
     final newList = ListOfThings(
       id: widget.listId,
@@ -177,6 +193,7 @@ class _AddListPageState extends State<AddListPage> {
       // shareCodeForEditor: null,
       sharedWith: {},
       ownerId: list?.ownerId,
+      filterTypes: filterTypes,
     );
     // logger.d('newList: $newList');
     if (widget.listId == null) {
@@ -326,6 +343,28 @@ class _AddListPageState extends State<AddListPage> {
     );
   }
 
+  List<FormInputFieldInfo> categoryFilterSettings() {
+    final categories =
+        CategoriesHelper.getAllCategoriesAndValues(listItems ?? []);
+    return categories.entries
+        .map(
+          (entry) => FormInputFieldInfo.dropdown(
+            id: getCategoryFilterFieldKey(entry.key),
+            label: entry.key,
+            currentValue: list?.filterTypes[entry.key] ?? FilterType.regular,
+            validators: [
+              FormBuilderValidators.required(),
+              FormBuilderValidators.maxLength(70),
+            ],
+            options: FilterType.values.toList(),
+            optionToString: (filterType) =>
+                (filterType as FilterType?)?.value ?? '',
+            sectionName: SectionName.categoryFilterSettings.value,
+          ),
+        )
+        .toList();
+  }
+
   FormInputFieldInfo cancelButton() {
     return FormInputFieldInfo.cancelButton(
       id: FieldId.cancel.value,
@@ -351,5 +390,25 @@ class _AddListPageState extends State<AddListPage> {
         save(values);
       },
     );
+  }
+
+  Map<String, FilterType> getFilterTypes(Map<String, dynamic> values) {
+    final response = <String, FilterType>{};
+
+    for (final entry in values.entries) {
+      if (!entry.key.startsWith(FieldId.categoryFilter.name)) {
+        continue;
+      }
+      final parts = entry.key.split('-');
+      final name = parts[1];
+      final value = entry.value as FilterType;
+
+      response[name] = value;
+    }
+    return response;
+  }
+
+  String getCategoryFilterFieldKey(String filterTypeName) {
+    return '${FieldId.categoryFilter.value}-$filterTypeName';
   }
 }

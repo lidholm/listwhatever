@@ -16,10 +16,10 @@ class FormInputFieldCancelButton extends StatelessWidget {
     return OutlinedButton(
       key: Key(field.id),
       onPressed: () {
-        // formKey.currentState?.reset();
+        formKey.currentState?.reset();
+
         field.cancel();
       },
-      // color: Theme.of(context).colorScheme.secondary,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
         child: Text(

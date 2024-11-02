@@ -9,3 +9,9 @@ class UpdateFilters extends FilterEvent {
 
   final Filters filters;
 }
+
+class UpdateFiltersForSelectedList extends FilterEvent {
+  UpdateFiltersForSelectedList(this.listId);
+
+  final String listId;
+}

@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:listwhatever/custom/pages/listItems/listItemsListView/selected_list_item_cubit.dart';
-import 'package:listwhatever/standard/appUi/theme/app_theme.dart';
 
 import '/custom/pages/listItems/models/list_item.dart';
 import '/standard/constants.dart';
@@ -60,7 +59,10 @@ class ListItemsListView extends StatelessWidget {
                                 children: [
                                   getTitle(item),
                                   ...getSubtitle(
-                                      context, selectListItemId, item),
+                                    context,
+                                    selectListItemId,
+                                    item,
+                                  ),
                                 ],
                               ),
                               getActionIcon(selectListItemId, item),
@@ -101,7 +103,10 @@ class ListItemsListView extends StatelessWidget {
   }
 
   List<Widget> getSubtitle(
-      BuildContext context, String? selectedItemId, ListItem item) {
+    BuildContext context,
+    String? selectedItemId,
+    ListItem item,
+  ) {
     if (selectedItemId != item.id || selectedItemId == null) {
       return getCategoriesSubtitle(context, item);
     }

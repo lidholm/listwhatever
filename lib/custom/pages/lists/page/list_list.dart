@@ -1,7 +1,5 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:listwhatever/custom/navigation/routes.dart';
-import 'package:listwhatever/custom/pages/listItems/route/list_items_page_route.dart';
 import 'package:listwhatever/custom/pages/lists/models/list_type.dart';
 import 'package:listwhatever/custom/pages/lists/models/user_list.dart';
 import 'package:listwhatever/standard/constants.dart';
@@ -14,11 +12,13 @@ class ListList extends StatelessWidget {
     required this.firebaseStorage,
     required this.lists,
     required this.userListContext,
+    required this.onTap,
     super.key,
   });
   final FirebaseStorage firebaseStorage;
   final List<UserList> lists;
   final BuildContext userListContext;
+  final void Function(String listId) onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -54,10 +54,7 @@ class ListList extends StatelessWidget {
 
         const textStyle = TextStyle(fontSize: 14, color: Colors.grey);
         return GestureDetector(
-          onTap: () {
-            ListItemsPageRoute(actualListId: list.listId)
-                .push<void>(userListContext);
-          },
+          onTap: () => onTap(list.listId),
           child: Container(
             padding: const EdgeInsets.all(16),
             child: Row(

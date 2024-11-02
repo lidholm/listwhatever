@@ -29,6 +29,7 @@ mixin _$ListOfThings {
   bool get shared => throw _privateConstructorUsedError;
   Map<String, ShareType> get sharedWith => throw _privateConstructorUsedError;
   String? get ownerId => throw _privateConstructorUsedError;
+  Map<String, FilterType> get filterTypes => throw _privateConstructorUsedError;
   String? get imageFilename => throw _privateConstructorUsedError;
   String? get shareCodeForViewer => throw _privateConstructorUsedError;
   String? get shareCodeForEditor => throw _privateConstructorUsedError;
@@ -60,6 +61,7 @@ abstract class $ListOfThingsCopyWith<$Res> {
       bool shared,
       Map<String, ShareType> sharedWith,
       String? ownerId,
+      Map<String, FilterType> filterTypes,
       String? imageFilename,
       String? shareCodeForViewer,
       String? shareCodeForEditor,
@@ -90,6 +92,7 @@ class _$ListOfThingsCopyWithImpl<$Res, $Val extends ListOfThings>
     Object? shared = null,
     Object? sharedWith = null,
     Object? ownerId = freezed,
+    Object? filterTypes = null,
     Object? imageFilename = freezed,
     Object? shareCodeForViewer = freezed,
     Object? shareCodeForEditor = freezed,
@@ -132,6 +135,10 @@ class _$ListOfThingsCopyWithImpl<$Res, $Val extends ListOfThings>
           ? _value.ownerId
           : ownerId // ignore: cast_nullable_to_non_nullable
               as String?,
+      filterTypes: null == filterTypes
+          ? _value.filterTypes
+          : filterTypes // ignore: cast_nullable_to_non_nullable
+              as Map<String, FilterType>,
       imageFilename: freezed == imageFilename
           ? _value.imageFilename
           : imageFilename // ignore: cast_nullable_to_non_nullable
@@ -170,6 +177,7 @@ abstract class _$$ListOfThingsImplCopyWith<$Res>
       bool shared,
       Map<String, ShareType> sharedWith,
       String? ownerId,
+      Map<String, FilterType> filterTypes,
       String? imageFilename,
       String? shareCodeForViewer,
       String? shareCodeForEditor,
@@ -198,6 +206,7 @@ class __$$ListOfThingsImplCopyWithImpl<$Res>
     Object? shared = null,
     Object? sharedWith = null,
     Object? ownerId = freezed,
+    Object? filterTypes = null,
     Object? imageFilename = freezed,
     Object? shareCodeForViewer = freezed,
     Object? shareCodeForEditor = freezed,
@@ -240,6 +249,10 @@ class __$$ListOfThingsImplCopyWithImpl<$Res>
           ? _value.ownerId
           : ownerId // ignore: cast_nullable_to_non_nullable
               as String?,
+      filterTypes: null == filterTypes
+          ? _value._filterTypes
+          : filterTypes // ignore: cast_nullable_to_non_nullable
+              as Map<String, FilterType>,
       imageFilename: freezed == imageFilename
           ? _value.imageFilename
           : imageFilename // ignore: cast_nullable_to_non_nullable
@@ -273,11 +286,13 @@ class _$ListOfThingsImpl implements _ListOfThings {
       required this.shared,
       required final Map<String, ShareType> sharedWith,
       required this.ownerId,
+      final Map<String, FilterType> filterTypes = const {},
       this.imageFilename = null,
       this.shareCodeForViewer = null,
       this.shareCodeForEditor = null,
       this.shareType = ShareType.viewer})
-      : _sharedWith = sharedWith;
+      : _sharedWith = sharedWith,
+        _filterTypes = filterTypes;
 
   factory _$ListOfThingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$ListOfThingsImplFromJson(json);
@@ -306,6 +321,15 @@ class _$ListOfThingsImpl implements _ListOfThings {
 
   @override
   final String? ownerId;
+  final Map<String, FilterType> _filterTypes;
+  @override
+  @JsonKey()
+  Map<String, FilterType> get filterTypes {
+    if (_filterTypes is EqualUnmodifiableMapView) return _filterTypes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_filterTypes);
+  }
+
   @override
   @JsonKey()
   final String? imageFilename;
@@ -321,7 +345,7 @@ class _$ListOfThingsImpl implements _ListOfThings {
 
   @override
   String toString() {
-    return 'ListOfThings(id: $id, name: $name, listType: $listType, withMap: $withMap, withDates: $withDates, withTimes: $withTimes, shared: $shared, sharedWith: $sharedWith, ownerId: $ownerId, imageFilename: $imageFilename, shareCodeForViewer: $shareCodeForViewer, shareCodeForEditor: $shareCodeForEditor, shareType: $shareType)';
+    return 'ListOfThings(id: $id, name: $name, listType: $listType, withMap: $withMap, withDates: $withDates, withTimes: $withTimes, shared: $shared, sharedWith: $sharedWith, ownerId: $ownerId, filterTypes: $filterTypes, imageFilename: $imageFilename, shareCodeForViewer: $shareCodeForViewer, shareCodeForEditor: $shareCodeForEditor, shareType: $shareType)';
   }
 
   @override
@@ -342,6 +366,8 @@ class _$ListOfThingsImpl implements _ListOfThings {
             const DeepCollectionEquality()
                 .equals(other._sharedWith, _sharedWith) &&
             (identical(other.ownerId, ownerId) || other.ownerId == ownerId) &&
+            const DeepCollectionEquality()
+                .equals(other._filterTypes, _filterTypes) &&
             (identical(other.imageFilename, imageFilename) ||
                 other.imageFilename == imageFilename) &&
             (identical(other.shareCodeForViewer, shareCodeForViewer) ||
@@ -365,6 +391,7 @@ class _$ListOfThingsImpl implements _ListOfThings {
       shared,
       const DeepCollectionEquality().hash(_sharedWith),
       ownerId,
+      const DeepCollectionEquality().hash(_filterTypes),
       imageFilename,
       shareCodeForViewer,
       shareCodeForEditor,
@@ -397,6 +424,7 @@ abstract class _ListOfThings implements ListOfThings {
       required final bool shared,
       required final Map<String, ShareType> sharedWith,
       required final String? ownerId,
+      final Map<String, FilterType> filterTypes,
       final String? imageFilename,
       final String? shareCodeForViewer,
       final String? shareCodeForEditor,
@@ -423,6 +451,8 @@ abstract class _ListOfThings implements ListOfThings {
   Map<String, ShareType> get sharedWith;
   @override
   String? get ownerId;
+  @override
+  Map<String, FilterType> get filterTypes;
   @override
   String? get imageFilename;
   @override

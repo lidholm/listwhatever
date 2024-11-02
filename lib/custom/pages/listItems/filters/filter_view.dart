@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:listwhatever/custom/pages/listItems/filters/categories_helper.dart';
 import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/form/form_generator.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
@@ -17,6 +20,7 @@ import 'bloc/filter_event.dart';
 const String className = 'FilterView';
 
 enum SectionName {
+  name._('name'),
   dates._('dates'),
   distance._('distance'),
   categories._('categories'),
@@ -28,6 +32,7 @@ enum SectionName {
 }
 
 enum FieldId {
+  name._('name'),
   startdate._('startdate'),
   enddate._('enddate'),
   distance._('distance'),
@@ -71,17 +76,17 @@ class _FilterViewState extends State<FilterView> {
 
   @override
   Widget build(BuildContext context) {
-    logger.i('$className listItems: ${widget.listItems}');
+    // logger.i('$className listItems: ${widget.listItems}');
 
     final fields = [
+      itemNameInputField(),
       startDateInputField(),
       endDateInputField(),
       distanceInputField(),
       ...categoriesFields(getCategories(widget.listItems)),
-      cancelButton(),
-      submitButton(),
+      resetButton(),
     ];
-    logger.i('fields: ${fields.length}');
+    // logger.i('fields: ${fields.length}');
 
     final sections = getSections();
 
@@ -90,6 +95,7 @@ class _FilterViewState extends State<FilterView> {
       sections: sections,
       fields: fields,
       focusFieldName: FieldId.submit.name,
+      changeCallback: updateFilters,
     );
 
     return Container(
@@ -108,6 +114,11 @@ class _FilterViewState extends State<FilterView> {
 
   List<FormInputSection> getSections() {
     return [
+      FormInputSection(
+        name: SectionName.name.name,
+        direction: x_stack.AxisDirection.vertical,
+        showBorder: true,
+      ),
       FormInputSection(
         name: SectionName.dates.name,
         direction: x_stack.AxisDirection.vertical,
@@ -131,11 +142,21 @@ class _FilterViewState extends State<FilterView> {
     ];
   }
 
+  FormInputFieldInfo itemNameInputField() {
+    return FormInputFieldInfo.textArea(
+      id: FieldId.name.name,
+      label: 'Item name',
+      currentValue: '',
+      validators: [],
+      sectionName: SectionName.name.name,
+    );
+  }
+
   FormInputFieldInfo startDateInputField() {
     return FormInputFieldInfo.date(
       id: FieldId.startdate.name,
       label: 'Start date',
-      currentValue: DateTime.now(),
+      currentValue: widget.filters.startDate ?? DateTime.now(),
       inputType: widget.list.withTimes ? InputType.both : InputType.date,
       validator: (d) {
         return null;
@@ -148,7 +169,7 @@ class _FilterViewState extends State<FilterView> {
     return FormInputFieldInfo.date(
       id: FieldId.enddate.name,
       label: 'End date',
-      currentValue: DateTime.now(),
+      currentValue: widget.filters.endDate ?? DateTime.now(),
       inputType: widget.list.withTimes ? InputType.both : InputType.date,
       validator: (e) => null,
       sectionName: SectionName.dates.name,
@@ -159,7 +180,7 @@ class _FilterViewState extends State<FilterView> {
     return FormInputFieldInfo.slider(
       id: FieldId.distance.name,
       label: 'End date',
-      currentValue: 0,
+      currentValue: widget.filters.distance ?? distanceMax,
       range: (distanceMin, distanceMax),
       validators: [],
       sectionName: SectionName.distance.name,
@@ -169,63 +190,117 @@ class _FilterViewState extends State<FilterView> {
   List<FormInputFieldInfo> categoriesFields(
     Map<String, Set<String>> categories,
   ) {
-    logger.i('$className categories: $categories');
-    final chipsFields = mapIndexed(categories.entries)
-        .map(
-          (e) => FormInputFieldInfo.chips(
-            id: getCategoryFieldKey(e.$2.key, e.$1),
-            label: e.$2.key,
-            currentValue: [],
-            values: e.$2.value,
-            validators: [],
-            sectionName: SectionName.categories.name,
-          ),
-        )
+    // logger.i('$className categories: $categories');
+    final chipsFields = categories.entries
+        .map((e) => getCategoryField(e.key, e.value))
         .toList();
 
     return chipsFields;
   }
 
-  String getCategoryFieldKey(String category, int index) {
-    return '${FieldId.categoryvalue.name}-$category-$index';
+  FormInputFieldInfo getCategoryField(String categoryName, Set<String> values) {
+    final type = widget.list.filterTypes[categoryName];
+    return switch (type) {
+      FilterType.regular => getCategoriesChipsField(categoryName, values),
+      FilterType.numericRange =>
+        getCategoriesNumericSliderField(categoryName, values),
+      FilterType.dateRange =>
+        getCategoriesDateSliderField(categoryName, values),
+      FilterType.timeOfDayRange =>
+        getCategoriesTimeOfDaySliderField(categoryName, values),
+      null => getCategoriesChipsField(categoryName, values),
+    };
   }
 
-  String getCategoryName(String categoryFieldKey) {
-    return categoryFieldKey.substring(
-      categoryFieldKey.indexOf('-') + 1,
-      categoryFieldKey.lastIndexOf('-'),
+  FormInputFieldInfo getCategoriesChipsField(
+    String categoryName,
+    Set<String> values,
+  ) {
+    return FormInputFieldInfo.chips(
+      id: getCategoryFieldKey(categoryName),
+      label: categoryName,
+      currentValue: values,
+      values: values.where((e) => e.trim().isNotEmpty),
+      validators: [],
+      sectionName: SectionName.categories.name,
     );
   }
 
-  FormInputFieldInfo cancelButton() {
+  FormInputFieldInfo getCategoriesNumericSliderField(
+    String categoryName,
+    Set<String> values,
+  ) {
+    final minValue = values.map((s) => double.tryParse(s) ?? 0).reduce(min);
+    final maxValue = values.map((s) => double.tryParse(s) ?? 0).reduce(max);
+    return FormInputFieldInfo.slider(
+      id: getCategoryFieldKey(categoryName),
+      rangeSlider: true,
+      range: (minValue, maxValue),
+      label: categoryName,
+      currentValues: (minValue, maxValue),
+      validators: [],
+      sectionName: SectionName.categories.name,
+    );
+  }
+
+  FormInputFieldInfo getCategoriesDateSliderField(
+    String categoryName,
+    Set<String> values,
+  ) {
+    final minValue = values
+            .map((s) => DateTime.tryParse(s)?.millisecondsSinceEpoch ?? 0)
+            .reduce(min) *
+        1.0;
+    final maxValue = values
+            .map((s) => DateTime.tryParse(s)?.millisecondsSinceEpoch ?? 0)
+            .reduce(max) *
+        1.0;
+    return FormInputFieldInfo.slider(
+      id: getCategoryFieldKey(categoryName),
+      type: SliderType.date,
+      rangeSlider: true,
+      range: (minValue, maxValue),
+      label: categoryName,
+      currentValues: (minValue, maxValue),
+      validators: [],
+      sectionName: SectionName.categories.name,
+    );
+  }
+
+  FormInputFieldInfo getCategoriesTimeOfDaySliderField(
+    String categoryName,
+    Set<String> values,
+  ) {
+    final timeOfDayValues = values.map(timeOfDayToSeconds);
+    print(timeOfDayValues);
+    final minValue = timeOfDayValues.reduce(min) * 1.0;
+    final maxValue = timeOfDayValues.reduce(max) * 1.0;
+    return FormInputFieldInfo.slider(
+      id: getCategoryFieldKey(categoryName),
+      type: SliderType.timeOfDay,
+      rangeSlider: true,
+      range: (minValue, maxValue),
+      label: categoryName,
+      currentValues: (minValue, maxValue),
+      validators: [],
+      sectionName: SectionName.categories.name,
+    );
+  }
+
+  String getCategoryFieldKey(String category) {
+    return '${FieldId.categoryvalue.name}-$category';
+  }
+
+  FormInputFieldInfo resetButton() {
     return FormInputFieldInfo.cancelButton(
       id: FieldId.cancel.name,
-      label: 'Cancel',
+      label: 'Reset',
       sectionName: SectionName.submit.name,
-      cancel: () {
-        print('cancelled');
-      },
-    );
-  }
-
-  FormInputFieldInfo submitButton() {
-    return FormInputFieldInfo.submitButton(
-      id: FieldId.submit.name,
-      label: 'Submit',
-      sectionName: SectionName.submit.name,
-      save: (Map<String, dynamic>? values) {
-        print('save');
-        if (values == null) {
-          print('No values to save');
-          return;
-        }
-        updateFilters(values);
-      },
+      cancel: () {},
     );
   }
 
   void updateFilters(Map<String, dynamic> values) {
-    final categoryFilters = <String, List<String>>{};
     DateTime? startDate;
     DateTime? endDate;
     double? maxDistance;
@@ -243,24 +318,94 @@ class _FilterViewState extends State<FilterView> {
             convertDistanceToMeters(DistanceUnitOptions.kilometers, d);
       }
     }
-    for (final value in values.entries) {
-      if ([FieldId.startdate.name, FieldId.enddate.name, FieldId.distance.name]
-          .contains(value.key)) {
-        continue;
-      }
-      logger.i('$className value: $value');
 
-      categoryFilters[getCategoryName(value.key)] =
-          (value.value as List<String>?) ?? [];
-    }
+    final categoryFilters = getRegularCategoryFilters(values);
     logger.i('$className: categoryFilters: $categoryFilters');
 
     final filters = Filters(
-      categoryFilters: categoryFilters,
+      itemName: values[FieldId.name.name] as String?,
+      regularCategoryFilters: categoryFilters,
+      dateCategoryFilters: getDateCategoryFilters(values),
+      timeOfDayCategoryFilters: getTimeOfDayCategoryFilters(values),
+      numericCategoryFilters: getNumericCategoryFilters(values),
       startDate: startDate,
       endDate: endDate,
       distance: maxDistance,
     );
     BlocProvider.of<FilterBloc>(context).add(UpdateFilters(filters));
+  }
+
+  List<MapEntry<String, T>> getConvertedCategories<T>(
+    Map<String, dynamic> values,
+    FilterType filterType,
+    T Function(dynamic) converter,
+  ) {
+    final categoryValues = values.entries
+        .where((entry) => entry.key.startsWith(FieldId.categoryvalue.name))
+        .map((e) => (e.key.split('-')[1], e.value))
+        .where((e) => widget.list.filterTypes[e.$1] == filterType)
+        .toList();
+
+    final categoryConvertedValues = categoryValues
+        .map(
+          (entry) => MapEntry(entry.$1, converter(entry.$2)),
+        )
+        .toList();
+    return categoryConvertedValues;
+  }
+
+  Map<String, Set<String>> getRegularCategoryFilters(
+    Map<String, dynamic> values,
+  ) {
+    final categoryConvertedValues = getConvertedCategories(
+      values,
+      FilterType.regular,
+      (x) => x as List<String>,
+    );
+
+    final categoryFilters =
+        CategoriesHelper.getAllCategoriesAndValuesForListOfCategories(
+      categoryConvertedValues,
+    );
+    return categoryFilters;
+  }
+
+  Map<String, (int, int)> getDateCategoryFilters(
+    Map<String, dynamic> values,
+  ) {
+    final categoryConvertedValues = getConvertedCategories(
+      values,
+      FilterType.dateRange,
+      (x) => x as (int, int),
+    );
+
+    final dateCategoryFilters = Map.fromEntries(categoryConvertedValues);
+    return dateCategoryFilters;
+  }
+
+  Map<String, (int, int)> getTimeOfDayCategoryFilters(
+    Map<String, dynamic> values,
+  ) {
+    final categoryConvertedValues = getConvertedCategories(
+      values,
+      FilterType.timeOfDayRange,
+      (x) => x as (int, int),
+    );
+
+    final timeOfDayCategoryFilters = Map.fromEntries(categoryConvertedValues);
+    return timeOfDayCategoryFilters;
+  }
+
+  Map<String, (int, int)> getNumericCategoryFilters(
+    Map<String, dynamic> values,
+  ) {
+    final categoryConvertedValues = getConvertedCategories(
+      values,
+      FilterType.numericRange,
+      (x) => x as (int, int),
+    );
+
+    final numericCategoryFilters = Map.fromEntries(categoryConvertedValues);
+    return numericCategoryFilters;
   }
 }

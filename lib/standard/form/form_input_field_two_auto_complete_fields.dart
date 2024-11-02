@@ -46,6 +46,7 @@ class _FormInputFieldTwoAutoCompleteFieldsState
             SizedBox(
               width: constraints.maxWidth * fieldWidth,
               child: FormBuilderTypeAhead<String>(
+                decoration: InputDecoration(labelText: widget.field.labelLeft),
                 key: Key(widget.field.id),
                 name: widget.field.id,
                 initialValue: widget.field.currentValueLeft,
@@ -62,6 +63,7 @@ class _FormInputFieldTwoAutoCompleteFieldsState
             SizedBox(
               width: constraints.maxWidth * fieldWidth,
               child: FormBuilderTypeAhead<String>(
+                decoration: InputDecoration(labelText: widget.field.labelRight),
                 key: Key(widget.field.id),
                 name: widget.field.id2,
                 initialValue: widget.field.currentValueRight,

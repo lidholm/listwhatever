@@ -16,11 +16,18 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Filters {
-  Map<String, List<String>> get categoryFilters =>
-      throw _privateConstructorUsedError;
+  String? get itemName => throw _privateConstructorUsedError;
   double? get distance => throw _privateConstructorUsedError;
   DateTime? get startDate => throw _privateConstructorUsedError;
   DateTime? get endDate => throw _privateConstructorUsedError;
+  Map<String, Set<String>>? get regularCategoryFilters =>
+      throw _privateConstructorUsedError;
+  Map<String, (int, int)>? get dateCategoryFilters =>
+      throw _privateConstructorUsedError;
+  Map<String, (int, int)>? get timeOfDayCategoryFilters =>
+      throw _privateConstructorUsedError;
+  Map<String, (int, int)>? get numericCategoryFilters =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of Filters
   /// with the given fields replaced by the non-null parameter values.
@@ -34,10 +41,14 @@ abstract class $FiltersCopyWith<$Res> {
       _$FiltersCopyWithImpl<$Res, Filters>;
   @useResult
   $Res call(
-      {Map<String, List<String>> categoryFilters,
+      {String? itemName,
       double? distance,
       DateTime? startDate,
-      DateTime? endDate});
+      DateTime? endDate,
+      Map<String, Set<String>>? regularCategoryFilters,
+      Map<String, (int, int)>? dateCategoryFilters,
+      Map<String, (int, int)>? timeOfDayCategoryFilters,
+      Map<String, (int, int)>? numericCategoryFilters});
 }
 
 /// @nodoc
@@ -55,16 +66,20 @@ class _$FiltersCopyWithImpl<$Res, $Val extends Filters>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? categoryFilters = null,
+    Object? itemName = freezed,
     Object? distance = freezed,
     Object? startDate = freezed,
     Object? endDate = freezed,
+    Object? regularCategoryFilters = freezed,
+    Object? dateCategoryFilters = freezed,
+    Object? timeOfDayCategoryFilters = freezed,
+    Object? numericCategoryFilters = freezed,
   }) {
     return _then(_value.copyWith(
-      categoryFilters: null == categoryFilters
-          ? _value.categoryFilters
-          : categoryFilters // ignore: cast_nullable_to_non_nullable
-              as Map<String, List<String>>,
+      itemName: freezed == itemName
+          ? _value.itemName
+          : itemName // ignore: cast_nullable_to_non_nullable
+              as String?,
       distance: freezed == distance
           ? _value.distance
           : distance // ignore: cast_nullable_to_non_nullable
@@ -77,6 +92,22 @@ class _$FiltersCopyWithImpl<$Res, $Val extends Filters>
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      regularCategoryFilters: freezed == regularCategoryFilters
+          ? _value.regularCategoryFilters
+          : regularCategoryFilters // ignore: cast_nullable_to_non_nullable
+              as Map<String, Set<String>>?,
+      dateCategoryFilters: freezed == dateCategoryFilters
+          ? _value.dateCategoryFilters
+          : dateCategoryFilters // ignore: cast_nullable_to_non_nullable
+              as Map<String, (int, int)>?,
+      timeOfDayCategoryFilters: freezed == timeOfDayCategoryFilters
+          ? _value.timeOfDayCategoryFilters
+          : timeOfDayCategoryFilters // ignore: cast_nullable_to_non_nullable
+              as Map<String, (int, int)>?,
+      numericCategoryFilters: freezed == numericCategoryFilters
+          ? _value.numericCategoryFilters
+          : numericCategoryFilters // ignore: cast_nullable_to_non_nullable
+              as Map<String, (int, int)>?,
     ) as $Val);
   }
 }
@@ -89,10 +120,14 @@ abstract class _$$FiltersImplCopyWith<$Res> implements $FiltersCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {Map<String, List<String>> categoryFilters,
+      {String? itemName,
       double? distance,
       DateTime? startDate,
-      DateTime? endDate});
+      DateTime? endDate,
+      Map<String, Set<String>>? regularCategoryFilters,
+      Map<String, (int, int)>? dateCategoryFilters,
+      Map<String, (int, int)>? timeOfDayCategoryFilters,
+      Map<String, (int, int)>? numericCategoryFilters});
 }
 
 /// @nodoc
@@ -108,16 +143,20 @@ class __$$FiltersImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? categoryFilters = null,
+    Object? itemName = freezed,
     Object? distance = freezed,
     Object? startDate = freezed,
     Object? endDate = freezed,
+    Object? regularCategoryFilters = freezed,
+    Object? dateCategoryFilters = freezed,
+    Object? timeOfDayCategoryFilters = freezed,
+    Object? numericCategoryFilters = freezed,
   }) {
     return _then(_$FiltersImpl(
-      categoryFilters: null == categoryFilters
-          ? _value._categoryFilters
-          : categoryFilters // ignore: cast_nullable_to_non_nullable
-              as Map<String, List<String>>,
+      itemName: freezed == itemName
+          ? _value.itemName
+          : itemName // ignore: cast_nullable_to_non_nullable
+              as String?,
       distance: freezed == distance
           ? _value.distance
           : distance // ignore: cast_nullable_to_non_nullable
@@ -130,6 +169,22 @@ class __$$FiltersImplCopyWithImpl<$Res>
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      regularCategoryFilters: freezed == regularCategoryFilters
+          ? _value._regularCategoryFilters
+          : regularCategoryFilters // ignore: cast_nullable_to_non_nullable
+              as Map<String, Set<String>>?,
+      dateCategoryFilters: freezed == dateCategoryFilters
+          ? _value._dateCategoryFilters
+          : dateCategoryFilters // ignore: cast_nullable_to_non_nullable
+              as Map<String, (int, int)>?,
+      timeOfDayCategoryFilters: freezed == timeOfDayCategoryFilters
+          ? _value._timeOfDayCategoryFilters
+          : timeOfDayCategoryFilters // ignore: cast_nullable_to_non_nullable
+              as Map<String, (int, int)>?,
+      numericCategoryFilters: freezed == numericCategoryFilters
+          ? _value._numericCategoryFilters
+          : numericCategoryFilters // ignore: cast_nullable_to_non_nullable
+              as Map<String, (int, int)>?,
     ));
   }
 }
@@ -138,31 +193,83 @@ class __$$FiltersImplCopyWithImpl<$Res>
 
 class _$FiltersImpl extends _Filters {
   _$FiltersImpl(
-      {required final Map<String, List<String>> categoryFilters,
-      this.distance,
-      this.startDate,
-      this.endDate})
-      : _categoryFilters = categoryFilters,
+      {this.itemName = null,
+      this.distance = null,
+      this.startDate = null,
+      this.endDate = null,
+      final Map<String, Set<String>>? regularCategoryFilters = null,
+      final Map<String, (int, int)>? dateCategoryFilters = null,
+      final Map<String, (int, int)>? timeOfDayCategoryFilters = null,
+      final Map<String, (int, int)>? numericCategoryFilters = null})
+      : _regularCategoryFilters = regularCategoryFilters,
+        _dateCategoryFilters = dateCategoryFilters,
+        _timeOfDayCategoryFilters = timeOfDayCategoryFilters,
+        _numericCategoryFilters = numericCategoryFilters,
         super._();
 
-  final Map<String, List<String>> _categoryFilters;
   @override
-  Map<String, List<String>> get categoryFilters {
-    if (_categoryFilters is EqualUnmodifiableMapView) return _categoryFilters;
+  @JsonKey()
+  final String? itemName;
+  @override
+  @JsonKey()
+  final double? distance;
+  @override
+  @JsonKey()
+  final DateTime? startDate;
+  @override
+  @JsonKey()
+  final DateTime? endDate;
+  final Map<String, Set<String>>? _regularCategoryFilters;
+  @override
+  @JsonKey()
+  Map<String, Set<String>>? get regularCategoryFilters {
+    final value = _regularCategoryFilters;
+    if (value == null) return null;
+    if (_regularCategoryFilters is EqualUnmodifiableMapView)
+      return _regularCategoryFilters;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_categoryFilters);
+    return EqualUnmodifiableMapView(value);
+  }
+
+  final Map<String, (int, int)>? _dateCategoryFilters;
+  @override
+  @JsonKey()
+  Map<String, (int, int)>? get dateCategoryFilters {
+    final value = _dateCategoryFilters;
+    if (value == null) return null;
+    if (_dateCategoryFilters is EqualUnmodifiableMapView)
+      return _dateCategoryFilters;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  final Map<String, (int, int)>? _timeOfDayCategoryFilters;
+  @override
+  @JsonKey()
+  Map<String, (int, int)>? get timeOfDayCategoryFilters {
+    final value = _timeOfDayCategoryFilters;
+    if (value == null) return null;
+    if (_timeOfDayCategoryFilters is EqualUnmodifiableMapView)
+      return _timeOfDayCategoryFilters;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  final Map<String, (int, int)>? _numericCategoryFilters;
+  @override
+  @JsonKey()
+  Map<String, (int, int)>? get numericCategoryFilters {
+    final value = _numericCategoryFilters;
+    if (value == null) return null;
+    if (_numericCategoryFilters is EqualUnmodifiableMapView)
+      return _numericCategoryFilters;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
   }
 
   @override
-  final double? distance;
-  @override
-  final DateTime? startDate;
-  @override
-  final DateTime? endDate;
-
-  @override
   String toString() {
-    return 'Filters(categoryFilters: $categoryFilters, distance: $distance, startDate: $startDate, endDate: $endDate)';
+    return 'Filters(itemName: $itemName, distance: $distance, startDate: $startDate, endDate: $endDate, regularCategoryFilters: $regularCategoryFilters, dateCategoryFilters: $dateCategoryFilters, timeOfDayCategoryFilters: $timeOfDayCategoryFilters, numericCategoryFilters: $numericCategoryFilters)';
   }
 
   @override
@@ -170,22 +277,34 @@ class _$FiltersImpl extends _Filters {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FiltersImpl &&
-            const DeepCollectionEquality()
-                .equals(other._categoryFilters, _categoryFilters) &&
+            (identical(other.itemName, itemName) ||
+                other.itemName == itemName) &&
             (identical(other.distance, distance) ||
                 other.distance == distance) &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
-            (identical(other.endDate, endDate) || other.endDate == endDate));
+            (identical(other.endDate, endDate) || other.endDate == endDate) &&
+            const DeepCollectionEquality().equals(
+                other._regularCategoryFilters, _regularCategoryFilters) &&
+            const DeepCollectionEquality()
+                .equals(other._dateCategoryFilters, _dateCategoryFilters) &&
+            const DeepCollectionEquality().equals(
+                other._timeOfDayCategoryFilters, _timeOfDayCategoryFilters) &&
+            const DeepCollectionEquality().equals(
+                other._numericCategoryFilters, _numericCategoryFilters));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_categoryFilters),
+      itemName,
       distance,
       startDate,
-      endDate);
+      endDate,
+      const DeepCollectionEquality().hash(_regularCategoryFilters),
+      const DeepCollectionEquality().hash(_dateCategoryFilters),
+      const DeepCollectionEquality().hash(_timeOfDayCategoryFilters),
+      const DeepCollectionEquality().hash(_numericCategoryFilters));
 
   /// Create a copy of Filters
   /// with the given fields replaced by the non-null parameter values.
@@ -198,20 +317,32 @@ class _$FiltersImpl extends _Filters {
 
 abstract class _Filters extends Filters {
   factory _Filters(
-      {required final Map<String, List<String>> categoryFilters,
+      {final String? itemName,
       final double? distance,
       final DateTime? startDate,
-      final DateTime? endDate}) = _$FiltersImpl;
+      final DateTime? endDate,
+      final Map<String, Set<String>>? regularCategoryFilters,
+      final Map<String, (int, int)>? dateCategoryFilters,
+      final Map<String, (int, int)>? timeOfDayCategoryFilters,
+      final Map<String, (int, int)>? numericCategoryFilters}) = _$FiltersImpl;
   _Filters._() : super._();
 
   @override
-  Map<String, List<String>> get categoryFilters;
+  String? get itemName;
   @override
   double? get distance;
   @override
   DateTime? get startDate;
   @override
   DateTime? get endDate;
+  @override
+  Map<String, Set<String>>? get regularCategoryFilters;
+  @override
+  Map<String, (int, int)>? get dateCategoryFilters;
+  @override
+  Map<String, (int, int)>? get timeOfDayCategoryFilters;
+  @override
+  Map<String, (int, int)>? get numericCategoryFilters;
 
   /// Create a copy of Filters
   /// with the given fields replaced by the non-null parameter values.
