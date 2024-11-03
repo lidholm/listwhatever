@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
 
 import '/custom/navigation/routes.dart';
@@ -9,7 +10,6 @@ import '/custom/pages/firebase_performance/firebase_performance_page_route.dart'
 import '/custom/pages/lists/page/lists_page_route.dart';
 import '/custom/pages/privacyPolicy/privacy_policy_page_route.dart';
 import '/custom/pages/remoteConfig/remote_config_page_route.dart';
-import '/l10n/l10n.dart';
 import '/standard/appUi/colors/app_colors.dart';
 import '/standard/appUi/spacing/app_spacing.dart';
 import '/standard/navigation/models/link.dart';
@@ -21,23 +21,51 @@ class NavDrawerSections extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final sections = {
-      context.l10n.functionalitySectionHeader: [
-        Link('lists', 'Lists', () => const ListsPageRoute().push<void>(context)),
-        Link('logs', 'Logs', () => const OnScreenLogsPageRoute().push<void>(context)),
+      AppLocalizations.of(context).functionalitySectionHeader: [
+        Link(
+          'lists',
+          'Lists',
+          () => const ListsPageRoute().push<void>(context),
+        ),
+        Link(
+          'logs',
+          'Logs',
+          () => const OnScreenLogsPageRoute().push<void>(context),
+        ),
       ],
-      context.l10n.firebaseSectionHeader: [
-        Link('remoteConfig', 'Remote Config', () => const RemoteConfigPageRoute().push<void>(context)),
-        Link('crashlytics', 'Crashlytics', () => const CrashlyticstPageRoute().push<void>(context)),
+      AppLocalizations.of(context).firebaseSectionHeader: [
+        Link(
+          'remoteConfig',
+          'Remote Config',
+          () => const RemoteConfigPageRoute().push<void>(context),
+        ),
+        Link(
+          'crashlytics',
+          'Crashlytics',
+          () => const CrashlyticstPageRoute().push<void>(context),
+        ),
         Link(
           'firebaseperformance',
           'Firebase Performance',
           () => const FirebasePerformancePageRoute().push<void>(context),
         ),
       ],
-      context.l10n.aboutSectionHeader: [
-        Link('about', 'About', () => const AboutPageRoute().push<void>(context)),
-        Link('deleteaccount', 'Delete Account', () => const DeleteAccountPageRoute().push<void>(context)),
-        Link('privacypolicy', 'Privacy Policy', () => const PrivacyPolicyPageRoute().push<void>(context)),
+      AppLocalizations.of(context).aboutSectionHeader: [
+        Link(
+          'about',
+          'About',
+          () => const AboutPageRoute().push<void>(context),
+        ),
+        Link(
+          'deleteaccount',
+          'Delete Account',
+          () => const DeleteAccountPageRoute().push<void>(context),
+        ),
+        Link(
+          'privacypolicy',
+          'Privacy Policy',
+          () => const PrivacyPolicyPageRoute().push<void>(context),
+        ),
       ],
     };
 
@@ -125,7 +153,9 @@ class NavDrawerSectionItem extends StatelessWidget {
         title: Text(
           title,
           style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                color: selected ? AppColors.highEmphasisPrimary : AppColors.mediumEmphasisPrimary,
+                color: selected
+                    ? AppColors.highEmphasisPrimary
+                    : AppColors.mediumEmphasisPrimary,
               ),
         ),
       ),

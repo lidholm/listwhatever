@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart'; // hide Page;
 
-import '/l10n/l10n.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});

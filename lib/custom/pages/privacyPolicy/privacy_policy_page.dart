@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '/l10n/l10n.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '/standard/appUi/typography/app_text_styles.dart';
 
 // TODO: Create multiple pages, one for each language

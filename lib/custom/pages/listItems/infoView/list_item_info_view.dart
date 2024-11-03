@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '/custom/navigation/routes.dart';
 import '/custom/pages/listItems/addListItem/edit_list_item_page_route.dart';
@@ -8,14 +9,17 @@ import '/custom/pages/listItems/list_item_load_bloc/list_item_load_event.dart';
 import '/custom/pages/listItems/list_item_load_bloc/list_item_load_state.dart';
 import '/custom/pages/list_or_list_item_not_loaded_handler.dart';
 import '/custom/pages/lists/list_load_events/list_load_bloc.dart';
-import '/l10n/l10n.dart';
 import '/standard/constants.dart';
 import '/standard/widgets/appBar/app_bar_action.dart';
 import '/standard/widgets/appBar/app_bar_action_icon.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
 
 class ListItemInfoView extends StatefulWidget {
-  const ListItemInfoView({required this.actualListId, required this.itemId, super.key});
+  const ListItemInfoView({
+    required this.actualListId,
+    required this.itemId,
+    super.key,
+  });
 
   final String? actualListId;
   final String? itemId;
@@ -29,7 +33,8 @@ class _ListItemInfoViewState extends State<ListItemInfoView> {
   void initState() {
     super.initState();
     if (widget.actualListId != null && widget.itemId != null) {
-      BlocProvider.of<ListItemLoadBloc>(context).add(LoadListItem(widget.actualListId!, widget.itemId!));
+      BlocProvider.of<ListItemLoadBloc>(context)
+          .add(LoadListItem(widget.actualListId!, widget.itemId!));
     }
   }
 
@@ -38,7 +43,11 @@ class _ListItemInfoViewState extends State<ListItemInfoView> {
     final listState = context.watch<ListLoadBloc>().state;
     final listItemState = context.watch<ListItemLoadBloc>().state;
 
-    final listStateView = ListOrListItemNotLoadedHandler.handleListAndListItemState(listState, listItemState);
+    final listStateView =
+        ListOrListItemNotLoadedHandler.handleListAndListItemState(
+      listState,
+      listItemState,
+    );
     if (listStateView != null) {
       return listStateView;
     }
@@ -54,13 +63,15 @@ class _ListItemInfoViewState extends State<ListItemInfoView> {
           AppBarAction(
             type: AppBarActionType.icon,
             iconAction: AppBarActionIcon(
-              title: context.l10n.editListItem,
+              title: AppLocalizations.of(context).editListItem,
               icon: Icons.edit,
               key: const Key('editListItemAction'),
               callback: () async {
                 final listItemBloc = context.read<ListItemLoadBloc>();
-                await EditListItemPageRoute(widget.actualListId!, listItem.id!).push<void>(context);
-                listItemBloc.add(LoadListItem(widget.actualListId!, listItem.id!));
+                await EditListItemPageRoute(widget.actualListId!, listItem.id!)
+                    .push<void>(context);
+                listItemBloc
+                    .add(LoadListItem(widget.actualListId!, listItem.id!));
               },
             ),
           ),

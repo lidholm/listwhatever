@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
-import '/l10n/l10n.dart';
 import '/standard/analytics/bloc/analytics_bloc.dart';
 import '/standard/analytics/bloc/analytics_event.dart';
 import '/standard/analyticsRepository/models/ntg_event.dart';
@@ -76,7 +76,7 @@ class _UserProfileViewState extends State<UserProfileView>
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
+    final l10n = AppLocalizations.of(context);
     final appState = context.watch<AppBloc>().state;
     switch (appState) {
       case LoggedIn():
@@ -214,7 +214,7 @@ class UserProfileTitle extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(AppSpacing.lg),
       child: Text(
-        context.l10n.userProfileTitle,
+        AppLocalizations.of(context).userProfileTitle,
         style: theme.textTheme.displaySmall,
       ),
     );
@@ -311,7 +311,7 @@ class UserProfileLogoutButton extends StatelessWidget {
           children: [
             Assets.icons.logOutIcon.svg(),
             const SizedBox(width: AppSpacing.sm),
-            Text(context.l10n.userProfileLogoutButtonText),
+            Text(AppLocalizations.of(context).userProfileLogoutButtonText),
           ],
         ),
         onPressed: () =>

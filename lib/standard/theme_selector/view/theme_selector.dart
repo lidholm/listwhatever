@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '/l10n/l10n.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '/standard/theme_selector/bloc/theme_mode_bloc.dart';
 import '/standard/theme_selector/bloc/theme_mode_event.dart';
 
@@ -14,12 +15,13 @@ class ThemeSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
+    final l10n = AppLocalizations.of(context);
     final themeMode = context.watch<ThemeModeBloc>().state;
     return DropdownButton(
       key: const Key('themeSelector_dropdown'),
-      onChanged: (ThemeMode? selectedThemeMode) =>
-          context.read<ThemeModeBloc>().add(ThemeModeChanged(selectedThemeMode)),
+      onChanged: (ThemeMode? selectedThemeMode) => context
+          .read<ThemeModeBloc>()
+          .add(ThemeModeChanged(selectedThemeMode)),
       value: themeMode,
       items: [
         DropdownMenuItem(

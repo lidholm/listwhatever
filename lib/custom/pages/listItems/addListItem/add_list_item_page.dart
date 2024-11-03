@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listwhatever/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
@@ -28,7 +29,6 @@ import '/custom/pages/lists/list_load_events/list_load_bloc.dart';
 import '/custom/pages/lists/list_load_events/list_load_event.dart';
 import '/custom/pages/lists/list_load_events/list_load_state.dart';
 import '/custom/pages/lists/models/list_of_things.dart';
-import '/l10n/l10n.dart';
 import '/standard/constants.dart';
 import '/standard/navigation/redirect_cubit.dart';
 import '/standard/widgets/appBar/app_bar_action.dart';
@@ -214,7 +214,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
           AppBarAction(
             type: AppBarActionType.icon,
             iconAction: AppBarActionIcon(
-              title: context.l10n.deleteListItem,
+              title: AppLocalizations.of(context).deleteListItem,
               icon: Icons.delete,
               key: const Key('deleteListItemAction'),
               callback: () async {
@@ -528,8 +528,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
       label: 'Address',
       currentValue: listItem?.address ?? '', // TODO
       validators: [
-        FormBuilderValidators.required(),
-        FormBuilderValidators.maxLength(70),
+        FormBuilderValidators.maxLength(150, checkNullOrEmpty: false),
       ],
       sectionName: SectionName.location.value,
     );
@@ -543,11 +542,21 @@ class _AddListItemPageState extends State<AddListItemPage> {
           ? '${listItem?.latLong?.lat}, ${listItem?.latLong?.lng}'
           : '',
       validators: [
-        FormBuilderValidators.required(),
-        FormBuilderValidators.maxLength(70),
+        FormBuilderValidators.maxLength(70, checkNullOrEmpty: false),
+        validLatLong,
       ],
       sectionName: SectionName.location.value,
     );
+  }
+
+  String? validLatLong(String? text) {
+    if (text == null || text.isEmpty) {
+      return null;
+    }
+    const latLongPattern =
+        r'^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$';
+    final regex = RegExp(latLongPattern);
+    return regex.hasMatch(text) ? null : 'Not a valid LatLong';
   }
 
   FormInputFieldInfo cancelButton() {

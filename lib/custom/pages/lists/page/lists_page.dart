@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:listwhatever/custom/pages/listItems/filters/bloc/filter_bloc.dart';
 import 'package:listwhatever/custom/pages/listItems/filters/bloc/filter_event.dart';
 import 'package:listwhatever/custom/pages/listItems/route/list_items_page_route.dart';
@@ -16,7 +17,6 @@ import '/custom/pages/lists/addList/add_list_page_route.dart';
 import '/custom/pages/lists/lists_load_events/lists_bloc.dart';
 import '/custom/pages/lists/lists_load_events/lists_event.dart';
 import '/custom/pages/lists/lists_load_events/lists_state.dart';
-import '/l10n/l10n.dart';
 import '/standard/firebase/firebase_storage.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
 
@@ -48,7 +48,7 @@ class _ListsPageState extends State<ListsPage> {
     return Scaffold(
       drawer: const NavDrawer(),
       appBar: CommonAppBar(
-        title: context.l10n.appTitle,
+        title: AppLocalizations.of(context).appTitle,
         actions: [
           if (listType == ListViewType.tiles)
             AppBarAction(

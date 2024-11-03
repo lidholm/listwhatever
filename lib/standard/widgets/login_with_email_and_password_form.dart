@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
-import '/l10n/l10n.dart';
+
 import '/standard/appUi/generated/assets.gen.dart';
 import '/standard/appUi/spacing/app_spacing.dart';
 import '/standard/appUi/widgets/app_button.dart';
@@ -25,7 +26,11 @@ class LoginWithEmailAndPasswordForm extends StatelessWidget {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              SnackBar(content: Text(context.l10n.loginWithEmailAndPasswordFailure)),
+              SnackBar(
+                content: Text(
+                  AppLocalizations.of(context).loginWithEmailAndPasswordFailure,
+                ),
+              ),
             );
         }
       },
@@ -68,7 +73,7 @@ class _HeaderTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Text(
-      context.l10n.loginWithEmailHeaderText,
+      AppLocalizations.of(context).loginWithEmailHeaderText,
       key: const Key('loginWithEmailForm_header_title'),
       style: theme.textTheme.displaySmall,
     );
@@ -93,11 +98,14 @@ class _EmailInputState extends State<_EmailInput> {
       key: const Key('loginWithEmailForm_emailInput_textField'),
       controller: _controller,
       readOnly: state.status.isInProgress,
-      hintText: context.l10n.loginWithEmailTextFieldHint,
-      onChanged: (email) => context.read<LoginBloc>().add(LoginEmailChanged(email)),
+      hintText: AppLocalizations.of(context).loginWithEmailTextFieldHint,
+      onChanged: (email) =>
+          context.read<LoginBloc>().add(LoginEmailChanged(email)),
       suffix: ClearIconButton(
-        iconKey: const Key('loginWithEmailAndPasswordForm_clearEmailIconButton'),
-        visible: context.select((LoginBloc bloc) => bloc.state.email.value.isNotEmpty),
+        iconKey:
+            const Key('loginWithEmailAndPasswordForm_clearEmailIconButton'),
+        visible: context
+            .select((LoginBloc bloc) => bloc.state.email.value.isNotEmpty),
         onPressed: () {
           if (state.status.isInProgress) {
             return;
@@ -134,13 +142,15 @@ class _PasswordInputState extends State<_PasswordInput> {
       key: const Key('loginWithEmailAndPasswordForm_passwordInput_textField'),
       controller: _controller,
       readOnly: state.status.isInProgress,
-      hintText: context.l10n.loginWithPasswordTextFieldHint,
+      hintText: AppLocalizations.of(context).loginWithPasswordTextFieldHint,
       onChanged: (password) {
         context.read<LoginBloc>().add(LoginPasswordChanged(password));
       },
       suffix: ClearIconButton(
-        iconKey: const Key('loginWithEmailAndPasswordForm_clearPasswordIconButton'),
-        visible: context.select((LoginBloc bloc) => bloc.state.password.value.isNotEmpty),
+        iconKey:
+            const Key('loginWithEmailAndPasswordForm_clearPasswordIconButton'),
+        visible: context
+            .select((LoginBloc bloc) => bloc.state.password.value.isNotEmpty),
         onPressed: () {
           if (state.status.isInProgress) {
             return;
@@ -171,7 +181,7 @@ class _TermsAndPrivacyPolicyLinkTexts extends StatelessWidget {
         text: TextSpan(
           children: <TextSpan>[
             TextSpan(
-              text: context.l10n.loginWithEmailSubtitleText,
+              text: AppLocalizations.of(context).loginWithEmailSubtitleText,
               style: theme.textTheme.bodyLarge,
             ),
             TextSpan(
@@ -190,12 +200,14 @@ class _NextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
+    final l10n = AppLocalizations.of(context);
     final state = context.watch<LoginBloc>().state;
 
     return AppButton.darkAqua(
       key: const Key('loginWithEmailForm_nextButton'),
-      onPressed: state.valid ? () => context.read<LoginBloc>().add(EmailAndPasswordSubmitted()) : null,
+      onPressed: state.valid
+          ? () => context.read<LoginBloc>().add(EmailAndPasswordSubmitted())
+          : null,
       child: state.status.isInProgress
           ? const SizedBox.square(
               dimension: 24,
