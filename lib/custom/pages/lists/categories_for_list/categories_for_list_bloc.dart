@@ -42,7 +42,7 @@ class CategoriesForListBloc
       emit(CategoriesForListLoaded(categoriesForList));
     } catch (e) {
       logger.e('$className _onLoadList Error: $e');
-      emit(CategoriesForListError('Failed to load lists.\n$e'));
+      emit(CategoriesForListError('Failed to load categories for list.\n$e'));
     }
   }
 }

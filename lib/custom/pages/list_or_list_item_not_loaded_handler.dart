@@ -7,7 +7,8 @@ import 'lists/list_load_events/list_load_state.dart';
 import 'lists/lists_load_events/lists_state.dart';
 
 class ListOrListItemNotLoadedHandler {
-  static Widget? handleListAndListItemsState(ListLoadState listState, ListItemsLoadState listItemsState) {
+  static Widget? handleListAndListItemsState(
+      ListLoadState listState, ListItemsLoadState listItemsState) {
     final listView = handleListState(listState);
     if (listView != null) {
       return listView;
@@ -19,7 +20,8 @@ class ListOrListItemNotLoadedHandler {
     return null;
   }
 
-  static Widget? handleListAndListItemState(ListLoadState listState, ListItemLoadState listItemState) {
+  static Widget? handleListAndListItemState(
+      ListLoadState listState, ListItemLoadState listItemState) {
     final listView = handleListState(listState);
     if (listView != null) {
       return listView;
@@ -82,19 +84,20 @@ class ListOrListItemNotLoadedHandler {
   }
 
   static Widget initialListView() {
-    return circularProgressIndicatorView();
+    // TODO: This would be better as a shimmer
+    return Text('InitialView');
   }
 
   static Widget loadingListView() {
-    return circularProgressIndicatorView();
+    return Text('loadingListView');
   }
 
   static Widget initialListsView() {
-    return circularProgressIndicatorView();
+    return Text('initialListsView');
   }
 
   static Widget loadingListsView() {
-    return circularProgressIndicatorView();
+    return Text('loadingListsView');
   }
 
   static Widget circularProgressIndicatorView() {

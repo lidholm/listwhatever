@@ -70,7 +70,7 @@ class SearchLocationBloc extends Bloc<SearchEvent, SearchState> {
       emit(SearchLoaded(results));
     } catch (e) {
       logger.e('Error: $e');
-      emit(SearchError('Failed to load lists.\n$e'));
+      emit(SearchError('Failed to search.\n$e'));
     }
   }
 }

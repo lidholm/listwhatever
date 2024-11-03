@@ -14,9 +14,9 @@ class AboutPage extends StatelessWidget {
           padding: const EdgeInsets.all(80),
           child: Column(
             children: [
-              Text(AppLocalizations.of(context).versionLabel('<version>')),
-              Text(AppLocalizations.of(context).gitHashLabel('<git_hash>')),
-              Text(AppLocalizations.of(context).aboutDateLabel('<datetime>')),
+              Text(AppLocalizations.of(context).versionLabel('0.0.46+0000001')),
+              Text(AppLocalizations.of(context).gitHashLabel('3d58f4d')),
+              Text(AppLocalizations.of(context).aboutDateLabel('2024-11-02 21:01:33 PDT')),
               const Divider(),
             ],
           ),

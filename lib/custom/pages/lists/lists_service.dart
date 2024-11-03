@@ -87,25 +87,26 @@ class ListsService extends FirestoreService {
     // Get the documents from the collection
     final QuerySnapshot querySnapshot = await itemsCollection.get();
 
-    // Extract the 'city' field from each document
     final allCategories = querySnapshot.docs
-        .map((doc) => doc['categories'] as Map<String, dynamic>)
+        .map((doc) => doc['categories'] as Map<String, dynamic>?)
         .toList();
     final categoriesAndValues = <String, Set<String>>{};
 
-    for (final m in allCategories) {
-      for (final cat in m.keys.map((e) => e.trim())) {
+    final nonNullCategories =
+        allCategories.where((t) => t != null && t.isNotEmpty);
+
+    for (final m in nonNullCategories) {
+      for (final cat in m!.keys.map((e) => e.trim())) {
         if (!categoriesAndValues.containsKey(cat)) {
           categoriesAndValues[cat] = <String>{};
         }
-
-        for (final value in m[cat] as List<dynamic>) {
-          categoriesAndValues[cat]!.add((value as String).trim());
+        if (m[cat] != null) {
+          for (final value in m[cat] as List<dynamic>) {
+            categoriesAndValues[cat]!.add((value as String).trim());
+          }
         }
       }
     }
-
-    print('categoriesAndValues: $categoriesAndValues');
 
     return categoriesAndValues;
   }

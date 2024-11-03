@@ -272,7 +272,6 @@ class _FilterViewState extends State<FilterView> {
     Set<String> values,
   ) {
     final timeOfDayValues = values.map(timeOfDayToSeconds);
-    print(timeOfDayValues);
     final minValue = timeOfDayValues.reduce(min) * 1.0;
     final maxValue = timeOfDayValues.reduce(max) * 1.0;
     return FormInputFieldInfo.slider(

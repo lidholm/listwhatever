@@ -21,10 +21,10 @@ class ListItemsService extends FirestoreService {
     final itemsCollection = await getCollection(actualListId);
 
     yield* itemsCollection.snapshots().map((snapshot) {
-      logger.d('number of getListItems: ${snapshot.docs.length}');
+      logger.i('number of getListItems: ${snapshot.docs.length}');
       return snapshot.docs.map((doc) {
         final data = doc.data();
-        logger.d('$className data: $data');
+        logger.i('$className data: $data');
         try {
           final listItem = ListItem.fromJson(data);
           return listItem;

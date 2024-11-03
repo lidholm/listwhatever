@@ -176,10 +176,6 @@ class _AddListItemPageState extends State<AddListItemPage> {
       cancelButton(),
       submitButton(),
     ];
-    print('fields: ${fields.length}');
-    // for (final field in fields) {
-    //   print(field.id);
-    // }
 
     final sections = getSections();
 
@@ -249,23 +245,27 @@ class _AddListItemPageState extends State<AddListItemPage> {
         return listItemStateView;
       }
     }
+    if (categoriesForListState is CategoriesForListError) {
+      return Text('Error: ${categoriesForListState.errorMessage}');
+    }
     if (categoriesForListState is! CategoriesForListLoaded) {
-      return const CircularProgressIndicator();
+      return Text(
+          'categoriesForListState is! CategoriesForListLoaded: $categoriesForListState');
     }
     return null;
   }
 
   void save(Map<String, dynamic> values) {
     final latLongString = values[FieldId.latlong.name] as String?;
-    final latLongParts = latLongString?.split(',');
+    final latLongParts =
+        (latLongString?.isEmpty ?? true) ? null : latLongString?.split(',');
     final lat =
         latLongParts == null ? null : double.parse(latLongParts.first.trim());
     final lng =
         latLongParts == null ? null : double.parse(latLongParts.last.trim());
-
     final categories = widget.getCategories(values);
 
-    logger.d('$className: values: $values');
+    logger.i('$className: values: $values');
     final listItem = ListItem(
       id: listItemId,
       name: values[FieldId.name.name]! as String,
@@ -281,7 +281,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
       address: values[FieldId.address.name] as String?,
       categories: categories,
     );
-    logger.d('$className: listItem: $listItem');
+    logger.i('$className: listItem: $listItem');
 
     if (listItemId == null) {
       BlocProvider.of<ListItemCrudBloc>(context)
@@ -376,7 +376,6 @@ class _AddListItemPageState extends State<AddListItemPage> {
   }
 
   FormInputFieldInfo categoryField(String indexKey, String left, String right) {
-    print('categoryField for $indexKey $left $right');
     return FormInputFieldInfo.twoAutoCompleteFields(
       id: getCategoryId(Side.left, indexKey),
       id2: getCategoryId(Side.right, indexKey),
@@ -397,12 +396,8 @@ class _AddListItemPageState extends State<AddListItemPage> {
       ],
       deletable: true,
       onDelete: () {
-        print('deleted category');
-        print('categories: $categories');
-        print('indexKey: $indexKey');
         setState(() {
           categories!.remove(indexKey);
-          print('categories: $categories');
         });
         _formKey.currentState?.value[getCategoryId(Side.left, indexKey)] = null;
         _formKey.currentState?.value[getCategoryId(Side.right, indexKey)] =
@@ -421,7 +416,6 @@ class _AddListItemPageState extends State<AddListItemPage> {
       label: 'Add category',
       sectionName: SectionName.categories.value,
       callback: () {
-        print('adding category');
         setState(() {
           final indexKey = getRandomString(3);
           categories![indexKey] = ('', '');
@@ -458,10 +452,8 @@ class _AddListItemPageState extends State<AddListItemPage> {
       sectionName: SectionName.urls.value,
       deletable: true,
       onDelete: () {
-        print('deleted url');
         setState(() {
           urls!.remove(indexKey);
-          print('urls: $urls');
         });
         _formKey.currentState?.value[getUrlId(indexKey)] = null;
       },
@@ -478,7 +470,6 @@ class _AddListItemPageState extends State<AddListItemPage> {
       label: 'Add url',
       sectionName: SectionName.urls.value,
       callback: () {
-        print('adding url');
         setState(() {
           final indexKey = getRandomString(3);
           urls![indexKey] = '';
@@ -503,10 +494,8 @@ class _AddListItemPageState extends State<AddListItemPage> {
       label: 'Search for a location',
       sectionName: SectionName.location.value,
       callback: () async {
-        print('searching for a location');
         final locationResponse = await const SearchLocationPageRoute()
             .push<SearchLocationResponse>(context);
-        print('locationResponse: $locationResponse');
 
         final latlong =
             (locationResponse?.lat != null && locationResponse?.long != null)
@@ -565,7 +554,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
       label: 'Cancel',
       sectionName: SectionName.submit.value,
       cancel: () {
-        print('cancelled');
+        print('cancelled. THIS SHOULD DO SOMETHING');
       },
     );
   }
@@ -576,13 +565,11 @@ class _AddListItemPageState extends State<AddListItemPage> {
       label: 'Submit',
       sectionName: SectionName.submit.value,
       save: (Map<String, dynamic>? values) {
-        print('save');
-        print(values);
         if (values == null) {
-          print('No values to save');
+          logger.e('$className: No values to save');
           return;
         }
-        save(values); // TODO
+        save(values);
       },
     );
   }
@@ -625,9 +612,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
   }
 
   List<String> getValuesForCategory(String t) {
-    print('getValuesForCategory($t)');
     final values = categoriesForList[t]?.toList() ?? [];
-    print('values: $values');
     return values;
   }
 }

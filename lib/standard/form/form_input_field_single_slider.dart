@@ -18,7 +18,6 @@ class FormInputFieldSingleSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final initialValue = field.currentValue ?? field.range.$2;
-    print('initialValue: $initialValue');
 
     return FormBuilderField(
       name: field.id,

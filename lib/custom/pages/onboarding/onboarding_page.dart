@@ -65,7 +65,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
       cancelButton(),
       submitButton(originalUser),
     ];
-    print('fields: ${fields.length}');
 
     final sections = getSections();
 
@@ -143,9 +142,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       label: 'Submit',
       sectionName: SectionName.submit.name,
       save: (Map<String, dynamic>? values) {
-        print('save');
         if (values == null) {
-          print('No values to save');
           return;
         }
         save(originalUser, values);

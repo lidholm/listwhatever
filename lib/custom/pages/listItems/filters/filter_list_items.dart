@@ -54,15 +54,11 @@ bool matchesFilter({
 
   final matches =
       matchesDate && matchesCategories && matchesDistance && matchesItemName;
-  // logger
-  //   ..d('distanceFilterCenter: $distanceFilterCenter')
-  //   ..d('filters.distance: ${filters.distance}')
-  //   ..d('matchesDate: $matchesDate')
-  //   ..d('matchesCategories: $matchesCategories')
-  //   ..d('matchesDistance: $matchesDistance');
-  // logger.d(
-  //   '$className: ${item.name} ($matchesDate, $matchesCategories, $matchesDistance) => $matches',
-  // );
+  logger
+    ..i('distanceFilterCenter: $distanceFilterCenter')
+    ..i('filters.distance: ${filters.distance}')
+    ..i('matchesDate: $matchesDate')
+    ..i('matchesCategories: $matchesCategories');
   return matches;
 }
 
@@ -112,7 +108,7 @@ bool matchesRegularCategoriesFilter(ListItem item, Filters filters) {
   }
   if (filters.regularCategoryFilters!.values.expand((e) => e).isNotEmpty &&
       item.categories.isEmpty) {
-    logger.d("filters but no categories, so can't be a match");
+    logger.i("filters but no categories, so can't be a match");
     return false;
   }
   // items without a date set will match even if a start or end date has been set
@@ -267,6 +263,5 @@ bool matchesItemNameFilter(
   }
   final result =
       item.name.toLowerCase().contains(filters.itemName!.toLowerCase());
-  print('result: $result');
   return result;
 }

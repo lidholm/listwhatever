@@ -35,6 +35,7 @@ class ListLoadBloc extends Bloc<ListLoadEvent, ListLoadState> {
       final list = await _listsService.getList(event.listId);
       emit(ListLoadLoaded(list));
     } catch (e) {
+      print('$className _onLoadList Error: $e');
       logger.e('$className _onLoadList Error: $e');
       emit(ListLoadError('Failed to load lists.\n$e'));
     }

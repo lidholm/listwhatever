@@ -29,9 +29,7 @@ enum Side {
 class PrintLogOutput extends LogOutput {
   @override
   void output(OutputEvent event) {
-    for (final line in event.lines) {
-      print(line);
-    }
+    for (final line in event.lines) {}
   }
 }
 

@@ -382,9 +382,7 @@ class _AddListPageState extends State<AddListPage> {
       label: 'Submit',
       sectionName: SectionName.submit.value,
       save: (Map<String, dynamic>? values) {
-        print('save');
         if (values == null) {
-          print('No values to save');
           return;
         }
         save(values);
