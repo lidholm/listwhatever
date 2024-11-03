@@ -32,12 +32,8 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
     UpdateFiltersForSelectedList event,
     Emitter<FilterState> emit,
   ) async {
-    final listItems = await _listItemsService.getListItems(event.listId).first;
-    final categoryFilters =
-        CategoriesHelper.getAllCategoriesAndValues(listItems);
-
     final defaultFilters = Filters(
-      regularCategoryFilters: categoryFilters,
+      regularCategoryFilters: {},
       startDate: DateTime.tryParse('2001-01-01'),
       endDate: DateTime.tryParse('2030-01-01'),
     );

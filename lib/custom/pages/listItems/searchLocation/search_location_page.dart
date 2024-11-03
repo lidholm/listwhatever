@@ -76,7 +76,6 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
       cancelButton(),
       submitButton(),
     ];
-    print('fields: ${fields.length}');
 
     final sections = getSections();
 
@@ -136,9 +135,6 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
       label: 'Search',
       sectionName: SectionName.search.name,
       callback: () {
-        print('search');
-        print(searchPhraseController);
-
         BlocProvider.of<SearchLocationBloc>(context)
             .add(Search(searchPhraseController.text));
       },
@@ -162,8 +158,6 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
         // logger.i('$className: onChange result: $selection');
         setState(() {
           final sel = selection as GeocoderResult?;
-
-          print('$className: sel: $sel');
 
           _formKey.currentState?.patchValue({
             FieldId.map.name: sel,
@@ -235,9 +229,7 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
       label: 'Submit',
       sectionName: SectionName.submit.name,
       save: (Map<String, dynamic>? values) {
-        print('save');
         if (values == null) {
-          print('No values to save');
           return;
         }
         closeAndReturnValues(values);
@@ -266,8 +258,6 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
       listener: (context, state) {
         if (state is SearchLoaded) {
           final results = state.lists;
-
-          print('$className: results: ${results?.first}');
 
           _formKey.currentState?.patchValue({
             FieldId.map.name: results?.first,

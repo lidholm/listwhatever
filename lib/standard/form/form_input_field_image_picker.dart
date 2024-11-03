@@ -63,7 +63,7 @@ class _FormInputFieldImagePickerState extends State<FormInputFieldImagePicker> {
 
   Widget showImagePicker(String? imageUrl) {
     final initialValue = imageUrl == null ? null : [imageUrl];
-    logger.i('$className: initialValue: $initialValue');
+    // logger.i('$className: initialValue: $initialValue');
     return FormBuilderImagePicker(
       key: Key(widget.field.id),
       name: widget.field.id,

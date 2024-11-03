@@ -85,7 +85,6 @@ class _ListsPageState extends State<ListsPage> {
           }
           final lists = (listsState as ListsLoadLoaded).lists;
 
-          print('listType: $listType');
           if (listType == ListViewType.tiles) {
             return ListTiles(
               firebaseStorage: firebaseStorage,

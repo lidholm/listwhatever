@@ -21,6 +21,7 @@ alias replaceGitVersionAboutPage="sed -i '' -e \"s/<git_hash>/`git rev-parse --s
 alias replaceDateTimeAboutPage="sed -i '' -e \"s/<datetime>/`date +"%Y-%m-%d %k:%M:%S %Z"`/g\" lib/custom/pages/about/about_page.dart"
 alias replaceAboutPage="replaceVersionAboutPage && replaceGitVersionAboutPage && replaceDateTimeAboutPage"
 alias buildProductionAab="flutter build appbundle --release --no-tree-shake-icons --flavor production -t lib/standard/main/main_production.dart"
+alias buildDebugWebBundle="replaceAboutPage && flutter build web --no-tree-shake-icons --profile -t lib/standard/main/main_production.dart"
 alias buildProductionWebBundle="replaceAboutPage && flutter build web --no-tree-shake-icons --release -t lib/standard/main/main_production.dart"
 alias deployWebBundle="firebase deploy --only firestore,hosting && git checkout -- lib/custom/pages/about/about_page.dart"
 alias deployProductionAabToGoolePlay="sh scripts/gitlabci/deployToGooglePlayStore.sh"
