@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
+
 import '/custom/navigation/routes.dart';
-import '/l10n/l10n.dart';
 import '/standard/appUi/generated/assets.gen.dart';
 import '/standard/appUi/spacing/app_spacing.dart';
 import '/standard/appUi/widgets/app_button.dart';
@@ -16,7 +17,7 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
+    final l10n = AppLocalizations.of(context);
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
         if (state.errorMessage != null) {
@@ -107,7 +108,10 @@ class _GoogleLoginButton extends StatelessWidget {
         children: [
           Assets.icons.google.svg(),
           const SizedBox(width: AppSpacing.lg),
-          const Padding(padding: EdgeInsets.only(top: AppSpacing.xxs), child: Text('Continue with Google')),
+          const Padding(
+            padding: EdgeInsets.only(top: AppSpacing.xxs),
+            child: Text('Continue with Google'),
+          ),
         ],
       ),
     );
@@ -155,14 +159,17 @@ class _ContinueWithEmailAndPasswordLoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppButton.outlinedTransparentDarkAqua(
       key: const Key('loginForm_emailAndPasswordLogin_appButton'),
-      onPressed: () => const LoginWithEmailAndPasswordPageRoute().push<void>(context),
+      onPressed: () =>
+          const LoginWithEmailAndPasswordPageRoute().push<void>(context),
       textStyle: Theme.of(context).textTheme.titleMedium,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Assets.icons.emailOutline.svg(),
           const SizedBox(width: AppSpacing.lg),
-          Text(context.l10n.loginWithEmailAndPasswordButtonText),
+          Text(
+            AppLocalizations.of(context).loginWithEmailAndPasswordButtonText,
+          ),
         ],
       ),
     );

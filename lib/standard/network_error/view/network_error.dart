@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '/l10n/l10n.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '/standard/appUi/colors/app_colors.dart';
 import '/standard/appUi/spacing/app_spacing.dart';
 import '/standard/appUi/typography/app_text_styles.dart';
@@ -33,7 +34,7 @@ class NetworkError extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
+    final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,

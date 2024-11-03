@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 import '/custom/pages/list_or_list_item_not_loaded_handler.dart';
@@ -11,7 +12,6 @@ import '/custom/pages/shareList/bloc/shared_list_event.dart';
 import '/custom/pages/shareList/bloc/shared_list_state.dart';
 import '/custom/pages/subscribeList/bloc/subscribe_list_bloc.dart';
 import '/custom/pages/subscribeList/bloc/subscribe_list_event.dart';
-import '/l10n/l10n.dart';
 import '/standard/constants.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
 import '/standard/widgets/vStack/h_stack.dart';
@@ -42,7 +42,7 @@ class _SubscribeListPageState extends State<SubscribeListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CommonAppBar(
-        title: context.l10n.sharedListsHeader,
+        title: AppLocalizations.of(context).sharedListsHeader,
       ),
       body: BlocBuilder<SharedListBloc, SharedListState>(
         builder: (context, state) {
@@ -57,9 +57,13 @@ class _SubscribeListPageState extends State<SubscribeListPage> {
             heightFactor: 1,
             child: VStack(
               children: [
-                Text(context.l10n.sharedListsText(list.ownerName)),
+                Text(
+                  AppLocalizations.of(context).sharedListsText(list.ownerName),
+                ),
                 Text(list.listName),
-                Text(context.l10n.sharedListsAcceptQuestionText),
+                Text(
+                  AppLocalizations.of(context).sharedListsAcceptQuestionText,
+                ),
                 HStack(
                   children: [
                     ElevatedButton(
@@ -70,7 +74,10 @@ class _SubscribeListPageState extends State<SubscribeListPage> {
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(left: 8, right: 8),
-                        child: Text(context.l10n.sharedListsAcceptButtonText),
+                        child: Text(
+                          AppLocalizations.of(context)
+                              .sharedListsAcceptButtonText,
+                        ),
                       ),
                     ),
                     ElevatedButton(
@@ -80,7 +87,10 @@ class _SubscribeListPageState extends State<SubscribeListPage> {
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(left: 8, right: 8),
-                        child: Text(context.l10n.sharedListsCancelButtonText),
+                        child: Text(
+                          AppLocalizations.of(context)
+                              .sharedListsCancelButtonText,
+                        ),
                       ),
                     ),
                   ],

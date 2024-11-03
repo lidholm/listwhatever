@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:listwhatever/custom/pages/listItems/addListItem/edit_list_item_page_route.dart';
 import 'package:listwhatever/custom/pages/listItems/list_item_load_bloc/list_item_load_bloc.dart';
@@ -29,7 +30,6 @@ import '/custom/pages/lists/list_load_events/list_load_bloc.dart';
 import '/custom/pages/lists/list_load_events/list_load_event.dart';
 import '/custom/pages/lists/models/list_of_things.dart';
 import '/custom/pages/shareList/share_list_page_route.dart';
-import '/l10n/l10n.dart';
 import '/standard/userRepository/models/user.dart';
 import '/standard/widgets/appBar/app_bar_action.dart';
 import '/standard/widgets/appBar/app_bar_action_dropdown.dart';
@@ -218,7 +218,7 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
     return AppBarAction(
       type: AppBarActionType.icon,
       iconAction: AppBarActionIcon(
-        title: context.l10n.showAsList,
+        title: AppLocalizations.of(context).showAsList,
         icon: Icons.list,
         callback: () {
           context.read<ListItemsPageViewCubit>().toggle();
@@ -238,7 +238,7 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
     return AppBarAction(
       type: AppBarActionType.icon,
       iconAction: AppBarActionIcon(
-        title: context.l10n.showAsMap,
+        title: AppLocalizations.of(context).showAsMap,
         icon: Icons.map,
         callback: () {
           context.read<ListItemsPageViewCubit>().toggle();
@@ -262,7 +262,7 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
       type: AppBarActionType.dropdown,
       dropdownAction: AppBarActionDropdown<dynamic>(
         icon: Icons.sort,
-        tooltip: context.l10n.sortActionText,
+        tooltip: AppLocalizations.of(context).sortActionText,
         callback: (dynamic value) {
           context
               .read<ListItemsSortOrderCubit>()
@@ -270,11 +270,20 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
           // logger.d('value: $value');
         },
         menuItems: [
-          (ListItemsSortOrder.name, context.l10n.sortActionItemName),
+          (
+            ListItemsSortOrder.name,
+            AppLocalizations.of(context).sortActionItemName
+          ),
           if (list.withDates)
-            (ListItemsSortOrder.date, context.l10n.sortActionItemDate),
+            (
+              ListItemsSortOrder.date,
+              AppLocalizations.of(context).sortActionItemDate
+            ),
           if (list.withMap)
-            (ListItemsSortOrder.distance, context.l10n.sortActionItemDistance),
+            (
+              ListItemsSortOrder.distance,
+              AppLocalizations.of(context).sortActionItemDistance
+            ),
         ]
             .map(
               (a) => (
@@ -306,7 +315,7 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
     return AppBarAction(
       type: AppBarActionType.icon,
       iconAction: AppBarActionIcon(
-        title: context.l10n.filterMenuText,
+        title: AppLocalizations.of(context).filterMenuText,
         icon: widget.filters.anySelectedFilters(
           listHasDates: widget.list.withDates,
           listHasMap: widget.list.withMap,
@@ -327,7 +336,7 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
     return AppBarAction(
       type: AppBarActionType.icon,
       iconAction: AppBarActionIcon(
-        title: context.l10n.shareListMenuText,
+        title: AppLocalizations.of(context).shareListMenuText,
         icon: Icons.share,
         callback: () {
           ShareListPageRoute(widget.list.id!).push<void>(context);
@@ -341,7 +350,7 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
     return AppBarAction(
       type: AppBarActionType.overflowIcon,
       overflowIcon: AppBarActionOverflowIcon(
-        title: context.l10n.editList,
+        title: AppLocalizations.of(context).editList,
         icon: Icons.edit,
         callback: () async {
           final listBloc = context.read<ListLoadBloc>();
@@ -357,7 +366,7 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
     return AppBarAction(
       type: AppBarActionType.overflowIcon,
       overflowIcon: AppBarActionOverflowIcon(
-        title: context.l10n.deleteList,
+        title: AppLocalizations.of(context).deleteList,
         icon: Icons.delete,
         callback: () async {
           context.read<ListCrudBloc>().add(DeleteList(widget.list.id!));
@@ -371,7 +380,7 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
     return AppBarAction(
       type: AppBarActionType.overflowIcon,
       overflowIcon: AppBarActionOverflowIcon(
-        title: context.l10n.importListItems,
+        title: AppLocalizations.of(context).importListItems,
         icon: Icons.import_export,
         callback: () async {
           await ImportCsvPageRoute(widget.list.id!).push<void>(context);
@@ -385,7 +394,7 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
     return AppBarAction(
       type: AppBarActionType.overflowIcon,
       overflowIcon: AppBarActionOverflowIcon(
-        title: context.l10n.listAsSpreadsheetsMenuItem,
+        title: AppLocalizations.of(context).listAsSpreadsheetsMenuItem,
         icon: Icons.list_alt,
         callback: () async {
           await ListAsSpreadsheetsPageRoute(widget.list.id!)
@@ -417,7 +426,7 @@ class _InnerListItemsPageState extends State<InnerListItemsPage> {
   ) {
     return CommonAppBar(
       toolbarHeight: toolbarHeight,
-      title: context.l10n.listItemsHeader(widget.list.name),
+      title: AppLocalizations.of(context).listItemsHeader(widget.list.name),
       titleWidget: StreamBuilder(
         stream: getImageAppBar(widget.list),
         builder: (buildContext, snapshot) {

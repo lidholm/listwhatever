@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 import '/custom/navigation/routes.dart';
-import '/l10n/l10n.dart';
 import '/standard/app/bloc/app_bloc.dart';
 import '/standard/app/bloc/app_state.dart';
 import '/standard/appUi/generated/assets.gen.dart';
@@ -43,7 +43,7 @@ class LoginButton extends StatelessWidget {
       onPressed: () {
         context.go(const LoginPageRoute().location);
       },
-      tooltip: context.l10n.loginTooltip,
+      tooltip: AppLocalizations.of(context).loginTooltip,
     );
   }
 }
@@ -62,7 +62,7 @@ class OpenProfileButton extends StatelessWidget {
         vertical: AppSpacing.sm,
       ),
       onPressed: () => const UserProfilePageRoute().push<void>(context),
-      tooltip: context.l10n.openProfileTooltip,
+      tooltip: AppLocalizations.of(context).openProfileTooltip,
     );
   }
 }

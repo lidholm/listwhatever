@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listwhatever/custom/pages/lists/categories_for_list/categories_for_list_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/page/list_type_cubit/list_type_cubit.dart';
@@ -24,7 +25,6 @@ import '/custom/pages/lists/user_lists_service.dart';
 import '/custom/pages/shareList/bloc/shared_list_bloc.dart';
 import '/custom/pages/shareList/shared_lists_service.dart';
 import '/custom/pages/subscribeList/bloc/subscribe_list_bloc.dart';
-import '/l10n/l10n.dart';
 import '/standard/analytics/bloc/analytics_bloc.dart';
 import '/standard/analyticsRepository/analytics_repository.dart';
 import '/standard/app/bloc/app_bloc.dart';

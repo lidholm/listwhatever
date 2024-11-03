@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '/l10n/l10n.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '/standard/appUi/colors/app_colors.dart';
 import '/standard/appUi/spacing/app_spacing.dart';
 import '/standard/appUi/typography/app_font_weight.dart';
@@ -12,7 +13,7 @@ class UserProfileSubscribeBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
+    final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xlg),
@@ -29,7 +30,8 @@ class UserProfileSubscribeBox extends StatelessWidget {
           const SizedBox(height: AppSpacing.lg),
           Text(
             l10n.userProfileSubscribeBoxMessage,
-            style: theme.textTheme.bodyMedium?.copyWith(color: AppColors.mediumEmphasisSurface),
+            style: theme.textTheme.bodyMedium
+                ?.copyWith(color: AppColors.mediumEmphasisSurface),
           ),
           const SizedBox(height: AppSpacing.lg),
           AppButton.smallRedWine(

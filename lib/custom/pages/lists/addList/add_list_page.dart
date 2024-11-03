@@ -71,10 +71,10 @@ class _AddListPageState extends State<AddListPage> {
   final _formKey = GlobalKey<FormBuilderState>();
 
   // ignore: strict_raw_type
-  late List<FormInputFieldInfo?> fields;
+  List<FormInputFieldInfo?> fields = [];
 
-  late ListOfThings? list;
-  late List<ListItem>? listItems;
+  ListOfThings? list;
+  List<ListItem>? listItems;
   ListType? selectedListType;
   bool? showImage;
   bool imageUploaded = false;
