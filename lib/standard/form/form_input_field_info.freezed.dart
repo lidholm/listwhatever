@@ -16,7 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$FormInputFieldInfo {
-  String get id => throw _privateConstructorUsedError;
   String get sectionName => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -118,6 +117,7 @@ mixin _$FormInputFieldInfo {
             List<String? Function(bool?)> validators,
             String sectionName)
         chips,
+    required TResult Function(String sectionName) shimmer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -220,6 +220,7 @@ mixin _$FormInputFieldInfo {
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult? Function(String sectionName)? shimmer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -322,6 +323,7 @@ mixin _$FormInputFieldInfo {
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult Function(String sectionName)? shimmer,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -343,6 +345,7 @@ mixin _$FormInputFieldInfo {
     required TResult Function(FormInputFieldInfoMap value) map,
     required TResult Function(FormInputFieldInfoSlider value) slider,
     required TResult Function(FormInputFieldInfoChips value) chips,
+    required TResult Function(FormInputFieldInfoShimmer value) shimmer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -360,6 +363,7 @@ mixin _$FormInputFieldInfo {
     TResult? Function(FormInputFieldInfoMap value)? map,
     TResult? Function(FormInputFieldInfoSlider value)? slider,
     TResult? Function(FormInputFieldInfoChips value)? chips,
+    TResult? Function(FormInputFieldInfoShimmer value)? shimmer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -377,6 +381,7 @@ mixin _$FormInputFieldInfo {
     TResult Function(FormInputFieldInfoMap value)? map,
     TResult Function(FormInputFieldInfoSlider value)? slider,
     TResult Function(FormInputFieldInfoChips value)? chips,
+    TResult Function(FormInputFieldInfoShimmer value)? shimmer,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -394,7 +399,7 @@ abstract class $FormInputFieldInfoCopyWith<$Res> {
           FormInputFieldInfo value, $Res Function(FormInputFieldInfo) then) =
       _$FormInputFieldInfoCopyWithImpl<$Res, FormInputFieldInfo>;
   @useResult
-  $Res call({String id, String sectionName});
+  $Res call({String sectionName});
 }
 
 /// @nodoc
@@ -412,14 +417,9 @@ class _$FormInputFieldInfoCopyWithImpl<$Res, $Val extends FormInputFieldInfo>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? sectionName = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       sectionName: null == sectionName
           ? _value.sectionName
           : sectionName // ignore: cast_nullable_to_non_nullable
@@ -729,6 +729,7 @@ class _$FormInputFieldInfoTextAreaImpl
             List<String? Function(bool?)> validators,
             String sectionName)
         chips,
+    required TResult Function(String sectionName) shimmer,
   }) {
     return textArea(id, label, validators, sectionName, currentValue, onChange,
         deletable, onDelete, controller);
@@ -835,6 +836,7 @@ class _$FormInputFieldInfoTextAreaImpl
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult? Function(String sectionName)? shimmer,
   }) {
     return textArea?.call(id, label, validators, sectionName, currentValue,
         onChange, deletable, onDelete, controller);
@@ -941,6 +943,7 @@ class _$FormInputFieldInfoTextAreaImpl
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult Function(String sectionName)? shimmer,
     required TResult orElse(),
   }) {
     if (textArea != null) {
@@ -969,6 +972,7 @@ class _$FormInputFieldInfoTextAreaImpl
     required TResult Function(FormInputFieldInfoMap value) map,
     required TResult Function(FormInputFieldInfoSlider value) slider,
     required TResult Function(FormInputFieldInfoChips value) chips,
+    required TResult Function(FormInputFieldInfoShimmer value) shimmer,
   }) {
     return textArea(this);
   }
@@ -989,6 +993,7 @@ class _$FormInputFieldInfoTextAreaImpl
     TResult? Function(FormInputFieldInfoMap value)? map,
     TResult? Function(FormInputFieldInfoSlider value)? slider,
     TResult? Function(FormInputFieldInfoChips value)? chips,
+    TResult? Function(FormInputFieldInfoShimmer value)? shimmer,
   }) {
     return textArea?.call(this);
   }
@@ -1009,6 +1014,7 @@ class _$FormInputFieldInfoTextAreaImpl
     TResult Function(FormInputFieldInfoMap value)? map,
     TResult Function(FormInputFieldInfoSlider value)? slider,
     TResult Function(FormInputFieldInfoChips value)? chips,
+    TResult Function(FormInputFieldInfoShimmer value)? shimmer,
     required TResult orElse(),
   }) {
     if (textArea != null) {
@@ -1031,7 +1037,6 @@ abstract class FormInputFieldInfoTextArea implements FormInputFieldInfo {
           final TextEditingController? controller}) =
       _$FormInputFieldInfoTextAreaImpl;
 
-  @override
   String get id;
   String get label;
   List<String? Function(String?)> get validators;
@@ -1369,6 +1374,7 @@ class _$FormInputFieldInfoDropDownImpl
             List<String? Function(bool?)> validators,
             String sectionName)
         chips,
+    required TResult Function(String sectionName) shimmer,
   }) {
     return dropdown(id, label, currentValue, options, optionToString,
         validators, sectionName, onChange, deletable, onDelete);
@@ -1475,6 +1481,7 @@ class _$FormInputFieldInfoDropDownImpl
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult? Function(String sectionName)? shimmer,
   }) {
     return dropdown?.call(id, label, currentValue, options, optionToString,
         validators, sectionName, onChange, deletable, onDelete);
@@ -1581,6 +1588,7 @@ class _$FormInputFieldInfoDropDownImpl
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult Function(String sectionName)? shimmer,
     required TResult orElse(),
   }) {
     if (dropdown != null) {
@@ -1609,6 +1617,7 @@ class _$FormInputFieldInfoDropDownImpl
     required TResult Function(FormInputFieldInfoMap value) map,
     required TResult Function(FormInputFieldInfoSlider value) slider,
     required TResult Function(FormInputFieldInfoChips value) chips,
+    required TResult Function(FormInputFieldInfoShimmer value) shimmer,
   }) {
     return dropdown(this);
   }
@@ -1629,6 +1638,7 @@ class _$FormInputFieldInfoDropDownImpl
     TResult? Function(FormInputFieldInfoMap value)? map,
     TResult? Function(FormInputFieldInfoSlider value)? slider,
     TResult? Function(FormInputFieldInfoChips value)? chips,
+    TResult? Function(FormInputFieldInfoShimmer value)? shimmer,
   }) {
     return dropdown?.call(this);
   }
@@ -1649,6 +1659,7 @@ class _$FormInputFieldInfoDropDownImpl
     TResult Function(FormInputFieldInfoMap value)? map,
     TResult Function(FormInputFieldInfoSlider value)? slider,
     TResult Function(FormInputFieldInfoChips value)? chips,
+    TResult Function(FormInputFieldInfoShimmer value)? shimmer,
     required TResult orElse(),
   }) {
     if (dropdown != null) {
@@ -1671,7 +1682,6 @@ abstract class FormInputFieldInfoDropDown implements FormInputFieldInfo {
       final bool deletable,
       final void Function()? onDelete}) = _$FormInputFieldInfoDropDownImpl;
 
-  @override
   String get id;
   String get label;
   dynamic get currentValue;
@@ -1978,6 +1988,7 @@ class _$FormInputFieldInfoCheckboxImpl
             List<String? Function(bool?)> validators,
             String sectionName)
         chips,
+    required TResult Function(String sectionName) shimmer,
   }) {
     return checkbox(id, label, currentValue, validators, sectionName, onChange,
         deletable, onDelete);
@@ -2084,6 +2095,7 @@ class _$FormInputFieldInfoCheckboxImpl
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult? Function(String sectionName)? shimmer,
   }) {
     return checkbox?.call(id, label, currentValue, validators, sectionName,
         onChange, deletable, onDelete);
@@ -2190,6 +2202,7 @@ class _$FormInputFieldInfoCheckboxImpl
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult Function(String sectionName)? shimmer,
     required TResult orElse(),
   }) {
     if (checkbox != null) {
@@ -2218,6 +2231,7 @@ class _$FormInputFieldInfoCheckboxImpl
     required TResult Function(FormInputFieldInfoMap value) map,
     required TResult Function(FormInputFieldInfoSlider value) slider,
     required TResult Function(FormInputFieldInfoChips value) chips,
+    required TResult Function(FormInputFieldInfoShimmer value) shimmer,
   }) {
     return checkbox(this);
   }
@@ -2238,6 +2252,7 @@ class _$FormInputFieldInfoCheckboxImpl
     TResult? Function(FormInputFieldInfoMap value)? map,
     TResult? Function(FormInputFieldInfoSlider value)? slider,
     TResult? Function(FormInputFieldInfoChips value)? chips,
+    TResult? Function(FormInputFieldInfoShimmer value)? shimmer,
   }) {
     return checkbox?.call(this);
   }
@@ -2258,6 +2273,7 @@ class _$FormInputFieldInfoCheckboxImpl
     TResult Function(FormInputFieldInfoMap value)? map,
     TResult Function(FormInputFieldInfoSlider value)? slider,
     TResult Function(FormInputFieldInfoChips value)? chips,
+    TResult Function(FormInputFieldInfoShimmer value)? shimmer,
     required TResult orElse(),
   }) {
     if (checkbox != null) {
@@ -2278,7 +2294,6 @@ abstract class FormInputFieldInfoCheckbox implements FormInputFieldInfo {
       final bool deletable,
       final void Function()? onDelete}) = _$FormInputFieldInfoCheckboxImpl;
 
-  @override
   String get id;
   String get label;
   bool get currentValue;
@@ -2550,6 +2565,7 @@ class _$FormInputFieldInfoImagePickerImpl
             List<String? Function(bool?)> validators,
             String sectionName)
         chips,
+    required TResult Function(String sectionName) shimmer,
   }) {
     return imagePicker(
         id, label, currentValue, validators, sectionName, onChange);
@@ -2656,6 +2672,7 @@ class _$FormInputFieldInfoImagePickerImpl
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult? Function(String sectionName)? shimmer,
   }) {
     return imagePicker?.call(
         id, label, currentValue, validators, sectionName, onChange);
@@ -2762,6 +2779,7 @@ class _$FormInputFieldInfoImagePickerImpl
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult Function(String sectionName)? shimmer,
     required TResult orElse(),
   }) {
     if (imagePicker != null) {
@@ -2790,6 +2808,7 @@ class _$FormInputFieldInfoImagePickerImpl
     required TResult Function(FormInputFieldInfoMap value) map,
     required TResult Function(FormInputFieldInfoSlider value) slider,
     required TResult Function(FormInputFieldInfoChips value) chips,
+    required TResult Function(FormInputFieldInfoShimmer value) shimmer,
   }) {
     return imagePicker(this);
   }
@@ -2810,6 +2829,7 @@ class _$FormInputFieldInfoImagePickerImpl
     TResult? Function(FormInputFieldInfoMap value)? map,
     TResult? Function(FormInputFieldInfoSlider value)? slider,
     TResult? Function(FormInputFieldInfoChips value)? chips,
+    TResult? Function(FormInputFieldInfoShimmer value)? shimmer,
   }) {
     return imagePicker?.call(this);
   }
@@ -2830,6 +2850,7 @@ class _$FormInputFieldInfoImagePickerImpl
     TResult Function(FormInputFieldInfoMap value)? map,
     TResult Function(FormInputFieldInfoSlider value)? slider,
     TResult Function(FormInputFieldInfoChips value)? chips,
+    TResult Function(FormInputFieldInfoShimmer value)? shimmer,
     required TResult orElse(),
   }) {
     if (imagePicker != null) {
@@ -2849,7 +2870,6 @@ abstract class FormInputFieldInfoImagePicker implements FormInputFieldInfo {
           final void Function(String)? onChange}) =
       _$FormInputFieldInfoImagePickerImpl;
 
-  @override
   String get id;
   String get label;
   String? get currentValue;
@@ -3083,6 +3103,7 @@ class _$FormInputFieldInfoCancelButtonImpl
             List<String? Function(bool?)> validators,
             String sectionName)
         chips,
+    required TResult Function(String sectionName) shimmer,
   }) {
     return cancelButton(id, label, sectionName, cancel);
   }
@@ -3188,6 +3209,7 @@ class _$FormInputFieldInfoCancelButtonImpl
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult? Function(String sectionName)? shimmer,
   }) {
     return cancelButton?.call(id, label, sectionName, cancel);
   }
@@ -3293,6 +3315,7 @@ class _$FormInputFieldInfoCancelButtonImpl
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult Function(String sectionName)? shimmer,
     required TResult orElse(),
   }) {
     if (cancelButton != null) {
@@ -3320,6 +3343,7 @@ class _$FormInputFieldInfoCancelButtonImpl
     required TResult Function(FormInputFieldInfoMap value) map,
     required TResult Function(FormInputFieldInfoSlider value) slider,
     required TResult Function(FormInputFieldInfoChips value) chips,
+    required TResult Function(FormInputFieldInfoShimmer value) shimmer,
   }) {
     return cancelButton(this);
   }
@@ -3340,6 +3364,7 @@ class _$FormInputFieldInfoCancelButtonImpl
     TResult? Function(FormInputFieldInfoMap value)? map,
     TResult? Function(FormInputFieldInfoSlider value)? slider,
     TResult? Function(FormInputFieldInfoChips value)? chips,
+    TResult? Function(FormInputFieldInfoShimmer value)? shimmer,
   }) {
     return cancelButton?.call(this);
   }
@@ -3360,6 +3385,7 @@ class _$FormInputFieldInfoCancelButtonImpl
     TResult Function(FormInputFieldInfoMap value)? map,
     TResult Function(FormInputFieldInfoSlider value)? slider,
     TResult Function(FormInputFieldInfoChips value)? chips,
+    TResult Function(FormInputFieldInfoShimmer value)? shimmer,
     required TResult orElse(),
   }) {
     if (cancelButton != null) {
@@ -3377,7 +3403,6 @@ abstract class FormInputFieldInfoCancelButton implements FormInputFieldInfo {
           required final void Function() cancel}) =
       _$FormInputFieldInfoCancelButtonImpl;
 
-  @override
   String get id;
   String get label;
   @override
@@ -3612,6 +3637,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
             List<String? Function(bool?)> validators,
             String sectionName)
         chips,
+    required TResult Function(String sectionName) shimmer,
   }) {
     return submitButton(id, label, sectionName, save);
   }
@@ -3717,6 +3743,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult? Function(String sectionName)? shimmer,
   }) {
     return submitButton?.call(id, label, sectionName, save);
   }
@@ -3822,6 +3849,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult Function(String sectionName)? shimmer,
     required TResult orElse(),
   }) {
     if (submitButton != null) {
@@ -3849,6 +3877,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
     required TResult Function(FormInputFieldInfoMap value) map,
     required TResult Function(FormInputFieldInfoSlider value) slider,
     required TResult Function(FormInputFieldInfoChips value) chips,
+    required TResult Function(FormInputFieldInfoShimmer value) shimmer,
   }) {
     return submitButton(this);
   }
@@ -3869,6 +3898,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
     TResult? Function(FormInputFieldInfoMap value)? map,
     TResult? Function(FormInputFieldInfoSlider value)? slider,
     TResult? Function(FormInputFieldInfoChips value)? chips,
+    TResult? Function(FormInputFieldInfoShimmer value)? shimmer,
   }) {
     return submitButton?.call(this);
   }
@@ -3889,6 +3919,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
     TResult Function(FormInputFieldInfoMap value)? map,
     TResult Function(FormInputFieldInfoSlider value)? slider,
     TResult Function(FormInputFieldInfoChips value)? chips,
+    TResult Function(FormInputFieldInfoShimmer value)? shimmer,
     required TResult orElse(),
   }) {
     if (submitButton != null) {
@@ -3906,7 +3937,6 @@ abstract class FormInputFieldInfoSubmitButton implements FormInputFieldInfo {
           required final void Function(Map<String, dynamic>?) save}) =
       _$FormInputFieldInfoSubmitButtonImpl;
 
-  @override
   String get id;
   String get label;
   @override
@@ -4296,6 +4326,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             List<String? Function(bool?)> validators,
             String sectionName)
         chips,
+    required TResult Function(String sectionName) shimmer,
   }) {
     return twoAutoCompleteFields(
         id,
@@ -4414,6 +4445,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult? Function(String sectionName)? shimmer,
   }) {
     return twoAutoCompleteFields?.call(
         id,
@@ -4532,6 +4564,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult Function(String sectionName)? shimmer,
     required TResult orElse(),
   }) {
     if (twoAutoCompleteFields != null) {
@@ -4572,6 +4605,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     required TResult Function(FormInputFieldInfoMap value) map,
     required TResult Function(FormInputFieldInfoSlider value) slider,
     required TResult Function(FormInputFieldInfoChips value) chips,
+    required TResult Function(FormInputFieldInfoShimmer value) shimmer,
   }) {
     return twoAutoCompleteFields(this);
   }
@@ -4592,6 +4626,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     TResult? Function(FormInputFieldInfoMap value)? map,
     TResult? Function(FormInputFieldInfoSlider value)? slider,
     TResult? Function(FormInputFieldInfoChips value)? chips,
+    TResult? Function(FormInputFieldInfoShimmer value)? shimmer,
   }) {
     return twoAutoCompleteFields?.call(this);
   }
@@ -4612,6 +4647,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     TResult Function(FormInputFieldInfoMap value)? map,
     TResult Function(FormInputFieldInfoSlider value)? slider,
     TResult Function(FormInputFieldInfoChips value)? chips,
+    TResult Function(FormInputFieldInfoShimmer value)? shimmer,
     required TResult orElse(),
   }) {
     if (twoAutoCompleteFields != null) {
@@ -4639,7 +4675,6 @@ abstract class FormInputFieldInfoTwoAutoCompleteFields
           final void Function()? onDelete}) =
       _$FormInputFieldInfoTwoAutoCompleteFieldsImpl;
 
-  @override
   String get id;
   String get id2;
   String get labelLeft;
@@ -4882,6 +4917,7 @@ class _$FormInputFieldInfoCustomButtonImpl
             List<String? Function(bool?)> validators,
             String sectionName)
         chips,
+    required TResult Function(String sectionName) shimmer,
   }) {
     return customButton(id, label, sectionName, callback);
   }
@@ -4987,6 +5023,7 @@ class _$FormInputFieldInfoCustomButtonImpl
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult? Function(String sectionName)? shimmer,
   }) {
     return customButton?.call(id, label, sectionName, callback);
   }
@@ -5092,6 +5129,7 @@ class _$FormInputFieldInfoCustomButtonImpl
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult Function(String sectionName)? shimmer,
     required TResult orElse(),
   }) {
     if (customButton != null) {
@@ -5119,6 +5157,7 @@ class _$FormInputFieldInfoCustomButtonImpl
     required TResult Function(FormInputFieldInfoMap value) map,
     required TResult Function(FormInputFieldInfoSlider value) slider,
     required TResult Function(FormInputFieldInfoChips value) chips,
+    required TResult Function(FormInputFieldInfoShimmer value) shimmer,
   }) {
     return customButton(this);
   }
@@ -5139,6 +5178,7 @@ class _$FormInputFieldInfoCustomButtonImpl
     TResult? Function(FormInputFieldInfoMap value)? map,
     TResult? Function(FormInputFieldInfoSlider value)? slider,
     TResult? Function(FormInputFieldInfoChips value)? chips,
+    TResult? Function(FormInputFieldInfoShimmer value)? shimmer,
   }) {
     return customButton?.call(this);
   }
@@ -5159,6 +5199,7 @@ class _$FormInputFieldInfoCustomButtonImpl
     TResult Function(FormInputFieldInfoMap value)? map,
     TResult Function(FormInputFieldInfoSlider value)? slider,
     TResult Function(FormInputFieldInfoChips value)? chips,
+    TResult Function(FormInputFieldInfoShimmer value)? shimmer,
     required TResult orElse(),
   }) {
     if (customButton != null) {
@@ -5176,7 +5217,6 @@ abstract class FormInputFieldInfoCustomButton implements FormInputFieldInfo {
           required final void Function() callback}) =
       _$FormInputFieldInfoCustomButtonImpl;
 
-  @override
   String get id;
   String get label;
   @override
@@ -5475,6 +5515,7 @@ class _$FormInputFieldInfoDateImpl
             List<String? Function(bool?)> validators,
             String sectionName)
         chips,
+    required TResult Function(String sectionName) shimmer,
   }) {
     return date(id, label, currentValue, sectionName, inputType, validator,
         onChange, deletable, onDelete);
@@ -5581,6 +5622,7 @@ class _$FormInputFieldInfoDateImpl
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult? Function(String sectionName)? shimmer,
   }) {
     return date?.call(id, label, currentValue, sectionName, inputType,
         validator, onChange, deletable, onDelete);
@@ -5687,6 +5729,7 @@ class _$FormInputFieldInfoDateImpl
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult Function(String sectionName)? shimmer,
     required TResult orElse(),
   }) {
     if (date != null) {
@@ -5715,6 +5758,7 @@ class _$FormInputFieldInfoDateImpl
     required TResult Function(FormInputFieldInfoMap value) map,
     required TResult Function(FormInputFieldInfoSlider value) slider,
     required TResult Function(FormInputFieldInfoChips value) chips,
+    required TResult Function(FormInputFieldInfoShimmer value) shimmer,
   }) {
     return date(this);
   }
@@ -5735,6 +5779,7 @@ class _$FormInputFieldInfoDateImpl
     TResult? Function(FormInputFieldInfoMap value)? map,
     TResult? Function(FormInputFieldInfoSlider value)? slider,
     TResult? Function(FormInputFieldInfoChips value)? chips,
+    TResult? Function(FormInputFieldInfoShimmer value)? shimmer,
   }) {
     return date?.call(this);
   }
@@ -5755,6 +5800,7 @@ class _$FormInputFieldInfoDateImpl
     TResult Function(FormInputFieldInfoMap value)? map,
     TResult Function(FormInputFieldInfoSlider value)? slider,
     TResult Function(FormInputFieldInfoChips value)? chips,
+    TResult Function(FormInputFieldInfoShimmer value)? shimmer,
     required TResult orElse(),
   }) {
     if (date != null) {
@@ -5776,7 +5822,6 @@ abstract class FormInputFieldInfoDate implements FormInputFieldInfo {
       final bool deletable,
       final void Function()? onDelete}) = _$FormInputFieldInfoDateImpl;
 
-  @override
   String get id;
   String get label;
   DateTime get currentValue;
@@ -6026,6 +6071,7 @@ class _$FormInputFieldInfoMapImpl
             List<String? Function(bool?)> validators,
             String sectionName)
         chips,
+    required TResult Function(String sectionName) shimmer,
   }) {
     return map(id, label, sectionName, value);
   }
@@ -6131,6 +6177,7 @@ class _$FormInputFieldInfoMapImpl
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult? Function(String sectionName)? shimmer,
   }) {
     return map?.call(id, label, sectionName, value);
   }
@@ -6236,6 +6283,7 @@ class _$FormInputFieldInfoMapImpl
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult Function(String sectionName)? shimmer,
     required TResult orElse(),
   }) {
     if (map != null) {
@@ -6263,6 +6311,7 @@ class _$FormInputFieldInfoMapImpl
     required TResult Function(FormInputFieldInfoMap value) map,
     required TResult Function(FormInputFieldInfoSlider value) slider,
     required TResult Function(FormInputFieldInfoChips value) chips,
+    required TResult Function(FormInputFieldInfoShimmer value) shimmer,
   }) {
     return map(this);
   }
@@ -6283,6 +6332,7 @@ class _$FormInputFieldInfoMapImpl
     TResult? Function(FormInputFieldInfoMap value)? map,
     TResult? Function(FormInputFieldInfoSlider value)? slider,
     TResult? Function(FormInputFieldInfoChips value)? chips,
+    TResult? Function(FormInputFieldInfoShimmer value)? shimmer,
   }) {
     return map?.call(this);
   }
@@ -6303,6 +6353,7 @@ class _$FormInputFieldInfoMapImpl
     TResult Function(FormInputFieldInfoMap value)? map,
     TResult Function(FormInputFieldInfoSlider value)? slider,
     TResult Function(FormInputFieldInfoChips value)? chips,
+    TResult Function(FormInputFieldInfoShimmer value)? shimmer,
     required TResult orElse(),
   }) {
     if (map != null) {
@@ -6319,7 +6370,6 @@ abstract class FormInputFieldInfoMap implements FormInputFieldInfo {
       required final String sectionName,
       final GeocoderResult? value}) = _$FormInputFieldInfoMapImpl;
 
-  @override
   String get id;
   String get label;
   @override
@@ -6632,6 +6682,7 @@ class _$FormInputFieldInfoSliderImpl
             List<String? Function(bool?)> validators,
             String sectionName)
         chips,
+    required TResult Function(String sectionName) shimmer,
   }) {
     return slider(id, label, range, validators, sectionName, currentValue,
         currentValues, rangeSlider, type);
@@ -6738,6 +6789,7 @@ class _$FormInputFieldInfoSliderImpl
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult? Function(String sectionName)? shimmer,
   }) {
     return slider?.call(id, label, range, validators, sectionName, currentValue,
         currentValues, rangeSlider, type);
@@ -6844,6 +6896,7 @@ class _$FormInputFieldInfoSliderImpl
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult Function(String sectionName)? shimmer,
     required TResult orElse(),
   }) {
     if (slider != null) {
@@ -6872,6 +6925,7 @@ class _$FormInputFieldInfoSliderImpl
     required TResult Function(FormInputFieldInfoMap value) map,
     required TResult Function(FormInputFieldInfoSlider value) slider,
     required TResult Function(FormInputFieldInfoChips value) chips,
+    required TResult Function(FormInputFieldInfoShimmer value) shimmer,
   }) {
     return slider(this);
   }
@@ -6892,6 +6946,7 @@ class _$FormInputFieldInfoSliderImpl
     TResult? Function(FormInputFieldInfoMap value)? map,
     TResult? Function(FormInputFieldInfoSlider value)? slider,
     TResult? Function(FormInputFieldInfoChips value)? chips,
+    TResult? Function(FormInputFieldInfoShimmer value)? shimmer,
   }) {
     return slider?.call(this);
   }
@@ -6912,6 +6967,7 @@ class _$FormInputFieldInfoSliderImpl
     TResult Function(FormInputFieldInfoMap value)? map,
     TResult Function(FormInputFieldInfoSlider value)? slider,
     TResult Function(FormInputFieldInfoChips value)? chips,
+    TResult Function(FormInputFieldInfoShimmer value)? shimmer,
     required TResult orElse(),
   }) {
     if (slider != null) {
@@ -6933,7 +6989,6 @@ abstract class FormInputFieldInfoSlider implements FormInputFieldInfo {
       final bool rangeSlider,
       final SliderType type}) = _$FormInputFieldInfoSliderImpl;
 
-  @override
   String get id;
   String get label;
   (double, double) get range;
@@ -7209,6 +7264,7 @@ class _$FormInputFieldInfoChipsImpl
             List<String? Function(bool?)> validators,
             String sectionName)
         chips,
+    required TResult Function(String sectionName) shimmer,
   }) {
     return chips(id, label, values, currentValue, validators, sectionName);
   }
@@ -7314,6 +7370,7 @@ class _$FormInputFieldInfoChipsImpl
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult? Function(String sectionName)? shimmer,
   }) {
     return chips?.call(
         id, label, values, currentValue, validators, sectionName);
@@ -7420,6 +7477,7 @@ class _$FormInputFieldInfoChipsImpl
             List<String? Function(bool?)> validators,
             String sectionName)?
         chips,
+    TResult Function(String sectionName)? shimmer,
     required TResult orElse(),
   }) {
     if (chips != null) {
@@ -7447,6 +7505,7 @@ class _$FormInputFieldInfoChipsImpl
     required TResult Function(FormInputFieldInfoMap value) map,
     required TResult Function(FormInputFieldInfoSlider value) slider,
     required TResult Function(FormInputFieldInfoChips value) chips,
+    required TResult Function(FormInputFieldInfoShimmer value) shimmer,
   }) {
     return chips(this);
   }
@@ -7467,6 +7526,7 @@ class _$FormInputFieldInfoChipsImpl
     TResult? Function(FormInputFieldInfoMap value)? map,
     TResult? Function(FormInputFieldInfoSlider value)? slider,
     TResult? Function(FormInputFieldInfoChips value)? chips,
+    TResult? Function(FormInputFieldInfoShimmer value)? shimmer,
   }) {
     return chips?.call(this);
   }
@@ -7487,6 +7547,7 @@ class _$FormInputFieldInfoChipsImpl
     TResult Function(FormInputFieldInfoMap value)? map,
     TResult Function(FormInputFieldInfoSlider value)? slider,
     TResult Function(FormInputFieldInfoChips value)? chips,
+    TResult Function(FormInputFieldInfoShimmer value)? shimmer,
     required TResult orElse(),
   }) {
     if (chips != null) {
@@ -7505,7 +7566,6 @@ abstract class FormInputFieldInfoChips implements FormInputFieldInfo {
       required final List<String? Function(bool?)> validators,
       required final String sectionName}) = _$FormInputFieldInfoChipsImpl;
 
-  @override
   String get id;
   String get label;
   Iterable<String> get values;
@@ -7519,5 +7579,495 @@ abstract class FormInputFieldInfoChips implements FormInputFieldInfo {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FormInputFieldInfoChipsImplCopyWith<_$FormInputFieldInfoChipsImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FormInputFieldInfoShimmerImplCopyWith<$Res>
+    implements $FormInputFieldInfoCopyWith<$Res> {
+  factory _$$FormInputFieldInfoShimmerImplCopyWith(
+          _$FormInputFieldInfoShimmerImpl value,
+          $Res Function(_$FormInputFieldInfoShimmerImpl) then) =
+      __$$FormInputFieldInfoShimmerImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String sectionName});
+}
+
+/// @nodoc
+class __$$FormInputFieldInfoShimmerImplCopyWithImpl<$Res>
+    extends _$FormInputFieldInfoCopyWithImpl<$Res,
+        _$FormInputFieldInfoShimmerImpl>
+    implements _$$FormInputFieldInfoShimmerImplCopyWith<$Res> {
+  __$$FormInputFieldInfoShimmerImplCopyWithImpl(
+      _$FormInputFieldInfoShimmerImpl _value,
+      $Res Function(_$FormInputFieldInfoShimmerImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of FormInputFieldInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? sectionName = null,
+  }) {
+    return _then(_$FormInputFieldInfoShimmerImpl(
+      sectionName: null == sectionName
+          ? _value.sectionName
+          : sectionName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$FormInputFieldInfoShimmerImpl
+    with DiagnosticableTreeMixin
+    implements FormInputFieldInfoShimmer {
+  const _$FormInputFieldInfoShimmerImpl({required this.sectionName});
+
+  @override
+  final String sectionName;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'FormInputFieldInfo.shimmer(sectionName: $sectionName)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'FormInputFieldInfo.shimmer'))
+      ..add(DiagnosticsProperty('sectionName', sectionName));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FormInputFieldInfoShimmerImpl &&
+            (identical(other.sectionName, sectionName) ||
+                other.sectionName == sectionName));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, sectionName);
+
+  /// Create a copy of FormInputFieldInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FormInputFieldInfoShimmerImplCopyWith<_$FormInputFieldInfoShimmerImpl>
+      get copyWith => __$$FormInputFieldInfoShimmerImplCopyWithImpl<
+          _$FormInputFieldInfoShimmerImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String id,
+            String label,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            String? currentValue,
+            void Function(String)? onChange,
+            bool deletable,
+            void Function()? onDelete,
+            TextEditingController? controller)
+        textArea,
+    required TResult Function(
+            String id,
+            String label,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)
+        dropdown,
+    required TResult Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            void Function(String)? onChange,
+            bool deletable,
+            void Function()? onDelete)
+        checkbox,
+    required TResult Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            void Function(String)? onChange)
+        imagePicker,
+    required TResult Function(
+            String id, String label, String sectionName, void Function() cancel)
+        cancelButton,
+    required TResult Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)
+        submitButton,
+    required TResult Function(
+            String id,
+            String id2,
+            String labelLeft,
+            String labelRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            Map<String, Set<String>> optionsRight,
+            List<String? Function(String?)> validatorsLeft,
+            List<String? Function(String?)> validatorsRight,
+            String sectionName,
+            bool deletable,
+            void Function()? onDelete)
+        twoAutoCompleteFields,
+    required TResult Function(String id, String label, String sectionName,
+            void Function() callback)
+        customButton,
+    required TResult Function(
+            String id,
+            String label,
+            DateTime currentValue,
+            String sectionName,
+            InputType inputType,
+            FormFieldValidator<DateTime?>? validator,
+            void Function(DateTime)? onChange,
+            bool deletable,
+            void Function()? onDelete)
+        date,
+    required TResult Function(
+            String id, String label, String sectionName, GeocoderResult? value)
+        map,
+    required TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)
+        slider,
+    required TResult Function(
+            String id,
+            String label,
+            Iterable<String> values,
+            Iterable<String> currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName)
+        chips,
+    required TResult Function(String sectionName) shimmer,
+  }) {
+    return shimmer(sectionName);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String id,
+            String label,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            String? currentValue,
+            void Function(String)? onChange,
+            bool deletable,
+            void Function()? onDelete,
+            TextEditingController? controller)?
+        textArea,
+    TResult? Function(
+            String id,
+            String label,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
+        dropdown,
+    TResult? Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            void Function(String)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
+        checkbox,
+    TResult? Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            void Function(String)? onChange)?
+        imagePicker,
+    TResult? Function(String id, String label, String sectionName,
+            void Function() cancel)?
+        cancelButton,
+    TResult? Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)?
+        submitButton,
+    TResult? Function(
+            String id,
+            String id2,
+            String labelLeft,
+            String labelRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            Map<String, Set<String>> optionsRight,
+            List<String? Function(String?)> validatorsLeft,
+            List<String? Function(String?)> validatorsRight,
+            String sectionName,
+            bool deletable,
+            void Function()? onDelete)?
+        twoAutoCompleteFields,
+    TResult? Function(String id, String label, String sectionName,
+            void Function() callback)?
+        customButton,
+    TResult? Function(
+            String id,
+            String label,
+            DateTime currentValue,
+            String sectionName,
+            InputType inputType,
+            FormFieldValidator<DateTime?>? validator,
+            void Function(DateTime)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
+        date,
+    TResult? Function(
+            String id, String label, String sectionName, GeocoderResult? value)?
+        map,
+    TResult? Function(
+            String id,
+            String label,
+            (double, double) range,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
+        slider,
+    TResult? Function(
+            String id,
+            String label,
+            Iterable<String> values,
+            Iterable<String> currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName)?
+        chips,
+    TResult? Function(String sectionName)? shimmer,
+  }) {
+    return shimmer?.call(sectionName);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String id,
+            String label,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            String? currentValue,
+            void Function(String)? onChange,
+            bool deletable,
+            void Function()? onDelete,
+            TextEditingController? controller)?
+        textArea,
+    TResult Function(
+            String id,
+            String label,
+            dynamic currentValue,
+            List<dynamic> options,
+            String Function(dynamic) optionToString,
+            List<String? Function(String?)> validators,
+            String sectionName,
+            void Function(dynamic)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
+        dropdown,
+    TResult Function(
+            String id,
+            String label,
+            bool currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            void Function(String)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
+        checkbox,
+    TResult Function(
+            String id,
+            String label,
+            String? currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            void Function(String)? onChange)?
+        imagePicker,
+    TResult Function(String id, String label, String sectionName,
+            void Function() cancel)?
+        cancelButton,
+    TResult Function(String id, String label, String sectionName,
+            void Function(Map<String, dynamic>?) save)?
+        submitButton,
+    TResult Function(
+            String id,
+            String id2,
+            String labelLeft,
+            String labelRight,
+            String currentValueLeft,
+            String currentValueRight,
+            List<String> optionsLeft,
+            Map<String, Set<String>> optionsRight,
+            List<String? Function(String?)> validatorsLeft,
+            List<String? Function(String?)> validatorsRight,
+            String sectionName,
+            bool deletable,
+            void Function()? onDelete)?
+        twoAutoCompleteFields,
+    TResult Function(String id, String label, String sectionName,
+            void Function() callback)?
+        customButton,
+    TResult Function(
+            String id,
+            String label,
+            DateTime currentValue,
+            String sectionName,
+            InputType inputType,
+            FormFieldValidator<DateTime?>? validator,
+            void Function(DateTime)? onChange,
+            bool deletable,
+            void Function()? onDelete)?
+        date,
+    TResult Function(
+            String id, String label, String sectionName, GeocoderResult? value)?
+        map,
+    TResult Function(
+            String id,
+            String label,
+            (double, double) range,
+            List<String? Function(bool?)> validators,
+            String sectionName,
+            double? currentValue,
+            (double, double)? currentValues,
+            bool rangeSlider,
+            SliderType type)?
+        slider,
+    TResult Function(
+            String id,
+            String label,
+            Iterable<String> values,
+            Iterable<String> currentValue,
+            List<String? Function(bool?)> validators,
+            String sectionName)?
+        chips,
+    TResult Function(String sectionName)? shimmer,
+    required TResult orElse(),
+  }) {
+    if (shimmer != null) {
+      return shimmer(sectionName);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(FormInputFieldInfoTextArea value) textArea,
+    required TResult Function(FormInputFieldInfoDropDown value) dropdown,
+    required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
+    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
+    required TResult Function(FormInputFieldInfoCancelButton value)
+        cancelButton,
+    required TResult Function(FormInputFieldInfoSubmitButton value)
+        submitButton,
+    required TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)
+        twoAutoCompleteFields,
+    required TResult Function(FormInputFieldInfoCustomButton value)
+        customButton,
+    required TResult Function(FormInputFieldInfoDate value) date,
+    required TResult Function(FormInputFieldInfoMap value) map,
+    required TResult Function(FormInputFieldInfoSlider value) slider,
+    required TResult Function(FormInputFieldInfoChips value) chips,
+    required TResult Function(FormInputFieldInfoShimmer value) shimmer,
+  }) {
+    return shimmer(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
+        twoAutoCompleteFields,
+    TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult? Function(FormInputFieldInfoDate value)? date,
+    TResult? Function(FormInputFieldInfoMap value)? map,
+    TResult? Function(FormInputFieldInfoSlider value)? slider,
+    TResult? Function(FormInputFieldInfoChips value)? chips,
+    TResult? Function(FormInputFieldInfoShimmer value)? shimmer,
+  }) {
+    return shimmer?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(FormInputFieldInfoTextArea value)? textArea,
+    TResult Function(FormInputFieldInfoDropDown value)? dropdown,
+    TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
+    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
+    TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
+    TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
+    TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?
+        twoAutoCompleteFields,
+    TResult Function(FormInputFieldInfoCustomButton value)? customButton,
+    TResult Function(FormInputFieldInfoDate value)? date,
+    TResult Function(FormInputFieldInfoMap value)? map,
+    TResult Function(FormInputFieldInfoSlider value)? slider,
+    TResult Function(FormInputFieldInfoChips value)? chips,
+    TResult Function(FormInputFieldInfoShimmer value)? shimmer,
+    required TResult orElse(),
+  }) {
+    if (shimmer != null) {
+      return shimmer(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FormInputFieldInfoShimmer implements FormInputFieldInfo {
+  const factory FormInputFieldInfoShimmer({required final String sectionName}) =
+      _$FormInputFieldInfoShimmerImpl;
+
+  @override
+  String get sectionName;
+
+  /// Create a copy of FormInputFieldInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FormInputFieldInfoShimmerImplCopyWith<_$FormInputFieldInfoShimmerImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

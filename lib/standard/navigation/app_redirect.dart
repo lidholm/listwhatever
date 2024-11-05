@@ -20,9 +20,9 @@ class AppRedirect {
     // logger.d('===================\n');
     final appBloc = BlocProvider.of<AppBloc>(context);
     final appState = appBloc.state;
-    // logger
-    //   ..i('$className => state.uri.path: ${state.uri.path}')
-    //   ..i('$className => appState: ${getFirstXChars(appState.toString(), 100)}   QQQ10');
+    logger
+      ..i('$className => state.uri.path: ${state.uri.path}   QQQ99')
+      ..i('$className => appState: ${getFirstXChars(appState.toString(), 100)}   QQQ10');
 
     if (state.uri.path == const LoginPageRoute().location &&
         appState is LoggedOut) {
@@ -32,6 +32,7 @@ class AppRedirect {
       return null;
     }
 
+    logger.i('$className: appState: $appState');
     if (appState is! LoggedInWithData) {
       if (appState is OnboardingRequired) {
         logger.i(
@@ -51,9 +52,11 @@ class AppRedirect {
       // logger.d('fromParam: $fromParam');
       context.read<RedirectCubit>().setRedirect(fromParam);
 
-      final redirectUri = routerProviderInformation.signInRouteLocation;
-      // logger.i('$className => redirectUri: $redirectUri    QQQ13');
-      return redirectUri;
+      if (appState is! LoggedIn) {
+        final redirectUri = routerProviderInformation.signInRouteLocation;
+        logger.i('$className => redirectUri: $redirectUri    QQQ13');
+        return redirectUri;
+      }
     }
 
     if (appState is LoggedOut) {

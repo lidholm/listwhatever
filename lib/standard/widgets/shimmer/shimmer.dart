@@ -20,13 +20,13 @@ class Shimmer extends StatefulWidget {
 class ShimmerState extends State<Shimmer> with SingleTickerProviderStateMixin {
   late AnimationController _shimmerController;
   Gradient get gradient => LinearGradient(
-    colors: widget.linearGradient.colors,
-    stops: widget.linearGradient.stops,
-    begin: widget.linearGradient.begin,
-    end: widget.linearGradient.end,
-    transform:
-    _SlidingGradientTransform(slidePercent: _shimmerController.value),
-  );
+        colors: widget.linearGradient.colors,
+        stops: widget.linearGradient.stops,
+        begin: widget.linearGradient.begin,
+        end: widget.linearGradient.end,
+        transform:
+            _SlidingGradientTransform(slidePercent: _shimmerController.value),
+      );
 
   @override
   void initState() {

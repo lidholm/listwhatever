@@ -20,7 +20,6 @@ import 'package:listwhatever/standard/form/form_generator.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 import 'package:listwhatever/standard/form/form_input_section.dart';
 
-import '/custom/pages/list_or_list_item_not_loaded_handler.dart';
 import '/custom/pages/lists/list_load_events/list_load_bloc.dart';
 import '/custom/pages/lists/list_load_events/list_load_event.dart';
 import '/custom/pages/lists/list_load_events/list_load_state.dart';
@@ -73,8 +72,6 @@ class _AddListPageState extends State<AddListPage> {
   // ignore: strict_raw_type
   List<FormInputFieldInfo?> fields = [];
 
-  ListOfThings? list;
-  List<ListItem>? listItems;
   ListType? selectedListType;
   bool? showImage;
   bool imageUploaded = false;
@@ -85,61 +82,58 @@ class _AddListPageState extends State<AddListPage> {
       BlocProvider.of<ListLoadBloc>(context).add(LoadList(widget.listId!));
     }
     super.initState();
-    list = null;
   }
 
   @override
   Widget build(BuildContext context) {
     // logger.i('$className: list: $list');
 
+    ListOfThings? list;
+    var listItems = <ListItem>[];
+    var isLoading = false;
+
     if (widget.listId != null) {
+      isLoading = true;
       final listState = context.watch<ListLoadBloc>().state;
       final listItemsState = context.watch<ListItemsLoadBloc>().state;
-
-      final listStateView =
-          ListOrListItemNotLoadedHandler.handleListAndListItemsState(
-        listState,
-        listItemsState,
-      );
-      if (listStateView != null) {
-        return listStateView;
+      if (listState is ListLoadLoaded &&
+          listItemsState is ListItemsLoadLoaded) {
+        list = listState.list;
+        listItems = listItemsState.listItems;
+        isLoading = false;
       }
-      setState(() {
-        list = (listState as ListLoadLoaded).list;
-        listItems = (listItemsState as ListItemsLoadLoaded).listItems;
-      });
     }
 
     showImage ??= list?.listType == ListType.other;
     logger.i('$className: showImage: $showImage');
 
     fields = [
-      nameField(),
-      listTypeField(),
-      imagePickerField(),
-      mapCheckboxField(),
-      dateCheckboxField(),
-      timeCheckboxField(),
-      ...categoryFilterSettings(),
+      nameField(list),
+      listTypeField(list),
+      imagePickerField(list),
+      mapCheckboxField(list),
+      dateCheckboxField(list),
+      timeCheckboxField(list),
+      ...categoryFilterSettings(list, listItems),
       cancelButton(),
-      submitButton(),
+      submitButton(list),
     ];
 
     final sections = [
       FormInputSection(
         name: SectionName.basic.value,
         direction: x_stack.AxisDirection.vertical,
-        showBorder: true,
+        showBorder: !isLoading,
       ),
       FormInputSection(
         name: SectionName.options.value,
         direction: x_stack.AxisDirection.vertical,
-        showBorder: true,
+        showBorder: !isLoading,
       ),
       FormInputSection(
         name: SectionName.categoryFilterSettings.value,
         direction: x_stack.AxisDirection.vertical,
-        showBorder: true,
+        showBorder: !isLoading,
       ),
       FormInputSection(
         name: SectionName.submit.value,
@@ -151,7 +145,10 @@ class _AddListPageState extends State<AddListPage> {
     final formGenerator = FormGenerator(
       formKey: _formKey,
       sections: sections,
-      fields: fields,
+      fields: isLoading
+          ? generateShimmerFormFields(5, SectionName.basic.name)
+          : fields,
+      isLoading: isLoading,
     );
 
     return Scaffold(
@@ -165,7 +162,7 @@ class _AddListPageState extends State<AddListPage> {
     );
   }
 
-  Future<void> save(Map<String, dynamic> values) async {
+  Future<void> save(ListOfThings? list, Map<String, dynamic> values) async {
     final listCrudBloc = BlocProvider.of<ListCrudBloc>(context);
     final goRouter = GoRouter.of(context);
 
@@ -253,7 +250,9 @@ class _AddListPageState extends State<AddListPage> {
     }
   }
 
-  FormInputFieldInfo nameField() {
+  FormInputFieldInfo nameField(
+    ListOfThings? list,
+  ) {
     return FormInputFieldInfo.textArea(
       id: FieldId.name.value,
       label: 'Name',
@@ -266,7 +265,9 @@ class _AddListPageState extends State<AddListPage> {
     );
   }
 
-  FormInputFieldInfo listTypeField() {
+  FormInputFieldInfo listTypeField(
+    ListOfThings? list,
+  ) {
     return FormInputFieldInfo.dropdown(
       id: FieldId.listType.value,
       label: 'List type',
@@ -288,7 +289,9 @@ class _AddListPageState extends State<AddListPage> {
     );
   }
 
-  FormInputFieldInfo? imagePickerField() {
+  FormInputFieldInfo? imagePickerField(
+    ListOfThings? list,
+  ) {
     if (showImage ?? list?.listType == ListType.other) {
       return FormInputFieldInfo.imagePicker(
         id: FieldId.listTypeImage.value,
@@ -304,7 +307,9 @@ class _AddListPageState extends State<AddListPage> {
     return null;
   }
 
-  FormInputFieldInfo mapCheckboxField() {
+  FormInputFieldInfo mapCheckboxField(
+    ListOfThings? list,
+  ) {
     return FormInputFieldInfo.checkbox(
       id: FieldId.withMap.value,
       label: 'Use a map',
@@ -317,7 +322,9 @@ class _AddListPageState extends State<AddListPage> {
     );
   }
 
-  FormInputFieldInfo dateCheckboxField() {
+  FormInputFieldInfo dateCheckboxField(
+    ListOfThings? list,
+  ) {
     return FormInputFieldInfo.checkbox(
       id: FieldId.withDates.value,
       label: 'Use dates',
@@ -330,7 +337,9 @@ class _AddListPageState extends State<AddListPage> {
     );
   }
 
-  FormInputFieldInfo timeCheckboxField() {
+  FormInputFieldInfo timeCheckboxField(
+    ListOfThings? list,
+  ) {
     return FormInputFieldInfo.checkbox(
       id: FieldId.withTimes.value,
       label: 'Use time',
@@ -343,7 +352,10 @@ class _AddListPageState extends State<AddListPage> {
     );
   }
 
-  List<FormInputFieldInfo> categoryFilterSettings() {
+  List<FormInputFieldInfo> categoryFilterSettings(
+    ListOfThings? list,
+    List<ListItem>? listItems,
+  ) {
     final categories =
         CategoriesHelper.getAllCategoriesAndValues(listItems ?? []);
     return categories.entries
@@ -376,7 +388,9 @@ class _AddListPageState extends State<AddListPage> {
     );
   }
 
-  FormInputFieldInfo submitButton() {
+  FormInputFieldInfo submitButton(
+    ListOfThings? list,
+  ) {
     return FormInputFieldInfo.submitButton(
       id: FieldId.submit.value,
       label: 'Submit',
@@ -385,7 +399,7 @@ class _AddListPageState extends State<AddListPage> {
         if (values == null) {
           return;
         }
-        save(values);
+        save(list, values);
       },
     );
   }

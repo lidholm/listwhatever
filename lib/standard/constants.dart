@@ -3,6 +3,13 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:listwhatever/custom/pages/listItems/filters/filters.dart';
+import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
+import 'package:listwhatever/custom/pages/lists/models/list_type.dart';
+import 'package:listwhatever/custom/pages/lists/models/user_list.dart';
+import 'package:listwhatever/standard/form/form_input_field_info.dart';
+import 'package:listwhatever/standard/settings/settings.dart';
+import 'package:listwhatever/standard/userRepository/models/user.dart';
 import 'package:logger/logger.dart';
 
 import '/custom/pages/listItems/models/list_item.dart';
@@ -29,7 +36,9 @@ enum Side {
 class PrintLogOutput extends LogOutput {
   @override
   void output(OutputEvent event) {
-    for (final line in event.lines) {}
+    for (final line in event.lines) {
+      print(line);
+    }
   }
 }
 
@@ -150,4 +159,82 @@ String secondsToTimeOfDayString(int t, {bool includeSeconds = false}) {
     return '${doubleDigit(h)}:${doubleDigit(m)}:${doubleDigit(s)}';
   }
   return '${doubleDigit(h)}:${doubleDigit(m)}';
+}
+
+ListOfThings generateShimmerList() {
+  return const ListOfThings(
+    id: '-1',
+    name: 'Shimmer',
+    listType: ListType.other,
+    withMap: true,
+    withDates: true,
+    withTimes: true,
+    shared: false,
+    sharedWith: {},
+    ownerId: '-1',
+  );
+}
+
+List<ListItem> generateShimmerListItem(int count) {
+  return List.generate(
+    count,
+    (i) => const ListItem(
+      id: '-1',
+      name: 'Shimmer',
+    ),
+  );
+}
+
+User generateShimmerUser() {
+  return const User(
+    id: '-1',
+    email: '',
+    name: '',
+    photo: '',
+    settings: Settings(distanceUnit: DistanceUnitOptions.kilometers),
+  );
+}
+
+List<UserList> generateShimmerUserLists(int count) {
+  return List.generate(
+    count,
+    (i) => const UserList(
+      id: '',
+      listId: '',
+      listName: '',
+      listType: ListType.other,
+      imageFilename: '',
+      ownerId: '',
+      isOwnList: false,
+    ),
+  );
+}
+
+Filters generateShimmerFilters() {
+  return Filters();
+}
+
+List<FormInputFieldInfo> generateShimmerFormFields(
+  int count,
+  String sectionName,
+) {
+  return List.generate(
+    count,
+    (i) => FormInputFieldInfo.shimmer(sectionName: sectionName),
+  );
+}
+
+// void let<T>(T? value, void Function(T) block) {
+//   if (value != null) {
+//     block(value);
+//   }
+// }
+
+extension Let<T> on T? {
+  void let(void Function(T) block) {
+    if (this != null) {
+      // ignore: null_check_on_nullable_type_parameter
+      block(this!);
+    }
+  }
 }

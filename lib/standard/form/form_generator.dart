@@ -14,12 +14,15 @@ import 'package:listwhatever/standard/form/form_input_field_drop_down.dart';
 import 'package:listwhatever/standard/form/form_input_field_image_picker.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 import 'package:listwhatever/standard/form/form_input_field_map.dart';
+import 'package:listwhatever/standard/form/form_input_field_shimmer.dart';
 import 'package:listwhatever/standard/form/form_input_field_single_slider.dart';
 import 'package:listwhatever/standard/form/form_input_field_submit_button.dart';
 import 'package:listwhatever/standard/form/form_input_field_text_area.dart';
 import 'package:listwhatever/standard/form/form_input_field_two_auto_complete_fields.dart';
 import 'package:listwhatever/standard/form/form_input_section.dart';
 import 'package:listwhatever/standard/widgets/border_with_header.dart';
+import 'package:listwhatever/standard/widgets/shimmer/shimmer.dart';
+import 'package:listwhatever/standard/widgets/shimmer/shimmer_loading.dart';
 import 'package:listwhatever/standard/widgets/vStack/v_stack.dart';
 import 'package:listwhatever/standard/widgets/vStack/x_stack.dart';
 
@@ -32,6 +35,7 @@ class FormGenerator extends StatefulWidget {
     required this.formKey,
     required this.sections,
     required this.fields,
+    required this.isLoading,
     this.focusFieldName,
     this.changeCallback,
     super.key,
@@ -43,6 +47,7 @@ class FormGenerator extends StatefulWidget {
   final List<FormInputFieldInfo?> fields;
   final String? focusFieldName;
   final void Function(Map<String, dynamic> values)? changeCallback;
+  final bool isLoading;
 
   @override
   State<StatefulWidget> createState() {
@@ -64,27 +69,35 @@ class _FormGeneratorState extends State<FormGenerator> {
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(8),
-        child: FormBuilder(
-          key: widget.formKey,
-          // IMPORTANT to remove all references from dynamic field when delete
-          clearValueOnUnregister: true,
-          skipDisabled: true,
+        child: Shimmer(
+          linearGradient: shimmerGradient,
+          child: ShimmerLoading(
+            isLoading: widget.isLoading,
+            child: FormBuilder(
+              key: widget.formKey,
+              // IMPORTANT to remove all references from dynamic field when delete
+              clearValueOnUnregister: true,
+              skipDisabled: true,
 
-          onChanged: () {
-            if (widget.changeCallback != null) {
-              final fields = widget.formKey.currentState?.fields;
-              final mapEntriesValues =
-                  fields?.entries.map((e) => MapEntry(e.key, e.value.value));
+              onChanged: () {
+                if (widget.changeCallback != null) {
+                  final fields = widget.formKey.currentState?.fields;
+                  final mapEntriesValues = fields?.entries
+                      .map((e) => MapEntry(e.key, e.value.value));
 
-              final values = (mapEntriesValues != null)
-                  ? Map.fromEntries(mapEntriesValues)
-                  : <String, dynamic>{};
-              widget.changeCallback?.call(values);
-            }
-          },
-          child: VStack(
-            spacing: 25,
-            children: widget.sections.map(generateSection).toList(),
+                  final values = (mapEntriesValues != null)
+                      ? Map.fromEntries(mapEntriesValues)
+                      : <String, dynamic>{};
+                  widget.changeCallback?.call(values);
+                }
+              },
+              child: VStack(
+                spacing: 25,
+                children: widget.isLoading
+                    ? _buildShimmerItems()
+                    : widget.sections.map(generateSection).toList(),
+              ),
+            ),
           ),
         ),
       ),
@@ -155,7 +168,24 @@ class _FormGeneratorState extends State<FormGenerator> {
           ? FormInputFieldDoubleSlider(field: field)
           : FormInputFieldSingleSlider(field: field),
       FormInputFieldInfoChips() => FormInputFieldChips(field: field),
+      FormInputFieldInfoShimmer() => FormInputFieldShimmer(field: field),
     };
     return response;
+  }
+
+  List<Widget> _buildShimmerItems() {
+    return List.generate(
+        widget.fields.length,
+        (i) => Padding(
+              padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
+              child: Container(
+                height: 60,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
+            ));
   }
 }
