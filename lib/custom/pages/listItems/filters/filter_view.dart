@@ -8,6 +8,9 @@ import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/form/form_generator.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 import 'package:listwhatever/standard/form/form_input_section.dart';
+import 'package:listwhatever/standard/helpers/date_helper.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
+import 'package:listwhatever/standard/helpers/shimmer_helper.dart';
 
 import '/custom/pages/listItems/filters/filters.dart';
 import '/custom/pages/listItems/models/list_item.dart';
@@ -73,10 +76,10 @@ class _FilterViewState extends State<FilterView> {
 
   @override
   Widget build(BuildContext context) {
-    // logger.i('$className listItems: ${widget.listItems}');
+    // LoggerHelper.logger.i('$className listItems: ${widget.listItems}');
 
     final fields = widget.isLoading
-        ? generateShimmerFormFields(4, SectionName.name.name)
+        ? ShimmerHelper.generateShimmerFormFields(4, SectionName.name.name)
         : [
             itemNameInputField(),
             startDateInputField(),
@@ -85,7 +88,7 @@ class _FilterViewState extends State<FilterView> {
             ...categoriesFields(getCategories(widget.listItems)),
             resetButton(),
           ];
-    // logger.i('fields: ${fields.length}');
+    // LoggerHelper.logger.i('fields: ${fields.length}');
 
     final sections = getSections();
 
@@ -190,7 +193,7 @@ class _FilterViewState extends State<FilterView> {
   List<FormInputFieldInfo> categoriesFields(
     Map<String, Set<String>> categories,
   ) {
-    // logger.i('$className categories: $categories');
+    // LoggerHelper.logger.i('$className categories: $categories');
     final chipsFields = categories.entries
         .map((e) => getCategoryField(e.key, e.value))
         .toList();
@@ -271,7 +274,7 @@ class _FilterViewState extends State<FilterView> {
     String categoryName,
     Set<String> values,
   ) {
-    final timeOfDayValues = values.map(timeOfDayToSeconds);
+    final timeOfDayValues = values.map(DateHelper.timeOfDayToSeconds);
     final minValue = timeOfDayValues.reduce(min) * 1.0;
     final maxValue = timeOfDayValues.reduce(max) * 1.0;
     return FormInputFieldInfo.slider(
@@ -319,7 +322,7 @@ class _FilterViewState extends State<FilterView> {
     }
 
     final categoryFilters = getRegularCategoryFilters(values);
-    logger.i('$className: categoryFilters: $categoryFilters');
+    LoggerHelper.logger.i('$className: categoryFilters: $categoryFilters');
 
     final filters = Filters(
       itemName: values[FieldId.name.name] as String?,

@@ -19,6 +19,8 @@ import 'package:listwhatever/standard/firebase/firebase_storage.dart';
 import 'package:listwhatever/standard/form/form_generator.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 import 'package:listwhatever/standard/form/form_input_section.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
+import 'package:listwhatever/standard/helpers/shimmer_helper.dart';
 
 import '/custom/pages/lists/list_load_events/list_load_bloc.dart';
 import '/custom/pages/lists/list_load_events/list_load_event.dart';
@@ -86,7 +88,7 @@ class _AddListPageState extends State<AddListPage> {
 
   @override
   Widget build(BuildContext context) {
-    // logger.i('$className: list: $list');
+    // LoggerHelper.logger.i('$className: list: $list');
 
     ListOfThings? list;
     var listItems = <ListItem>[];
@@ -105,7 +107,7 @@ class _AddListPageState extends State<AddListPage> {
     }
 
     showImage ??= list?.listType == ListType.other;
-    logger.i('$className: showImage: $showImage');
+    LoggerHelper.logger.i('$className: showImage: $showImage');
 
     fields = [
       nameField(list),
@@ -146,7 +148,7 @@ class _AddListPageState extends State<AddListPage> {
       formKey: _formKey,
       sections: sections,
       fields: isLoading
-          ? generateShimmerFormFields(5, SectionName.basic.name)
+          ? ShimmerHelper.generateShimmerFormFields(5, SectionName.basic.name)
           : fields,
       isLoading: isLoading,
     );
@@ -172,11 +174,11 @@ class _AddListPageState extends State<AddListPage> {
     if (values.containsKey(FieldId.listTypeImage.value)) {
       imageFilename =
           await uploadImage(values[FieldId.listTypeImage.value] as List);
-      // logger.i('$className: imageFilename: $imageFilename');
+      // LoggerHelper.logger.i('$className: imageFilename: $imageFilename');
     }
 
     final filterTypes = getFilterTypes(values);
-    // logger.d('values: $values');
+    // LoggerHelper.logger.d('values: $values');
     final newList = ListOfThings(
       id: widget.listId,
       name: values[FieldId.name.value]! as String,
@@ -192,13 +194,13 @@ class _AddListPageState extends State<AddListPage> {
       ownerId: list?.ownerId,
       filterTypes: filterTypes,
     );
-    // logger.d('newList: $newList');
+    // LoggerHelper.logger.d('newList: $newList');
     if (widget.listId == null) {
       listCrudBloc.add(AddList(newList));
     } else {
       listCrudBloc.add(UpdateList(newList));
     }
-    // logger.i('$className -> popping once');
+    // LoggerHelper.logger.i('$className -> popping once');
     goRouter.pop();
   }
 
@@ -206,7 +208,7 @@ class _AddListPageState extends State<AddListPage> {
     List<dynamic> images,
   ) async {
     if (images.isEmpty) {
-      logger.w('No image');
+      LoggerHelper.logger.w('No image');
     }
     final image = images[0] as XFile;
     final storage = await getFirebaseStorage();
@@ -242,10 +244,10 @@ class _AddListPageState extends State<AddListPage> {
 
       return imageUploaded ? fileName : null;
     } on FirebaseException catch (e) {
-      logger.e(e);
+      LoggerHelper.logger.e(e);
       rethrow;
     } on Exception catch (e) {
-      logger.e(e);
+      LoggerHelper.logger.e(e);
       rethrow;
     }
   }
@@ -280,10 +282,10 @@ class _AddListPageState extends State<AddListPage> {
       optionToString: (listType) => (listType as ListType?)?.name ?? '',
       sectionName: SectionName.basic.value,
       onChange: (listType) => setState(() {
-        logger.i('$className: onChange ListType: $listType');
+        LoggerHelper.logger.i('$className: onChange ListType: $listType');
         setState(() {
           showImage = listType == ListType.other.name;
-          logger.i('$className: showImage: $showImage');
+          LoggerHelper.logger.i('$className: showImage: $showImage');
         });
       }),
     );

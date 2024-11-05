@@ -8,8 +8,9 @@ import 'package:listwhatever/custom/pages/lists/lists_load_events/lists_bloc.dar
 import 'package:listwhatever/custom/pages/lists/lists_load_events/lists_state.dart';
 import 'package:listwhatever/custom/pages/lists/models/list_type.dart';
 import 'package:listwhatever/custom/pages/lists/models/user_list.dart';
-import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/firebase/firebaseStorageBloc/bloc/firebase_storage_bloc.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
+import 'package:listwhatever/standard/helpers/shimmer_helper.dart';
 import 'package:listwhatever/standard/widgets/imageButton/image_button.dart';
 import 'package:listwhatever/standard/widgets/shimmer/shimmer_loading.dart';
 
@@ -25,7 +26,7 @@ class ListList extends StatelessWidget {
     final listsState = context.watch<ListsLoadBloc>().state;
     final firebaseStorage = context.watch<FirebaseStorageBloc>().state;
 
-    var lists = generateShimmerUserLists(5);
+    var lists = ShimmerHelper.generateShimmerUserLists(5);
 
     var isLoading = true;
     var images = <String, String>{};
@@ -61,7 +62,7 @@ class ListList extends StatelessWidget {
     UserList list,
     Map<String, String> images,
   ) {
-    logger
+    LoggerHelper.logger
       ..i('$className: list.listName: ${list.listName}')
       ..i('$className: list.imageFilename: ${list.imageFilename}')
       ..i('$className: list.isOwnList: ${list.isOwnList}');
@@ -111,7 +112,7 @@ class ListList extends StatelessWidget {
   }
 
   Widget imageWidget(String? imageUrl) {
-    // logger.i('$className: imageUrl: $imageUrl');
+    // LoggerHelper.logger.i('$className: imageUrl: $imageUrl');
 
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {

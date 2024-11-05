@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/standard/helpers/date_helper.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 
 import '/custom/pages/listItems/list_item_crud_bloc/list_item_crud_bloc.dart';
@@ -55,9 +57,9 @@ class _ListAsSpreadsheetsPageState extends State<ListAsSpreadsheetsPage> {
 
     return BlocListener<ListItemCrudBloc, ListItemCrudState>(
       listener: (context, state) {
-        logger.i('$className => state: $state');
+        LoggerHelper.logger.i('$className => state: $state');
         if (state is ListItemCrudImported) {
-          logger.i('$className -> popping once');
+          LoggerHelper.logger.i('$className -> popping once');
           GoRouter.of(context).pop();
         }
       },
@@ -129,7 +131,7 @@ class _ListAsSpreadsheetsPageInnerState
     final columns = getColumns(categories);
     final rows = getRows(categories);
 
-    logger
+    LoggerHelper.logger
       ..i('columns: ${columns.map(
         (e) => e.field,
       )}')
@@ -146,7 +148,7 @@ class _ListAsSpreadsheetsPageInnerState
     } else {
       final columnGroups =
           categories.isNotEmpty ? getColumnGroups(categories) : null;
-      logger.i('columnGroups: $columnGroups');
+      LoggerHelper.logger.i('columnGroups: $columnGroups');
       return PlutoGrid(
         columns: columns,
         rows: rows,
@@ -251,7 +253,7 @@ class _ListAsSpreadsheetsPageInnerState
                 'time': PlutoCell(
                   value: item.datetime == null
                       ? ''
-                      : '${doubleDigit(item.datetime!.hour)}:${doubleDigit(item.datetime!.minute)}',
+                      : '${DateHelper.doubleDigit(item.datetime!.hour)}:${DateHelper.doubleDigit(item.datetime!.minute)}',
                 ),
                 // TODO: Support AM/PM
               },
@@ -305,7 +307,7 @@ class _ListAsSpreadsheetsPageInnerState
       name: name,
       urls: urls,
     );
-    logger.i('$className => updatedItem: $updatedItem');
+    LoggerHelper.logger.i('$className => updatedItem: $updatedItem');
 
     return updatedItem;
   }
@@ -336,7 +338,7 @@ class _ListAsSpreadsheetsPageInnerState
         }
       }
 
-      logger.i('$className => name: $name');
+      LoggerHelper.logger.i('$className => name: $name');
       var item = _items[rowIndex].copyWith(
         name: name,
         urls: urls,

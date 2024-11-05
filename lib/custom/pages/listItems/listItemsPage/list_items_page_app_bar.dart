@@ -51,8 +51,9 @@ class ListItemsPageAppBar extends StatelessWidget
 
   Widget _buildTitleWidget(ListLoadState listState) {
     var isLoading = true;
-    ImageProvider<Object> image =
-        const AssetImage('assets/images/background.webp');
+    ImageProvider<Object> image = const AssetImage(
+      'assets/images/background.webp',
+    ); // TODO: Fix after generating images
     var titleWidget = <Widget>[];
 
     if (listState is ListLoadLoaded && listState.list != null) {
@@ -192,7 +193,7 @@ class ListItemsPageAppBar extends StatelessWidget
           context
               .read<ListItemsSortOrderCubit>()
               .select(value as ListItemsSortOrder);
-          // logger.d('value: $value');
+          // LoggerHelper.logger.d('value: $value');
         },
         menuItems: [
           (

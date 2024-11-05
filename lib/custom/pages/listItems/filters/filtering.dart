@@ -2,10 +2,11 @@ import 'package:great_circle_distance_calculator/great_circle_distance_calculato
 import 'package:listwhatever/custom/pages/listItems/filters/categories_helper.dart';
 import 'package:listwhatever/custom/pages/listItems/listItemsListView/list_items_sort_order_cubit.dart';
 import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
+import 'package:listwhatever/standard/helpers/date_helper.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 import '/custom/pages/listItems/models/list_item.dart';
 import '/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
-import '/standard/constants.dart';
 import 'filters.dart';
 
 const String className = 'filterListItems';
@@ -77,7 +78,7 @@ class Filtering {
         filteredItems.add(item);
       }
     }
-    // logger.d('number of filteredItems: ${filteredItems.length}');
+    // LoggerHelper.logger.d('number of filteredItems: ${filteredItems.length}');
     return filteredItems;
   }
 
@@ -104,7 +105,7 @@ class Filtering {
 
     final matches =
         matchesDate && matchesCategories && matchesDistance && matchesItemName;
-    logger
+    LoggerHelper.logger
       ..i('distanceFilterCenter: $distanceFilterCenter')
       ..i('filters.distance: ${filters.distance}')
       ..i('matchesDate: $matchesDate')
@@ -118,21 +119,23 @@ class Filtering {
     required bool listHasDates,
   }) {
     if (filters.startDate == null && filters.endDate == null) {
-      // logger.d('no filters, so a match');
+      // LoggerHelper.logger.d('no filters, so a match');
       return true;
     }
     if (!listHasDates) {
-      // logger.d("List doesn't have dates, so a match");
+      // LoggerHelper.logger.d("List doesn't have dates, so a match");
       return true;
     }
     if (item.datetime == null) {
       return true;
     }
-    final response =
-        item.datetime!.compareTo(filters.startDate ?? minDateTime) >= 0 &&
-            item.datetime!.compareTo(filters.endDate ?? maxDateTime) <= 0;
+    final response = item.datetime!
+                .compareTo(filters.startDate ?? DateHelper.minDateTime) >=
+            0 &&
+        item.datetime!.compareTo(filters.endDate ?? DateHelper.maxDateTime) <=
+            0;
     if (!response) {
-      // logger.d('not matching date filter');
+      // LoggerHelper.logger.d('not matching date filter');
     }
     return response;
   }
@@ -153,12 +156,12 @@ class Filtering {
     */
     if (filters.regularCategoryFilters == null ||
         filters.regularCategoryFilters!.values.expand((e) => e).isEmpty) {
-      // logger.d('no filters, so a match');
+      // LoggerHelper.logger.d('no filters, so a match');
       return true;
     }
     if (filters.regularCategoryFilters!.values.expand((e) => e).isNotEmpty &&
         item.categories.isEmpty) {
-      logger.i("filters but no categories, so can't be a match");
+      LoggerHelper.logger.i("filters but no categories, so can't be a match");
       return false;
     }
     // items without a date set will match even if a start or end date has been set
@@ -183,7 +186,7 @@ class Filtering {
         }
       }
       if (!matches) {
-        logger.d('not matching categories');
+        LoggerHelper.logger.d('not matching categories');
         return false;
       }
     }
@@ -228,7 +231,9 @@ class Filtering {
 
     final timeOfDayCategories = item.categories.entries
         .where((e) => categoriesWithTimeOfDay.contains(e.key))
-        .map((e) => (e.key, e.value.map(timeOfDayToSeconds).toList()))
+        .map(
+          (e) => (e.key, e.value.map(DateHelper.timeOfDayToSeconds).toList()),
+        )
         .toList();
 
     for (final entry in timeOfDayCategories) {
@@ -299,10 +304,10 @@ class Filtering {
       latitude2: distanceFilterCenter.lat,
       longitude2: distanceFilterCenter.lng,
     );
-    // logger.d('distance: ${gcd.haversineDistance()}');
+    // LoggerHelper.logger.d('distance: ${gcd.haversineDistance()}');
     final response = gcd.haversineDistance() < filters.distance!;
     if (!response) {
-      // logger.d('not matching distance filter');
+      // LoggerHelper.logger.d('not matching distance filter');
     }
     return response;
   }

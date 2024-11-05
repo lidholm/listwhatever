@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 import '/custom/pages/listItems/filters/filters.dart';
-import '/standard/constants.dart';
 
 import 'filter_event.dart';
 import 'filter_state.dart';
@@ -20,7 +20,7 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
 
       emit(FiltersUpdated(event.filters));
     } catch (e) {
-      logger.e('Error: $e');
+      LoggerHelper.logger.e('Error: $e');
       emit(FiltersError('Failed to update filters.\n$e'));
     }
   }

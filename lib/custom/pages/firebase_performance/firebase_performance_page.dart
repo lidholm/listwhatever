@@ -3,13 +3,14 @@ import 'dart:async';
 import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import '/standard/constants.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 class FirebasePerformancePage extends StatefulWidget {
   const FirebasePerformancePage({super.key});
 
   @override
-  State<FirebasePerformancePage> createState() => _FirebasePerformancePageState();
+  State<FirebasePerformancePage> createState() =>
+      _FirebasePerformancePageState();
 }
 
 class _MetricHttpClient extends BaseClient {
@@ -21,15 +22,16 @@ class _MetricHttpClient extends BaseClient {
   Future<StreamedResponse> send(BaseRequest request) async {
     // Custom network monitoring is not supported for web.
     // https://firebase.google.com/docs/perf-mon/custom-network-traces?platform=android
-    final metric = FirebasePerformance.instance.newHttpMetric(request.url.toString(), HttpMethod.Get)
+    final metric = FirebasePerformance.instance
+        .newHttpMetric(request.url.toString(), HttpMethod.Get)
       ..requestPayloadSize = request.contentLength;
     await metric.start();
 
     StreamedResponse response;
     try {
       response = await _inner.send(request);
-      
-      logger.d(
+
+      LoggerHelper.logger.d(
         'Called ${request.url} with custom monitoring, response code: ${response.statusCode}',
       );
 
@@ -46,12 +48,11 @@ class _MetricHttpClient extends BaseClient {
 
     final attributes = metric.getAttributes();
 
-    
-    logger.d('Http metric attributes: $attributes.');
+    LoggerHelper.logger.d('Http metric attributes: $attributes.');
 
     final score = metric.getAttribute('score');
-    
-    logger.d('Http metric score attribute value: $score');
+
+    LoggerHelper.logger.d('Http metric score attribute value: $score');
 
     return response;
   }
@@ -60,7 +61,8 @@ class _MetricHttpClient extends BaseClient {
 class _FirebasePerformancePageState extends State<FirebasePerformancePage> {
   final FirebasePerformance _performance = FirebasePerformance.instance;
   bool _isPerformanceCollectionEnabled = false;
-  String _performanceCollectionMessage = 'Unknown status of performance collection.';
+  String _performanceCollectionMessage =
+      'Unknown status of performance collection.';
   bool _trace1HasRan = false;
   bool _trace2HasRan = false;
   bool _customHttpMetricHasRan = false;
@@ -73,7 +75,8 @@ class _FirebasePerformancePageState extends State<FirebasePerformancePage> {
 
   Future<void> _togglePerformanceCollection() async {
     // No-op for web.
-    await _performance.setPerformanceCollectionEnabled(!_isPerformanceCollectionEnabled);
+    await _performance
+        .setPerformanceCollectionEnabled(!_isPerformanceCollectionEnabled);
 
     // Always true for web.
     final isEnabled = await _performance.isPerformanceCollectionEnabled();
@@ -101,16 +104,16 @@ class _FirebasePerformancePageState extends State<FirebasePerformancePage> {
     await trace.stop();
 
     final sum = trace.getMetric('sum');
-    
-    logger.d('test_trace_1 sum value: $sum');
+
+    LoggerHelper.logger.d('test_trace_1 sum value: $sum');
 
     final attributes = trace.getAttributes();
-    
-    logger.d('test_trace_1 attributes: $attributes');
+
+    LoggerHelper.logger.d('test_trace_1 attributes: $attributes');
 
     final favoriteColor = trace.getAttribute('favorite_color');
-    
-    logger.d('test_trace_1 favorite_color: $favoriteColor');
+
+    LoggerHelper.logger.d('test_trace_1 favorite_color: $favoriteColor');
 
     setState(() {
       _trace1HasRan = true;
@@ -131,8 +134,8 @@ class _FirebasePerformancePageState extends State<FirebasePerformancePage> {
     await trace.stop();
 
     final sum2 = trace.getMetric('sum');
-    
-    logger.d('test_trace_2 sum value: $sum2');
+
+    LoggerHelper.logger.d('test_trace_2 sum value: $sum2');
 
     setState(() {
       _trace2HasRan = true;
@@ -160,8 +163,9 @@ class _FirebasePerformancePageState extends State<FirebasePerformancePage> {
 
   Future<void> _testAutomaticHttpMetric() async {
     final response = await get(Uri.parse('https://www.google.com'));
-    
-    logger.d('Called facebook, response code: ${response.statusCode}');
+
+    LoggerHelper.logger
+        .d('Called facebook, response code: ${response.statusCode}');
   }
 
   @override

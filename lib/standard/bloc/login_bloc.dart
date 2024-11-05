@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:listwhatever/standard/constants.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 import '/standard/authenticationClient/authentication_client.dart';
 import '/standard/bloc/login_event.dart';
@@ -77,9 +77,9 @@ class LoginBloc extends Bloc<LoginFormEvent, LoginState> {
   ) async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
-      logger.i('$className logInWithGoogle');
+      LoggerHelper.logger.i('$className logInWithGoogle');
       await _userRepository.logInWithGoogle();
-      logger.i('$className logInWithGoogle done');
+      LoggerHelper.logger.i('$className logInWithGoogle done');
       emit(state.copyWith(status: FormzSubmissionStatus.success));
     } on LogInWithGoogleCanceled {
       emit(state.copyWith(status: FormzSubmissionStatus.canceled));

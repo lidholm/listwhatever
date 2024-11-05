@@ -4,7 +4,8 @@ import 'package:listwhatever/custom/pages/listItems/filters/filtering.dart';
 import 'package:listwhatever/custom/pages/listItems/filters/filters.dart';
 import 'package:listwhatever/custom/pages/listItems/models/list_item.dart';
 import 'package:listwhatever/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
-import 'package:listwhatever/standard/constants.dart';
+import 'package:listwhatever/standard/helpers/date_helper.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 void main() {
   final emptyList = <ListItem>[];
@@ -321,7 +322,7 @@ void main() {
         longitude2: lon2,
       );
 
-      logger
+      LoggerHelper.logger
         ..i(
           'Distance from location 1 to 2 using the Haversine formula is: ${gcd.haversineDistance()} meters',
         )
@@ -450,8 +451,8 @@ void main() {
 
       final input = [firstItem, secondItem, thirdItem];
 
-      final lowerDateMs = timeOfDayToSeconds('10:00');
-      final upperDateMs = timeOfDayToSeconds('12:00');
+      final lowerDateMs = DateHelper.timeOfDayToSeconds('10:00');
+      final upperDateMs = DateHelper.timeOfDayToSeconds('12:00');
       final filters = Filters(
         timeOfDayCategoryFilters: {
           'timeOfDay': (
@@ -491,8 +492,8 @@ void main() {
 
       final input = [firstItem, secondItem, thirdItem];
 
-      final lowerDateMs = timeOfDayToSeconds('10:00');
-      final upperDateMs = timeOfDayToSeconds('12:00');
+      final lowerDateMs = DateHelper.timeOfDayToSeconds('10:00');
+      final upperDateMs = DateHelper.timeOfDayToSeconds('12:00');
       final filters = Filters(
         timeOfDayCategoryFilters: {
           'timeOfDay': (

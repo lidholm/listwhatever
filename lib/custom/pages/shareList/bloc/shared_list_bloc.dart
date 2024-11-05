@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 import '/custom/pages/shareList/shared_lists_service.dart';
 
-import '/standard/constants.dart';
 import 'shared_list_event.dart';
 import 'shared_list_state.dart';
 
@@ -16,14 +16,14 @@ class SharedListBloc extends Bloc<SharedListEvent, SharedListState> {
     LoadSharedList event,
     Emitter<SharedListState> emit,
   ) async {
-    // logger.i('$className => _onLoadSharedList');
+    // LoggerHelper.logger.i('$className => _onLoadSharedList');
     try {
       emit(SharedListLoading());
       final sharedList =
           await _sharedListsService.getSharedList(event.shareCode);
       emit(SharedListLoaded(sharedList));
     } catch (e) {
-      logger.e('Error: $e');
+      LoggerHelper.logger.e('Error: $e');
       emit(SharedListError('Failed to load shared lists.\n$e'));
     }
   }

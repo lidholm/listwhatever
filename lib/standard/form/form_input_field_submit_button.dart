@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 class FormInputFieldSubmitButton extends StatelessWidget {
   const FormInputFieldSubmitButton({
@@ -17,10 +17,10 @@ class FormInputFieldSubmitButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {
         if (formKey.currentState?.saveAndValidate() ?? false) {
-          logger.d(formKey.currentState?.value.toString());
+          LoggerHelper.logger.d(formKey.currentState?.value.toString());
           field.save(formKey.currentState?.value);
         } else {
-          logger
+          LoggerHelper.logger
             ..d(formKey.currentState?.value.toString())
             ..d('validation failed');
         }

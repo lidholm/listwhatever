@@ -131,9 +131,9 @@ class _ListItemsPageState extends State<ListItemsPage> {
 
   //     return BlocListener<ListCrudBloc, ListCrudState>(
   //       listener: (context, state) {
-  //         logger.i('$className => state: $state');
+  //         LoggerHelper.logger.i('$className => state: $state');
   //         if (state is ListCrudDeleted) {
-  //           logger.i('$className -> popping once');
+  //           LoggerHelper.logger.i('$className -> popping once');
   //           GoRouter.of(context).pop();
   //         }
   //       },

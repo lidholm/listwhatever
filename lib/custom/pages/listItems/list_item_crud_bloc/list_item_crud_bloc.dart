@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:collection/collection.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 import '/custom/pages/listItems/service/list_items_service.dart';
-import '/standard/constants.dart';
 
 import 'list_item_crud_event.dart';
 import 'list_item_crud_state.dart';
@@ -26,7 +26,7 @@ class ListItemCrudBloc extends Bloc<ListItemCrudEvent, ListItemCrudState> {
       _listItemsService.changeUser(event.userId);
       emit(ListItemCrudChangedUser('Changed user'));
     } catch (e) {
-      logger.e('Error: $e');
+      LoggerHelper.logger.e('Error: $e');
       emit(ListItemCrudError('Failed to change user.\n$e'));
     }
   }
@@ -40,7 +40,7 @@ class ListItemCrudBloc extends Bloc<ListItemCrudEvent, ListItemCrudState> {
       await _listItemsService.addListItem(event.actualListId, event.listItem);
       emit(ListItemCrudAdded(event.listItem));
     } catch (e) {
-      logger.e('Error: $e');
+      LoggerHelper.logger.e('Error: $e');
       emit(ListItemCrudError('Failed to add listItem.\n$e'));
     }
   }
@@ -49,7 +49,8 @@ class ListItemCrudBloc extends Bloc<ListItemCrudEvent, ListItemCrudState> {
     UpdateListItem event,
     Emitter<ListItemCrudState> emit,
   ) async {
-    logger.i('$className => updating list item for list ${event.actualListId}');
+    LoggerHelper.logger
+        .i('$className => updating list item for list ${event.actualListId}');
     try {
       emit(ListItemCrudLoading());
       await _listItemsService.updateListItem(
@@ -58,7 +59,7 @@ class ListItemCrudBloc extends Bloc<ListItemCrudEvent, ListItemCrudState> {
       );
       emit(ListItemCrudUpdated(event.listItem));
     } catch (e) {
-      logger.e('Error: $e');
+      LoggerHelper.logger.e('Error: $e');
       emit(ListItemCrudError('Failed to update listItem.\n$e'));
     }
   }
@@ -67,7 +68,8 @@ class ListItemCrudBloc extends Bloc<ListItemCrudEvent, ListItemCrudState> {
     DeleteListItem event,
     Emitter<ListItemCrudState> emit,
   ) async {
-    logger.i('$className => deleting list item for list ${event.actualListId}');
+    LoggerHelper.logger
+        .i('$className => deleting list item for list ${event.actualListId}');
     try {
       emit(ListItemCrudLoading());
       await _listItemsService.deleteListItem(
@@ -76,7 +78,7 @@ class ListItemCrudBloc extends Bloc<ListItemCrudEvent, ListItemCrudState> {
       );
       emit(ListItemCrudDeleted(event.listItemId));
     } catch (e) {
-      logger.e('Error: $e');
+      LoggerHelper.logger.e('Error: $e');
       emit(ListItemCrudError('Failed to delete listItem.\n$e'));
     }
   }
@@ -85,7 +87,8 @@ class ListItemCrudBloc extends Bloc<ListItemCrudEvent, ListItemCrudState> {
     ImportListItems event,
     Emitter<ListItemCrudState> emit,
   ) async {
-    logger.i('$className => import list items for list ${event.actualListId}');
+    LoggerHelper.logger
+        .i('$className => import list items for list ${event.actualListId}');
     try {
       emit(ListItemCrudLoading());
       final originalListItems =
@@ -106,7 +109,7 @@ class ListItemCrudBloc extends Bloc<ListItemCrudEvent, ListItemCrudState> {
       emit(ListItemCrudImported(event.listItems));
       // emit(ListItemLoading());
     } catch (e) {
-      logger.e('Error: $e');
+      LoggerHelper.logger.e('Error: $e');
       emit(ListItemCrudError('Failed to import listItems.\n$e'));
     }
   }

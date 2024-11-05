@@ -9,11 +9,11 @@ Future<FirebaseFirestore> getFirestore() async {
 
   final instance = FirebaseFirestore.instance;
   if (emulatorInfo.type != EmulatorType.none) {
-    // logger.d('firestoreProvider. Using emulator ${emulatorInfo.address}');
+    // LoggerHelper.logger.d('firestoreProvider. Using emulator ${emulatorInfo.address}');
     _connectToFirebaseEmulator(instance, emulatorInfo.address!);
     // await instance.clearPersistence();
   } else {
-    // logger.d('firestoreProvider.using firestore without emulator');
+    // LoggerHelper.logger.d('firestoreProvider.using firestore without emulator');
   }
 
   return instance;

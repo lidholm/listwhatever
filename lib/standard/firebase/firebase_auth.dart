@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import '/standard/constants.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 import '/standard/emulator/emulator_info.dart';
 import '/standard/emulator/get_emulator_info.dart';
 
@@ -10,12 +10,13 @@ Future<firebase_auth.FirebaseAuth> getFirebaseAuth() async {
 
   final instance = firebase_auth.FirebaseAuth.instance;
   if (emulatorInfo.type != EmulatorType.none) {
-    // logger.d('firestoreProvider. Using emulator ${emulatorInfo.address}');
-    logger.d('firestoreProvider. Using emulator ${emulatorInfo.address}');
+    // LoggerHelper.logger.d('firestoreProvider. Using emulator ${emulatorInfo.address}');
+    LoggerHelper.logger
+        .d('firestoreProvider. Using emulator ${emulatorInfo.address}');
     await instance.useAuthEmulator(emulatorInfo.address!, port);
     // await instance.clearPersistence();
   } else {
-    logger.d('firestoreProvider.using firestore without emulator');
+    LoggerHelper.logger.d('firestoreProvider.using firestore without emulator');
   }
 
   return instance;

@@ -11,8 +11,8 @@ import 'package:listwhatever/custom/pages/lists/models/list_type.dart';
 import 'package:listwhatever/custom/pages/lists/models/user_list.dart';
 import 'package:listwhatever/standard/appUi/colors/app_colors.dart';
 import 'package:listwhatever/standard/appUi/theme/app_theme.dart';
-import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/firebase/firebaseStorageBloc/bloc/firebase_storage_bloc.dart';
+import 'package:listwhatever/standard/helpers/shimmer_helper.dart';
 import 'package:listwhatever/standard/widgets/imageButton/image_button.dart';
 import 'package:listwhatever/standard/widgets/shimmer/shimmer_loading.dart';
 
@@ -31,7 +31,7 @@ class ListTiles extends StatelessWidget {
     final listsState = context.watch<ListsLoadBloc>().state;
     final firebaseStorage = context.watch<FirebaseStorageBloc>().state;
 
-    var lists = generateShimmerUserLists(5); // TODO: Break out to ShimmerHelper
+    var lists = ShimmerHelper.generateShimmerUserLists(5);
 
     var isLoading = true;
     var images = <String, String>{};

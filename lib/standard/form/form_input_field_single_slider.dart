@@ -5,8 +5,9 @@ import 'package:another_xlider/models/tooltip/tooltip.dart';
 import 'package:another_xlider/models/trackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
+import 'package:listwhatever/standard/helpers/date_format_helper.dart';
+import 'package:listwhatever/standard/helpers/date_helper.dart';
 
 const String className = 'FormInputFieldSingleSlider';
 
@@ -29,7 +30,7 @@ class FormInputFieldSingleSlider extends StatelessWidget {
           values = [formField.value!];
         }
 
-        // logger.i('$className => field: $field');
+        // LoggerHelper.logger.i('$className => field: $field');
         return FlutterSlider(
           values: values,
           min: field.range.$1,
@@ -82,13 +83,16 @@ class FormInputFieldSingleSlider extends StatelessWidget {
           textStyle: textStyle,
           format: (s) {
             final date = DateTime.fromMillisecondsSinceEpoch(int.parse(s));
-            return formatReadableDate(date, DateFormatType.iso8601);
+            return DateFormatHelper.formatReadableDate(
+              date,
+              DateFormatType.iso8601,
+            );
           },
         ),
       SliderType.timeOfDay => FlutterSliderTooltip(
           textStyle: textStyle,
           format: (s) {
-            return secondsToTimeOfDayString(int.parse(s));
+            return DateHelper.secondsToTimeOfDayString(int.parse(s));
           },
         ),
     };

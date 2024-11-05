@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:listwhatever/custom/pages/listItems/filters/bloc/filter_bloc.dart';
 import 'package:listwhatever/custom/pages/listItems/filters/bloc/filter_state.dart';
 import 'package:listwhatever/custom/pages/listItems/filters/filter_view.dart';
-import 'package:listwhatever/custom/pages/listItems/filters/filters.dart';
 import 'package:listwhatever/custom/pages/listItems/filters/show_filter_cubit.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_bloc.dart';
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
@@ -12,7 +11,7 @@ import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_bloc.
 import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_state.dart';
 import 'package:listwhatever/standard/app/bloc/app_bloc.dart';
 import 'package:listwhatever/standard/app/bloc/app_state.dart';
-import 'package:listwhatever/standard/constants.dart';
+import 'package:listwhatever/standard/helpers/shimmer_helper.dart';
 
 const widthForRightHandSideView = 400.0;
 const heightForBottomView = 400.0;
@@ -30,10 +29,10 @@ class FilterWidget extends StatelessWidget {
     final filtersState = context.watch<FilterBloc>().state;
 
     var isLoading = true;
-    var list = generateShimmerList();
-    var listItems = generateShimmerListItem(0);
-    var filters = Filters();
-    var user = generateShimmerUser();
+    var list = ShimmerHelper.generateShimmerList();
+    var listItems = ShimmerHelper.generateShimmerListItem(0);
+    var filters = ShimmerHelper.generateShimmerFilters();
+    var user = ShimmerHelper.generateShimmerUser();
 
     if (appState is LoggedInWithData &&
         listState is ListLoadLoaded &&

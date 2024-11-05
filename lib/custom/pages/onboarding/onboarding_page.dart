@@ -6,11 +6,11 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:listwhatever/standard/form/form_generator.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 import 'package:listwhatever/standard/form/form_input_section.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 import '/standard/app/bloc/app_bloc.dart';
 import '/standard/app/bloc/app_event.dart';
 import '/standard/app/bloc/app_state.dart';
-import '/standard/constants.dart';
 import '/standard/settings/settings.dart';
 import '/standard/userRepository/models/user.dart';
 import '/standard/widgets/appBar/app_bar_action.dart';
@@ -152,7 +152,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
   }
 
   void save(User originalUser, Map<String, dynamic> values) {
-    logger.d('values: $values   ');
+    LoggerHelper.logger.d('values: $values   ');
     final user = User(
       name: values[FieldId.name.name]! as String,
       settings: defaultSettings,
@@ -162,10 +162,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
     );
 
     if (originalUser.name.isEmpty) {
-      logger.d('$className => adding firestoreUser $user   ');
+      LoggerHelper.logger.d('$className => adding firestoreUser $user   ');
       BlocProvider.of<AppBloc>(context).add(AddUser(user: user));
     } else {
-      logger.d('$className => updating firestoreUser $user   ');
+      LoggerHelper.logger.d('$className => updating firestoreUser $user   ');
       BlocProvider.of<AppBloc>(context).add(UpdateUser(user: user));
     }
   }

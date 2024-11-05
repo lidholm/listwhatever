@@ -63,8 +63,8 @@ class _FormGeneratorState extends State<FormGenerator> {
 
   @override
   Widget build(BuildContext context) {
-    // logger.i('$className: building.');
-    // logger.i('$className: fields: ${widget.fields.length}.');
+    // LoggerHelper.logger.i('$className: building.');
+    // LoggerHelper.logger.i('$className: fields: ${widget.fields.length}.');
 
     return SafeArea(
       child: Padding(
@@ -105,12 +105,12 @@ class _FormGeneratorState extends State<FormGenerator> {
   }
 
   Widget generateSection(FormInputSection section) {
-    // logger.d('widget.fields: ${widget.fields}');
+    // LoggerHelper.logger.d('widget.fields: ${widget.fields}');
     final sectionFields =
         widget.fields.where((f) => f?.sectionName == section.name);
     final actualFields = sectionFields.map(generateField).toList();
 
-    // logger.i(
+    // LoggerHelper.logger.i(
     //     '$className: generateSection ${section.key}: fields: ${fields.length}.',
     //     );
 
@@ -139,7 +139,7 @@ class _FormGeneratorState extends State<FormGenerator> {
   Widget generateField(
     FormInputFieldInfo? field,
   ) {
-    // logger.i('$className: generateField ${field.label}.');
+    // LoggerHelper.logger.i('$className: generateField ${field.label}.');
     if (field == null) {
       return const CircularProgressIndicator();
     }
@@ -175,17 +175,18 @@ class _FormGeneratorState extends State<FormGenerator> {
 
   List<Widget> _buildShimmerItems() {
     return List.generate(
-        widget.fields.length,
-        (i) => Padding(
-              padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
-              child: Container(
-                height: 60,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(16),
-                ),
-              ),
-            ));
+      widget.fields.length,
+      (i) => Padding(
+        padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
+        child: Container(
+          height: 60,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(16),
+          ),
+        ),
+      ),
+    );
   }
 }
