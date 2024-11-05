@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 import '/custom/pages/list_or_list_item_not_loaded_handler.dart';
 import '/custom/pages/shareList/bloc/shared_list_bloc.dart';
@@ -12,7 +13,6 @@ import '/custom/pages/shareList/bloc/shared_list_event.dart';
 import '/custom/pages/shareList/bloc/shared_list_state.dart';
 import '/custom/pages/subscribeList/bloc/subscribe_list_bloc.dart';
 import '/custom/pages/subscribeList/bloc/subscribe_list_event.dart';
-import '/standard/constants.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
 import '/standard/widgets/vStack/h_stack.dart';
 import '/standard/widgets/vStack/v_stack.dart';
@@ -82,7 +82,7 @@ class _SubscribeListPageState extends State<SubscribeListPage> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        logger.i('$className -> popping once');
+                        LoggerHelper.logger.i('$className -> popping once');
                         GoRouter.of(context).pop();
                       },
                       child: Padding(

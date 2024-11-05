@@ -6,6 +6,7 @@ import 'package:listwhatever/custom/pages/listItems/filters/show_filter_cubit.da
 import 'package:listwhatever/custom/pages/lists/categories_for_list/categories_for_list_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/page/list_type_cubit/list_type_cubit.dart';
 import 'package:listwhatever/standard/firebase/firebaseStorageBloc/bloc/firebase_storage_bloc.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 import '/custom/currentLocationBloc/current_location_bloc.dart';
 import '/custom/navigation/get_router_provider_information.dart';
@@ -34,7 +35,6 @@ import '/standard/app/widgets/to_onscreen_logs_listener.dart';
 import '/standard/appUi/theme/app_theme.dart';
 import '/standard/bloc/login_bloc.dart';
 import '/standard/changeUserBloc/bloc/change_user_bloc_bloc.dart';
-import '/standard/constants.dart';
 import '/standard/navigation/redirect_cubit.dart';
 import '/standard/navigation/router.dart';
 import '/standard/onScreenLog/on_screen_log_cubit.dart';
@@ -61,7 +61,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    logger.d('starting app');
+    LoggerHelper.logger.d('starting app');
     final initialUserId = _user.id.isEmpty ? null : _user.id;
 
     final sharedListsService = SharedListsService();

@@ -1,28 +1,8 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
-import 'package:listwhatever/custom/pages/listItems/filters/filters.dart';
-import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
-import 'package:listwhatever/custom/pages/lists/models/list_type.dart';
-import 'package:listwhatever/custom/pages/lists/models/user_list.dart';
-import 'package:listwhatever/standard/form/form_input_field_info.dart';
-import 'package:listwhatever/standard/settings/settings.dart';
-import 'package:listwhatever/standard/userRepository/models/user.dart';
-import 'package:logger/logger.dart';
-
 import '/custom/pages/listItems/models/list_item.dart';
 
 String defaultImageFilename = 'activities.png';
-
-Logger logger = Logger(
-  // printer: PrettyPrinter(methodCount: 0, printTime: true),
-  printer: SimplePrinter(printTime: true),
-  level: Level.debug,
-  output: PrintLogOutput(),
-  filter: ProductionFilter(),
-);
 
 enum Side {
   left._('left'),
@@ -31,15 +11,6 @@ enum Side {
   const Side._(this.value);
 
   final String value;
-}
-
-class PrintLogOutput extends LogOutput {
-  @override
-  void output(OutputEvent event) {
-    for (final line in event.lines) {
-      print(line);
-    }
-  }
 }
 
 Iterable<(int, T)> mapIndexed<T>(
@@ -63,63 +34,6 @@ String getRandomString(int length) => String.fromCharCodes(
       ),
     );
 
-extension DateTimeExtension on DateTime {
-  DateTime applied(TimeOfDay time) {
-    return DateTime(year, month, day, time.hour, time.minute);
-  }
-}
-
-DateTime getCurrentDate() {
-  final now = DateTime.now();
-  final date = DateTime(now.year, now.month, now.day);
-  return date;
-}
-
-enum DateFormatType { iso8601, us, monthAndDay }
-
-String formatReadableDate(DateTime d, DateFormatType? type) {
-  final diff = d.difference(DateTime.now());
-  if (type == DateFormatType.iso8601) {
-    return dateFormatter.format(d);
-  }
-  if (type == DateFormatType.us) {
-    return usDateFormatter.format(d);
-  }
-
-  if (type == DateFormatType.monthAndDay) {
-    if (diff > const Duration(days: 365)) {
-      return monthAndDayFormatterWithYear.format(d);
-    } else {
-      return monthAndDayFormatter.format(d);
-    }
-  }
-  throw Exception('Format for DateFormatType is not implemented yet');
-}
-
-final dateTimeFormatter = DateFormat('yyyy-MM-dd HH:mm');
-final dateFormatter = DateFormat('yyyy-MM-dd');
-final usDateFormatter = DateFormat.yMd();
-final usDateTimeFormatter = DateFormat.yMd().add_jm();
-final monthAndDayFormatter = DateFormat('MMMM d');
-final monthAndDayFormatterWithYear = DateFormat('MMMM d, yyyy');
-final timeFormatter = DateFormat('HH:mm');
-final readableDateAndTimeFormatter = DateFormat('d MMM HH:mm');
-final DateTime minDateTime = DateTime.utc(1900, 04, 20);
-final DateTime maxDateTime = DateTime.utc(2100, 09, 13);
-
-extension MyIterable<E> on Iterable<E> {
-  // ignore: strict_raw_type
-  Iterable<E> sortedBy(Comparable Function(E e) key) =>
-      toList()..sort((a, b) => key(a).compareTo(key(b)));
-}
-
-extension GoRouterStateExtension on GoRouterState {
-  // ignore: strict_raw_type
-  String debugString() =>
-      'GoRouterState: name: $name,  path: $path, fullPath: $fullPath, pathParams: $pathParameters, extra: $extra, matchedLocation: $matchedLocation\n'
-      'uri: ${uri.path} ${uri.queryParameters} ${uri.query} ${uri.data} ${uri.userInfo}';
-}
-
 Map<String, Set<String>> getCategories(List<ListItem> items) {
   final categories = <String, Set<String>>{};
 
@@ -133,108 +47,4 @@ Map<String, Set<String>> getCategories(List<ListItem> items) {
     }
   }
   return categories;
-}
-
-String doubleDigit(int num) {
-  if (num < 10) {
-    return '0$num';
-  }
-  return '$num';
-}
-
-int timeOfDayToSeconds(String t) {
-  final spl = t.split(':');
-  final h = int.parse(spl[0]);
-  final m = int.parse(spl[1]);
-  final s = (spl.length > 2) ? int.parse(spl[2]) : 0;
-  final v = h * 3600 + m * 60 + s;
-  return v;
-}
-
-String secondsToTimeOfDayString(int t, {bool includeSeconds = false}) {
-  final h = t ~/ 3600;
-  final m = (t - h * 3600) ~/ 60;
-  if (includeSeconds) {
-    final s = t - h * 3600 - m * 60;
-    return '${doubleDigit(h)}:${doubleDigit(m)}:${doubleDigit(s)}';
-  }
-  return '${doubleDigit(h)}:${doubleDigit(m)}';
-}
-
-ListOfThings generateShimmerList() {
-  return const ListOfThings(
-    id: '-1',
-    name: 'Shimmer',
-    listType: ListType.other,
-    withMap: true,
-    withDates: true,
-    withTimes: true,
-    shared: false,
-    sharedWith: {},
-    ownerId: '-1',
-  );
-}
-
-List<ListItem> generateShimmerListItem(int count) {
-  return List.generate(
-    count,
-    (i) => const ListItem(
-      id: '-1',
-      name: 'Shimmer',
-    ),
-  );
-}
-
-User generateShimmerUser() {
-  return const User(
-    id: '-1',
-    email: '',
-    name: '',
-    photo: '',
-    settings: Settings(distanceUnit: DistanceUnitOptions.kilometers),
-  );
-}
-
-List<UserList> generateShimmerUserLists(int count) {
-  return List.generate(
-    count,
-    (i) => const UserList(
-      id: '',
-      listId: '',
-      listName: '',
-      listType: ListType.other,
-      imageFilename: '',
-      ownerId: '',
-      isOwnList: false,
-    ),
-  );
-}
-
-Filters generateShimmerFilters() {
-  return Filters();
-}
-
-List<FormInputFieldInfo> generateShimmerFormFields(
-  int count,
-  String sectionName,
-) {
-  return List.generate(
-    count,
-    (i) => FormInputFieldInfo.shimmer(sectionName: sectionName),
-  );
-}
-
-// void let<T>(T? value, void Function(T) block) {
-//   if (value != null) {
-//     block(value);
-//   }
-// }
-
-extension Let<T> on T? {
-  void let(void Function(T) block) {
-    if (this != null) {
-      // ignore: null_check_on_nullable_type_parameter
-      block(this!);
-    }
-  }
 }

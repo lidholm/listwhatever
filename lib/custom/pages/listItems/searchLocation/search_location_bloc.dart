@@ -5,9 +5,9 @@ import 'package:listwhatever/custom/pages/listItems/searchLocation/geocoder/geoc
 import 'package:listwhatever/custom/pages/listItems/searchLocation/geocoder/geometry.dart';
 import 'package:listwhatever/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
 import 'package:listwhatever/custom/pages/listItems/searchLocation/geocoder/pluscode.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 import '/custom/pages/listItems/searchLocation/geocoder/geocoder.dart';
 import '/standard/api_keys.dart';
-import '/standard/constants.dart';
 
 import 'search_location_event.dart';
 import 'search_location_state.dart';
@@ -69,7 +69,7 @@ class SearchLocationBloc extends Bloc<SearchEvent, SearchState> {
 
       emit(SearchLoaded(results));
     } catch (e) {
-      logger.e('Error: $e');
+      LoggerHelper.logger.e('Error: $e');
       emit(SearchError('Failed to search.\n$e'));
     }
   }

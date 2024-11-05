@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:listwhatever/standard/helpers/date_format_helper.dart';
 
 import '/custom/navigation/routes.dart';
 import '/custom/pages/listItems/addListItem/edit_list_item_page_route.dart';
@@ -9,7 +10,6 @@ import '/custom/pages/listItems/list_item_load_bloc/list_item_load_event.dart';
 import '/custom/pages/listItems/list_item_load_bloc/list_item_load_state.dart';
 import '/custom/pages/list_or_list_item_not_loaded_handler.dart';
 import '/custom/pages/lists/list_load_events/list_load_bloc.dart';
-import '/standard/constants.dart';
 import '/standard/widgets/appBar/app_bar_action.dart';
 import '/standard/widgets/appBar/app_bar_action_icon.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
@@ -145,7 +145,7 @@ class _ListItemInfoViewState extends State<ListItemInfoView> {
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               Text(
-                '  ${listItem.datetime != null ? dateFormatter.format(listItem.datetime!) : ''}',
+                '  ${listItem.datetime != null ? DateFormatHelper.dateFormatter.format(listItem.datetime!) : ''}',
               ),
             ],
           ),

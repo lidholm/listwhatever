@@ -10,7 +10,7 @@ import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_it
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
 import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_state.dart';
-import 'package:listwhatever/standard/constants.dart';
+import 'package:listwhatever/standard/helpers/shimmer_helper.dart';
 import 'package:listwhatever/standard/widgets/shimmer/shimmer_loading.dart';
 
 import '/standard/widgets/vStack/v_stack.dart';
@@ -34,7 +34,7 @@ class ListItemsListView extends StatelessWidget {
     final filtersState = context.watch<FilterBloc>().state;
 
     var isLoading = true;
-    var items = generateShimmerListItem(3);
+    var items = ShimmerHelper.generateShimmerListItem(3);
 
     if (listState is ListLoadLoaded &&
         listItemsState is ListItemsLoadLoaded &&

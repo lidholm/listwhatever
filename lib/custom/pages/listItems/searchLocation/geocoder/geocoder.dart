@@ -2,7 +2,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import '/standard/constants.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 import 'bounds.dart';
 import 'geocoderresult.dart';
 import 'geometry.dart';
@@ -26,7 +26,7 @@ class Geocoder {
 
       if (response.statusCode == 200) {
         final data = response.body; //.stream.bytesToString();
-        logger.d('search results: $data');
+        LoggerHelper.logger.d('search results: $data');
         final fetch = json.decode(data) as Map<String, dynamic>;
         final results = fetch['results'] as List<dynamic>;
         final geoResults = <GeocoderResult>[];

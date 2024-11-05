@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 import '/standard/analyticsRepository/analytics_repository.dart';
 import '/standard/analyticsRepository/models/analytics_event.dart';
-import '/standard/constants.dart';
 
 class AppBlocObserver extends BlocObserver {
   AppBlocObserver({
@@ -17,13 +17,13 @@ class AppBlocObserver extends BlocObserver {
     Transition<dynamic, dynamic> transition,
   ) {
     super.onTransition(bloc, transition);
-    // logger.i('$className => onTransition ${bloc.runtimeType}: $transition');
+    // LoggerHelper.logger.i('$className => onTransition ${bloc.runtimeType}: $transition');
   }
 
   @override
   void onError(BlocBase<dynamic> bloc, Object error, StackTrace stackTrace) {
     super.onError(bloc, error, stackTrace);
-    logger.e(
+    LoggerHelper.logger.e(
       '$className onError ${bloc.runtimeType}',
       error: error,
       stackTrace: stackTrace,

@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:listwhatever/standard/constants.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:twitter_login/twitter_login.dart';
 
@@ -61,7 +61,7 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
   @override
   Stream<AuthenticationUser> get user {
     return _firebaseAuth.authStateChanges().map((firebaseUser) {
-      logger.i(
+      LoggerHelper.logger.i(
         '$className: user is updated. firebaseUser: ${firebaseUser?.toString().substring(0, 100)}',
       );
       return firebaseUser == null
@@ -117,23 +117,23 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
   /// Throws a [LogInWithGoogleFailure] if an exception occurs.
   @override
   Future<firebase_auth.UserCredential> logInWithGoogle() async {
-    logger.i('$className: logInWithGoogle');
+    LoggerHelper.logger.i('$className: logInWithGoogle');
     if (kIsWeb) {
-      logger.i('$className: kIsWeb');
+      LoggerHelper.logger.i('$className: kIsWeb');
       return logInWithGoogleWeb();
     } else {
-      logger.i('$className: not kIsWeb');
+      LoggerHelper.logger.i('$className: not kIsWeb');
       return logInWithGoogleOther();
     }
   }
 
   Future<firebase_auth.UserCredential> logInWithGoogleOther() async {
     try {
-      logger.i('$className: logInWithGoogleOther');
+      LoggerHelper.logger.i('$className: logInWithGoogleOther');
 
       final googleUser = await _googleSignIn.signIn();
       if (googleUser == null) {
-        logger.i('$className: googleUser == null');
+        LoggerHelper.logger.i('$className: googleUser == null');
         throw LogInWithGoogleCanceled(
           Exception('Sign in with Google canceled'),
           null,
@@ -144,10 +144,10 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-      logger.i('$className: credential: $credential');
+      LoggerHelper.logger.i('$className: credential: $credential');
 
       final userCreds = await _firebaseAuth.signInWithCredential(credential);
-      logger.i('$className: userCreds: $userCreds');
+      LoggerHelper.logger.i('$className: userCreds: $userCreds');
       return userCreds;
     } on LogInWithGoogleCanceled {
       rethrow;
@@ -172,7 +172,7 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
       // Once signed in, return the UserCredential
       final userCredentials =
           await FirebaseAuth.instance.signInWithPopup(googleProvider);
-      logger.i(
+      LoggerHelper.logger.i(
         '$className: logInWithGoogleWeb userCredentials: ${userCredentials.toString().substring(0, 100)}',
       );
       return userCredentials;
@@ -180,7 +180,7 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
       // Or use signInWithRedirect
       // return await FirebaseAuth.instance.signInWithRedirect(googleProvider);
     } catch (error, stackTrace) {
-      logger.i('$className: logInWithGoogleWeb error: $error');
+      LoggerHelper.logger.i('$className: logInWithGoogleWeb error: $error');
       var extraMessage = error.runtimeType.toString();
       if (error is AssertionError) {
         extraMessage = error.message.toString();
@@ -293,12 +293,12 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
   @override
   Future<void> logOut() async {
     try {
-      logger.i('$className logOut()');
+      LoggerHelper.logger.i('$className logOut()');
       await Future.wait([
         _firebaseAuth.signOut(),
         _googleSignIn.signOut(),
       ]);
-      logger.i('$className logOut() done');
+      LoggerHelper.logger.i('$className logOut() done');
     } catch (error, stackTrace) {
       Error.throwWithStackTrace(LogOutFailure(error, null), stackTrace);
     }
@@ -306,7 +306,7 @@ class FirebaseAuthenticationClient implements AuthenticationClient {
 
   /// Updates the user token in [TokenStorage] if the user is authenticated.
   Future<void> _onUserChanged(AuthenticationUser user) async {
-    logger.i('$className: _onUserChanged: user: $user');
+    LoggerHelper.logger.i('$className: _onUserChanged: user: $user');
     if (!user.isAnonymous) {
       await _tokenStorage.saveToken(user.id);
     } else {

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 import '/custom/pages/lists/lists_service.dart';
 
-import '/standard/constants.dart';
 import 'categories_for_list_event.dart';
 import 'categories_for_list_state.dart';
 
@@ -25,7 +25,7 @@ class CategoriesForListBloc
       _listsService.changeUser(event.userId);
       emit(CategoriesForListLoaded(const {}));
     } catch (e) {
-      logger.e('$className _onChangeUser Error: $e');
+      LoggerHelper.logger.e('$className _onChangeUser Error: $e');
       emit(CategoriesForListError('Failed to change user.\n$e'));
     }
   }
@@ -34,7 +34,7 @@ class CategoriesForListBloc
     LoadCategoriesForList event,
     Emitter<CategoriesForListState> emit,
   ) async {
-    // logger.i('$className => getting list  ${event.listId}');
+    // LoggerHelper.logger.i('$className => getting list  ${event.listId}');
     try {
       emit(CategoriesForListLoading());
       final categoriesForList =
@@ -43,7 +43,7 @@ class CategoriesForListBloc
 
       emit(CategoriesForListLoaded(categoriesForList));
     } catch (e) {
-      logger.e('$className _onLoadList Error: $e');
+      LoggerHelper.logger.e('$className _onLoadList Error: $e');
       emit(CategoriesForListError('Failed to load categories for list.\n$e'));
     }
   }

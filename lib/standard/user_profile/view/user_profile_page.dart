@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 import '/standard/analytics/bloc/analytics_bloc.dart';
 import '/standard/analytics/bloc/analytics_event.dart';
@@ -14,7 +15,6 @@ import '/standard/appUi/generated/assets.gen.dart';
 import '/standard/appUi/spacing/app_spacing.dart';
 import '/standard/appUi/widgets/app_button.dart';
 import '/standard/appUi/widgets/app_dropdown.dart';
-import '/standard/constants.dart';
 import '/standard/settings/settings.dart';
 import '/standard/userRepository/user_repository.dart';
 import '/standard/user_profile/bloc/user_profile_bloc.dart';
@@ -92,7 +92,7 @@ class _UserProfileViewState extends State<UserProfileView>
           ),
         );
       case LoggedInWithData():
-        logger.i('LoggedInWithData');
+        LoggerHelper.logger.i('LoggedInWithData');
       case OnboardingRequired():
         return Scaffold(
           body: Column(
@@ -127,7 +127,7 @@ class _UserProfileViewState extends State<UserProfileView>
       },
       child: BlocListener<AppBloc, AppState>(
         listener: (context, state) {
-          logger.i('$className -> popping once');
+          LoggerHelper.logger.i('$className -> popping once');
           GoRouter.of(context).pop();
         },
         child: Scaffold(

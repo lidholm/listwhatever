@@ -6,12 +6,12 @@ import 'package:go_router/go_router.dart';
 import 'package:listwhatever/standard/form/form_generator.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 import 'package:listwhatever/standard/form/form_input_section.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 import '/custom/pages/listItems/searchLocation/geocoder/geocoderresult.dart';
 import '/custom/pages/listItems/searchLocation/search_location_bloc.dart';
 import '/custom/pages/listItems/searchLocation/search_location_event.dart';
 import '/custom/pages/listItems/searchLocation/search_location_response.dart';
 import '/custom/pages/listItems/searchLocation/search_location_state.dart';
-import '/standard/constants.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
 import '/standard/widgets/vStack/x_stack.dart' as x_stack;
 
@@ -156,7 +156,7 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
           (result as GeocoderResult?)?.formattedAddress ?? '',
       sectionName: SectionName.info.name,
       onChange: (selection) => setState(() {
-        // logger.i('$className: onChange result: $selection');
+        // LoggerHelper.logger.i('$className: onChange result: $selection');
         setState(() {
           final sel = selection as GeocoderResult?;
 
@@ -168,7 +168,7 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
                 : '${sel.geometry.location.lat}, ${sel.geometry.location.lng}',
           });
 
-          logger.i(
+          LoggerHelper.logger.i(
             '$className: _formKey.currentState: ${_formKey.currentState?.value}',
           );
         });
@@ -239,7 +239,7 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
   }
 
   void closeAndReturnValues(Map<String, dynamic> values) {
-    // logger.d('values: $values');
+    // LoggerHelper.logger.d('values: $values');
     final latLongString = values[FieldId.latlong.name]! as String;
     final latLongParts = latLongString.split(',');
     final lat = double.parse(latLongParts.first.trim());

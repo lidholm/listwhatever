@@ -4,7 +4,7 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '/standard/constants.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 class RemoteConfigPage extends StatefulWidget {
   const RemoteConfigPage({super.key});
@@ -61,10 +61,10 @@ class _RemoteConfigPageState extends State<RemoteConfigPage> {
                 return 'Fetched: ${remoteConfig.getString('welcome')}';
               } on PlatformException catch (exception) {
                 // Fetch exception.
-                logger.e(exception);
+                LoggerHelper.logger.e(exception);
                 return 'Exception: $exception';
               } catch (exception) {
-                logger.e(exception);
+                LoggerHelper.logger.e(exception);
                 return 'Unable to fetch remote config. Cached or default values will be '
                     'used';
               }
@@ -72,7 +72,9 @@ class _RemoteConfigPageState extends State<RemoteConfigPage> {
             buttonText: 'Fetch Activate',
           ),
           _ButtonAndText(
-            defaultText: update != null ? 'Updated keys: ${update?.updatedKeys}' : 'No data',
+            defaultText: update != null
+                ? 'Updated keys: ${update?.updatedKeys}'
+                : 'No data',
             onPressed: () async {
               try {
                 final remoteConfig = FirebaseRemoteConfig.instance;
@@ -84,7 +86,8 @@ class _RemoteConfigPageState extends State<RemoteConfigPage> {
                   return 'Listening cancelled';
                 }
                 setState(() {
-                  subscription = remoteConfig.onConfigUpdated.listen((event) async {
+                  subscription =
+                      remoteConfig.onConfigUpdated.listen((event) async {
                     // Make new values available to the app.
                     await remoteConfig.activate();
 
@@ -97,15 +100,17 @@ class _RemoteConfigPageState extends State<RemoteConfigPage> {
                 return 'Listening, waiting for update...';
               } on PlatformException catch (exception) {
                 // Fetch exception.
-                logger.e(exception);
+                LoggerHelper.logger.e(exception);
                 return 'Exception: $exception';
               } catch (exception) {
-                logger.e(exception);
+                LoggerHelper.logger.e(exception);
                 return 'Unable to listen to remote config. Cached or default values will be '
                     'used';
               }
             },
-            buttonText: subscription != null ? 'Cancel' : 'Listen ${kIsWeb ? 'Not supported on web' : ''}',
+            buttonText: subscription != null
+                ? 'Cancel'
+                : 'Listen ${kIsWeb ? 'Not supported on web' : ''}',
           ),
         ],
       ),

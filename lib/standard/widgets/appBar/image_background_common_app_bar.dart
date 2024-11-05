@@ -25,7 +25,7 @@ class ImageBackgroundCommonAppBar extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    // logger.i('$className: imageUrl: $imageUrl');
+    // LoggerHelper.logger.i('$className: imageUrl: $imageUrl');
 
     ImageProvider<Object> image =
         const AssetImage('assets/images/background.webp');

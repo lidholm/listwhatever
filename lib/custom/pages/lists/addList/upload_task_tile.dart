@@ -1,6 +1,6 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import '/standard/constants.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 class UploadTaskListTile extends StatelessWidget {
   // ignore: public_member_api_docs
@@ -53,7 +53,7 @@ class UploadTaskListTile extends StatelessWidget {
             subtitle = const Text('Upload canceled.');
           } else {
             // ignore: avoid_print
-            logger
+            LoggerHelper.logger
               ..i('$className => ${asyncSnapshot.error}')
               ..i('$className => ${asyncSnapshot.stackTrace}');
             subtitle = const Text('Something went wrong.');

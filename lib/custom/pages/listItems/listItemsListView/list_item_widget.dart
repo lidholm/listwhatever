@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:listwhatever/custom/pages/listItems/listItemsListView/selected_list_item_cubit.dart';
 import 'package:listwhatever/custom/pages/listItems/models/list_item.dart';
-import 'package:listwhatever/standard/constants.dart';
+import 'package:listwhatever/standard/helpers/date_format_helper.dart';
 
 class ListItemWidget extends StatelessWidget {
   const ListItemWidget({
@@ -86,7 +86,7 @@ class ListItemWidget extends StatelessWidget {
     if (item.datetime != null) {
       // TODO: Check if time should be shown
       text =
-          '${item.name} - ${formatReadableDate(item.datetime!, DateFormatType.iso8601)}';
+          '${item.name} - ${DateFormatHelper.formatReadableDate(item.datetime!, DateFormatType.iso8601)}';
     }
 
     return Text(

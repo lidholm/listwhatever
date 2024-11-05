@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_builder_image_picker/form_builder_image_picker.dart';
-import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/firebase/firebaseStorageBloc/bloc/firebase_storage_bloc.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 const imageSize = 80.0;
 const String className = 'FormInputFieldImagePicker';
@@ -43,7 +43,8 @@ class _FormInputFieldImagePickerState extends State<FormInputFieldImagePicker> {
   @override
   Widget build(BuildContext context) {
     final firebaseStorageState = context.watch<FirebaseStorageBloc>().state;
-    logger.i('$className: firebaseStorageState: $firebaseStorageState');
+    LoggerHelper.logger
+        .i('$className: firebaseStorageState: $firebaseStorageState');
 
     return switch (firebaseStorageState) {
       Initial() => showImagePicker(null),
@@ -53,7 +54,7 @@ class _FormInputFieldImagePickerState extends State<FormInputFieldImagePicker> {
   }
 
   Widget showImagePickerForList(Map<String, String?> imageUrls) {
-    logger.i('$className: imageUrls: $imageUrls');
+    LoggerHelper.logger.i('$className: imageUrls: $imageUrls');
 
     if (imageUrls.isEmpty || imageUrls.values.first == null) {
       return const CircularProgressIndicator();
@@ -63,7 +64,7 @@ class _FormInputFieldImagePickerState extends State<FormInputFieldImagePicker> {
 
   Widget showImagePicker(String? imageUrl) {
     final initialValue = imageUrl == null ? null : [imageUrl];
-    // logger.i('$className: initialValue: $initialValue');
+    // LoggerHelper.logger.i('$className: initialValue: $initialValue');
     return FormBuilderImagePicker(
       key: Key(widget.field.id),
       name: widget.field.id,

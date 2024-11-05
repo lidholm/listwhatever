@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:listwhatever/custom/pages/listItems/searchLocation/geocoder/geocoderresult.dart';
-import 'package:listwhatever/standard/constants.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 const String className = 'FormInputFieldMap';
 
@@ -22,7 +22,7 @@ class _FormInputFieldMapState extends State<FormInputFieldMap> {
   GoogleMapController? mapController;
   @override
   Widget build(BuildContext context) {
-    logger.i('$className: field.value: ${widget.field.value}');
+    LoggerHelper.logger.i('$className: field.value: ${widget.field.value}');
 
     return FormBuilderField(
       name: widget.field.id,
@@ -45,7 +45,7 @@ class _FormInputFieldMapState extends State<FormInputFieldMap> {
   }
 
   CameraPosition getCameraPosition(FormFieldState<GeocoderResult?> formField) {
-    logger.i('$className: formField: ${formField.value}');
+    LoggerHelper.logger.i('$className: formField: ${formField.value}');
 
     var camera = const CameraPosition(
       target: LatLng(0, 0),
@@ -70,7 +70,7 @@ class _FormInputFieldMapState extends State<FormInputFieldMap> {
       );
     }
 
-    logger.i('$className: camera: $camera');
+    LoggerHelper.logger.i('$className: camera: $camera');
     return camera;
   }
 
@@ -80,7 +80,7 @@ class _FormInputFieldMapState extends State<FormInputFieldMap> {
   }
 
   Set<Marker> _createMarker(GeocoderResult? result) {
-    logger.i('$className: result: $result');
+    LoggerHelper.logger.i('$className: result: $result');
     if (result == null) return Set.of({});
 
     return Set.of({

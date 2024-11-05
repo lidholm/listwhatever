@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 import '/standard/authenticationClient/authentication_client.dart';
-import '/standard/constants.dart';
 import '/standard/userRepository/models/user.dart';
 import '/standard/userRepository/user_storage.dart';
 
@@ -65,7 +65,7 @@ class UserRepository {
   ///
   Stream<User> get user => _authenticationClient.user.map(
         (authenticationUser) {
-          logger.i(
+          LoggerHelper.logger.i(
             '$className => authenticationUser.email: ${authenticationUser.email}     QQQ9',
           );
           return fromAuthenticationUser(
@@ -93,18 +93,18 @@ class UserRepository {
   /// Throws a [LogInWithGoogleFailure] if an exception occurs.
   Future<void> logInWithGoogle() async {
     try {
-      logger.i('$className logInWithGoogle -> ');
+      LoggerHelper.logger.i('$className logInWithGoogle -> ');
       final userCreds = await _authenticationClient.logInWithGoogle();
-      logger
+      LoggerHelper.logger
           .i('$className userCreds: ${userCreds.toString().substring(0, 100)}');
     } on LogInWithGoogleFailure {
-      logger.i('logInWithGoogle');
+      LoggerHelper.logger.i('logInWithGoogle');
       rethrow;
     } on LogInWithGoogleCanceled {
-      logger.i('LogInWithGoogleCanceled');
+      LoggerHelper.logger.i('LogInWithGoogleCanceled');
       rethrow;
     } catch (error, stackTrace) {
-      logger.i('error');
+      LoggerHelper.logger.i('error');
       Error.throwWithStackTrace(
         LogInWithGoogleFailure(error, null),
         stackTrace,

@@ -81,7 +81,7 @@ class ImageButton<T> extends StatelessWidget {
   }
 
   Widget imageWidget() {
-    // logger.i('$className: imageUrl: $imageUrl');
+    // LoggerHelper.logger.i('$className: imageUrl: $imageUrl');
 
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {

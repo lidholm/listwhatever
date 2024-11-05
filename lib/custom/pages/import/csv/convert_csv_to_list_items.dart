@@ -1,8 +1,8 @@
 import 'package:csv/csv.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 import '/custom/pages/listItems/models/list_item.dart';
 
 import '/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
-import '/standard/constants.dart';
 
 enum Keywords {
   name,
@@ -27,7 +27,7 @@ class CsvConverter {
     final headers = rows[0].map((x) => (x as String).trim()).toList();
     final rest = rows.skip(1);
     final headerPositions = getHeaderPositions(headers);
-    logger.i('$className => headerPositions: $headerPositions');
+    LoggerHelper.logger.i('$className => headerPositions: $headerPositions');
 
     for (final row in rest) {
       if (row.isEmpty || (row.length == 1 && (row[0] as String).trim() == '')) {
@@ -40,7 +40,7 @@ class CsvConverter {
         try {
           latlong = LatLong(lat: double.parse(lat), lng: double.parse(lng));
         } catch (e) {
-          logger
+          LoggerHelper.logger
             ..e("Can't parse latlong: $e, $row")
             ..i("Can't parse latlong: $e, $row");
         }
@@ -100,7 +100,7 @@ class CsvConverter {
         return keyword.name.toLowerCase();
       }
     }
-    logger.i('$className => $header is not matching a keyword');
+    LoggerHelper.logger.i('$className => $header is not matching a keyword');
     return null;
   }
 

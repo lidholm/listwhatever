@@ -25,7 +25,7 @@ Future<EmulatorInfo> getEmulatorInfo() async {
   if (useEmulator == false || override == false) {
     return EmulatorInfo(type: EmulatorType.none, address: null);
   }
-  // logger.d('useEmulator: $useEmulator');
+  // LoggerHelper.logger.d('useEmulator: $useEmulator');
 
   if (kIsWeb) {
     return EmulatorInfo(type: EmulatorType.localhost, address: 'localhost');

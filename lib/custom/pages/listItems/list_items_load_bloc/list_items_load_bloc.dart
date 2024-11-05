@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
+import 'package:listwhatever/standard/helpers/logger_helper.dart';
 import '/custom/pages/listItems/models/list_item.dart';
 import '/custom/pages/listItems/service/list_items_service.dart';
 
-import '/standard/constants.dart';
 import 'list_items_load_event.dart';
 import 'list_items_load_state.dart';
 
@@ -26,7 +26,7 @@ class ListItemsLoadBloc extends Bloc<ListItemsLoadEvent, ListItemsLoadState> {
 
       emit(ListItemsLoadLoaded(const []));
     } catch (e) {
-      logger.e('Error: $e');
+      LoggerHelper.logger.e('Error: $e');
       emit(ListItemsLoadError('Failed to change user.\n$e'));
     }
   }
@@ -35,7 +35,8 @@ class ListItemsLoadBloc extends Bloc<ListItemsLoadEvent, ListItemsLoadState> {
     LoadListItems event,
     Emitter<ListItemsLoadState> emit,
   ) async {
-    logger.i('$className => loading list item for list ${event.actualListId}');
+    LoggerHelper.logger
+        .i('$className => loading list item for list ${event.actualListId}');
     try {
       emit(ListItemsLoadLoading());
       final listItems =
@@ -45,7 +46,7 @@ class ListItemsLoadBloc extends Bloc<ListItemsLoadEvent, ListItemsLoadState> {
 
       emit(ListItemsLoadLoaded(listItems));
     } catch (e) {
-      logger.e('Error: $e');
+      LoggerHelper.logger.e('Error: $e');
       emit(ListItemsLoadError('Failed to load listItems.\n$e'));
     }
   }
@@ -54,7 +55,7 @@ class ListItemsLoadBloc extends Bloc<ListItemsLoadEvent, ListItemsLoadState> {
     WatchListItems event,
     Emitter<ListItemsLoadState> emit,
   ) async {
-    // logger.i('$className => loading list item for list ${event.actualListId}');
+    // LoggerHelper.logger.i('$className => loading list item for list ${event.actualListId}');
     try {
       emit(ListItemsLoadLoading());
       await Future<void>.delayed(const Duration(seconds: 1));
@@ -65,7 +66,7 @@ class ListItemsLoadBloc extends Bloc<ListItemsLoadEvent, ListItemsLoadState> {
         },
       );
     } catch (e) {
-      logger.e('Error: $e');
+      LoggerHelper.logger.e('Error: $e');
       emit(ListItemsLoadError('Failed to load listItems.\n$e'));
     }
   }

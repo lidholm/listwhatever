@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
-import '/standard/constants.dart';
+import 'package:listwhatever/standard/helpers/date_format_helper.dart';
+import 'package:listwhatever/standard/helpers/date_helper.dart';
 import '/standard/widgets/border_with_header.dart';
 
 const startDateFieldName = 'startDate';
@@ -37,7 +38,8 @@ class _DateFilterState extends State<DateFilter> {
                 startDateFieldName,
                 () => setState(() {
                   startDate = null;
-                  widget.formKey.currentState?.fields[startDateFieldName]?.didChange(startDate);
+                  widget.formKey.currentState?.fields[startDateFieldName]
+                      ?.didChange(startDate);
                 }),
               ),
             ],
@@ -52,7 +54,8 @@ class _DateFilterState extends State<DateFilter> {
                 endDateFieldName,
                 () => setState(() {
                   endDate = null;
-                  widget.formKey.currentState?.fields[endDateFieldName]?.didChange(endDate);
+                  widget.formKey.currentState?.fields[endDateFieldName]
+                      ?.didChange(endDate);
                 }),
               ),
             ],
@@ -79,12 +82,14 @@ class _DateFilterState extends State<DateFilter> {
         ),
         name: name,
         inputType: InputType.date,
-        firstDate: minDateTime,
-        lastDate: maxDateTime,
+        firstDate: DateHelper.minDateTime,
+        lastDate: DateHelper.maxDateTime,
         format: getDateFormatter(),
         validator: (val) {
-          final startDate = formKey.currentState?.fields[startDateFieldName]?.value as DateTime?;
-          final endDate = formKey.currentState?.fields[endDateFieldName]?.value as DateTime?;
+          final startDate = formKey
+              .currentState?.fields[startDateFieldName]?.value as DateTime?;
+          final endDate = formKey.currentState?.fields[endDateFieldName]?.value
+              as DateTime?;
           if (startDate != null && endDate != null) {
             if (startDate.compareTo(endDate) > 0) {
               return 'Start date has to be before end date';
@@ -97,7 +102,7 @@ class _DateFilterState extends State<DateFilter> {
   }
 
   DateFormat getDateFormatter() {
-    return dateFormatter;
+    return DateFormatHelper.dateFormatter;
     // TODO: return firestoreUser?.settings.dateFormatType == DateFormatType.ISO_8601
     //     ? dateFormatter
     //     : usDateFormatter;
