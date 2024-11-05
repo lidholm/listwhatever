@@ -50,12 +50,14 @@ const distanceMax = 50.0;
 
 class FilterView extends StatefulWidget {
   const FilterView({
+    required this.isLoading,
     required this.list,
     required this.listItems,
     required this.filters,
     required this.settings,
     super.key,
   });
+  final bool isLoading;
   final ListOfThings list;
   final List<ListItem> listItems;
   final Filters filters;
@@ -70,22 +72,19 @@ class _FilterViewState extends State<FilterView> {
   final _formKey = GlobalKey<FormBuilderState>();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     // logger.i('$className listItems: ${widget.listItems}');
 
-    final fields = [
-      itemNameInputField(),
-      startDateInputField(),
-      endDateInputField(),
-      distanceInputField(),
-      ...categoriesFields(getCategories(widget.listItems)),
-      resetButton(),
-    ];
+    final fields = widget.isLoading
+        ? generateShimmerFormFields(4, SectionName.name.name)
+        : [
+            itemNameInputField(),
+            startDateInputField(),
+            endDateInputField(),
+            distanceInputField(),
+            ...categoriesFields(getCategories(widget.listItems)),
+            resetButton(),
+          ];
     // logger.i('fields: ${fields.length}');
 
     final sections = getSections();
@@ -96,6 +95,7 @@ class _FilterViewState extends State<FilterView> {
       fields: fields,
       focusFieldName: FieldId.submit.name,
       changeCallback: updateFilters,
+      isLoading: widget.isLoading,
     );
 
     return Container(
@@ -117,27 +117,27 @@ class _FilterViewState extends State<FilterView> {
       FormInputSection(
         name: SectionName.name.name,
         direction: x_stack.AxisDirection.vertical,
-        showBorder: true,
+        showBorder: !widget.isLoading,
       ),
       FormInputSection(
         name: SectionName.dates.name,
         direction: x_stack.AxisDirection.vertical,
-        showBorder: true,
+        showBorder: !widget.isLoading,
       ),
       FormInputSection(
         name: SectionName.distance.name,
         direction: x_stack.AxisDirection.vertical,
-        showBorder: true,
+        showBorder: !widget.isLoading,
       ),
       FormInputSection(
         name: SectionName.categories.name,
         direction: x_stack.AxisDirection.vertical,
-        showBorder: true,
+        showBorder: !widget.isLoading,
       ),
       FormInputSection(
         name: SectionName.submit.name,
         direction: x_stack.AxisDirection.horizontal,
-        showBorder: false,
+        showBorder: !widget.isLoading,
       ),
     ];
   }

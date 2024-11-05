@@ -72,6 +72,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       formKey: _formKey,
       sections: sections,
       fields: fields,
+      isLoading: false, // TODO: Update
     );
 
     return SafeArea(

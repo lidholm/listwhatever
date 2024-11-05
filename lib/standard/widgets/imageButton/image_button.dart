@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:listwhatever/standard/widgets/shimmer/shimmer_loading.dart';
 import '/standard/appUi/colors/app_colors.dart';
-import '/standard/navigation/widgets/shimmer/shimmer_loading.dart';
 
 const imageRadius = 4.0;
 const roundedRadius = 20.0;

@@ -23,10 +23,12 @@ class CrashlyticsPage extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    FirebaseCrashlytics.instance.setCustomKey('example', 'flutterfire');
+                    FirebaseCrashlytics.instance
+                        .setCustomKey('example', 'flutterfire');
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('Custom Key "example: flutterfire" has been set \n'
+                        content: Text(
+                            'Custom Key "example: flutterfire" has been set \n'
                             'Key will appear in Firebase Console once an error has been reported.'),
                         duration: Duration(seconds: 5),
                       ),
@@ -39,7 +41,8 @@ class CrashlyticsPage extends StatelessWidget {
                     FirebaseCrashlytics.instance.log('This is a log example');
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('The message "This is a log example" has been logged \n'
+                        content: Text(
+                            'The message "This is a log example" has been logged \n'
                             'Message will appear in Firebase Console once an error has been reported.'),
                         duration: Duration(seconds: 5),
                       ),
@@ -99,7 +102,7 @@ class CrashlyticsPage extends StatelessWidget {
                     // `runZonedGuarded`.
                     runZonedGuarded(
                       () {
-                        Future<void>.delayed(const Duration(seconds: 2), () {
+                        Future<void>.delayed(const Duration(seconds: 1), () {
                           final list = <int>[];
                           logger.d(list[100]);
                         });

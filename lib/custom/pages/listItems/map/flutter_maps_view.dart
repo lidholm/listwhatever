@@ -6,6 +6,14 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_cancellable_tile_provider/flutter_map_cancellable_tile_provider.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:listwhatever/custom/pages/listItems/filters/bloc/filter_bloc.dart';
+import 'package:listwhatever/custom/pages/listItems/filters/bloc/filter_state.dart';
+import 'package:listwhatever/custom/pages/listItems/filters/filtering.dart';
+import 'package:listwhatever/custom/pages/listItems/listItemsListView/list_items_sort_order_cubit.dart';
+import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_bloc.dart';
+import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
+import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_bloc.dart';
+import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_state.dart';
 
 import '/custom/currentLocationBloc/current_location_bloc.dart';
 import '/custom/pages/listItems/map/custom_marker.dart';
@@ -13,8 +21,7 @@ import '/custom/pages/listItems/models/list_item.dart';
 import '/standard/constants.dart';
 
 class FlutterMapsView extends StatefulWidget {
-  const FlutterMapsView({required this.items, required this.onTap, super.key});
-  final List<ListItem> items;
+  const FlutterMapsView({required this.onTap, super.key});
   final void Function(String itemId) onTap;
 
   @override
@@ -33,10 +40,28 @@ class FlutterMapsViewState extends State<FlutterMapsView> {
 
   @override
   Widget build(BuildContext context) {
+    final sortOrder = context.watch<ListItemsSortOrderCubit>().state;
+
+    final listState = context.watch<ListLoadBloc>().state;
+    final listItemsState = context.watch<ListItemsLoadBloc>().state;
     final currentLocation = context.watch<CurrentLocationCubit>().state;
+    final filtersState = context.watch<FilterBloc>().state;
+
+    var items = <ListItem>[];
+
+    if (listState is ListLoadLoaded &&
+        listItemsState is ListItemsLoadLoaded &&
+        listState.list != null &&
+        filtersState is FiltersUpdated) {
+      final list = listState.list!;
+      items = listItemsState.listItems;
+      final filters = filtersState.filters;
+
+      items = Filtering.sortAndFilterItems(list, items, filters, sortOrder);
+    }
 
     logger.d('rebuilding map view');
-    final options = getMapOptions();
+    final options = getMapOptions(items);
 
     final currentLocationMarker = getCurrentLocationMarker(currentLocation);
     return Column(
@@ -48,7 +73,7 @@ class FlutterMapsViewState extends State<FlutterMapsView> {
               openStreetMapTileLayer,
               MarkerLayer(
                 markers: [
-                  ...getMarkers(),
+                  ...getMarkers(items),
                   if (currentLocationMarker != null) currentLocationMarker,
                 ],
               ),
@@ -59,8 +84,8 @@ class FlutterMapsViewState extends State<FlutterMapsView> {
     );
   }
 
-  MapOptions getMapOptions() {
-    final initialCenter = getCenter();
+  MapOptions getMapOptions(List<ListItem> items) {
+    final initialCenter = getCenter(items);
     return initialCenter != null
         ? MapOptions(
             initialCenter: initialCenter,
@@ -71,8 +96,8 @@ class FlutterMapsViewState extends State<FlutterMapsView> {
           );
   }
 
-  (LatLng, LatLng)? getBounds() {
-    final latLngList = widget.items
+  (LatLng, LatLng)? getBounds(List<ListItem> items) {
+    final latLngList = items
         .where((e) => e.latLong != null)
         .map((e) => e.latLong!.toLatLng())
         .toList();
@@ -99,8 +124,8 @@ class FlutterMapsViewState extends State<FlutterMapsView> {
     return (LatLng(x1!, y1!), LatLng(x0!, y0!));
   }
 
-  LatLng? getCenter() {
-    final bounds = getBounds();
+  LatLng? getCenter(List<ListItem> items) {
+    final bounds = getBounds(items);
     if (bounds == null) {
       return null;
     }
@@ -110,9 +135,9 @@ class FlutterMapsViewState extends State<FlutterMapsView> {
     );
   }
 
-  List<Marker> getMarkers() {
+  List<Marker> getMarkers(List<ListItem> items) {
     final markers = <Marker>[];
-    for (final item in widget.items) {
+    for (final item in items) {
       if (item.latLong != null) {
         markers.add(
           Marker(

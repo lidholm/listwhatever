@@ -52,13 +52,13 @@ class _FormInputFieldImagePickerState extends State<FormInputFieldImagePicker> {
     };
   }
 
-  Widget showImagePickerForList(List<String?> imageUrls) {
+  Widget showImagePickerForList(Map<String, String?> imageUrls) {
     logger.i('$className: imageUrls: $imageUrls');
 
-    if (imageUrls.isEmpty || imageUrls.first == null) {
+    if (imageUrls.isEmpty || imageUrls.values.first == null) {
       return const CircularProgressIndicator();
     }
-    return showImagePicker(imageUrls.first);
+    return showImagePicker(imageUrls.values.first);
   }
 
   Widget showImagePicker(String? imageUrl) {

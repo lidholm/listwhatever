@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/custom/pages/listItems/filters/show_filter_cubit.dart';
 import 'package:listwhatever/custom/pages/lists/categories_for_list/categories_for_list_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/page/list_type_cubit/list_type_cubit.dart';
 import 'package:listwhatever/standard/firebase/firebaseStorageBloc/bloc/firebase_storage_bloc.dart';
@@ -95,7 +96,11 @@ class App extends StatelessWidget {
               ],
             ),
           ),
-          BlocProvider(create: (_) => FirebaseStorageBloc()),
+          BlocProvider(
+            create: (_) => FirebaseStorageBloc(
+              userListsService: userListsService,
+            ),
+          ),
           BlocProvider(create: (_) => ThemeModeBloc()),
           BlocProvider<ListTypeCubit>(create: (context) => ListTypeCubit()),
           BlocProvider<OnScreenLogsCubit>(
@@ -105,7 +110,7 @@ class App extends StatelessWidget {
             create: (context) => SearchLocationBloc(),
           ),
           BlocProvider<FilterBloc>(
-            create: (context) => FilterBloc(listItemsService),
+            create: (context) => FilterBloc(),
           ),
           BlocProvider<SharedListBloc>(
             create: (context) => SharedListBloc(sharedListsService),
@@ -140,6 +145,9 @@ class App extends StatelessWidget {
           ),
           BlocProvider<ListItemsSortOrderCubit>(
             create: (context) => ListItemsSortOrderCubit(),
+          ),
+          BlocProvider<ShowFilterCubit>(
+            create: (context) => ShowFilterCubit(),
           ),
           BlocProvider<RedirectCubit>(create: (context) => RedirectCubit()),
           BlocProvider<CurrentLocationCubit>(

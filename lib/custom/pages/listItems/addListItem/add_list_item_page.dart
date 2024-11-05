@@ -183,6 +183,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
       formKey: _formKey,
       sections: sections,
       fields: fields,
+      isLoading: false, // TODO: Update
     );
 
     return BlocListener<ListItemCrudBloc, ListItemCrudState>(
@@ -250,7 +251,8 @@ class _AddListItemPageState extends State<AddListItemPage> {
     }
     if (categoriesForListState is! CategoriesForListLoaded) {
       return Text(
-          'categoriesForListState is! CategoriesForListLoaded: $categoriesForListState');
+        'categoriesForListState is! CategoriesForListLoaded: $categoriesForListState',
+      );
     }
     return null;
   }

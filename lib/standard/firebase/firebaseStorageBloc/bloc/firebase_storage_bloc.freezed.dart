@@ -16,44 +16,43 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$FirebaseStorageEvent {
-  List<String> get filenames => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(List<String> filenames) loadFiles,
+    required TResult Function() getAllUserLists,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(List<String> filenames)? loadFiles,
+    TResult? Function()? getAllUserLists,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<String> filenames)? loadFiles,
+    TResult Function()? getAllUserLists,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadFiles value) loadFiles,
+    required TResult Function(_GetAllUserLists value) getAllUserLists,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoadFiles value)? loadFiles,
+    TResult? Function(_GetAllUserLists value)? getAllUserLists,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadFiles value)? loadFiles,
+    TResult Function(_GetAllUserLists value)? getAllUserLists,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  /// Create a copy of FirebaseStorageEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $FirebaseStorageEventCopyWith<FirebaseStorageEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -62,8 +61,6 @@ abstract class $FirebaseStorageEventCopyWith<$Res> {
   factory $FirebaseStorageEventCopyWith(FirebaseStorageEvent value,
           $Res Function(FirebaseStorageEvent) then) =
       _$FirebaseStorageEventCopyWithImpl<$Res, FirebaseStorageEvent>;
-  @useResult
-  $Res call({List<String> filenames});
 }
 
 /// @nodoc
@@ -79,27 +76,13 @@ class _$FirebaseStorageEventCopyWithImpl<$Res,
 
   /// Create a copy of FirebaseStorageEvent
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? filenames = null,
-  }) {
-    return _then(_value.copyWith(
-      filenames: null == filenames
-          ? _value.filenames
-          : filenames // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$LoadFilesImplCopyWith<$Res>
-    implements $FirebaseStorageEventCopyWith<$Res> {
+abstract class _$$LoadFilesImplCopyWith<$Res> {
   factory _$$LoadFilesImplCopyWith(
           _$LoadFilesImpl value, $Res Function(_$LoadFilesImpl) then) =
       __$$LoadFilesImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({List<String> filenames});
 }
@@ -171,6 +154,7 @@ class _$LoadFilesImpl implements _LoadFiles {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(List<String> filenames) loadFiles,
+    required TResult Function() getAllUserLists,
   }) {
     return loadFiles(filenames);
   }
@@ -179,6 +163,7 @@ class _$LoadFilesImpl implements _LoadFiles {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(List<String> filenames)? loadFiles,
+    TResult? Function()? getAllUserLists,
   }) {
     return loadFiles?.call(filenames);
   }
@@ -187,6 +172,7 @@ class _$LoadFilesImpl implements _LoadFiles {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<String> filenames)? loadFiles,
+    TResult Function()? getAllUserLists,
     required TResult orElse(),
   }) {
     if (loadFiles != null) {
@@ -199,6 +185,7 @@ class _$LoadFilesImpl implements _LoadFiles {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadFiles value) loadFiles,
+    required TResult Function(_GetAllUserLists value) getAllUserLists,
   }) {
     return loadFiles(this);
   }
@@ -207,6 +194,7 @@ class _$LoadFilesImpl implements _LoadFiles {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoadFiles value)? loadFiles,
+    TResult? Function(_GetAllUserLists value)? getAllUserLists,
   }) {
     return loadFiles?.call(this);
   }
@@ -215,6 +203,7 @@ class _$LoadFilesImpl implements _LoadFiles {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadFiles value)? loadFiles,
+    TResult Function(_GetAllUserLists value)? getAllUserLists,
     required TResult orElse(),
   }) {
     if (loadFiles != null) {
@@ -227,15 +216,118 @@ class _$LoadFilesImpl implements _LoadFiles {
 abstract class _LoadFiles implements FirebaseStorageEvent {
   const factory _LoadFiles(final List<String> filenames) = _$LoadFilesImpl;
 
-  @override
   List<String> get filenames;
 
   /// Create a copy of FirebaseStorageEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadFilesImplCopyWith<_$LoadFilesImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetAllUserListsImplCopyWith<$Res> {
+  factory _$$GetAllUserListsImplCopyWith(_$GetAllUserListsImpl value,
+          $Res Function(_$GetAllUserListsImpl) then) =
+      __$$GetAllUserListsImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$GetAllUserListsImplCopyWithImpl<$Res>
+    extends _$FirebaseStorageEventCopyWithImpl<$Res, _$GetAllUserListsImpl>
+    implements _$$GetAllUserListsImplCopyWith<$Res> {
+  __$$GetAllUserListsImplCopyWithImpl(
+      _$GetAllUserListsImpl _value, $Res Function(_$GetAllUserListsImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of FirebaseStorageEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$GetAllUserListsImpl implements _GetAllUserLists {
+  const _$GetAllUserListsImpl();
+
+  @override
+  String toString() {
+    return 'FirebaseStorageEvent.getAllUserLists()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$GetAllUserListsImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(List<String> filenames) loadFiles,
+    required TResult Function() getAllUserLists,
+  }) {
+    return getAllUserLists();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<String> filenames)? loadFiles,
+    TResult? Function()? getAllUserLists,
+  }) {
+    return getAllUserLists?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<String> filenames)? loadFiles,
+    TResult Function()? getAllUserLists,
+    required TResult orElse(),
+  }) {
+    if (getAllUserLists != null) {
+      return getAllUserLists();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadFiles value) loadFiles,
+    required TResult Function(_GetAllUserLists value) getAllUserLists,
+  }) {
+    return getAllUserLists(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadFiles value)? loadFiles,
+    TResult? Function(_GetAllUserLists value)? getAllUserLists,
+  }) {
+    return getAllUserLists?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadFiles value)? loadFiles,
+    TResult Function(_GetAllUserLists value)? getAllUserLists,
+    required TResult orElse(),
+  }) {
+    if (getAllUserLists != null) {
+      return getAllUserLists(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetAllUserLists implements FirebaseStorageEvent {
+  const factory _GetAllUserLists() = _$GetAllUserListsImpl;
 }
 
 /// @nodoc
@@ -244,21 +336,21 @@ mixin _$FirebaseStorageState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<String> imageUrls) filesLoaded,
+    required TResult Function(Map<String, String> imageUrls) filesLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<String> imageUrls)? filesLoaded,
+    TResult? Function(Map<String, String> imageUrls)? filesLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<String> imageUrls)? filesLoaded,
+    TResult Function(Map<String, String> imageUrls)? filesLoaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -351,7 +443,7 @@ class _$InitialImpl implements Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<String> imageUrls) filesLoaded,
+    required TResult Function(Map<String, String> imageUrls) filesLoaded,
   }) {
     return initial();
   }
@@ -361,7 +453,7 @@ class _$InitialImpl implements Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<String> imageUrls)? filesLoaded,
+    TResult? Function(Map<String, String> imageUrls)? filesLoaded,
   }) {
     return initial?.call();
   }
@@ -371,7 +463,7 @@ class _$InitialImpl implements Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<String> imageUrls)? filesLoaded,
+    TResult Function(Map<String, String> imageUrls)? filesLoaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -462,7 +554,7 @@ class _$LoadingImpl implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<String> imageUrls) filesLoaded,
+    required TResult Function(Map<String, String> imageUrls) filesLoaded,
   }) {
     return loading();
   }
@@ -472,7 +564,7 @@ class _$LoadingImpl implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<String> imageUrls)? filesLoaded,
+    TResult? Function(Map<String, String> imageUrls)? filesLoaded,
   }) {
     return loading?.call();
   }
@@ -482,7 +574,7 @@ class _$LoadingImpl implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<String> imageUrls)? filesLoaded,
+    TResult Function(Map<String, String> imageUrls)? filesLoaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -536,7 +628,7 @@ abstract class _$$FilesLoadedImplCopyWith<$Res> {
           _$FilesLoadedImpl value, $Res Function(_$FilesLoadedImpl) then) =
       __$$FilesLoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<String> imageUrls});
+  $Res call({Map<String, String> imageUrls});
 }
 
 /// @nodoc
@@ -558,7 +650,7 @@ class __$$FilesLoadedImplCopyWithImpl<$Res>
       null == imageUrls
           ? _value._imageUrls
           : imageUrls // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as Map<String, String>,
     ));
   }
 }
@@ -566,15 +658,15 @@ class __$$FilesLoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FilesLoadedImpl implements FilesLoaded {
-  const _$FilesLoadedImpl(final List<String> imageUrls)
+  const _$FilesLoadedImpl(final Map<String, String> imageUrls)
       : _imageUrls = imageUrls;
 
-  final List<String> _imageUrls;
+  final Map<String, String> _imageUrls;
   @override
-  List<String> get imageUrls {
-    if (_imageUrls is EqualUnmodifiableListView) return _imageUrls;
+  Map<String, String> get imageUrls {
+    if (_imageUrls is EqualUnmodifiableMapView) return _imageUrls;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_imageUrls);
+    return EqualUnmodifiableMapView(_imageUrls);
   }
 
   @override
@@ -608,7 +700,7 @@ class _$FilesLoadedImpl implements FilesLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<String> imageUrls) filesLoaded,
+    required TResult Function(Map<String, String> imageUrls) filesLoaded,
   }) {
     return filesLoaded(imageUrls);
   }
@@ -618,7 +710,7 @@ class _$FilesLoadedImpl implements FilesLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<String> imageUrls)? filesLoaded,
+    TResult? Function(Map<String, String> imageUrls)? filesLoaded,
   }) {
     return filesLoaded?.call(imageUrls);
   }
@@ -628,7 +720,7 @@ class _$FilesLoadedImpl implements FilesLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<String> imageUrls)? filesLoaded,
+    TResult Function(Map<String, String> imageUrls)? filesLoaded,
     required TResult orElse(),
   }) {
     if (filesLoaded != null) {
@@ -673,9 +765,10 @@ class _$FilesLoadedImpl implements FilesLoaded {
 }
 
 abstract class FilesLoaded implements FirebaseStorageState {
-  const factory FilesLoaded(final List<String> imageUrls) = _$FilesLoadedImpl;
+  const factory FilesLoaded(final Map<String, String> imageUrls) =
+      _$FilesLoadedImpl;
 
-  List<String> get imageUrls;
+  Map<String, String> get imageUrls;
 
   /// Create a copy of FirebaseStorageState
   /// with the given fields replaced by the non-null parameter values.

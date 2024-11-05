@@ -8,7 +8,9 @@ import 'lists/lists_load_events/lists_state.dart';
 
 class ListOrListItemNotLoadedHandler {
   static Widget? handleListAndListItemsState(
-      ListLoadState listState, ListItemsLoadState listItemsState) {
+    ListLoadState listState,
+    ListItemsLoadState listItemsState,
+  ) {
     final listView = handleListState(listState);
     if (listView != null) {
       return listView;
@@ -20,8 +22,25 @@ class ListOrListItemNotLoadedHandler {
     return null;
   }
 
+  static Widget? handleListAndListItemsErrors(
+    ListLoadState listState,
+    ListItemsLoadState listItemsState,
+  ) {
+    final listView = handleListError(listState);
+    if (listView != null) {
+      return listView;
+    }
+    final listItemsView = handleListItemsError(listItemsState);
+    if (listItemsView != null) {
+      return listItemsView;
+    }
+    return null;
+  }
+
   static Widget? handleListAndListItemState(
-      ListLoadState listState, ListItemLoadState listItemState) {
+    ListLoadState listState,
+    ListItemLoadState listItemState,
+  ) {
     final listView = handleListState(listState);
     if (listView != null) {
       return listView;
@@ -51,11 +70,29 @@ class ListOrListItemNotLoadedHandler {
     };
   }
 
+  static Widget? handleListError(ListLoadState listState) {
+    return switch (listState) {
+      ListLoadError() => getErrorWidget(listState.errorMessage),
+      ListLoadInitial() => null,
+      ListLoadLoading() => null,
+      ListLoadLoaded() => null,
+    };
+  }
+
   static Widget? handleListItemsState(ListItemsLoadState listItemsState) {
     return switch (listItemsState) {
       ListItemsLoadError() => getErrorWidget(listItemsState.errorMessage),
       ListItemsLoadInitial() => circularProgressIndicatorView(),
       ListItemsLoadLoading() => circularProgressIndicatorView(),
+      ListItemsLoadLoaded() => null,
+    };
+  }
+
+  static Widget? handleListItemsError(ListItemsLoadState listItemsState) {
+    return switch (listItemsState) {
+      ListItemsLoadError() => getErrorWidget(listItemsState.errorMessage),
+      ListItemsLoadInitial() => null,
+      ListItemsLoadLoading() => null,
       ListItemsLoadLoaded() => null,
     };
   }
@@ -85,19 +122,19 @@ class ListOrListItemNotLoadedHandler {
 
   static Widget initialListView() {
     // TODO: This would be better as a shimmer
-    return Text('InitialView');
+    return const Text('InitialView');
   }
 
   static Widget loadingListView() {
-    return Text('loadingListView');
+    return const Text('loadingListView');
   }
 
   static Widget initialListsView() {
-    return Text('initialListsView');
+    return const Text('initialListsView');
   }
 
   static Widget loadingListsView() {
-    return Text('loadingListsView');
+    return const Text('loadingListsView');
   }
 
   static Widget circularProgressIndicatorView() {

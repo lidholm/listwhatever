@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:great_circle_distance_calculator/great_circle_distance_calculator.dart';
-import 'package:listwhatever/custom/pages/listItems/filters/filter_list_items.dart';
+import 'package:listwhatever/custom/pages/listItems/filters/filtering.dart';
 import 'package:listwhatever/custom/pages/listItems/filters/filters.dart';
 import 'package:listwhatever/custom/pages/listItems/models/list_item.dart';
 import 'package:listwhatever/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
@@ -14,7 +14,7 @@ void main() {
   group('filter items', () {
     test('return no items when no items exists', () {
       expect(
-        filterListItems(
+        Filtering.filterListItems(
           allItems: [],
           filters: emptyFilters,
           listHasDates: true,
@@ -24,7 +24,7 @@ void main() {
         equals(<ListItem>[]),
       );
       expect(
-        filterListItems(
+        Filtering.filterListItems(
           allItems: [],
           filters: Filters(
             regularCategoryFilters: {
@@ -43,7 +43,7 @@ void main() {
       var input = createListItemWithSpecifiedName('First');
       input = addCategoryAndValueToMapItem(input, 'some', 'value');
       expect(
-        filterListItems(
+        Filtering.filterListItems(
           allItems: [input],
           filters: emptyFilters,
           listHasDates: true,
@@ -60,7 +60,7 @@ void main() {
       final filters =
           Filters(regularCategoryFilters: <String, Set<String>>{'some': {}});
       expect(
-        filterListItems(
+        Filtering.filterListItems(
           allItems: [item1],
           filters: filters,
           listHasDates: true,
@@ -82,7 +82,7 @@ void main() {
         },
       );
       expect(
-        filterListItems(
+        Filtering.filterListItems(
           allItems: input,
           filters: filters,
           listHasDates: true,
@@ -104,7 +104,7 @@ void main() {
         },
       );
       expect(
-        filterListItems(
+        Filtering.filterListItems(
           allItems: input,
           filters: filters,
           listHasDates: true,
@@ -127,7 +127,7 @@ void main() {
         },
       );
       expect(
-        filterListItems(
+        Filtering.filterListItems(
           allItems: input,
           filters: filters,
           listHasDates: true,
@@ -151,7 +151,7 @@ void main() {
         },
       );
       expect(
-        filterListItems(
+        Filtering.filterListItems(
           allItems: input,
           filters: filters,
           listHasDates: true,
@@ -181,7 +181,7 @@ void main() {
         },
       );
       expect(
-        filterListItems(
+        Filtering.filterListItems(
           allItems: input,
           filters: filters,
           listHasDates: true,
@@ -206,7 +206,7 @@ void main() {
         regularCategoryFilters: {},
       );
       expect(
-        filterListItems(
+        Filtering.filterListItems(
           allItems: input,
           filters: filters,
           listHasDates: true,
@@ -233,7 +233,7 @@ void main() {
         startDate: DateTime.parse('2023-05-20'),
         regularCategoryFilters: {},
       );
-      final actual = filterListItems(
+      final actual = Filtering.filterListItems(
         allItems: input,
         filters: filters,
         listHasDates: true,
@@ -259,7 +259,7 @@ void main() {
         endDate: DateTime.parse('2023-05-20'),
         regularCategoryFilters: {},
       );
-      final actual = filterListItems(
+      final actual = Filtering.filterListItems(
         allItems: input,
         filters: filters,
         listHasDates: true,
@@ -297,7 +297,7 @@ void main() {
         endDate: DateTime.parse('2023-05-22'),
         regularCategoryFilters: {},
       );
-      final actual = filterListItems(
+      final actual = Filtering.filterListItems(
         allItems: input,
         filters: filters,
         listHasDates: true,
@@ -346,7 +346,7 @@ void main() {
         distance: 150,
       );
       expect(
-        filterListItems(
+        Filtering.filterListItems(
           allItems: input,
           filters: filters,
           listHasMap: true,
@@ -385,7 +385,7 @@ void main() {
         regularCategoryFilters: {},
       );
       expect(
-        filterListItems(
+        Filtering.filterListItems(
           allItems: input,
           filters: filters,
           listHasMap: true,
@@ -423,7 +423,7 @@ void main() {
         regularCategoryFilters: {},
       );
       expect(
-        filterListItems(
+        Filtering.filterListItems(
           allItems: input,
           filters: filters,
           listHasMap: true,
@@ -463,7 +463,7 @@ void main() {
         regularCategoryFilters: {},
       );
       expect(
-        filterListItems(
+        Filtering.filterListItems(
           allItems: input,
           filters: filters,
           listHasMap: true,
@@ -504,7 +504,7 @@ void main() {
         regularCategoryFilters: {},
       );
       expect(
-        filterListItems(
+        Filtering.filterListItems(
           allItems: input,
           filters: filters,
           listHasMap: true,
@@ -541,7 +541,7 @@ void main() {
         regularCategoryFilters: {},
       );
       expect(
-        filterListItems(
+        Filtering.filterListItems(
           allItems: input,
           filters: filters,
           listHasMap: true,
@@ -580,7 +580,7 @@ void main() {
         regularCategoryFilters: {},
       );
       expect(
-        filterListItems(
+        Filtering.filterListItems(
           allItems: input,
           filters: filters,
           listHasMap: true,
@@ -605,7 +605,7 @@ void main() {
         regularCategoryFilters: {},
       );
       expect(
-        filterListItems(
+        Filtering.filterListItems(
           allItems: input,
           filters: filters,
           listHasMap: true,
@@ -635,7 +635,7 @@ void main() {
         },
       );
       expect(
-        filterListItems(
+        Filtering.filterListItems(
           allItems: input,
           filters: filters,
           listHasDates: true,

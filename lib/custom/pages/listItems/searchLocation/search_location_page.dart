@@ -83,6 +83,7 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
       formKey: _formKey,
       sections: sections,
       fields: fields,
+      isLoading: false, // TODO: Update
     );
 
     return searchResultsListener(

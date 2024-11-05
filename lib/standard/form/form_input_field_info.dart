@@ -135,4 +135,8 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     required List<FormFieldValidator<bool>> validators,
     required String sectionName,
   }) = FormInputFieldInfoChips;
+
+  const factory FormInputFieldInfo.shimmer({
+    required String sectionName,
+  }) = FormInputFieldInfoShimmer;
 }
