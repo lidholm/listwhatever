@@ -21,7 +21,6 @@ class ListLoadBloc extends Bloc<ListLoadEvent, ListLoadState> {
       // logger.e('$className: event: $event');
       emit(ListLoadLoading());
       _listsService.changeUser(event.userId);
-      await Future<void>.delayed(const Duration(seconds: 1));
 
       emit(ListLoadLoaded(null));
     } catch (e) {
@@ -35,7 +34,6 @@ class ListLoadBloc extends Bloc<ListLoadEvent, ListLoadState> {
     try {
       emit(ListLoadLoading());
       final list = await _listsService.getList(event.listId);
-      await Future<void>.delayed(const Duration(seconds: 1));
 
       emit(ListLoadLoaded(list));
     } catch (e) {

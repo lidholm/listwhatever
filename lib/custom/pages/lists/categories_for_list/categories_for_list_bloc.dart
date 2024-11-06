@@ -39,7 +39,6 @@ class CategoriesForListBloc
       emit(CategoriesForListLoading());
       final categoriesForList =
           await _listsService.getCategoriesForList(event.listId);
-      await Future<void>.delayed(const Duration(seconds: 1));
 
       emit(CategoriesForListLoaded(categoriesForList));
     } catch (e) {
