@@ -27,7 +27,6 @@ alias deployWebBundle="firebase deploy --only firestore,hosting && git checkout 
 alias deployProductionAabToGoolePlay="sh scripts/gitlabci/deployToGooglePlayStore.sh"
 # alias deployProductionAabToFirebase="firebase appdistribution:distribute build/app/outputs/bundle/productionRelease/app-production-release.aab --app `grep mobilesdk_app_id android/app/google-services.json | head -1 | cut -d '"' -f 4` --testers-file deploy/android/testers.txt --release-notes-file deploy/release_notes.txt"
 
-
 runIntegrationTestsOnWeb () {
     for src in integration_test/*; do
         echo $src

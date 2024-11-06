@@ -154,3 +154,7 @@ node_modules
 linux/flutter/
 macos/Flutter/
 lib/standard/main/main_development2.dart
+backupEmulatorDataList.json
+backupProdDataList.json
+backupProdDataUserList.json
+emulatorImportData.json
