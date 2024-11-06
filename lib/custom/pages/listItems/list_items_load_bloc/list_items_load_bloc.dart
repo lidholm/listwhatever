@@ -22,7 +22,6 @@ class ListItemsLoadBloc extends Bloc<ListItemsLoadEvent, ListItemsLoadState> {
     try {
       emit(ListItemsLoadLoading());
       _listItemsService.changeUser(event.userId);
-      await Future<void>.delayed(const Duration(seconds: 1));
 
       emit(ListItemsLoadLoaded(const []));
     } catch (e) {
@@ -42,8 +41,6 @@ class ListItemsLoadBloc extends Bloc<ListItemsLoadEvent, ListItemsLoadState> {
       final listItems =
           await _listItemsService.getListItems(event.actualListId).first;
 
-      await Future<void>.delayed(const Duration(seconds: 1));
-
       emit(ListItemsLoadLoaded(listItems));
     } catch (e) {
       LoggerHelper.logger.e('Error: $e');
@@ -58,7 +55,6 @@ class ListItemsLoadBloc extends Bloc<ListItemsLoadEvent, ListItemsLoadState> {
     // LoggerHelper.logger.i('$className => loading list item for list ${event.actualListId}');
     try {
       emit(ListItemsLoadLoading());
-      await Future<void>.delayed(const Duration(seconds: 1));
       await emit.forEach(
         _listItemsService.getListItems(event.actualListId),
         onData: (List<ListItem> listItems) {
