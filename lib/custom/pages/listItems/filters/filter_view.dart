@@ -9,7 +9,6 @@ import 'package:listwhatever/standard/form/form_generator.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 import 'package:listwhatever/standard/form/form_input_section.dart';
 import 'package:listwhatever/standard/helpers/date_helper.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 import 'package:listwhatever/standard/helpers/shimmer_helper.dart';
 
 import '/custom/pages/listItems/filters/filters.dart';
@@ -321,12 +320,13 @@ class _FilterViewState extends State<FilterView> {
       }
     }
 
-    final categoryFilters = getRegularCategoryFilters(values);
-    LoggerHelper.logger.i('$className: categoryFilters: $categoryFilters');
+    final regularCategoryFilters = getRegularCategoryFilters(values);
+    // LoggerHelper.logger
+    //     .i('$className: regularCategoryFilters: $regularCategoryFilters');
 
     final filters = Filters(
       itemName: values[FieldId.name.name] as String?,
-      regularCategoryFilters: categoryFilters,
+      regularCategoryFilters: regularCategoryFilters,
       dateCategoryFilters: getDateCategoryFilters(values),
       timeOfDayCategoryFilters: getTimeOfDayCategoryFilters(values),
       numericCategoryFilters: getNumericCategoryFilters(values),
@@ -334,6 +334,8 @@ class _FilterViewState extends State<FilterView> {
       endDate: endDate,
       distance: maxDistance,
     );
+
+    // LoggerHelper.logger.i('$className filters: $filters');
     BlocProvider.of<FilterBloc>(context).add(UpdateFilters(filters));
   }
 
@@ -345,7 +347,12 @@ class _FilterViewState extends State<FilterView> {
     final categoryValues = values.entries
         .where((entry) => entry.key.startsWith(FieldId.categoryvalue.name))
         .map((e) => (e.key.split('-')[1], e.value))
-        .where((e) => widget.list.filterTypes[e.$1] == filterType)
+        .where(
+          (e) =>
+              widget.list.filterTypes[e.$1] == filterType ||
+              (filterType == FilterType.regular) &&
+                  widget.list.filterTypes[e.$1] == null,
+        )
         .toList();
 
     final categoryConvertedValues = categoryValues

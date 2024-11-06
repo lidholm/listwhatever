@@ -3,7 +3,6 @@ import 'package:listwhatever/custom/pages/listItems/filters/categories_helper.da
 import 'package:listwhatever/custom/pages/listItems/listItemsListView/list_items_sort_order_cubit.dart';
 import 'package:listwhatever/custom/pages/lists/models/list_of_things.dart';
 import 'package:listwhatever/standard/helpers/date_helper.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 import '/custom/pages/listItems/models/list_item.dart';
 import '/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
@@ -105,11 +104,11 @@ class Filtering {
 
     final matches =
         matchesDate && matchesCategories && matchesDistance && matchesItemName;
-    LoggerHelper.logger
-      ..i('distanceFilterCenter: $distanceFilterCenter')
-      ..i('filters.distance: ${filters.distance}')
-      ..i('matchesDate: $matchesDate')
-      ..i('matchesCategories: $matchesCategories');
+    // LoggerHelper.logger
+    //   ..i('distanceFilterCenter: $distanceFilterCenter')
+    //   ..i('filters.distance: ${filters.distance}')
+    //   ..i('matchesDate: $matchesDate')
+    //   ..i('matchesCategories: $matchesCategories');
     return matches;
   }
 
@@ -161,7 +160,7 @@ class Filtering {
     }
     if (filters.regularCategoryFilters!.values.expand((e) => e).isNotEmpty &&
         item.categories.isEmpty) {
-      LoggerHelper.logger.i("filters but no categories, so can't be a match");
+      // LoggerHelper.logger.i("filters but no categories, so can't be a match");
       return false;
     }
     // items without a date set will match even if a start or end date has been set
@@ -186,7 +185,7 @@ class Filtering {
         }
       }
       if (!matches) {
-        LoggerHelper.logger.d('not matching categories');
+        // LoggerHelper.logger.d('not matching categories');
         return false;
       }
     }
@@ -264,7 +263,8 @@ class Filtering {
 
     for (final entry in numericCategories) {
       final boundryTimeOfDays = filters.numericCategoryFilters![entry.$1]!;
-      for (final number in entry.$2.map(int.parse)) {
+      for (final number
+          in entry.$2.where((t) => t.trim().isNotEmpty).map(int.parse)) {
         if (number >= boundryTimeOfDays.$1 && number <= boundryTimeOfDays.$2) {
           return true;
         }
