@@ -24,7 +24,6 @@ import '/custom/pages/listItems/list_item_load_bloc/list_item_load_event.dart';
 import '/custom/pages/listItems/list_item_load_bloc/list_item_load_state.dart';
 import '/custom/pages/listItems/models/list_item.dart';
 import '/custom/pages/listItems/route/list_items_page_route.dart';
-import '/custom/pages/list_or_list_item_not_loaded_handler.dart';
 import '/custom/pages/lists/list_load_events/list_load_bloc.dart';
 import '/custom/pages/lists/list_load_events/list_load_event.dart';
 import '/custom/pages/lists/list_load_events/list_load_state.dart';
@@ -140,42 +139,40 @@ class _AddListItemPageState extends State<AddListItemPage> {
 
   @override
   Widget build(BuildContext context) {
-    //
-
     final listState = context.watch<ListLoadBloc>().state;
     final listItemState = context.watch<ListItemLoadBloc>().state;
     final categoriesForListState = context.watch<CategoriesForListBloc>().state;
-    listItem = getMaybeListItem(listItemState);
 
-    final notLoadedView = getNotLoadedView(
-      listState,
-      listItemState,
-      categoriesForListState,
-    );
-    if (notLoadedView != null) {
-      return notLoadedView;
+    if (listState is! ListLoadLoaded ||
+        listItemState is! ListItemLoadLoaded ||
+        categoriesForListState is! CategoriesForListLoaded) {
+      fields = List.generate(
+        5,
+        (i) =>
+            FormInputFieldInfo.shimmer(sectionName: SectionName.mainInfo.value),
+      );
+    } else {
+      list = listState.list;
+      categoriesForList = categoriesForListState.categoriesForList;
+      listItem = listItemState.listItem;
+
+      fields = [
+        nameInputField(),
+        extraInfoField(),
+        ...categoryFields(),
+        addCategoryButton(),
+        ...urlFields(),
+        addUrlButton(),
+        if (list!.withDates) dateInputField(),
+        if (list!.withMap) ...[
+          searchLocationButton(),
+          addressField(),
+          latLongField(),
+        ],
+        cancelButton(),
+        submitButton(),
+      ];
     }
-
-    list = (listState as ListLoadLoaded).list;
-    categoriesForList =
-        (categoriesForListState as CategoriesForListLoaded).categoriesForList;
-
-    fields = [
-      nameInputField(),
-      extraInfoField(),
-      ...categoryFields(),
-      addCategoryButton(),
-      ...urlFields(),
-      addUrlButton(),
-      if (list!.withDates) dateInputField(),
-      if (list!.withMap) ...[
-        searchLocationButton(),
-        addressField(),
-        latLongField(),
-      ],
-      cancelButton(),
-      submitButton(),
-    ];
 
     final sections = getSections();
 
@@ -229,34 +226,6 @@ class _AddListItemPageState extends State<AddListItemPage> {
     );
   }
 
-  Widget? getNotLoadedView(
-    ListLoadState listState,
-    ListItemLoadState listItemState,
-    CategoriesForListState categoriesForListState,
-  ) {
-    final listStateView =
-        ListOrListItemNotLoadedHandler.handleListState(listState);
-    if (listStateView != null) {
-      return listStateView;
-    }
-    if (listItemId != null) {
-      final listItemStateView =
-          ListOrListItemNotLoadedHandler.handleListItemState(listItemState);
-      if (listItemStateView != null) {
-        return listItemStateView;
-      }
-    }
-    if (categoriesForListState is CategoriesForListError) {
-      return Text('Error: ${categoriesForListState.errorMessage}');
-    }
-    if (categoriesForListState is! CategoriesForListLoaded) {
-      return Text(
-        'categoriesForListState is! CategoriesForListLoaded: $categoriesForListState',
-      );
-    }
-    return null;
-  }
-
   void save(Map<String, dynamic> values) {
     final latLongString = values[FieldId.latlong.name] as String?;
     final latLongParts =
@@ -290,15 +259,6 @@ class _AddListItemPageState extends State<AddListItemPage> {
       BlocProvider.of<ListItemCrudBloc>(context)
           .add(UpdateListItem(list!.id!, listItem));
     }
-  }
-
-  ListItem? getMaybeListItem(ListItemLoadState listItemState) {
-    if (listItemId != null) {
-      if (listItemState is ListItemLoadLoaded) {
-        return listItemState.listItem;
-      }
-    }
-    return null;
   }
 
   void listItemChangedListener(GoRouter goRouter, ListItemCrudState state) {

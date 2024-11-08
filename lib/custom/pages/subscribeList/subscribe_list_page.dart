@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
-import '/custom/pages/list_or_list_item_not_loaded_handler.dart';
 import '/custom/pages/shareList/bloc/shared_list_bloc.dart';
 import '/custom/pages/shareList/bloc/shared_list_event.dart';
 import '/custom/pages/shareList/bloc/shared_list_state.dart';
@@ -44,12 +43,16 @@ class _SubscribeListPageState extends State<SubscribeListPage> {
       ),
       body: BlocBuilder<SharedListBloc, SharedListState>(
         builder: (context, state) {
-          final listStateView =
-              ListOrListItemNotLoadedHandler.handleSharedListState(state);
-          if (listStateView != null) {
-            return listStateView;
+          if (state is! SharedListLoaded) {
+            return const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(),
+              ],
+            );
           }
-          final list = (state as SharedListLoaded).sharedList;
+
+          final list = state.sharedList;
           return FractionallySizedBox(
             widthFactor: 1,
             heightFactor: 1,

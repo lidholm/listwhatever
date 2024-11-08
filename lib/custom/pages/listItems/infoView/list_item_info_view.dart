@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:listwhatever/custom/pages/listItems/models/list_item.dart';
 import 'package:listwhatever/standard/helpers/date_format_helper.dart';
 
 import '/custom/navigation/routes.dart';
@@ -8,8 +9,6 @@ import '/custom/pages/listItems/addListItem/edit_list_item_page_route.dart';
 import '/custom/pages/listItems/list_item_load_bloc/list_item_load_bloc.dart';
 import '/custom/pages/listItems/list_item_load_bloc/list_item_load_event.dart';
 import '/custom/pages/listItems/list_item_load_bloc/list_item_load_state.dart';
-import '/custom/pages/list_or_list_item_not_loaded_handler.dart';
-import '/custom/pages/lists/list_load_events/list_load_bloc.dart';
 import '/standard/widgets/appBar/app_bar_action.dart';
 import '/standard/widgets/appBar/app_bar_action_icon.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
@@ -40,17 +39,7 @@ class _ListItemInfoViewState extends State<ListItemInfoView> {
 
   @override
   Widget build(BuildContext context) {
-    final listState = context.watch<ListLoadBloc>().state;
     final listItemState = context.watch<ListItemLoadBloc>().state;
-
-    final listStateView =
-        ListOrListItemNotLoadedHandler.handleListAndListItemState(
-      listState,
-      listItemState,
-    );
-    if (listStateView != null) {
-      return listStateView;
-    }
 
     final listItem = (listItemState as ListItemLoadLoaded).listItem;
     if (listItem == null) {
@@ -59,23 +48,7 @@ class _ListItemInfoViewState extends State<ListItemInfoView> {
     return Scaffold(
       appBar: CommonAppBar(
         title: '${listItem.name} Details',
-        actions: [
-          AppBarAction(
-            type: AppBarActionType.icon,
-            iconAction: AppBarActionIcon(
-              title: AppLocalizations.of(context).editListItem,
-              icon: Icons.edit,
-              key: const Key('editListItemAction'),
-              callback: () async {
-                final listItemBloc = context.read<ListItemLoadBloc>();
-                await EditListItemPageRoute(widget.actualListId!, listItem.id!)
-                    .push<void>(context);
-                listItemBloc
-                    .add(LoadListItem(widget.actualListId!, listItem.id!));
-              },
-            ),
-          ),
-        ],
+        actions: getAppBarActions(listItem),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
@@ -152,5 +125,24 @@ class _ListItemInfoViewState extends State<ListItemInfoView> {
         ),
       ),
     );
+  }
+
+  List<AppBarAction<dynamic>> getAppBarActions(ListItem listItem) {
+    return [
+      AppBarAction(
+        type: AppBarActionType.icon,
+        iconAction: AppBarActionIcon(
+          title: AppLocalizations.of(context).editListItem,
+          icon: Icons.edit,
+          key: const Key('editListItemAction'),
+          callback: () async {
+            final listItemBloc = context.read<ListItemLoadBloc>();
+            await EditListItemPageRoute(widget.actualListId!, listItem.id!)
+                .push<void>(context);
+            listItemBloc.add(LoadListItem(widget.actualListId!, listItem.id!));
+          },
+        ),
+      ),
+    ];
   }
 }

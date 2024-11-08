@@ -13,7 +13,6 @@ import '/custom/pages/listItems/list_items_load_bloc/list_items_load_bloc.dart';
 import '/custom/pages/listItems/list_items_load_bloc/list_items_load_event.dart';
 import '/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
 import '/custom/pages/listItems/models/list_item.dart';
-import '/custom/pages/list_or_list_item_not_loaded_handler.dart';
 import '/standard/widgets/appBar/common_app_bar.dart';
 import '/standard/widgets/vStack/v_stack.dart';
 
@@ -54,14 +53,16 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
       },
       child: BlocBuilder<ListItemsLoadBloc, ListItemsLoadState>(
         builder: (listItemsContext, listItemsState) {
-          final listItemsView =
-              ListOrListItemNotLoadedHandler.handleListItemsState(
-            listItemsState,
-          );
-          if (listItemsView != null) {
-            return listItemsView;
+          if (listItemsState is! ListItemsLoadLoaded) {
+            return const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(),
+              ],
+            );
           }
-          final listItems = (listItemsState as ListItemsLoadLoaded).listItems;
+
+          final listItems = listItemsState.listItems;
 
           return Scaffold(
             appBar: const CommonAppBar(
