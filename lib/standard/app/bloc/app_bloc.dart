@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 import '/standard/app/bloc/app_event.dart';
 import '/standard/app/bloc/app_state.dart';
@@ -40,7 +39,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   late StreamSubscription<User> _userSubscription;
 
   void _userChanged(User user) {
-    LoggerHelper.logger.i('$className => add(AppUserChanged(${user.id})) QQQ1');
     add(AuthenticationUserChanged(user));
   }
 
@@ -50,18 +48,14 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   ) async {
     final user = event.user;
 
-    LoggerHelper.logger
-      ..i('$className => state.status: $state      QQQQQ 21')
-      ..i('$className => user: $user      QQQQQ 22');
     if (user.isAnonymous()) {
-      LoggerHelper.logger.i('$className => AppStatus.loggedOut QQQQQ 23');
       emit(AppState.loggedOut());
       return;
     }
 
     emit(AppState.loggedIn(user));
     final userWithData = await tryReadUser(user);
-    // LoggerHelper.logger.i('$className => userWithData: $userWithData');
+    //
 
     if (userWithData == null) {
       emit(AppState.onboardingRequired(user));
@@ -82,14 +76,11 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   // }
 
   Future<void> _onUpdateUser(UpdateUser event, Emitter<AppState> emit) async {
-    LoggerHelper.logger.i('$className => _onUpdateUser $event');
     final updatedUser = await _userService.updateUser(event.user);
     emit(AppState.loggedInWithData(updatedUser));
   }
 
   Future<void> _onAddUser(AddUser event, Emitter<AppState> emit) async {
-    LoggerHelper.logger.i('$className => _onAddUser $event');
-
     final user = await _userService.addUser(event.user);
     emit(LoggedInWithData(user));
   }
@@ -105,8 +96,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
 
   Future<User?> tryReadUser(User user) async {
-    LoggerHelper.logger.i('$className => in tryReadUser QQQQ 31');
-
     try {
       final firestoreUser = await _userService.getUser(user.id);
       // logger
@@ -114,12 +103,11 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       //   ..i('$className => in firestoreUser $firestoreUser QQQQ 31');
 
       if (firestoreUser == null) {
-        LoggerHelper.logger.i('$className => return null');
         return null;
       }
 
       final fullUser = user.copyWith(settings: firestoreUser.settings);
-      // LoggerHelper.logger.i('$className => return fullUser: $fullUser');
+      //
       return fullUser;
     } catch (e) {
       return null;

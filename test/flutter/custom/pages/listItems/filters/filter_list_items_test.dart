@@ -5,7 +5,6 @@ import 'package:listwhatever/custom/pages/listItems/filters/filters.dart';
 import 'package:listwhatever/custom/pages/listItems/models/list_item.dart';
 import 'package:listwhatever/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
 import 'package:listwhatever/standard/helpers/date_helper.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 void main() {
   final emptyList = <ListItem>[];
@@ -321,17 +320,6 @@ void main() {
         latitude2: lat2,
         longitude2: lon2,
       );
-
-      LoggerHelper.logger
-        ..i(
-          'Distance from location 1 to 2 using the Haversine formula is: ${gcd.haversineDistance()} meters',
-        )
-        ..i(
-          'Distance from location 1 to 2 using the Spherical Law of Cosines is: ${gcd.sphericalLawOfCosinesDistance()} meters',
-        )
-        ..i(
-          'Distance from location 1 to 2 using the Vicenty`s formula is: ${gcd.vincentyDistance()} meters',
-        );
     });
 
     test('return the item when distance is within filter', () {

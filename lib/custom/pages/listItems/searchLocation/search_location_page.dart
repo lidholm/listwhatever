@@ -6,7 +6,6 @@ import 'package:go_router/go_router.dart';
 import 'package:listwhatever/standard/form/form_generator.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 import 'package:listwhatever/standard/form/form_input_section.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 import '/custom/pages/listItems/searchLocation/geocoder/geocoderresult.dart';
 import '/custom/pages/listItems/searchLocation/search_location_bloc.dart';
 import '/custom/pages/listItems/searchLocation/search_location_event.dart';
@@ -156,7 +155,7 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
           (result as GeocoderResult?)?.formattedAddress ?? '',
       sectionName: SectionName.info.name,
       onChange: (selection) => setState(() {
-        // LoggerHelper.logger.i('$className: onChange result: $selection');
+        //
         setState(() {
           final sel = selection as GeocoderResult?;
 
@@ -167,10 +166,6 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
                 ? ''
                 : '${sel.geometry.location.lat}, ${sel.geometry.location.lng}',
           });
-
-          LoggerHelper.logger.i(
-            '$className: _formKey.currentState: ${_formKey.currentState?.value}',
-          );
         });
       }),
     );
@@ -239,7 +234,7 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
   }
 
   void closeAndReturnValues(Map<String, dynamic> values) {
-    // LoggerHelper.logger.d('values: $values');
+    //
     final latLongString = values[FieldId.latlong.name]! as String;
     final latLongParts = latLongString.split(',');
     final lat = double.parse(latLongParts.first.trim());

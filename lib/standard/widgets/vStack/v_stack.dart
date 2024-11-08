@@ -57,7 +57,7 @@ class VStack extends StatelessWidget {
       SpacingPosition.after => null,
       SpacingPosition.beforeAndAfter => getSpacer(),
     };
-    // LoggerHelper.logger.i('$className: Spacer at $currentIndex: $w');
+    //
     return w;
   }
 
@@ -74,7 +74,7 @@ class VStack extends StatelessWidget {
       SpacingPosition.after => null,
       SpacingPosition.beforeAndAfter => null,
     };
-    // LoggerHelper.logger.i('$className: Spacer at $currentIndex: $w');
+    //
     return w;
   }
 
@@ -91,7 +91,7 @@ class VStack extends StatelessWidget {
       SpacingPosition.after => getSpacer(),
       SpacingPosition.beforeAndAfter => getSpacer(),
     };
-    // LoggerHelper.logger.i('$className: Spacer at $currentIndex: $w');
+    //
     return w;
   }
 }

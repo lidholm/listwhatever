@@ -17,7 +17,6 @@ class AppBlocObserver extends BlocObserver {
     Transition<dynamic, dynamic> transition,
   ) {
     super.onTransition(bloc, transition);
-    // LoggerHelper.logger.i('$className => onTransition ${bloc.runtimeType}: $transition');
   }
 
   @override

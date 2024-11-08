@@ -12,6 +12,11 @@ enum SliderType {
   timeOfDay,
 }
 
+enum DropDownType {
+  string,
+  image,
+}
+
 @freezed
 sealed class FormInputFieldInfo with _$FormInputFieldInfo {
   const factory FormInputFieldInfo.textArea({
@@ -32,8 +37,9 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     required dynamic currentValue,
     required List<dynamic> options,
     required String Function(dynamic) optionToString,
-    required List<FormFieldValidator<String>> validators,
     required String sectionName,
+    @Default(null) List<FormFieldValidator<String>>? validators,
+    @Default(DropDownType.string) DropDownType type,
     @Default(null) void Function(dynamic)? onChange,
     @Default(false) bool deletable,
     @Default(null) void Function()? onDelete,

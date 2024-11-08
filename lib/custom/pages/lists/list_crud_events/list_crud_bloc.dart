@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 import '/custom/pages/lists/lists_service.dart';
 import '/custom/pages/lists/models/user_list.dart';
@@ -27,7 +26,6 @@ class ListCrudBloc extends Bloc<ListCrudEvent, ListCrudState> {
       _listsService.changeUser(event.userId);
       emit(ListCrudChangedUser('Changed user for ListCrud'));
     } catch (e) {
-      LoggerHelper.logger.e('Error: $e');
       emit(ListCrudError('Failed to change user.\n$e'));
     }
   }
@@ -49,7 +47,6 @@ class ListCrudBloc extends Bloc<ListCrudEvent, ListCrudState> {
       await _userListsService.addList(userList);
       emit(ListCrudAdded(event.list));
     } catch (e) {
-      LoggerHelper.logger.e('Error: $e');
       emit(ListCrudError('Failed to add list.\n$e'));
     }
   }
@@ -58,7 +55,7 @@ class ListCrudBloc extends Bloc<ListCrudEvent, ListCrudState> {
     UpdateList event,
     Emitter<ListCrudState> emit,
   ) async {
-    // LoggerHelper.logger.i('$className => _onUpdateList');
+    //
     try {
       emit(ListCrudLoading());
       await _listsService.updateList(event.list);
@@ -75,7 +72,6 @@ class ListCrudBloc extends Bloc<ListCrudEvent, ListCrudState> {
       await _userListsService.updateList(userList);
       emit(ListCrudUpdated(event.list));
     } catch (e) {
-      LoggerHelper.logger.e('Error: $e');
       emit(ListCrudError('Failed to update list.\n$e'));
     }
   }
@@ -84,16 +80,12 @@ class ListCrudBloc extends Bloc<ListCrudEvent, ListCrudState> {
     DeleteList event,
     Emitter<ListCrudState> emit,
   ) async {
-    LoggerHelper.logger
-      ..i('_onDeleteList')
-      ..i('_listsService.userId: ${_listsService.userId}');
     try {
       emit(ListCrudLoading());
       await _userListsService.deleteList(event.listId);
       // TODO: Should the main list be deleted too? How about if it is shared?
       emit(ListCrudDeleted(event.listId));
     } catch (e) {
-      LoggerHelper.logger.e('Error: $e');
       emit(ListCrudError('Failed to delete list.\n$e'));
     }
   }

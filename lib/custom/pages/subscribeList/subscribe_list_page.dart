@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 import '/custom/pages/list_or_list_item_not_loaded_handler.dart';
 import '/custom/pages/shareList/bloc/shared_list_bloc.dart';
@@ -30,7 +29,6 @@ class SubscribeListPage extends StatefulWidget {
 }
 
 class _SubscribeListPageState extends State<SubscribeListPage> {
-  static String className = 'SubscribeListPage';
   @override
   void initState() {
     BlocProvider.of<SharedListBloc>(context)
@@ -82,7 +80,6 @@ class _SubscribeListPageState extends State<SubscribeListPage> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        LoggerHelper.logger.i('$className -> popping once');
                         GoRouter.of(context).pop();
                       },
                       child: Padding(

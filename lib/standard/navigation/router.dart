@@ -4,7 +4,6 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 import '/standard/app/bloc/app_bloc.dart';
 import '/standard/app/widgets/authenticated_user_listener.dart';
 
@@ -55,7 +54,6 @@ class GoRouterRefreshStream extends ChangeNotifier {
       _subscriptions.add(
         stream.asBroadcastStream().listen(
           (dynamic value) {
-            LoggerHelper.logger.d('$className.=> value has changed   QQQ8');
             notifyListeners();
           },
         ),

@@ -30,7 +30,7 @@ class FormInputFieldSingleSlider extends StatelessWidget {
           values = [formField.value!];
         }
 
-        // LoggerHelper.logger.i('$className => field: $field');
+        //
         return FlutterSlider(
           values: values,
           min: field.range.$1,

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 import '/standard/authenticationClient/authentication_client.dart';
 import '/standard/userRepository/models/user.dart';
@@ -63,16 +62,11 @@ class UserRepository {
   /// Stream of [User] which will emit the current user when
   /// the authentication state or the subscription plan changes.
   ///
-  Stream<User> get user => _authenticationClient.user.map(
-        (authenticationUser) {
-          LoggerHelper.logger.i(
-            '$className => authenticationUser.email: ${authenticationUser.email}     QQQ9',
-          );
-          return fromAuthenticationUser(
-            authenticationUser,
-          );
-        },
-      ).asBroadcastStream();
+  Stream<User> get user => _authenticationClient.user
+      .map(
+        fromAuthenticationUser,
+      )
+      .asBroadcastStream();
 
   /// Starts the Sign In with Apple Flow.
   ///
@@ -93,18 +87,12 @@ class UserRepository {
   /// Throws a [LogInWithGoogleFailure] if an exception occurs.
   Future<void> logInWithGoogle() async {
     try {
-      LoggerHelper.logger.i('$className logInWithGoogle -> ');
-      final userCreds = await _authenticationClient.logInWithGoogle();
-      LoggerHelper.logger
-          .i('$className userCreds: ${userCreds.toString().substring(0, 100)}');
+      await _authenticationClient.logInWithGoogle();
     } on LogInWithGoogleFailure {
-      LoggerHelper.logger.i('logInWithGoogle');
       rethrow;
     } on LogInWithGoogleCanceled {
-      LoggerHelper.logger.i('LogInWithGoogleCanceled');
       rethrow;
     } catch (error, stackTrace) {
-      LoggerHelper.logger.i('error');
       Error.throwWithStackTrace(
         LogInWithGoogleFailure(error, null),
         stackTrace,

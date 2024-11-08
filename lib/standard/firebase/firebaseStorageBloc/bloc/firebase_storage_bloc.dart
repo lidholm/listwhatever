@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:listwhatever/custom/pages/lists/user_lists_service.dart';
 import 'package:listwhatever/standard/firebase/firebase_storage.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 part 'firebase_storage_event.dart';
 part 'firebase_storage_state.dart';
@@ -26,22 +25,18 @@ class FirebaseStorageBloc
     Emitter<FirebaseStorageState> emit,
   ) async {
     emit(const Loading());
-    LoggerHelper.logger.i('$className: onLoadFile: ${event.filenames}');
 
     final urls = <String, String>{};
 
     for (final filename in event.filenames) {
       if (loadedFiles.containsKey(filename)) {
-        LoggerHelper.logger.i(
-          '$className: already loaded, just returning: $filename => ${loadedFiles[filename]}',
-        );
       } else {
         final imageUrl = await (await getFirebaseStorage())
             .ref()
             .child('images')
             .child(filename)
             .getDownloadURL();
-        // LoggerHelper.logger.i('$className: imageUrl: $imageUrl');
+        //
         loadedFiles[filename] = imageUrl;
       }
 
@@ -68,16 +63,13 @@ class FirebaseStorageBloc
 
     for (final filename in allImages) {
       if (loadedFiles.containsKey(filename)) {
-        LoggerHelper.logger.i(
-          '$className: already loaded, just returning: $filename => ${loadedFiles[filename]}',
-        );
       } else {
         final imageUrl = await (await getFirebaseStorage())
             .ref()
             .child('images')
             .child(filename)
             .getDownloadURL();
-        // LoggerHelper.logger.i('$className: imageUrl: $imageUrl');
+        //
         loadedFiles[filename] = imageUrl;
       }
 

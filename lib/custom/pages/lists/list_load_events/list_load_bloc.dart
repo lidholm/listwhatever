@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 import '/custom/pages/lists/lists_service.dart';
 
 import 'list_load_event.dart';
@@ -24,13 +23,12 @@ class ListLoadBloc extends Bloc<ListLoadEvent, ListLoadState> {
 
       emit(ListLoadLoaded(null));
     } catch (e) {
-      LoggerHelper.logger.e('$className _onChangeUser Error: $e');
       emit(ListLoadError('Failed to change user.\n$e'));
     }
   }
 
   Future<void> _onLoadList(LoadList event, Emitter<ListLoadState> emit) async {
-    // LoggerHelper.logger.i('$className => getting list  ${event.listId}');
+    //
     try {
       emit(ListLoadLoading());
       final list = await _listsService.getList(event.listId);
@@ -38,7 +36,7 @@ class ListLoadBloc extends Bloc<ListLoadEvent, ListLoadState> {
       emit(ListLoadLoaded(list));
     } catch (e) {
       print('$className _onLoadList Error: $e');
-      LoggerHelper.logger.e('$className _onLoadList Error: $e');
+
       emit(ListLoadError('Failed to load lists.\n$e'));
     }
   }

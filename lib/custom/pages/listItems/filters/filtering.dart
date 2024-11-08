@@ -77,7 +77,7 @@ class Filtering {
         filteredItems.add(item);
       }
     }
-    // LoggerHelper.logger.d('number of filteredItems: ${filteredItems.length}');
+    //
     return filteredItems;
   }
 
@@ -104,7 +104,7 @@ class Filtering {
 
     final matches =
         matchesDate && matchesCategories && matchesDistance && matchesItemName;
-    // LoggerHelper.logger
+    //
     //   ..i('distanceFilterCenter: $distanceFilterCenter')
     //   ..i('filters.distance: ${filters.distance}')
     //   ..i('matchesDate: $matchesDate')
@@ -118,11 +118,11 @@ class Filtering {
     required bool listHasDates,
   }) {
     if (filters.startDate == null && filters.endDate == null) {
-      // LoggerHelper.logger.d('no filters, so a match');
+      //
       return true;
     }
     if (!listHasDates) {
-      // LoggerHelper.logger.d("List doesn't have dates, so a match");
+      //
       return true;
     }
     if (item.datetime == null) {
@@ -134,7 +134,7 @@ class Filtering {
         item.datetime!.compareTo(filters.endDate ?? DateHelper.maxDateTime) <=
             0;
     if (!response) {
-      // LoggerHelper.logger.d('not matching date filter');
+      //
     }
     return response;
   }
@@ -155,12 +155,12 @@ class Filtering {
     */
     if (filters.regularCategoryFilters == null ||
         filters.regularCategoryFilters!.values.expand((e) => e).isEmpty) {
-      // LoggerHelper.logger.d('no filters, so a match');
+      //
       return true;
     }
     if (filters.regularCategoryFilters!.values.expand((e) => e).isNotEmpty &&
         item.categories.isEmpty) {
-      // LoggerHelper.logger.i("filters but no categories, so can't be a match");
+      //
       return false;
     }
     // items without a date set will match even if a start or end date has been set
@@ -185,7 +185,7 @@ class Filtering {
         }
       }
       if (!matches) {
-        // LoggerHelper.logger.d('not matching categories');
+        //
         return false;
       }
     }
@@ -263,8 +263,7 @@ class Filtering {
 
     for (final entry in numericCategories) {
       final boundryTimeOfDays = filters.numericCategoryFilters![entry.$1]!;
-      for (final number
-          in entry.$2.where((t) => t.trim().isNotEmpty).map(int.parse)) {
+      for (final number in getNumberValuesForCategory(entry)) {
         if (number >= boundryTimeOfDays.$1 && number <= boundryTimeOfDays.$2) {
           return true;
         }
@@ -272,6 +271,21 @@ class Filtering {
       return false;
     }
     return true;
+  }
+
+  static List<double> getNumberValuesForCategory((String, List<String>) entry) {
+    final response = <double>[];
+    for (final t in entry.$2) {
+      if (t.trim().isEmpty) {
+        continue;
+      }
+      final d = double.tryParse(t);
+      if (d == null) {
+        print('$className: error:: $t $entry');
+      }
+      response.add(d!);
+    }
+    return response;
   }
 
   static bool hasFilterForCategory(
@@ -304,10 +318,10 @@ class Filtering {
       latitude2: distanceFilterCenter.lat,
       longitude2: distanceFilterCenter.lng,
     );
-    // LoggerHelper.logger.d('distance: ${gcd.haversineDistance()}');
+    //
     final response = gcd.haversineDistance() < filters.distance!;
     if (!response) {
-      // LoggerHelper.logger.d('not matching distance filter');
+      //
     }
     return response;
   }

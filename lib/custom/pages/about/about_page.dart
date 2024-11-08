@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart'; // hide Page;
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '/l10n/l10n.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
@@ -14,9 +14,9 @@ class AboutPage extends StatelessWidget {
           padding: const EdgeInsets.all(80),
           child: Column(
             children: [
-              Text(AppLocalizations.of(context).versionLabel('0.0.46+0000001')),
-              Text(AppLocalizations.of(context).gitHashLabel('3d58f4d')),
-              Text(AppLocalizations.of(context).aboutDateLabel('2024-11-02 21:01:33 PDT')),
+              Text(AppLocalizations.of(context).versionLabel('<version>')),
+              Text(AppLocalizations.of(context).gitHashLabel('<git_hash>')),
+              Text(AppLocalizations.of(context).aboutDateLabel('<datetime>')),
               const Divider(),
             ],
           ),
