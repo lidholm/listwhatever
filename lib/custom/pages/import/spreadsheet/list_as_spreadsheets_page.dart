@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/custom/pages/listItems/list_item_load_bloc/list_item_load_state.dart';
 import 'package:listwhatever/standard/helpers/date_helper.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 
@@ -12,7 +13,6 @@ import '/custom/pages/listItems/list_items_load_bloc/list_items_load_event.dart'
 import '/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
 import '/custom/pages/listItems/models/list_item.dart';
 import '/custom/pages/listItems/searchLocation/geocoder/latlong.dart';
-import '/custom/pages/list_or_list_item_not_loaded_handler.dart';
 import '/custom/pages/lists/list_load_events/list_load_bloc.dart';
 import '/custom/pages/lists/list_load_events/list_load_event.dart';
 import '/custom/pages/lists/list_load_events/list_load_state.dart';
@@ -43,16 +43,16 @@ class _ListAsSpreadsheetsPageState extends State<ListAsSpreadsheetsPage> {
     final listState = context.watch<ListLoadBloc>().state;
     final listItemsState = context.watch<ListItemsLoadBloc>().state;
 
-    final listItemsStateView =
-        ListOrListItemNotLoadedHandler.handleListAndListItemsState(
-      listState,
-      listItemsState,
-    );
-    if (listItemsStateView != null) {
-      return listItemsStateView;
+    if (listState is! ListLoadLoaded || listItemsState is! ListItemLoadLoaded) {
+      return const Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircularProgressIndicator(),
+        ],
+      );
     }
 
-    final list = (listState as ListLoadLoaded).list!;
+    final list = listState.list!;
     final items = (listItemsState as ListItemsLoadLoaded).listItems;
 
     return BlocListener<ListItemCrudBloc, ListItemCrudState>(
