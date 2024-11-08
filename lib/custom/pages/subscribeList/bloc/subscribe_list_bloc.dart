@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 import '/custom/pages/lists/lists_service.dart';
 import '/custom/pages/shareList/shared_lists_service.dart';
 
@@ -21,7 +20,7 @@ class SubscribeListBloc extends Bloc<SubscribeListEvent, SubscribeListState> {
     SubscribeListForUser event,
     Emitter<SubscribeListState> emit,
   ) async {
-    // LoggerHelper.logger.i('$className => _onLoadSharedList');
+    //
     try {
       emit(SubscribeListLoading());
       final userId = _listService.userId!;
@@ -33,7 +32,6 @@ class SubscribeListBloc extends Bloc<SubscribeListEvent, SubscribeListState> {
 
       emit(SubscribeListLoaded(sharedList));
     } catch (e) {
-      LoggerHelper.logger.e('Error: $e');
       emit(SubscribeListError('Failed to load shared lists.\n$e'));
     }
   }

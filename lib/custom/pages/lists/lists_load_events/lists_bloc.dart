@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 import '/custom/pages/lists/models/user_list.dart';
 import '/custom/pages/lists/user_lists_service.dart';
 
@@ -23,7 +22,6 @@ class ListsLoadBloc extends Bloc<ListsLoadEvent, ListsLoadState> {
       _userListsService.changeUser(event.userId);
       emit(ListsLoadLoaded(const []));
     } catch (e) {
-      LoggerHelper.logger.e('Error: $e');
       emit(ListsLoadError('Failed to change user.\n$e'));
     }
   }

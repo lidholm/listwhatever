@@ -14,7 +14,6 @@ import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_it
 import 'package:listwhatever/custom/pages/listItems/list_items_load_bloc/list_items_load_state.dart';
 import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/list_load_events/list_load_state.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 import '/custom/currentLocationBloc/current_location_bloc.dart';
 import '/custom/pages/listItems/map/custom_marker.dart';
@@ -60,7 +59,6 @@ class FlutterMapsViewState extends State<FlutterMapsView> {
       items = Filtering.sortAndFilterItems(list, items, filters, sortOrder);
     }
 
-    LoggerHelper.logger.d('rebuilding map view');
     final options = getMapOptions(items);
 
     final currentLocationMarker = getCurrentLocationMarker(currentLocation);
@@ -101,7 +99,7 @@ class FlutterMapsViewState extends State<FlutterMapsView> {
         .where((e) => e.latLong != null)
         .map((e) => e.latLong!.toLatLng())
         .toList();
-    LoggerHelper.logger.i('$className => latLngList: $latLngList');
+    //
     if (latLngList.isEmpty) {
       return null;
     }

@@ -36,8 +36,9 @@ mixin _$FormInputFieldInfo {
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -139,8 +140,9 @@ mixin _$FormInputFieldInfo {
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -242,8 +244,9 @@ mixin _$FormInputFieldInfo {
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -648,8 +651,9 @@ class _$FormInputFieldInfoTextAreaImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -755,8 +759,9 @@ class _$FormInputFieldInfoTextAreaImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -862,8 +867,9 @@ class _$FormInputFieldInfoTextAreaImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -1071,8 +1077,9 @@ abstract class _$$FormInputFieldInfoDropDownImplCopyWith<$Res>
       dynamic currentValue,
       List<dynamic> options,
       String Function(dynamic) optionToString,
-      List<String? Function(String?)> validators,
       String sectionName,
+      List<String? Function(String?)>? validators,
+      DropDownType type,
       void Function(dynamic)? onChange,
       bool deletable,
       void Function()? onDelete});
@@ -1098,8 +1105,9 @@ class __$$FormInputFieldInfoDropDownImplCopyWithImpl<$Res>
     Object? currentValue = freezed,
     Object? options = null,
     Object? optionToString = null,
-    Object? validators = null,
     Object? sectionName = null,
+    Object? validators = freezed,
+    Object? type = null,
     Object? onChange = freezed,
     Object? deletable = null,
     Object? onDelete = freezed,
@@ -1125,14 +1133,18 @@ class __$$FormInputFieldInfoDropDownImplCopyWithImpl<$Res>
           ? _value.optionToString
           : optionToString // ignore: cast_nullable_to_non_nullable
               as String Function(dynamic),
-      validators: null == validators
-          ? _value._validators
-          : validators // ignore: cast_nullable_to_non_nullable
-              as List<String? Function(String?)>,
       sectionName: null == sectionName
           ? _value.sectionName
           : sectionName // ignore: cast_nullable_to_non_nullable
               as String,
+      validators: freezed == validators
+          ? _value._validators
+          : validators // ignore: cast_nullable_to_non_nullable
+              as List<String? Function(String?)>?,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as DropDownType,
       onChange: freezed == onChange
           ? _value.onChange
           : onChange // ignore: cast_nullable_to_non_nullable
@@ -1160,8 +1172,9 @@ class _$FormInputFieldInfoDropDownImpl
       required this.currentValue,
       required final List<dynamic> options,
       required this.optionToString,
-      required final List<String? Function(String?)> validators,
       required this.sectionName,
+      final List<String? Function(String?)>? validators = null,
+      this.type = DropDownType.string,
       this.onChange = null,
       this.deletable = false,
       this.onDelete = null})
@@ -1184,16 +1197,22 @@ class _$FormInputFieldInfoDropDownImpl
 
   @override
   final String Function(dynamic) optionToString;
-  final List<String? Function(String?)> _validators;
   @override
-  List<String? Function(String?)> get validators {
+  final String sectionName;
+  final List<String? Function(String?)>? _validators;
+  @override
+  @JsonKey()
+  List<String? Function(String?)>? get validators {
+    final value = _validators;
+    if (value == null) return null;
     if (_validators is EqualUnmodifiableListView) return _validators;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_validators);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
-  final String sectionName;
+  @JsonKey()
+  final DropDownType type;
   @override
   @JsonKey()
   final void Function(dynamic)? onChange;
@@ -1206,7 +1225,7 @@ class _$FormInputFieldInfoDropDownImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo.dropdown(id: $id, label: $label, currentValue: $currentValue, options: $options, optionToString: $optionToString, validators: $validators, sectionName: $sectionName, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
+    return 'FormInputFieldInfo.dropdown(id: $id, label: $label, currentValue: $currentValue, options: $options, optionToString: $optionToString, sectionName: $sectionName, validators: $validators, type: $type, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
   }
 
   @override
@@ -1219,8 +1238,9 @@ class _$FormInputFieldInfoDropDownImpl
       ..add(DiagnosticsProperty('currentValue', currentValue))
       ..add(DiagnosticsProperty('options', options))
       ..add(DiagnosticsProperty('optionToString', optionToString))
-      ..add(DiagnosticsProperty('validators', validators))
       ..add(DiagnosticsProperty('sectionName', sectionName))
+      ..add(DiagnosticsProperty('validators', validators))
+      ..add(DiagnosticsProperty('type', type))
       ..add(DiagnosticsProperty('onChange', onChange))
       ..add(DiagnosticsProperty('deletable', deletable))
       ..add(DiagnosticsProperty('onDelete', onDelete));
@@ -1238,10 +1258,11 @@ class _$FormInputFieldInfoDropDownImpl
             const DeepCollectionEquality().equals(other._options, _options) &&
             (identical(other.optionToString, optionToString) ||
                 other.optionToString == optionToString) &&
-            const DeepCollectionEquality()
-                .equals(other._validators, _validators) &&
             (identical(other.sectionName, sectionName) ||
                 other.sectionName == sectionName) &&
+            const DeepCollectionEquality()
+                .equals(other._validators, _validators) &&
+            (identical(other.type, type) || other.type == type) &&
             (identical(other.onChange, onChange) ||
                 other.onChange == onChange) &&
             (identical(other.deletable, deletable) ||
@@ -1258,8 +1279,9 @@ class _$FormInputFieldInfoDropDownImpl
       const DeepCollectionEquality().hash(currentValue),
       const DeepCollectionEquality().hash(_options),
       optionToString,
-      const DeepCollectionEquality().hash(_validators),
       sectionName,
+      const DeepCollectionEquality().hash(_validators),
+      type,
       onChange,
       deletable,
       onDelete);
@@ -1293,8 +1315,9 @@ class _$FormInputFieldInfoDropDownImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -1377,7 +1400,7 @@ class _$FormInputFieldInfoDropDownImpl
     required TResult Function(String sectionName) shimmer,
   }) {
     return dropdown(id, label, currentValue, options, optionToString,
-        validators, sectionName, onChange, deletable, onDelete);
+        sectionName, validators, type, onChange, deletable, onDelete);
   }
 
   @override
@@ -1400,8 +1423,9 @@ class _$FormInputFieldInfoDropDownImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -1484,7 +1508,7 @@ class _$FormInputFieldInfoDropDownImpl
     TResult? Function(String sectionName)? shimmer,
   }) {
     return dropdown?.call(id, label, currentValue, options, optionToString,
-        validators, sectionName, onChange, deletable, onDelete);
+        sectionName, validators, type, onChange, deletable, onDelete);
   }
 
   @override
@@ -1507,8 +1531,9 @@ class _$FormInputFieldInfoDropDownImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -1593,7 +1618,7 @@ class _$FormInputFieldInfoDropDownImpl
   }) {
     if (dropdown != null) {
       return dropdown(id, label, currentValue, options, optionToString,
-          validators, sectionName, onChange, deletable, onDelete);
+          sectionName, validators, type, onChange, deletable, onDelete);
     }
     return orElse();
   }
@@ -1676,8 +1701,9 @@ abstract class FormInputFieldInfoDropDown implements FormInputFieldInfo {
       required final dynamic currentValue,
       required final List<dynamic> options,
       required final String Function(dynamic) optionToString,
-      required final List<String? Function(String?)> validators,
       required final String sectionName,
+      final List<String? Function(String?)>? validators,
+      final DropDownType type,
       final void Function(dynamic)? onChange,
       final bool deletable,
       final void Function()? onDelete}) = _$FormInputFieldInfoDropDownImpl;
@@ -1687,9 +1713,10 @@ abstract class FormInputFieldInfoDropDown implements FormInputFieldInfo {
   dynamic get currentValue;
   List<dynamic> get options;
   String Function(dynamic) get optionToString;
-  List<String? Function(String?)> get validators;
   @override
   String get sectionName;
+  List<String? Function(String?)>? get validators;
+  DropDownType get type;
   void Function(dynamic)? get onChange;
   bool get deletable;
   void Function()? get onDelete;
@@ -1907,8 +1934,9 @@ class _$FormInputFieldInfoCheckboxImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -2014,8 +2042,9 @@ class _$FormInputFieldInfoCheckboxImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -2121,8 +2150,9 @@ class _$FormInputFieldInfoCheckboxImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -2484,8 +2514,9 @@ class _$FormInputFieldInfoImagePickerImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -2591,8 +2622,9 @@ class _$FormInputFieldInfoImagePickerImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -2698,8 +2730,9 @@ class _$FormInputFieldInfoImagePickerImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -3022,8 +3055,9 @@ class _$FormInputFieldInfoCancelButtonImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -3128,8 +3162,9 @@ class _$FormInputFieldInfoCancelButtonImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -3234,8 +3269,9 @@ class _$FormInputFieldInfoCancelButtonImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -3556,8 +3592,9 @@ class _$FormInputFieldInfoSubmitButtonImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -3662,8 +3699,9 @@ class _$FormInputFieldInfoSubmitButtonImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -3768,8 +3806,9 @@ class _$FormInputFieldInfoSubmitButtonImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -4245,8 +4284,9 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -4364,8 +4404,9 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -4483,8 +4524,9 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -4836,8 +4878,9 @@ class _$FormInputFieldInfoCustomButtonImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -4942,8 +4985,9 @@ class _$FormInputFieldInfoCustomButtonImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -5048,8 +5092,9 @@ class _$FormInputFieldInfoCustomButtonImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -5434,8 +5479,9 @@ class _$FormInputFieldInfoDateImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -5541,8 +5587,9 @@ class _$FormInputFieldInfoDateImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -5648,8 +5695,9 @@ class _$FormInputFieldInfoDateImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -5990,8 +6038,9 @@ class _$FormInputFieldInfoMapImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -6096,8 +6145,9 @@ class _$FormInputFieldInfoMapImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -6202,8 +6252,9 @@ class _$FormInputFieldInfoMapImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -6601,8 +6652,9 @@ class _$FormInputFieldInfoSliderImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -6708,8 +6760,9 @@ class _$FormInputFieldInfoSliderImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -6815,8 +6868,9 @@ class _$FormInputFieldInfoSliderImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -7183,8 +7237,9 @@ class _$FormInputFieldInfoChipsImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -7289,8 +7344,9 @@ class _$FormInputFieldInfoChipsImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -7396,8 +7452,9 @@ class _$FormInputFieldInfoChipsImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -7684,8 +7741,9 @@ class _$FormInputFieldInfoShimmerImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)
@@ -7790,8 +7848,9 @@ class _$FormInputFieldInfoShimmerImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?
@@ -7896,8 +7955,9 @@ class _$FormInputFieldInfoShimmerImpl
             dynamic currentValue,
             List<dynamic> options,
             String Function(dynamic) optionToString,
-            List<String? Function(String?)> validators,
             String sectionName,
+            List<String? Function(String?)>? validators,
+            DropDownType type,
             void Function(dynamic)? onChange,
             bool deletable,
             void Function()? onDelete)?

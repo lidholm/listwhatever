@@ -4,7 +4,6 @@ import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 const String className = 'FormInputFieldTwoAutoCompleteFields';
 
@@ -34,9 +33,9 @@ class _FormInputFieldTwoAutoCompleteFieldsState
 
   @override
   Widget build(BuildContext context) {
-    LoggerHelper.logger.i(
-      '$className: build ${widget.field.id} - ${widget.field.currentValueLeft}',
-    );
+    //
+    //   '$className: build ${widget.field.id} - ${widget.field.currentValueLeft}',
+    // );
     final fieldWidth = widget.field.deletable ? 0.44 : 0.48;
     return LayoutBuilder(
       builder: (context, constraints) {

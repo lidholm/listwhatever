@@ -6,7 +6,6 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:listwhatever/standard/form/form_generator.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 import 'package:listwhatever/standard/form/form_input_section.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 import '/standard/app/bloc/app_bloc.dart';
 import '/standard/app/bloc/app_event.dart';
@@ -47,7 +46,6 @@ class OnboardingPage extends StatefulWidget {
 }
 
 class _OnboardingPageState extends State<OnboardingPage> {
-  static String className = 'OnboardingPage';
   final _formKey = GlobalKey<FormBuilderState>();
 
   @override
@@ -152,7 +150,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
   }
 
   void save(User originalUser, Map<String, dynamic> values) {
-    LoggerHelper.logger.d('values: $values   ');
     final user = User(
       name: values[FieldId.name.name]! as String,
       settings: defaultSettings,
@@ -162,10 +159,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
     );
 
     if (originalUser.name.isEmpty) {
-      LoggerHelper.logger.d('$className => adding firestoreUser $user   ');
       BlocProvider.of<AppBloc>(context).add(AddUser(user: user));
     } else {
-      LoggerHelper.logger.d('$className => updating firestoreUser $user   ');
       BlocProvider.of<AppBloc>(context).add(UpdateUser(user: user));
     }
   }

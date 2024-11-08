@@ -9,10 +9,10 @@ Future<FirebaseStorage> getFirebaseStorage() async {
 // Todo: Singleton here
   final instance = FirebaseStorage.instance;
   if (emulatorInfo.type != EmulatorType.none) {
-    // LoggerHelper.logger.i('firebaseStorage. Using emulator ${emulatorInfo.address}');
+    //
     _connectToFirebaseEmulator(instance, emulatorInfo.address!);
   } else {
-    // LoggerHelper.logger.i('firebaseStorage. Using firebase storage without emulator');
+    //
   }
 
   return instance;

@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 import '/custom/pages/listItems/service/list_items_service.dart';
 import 'list_item_load_event.dart';
 import 'list_item_load_state.dart';
@@ -21,7 +20,6 @@ class ListItemLoadBloc extends Bloc<ListItemLoadEvent, ListItemLoadState> {
       _listItemsService.changeUser(event.userId);
       emit(ListItemLoadLoaded(null));
     } catch (e) {
-      LoggerHelper.logger.e('Error: $e');
       emit(ListItemLoadError('Failed to change user.\n$e'));
     }
   }
@@ -30,9 +28,9 @@ class ListItemLoadBloc extends Bloc<ListItemLoadEvent, ListItemLoadState> {
     LoadListItem event,
     Emitter<ListItemLoadState> emit,
   ) async {
-    LoggerHelper.logger.i(
-      '$className => loading list item ${event.listItemId} for list ${event.actualListId}',
-    );
+    //
+    //   '$className => loading list item ${event.listItemId} for list ${event.actualListId}',
+    // );
     try {
       emit(ListItemLoadLoading());
       final listItem = await _listItemsService.getListItem(
@@ -41,7 +39,6 @@ class ListItemLoadBloc extends Bloc<ListItemLoadEvent, ListItemLoadState> {
       );
       emit(ListItemLoadLoaded(listItem));
     } catch (e) {
-      LoggerHelper.logger.e('Error: $e');
       emit(ListItemLoadError('Failed to load listItem.\n$e'));
     }
   }

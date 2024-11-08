@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 class CrashlyticsPage extends StatelessWidget {
   const CrashlyticsPage({super.key});
@@ -104,7 +103,7 @@ class CrashlyticsPage extends StatelessWidget {
                       () {
                         Future<void>.delayed(const Duration(seconds: 1), () {
                           final list = <int>[];
-                          LoggerHelper.logger.d(list[100]);
+                          print(list[100]);
                         });
                       },
                       FirebaseCrashlytics.instance.recordError,

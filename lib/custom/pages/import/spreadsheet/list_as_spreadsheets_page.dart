@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listwhatever/standard/helpers/date_helper.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 
 import '/custom/pages/listItems/list_item_crud_bloc/list_item_crud_bloc.dart';
@@ -20,6 +19,8 @@ import '/custom/pages/lists/list_load_events/list_load_state.dart';
 import '/custom/pages/lists/models/list_of_things.dart';
 import '/standard/constants.dart';
 
+const String className = 'ListAsSpreadsheetsPage';
+
 class ListAsSpreadsheetsPage extends StatefulWidget {
   const ListAsSpreadsheetsPage({required this.userListId, super.key});
   final String userListId;
@@ -29,7 +30,6 @@ class ListAsSpreadsheetsPage extends StatefulWidget {
 }
 
 class _ListAsSpreadsheetsPageState extends State<ListAsSpreadsheetsPage> {
-  static String className = 'ListAsSpreadsheetsPage';
   @override
   void initState() {
     super.initState();
@@ -57,9 +57,7 @@ class _ListAsSpreadsheetsPageState extends State<ListAsSpreadsheetsPage> {
 
     return BlocListener<ListItemCrudBloc, ListItemCrudState>(
       listener: (context, state) {
-        LoggerHelper.logger.i('$className => state: $state');
         if (state is ListItemCrudImported) {
-          LoggerHelper.logger.i('$className -> popping once');
           GoRouter.of(context).pop();
         }
       },
@@ -93,7 +91,6 @@ class _ListAsSpreadsheetsPageInnerState
     extends State<ListAsSpreadsheetsPageInner> {
   late final PlutoGridStateManager stateManager;
   late List<ListItem> _items;
-  static String className = 'ListAsSPreadsheetsPage';
 
   @override
   void initState() {
@@ -131,12 +128,6 @@ class _ListAsSpreadsheetsPageInnerState
     final columns = getColumns(categories);
     final rows = getRows(categories);
 
-    LoggerHelper.logger
-      ..i('columns: ${columns.map(
-        (e) => e.field,
-      )}')
-      ..i('rows: ${rows.map((e) => e.toJson())}');
-
     if (categories.isEmpty) {
       return PlutoGrid(
         columns: columns,
@@ -148,7 +139,7 @@ class _ListAsSpreadsheetsPageInnerState
     } else {
       final columnGroups =
           categories.isNotEmpty ? getColumnGroups(categories) : null;
-      LoggerHelper.logger.i('columnGroups: $columnGroups');
+
       return PlutoGrid(
         columns: columns,
         rows: rows,
@@ -307,7 +298,6 @@ class _ListAsSpreadsheetsPageInnerState
       name: name,
       urls: urls,
     );
-    LoggerHelper.logger.i('$className => updatedItem: $updatedItem');
 
     return updatedItem;
   }
@@ -338,7 +328,6 @@ class _ListAsSpreadsheetsPageInnerState
         }
       }
 
-      LoggerHelper.logger.i('$className => name: $name');
       var item = _items[rowIndex].copyWith(
         name: name,
         urls: urls,

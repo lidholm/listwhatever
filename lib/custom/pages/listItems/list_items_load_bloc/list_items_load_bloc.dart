@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 import '/custom/pages/listItems/models/list_item.dart';
 import '/custom/pages/listItems/service/list_items_service.dart';
 
@@ -25,7 +24,6 @@ class ListItemsLoadBloc extends Bloc<ListItemsLoadEvent, ListItemsLoadState> {
 
       emit(ListItemsLoadLoaded(const []));
     } catch (e) {
-      LoggerHelper.logger.e('Error: $e');
       emit(ListItemsLoadError('Failed to change user.\n$e'));
     }
   }
@@ -34,8 +32,6 @@ class ListItemsLoadBloc extends Bloc<ListItemsLoadEvent, ListItemsLoadState> {
     LoadListItems event,
     Emitter<ListItemsLoadState> emit,
   ) async {
-    LoggerHelper.logger
-        .i('$className => loading list item for list ${event.actualListId}');
     try {
       emit(ListItemsLoadLoading());
       final listItems =
@@ -43,7 +39,6 @@ class ListItemsLoadBloc extends Bloc<ListItemsLoadEvent, ListItemsLoadState> {
 
       emit(ListItemsLoadLoaded(listItems));
     } catch (e) {
-      LoggerHelper.logger.e('Error: $e');
       emit(ListItemsLoadError('Failed to load listItems.\n$e'));
     }
   }
@@ -52,7 +47,7 @@ class ListItemsLoadBloc extends Bloc<ListItemsLoadEvent, ListItemsLoadState> {
     WatchListItems event,
     Emitter<ListItemsLoadState> emit,
   ) async {
-    // LoggerHelper.logger.i('$className => loading list item for list ${event.actualListId}');
+    //
     try {
       emit(ListItemsLoadLoading());
       await emit.forEach(
@@ -62,7 +57,6 @@ class ListItemsLoadBloc extends Bloc<ListItemsLoadEvent, ListItemsLoadState> {
         },
       );
     } catch (e) {
-      LoggerHelper.logger.e('Error: $e');
       emit(ListItemsLoadError('Failed to load listItems.\n$e'));
     }
   }

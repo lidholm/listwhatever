@@ -49,7 +49,7 @@ Next is to export the data from the emulator, so that the production data can be
 First, make sure that there is a user created and that it has a list created, that makes it easier to know where to copy the data into later
 
 ```
-FIRESTORE_EMULATOR_HOST=localhost:8080 npx -p node-firestore-import-export firestore-export --backupFile backupEmulatorData.json  --prettyPrint
+FIRESTORE_EMULATOR_HOST=localhost:8080 npx -p node-firestore-import-export firestore-export --accountCredentials firebase-deploy-service-account.json --backupFile emulatorExportData.json  --prettyPrint
 ```
 
 This will export all the data from the emulator to a file.
@@ -86,5 +86,5 @@ For the data under `/lists/list123` we need the following updates:
 ## Import data back to emulator
 
 ```
-FIRESTORE_EMULATOR_HOST=localhost:8080 npx -p node-firestore-import-export firestore-import --backupFile emulatorImportData.json
+FIRESTORE_EMULATOR_HOST=localhost:8080 npx -p node-firestore-import-export firestore-import --accountCredentials firebase-deploy-service-account.json --backupFile emulatorImportData.json
 ```

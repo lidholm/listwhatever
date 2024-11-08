@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 import '/standard/firebase/firestore_service.dart';
 import '/standard/userRepository/models/user.dart';
@@ -13,7 +12,7 @@ class UserService extends FirestoreService {
     String? userId,
   ]) async {
     final path = '/users/${userId ?? this.userId}';
-    LoggerHelper.logger.d('$className => user path: $path');
+    //
     return firestore.doc(path);
   }
 
@@ -35,7 +34,7 @@ class UserService extends FirestoreService {
   }
 
   Future<User> updateUser(User user) async {
-    LoggerHelper.logger.d('updating user: $user');
+    //
     final doc = await getDocument(user.id);
     final options = SetOptions(merge: true);
     await doc.set(user.toJson(), options);
@@ -43,7 +42,7 @@ class UserService extends FirestoreService {
   }
 
   Future<User> addUser(User user) async {
-    LoggerHelper.logger.d('updating user: $user');
+    //
     final doc = await getDocument(user.id);
     await doc.set(user.toJson());
     return user;

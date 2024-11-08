@@ -15,12 +15,12 @@ class ChangeUserBloc extends Bloc<ChangeUserEvent, ChangeUserState> {
     ChangeUserEvent event,
     Emitter<ChangeUserState> emit,
   ) {
-    // LoggerHelper.logger.i('$className => event.user: ${event.user}');
+    //
     final userId =
         (event.user == null || event.user!.id.isEmpty) ? null : event.user!.id;
-    // LoggerHelper.logger.i('$className => userId: $userId   QQQ');
+    //
     for (final service in services) {
-      // LoggerHelper.logger.i('$className => service: $service   QQQ');
+      //
       service.changeUser(userId);
     }
   }

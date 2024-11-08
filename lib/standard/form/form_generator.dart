@@ -63,8 +63,8 @@ class _FormGeneratorState extends State<FormGenerator> {
 
   @override
   Widget build(BuildContext context) {
-    // LoggerHelper.logger.i('$className: building.');
-    // LoggerHelper.logger.i('$className: fields: ${widget.fields.length}.');
+    //
+    //
 
     return SafeArea(
       child: Padding(
@@ -105,12 +105,12 @@ class _FormGeneratorState extends State<FormGenerator> {
   }
 
   Widget generateSection(FormInputSection section) {
-    // LoggerHelper.logger.d('widget.fields: ${widget.fields}');
+    //
     final sectionFields =
         widget.fields.where((f) => f?.sectionName == section.name);
     final actualFields = sectionFields.map(generateField).toList();
 
-    // LoggerHelper.logger.i(
+    //
     //     '$className: generateSection ${section.key}: fields: ${fields.length}.',
     //     );
 
@@ -139,7 +139,7 @@ class _FormGeneratorState extends State<FormGenerator> {
   Widget generateField(
     FormInputFieldInfo? field,
   ) {
-    // LoggerHelper.logger.i('$className: generateField ${field.label}.');
+    //
     if (field == null) {
       return const CircularProgressIndicator();
     }

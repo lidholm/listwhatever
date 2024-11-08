@@ -4,7 +4,6 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 class RemoteConfigPage extends StatefulWidget {
   const RemoteConfigPage({super.key});
@@ -61,10 +60,9 @@ class _RemoteConfigPageState extends State<RemoteConfigPage> {
                 return 'Fetched: ${remoteConfig.getString('welcome')}';
               } on PlatformException catch (exception) {
                 // Fetch exception.
-                LoggerHelper.logger.e(exception);
+
                 return 'Exception: $exception';
               } catch (exception) {
-                LoggerHelper.logger.e(exception);
                 return 'Unable to fetch remote config. Cached or default values will be '
                     'used';
               }
@@ -100,10 +98,9 @@ class _RemoteConfigPageState extends State<RemoteConfigPage> {
                 return 'Listening, waiting for update...';
               } on PlatformException catch (exception) {
                 // Fetch exception.
-                LoggerHelper.logger.e(exception);
+
                 return 'Exception: $exception';
               } catch (exception) {
-                LoggerHelper.logger.e(exception);
                 return 'Unable to listen to remote config. Cached or default values will be '
                     'used';
               }

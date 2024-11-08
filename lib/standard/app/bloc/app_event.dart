@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 import '/standard/userRepository/models/user.dart';
 
 abstract class AppEvent extends Equatable {
@@ -14,11 +13,7 @@ class AppLogoutRequested extends AppEvent {
 }
 
 class AuthenticationUserChanged extends AppEvent {
-  AuthenticationUserChanged(this.user) {
-    LoggerHelper.logger.i(
-      'AuthenticationUserChanged => creating AppUserChanged with ${user.id} QQQ2',
-    );
-  }
+  const AuthenticationUserChanged(this.user);
 
   final User user;
 

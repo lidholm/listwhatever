@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 /// An item with sub menu for using in popup menus
 ///
@@ -36,8 +35,6 @@ class PopupSubMenuItem<T> extends PopupMenuEntry<T> {
 
 /// The [State] for [PopupSubMenuItem] subclasses.
 class _PopupSubMenuState<T> extends State<PopupSubMenuItem<T>> {
-  static String className = 'PopupSubMenu';
-
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<T>(
@@ -59,13 +56,11 @@ class _PopupSubMenuState<T> extends State<PopupSubMenuItem<T>> {
       ),
       onCanceled: () {
         if (Navigator.canPop(context)) {
-          LoggerHelper.logger.i('$className -> popping once');
           GoRouter.of(context).pop();
         }
       },
       onSelected: (T value) {
         if (Navigator.canPop(context)) {
-          LoggerHelper.logger.i('$className -> popping once');
           GoRouter.of(context).pop();
         }
         widget.onSelected.call(value);

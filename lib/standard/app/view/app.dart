@@ -6,7 +6,6 @@ import 'package:listwhatever/custom/pages/listItems/filters/show_filter_cubit.da
 import 'package:listwhatever/custom/pages/lists/categories_for_list/categories_for_list_bloc.dart';
 import 'package:listwhatever/custom/pages/lists/page/list_type_cubit/list_type_cubit.dart';
 import 'package:listwhatever/standard/firebase/firebaseStorageBloc/bloc/firebase_storage_bloc.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 import '/custom/currentLocationBloc/current_location_bloc.dart';
 import '/custom/navigation/get_router_provider_information.dart';
@@ -61,7 +60,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LoggerHelper.logger.d('starting app');
     final initialUserId = _user.id.isEmpty ? null : _user.id;
 
     final sharedListsService = SharedListsService();

@@ -14,7 +14,6 @@ import 'package:listwhatever/custom/pages/lists/categories_for_list/categories_f
 import 'package:listwhatever/standard/form/form_generator.dart';
 import 'package:listwhatever/standard/form/form_input_field_info.dart';
 import 'package:listwhatever/standard/form/form_input_section.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 import '/custom/navigation/routes.dart';
 import '/custom/pages/listItems/list_item_crud_bloc/list_item_crud_bloc.dart';
@@ -141,7 +140,7 @@ class _AddListItemPageState extends State<AddListItemPage> {
 
   @override
   Widget build(BuildContext context) {
-    LoggerHelper.logger.d('$className: in AddListItemPage');
+    //
 
     final listState = context.watch<ListLoadBloc>().state;
     final listItemState = context.watch<ListItemLoadBloc>().state;
@@ -268,7 +267,6 @@ class _AddListItemPageState extends State<AddListItemPage> {
         latLongParts == null ? null : double.parse(latLongParts.last.trim());
     final categories = widget.getCategories(values);
 
-    LoggerHelper.logger.i('$className: values: $values');
     final listItem = ListItem(
       id: listItemId,
       name: values[FieldId.name.name]! as String,
@@ -284,7 +282,6 @@ class _AddListItemPageState extends State<AddListItemPage> {
       address: values[FieldId.address.name] as String?,
       categories: categories,
     );
-    LoggerHelper.logger.i('$className: listItem: $listItem');
 
     if (listItemId == null) {
       BlocProvider.of<ListItemCrudBloc>(context)
@@ -305,26 +302,19 @@ class _AddListItemPageState extends State<AddListItemPage> {
   }
 
   void listItemChangedListener(GoRouter goRouter, ListItemCrudState state) {
-    LoggerHelper.logger.i('$className => state: $state');
     if (state is ListItemCrudDeleted) {
       setState(() {
         listItemId = null;
       });
-      LoggerHelper.logger.i('$className -> popping twice');
+
       goRouter
         ..pop()
         ..pop();
     } else if (state is ListItemCrudUpdated) {
-      LoggerHelper.logger
-        ..i('$className => popping GoRouter after updated')
-        ..i('$className -> popping twice');
       goRouter
         ..pop()
         ..pop();
     } else if (state is ListItemCrudAdded) {
-      LoggerHelper.logger
-        ..i('$className => popping GoRouter after added')
-        ..i('$className -> popping once');
       goRouter.pop();
     }
   }
@@ -569,7 +559,6 @@ class _AddListItemPageState extends State<AddListItemPage> {
       sectionName: SectionName.submit.value,
       save: (Map<String, dynamic>? values) {
         if (values == null) {
-          LoggerHelper.logger.e('$className: No values to save');
           return;
         }
         save(values);

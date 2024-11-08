@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:listwhatever/standard/helpers/logger_helper.dart';
 
 class FirebasePerformancePage extends StatefulWidget {
   const FirebasePerformancePage({super.key});
@@ -31,10 +30,6 @@ class _MetricHttpClient extends BaseClient {
     try {
       response = await _inner.send(request);
 
-      LoggerHelper.logger.d(
-        'Called ${request.url} with custom monitoring, response code: ${response.statusCode}',
-      );
-
       metric
         ..responseContentType = 'text/html'
         ..httpResponseCode = response.statusCode
@@ -47,12 +42,10 @@ class _MetricHttpClient extends BaseClient {
     }
 
     final attributes = metric.getAttributes();
-
-    LoggerHelper.logger.d('Http metric attributes: $attributes.');
+    print('Http metric attributes: $attributes.');
 
     final score = metric.getAttribute('score');
-
-    LoggerHelper.logger.d('Http metric score attribute value: $score');
+    print('Http metric score attribute value: $score');
 
     return response;
   }
@@ -104,16 +97,13 @@ class _FirebasePerformancePageState extends State<FirebasePerformancePage> {
     await trace.stop();
 
     final sum = trace.getMetric('sum');
-
-    LoggerHelper.logger.d('test_trace_1 sum value: $sum');
+    print('test_trace_1 sum value: $sum');
 
     final attributes = trace.getAttributes();
-
-    LoggerHelper.logger.d('test_trace_1 attributes: $attributes');
+    print('test_trace_1 attributes: $attributes');
 
     final favoriteColor = trace.getAttribute('favorite_color');
-
-    LoggerHelper.logger.d('test_trace_1 favorite_color: $favoriteColor');
+    print('test_trace_1 favorite_color: $favoriteColor');
 
     setState(() {
       _trace1HasRan = true;
@@ -134,8 +124,7 @@ class _FirebasePerformancePageState extends State<FirebasePerformancePage> {
     await trace.stop();
 
     final sum2 = trace.getMetric('sum');
-
-    LoggerHelper.logger.d('test_trace_2 sum value: $sum2');
+    print('test_trace_2 sum value: $sum2');
 
     setState(() {
       _trace2HasRan = true;
@@ -163,9 +152,7 @@ class _FirebasePerformancePageState extends State<FirebasePerformancePage> {
 
   Future<void> _testAutomaticHttpMetric() async {
     final response = await get(Uri.parse('https://www.google.com'));
-
-    LoggerHelper.logger
-        .d('Called facebook, response code: ${response.statusCode}');
+    print('Called facebook, response code: ${response.statusCode}');
   }
 
   @override

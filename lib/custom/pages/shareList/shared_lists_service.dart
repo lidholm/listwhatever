@@ -8,7 +8,7 @@ class SharedListsService extends FirestoreService {
 
   Future<CollectionReference<Map<String, dynamic>>> getCollection() async {
     const path = '/sharedLists';
-    // LoggerHelper.logger.d('path: $path');
+    //
     return firestore.collection(path);
   }
 

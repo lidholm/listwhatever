@@ -31,8 +31,9 @@ class ImportCsvPage extends StatefulWidget {
   State<ImportCsvPage> createState() => _ImportCsvPageState();
 }
 
+const String className = 'ImportCsvPage';
+
 class _ImportCsvPageState extends State<ImportCsvPage> {
-  static String className = 'ImportCsvPage';
   final _formKey = GlobalKey<FormBuilderState>();
   bool _csvHasError = false;
 
@@ -47,9 +48,7 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
   Widget build(BuildContext context) {
     return BlocListener<ListItemCrudBloc, ListItemCrudState>(
       listener: (context, state) {
-        LoggerHelper.logger.i('$className => state: $state');
         if (state is ListItemCrudImported) {
-          LoggerHelper.logger.i('$className -> popping once');
           GoRouter.of(context).pop();
         }
       },
@@ -101,7 +100,7 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
       key: _formKey,
       onChanged: () {
         _formKey.currentState!.save();
-        // LoggerHelper.logger.d(_formKey.currentState!.value.toString());
+        //
       },
       autovalidateMode: AutovalidateMode.disabled,
       initialValue: initialValue,
@@ -152,12 +151,12 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
       child: ElevatedButton(
         onPressed: () {
           if (_formKey.currentState?.saveAndValidate() ?? false) {
-            // LoggerHelper.logger.d(_formKey.currentState?.value.toString());
+            //
             save(actualListId, listItems, _formKey.currentState);
           } else {
             LoggerHelper.logger
-              ..d(_formKey.currentState?.value.toString())
-              ..d('validation failed');
+              ..e(_formKey.currentState?.value.toString())
+              ..e('validation failed');
           }
         },
         child: const Text(
@@ -204,13 +203,9 @@ class _ImportCsvPageState extends State<ImportCsvPage> {
       values[entry.key] = entry.value.value;
     }
 
-    LoggerHelper.logger.d('values: $values');
     final csv = values[ImportCsvValues.csv.name] as String;
 
-    LoggerHelper.logger.d('csv: $csv');
-
     final listItems = CsvConverter().convert(csv);
-    LoggerHelper.logger.d('listItems: $listItems');
 
     BlocProvider.of<ListItemCrudBloc>(context)
         .add(ImportListItems(actualListId, listItems));

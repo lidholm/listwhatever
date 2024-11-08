@@ -75,7 +75,7 @@ class _FilterViewState extends State<FilterView> {
 
   @override
   Widget build(BuildContext context) {
-    // LoggerHelper.logger.i('$className listItems: ${widget.listItems}');
+    //
 
     final fields = widget.isLoading
         ? ShimmerHelper.generateShimmerFormFields(4, SectionName.name.name)
@@ -87,7 +87,7 @@ class _FilterViewState extends State<FilterView> {
             ...categoriesFields(getCategories(widget.listItems)),
             resetButton(),
           ];
-    // LoggerHelper.logger.i('fields: ${fields.length}');
+    //
 
     final sections = getSections();
 
@@ -192,7 +192,7 @@ class _FilterViewState extends State<FilterView> {
   List<FormInputFieldInfo> categoriesFields(
     Map<String, Set<String>> categories,
   ) {
-    // LoggerHelper.logger.i('$className categories: $categories');
+    //
     final chipsFields = categories.entries
         .map((e) => getCategoryField(e.key, e.value))
         .toList();
@@ -321,7 +321,7 @@ class _FilterViewState extends State<FilterView> {
     }
 
     final regularCategoryFilters = getRegularCategoryFilters(values);
-    // LoggerHelper.logger
+    //
     //     .i('$className: regularCategoryFilters: $regularCategoryFilters');
 
     final filters = Filters(
@@ -335,7 +335,7 @@ class _FilterViewState extends State<FilterView> {
       distance: maxDistance,
     );
 
-    // LoggerHelper.logger.i('$className filters: $filters');
+    //
     BlocProvider.of<FilterBloc>(context).add(UpdateFilters(filters));
   }
 
