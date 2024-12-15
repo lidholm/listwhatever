@@ -1,0 +1,12 @@
+include: package:very_good_analysis/analysis_options.6.0.0.yaml
+analyzer:
+  plugins:
+    - custom_lint
+  exclude: [build/**, lib/**.freezed.dart, lib/**.g.dart, secrets/*, packages/**]
+linter:
+  rules:
+    public_member_api_docs: false
+    lines_longer_than_80_chars: false
+    avoid_print: false
+    flutter_style_todos: false
+    always_use_package_imports: false

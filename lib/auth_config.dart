@@ -1,0 +1,30 @@
+// ignore_for_file: lines_longer_than_80_chars
+
+import 'package:flutter/foundation.dart';
+
+// ignore: non_constant_identifier_names
+String get GOOGLE_CLIENT_ID {
+  if (defaultTargetPlatform == TargetPlatform.macOS) {
+    return '406099696497-65v1b9ffv6sgfqngfjab5ol5qdikh2rm.apps.googleusercontent.com';
+  } else if (defaultTargetPlatform == TargetPlatform.iOS) {
+    return '406099696497-65v1b9ffv6sgfqngfjab5ol5qdikh2rm.apps.googleusercontent.com';
+  } else if (defaultTargetPlatform == TargetPlatform.windows) {
+    return '406099696497-a12gakvts4epfk5pkio7dphc1anjiggc.apps.googleusercontent.com';
+  } else {
+    return '448618578101-sg12d2qin42cpr00f8b0gehs5s7inm0v.apps.googleusercontent.com';
+  }
+}
+
+// ignore: constant_identifier_names
+const GOOGLE_REDIRECT_URI =
+    'https://react-native-firebase-testing.firebaseapp.com/__/auth/handler';
+
+// ignore: constant_identifier_names
+const TWITTER_API_KEY = String.fromEnvironment('TWITTER_API_KEY');
+// ignore: constant_identifier_names
+const TWITTER_API_SECRET_KEY = String.fromEnvironment('TWITTER_API_SECRET_KEY');
+// ignore: constant_identifier_names
+const TWITTER_REDIRECT_URI = 'ffire://';
+
+// ignore: constant_identifier_names
+const FACEBOOK_CLIENT_ID = '128693022464535';

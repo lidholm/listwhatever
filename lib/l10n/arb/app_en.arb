@@ -1,0 +1,27 @@
+{
+    "@@locale": "en",
+    "appBarTitle": "Example app",
+    "@appBarTitle": {
+        "description": "Text shown in the AppBar of the main page"
+    },
+    "counterAppBarTitle": "Counter",
+    "@counterAppBarTitle": {
+        "description": "Text shown in the AppBar of the Counter Page"
+    },
+    "petAppBarTitle": "Pets",
+    "@petAppBarTitle": {
+        "description": "Text shown in the AppBar of the Pets Page"
+    },
+    "counterTabTitle": "Counter",
+    "@counterTabTitle": {
+        "description": "Text shown in the Tab bar for Counter"
+    },
+    "aboutTabTitle": "About",
+    "@aboutTabTitle": {
+        "description": "Text shown in the Tab bar for About"
+    },
+    "petTabTitle": "Pets (Firestore)",
+    "@petTabTitle": {
+        "description": "Text shown in the Tab bar for Pets"
+    }
+}

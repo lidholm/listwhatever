@@ -1,0 +1,190 @@
+{
+  "project_info": {
+    "project_number": "386438315822",
+    "project_id": "listwhatever-ad43ed",
+    "storage_bucket": "listwhatever-ad43ed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386438315822:android:3c40734d8299548d6284bf",
+        "android_client_info": {
+          "package_name": "com.anywhostudios.listwhatever"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "386438315822-2sjo9r4u9f7sb8vu9je36980il6ujgbd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anywhostudios.listwhatever",
+            "certificate_hash": "cd600ed35958af53ba955ac649da64c80b8ae89d"
+          }
+        },
+        {
+          "client_id": "386438315822-66bt9spc7mtkhru818oc5e18140u61ma.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anywhostudios.listwhatever",
+            "certificate_hash": "50ecfd1f9dd7dd6ccd292d33e692e923ab8d991e"
+          }
+        },
+        {
+          "client_id": "386438315822-v295j6408a3r0u3ei1f7bmnkru7bjben.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anywhostudios.listwhatever",
+            "certificate_hash": "e09f321bfc024f17a36cd44f909b95ebb366c495"
+          }
+        },
+        {
+          "client_id": "386438315822-agfm4kmegmng094p8vj4muv1evlammp5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9hR4vr5zUYH4c_MJr-c2ZCrZo95H2eBI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "386438315822-agfm4kmegmng094p8vj4muv1evlammp5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "386438315822-t683rs55efnqh0nt9ot7gvv4pfpntthu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.anywhostudios.listwhatever"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386438315822:android:8288e4b555f7a8006284bf",
+        "android_client_info": {
+          "package_name": "com.anywhostudios.listwhatever.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "386438315822-7a3th645geasstn8svo5e1o4hgvskff1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anywhostudios.listwhatever.dev",
+            "certificate_hash": "e09f321bfc024f17a36cd44f909b95ebb366c495"
+          }
+        },
+        {
+          "client_id": "386438315822-c2v18tndohaluhakcvbc43742br3569m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anywhostudios.listwhatever.dev",
+            "certificate_hash": "50ecfd1f9dd7dd6ccd292d33e692e923ab8d991e"
+          }
+        },
+        {
+          "client_id": "386438315822-mrls4ker5dq0p7si995oan4nvd0m6l98.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anywhostudios.listwhatever.dev",
+            "certificate_hash": "cd600ed35958af53ba955ac649da64c80b8ae89d"
+          }
+        },
+        {
+          "client_id": "386438315822-agfm4kmegmng094p8vj4muv1evlammp5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9hR4vr5zUYH4c_MJr-c2ZCrZo95H2eBI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "386438315822-agfm4kmegmng094p8vj4muv1evlammp5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "386438315822-t683rs55efnqh0nt9ot7gvv4pfpntthu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.anywhostudios.listwhatever"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386438315822:android:e9a1db544a6749166284bf",
+        "android_client_info": {
+          "package_name": "com.anywhostudios.listwhatever.stg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "386438315822-83t1ikraosaljgqirkgolbju3gtru84f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anywhostudios.listwhatever.stg",
+            "certificate_hash": "cd600ed35958af53ba955ac649da64c80b8ae89d"
+          }
+        },
+        {
+          "client_id": "386438315822-9l4gjpouq654sefmerlnjgm7as89d5r9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anywhostudios.listwhatever.stg",
+            "certificate_hash": "50ecfd1f9dd7dd6ccd292d33e692e923ab8d991e"
+          }
+        },
+        {
+          "client_id": "386438315822-vv88pschrp8fnmj2bul02c183168a4pm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anywhostudios.listwhatever.stg",
+            "certificate_hash": "e09f321bfc024f17a36cd44f909b95ebb366c495"
+          }
+        },
+        {
+          "client_id": "386438315822-agfm4kmegmng094p8vj4muv1evlammp5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9hR4vr5zUYH4c_MJr-c2ZCrZo95H2eBI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "386438315822-agfm4kmegmng094p8vj4muv1evlammp5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "386438315822-t683rs55efnqh0nt9ot7gvv4pfpntthu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.anywhostudios.listwhatever"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
