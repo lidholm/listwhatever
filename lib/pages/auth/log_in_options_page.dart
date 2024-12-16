@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:icons_plus/icons_plus.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:listwhatever/auth/bloc/auth_bloc.dart';
 import 'package:listwhatever/pages/auth/social_button.dart';
 import 'package:listwhatever/routing/go_router_configuration.dart';
@@ -64,12 +64,20 @@ class LogInOptionsPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SocialButton(
-                      icon: Icons.apple,
+                      icon: const HugeIcon(
+                        icon: HugeIcons.strokeRoundedAirplaneSeat,
+                        color: Colors.black,
+                        size: 100,
+                      ),
                       onPressed: () => appleSignUp(context),
                     ),
                     const SizedBox(width: 20),
                     SocialButton(
-                      icon: Bootstrap.google,
+                      icon: const HugeIcon(
+                        icon: HugeIcons.strokeRoundedAirplaneSeat,
+                        color: Colors.black,
+                        size: 100,
+                      ),
                       onPressed: () => googleSignUp(context),
                     ),
                   ],
