@@ -5,60 +5,57 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch development",
+      "name": "Launch development (chrome)",
       "request": "launch",
       "type": "dart",
-      "program": "lib/standard/main/main_development.dart",
+      "program": "lib/main_development.dart",
+      "args": [
+        "--target",
+        "lib/main_development.dart",
+        "-d",
+        "chrome"
+      ]
+    },
+    {
+      "name": "Launch development (android)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main_development.dart",
       "args": [
         "--flavor",
         "development",
         "--target",
-        "lib/standard/main/main_development.dart"
-      ]
-    },
-    {
-      "name": "Launch development (web)",
-      "request": "launch",
-      "type": "dart",
-      "program": "lib/standard/main/main_development.dart",
-      "args": [
-        "--target",
-        "lib/standard/main/main_development.dart",
+        "lib/main_development.dart",
         "-d",
-        "chrome",
-        "--web-hostname",
-        "localhost",
-        "--web-port",
-        "8088"
+        "emulator-5554"
       ]
     },
     {
-      "name": "Launch development (web) (web-renderer html)",
+      "name": "Launch development (macos)",
       "request": "launch",
       "type": "dart",
-      "program": "lib/standard/main/main_development.dart",
+      "program": "lib/main_development.dart",
       "args": [
+        "--flavor",
+        "development",
         "--target",
-        "lib/standard/main/main_development.dart",
+        "lib/main_development.dart",
         "-d",
-        "chrome",
-        "--web-hostname",
-        "localhost",
-        "--web-port",
-        "8088"
+        "macos"
       ]
     },
     {
-      "name": "Launch with profile",
+      "name": "Launch development (ios)",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "profile",
-      "program": "lib/main_production.dart",
+      "program": "lib/main_development.dart",
       "args": [
+        "--flavor",
+        "development",
         "--target",
-        "lib/main_production.dart",
-        "--web-renderer",
-        "html"
+        "lib/main_development.dart",
+        "-d",
+        "0DB6149C-54C5-4A75-BBD7-D5195742CEC9"
       ]
     },
     {
@@ -66,40 +63,14 @@
       "request": "launch",
       "type": "dart",
       "program": "lib/main_staging.dart",
-      "args": [
-        "--flavor",
-        "staging",
-        "--target",
-        "lib/main_staging.dart"
-      ]
+      "args": ["--flavor", "staging", "--target", "lib/main_staging.dart"]
     },
     {
       "name": "Launch production",
       "request": "launch",
       "type": "dart",
       "program": "lib/main_production.dart",
-      "args": [
-        "--flavor",
-        "production",
-        "--target",
-        "lib/main_production.dart"
-      ]
-    },
-    {
-      "name": "Integration tests",
-      "request": "launch",
-      "type": "dart",
-      "program": "integration_test/router_integration_test.dart",
-      "args": [
-        "--flavor",
-        "development",
-      ]
-    },
-    {
-      "type": "node",
-      "request": "attach",
-      "name": "Debug emulator functions",
-      "port": 9229
+      "args": ["--flavor", "production", "--target", "lib/main_production.dart"]
     }
   ]
 }

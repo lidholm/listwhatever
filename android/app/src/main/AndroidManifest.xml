@@ -1,21 +1,16 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.anywhostudios.listwhatever">
-    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
-   <application
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application  
+        android:usesCleartextTraffic="true"
         android:label="${appName}"
-        android:usesCleartextTraffic="${usesCleartextTraffic}"
-        android:icon="@mipmap/ic_launcher"
-        android:requestLegacyExternalStorage="true" 
-        >
+        android:name="${applicationName}"
+        android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-            android:hardwareAccelerated="true"  
+            android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize">
             <!-- Specifies an Android theme to apply to this Activity as soon as
                  the Android process has started. This theme is visible to the user
@@ -35,7 +30,5 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-        <meta-data android:name="com.google.android.geo.API_KEY"
-        android:value="AIzaSyDCKm_5WrpJBbre-270rz9krFtim_1X4TE"/>
     </application>
 </manifest>

@@ -1,1 +1,0 @@
-An app to create any kind of list and filters
