@@ -13,6 +13,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final petRepository = PetRepository();
+
     final authRepository = AuthRepository();
 
     return MultiRepositoryProvider(
