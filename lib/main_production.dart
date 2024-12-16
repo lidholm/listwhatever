@@ -7,7 +7,7 @@ import 'package:listwhatever/app/view/app.dart';
 import 'package:listwhatever/bootstrap.dart';
 import 'package:listwhatever/firebase_options.dart';
 
-const bool shouldUseEmulator = true;
+const bool shouldUseEmulator = false;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
