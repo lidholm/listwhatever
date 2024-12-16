@@ -65,22 +65,14 @@ class SignInOptionsPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SocialButton(
-                      icon: const HugeIcon(
-                        icon: HugeIcons.strokeRoundedApple,
-                        color: Colors.black,
-                        size: 20,
-                      ),
+                      icon: HugeIcons.strokeRoundedApple,
                       onPressed: () {
                         // Handle Apple sign-in
                       },
                     ),
                     const SizedBox(width: 20),
                     SocialButton(
-                      icon: const HugeIcon(
-                        icon: HugeIcons.strokeRoundedGoogle,
-                        color: Colors.black,
-                        size: 20,
-                      ),
+                      icon: HugeIcons.strokeRoundedGoogle,
                       onPressed: () {
                         // Handle Google sign-in
                       },

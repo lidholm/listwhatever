@@ -4,7 +4,7 @@ import 'package:hugeicons/hugeicons.dart';
 class SocialButton extends StatelessWidget {
   const SocialButton({required this.icon, required this.onPressed, super.key});
 
-  final HugeIcon icon;
+  final IconData icon;
   final VoidCallback onPressed;
 
   @override
@@ -14,7 +14,11 @@ class SocialButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.white,
       ),
-      child: icon,
+      child: HugeIcon(
+        icon: icon,
+        color: Colors.black,
+        size: 20,
+      ),
     );
   }
 }
