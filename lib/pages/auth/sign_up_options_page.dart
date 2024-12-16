@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:listwhatever/auth/bloc/auth_bloc.dart';
 import 'package:listwhatever/pages/auth/social_button.dart';
 // import 'package:listwhatever/auth_repository.dart';
 import 'package:listwhatever/routing/go_router_configuration.dart';
@@ -96,5 +98,21 @@ class SignInOptionsPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void logIn(BuildContext context) {
+    GoRouter.of(context).goNamed(RouteName.logIn.value);
+  }
+
+  void register(BuildContext context) {
+    BlocProvider.of<AuthBloc>(context).add(RegisterWithEmailAndPassword());
+  }
+
+  void appleSignUp(BuildContext context) {
+    BlocProvider.of<AuthBloc>(context).add(SignUpWithApple());
+  }
+
+  void googleSignUp(BuildContext context) {
+    BlocProvider.of<AuthBloc>(context).add(SignUpWithGoogle());
   }
 }

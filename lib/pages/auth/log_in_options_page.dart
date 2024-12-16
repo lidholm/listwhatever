@@ -11,6 +11,9 @@ class LogInOptionsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
+
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
@@ -28,15 +31,17 @@ class LogInOptionsPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  controller: emailController,
+                  decoration: const InputDecoration(
                     labelText: 'Email',
                     prefixIcon: Icon(Icons.email),
                   ),
                 ),
                 const SizedBox(height: 20),
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  controller: passwordController,
+                  decoration: const InputDecoration(
                     labelText: 'Password',
                     prefixIcon: Icon(Icons.lock),
                     suffixIcon: Icon(Icons.visibility),
@@ -45,7 +50,11 @@ class LogInOptionsPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 ElevatedButton(
-                  onPressed: () => signUp(context),
+                  onPressed: () => logInWithEmailAndPassword(
+                    context,
+                    emailController.text,
+                    passwordController.text,
+                  ),
                   child: const Text('Log in'),
                 ),
                 const SizedBox(height: 20),
@@ -72,7 +81,7 @@ class LogInOptionsPage extends StatelessWidget {
                     const Text("Don't have an account?"),
                     TextButton(
                       onPressed: () {
-                        GoRouter.of(context).goNamed(RouteName.signUp.value);
+                        signUp(context);
                       },
                       child: const Text('Sign up'),
                     ),
@@ -88,6 +97,15 @@ class LogInOptionsPage extends StatelessWidget {
 
   void signUp(BuildContext context) {
     GoRouter.of(context).goNamed(RouteName.signUp.value);
+  }
+
+  void logInWithEmailAndPassword(
+    BuildContext context,
+    String email,
+    String password,
+  ) {
+    BlocProvider.of<AuthBloc>(context)
+        .add(LoginWithEmailAndPassword(email: email, password: password));
   }
 
   void appleSignUp(BuildContext context) {

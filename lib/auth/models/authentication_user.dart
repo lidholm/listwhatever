@@ -29,4 +29,8 @@ class AuthenticationUser with _$AuthenticationUser {
       isNewUser: false,
     );
   }
+
+  bool isAnonymous() {
+    return id == '-1';
+  }
 }

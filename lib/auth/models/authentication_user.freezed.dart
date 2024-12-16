@@ -150,13 +150,14 @@ class __$$AuthenticationUserImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$AuthenticationUserImpl implements _AuthenticationUser {
+class _$AuthenticationUserImpl extends _AuthenticationUser {
   _$AuthenticationUserImpl(
       {required this.id,
       required this.email,
       required this.name,
       required this.photo,
-      required this.isNewUser});
+      required this.isNewUser})
+      : super._();
 
   factory _$AuthenticationUserImpl.fromJson(Map<String, dynamic> json) =>
       _$$AuthenticationUserImplFromJson(json);
@@ -212,13 +213,14 @@ class _$AuthenticationUserImpl implements _AuthenticationUser {
   }
 }
 
-abstract class _AuthenticationUser implements AuthenticationUser {
+abstract class _AuthenticationUser extends AuthenticationUser {
   factory _AuthenticationUser(
       {required final String id,
       required final String? email,
       required final String? name,
       required final String? photo,
       required final bool isNewUser}) = _$AuthenticationUserImpl;
+  _AuthenticationUser._() : super._();
 
   factory _AuthenticationUser.fromJson(Map<String, dynamic> json) =
       _$AuthenticationUserImpl.fromJson;

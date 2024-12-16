@@ -1,4 +1,4 @@
-alias startEmulators="firebase emulators:start --import ./emulatorData --project listwhatever-ad43ed --inspect-functions"
+alias startEmulators="firebase emulators:start  --project listwhatever-ad43ed --inspect-functions"
 alias exportEmulatorData="firebase emulators:export ./emulatorData --project listwhatever-ad43ed"
 alias exportEmulatorDataDemo="firebase emulators:export ./emulatorData --project demo-anyhoosolutions"
 alias exportEmulatorData="firebase emulators:export ./emulatorData --project anyhoosolutions"
