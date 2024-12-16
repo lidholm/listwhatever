@@ -11,8 +11,8 @@ class LogInOptionsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
+    final emailController = TextEditingController(text: 'regular@email.com');
+    final passwordController = TextEditingController(text: 'test1234!');
 
     return Scaffold(
       body: Center(

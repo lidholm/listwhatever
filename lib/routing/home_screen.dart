@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/auth/bloc/auth_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   /// Constructs a [HomeScreen]
@@ -19,6 +21,10 @@ class HomeScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: () => context.go('/tabbar'),
               child: const Text('Go to the Tab bar screen'),
+            ),
+            ElevatedButton(
+              onPressed: () => BlocProvider.of<AuthBloc>(context).add(Logout()),
+              child: const Text('Log out'),
             ),
           ],
         ),

@@ -23,3 +23,5 @@ class LoginWithEmailAndPassword extends AuthEvent {
   final String email;
   final String password;
 }
+
+class Logout extends AuthEvent {}
