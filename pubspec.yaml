@@ -33,10 +33,12 @@ dependencies:
   json_annotation: ^4.9.0
   meta: ^1.15.0
   hugeicons: ^0.0.7
+  widgetbook: ^3.10.1
+  widgetbook_annotation: ^3.2.0
 
 dev_dependencies:
   bloc_test: ^9.1.7
-  build_runner: ^2.4.13
+  build_runner: ^2.4.14
   flutter_test:
     sdk: flutter
   freezed: ^2.5.7
@@ -45,6 +47,7 @@ dev_dependencies:
   json_serializable: ^6.9.0
   mocktail: ^1.0.4
   very_good_analysis: ^6.0.0
+  widgetbook_generator: ^3.9.1
 
 flutter:
   uses-material-design: true
