@@ -13,6 +13,7 @@ import 'package:listwhatever/tab_bar/view/tab_bar_page.dart';
 
 enum RouteName {
   lists._('lists'),
+  listItems._('listItems'),
   details._('submit'),
   tabBar._('tabbar'),
   signUp._('signup'),

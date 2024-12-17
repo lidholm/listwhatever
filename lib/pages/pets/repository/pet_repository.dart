@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:listwhatever/pages/pets/firestore.dart';
+import 'package:listwhatever/firebase/firestore/firestore.dart';
 import 'package:listwhatever/pages/pets/model/pet.dart';
 
 class PetRepository {
