@@ -5,9 +5,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:listwhatever/l10n/l10n.dart';
-import 'package:listwhatever/pages/firestore/bloc/pet_bloc.dart';
-import 'package:listwhatever/pages/firestore/bloc/pet_event.dart';
-import 'package:listwhatever/pages/firestore/view/pet_list.dart';
+import 'package:listwhatever/pages/pets/bloc/pet_bloc.dart';
+import 'package:listwhatever/pages/pets/bloc/pet_event.dart';
+import 'package:listwhatever/pages/pets/view/pet_list.dart';
 
 const petNames = [
   'Bella',

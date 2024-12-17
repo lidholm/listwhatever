@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:listwhatever/pages/firestore/bloc/pet_event.dart';
-import 'package:listwhatever/pages/firestore/bloc/pet_state.dart';
-import 'package:listwhatever/pages/firestore/model/pet.dart';
-import 'package:listwhatever/pages/firestore/repository/pet_repository.dart';
+import 'package:listwhatever/pages/pets/bloc/pet_event.dart';
+import 'package:listwhatever/pages/pets/bloc/pet_state.dart';
+import 'package:listwhatever/pages/pets/model/pet.dart';
+import 'package:listwhatever/pages/pets/repository/pet_repository.dart';
 
 class PetBloc extends Bloc<PetEvent, PetState> {
   PetBloc({required this.petRepository}) : super(PetInitial()) {

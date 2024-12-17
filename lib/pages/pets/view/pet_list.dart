@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:listwhatever/pages/firestore/bloc/pet_bloc.dart';
-import 'package:listwhatever/pages/firestore/bloc/pet_state.dart';
-import 'package:listwhatever/pages/firestore/model/pet.dart';
+import 'package:listwhatever/pages/pets/bloc/pet_bloc.dart';
+import 'package:listwhatever/pages/pets/bloc/pet_state.dart';
+import 'package:listwhatever/pages/pets/model/pet.dart';
 
 class PetList extends StatelessWidget {
   const PetList({super.key});

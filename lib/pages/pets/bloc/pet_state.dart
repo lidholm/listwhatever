@@ -1,4 +1,4 @@
-import 'package:listwhatever/pages/firestore/model/pet.dart';
+import 'package:listwhatever/pages/pets/model/pet.dart';
 
 sealed class PetState {}
 

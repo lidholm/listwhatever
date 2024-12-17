@@ -12,7 +12,7 @@ import 'package:listwhatever/routing/home_screen.dart';
 import 'package:listwhatever/tab_bar/view/tab_bar_page.dart';
 
 enum RouteName {
-  home._('/details'),
+  lists._('lists'),
   details._('submit'),
   tabBar._('tabbar'),
   signUp._('signup'),
@@ -31,14 +31,14 @@ GoRouter getGoRouterConfiguration(BuildContext context) {
       BlocProvider.of<AuthBloc>(context).stream,
     ]),
     debugLogDiagnostics: true,
-    initialLocation: '/${RouteName.signUp.value}',
+    initialLocation: '/',
     redirect: routerRedirect,
     routes: <RouteBase>[
       GoRoute(
-        name: RouteName.home.value,
+        name: RouteName.lists.value,
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return const HomeScreen();
+          return const ListsPage();
         },
         routes: <RouteBase>[
           GoRoute(
