@@ -5,10 +5,10 @@ import 'package:listwhatever/auth/bloc/auth_bloc.dart';
 import 'package:listwhatever/pages/auth/log_in_options_page.dart';
 import 'package:listwhatever/pages/auth/profile_page.dart';
 import 'package:listwhatever/pages/auth/sign_up_options_page.dart';
+import 'package:listwhatever/pages/lists/pages/lists_page.dart';
 import 'package:listwhatever/routing/details_screen.dart';
 import 'package:listwhatever/routing/go_router_redirect.dart';
 import 'package:listwhatever/routing/go_router_refresh_stream.dart';
-import 'package:listwhatever/routing/home_screen.dart';
 import 'package:listwhatever/tab_bar/view/tab_bar_page.dart';
 
 enum RouteName {
