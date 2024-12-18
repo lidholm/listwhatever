@@ -28,7 +28,7 @@ class ListTiles extends StatelessWidget {
 
     // var lists = ShimmerHelper.generateShimmerUserLists(5);
 
-    const isLoading = false;
+    // const isLoading = false;
     // if (listsState is ListsLoadLoaded && firebaseStorage is FilesLoaded) {
     //   isLoading = false;
     //   lists = listsState.lists;
@@ -40,7 +40,7 @@ class ListTiles extends StatelessWidget {
       child: Column(
         children: List.generate(lists.length, (index) {
           final list = lists[index];
-          return UserListTile(list: list, isLoading: isLoading);
+          return UserListTile(list: list, isLoading: index == 2);
         }),
       ),
     );

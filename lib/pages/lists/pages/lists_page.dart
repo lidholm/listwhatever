@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:listwhatever/components/shimmer/shimmer.dart';
+import 'package:listwhatever/components/shimmer/shimmer_loading.dart';
 import 'package:listwhatever/pages/lists/components/list_page_app_bar.dart';
 import 'package:listwhatever/pages/lists/components/list_tiles.dart';
 
@@ -26,7 +28,7 @@ class _ListsPageState extends State<ListsPage> {
         //   child:
         const Scaffold(
       appBar: ListPageAppBar(),
-      body: ListTiles(),
+      body: Shimmer(linearGradient: shimmerGradient, child: ListTiles()),
       // floatingActionButton: FloatingActionButton(
       //   onPressed: () {
       //     // GoRouter.of(context).pushNamed(RouteName.listItems.value);

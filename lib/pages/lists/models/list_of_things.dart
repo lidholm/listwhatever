@@ -19,8 +19,6 @@ enum FilterType {
   final String value;
 }
 
-// TODO: Allow order of category filers
-
 @freezed
 class ListOfThings with _$ListOfThings {
   const factory ListOfThings({
