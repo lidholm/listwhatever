@@ -19,10 +19,10 @@ class UserListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return buildTile();
+    return buildTile(context);
   }
 
-  Widget buildTile() {
+  Widget buildTile(BuildContext context) {
     return ShimmerLoading(
       isLoading: isLoading,
       child: Row(
@@ -32,7 +32,7 @@ class UserListTile extends StatelessWidget {
           Column(
             spacing: 8,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [buildTitle(), buildSubtitle()],
+            children: [buildTitle(context), buildSubtitle(context)],
           ),
         ],
       ),
@@ -51,22 +51,25 @@ class UserListTile extends StatelessWidget {
     );
   }
 
-  Widget buildTitle() {
+  Widget buildTitle(BuildContext context) {
     if (isLoading) {
       return buildShimmerContainer(20, 160);
     }
 
     return Text(
       list.listName,
-      style: const TextStyle(fontWeight: FontWeight.bold),
+      style: Theme.of(context).textTheme.titleLarge,
     );
   }
 
-  Widget buildSubtitle() {
+  Widget buildSubtitle(BuildContext context) {
     if (isLoading) {
       return buildShimmerContainer(20, 140);
     }
-    return const Text('Some', style: TextStyle(fontStyle: FontStyle.italic));
+    return Text(
+      'Some',
+      style: Theme.of(context).textTheme.titleMedium,
+    );
   }
 
   Widget buildShimmerContainer(double height, double width) {

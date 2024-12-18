@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:listwhatever/app/view/app_theme.dart';
 import 'package:listwhatever/auth/auth_repository.dart';
 import 'package:listwhatever/auth/bloc/auth_bloc.dart';
 import 'package:listwhatever/l10n/l10n.dart';
@@ -15,6 +16,7 @@ class App extends StatelessWidget {
     final petRepository = PetRepository();
 
     final authRepository = AuthRepository();
+    final theme = ListWhateverTheme(context);
 
     return MultiRepositoryProvider(
       providers: [
@@ -30,12 +32,7 @@ class App extends StatelessWidget {
           builder: (context) {
             return MaterialApp.router(
               routerConfig: getGoRouterConfiguration(context),
-              theme: ThemeData(
-                appBarTheme: AppBarTheme(
-                  backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-                ),
-                useMaterial3: true,
-              ),
+              theme: theme.getThemeData(),
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
             );

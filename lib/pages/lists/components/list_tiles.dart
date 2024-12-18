@@ -16,7 +16,7 @@ class ListTiles extends StatelessWidget {
       (i) => const UserList(
         id: 'id',
         listId: 'listId',
-        listName: 'listName',
+        listName: 'Restaurants in SD',
         imageFilename: 'assets/images/restaurants.jpeg',
         ownerId: 'ownerId',
         isOwnList: true,
@@ -41,7 +41,10 @@ class ListTiles extends StatelessWidget {
         spacing: 16,
         children: List.generate(lists.length, (index) {
           final list = lists[index];
-          return UserListTile(list: list, isLoading: index == 2);
+          return UserListTile(
+            list: list,
+            isLoading: index == 5,
+          );
         }),
       ),
     );
