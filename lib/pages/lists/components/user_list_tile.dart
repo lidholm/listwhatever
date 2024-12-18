@@ -22,63 +22,63 @@ class UserListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return isLoading ? buildShimmer() : buildTile();
+    return buildTile();
   }
 
   Widget buildTile() {
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: ListTile(
-        tileColor: Colors.brown.shade100,
-        minTileHeight: height,
-        leading: Image.asset(
-          height: imageHeight,
-          width: imageWidth,
-          list.imageFilename ?? 'default',
-          fit: BoxFit.fitHeight,
-        ),
-        title: Text(
-          list.listName,
-          style: TextStyle(color: Colors.blue),
-        ),
-        subtitle: Text('Some', style: TextStyle(color: Colors.green)),
+    return ShimmerLoading(
+      isLoading: isLoading,
+      child: Row(
+        spacing: 8,
+        children: [
+          buildImage(),
+          Column(
+            spacing: 8,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [buildTitle(), buildSubtitle()],
+          ),
+        ],
       ),
     );
   }
 
-  Widget buildShimmer() {
-    return ShimmerLoading(
-      isLoading: true,
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: ListTile(
-          tileColor: Colors.brown.shade100,
-          minTileHeight: height,
-          leading: Container(
-            height: imageHeight,
-            width: imageWidth,
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.circular(16),
-            ),
-          ),
-          title: Container(
-            width: 80,
-            height: 20,
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.circular(16),
-            ),
-          ),
-          subtitle: Container(
-            width: 30,
-            height: 20,
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.circular(16),
-            ),
-          ),
-        ),
+  Widget buildImage() {
+    if (isLoading) {
+      return buildShimmerContainer(imageHeight, imageWidth);
+    }
+    return Image.asset(
+      height: imageHeight,
+      width: imageWidth,
+      list.imageFilename ?? 'default',
+      fit: BoxFit.fitHeight,
+    );
+  }
+
+  Widget buildTitle() {
+    if (isLoading) {
+      return buildShimmerContainer(20, imageWidth);
+    }
+
+    return Text(
+      list.listName,
+      style: TextStyle(color: Colors.blue),
+    );
+  }
+
+  Widget buildSubtitle() {
+    if (isLoading) {
+      return buildShimmerContainer(20, imageWidth - 20);
+    }
+    return Text('Some', style: TextStyle(color: Colors.green));
+  }
+
+  Widget buildShimmerContainer(double height, double width) {
+    return Container(
+      height: height,
+      width: width,
+      decoration: BoxDecoration(
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(16),
       ),
     );
   }
