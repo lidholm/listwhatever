@@ -22,12 +22,12 @@ FutureOr<String?> routerRedirect(BuildContext context, GoRouterState state) {
     }
   }
 
-  if (isLoggedOut(authBloc)) {
-    if (isProtectedPage(state)) {
-      print('routerRedirect return /login');
-      return '/login';
-    }
-  }
+  // if (isLoggedOut(authBloc)) {
+  //   if (isProtectedPage(state)) {
+  //     print('routerRedirect return /login');
+  //     return '/login';
+  //   }
+  // }
   print('routerRedirect return null');
   return null;
 }
