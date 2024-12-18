@@ -38,17 +38,12 @@ class ListTiles extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
-        spacing: 8,
+        spacing: 16,
         children: List.generate(lists.length, (index) {
           final list = lists[index];
           return UserListTile(list: list, isLoading: index == 2);
         }),
       ),
     );
-  }
-
-  void onTap(BuildContext context, String listId) {
-    // context.read<FilterBloc>().add(UpdateFiltersForSelectedList(listId));
-    // ListItemsPageRoute(actualListId: listId).push<void>(context);
   }
 }

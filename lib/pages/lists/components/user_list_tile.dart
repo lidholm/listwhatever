@@ -4,10 +4,7 @@ import 'package:listwhatever/pages/lists/models/user_list.dart';
 
 const String className = 'UserListTile';
 
-const roundedRadius = 4.0;
-const background = Colors.green;
 const imageRadius = 8.0;
-const height = 80.0;
 const imageHeight = 60.0;
 const imageWidth = 80.0;
 
@@ -50,26 +47,26 @@ class UserListTile extends StatelessWidget {
       height: imageHeight,
       width: imageWidth,
       list.imageFilename ?? 'default',
-      fit: BoxFit.fitHeight,
+      fit: BoxFit.cover,
     );
   }
 
   Widget buildTitle() {
     if (isLoading) {
-      return buildShimmerContainer(20, imageWidth);
+      return buildShimmerContainer(20, 160);
     }
 
     return Text(
       list.listName,
-      style: TextStyle(color: Colors.blue),
+      style: const TextStyle(fontWeight: FontWeight.bold),
     );
   }
 
   Widget buildSubtitle() {
     if (isLoading) {
-      return buildShimmerContainer(20, imageWidth - 20);
+      return buildShimmerContainer(20, 140);
     }
-    return Text('Some', style: TextStyle(color: Colors.green));
+    return const Text('Some', style: TextStyle(fontStyle: FontStyle.italic));
   }
 
   Widget buildShimmerContainer(double height, double width) {
@@ -78,7 +75,7 @@ class UserListTile extends StatelessWidget {
       width: width,
       decoration: BoxDecoration(
         color: Colors.black,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(imageRadius),
       ),
     );
   }
@@ -90,7 +87,6 @@ class UserListTile extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: background,
         border: Border.all(
           color: topRightIconBorderColor,
           width: 4,
