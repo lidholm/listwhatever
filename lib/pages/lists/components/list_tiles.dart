@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:listwhatever/pages/lists/components/user_list_tile.dart';
 import 'package:listwhatever/pages/lists/models/user_list.dart';
@@ -12,16 +11,13 @@ class ListTiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final crossAxisCount =
-        kIsWeb ? (MediaQuery.of(context).size.width / 360).floor() : 2;
-
     final lists = List.generate(
       4,
       (i) => const UserList(
         id: 'id',
         listId: 'listId',
         listName: 'listName',
-        imageFilename: 'imageFilename',
+        imageFilename: 'assets/images/restaurants.jpeg',
         ownerId: 'ownerId',
         isOwnList: true,
       ),
@@ -39,27 +35,14 @@ class ListTiles extends StatelessWidget {
     //   images = firebaseStorage.imageUrls;
     // }
 
-    return
-        // ShimmerLoading(
-        //   isLoading: isLoading,
-        //   child:
-        Padding(
+    return Padding(
       padding: const EdgeInsets.all(16),
-      child: CustomScrollView(
-        slivers: [
-          SliverGrid.count(
-            mainAxisSpacing: 20,
-            crossAxisSpacing: 20,
-            crossAxisCount: crossAxisCount,
-            children: lists
-                .map(
-                  (list) => UserListTile(list: list, isLoading: isLoading),
-                )
-                .toList(),
-          ),
-        ],
+      child: Column(
+        children: List.generate(lists.length, (index) {
+          final list = lists[index];
+          return UserListTile(list: list, isLoading: isLoading);
+        }),
       ),
-      // ),
     );
   }
 
