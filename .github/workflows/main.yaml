@@ -1,4 +1,4 @@
-name: listwhatever
+name: ListWhatever
 
 concurrency:
   group: $-$

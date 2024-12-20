@@ -1,6 +1,6 @@
 {
-    "name": "listwhatever",
-    "short_name": "listwhatever",
+    "name": "ListWhatever",
+    "short_name": "ListWhatever",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

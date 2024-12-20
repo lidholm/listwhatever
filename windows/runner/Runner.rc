@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.anyhoosolutions.listwhatever" "\0"
-            VALUE "FileDescription", "listwhatever" "\0"
+            VALUE "FileDescription", "ListWhatever" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "listwhatever" "\0"
+            VALUE "InternalName", "ListWhatever" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 net.app.oneapp.oneapp. All rights reserved." "\0"
-            VALUE "OriginalFilename", "listwhatever.exe" "\0"
-            VALUE "ProductName", "listwhatever" "\0"
+            VALUE "OriginalFilename", "ListWhatever.exe" "\0"
+            VALUE "ProductName", "ListWhatever" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

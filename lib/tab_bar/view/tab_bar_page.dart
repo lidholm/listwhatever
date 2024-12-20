@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:listwhatever/l10n/l10n.dart';
 import 'package:listwhatever/pages/about/about_page.dart';
 import 'package:listwhatever/pages/counter/view/counter_page.dart';
-import 'package:listwhatever/pages/pets/view/pet_page.dart';
 import 'package:listwhatever/tab_bar/models/tabpage.dart';
 
 class TabBarPage extends StatefulWidget {
@@ -23,12 +22,6 @@ class TabBarPageState extends State<TabBarPage> {
       label: (context) => context.l10n.counterTabTitle,
       icon: Icons.home,
       page: const CounterPage(),
-    ),
-    TabPage(
-      key: 'pets',
-      label: (context) => context.l10n.petTabTitle,
-      icon: Icons.pets,
-      page: const PetPage(),
     ),
     TabPage(
       key: 'about',

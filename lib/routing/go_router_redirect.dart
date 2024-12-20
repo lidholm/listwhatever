@@ -8,6 +8,7 @@ import 'package:listwhatever/routing/go_router_configuration.dart';
 
 FutureOr<String?> routerRedirect(BuildContext context, GoRouterState state) {
   print('routerRedirect state.matchedLocation: ${state.matchedLocation}');
+
   final authBloc = BlocProvider.of<AuthBloc>(context);
   print('routerRedirect authBloc.state: ${authBloc.state}');
 
@@ -15,6 +16,7 @@ FutureOr<String?> routerRedirect(BuildContext context, GoRouterState state) {
     print('routerRedirect return /');
     return '/';
   }
+
   if (isLoggedIn(authBloc)) {
     if (isLoggingInState(state)) {
       print('routerRedirect return /');
@@ -22,12 +24,13 @@ FutureOr<String?> routerRedirect(BuildContext context, GoRouterState state) {
     }
   }
 
-  // if (isLoggedOut(authBloc)) {
-  //   if (isProtectedPage(state)) {
-  //     print('routerRedirect return /login');
-  //     return '/login';
-  //   }
-  // }
+  if (isLoggedOut(authBloc)) {
+    if (isProtectedPage(state)) {
+      print('routerRedirect return /login');
+      return '/login';
+    }
+  }
+
   print('routerRedirect return null');
   return null;
 }
