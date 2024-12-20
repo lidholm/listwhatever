@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:listwhatever/auth/models/authentication_user.dart';
-import 'package:listwhatever/firebase/firestore/firestore.dart';
+import 'package:listwhatever/firestore/firestore.dart';
 import 'package:listwhatever/pages/lists/models/user_list.dart';
 
 class UserListRepository {
