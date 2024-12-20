@@ -3,8 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'authentication_user.freezed.dart';
 part 'authentication_user.g.dart';
 
-const anonymousId = '-1';
-
 @freezed
 class AuthenticationUser with _$AuthenticationUser {
   factory AuthenticationUser({
@@ -22,15 +20,16 @@ class AuthenticationUser with _$AuthenticationUser {
   factory AuthenticationUser.fromJson(Map<String, dynamic> json) =>
       _$AuthenticationUserFromJson(json);
 
-  factory AuthenticationUser.anonymous() => AuthenticationUser(
-        id: anonymousId,
-        email: 'anonymous',
-        name: '',
-        photo: '',
-        isNewUser: false,
-      );
+  factory AuthenticationUser.anonymous() =>
+     AuthenticationUser(
+      id: '-1',
+      email: 'anonymous',
+      name: '',
+      photo: '',
+      isNewUser: false,
+    );
 
   bool isAnonymous() {
-    return id == anonymousId;
+    return id == '-1';
   }
 }

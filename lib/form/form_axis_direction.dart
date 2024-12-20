@@ -1,0 +1,2 @@
+enum FormAxisDirection { vertical, horizontal }
+
