@@ -11,7 +11,6 @@ import 'package:listwhatever/form/form_input_field_custom_button.dart';
 import 'package:listwhatever/form/form_input_field_date.dart';
 import 'package:listwhatever/form/form_input_field_double_slider.dart';
 import 'package:listwhatever/form/form_input_field_drop_down.dart';
-import 'package:listwhatever/form/form_input_field_image_picker.dart';
 import 'package:listwhatever/form/form_input_field_info.dart';
 import 'package:listwhatever/form/form_input_field_shimmer.dart';
 import 'package:listwhatever/form/form_input_field_single_slider.dart';
@@ -19,7 +18,6 @@ import 'package:listwhatever/form/form_input_field_submit_button.dart';
 import 'package:listwhatever/form/form_input_field_text_area.dart';
 import 'package:listwhatever/form/form_input_field_two_auto_complete_fields.dart';
 import 'package:listwhatever/form/form_input_section.dart';
-
 
 const String className = 'FormGenerator';
 
@@ -56,7 +54,6 @@ class _FormGeneratorState extends State<FormGenerator> {
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(8),
@@ -101,18 +98,17 @@ class _FormGeneratorState extends State<FormGenerator> {
         widget.fields.where((f) => f?.sectionName == section.name);
     final actualFields = sectionFields.map(generateField).toList();
 
-    final child = (section.direction == FormAxisDirection.horizontal) ? 
-  Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    spacing: 10,
-    children: actualFields,
-  )
- :
-  Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    spacing: 10,
-    children: actualFields,
-  );
+    final child = (section.direction == FormAxisDirection.horizontal)
+        ? Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            spacing: 10,
+            children: actualFields,
+          )
+        : Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 10,
+            children: actualFields,
+          );
 
     if (section.showBorder) {
       return BorderWithHeader(title: section.name, child: child);
@@ -133,8 +129,6 @@ class _FormGeneratorState extends State<FormGenerator> {
       FormInputFieldInfoTextArea() => FormInputFieldTextArea(field: field),
       FormInputFieldInfoDropDown() => FormInputFieldDropDown(field: field),
       FormInputFieldInfoCheckbox() => FormInputFieldCheckbox(field: field),
-      FormInputFieldInfoImagePicker() =>
-        FormInputFieldImagePicker(field: field),
       FormInputFieldInfoCancelButton() => FormInputFieldCancelButton(
           formKey: widget.formKey,
           field: field,
@@ -148,9 +142,6 @@ class _FormGeneratorState extends State<FormGenerator> {
       FormInputFieldInfoCustomButton() =>
         FormInputFieldCustomButton(formKey: widget.formKey, field: field),
       FormInputFieldInfoDate() => FormInputFieldDate(field: field),
-
-
-
       FormInputFieldInfoSlider() => field.rangeSlider
           ? FormInputFieldDoubleSlider(field: field)
           : FormInputFieldSingleSlider(field: field),

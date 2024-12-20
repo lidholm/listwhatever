@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-// ignore: unused_import
-import 'package:listwhatever/constants.dart';
 import 'package:listwhatever/form/form_input_field_info.dart';
 
 const String className = 'FormInputFieldTextArea';

@@ -54,14 +54,6 @@ mixin _$FormInputFieldInfo {
             void Function()? onDelete)
         checkbox,
     required TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)
-        imagePicker,
-    required TResult Function(
             String id, String label, String sectionName, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
@@ -154,14 +146,6 @@ mixin _$FormInputFieldInfo {
             bool deletable,
             void Function()? onDelete)?
         checkbox,
-    TResult? Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
     TResult? Function(String id, String label, String sectionName,
             void Function() cancel)?
         cancelButton,
@@ -255,14 +239,6 @@ mixin _$FormInputFieldInfo {
             bool deletable,
             void Function()? onDelete)?
         checkbox,
-    TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
     TResult Function(String id, String label, String sectionName,
             void Function() cancel)?
         cancelButton,
@@ -326,7 +302,6 @@ mixin _$FormInputFieldInfo {
     required TResult Function(FormInputFieldInfoTextArea value) textArea,
     required TResult Function(FormInputFieldInfoDropDown value) dropdown,
     required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
-    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
     required TResult Function(FormInputFieldInfoCancelButton value)
         cancelButton,
     required TResult Function(FormInputFieldInfoSubmitButton value)
@@ -346,7 +321,6 @@ mixin _$FormInputFieldInfo {
     TResult? Function(FormInputFieldInfoTextArea value)? textArea,
     TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
     TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
     TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
     TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
     TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
@@ -363,7 +337,6 @@ mixin _$FormInputFieldInfo {
     TResult Function(FormInputFieldInfoTextArea value)? textArea,
     TResult Function(FormInputFieldInfoDropDown value)? dropdown,
     TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
     TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
     TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
     TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?
@@ -657,14 +630,6 @@ class _$FormInputFieldInfoTextAreaImpl
             void Function()? onDelete)
         checkbox,
     required TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)
-        imagePicker,
-    required TResult Function(
             String id, String label, String sectionName, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
@@ -761,14 +726,6 @@ class _$FormInputFieldInfoTextAreaImpl
             bool deletable,
             void Function()? onDelete)?
         checkbox,
-    TResult? Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
     TResult? Function(String id, String label, String sectionName,
             void Function() cancel)?
         cancelButton,
@@ -866,14 +823,6 @@ class _$FormInputFieldInfoTextAreaImpl
             bool deletable,
             void Function()? onDelete)?
         checkbox,
-    TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
     TResult Function(String id, String label, String sectionName,
             void Function() cancel)?
         cancelButton,
@@ -944,7 +893,6 @@ class _$FormInputFieldInfoTextAreaImpl
     required TResult Function(FormInputFieldInfoTextArea value) textArea,
     required TResult Function(FormInputFieldInfoDropDown value) dropdown,
     required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
-    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
     required TResult Function(FormInputFieldInfoCancelButton value)
         cancelButton,
     required TResult Function(FormInputFieldInfoSubmitButton value)
@@ -967,7 +915,6 @@ class _$FormInputFieldInfoTextAreaImpl
     TResult? Function(FormInputFieldInfoTextArea value)? textArea,
     TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
     TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
     TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
     TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
     TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
@@ -987,7 +934,6 @@ class _$FormInputFieldInfoTextAreaImpl
     TResult Function(FormInputFieldInfoTextArea value)? textArea,
     TResult Function(FormInputFieldInfoDropDown value)? dropdown,
     TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
     TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
     TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
     TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?
@@ -1309,14 +1255,6 @@ class _$FormInputFieldInfoDropDownImpl
             void Function()? onDelete)
         checkbox,
     required TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)
-        imagePicker,
-    required TResult Function(
             String id, String label, String sectionName, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
@@ -1413,14 +1351,6 @@ class _$FormInputFieldInfoDropDownImpl
             bool deletable,
             void Function()? onDelete)?
         checkbox,
-    TResult? Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
     TResult? Function(String id, String label, String sectionName,
             void Function() cancel)?
         cancelButton,
@@ -1518,14 +1448,6 @@ class _$FormInputFieldInfoDropDownImpl
             bool deletable,
             void Function()? onDelete)?
         checkbox,
-    TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
     TResult Function(String id, String label, String sectionName,
             void Function() cancel)?
         cancelButton,
@@ -1596,7 +1518,6 @@ class _$FormInputFieldInfoDropDownImpl
     required TResult Function(FormInputFieldInfoTextArea value) textArea,
     required TResult Function(FormInputFieldInfoDropDown value) dropdown,
     required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
-    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
     required TResult Function(FormInputFieldInfoCancelButton value)
         cancelButton,
     required TResult Function(FormInputFieldInfoSubmitButton value)
@@ -1619,7 +1540,6 @@ class _$FormInputFieldInfoDropDownImpl
     TResult? Function(FormInputFieldInfoTextArea value)? textArea,
     TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
     TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
     TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
     TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
     TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
@@ -1639,7 +1559,6 @@ class _$FormInputFieldInfoDropDownImpl
     TResult Function(FormInputFieldInfoTextArea value)? textArea,
     TResult Function(FormInputFieldInfoDropDown value)? dropdown,
     TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
     TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
     TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
     TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?
@@ -1916,14 +1835,6 @@ class _$FormInputFieldInfoCheckboxImpl
             void Function()? onDelete)
         checkbox,
     required TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)
-        imagePicker,
-    required TResult Function(
             String id, String label, String sectionName, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
@@ -2020,14 +1931,6 @@ class _$FormInputFieldInfoCheckboxImpl
             bool deletable,
             void Function()? onDelete)?
         checkbox,
-    TResult? Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
     TResult? Function(String id, String label, String sectionName,
             void Function() cancel)?
         cancelButton,
@@ -2125,14 +2028,6 @@ class _$FormInputFieldInfoCheckboxImpl
             bool deletable,
             void Function()? onDelete)?
         checkbox,
-    TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
     TResult Function(String id, String label, String sectionName,
             void Function() cancel)?
         cancelButton,
@@ -2203,7 +2098,6 @@ class _$FormInputFieldInfoCheckboxImpl
     required TResult Function(FormInputFieldInfoTextArea value) textArea,
     required TResult Function(FormInputFieldInfoDropDown value) dropdown,
     required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
-    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
     required TResult Function(FormInputFieldInfoCancelButton value)
         cancelButton,
     required TResult Function(FormInputFieldInfoSubmitButton value)
@@ -2226,7 +2120,6 @@ class _$FormInputFieldInfoCheckboxImpl
     TResult? Function(FormInputFieldInfoTextArea value)? textArea,
     TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
     TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
     TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
     TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
     TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
@@ -2246,7 +2139,6 @@ class _$FormInputFieldInfoCheckboxImpl
     TResult Function(FormInputFieldInfoTextArea value)? textArea,
     TResult Function(FormInputFieldInfoDropDown value)? dropdown,
     TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
     TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
     TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
     TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?
@@ -2291,572 +2183,6 @@ abstract class FormInputFieldInfoCheckbox implements FormInputFieldInfo {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FormInputFieldInfoCheckboxImplCopyWith<_$FormInputFieldInfoCheckboxImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$FormInputFieldInfoImagePickerImplCopyWith<$Res>
-    implements $FormInputFieldInfoCopyWith<$Res> {
-  factory _$$FormInputFieldInfoImagePickerImplCopyWith(
-          _$FormInputFieldInfoImagePickerImpl value,
-          $Res Function(_$FormInputFieldInfoImagePickerImpl) then) =
-      __$$FormInputFieldInfoImagePickerImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      String label,
-      String? currentValue,
-      List<String? Function(bool?)> validators,
-      String sectionName,
-      void Function(String)? onChange});
-}
-
-/// @nodoc
-class __$$FormInputFieldInfoImagePickerImplCopyWithImpl<$Res>
-    extends _$FormInputFieldInfoCopyWithImpl<$Res,
-        _$FormInputFieldInfoImagePickerImpl>
-    implements _$$FormInputFieldInfoImagePickerImplCopyWith<$Res> {
-  __$$FormInputFieldInfoImagePickerImplCopyWithImpl(
-      _$FormInputFieldInfoImagePickerImpl _value,
-      $Res Function(_$FormInputFieldInfoImagePickerImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of FormInputFieldInfo
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? label = null,
-    Object? currentValue = freezed,
-    Object? validators = null,
-    Object? sectionName = null,
-    Object? onChange = freezed,
-  }) {
-    return _then(_$FormInputFieldInfoImagePickerImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      label: null == label
-          ? _value.label
-          : label // ignore: cast_nullable_to_non_nullable
-              as String,
-      currentValue: freezed == currentValue
-          ? _value.currentValue
-          : currentValue // ignore: cast_nullable_to_non_nullable
-              as String?,
-      validators: null == validators
-          ? _value._validators
-          : validators // ignore: cast_nullable_to_non_nullable
-              as List<String? Function(bool?)>,
-      sectionName: null == sectionName
-          ? _value.sectionName
-          : sectionName // ignore: cast_nullable_to_non_nullable
-              as String,
-      onChange: freezed == onChange
-          ? _value.onChange
-          : onChange // ignore: cast_nullable_to_non_nullable
-              as void Function(String)?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$FormInputFieldInfoImagePickerImpl
-    with DiagnosticableTreeMixin
-    implements FormInputFieldInfoImagePicker {
-  const _$FormInputFieldInfoImagePickerImpl(
-      {required this.id,
-      required this.label,
-      required this.currentValue,
-      required final List<String? Function(bool?)> validators,
-      required this.sectionName,
-      this.onChange = null})
-      : _validators = validators;
-
-  @override
-  final String id;
-  @override
-  final String label;
-  @override
-  final String? currentValue;
-  final List<String? Function(bool?)> _validators;
-  @override
-  List<String? Function(bool?)> get validators {
-    if (_validators is EqualUnmodifiableListView) return _validators;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_validators);
-  }
-
-  @override
-  final String sectionName;
-  @override
-  @JsonKey()
-  final void Function(String)? onChange;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo.imagePicker(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, onChange: $onChange)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'FormInputFieldInfo.imagePicker'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('label', label))
-      ..add(DiagnosticsProperty('currentValue', currentValue))
-      ..add(DiagnosticsProperty('validators', validators))
-      ..add(DiagnosticsProperty('sectionName', sectionName))
-      ..add(DiagnosticsProperty('onChange', onChange));
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$FormInputFieldInfoImagePickerImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.label, label) || other.label == label) &&
-            (identical(other.currentValue, currentValue) ||
-                other.currentValue == currentValue) &&
-            const DeepCollectionEquality()
-                .equals(other._validators, _validators) &&
-            (identical(other.sectionName, sectionName) ||
-                other.sectionName == sectionName) &&
-            (identical(other.onChange, onChange) ||
-                other.onChange == onChange));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, id, label, currentValue,
-      const DeepCollectionEquality().hash(_validators), sectionName, onChange);
-
-  /// Create a copy of FormInputFieldInfo
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$FormInputFieldInfoImagePickerImplCopyWith<
-          _$FormInputFieldInfoImagePickerImpl>
-      get copyWith => __$$FormInputFieldInfoImagePickerImplCopyWithImpl<
-          _$FormInputFieldInfoImagePickerImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String id,
-            String label,
-            List<String? Function(String?)> validators,
-            String sectionName,
-            String? currentValue,
-            void Function(String)? onChange,
-            bool deletable,
-            void Function()? onDelete,
-            TextEditingController? controller)
-        textArea,
-    required TResult Function(
-            String id,
-            String label,
-            dynamic currentValue,
-            List<dynamic> options,
-            String Function(dynamic) optionToString,
-            String sectionName,
-            List<String? Function(String?)>? validators,
-            DropDownType type,
-            void Function(dynamic)? onChange,
-            bool deletable,
-            void Function()? onDelete)
-        dropdown,
-    required TResult Function(
-            String id,
-            String label,
-            bool currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange,
-            bool deletable,
-            void Function()? onDelete)
-        checkbox,
-    required TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)
-        imagePicker,
-    required TResult Function(
-            String id, String label, String sectionName, void Function() cancel)
-        cancelButton,
-    required TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)
-        submitButton,
-    required TResult Function(
-            String id,
-            String id2,
-            String labelLeft,
-            String labelRight,
-            String currentValueLeft,
-            String currentValueRight,
-            List<String> optionsLeft,
-            Map<String, Set<String>> optionsRight,
-            List<String? Function(String?)> validatorsLeft,
-            List<String? Function(String?)> validatorsRight,
-            String sectionName,
-            bool deletable,
-            void Function()? onDelete)
-        twoAutoCompleteFields,
-    required TResult Function(String id, String label, String sectionName,
-            void Function() callback)
-        customButton,
-    required TResult Function(
-            String id,
-            String label,
-            DateTime currentValue,
-            String sectionName,
-            InputType inputType,
-            FormFieldValidator<DateTime?>? validator,
-            void Function(DateTime)? onChange,
-            bool deletable,
-            void Function()? onDelete)
-        date,
-    required TResult Function(
-            String id,
-            String label,
-            (double, double) range,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            double? currentValue,
-            (double, double)? currentValues,
-            bool rangeSlider,
-            SliderType type)
-        slider,
-    required TResult Function(
-            String id,
-            String label,
-            Iterable<String> values,
-            Iterable<String> currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName)
-        chips,
-    required TResult Function(String sectionName) shimmer,
-  }) {
-    return imagePicker(
-        id, label, currentValue, validators, sectionName, onChange);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String id,
-            String label,
-            List<String? Function(String?)> validators,
-            String sectionName,
-            String? currentValue,
-            void Function(String)? onChange,
-            bool deletable,
-            void Function()? onDelete,
-            TextEditingController? controller)?
-        textArea,
-    TResult? Function(
-            String id,
-            String label,
-            dynamic currentValue,
-            List<dynamic> options,
-            String Function(dynamic) optionToString,
-            String sectionName,
-            List<String? Function(String?)>? validators,
-            DropDownType type,
-            void Function(dynamic)? onChange,
-            bool deletable,
-            void Function()? onDelete)?
-        dropdown,
-    TResult? Function(
-            String id,
-            String label,
-            bool currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange,
-            bool deletable,
-            void Function()? onDelete)?
-        checkbox,
-    TResult? Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
-    TResult? Function(String id, String label, String sectionName,
-            void Function() cancel)?
-        cancelButton,
-    TResult? Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
-        submitButton,
-    TResult? Function(
-            String id,
-            String id2,
-            String labelLeft,
-            String labelRight,
-            String currentValueLeft,
-            String currentValueRight,
-            List<String> optionsLeft,
-            Map<String, Set<String>> optionsRight,
-            List<String? Function(String?)> validatorsLeft,
-            List<String? Function(String?)> validatorsRight,
-            String sectionName,
-            bool deletable,
-            void Function()? onDelete)?
-        twoAutoCompleteFields,
-    TResult? Function(String id, String label, String sectionName,
-            void Function() callback)?
-        customButton,
-    TResult? Function(
-            String id,
-            String label,
-            DateTime currentValue,
-            String sectionName,
-            InputType inputType,
-            FormFieldValidator<DateTime?>? validator,
-            void Function(DateTime)? onChange,
-            bool deletable,
-            void Function()? onDelete)?
-        date,
-    TResult? Function(
-            String id,
-            String label,
-            (double, double) range,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            double? currentValue,
-            (double, double)? currentValues,
-            bool rangeSlider,
-            SliderType type)?
-        slider,
-    TResult? Function(
-            String id,
-            String label,
-            Iterable<String> values,
-            Iterable<String> currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName)?
-        chips,
-    TResult? Function(String sectionName)? shimmer,
-  }) {
-    return imagePicker?.call(
-        id, label, currentValue, validators, sectionName, onChange);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String id,
-            String label,
-            List<String? Function(String?)> validators,
-            String sectionName,
-            String? currentValue,
-            void Function(String)? onChange,
-            bool deletable,
-            void Function()? onDelete,
-            TextEditingController? controller)?
-        textArea,
-    TResult Function(
-            String id,
-            String label,
-            dynamic currentValue,
-            List<dynamic> options,
-            String Function(dynamic) optionToString,
-            String sectionName,
-            List<String? Function(String?)>? validators,
-            DropDownType type,
-            void Function(dynamic)? onChange,
-            bool deletable,
-            void Function()? onDelete)?
-        dropdown,
-    TResult Function(
-            String id,
-            String label,
-            bool currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange,
-            bool deletable,
-            void Function()? onDelete)?
-        checkbox,
-    TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
-    TResult Function(String id, String label, String sectionName,
-            void Function() cancel)?
-        cancelButton,
-    TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
-        submitButton,
-    TResult Function(
-            String id,
-            String id2,
-            String labelLeft,
-            String labelRight,
-            String currentValueLeft,
-            String currentValueRight,
-            List<String> optionsLeft,
-            Map<String, Set<String>> optionsRight,
-            List<String? Function(String?)> validatorsLeft,
-            List<String? Function(String?)> validatorsRight,
-            String sectionName,
-            bool deletable,
-            void Function()? onDelete)?
-        twoAutoCompleteFields,
-    TResult Function(String id, String label, String sectionName,
-            void Function() callback)?
-        customButton,
-    TResult Function(
-            String id,
-            String label,
-            DateTime currentValue,
-            String sectionName,
-            InputType inputType,
-            FormFieldValidator<DateTime?>? validator,
-            void Function(DateTime)? onChange,
-            bool deletable,
-            void Function()? onDelete)?
-        date,
-    TResult Function(
-            String id,
-            String label,
-            (double, double) range,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            double? currentValue,
-            (double, double)? currentValues,
-            bool rangeSlider,
-            SliderType type)?
-        slider,
-    TResult Function(
-            String id,
-            String label,
-            Iterable<String> values,
-            Iterable<String> currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName)?
-        chips,
-    TResult Function(String sectionName)? shimmer,
-    required TResult orElse(),
-  }) {
-    if (imagePicker != null) {
-      return imagePicker(
-          id, label, currentValue, validators, sectionName, onChange);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(FormInputFieldInfoTextArea value) textArea,
-    required TResult Function(FormInputFieldInfoDropDown value) dropdown,
-    required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
-    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
-    required TResult Function(FormInputFieldInfoCancelButton value)
-        cancelButton,
-    required TResult Function(FormInputFieldInfoSubmitButton value)
-        submitButton,
-    required TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)
-        twoAutoCompleteFields,
-    required TResult Function(FormInputFieldInfoCustomButton value)
-        customButton,
-    required TResult Function(FormInputFieldInfoDate value) date,
-    required TResult Function(FormInputFieldInfoSlider value) slider,
-    required TResult Function(FormInputFieldInfoChips value) chips,
-    required TResult Function(FormInputFieldInfoShimmer value) shimmer,
-  }) {
-    return imagePicker(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FormInputFieldInfoTextArea value)? textArea,
-    TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
-    TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
-    TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
-    TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
-    TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
-        twoAutoCompleteFields,
-    TResult? Function(FormInputFieldInfoCustomButton value)? customButton,
-    TResult? Function(FormInputFieldInfoDate value)? date,
-    TResult? Function(FormInputFieldInfoSlider value)? slider,
-    TResult? Function(FormInputFieldInfoChips value)? chips,
-    TResult? Function(FormInputFieldInfoShimmer value)? shimmer,
-  }) {
-    return imagePicker?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(FormInputFieldInfoTextArea value)? textArea,
-    TResult Function(FormInputFieldInfoDropDown value)? dropdown,
-    TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
-    TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
-    TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
-    TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?
-        twoAutoCompleteFields,
-    TResult Function(FormInputFieldInfoCustomButton value)? customButton,
-    TResult Function(FormInputFieldInfoDate value)? date,
-    TResult Function(FormInputFieldInfoSlider value)? slider,
-    TResult Function(FormInputFieldInfoChips value)? chips,
-    TResult Function(FormInputFieldInfoShimmer value)? shimmer,
-    required TResult orElse(),
-  }) {
-    if (imagePicker != null) {
-      return imagePicker(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class FormInputFieldInfoImagePicker implements FormInputFieldInfo {
-  const factory FormInputFieldInfoImagePicker(
-          {required final String id,
-          required final String label,
-          required final String? currentValue,
-          required final List<String? Function(bool?)> validators,
-          required final String sectionName,
-          final void Function(String)? onChange}) =
-      _$FormInputFieldInfoImagePickerImpl;
-
-  String get id;
-  String get label;
-  String? get currentValue;
-  List<String? Function(bool?)> get validators;
-  @override
-  String get sectionName;
-  void Function(String)? get onChange;
-
-  /// Create a copy of FormInputFieldInfo
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FormInputFieldInfoImagePickerImplCopyWith<
-          _$FormInputFieldInfoImagePickerImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -3013,14 +2339,6 @@ class _$FormInputFieldInfoCancelButtonImpl
             void Function()? onDelete)
         checkbox,
     required TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)
-        imagePicker,
-    required TResult Function(
             String id, String label, String sectionName, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
@@ -3116,14 +2434,6 @@ class _$FormInputFieldInfoCancelButtonImpl
             bool deletable,
             void Function()? onDelete)?
         checkbox,
-    TResult? Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
     TResult? Function(String id, String label, String sectionName,
             void Function() cancel)?
         cancelButton,
@@ -3220,14 +2530,6 @@ class _$FormInputFieldInfoCancelButtonImpl
             bool deletable,
             void Function()? onDelete)?
         checkbox,
-    TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
     TResult Function(String id, String label, String sectionName,
             void Function() cancel)?
         cancelButton,
@@ -3297,7 +2599,6 @@ class _$FormInputFieldInfoCancelButtonImpl
     required TResult Function(FormInputFieldInfoTextArea value) textArea,
     required TResult Function(FormInputFieldInfoDropDown value) dropdown,
     required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
-    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
     required TResult Function(FormInputFieldInfoCancelButton value)
         cancelButton,
     required TResult Function(FormInputFieldInfoSubmitButton value)
@@ -3320,7 +2621,6 @@ class _$FormInputFieldInfoCancelButtonImpl
     TResult? Function(FormInputFieldInfoTextArea value)? textArea,
     TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
     TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
     TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
     TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
     TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
@@ -3340,7 +2640,6 @@ class _$FormInputFieldInfoCancelButtonImpl
     TResult Function(FormInputFieldInfoTextArea value)? textArea,
     TResult Function(FormInputFieldInfoDropDown value)? dropdown,
     TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
     TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
     TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
     TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?
@@ -3538,14 +2837,6 @@ class _$FormInputFieldInfoSubmitButtonImpl
             void Function()? onDelete)
         checkbox,
     required TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)
-        imagePicker,
-    required TResult Function(
             String id, String label, String sectionName, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
@@ -3641,14 +2932,6 @@ class _$FormInputFieldInfoSubmitButtonImpl
             bool deletable,
             void Function()? onDelete)?
         checkbox,
-    TResult? Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
     TResult? Function(String id, String label, String sectionName,
             void Function() cancel)?
         cancelButton,
@@ -3745,14 +3028,6 @@ class _$FormInputFieldInfoSubmitButtonImpl
             bool deletable,
             void Function()? onDelete)?
         checkbox,
-    TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
     TResult Function(String id, String label, String sectionName,
             void Function() cancel)?
         cancelButton,
@@ -3822,7 +3097,6 @@ class _$FormInputFieldInfoSubmitButtonImpl
     required TResult Function(FormInputFieldInfoTextArea value) textArea,
     required TResult Function(FormInputFieldInfoDropDown value) dropdown,
     required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
-    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
     required TResult Function(FormInputFieldInfoCancelButton value)
         cancelButton,
     required TResult Function(FormInputFieldInfoSubmitButton value)
@@ -3845,7 +3119,6 @@ class _$FormInputFieldInfoSubmitButtonImpl
     TResult? Function(FormInputFieldInfoTextArea value)? textArea,
     TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
     TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
     TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
     TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
     TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
@@ -3865,7 +3138,6 @@ class _$FormInputFieldInfoSubmitButtonImpl
     TResult Function(FormInputFieldInfoTextArea value)? textArea,
     TResult Function(FormInputFieldInfoDropDown value)? dropdown,
     TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
     TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
     TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
     TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?
@@ -4218,14 +3490,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             void Function()? onDelete)
         checkbox,
     required TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)
-        imagePicker,
-    required TResult Function(
             String id, String label, String sectionName, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
@@ -4334,14 +3598,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             bool deletable,
             void Function()? onDelete)?
         checkbox,
-    TResult? Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
     TResult? Function(String id, String label, String sectionName,
             void Function() cancel)?
         cancelButton,
@@ -4451,14 +3707,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             bool deletable,
             void Function()? onDelete)?
         checkbox,
-    TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
     TResult Function(String id, String label, String sectionName,
             void Function() cancel)?
         cancelButton,
@@ -4541,7 +3789,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     required TResult Function(FormInputFieldInfoTextArea value) textArea,
     required TResult Function(FormInputFieldInfoDropDown value) dropdown,
     required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
-    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
     required TResult Function(FormInputFieldInfoCancelButton value)
         cancelButton,
     required TResult Function(FormInputFieldInfoSubmitButton value)
@@ -4564,7 +3811,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     TResult? Function(FormInputFieldInfoTextArea value)? textArea,
     TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
     TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
     TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
     TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
     TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
@@ -4584,7 +3830,6 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
     TResult Function(FormInputFieldInfoTextArea value)? textArea,
     TResult Function(FormInputFieldInfoDropDown value)? dropdown,
     TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
     TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
     TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
     TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?
@@ -4800,14 +4045,6 @@ class _$FormInputFieldInfoCustomButtonImpl
             void Function()? onDelete)
         checkbox,
     required TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)
-        imagePicker,
-    required TResult Function(
             String id, String label, String sectionName, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
@@ -4903,14 +4140,6 @@ class _$FormInputFieldInfoCustomButtonImpl
             bool deletable,
             void Function()? onDelete)?
         checkbox,
-    TResult? Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
     TResult? Function(String id, String label, String sectionName,
             void Function() cancel)?
         cancelButton,
@@ -5007,14 +4236,6 @@ class _$FormInputFieldInfoCustomButtonImpl
             bool deletable,
             void Function()? onDelete)?
         checkbox,
-    TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
     TResult Function(String id, String label, String sectionName,
             void Function() cancel)?
         cancelButton,
@@ -5084,7 +4305,6 @@ class _$FormInputFieldInfoCustomButtonImpl
     required TResult Function(FormInputFieldInfoTextArea value) textArea,
     required TResult Function(FormInputFieldInfoDropDown value) dropdown,
     required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
-    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
     required TResult Function(FormInputFieldInfoCancelButton value)
         cancelButton,
     required TResult Function(FormInputFieldInfoSubmitButton value)
@@ -5107,7 +4327,6 @@ class _$FormInputFieldInfoCustomButtonImpl
     TResult? Function(FormInputFieldInfoTextArea value)? textArea,
     TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
     TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
     TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
     TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
     TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
@@ -5127,7 +4346,6 @@ class _$FormInputFieldInfoCustomButtonImpl
     TResult Function(FormInputFieldInfoTextArea value)? textArea,
     TResult Function(FormInputFieldInfoDropDown value)? dropdown,
     TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
     TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
     TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
     TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?
@@ -5389,14 +4607,6 @@ class _$FormInputFieldInfoDateImpl
             void Function()? onDelete)
         checkbox,
     required TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)
-        imagePicker,
-    required TResult Function(
             String id, String label, String sectionName, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
@@ -5493,14 +4703,6 @@ class _$FormInputFieldInfoDateImpl
             bool deletable,
             void Function()? onDelete)?
         checkbox,
-    TResult? Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
     TResult? Function(String id, String label, String sectionName,
             void Function() cancel)?
         cancelButton,
@@ -5598,14 +4800,6 @@ class _$FormInputFieldInfoDateImpl
             bool deletable,
             void Function()? onDelete)?
         checkbox,
-    TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
     TResult Function(String id, String label, String sectionName,
             void Function() cancel)?
         cancelButton,
@@ -5676,7 +4870,6 @@ class _$FormInputFieldInfoDateImpl
     required TResult Function(FormInputFieldInfoTextArea value) textArea,
     required TResult Function(FormInputFieldInfoDropDown value) dropdown,
     required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
-    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
     required TResult Function(FormInputFieldInfoCancelButton value)
         cancelButton,
     required TResult Function(FormInputFieldInfoSubmitButton value)
@@ -5699,7 +4892,6 @@ class _$FormInputFieldInfoDateImpl
     TResult? Function(FormInputFieldInfoTextArea value)? textArea,
     TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
     TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
     TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
     TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
     TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
@@ -5719,7 +4911,6 @@ class _$FormInputFieldInfoDateImpl
     TResult Function(FormInputFieldInfoTextArea value)? textArea,
     TResult Function(FormInputFieldInfoDropDown value)? dropdown,
     TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
     TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
     TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
     TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?
@@ -6004,14 +5195,6 @@ class _$FormInputFieldInfoSliderImpl
             void Function()? onDelete)
         checkbox,
     required TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)
-        imagePicker,
-    required TResult Function(
             String id, String label, String sectionName, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
@@ -6108,14 +5291,6 @@ class _$FormInputFieldInfoSliderImpl
             bool deletable,
             void Function()? onDelete)?
         checkbox,
-    TResult? Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
     TResult? Function(String id, String label, String sectionName,
             void Function() cancel)?
         cancelButton,
@@ -6213,14 +5388,6 @@ class _$FormInputFieldInfoSliderImpl
             bool deletable,
             void Function()? onDelete)?
         checkbox,
-    TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
     TResult Function(String id, String label, String sectionName,
             void Function() cancel)?
         cancelButton,
@@ -6291,7 +5458,6 @@ class _$FormInputFieldInfoSliderImpl
     required TResult Function(FormInputFieldInfoTextArea value) textArea,
     required TResult Function(FormInputFieldInfoDropDown value) dropdown,
     required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
-    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
     required TResult Function(FormInputFieldInfoCancelButton value)
         cancelButton,
     required TResult Function(FormInputFieldInfoSubmitButton value)
@@ -6314,7 +5480,6 @@ class _$FormInputFieldInfoSliderImpl
     TResult? Function(FormInputFieldInfoTextArea value)? textArea,
     TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
     TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
     TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
     TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
     TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
@@ -6334,7 +5499,6 @@ class _$FormInputFieldInfoSliderImpl
     TResult Function(FormInputFieldInfoTextArea value)? textArea,
     TResult Function(FormInputFieldInfoDropDown value)? dropdown,
     TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
     TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
     TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
     TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?
@@ -6577,14 +5741,6 @@ class _$FormInputFieldInfoChipsImpl
             void Function()? onDelete)
         checkbox,
     required TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)
-        imagePicker,
-    required TResult Function(
             String id, String label, String sectionName, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
@@ -6680,14 +5836,6 @@ class _$FormInputFieldInfoChipsImpl
             bool deletable,
             void Function()? onDelete)?
         checkbox,
-    TResult? Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
     TResult? Function(String id, String label, String sectionName,
             void Function() cancel)?
         cancelButton,
@@ -6785,14 +5933,6 @@ class _$FormInputFieldInfoChipsImpl
             bool deletable,
             void Function()? onDelete)?
         checkbox,
-    TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
     TResult Function(String id, String label, String sectionName,
             void Function() cancel)?
         cancelButton,
@@ -6862,7 +6002,6 @@ class _$FormInputFieldInfoChipsImpl
     required TResult Function(FormInputFieldInfoTextArea value) textArea,
     required TResult Function(FormInputFieldInfoDropDown value) dropdown,
     required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
-    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
     required TResult Function(FormInputFieldInfoCancelButton value)
         cancelButton,
     required TResult Function(FormInputFieldInfoSubmitButton value)
@@ -6885,7 +6024,6 @@ class _$FormInputFieldInfoChipsImpl
     TResult? Function(FormInputFieldInfoTextArea value)? textArea,
     TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
     TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
     TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
     TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
     TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
@@ -6905,7 +6043,6 @@ class _$FormInputFieldInfoChipsImpl
     TResult Function(FormInputFieldInfoTextArea value)? textArea,
     TResult Function(FormInputFieldInfoDropDown value)? dropdown,
     TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
     TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
     TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
     TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?
@@ -7069,14 +6206,6 @@ class _$FormInputFieldInfoShimmerImpl
             void Function()? onDelete)
         checkbox,
     required TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)
-        imagePicker,
-    required TResult Function(
             String id, String label, String sectionName, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
@@ -7172,14 +6301,6 @@ class _$FormInputFieldInfoShimmerImpl
             bool deletable,
             void Function()? onDelete)?
         checkbox,
-    TResult? Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
     TResult? Function(String id, String label, String sectionName,
             void Function() cancel)?
         cancelButton,
@@ -7276,14 +6397,6 @@ class _$FormInputFieldInfoShimmerImpl
             bool deletable,
             void Function()? onDelete)?
         checkbox,
-    TResult Function(
-            String id,
-            String label,
-            String? currentValue,
-            List<String? Function(bool?)> validators,
-            String sectionName,
-            void Function(String)? onChange)?
-        imagePicker,
     TResult Function(String id, String label, String sectionName,
             void Function() cancel)?
         cancelButton,
@@ -7353,7 +6466,6 @@ class _$FormInputFieldInfoShimmerImpl
     required TResult Function(FormInputFieldInfoTextArea value) textArea,
     required TResult Function(FormInputFieldInfoDropDown value) dropdown,
     required TResult Function(FormInputFieldInfoCheckbox value) checkbox,
-    required TResult Function(FormInputFieldInfoImagePicker value) imagePicker,
     required TResult Function(FormInputFieldInfoCancelButton value)
         cancelButton,
     required TResult Function(FormInputFieldInfoSubmitButton value)
@@ -7376,7 +6488,6 @@ class _$FormInputFieldInfoShimmerImpl
     TResult? Function(FormInputFieldInfoTextArea value)? textArea,
     TResult? Function(FormInputFieldInfoDropDown value)? dropdown,
     TResult? Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult? Function(FormInputFieldInfoImagePicker value)? imagePicker,
     TResult? Function(FormInputFieldInfoCancelButton value)? cancelButton,
     TResult? Function(FormInputFieldInfoSubmitButton value)? submitButton,
     TResult? Function(FormInputFieldInfoTwoAutoCompleteFields value)?
@@ -7396,7 +6507,6 @@ class _$FormInputFieldInfoShimmerImpl
     TResult Function(FormInputFieldInfoTextArea value)? textArea,
     TResult Function(FormInputFieldInfoDropDown value)? dropdown,
     TResult Function(FormInputFieldInfoCheckbox value)? checkbox,
-    TResult Function(FormInputFieldInfoImagePicker value)? imagePicker,
     TResult Function(FormInputFieldInfoCancelButton value)? cancelButton,
     TResult Function(FormInputFieldInfoSubmitButton value)? submitButton,
     TResult Function(FormInputFieldInfoTwoAutoCompleteFields value)?

@@ -52,7 +52,7 @@ class _$FormInputSectionCopyWithImpl<$Res, $Val extends FormInputSection>
   @override
   $Res call({
     Object? name = null,
-    Object? direction = freezed,
+    Object? direction = null,
     Object? showBorder = null,
   }) {
     return _then(_value.copyWith(
@@ -60,7 +60,7 @@ class _$FormInputSectionCopyWithImpl<$Res, $Val extends FormInputSection>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      direction: freezed == direction
+      direction: null == direction
           ? _value.direction
           : direction // ignore: cast_nullable_to_non_nullable
               as FormAxisDirection,
@@ -97,7 +97,7 @@ class __$$FormInputSectionImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
-    Object? direction = freezed,
+    Object? direction = null,
     Object? showBorder = null,
   }) {
     return _then(_$FormInputSectionImpl(
@@ -105,7 +105,7 @@ class __$$FormInputSectionImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      direction: freezed == direction
+      direction: null == direction
           ? _value.direction
           : direction // ignore: cast_nullable_to_non_nullable
               as FormAxisDirection,
@@ -141,14 +141,14 @@ class _$FormInputSectionImpl implements _FormInputSection {
         (other.runtimeType == runtimeType &&
             other is _$FormInputSectionImpl &&
             (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality().equals(other.direction, direction) &&
+            (identical(other.direction, direction) ||
+                other.direction == direction) &&
             (identical(other.showBorder, showBorder) ||
                 other.showBorder == showBorder));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name,
-      const DeepCollectionEquality().hash(direction), showBorder);
+  int get hashCode => Object.hash(runtimeType, name, direction, showBorder);
 
   /// Create a copy of FormInputSection
   /// with the given fields replaced by the non-null parameter values.

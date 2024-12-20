@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:listwhatever/custom/pages/listItems/filters/filter_widget.dart';
 import 'package:listwhatever/form/form_input_field_info.dart';
 
 const String className = 'FormInputFieldTextArea';
+const double widthForRightHandSideView = 200;
 
 class FormInputFieldShimmer extends StatelessWidget {
   const FormInputFieldShimmer({required this.field, super.key});

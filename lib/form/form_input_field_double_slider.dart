@@ -2,9 +2,9 @@ import 'package:another_xlider/another_xlider.dart';
 import 'package:another_xlider/models/trackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:listwhatever/components/border_with_header.dart';
 import 'package:listwhatever/form/form_input_field_info.dart';
 import 'package:listwhatever/form/form_input_field_single_slider.dart';
-import 'package:listwhatever/widgets/border_with_header.dart';
 
 const String className = 'FormInputFieldDoubleSlider';
 

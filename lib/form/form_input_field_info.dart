@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:listwhatever/custom/pages/listItems/searchLocation/geocoder/geocoderresult.dart';
 
 part 'form_input_field_info.freezed.dart';
 
@@ -56,15 +55,6 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     @Default(null) void Function()? onDelete,
   }) = FormInputFieldInfoCheckbox;
 
-  const factory FormInputFieldInfo.imagePicker({
-    required String id,
-    required String label,
-    required String? currentValue,
-    required List<FormFieldValidator<bool>> validators,
-    required String sectionName,
-    @Default(null) void Function(String value)? onChange,
-  }) = FormInputFieldInfoImagePicker;
-
   const factory FormInputFieldInfo.cancelButton({
     required String id,
     required String label,
@@ -113,8 +103,6 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     @Default(false) bool deletable,
     @Default(null) void Function()? onDelete,
   }) = FormInputFieldInfoDate;
-
-
 
   const factory FormInputFieldInfo.slider({
     required String id,
