@@ -59,32 +59,27 @@ class _FormGeneratorState extends State<FormGenerator> {
         padding: const EdgeInsets.all(8),
         child: Shimmer(
           linearGradient: shimmerGradient,
-          child: ShimmerLoading(
-            isLoading: widget.isLoading,
-            child: FormBuilder(
-              key: widget.formKey,
-              // IMPORTANT to remove all references from dynamic field when delete
-              clearValueOnUnregister: true,
-              skipDisabled: true,
+          child: FormBuilder(
+            key: widget.formKey,
+            // IMPORTANT to remove all references from dynamic field when delete
+            clearValueOnUnregister: true,
+            skipDisabled: true,
 
-              onChanged: () {
-                if (widget.changeCallback != null) {
-                  final fields = widget.formKey.currentState?.fields;
-                  final mapEntriesValues = fields?.entries
-                      .map((e) => MapEntry(e.key, e.value.value));
+            onChanged: () {
+              if (widget.changeCallback != null) {
+                final fields = widget.formKey.currentState?.fields;
+                final mapEntriesValues =
+                    fields?.entries.map((e) => MapEntry(e.key, e.value.value));
 
-                  final values = (mapEntriesValues != null)
-                      ? Map.fromEntries(mapEntriesValues)
-                      : <String, dynamic>{};
-                  widget.changeCallback?.call(values);
-                }
-              },
-              child: Row(
-                spacing: 25,
-                children: widget.isLoading
-                    ? _buildShimmerItems()
-                    : widget.sections.map(generateSection).toList(),
-              ),
+                final values = (mapEntriesValues != null)
+                    ? Map.fromEntries(mapEntriesValues)
+                    : <String, dynamic>{};
+                widget.changeCallback?.call(values);
+              }
+            },
+            child: Column(
+              spacing: 25,
+              children: widget.sections.map(generateSection).toList(),
             ),
           ),
         ),
@@ -93,7 +88,6 @@ class _FormGeneratorState extends State<FormGenerator> {
   }
 
   Widget generateSection(FormInputSection section) {
-    //
     final sectionFields =
         widget.fields.where((f) => f?.sectionName == section.name);
     final actualFields = sectionFields.map(generateField).toList();
@@ -117,10 +111,7 @@ class _FormGeneratorState extends State<FormGenerator> {
     }
   }
 
-  Widget generateField(
-    FormInputFieldInfo? field,
-  ) {
-    //
+  Widget generateField(FormInputFieldInfo? field) {
     if (field == null) {
       return const CircularProgressIndicator();
     }
@@ -149,22 +140,5 @@ class _FormGeneratorState extends State<FormGenerator> {
       FormInputFieldInfoShimmer() => FormInputFieldShimmer(field: field),
     };
     return response;
-  }
-
-  List<Widget> _buildShimmerItems() {
-    return List.generate(
-      widget.fields.length,
-      (i) => Padding(
-        padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
-        child: Container(
-          height: 60,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.circular(16),
-          ),
-        ),
-      ),
-    );
   }
 }
