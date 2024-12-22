@@ -18,7 +18,7 @@ FutureOr<String?> routerRedirect(BuildContext context, GoRouterState state) {
   }
 
   if (isLoggedIn(authBloc)) {
-    if (isLoggingInState(state)) {
+    if (isLoggingInPage(state)) {
       print('routerRedirect return /');
       return '/listItems';
     }
@@ -35,12 +35,13 @@ FutureOr<String?> routerRedirect(BuildContext context, GoRouterState state) {
   return null;
 }
 
-bool isLoggingInState(GoRouterState state) {
+bool isLoggingInPage(GoRouterState state) {
   return [RouteName.logIn.value, RouteName.signUp.value]
       .contains(state.matchedLocation.replaceAll('/', ''));
 }
 
 bool isLoggedIn(AuthBloc authBloc) {
+  print('go_router_redirect: authBloc.state: ${authBloc.state}');
   return authBloc.state is AuthLoggedIn ||
       authBloc.state is AuthOnboardingRequired;
 }

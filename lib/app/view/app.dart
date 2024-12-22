@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:listwhatever/app/view/app_theme.dart';
 import 'package:listwhatever/auth/auth_repository.dart';
+import 'package:listwhatever/auth/authenticated_user_listener.dart';
 import 'package:listwhatever/auth/bloc/auth_bloc.dart';
+import 'package:listwhatever/changeUserBloc/change_user_bloc_bloc.dart';
 import 'package:listwhatever/l10n/l10n.dart';
 import 'package:listwhatever/pages/lists/bloc/lists_bloc.dart';
 import 'package:listwhatever/pages/lists/repository/user_list_repository.dart';
@@ -30,6 +32,10 @@ class App extends StatelessWidget {
           child: MultiBlocProvider(
             providers: [
               BlocProvider(
+                create: (_) =>
+                    ChangeUserBloc(userListRepository: userListRepository),
+              ),
+              BlocProvider(
                 create: (_) => AuthBloc(authRepository: authRepository),
               ),
               BlocProvider(
@@ -39,12 +45,14 @@ class App extends StatelessWidget {
             ],
             child: Builder(
               builder: (context) {
-                return MaterialApp.router(
-                  routerConfig: getGoRouterConfiguration(context),
-                  theme: theme.getThemeData(),
-                  localizationsDelegates:
-                      AppLocalizations.localizationsDelegates,
-                  supportedLocales: AppLocalizations.supportedLocales,
+                return AuthenticatedUserListener(
+                  child: MaterialApp.router(
+                    routerConfig: getGoRouterConfiguration(context),
+                    theme: theme.getThemeData(),
+                    localizationsDelegates:
+                        AppLocalizations.localizationsDelegates,
+                    supportedLocales: AppLocalizations.supportedLocales,
+                  ),
                 );
               },
             ),

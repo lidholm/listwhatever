@@ -5,10 +5,16 @@ import 'package:listwhatever/pages/lists/models/user_list.dart';
 
 class UserListRepository {
   UserListRepository({required this.userId});
-  final String? userId;
+  String? userId;
+
+  // ignore: use_setters_to_change_properties
+  void changeUser(String? userId) {
+    this.userId = userId;
+  }
 
   Future<CollectionReference<Map<String, dynamic>>> getCollection() async {
     final path = '/users/$userId/lists';
+    print('UserListRepository path: $path');
     return (await getFirestore()).collection(path);
   }
 
@@ -34,7 +40,7 @@ class UserListRepository {
 
   Future<String> addUserList(UserList userList) async {
     if (userId == null || userId == anonymousId) {
-      return '-1';
+      return 'this should not happen';
     }
 
     final listsCollection = await getCollection();
