@@ -7,8 +7,17 @@ class ListWhateverTheme {
 
   ThemeData getThemeData() {
     return ThemeData(
+      useMaterial3: true,
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: Colors.grey.shade900,
+        brightness: Brightness.dark,
+      ),
       appBarTheme: AppBarTheme(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Colors.grey.shade900,
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: Colors.amber.shade400,
+        foregroundColor: Colors.black,
       ),
       textTheme: TextTheme(
         displayLarge: const TextStyle(
@@ -23,7 +32,6 @@ class ListWhateverTheme {
         titleMedium: GoogleFonts.inter(),
         titleSmall: GoogleFonts.inter(),
       ),
-      useMaterial3: true,
     );
   }
 }

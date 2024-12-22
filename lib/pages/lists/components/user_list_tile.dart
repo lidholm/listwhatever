@@ -4,9 +4,9 @@ import 'package:listwhatever/pages/lists/models/user_list.dart';
 
 const String className = 'UserListTile';
 
-const imageRadius = 8.0;
-const imageHeight = 60.0;
-const imageWidth = 80.0;
+const imageRadius = 12.0;
+const imageHeight = 80.0;
+const imageWidth = 120.0;
 
 class UserListTile extends StatelessWidget {
   const UserListTile({
@@ -25,17 +25,27 @@ class UserListTile extends StatelessWidget {
   Widget buildTile(BuildContext context) {
     return ShimmerLoading(
       isLoading: isLoading,
-      child: Row(
-        spacing: 8,
-        children: [
-          buildImage(),
-          Column(
-            spacing: 8,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [buildTitle(context), buildSubtitle(context)],
+      child: Container(
+          height: 100,
+          decoration: BoxDecoration(
+            color: Colors.grey.shade800,
+            borderRadius: BorderRadius.circular(imageRadius),
           ),
-        ],
-      ),
+          child: Row(
+            spacing: 24,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 16),
+                child: buildImage(),
+              ),
+              Column(
+                spacing: 8,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [buildTitle(context), buildSubtitle(context)],
+              ),
+            ],
+          )),
     );
   }
 
@@ -43,11 +53,14 @@ class UserListTile extends StatelessWidget {
     if (isLoading) {
       return buildShimmerContainer(imageHeight, imageWidth);
     }
-    return Image.asset(
-      height: imageHeight,
-      width: imageWidth,
-      list.imageFilename ?? 'default',
-      fit: BoxFit.cover,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(imageRadius),
+      child: Image.asset(
+        height: imageHeight,
+        width: imageWidth,
+        list.imageFilename ?? 'default',
+        fit: BoxFit.cover,
+      ),
     );
   }
 
@@ -67,7 +80,7 @@ class UserListTile extends StatelessWidget {
       return buildShimmerContainer(20, 140);
     }
     return Text(
-      'Some',
+      'Number of items: 14',
       style: Theme.of(context).textTheme.titleMedium,
     );
   }
