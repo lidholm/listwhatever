@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:listwhatever/pages/lists/bloc/bloc/user_lists_bloc.dart';
+import 'package:listwhatever/pages/lists/bloc/lists_bloc.dart';
 import 'package:listwhatever/pages/lists/components/user_list_tile.dart';
 import 'package:listwhatever/pages/lists/models/user_list.dart';
 
@@ -13,7 +13,7 @@ class ListTiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final listsState = context.watch<UserListsBloc>().state;
+    final listsState = context.watch<ListsBloc>().state;
     print('listsState: $listsState');
 
     final lists = getLists(listsState);
@@ -33,7 +33,7 @@ class ListTiles extends StatelessWidget {
     );
   }
 
-  List<UserList> getLists(UserListsState listsState) {
+  List<UserList> getLists(ListsState listsState) {
     if (isLoadingState(listsState)) {
       return List.generate(
         4,
@@ -51,7 +51,7 @@ class ListTiles extends StatelessWidget {
     return (listsState as Loaded).lists;
   }
 
-  bool isLoadingState(UserListsState listsState) {
+  bool isLoadingState(ListsState listsState) {
     return listsState is! Loaded;
   }
 }

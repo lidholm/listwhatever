@@ -12,6 +12,10 @@ class SignInOptionsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final nameController = TextEditingController(text: 'Regular');
+    final emailController = TextEditingController(text: 'regular@email.com');
+    final passwordController = TextEditingController(text: 'test1234!');
+
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
@@ -29,22 +33,25 @@ class SignInOptionsPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  controller: nameController,
+                  decoration: const InputDecoration(
                     labelText: 'Name',
                     prefixIcon: Icon(Icons.person),
                   ),
                 ),
                 const SizedBox(height: 20),
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  controller: emailController,
+                  decoration: const InputDecoration(
                     labelText: 'Email',
                     prefixIcon: Icon(Icons.email),
                   ),
                 ),
                 const SizedBox(height: 20),
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  controller: passwordController,
+                  decoration: const InputDecoration(
                     labelText: 'Password',
                     prefixIcon: Icon(Icons.lock),
                     suffixIcon: Icon(Icons.visibility),
@@ -54,7 +61,12 @@ class SignInOptionsPage extends StatelessWidget {
                 const SizedBox(height: 30),
                 ElevatedButton(
                   onPressed: () {
-                    // Handle sign-up logic here
+                    context.read<AuthBloc>().add(
+                          SignUpWithEmailAndPassword(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          ),
+                        );
                   },
                   child: const Text('Sign Up'),
                 ),

@@ -27,14 +27,18 @@ class UserListRepository {
     });
   }
 
-  // Future<String> addPet(Pet pet) async {
-  //   final listsCollection = await getCollection();
-  //   final ref = await listsCollection.add(pet.toJson());
-  //   return ref.id;
-  // }
-
   UserList convertToUserList(String id, Map<String, dynamic> data) {
     final list = UserList.fromJson(data);
     return list.copyWith();
+  }
+
+  Future<String> addUserList(UserList userList) async {
+    if (userId == null || userId == anonymousId) {
+      return '-1';
+    }
+
+    final listsCollection = await getCollection();
+    final ref = await listsCollection.add(userList.toJson());
+    return ref.id;
   }
 }

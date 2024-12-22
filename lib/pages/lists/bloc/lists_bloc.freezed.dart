@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'user_lists_bloc.dart';
+part of 'lists_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,59 +15,65 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$UserListsEvent {
+mixin _$ListsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() watchUserLists,
+    required TResult Function(ListOfThings list) addList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? watchUserLists,
+    TResult? Function(ListOfThings list)? addList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? watchUserLists,
+    TResult Function(ListOfThings list)? addList,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_WatchUserLists value) watchUserLists,
+    required TResult Function(_AddList value) addList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_WatchUserLists value)? watchUserLists,
+    TResult? Function(_AddList value)? addList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_WatchUserLists value)? watchUserLists,
+    TResult Function(_AddList value)? addList,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserListsEventCopyWith<$Res> {
-  factory $UserListsEventCopyWith(
-          UserListsEvent value, $Res Function(UserListsEvent) then) =
-      _$UserListsEventCopyWithImpl<$Res, UserListsEvent>;
+abstract class $ListsEventCopyWith<$Res> {
+  factory $ListsEventCopyWith(
+          ListsEvent value, $Res Function(ListsEvent) then) =
+      _$ListsEventCopyWithImpl<$Res, ListsEvent>;
 }
 
 /// @nodoc
-class _$UserListsEventCopyWithImpl<$Res, $Val extends UserListsEvent>
-    implements $UserListsEventCopyWith<$Res> {
-  _$UserListsEventCopyWithImpl(this._value, this._then);
+class _$ListsEventCopyWithImpl<$Res, $Val extends ListsEvent>
+    implements $ListsEventCopyWith<$Res> {
+  _$ListsEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UserListsEvent
+  /// Create a copy of ListsEvent
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -80,13 +86,13 @@ abstract class _$$WatchUserListsImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$WatchUserListsImplCopyWithImpl<$Res>
-    extends _$UserListsEventCopyWithImpl<$Res, _$WatchUserListsImpl>
+    extends _$ListsEventCopyWithImpl<$Res, _$WatchUserListsImpl>
     implements _$$WatchUserListsImplCopyWith<$Res> {
   __$$WatchUserListsImplCopyWithImpl(
       _$WatchUserListsImpl _value, $Res Function(_$WatchUserListsImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UserListsEvent
+  /// Create a copy of ListsEvent
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -97,7 +103,7 @@ class _$WatchUserListsImpl implements _WatchUserLists {
 
   @override
   String toString() {
-    return 'UserListsEvent.watchUserLists()';
+    return 'ListsEvent.watchUserLists()';
   }
 
   @override
@@ -113,6 +119,7 @@ class _$WatchUserListsImpl implements _WatchUserLists {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() watchUserLists,
+    required TResult Function(ListOfThings list) addList,
   }) {
     return watchUserLists();
   }
@@ -121,6 +128,7 @@ class _$WatchUserListsImpl implements _WatchUserLists {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? watchUserLists,
+    TResult? Function(ListOfThings list)? addList,
   }) {
     return watchUserLists?.call();
   }
@@ -129,6 +137,7 @@ class _$WatchUserListsImpl implements _WatchUserLists {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? watchUserLists,
+    TResult Function(ListOfThings list)? addList,
     required TResult orElse(),
   }) {
     if (watchUserLists != null) {
@@ -141,6 +150,7 @@ class _$WatchUserListsImpl implements _WatchUserLists {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_WatchUserLists value) watchUserLists,
+    required TResult Function(_AddList value) addList,
   }) {
     return watchUserLists(this);
   }
@@ -149,6 +159,7 @@ class _$WatchUserListsImpl implements _WatchUserLists {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_WatchUserLists value)? watchUserLists,
+    TResult? Function(_AddList value)? addList,
   }) {
     return watchUserLists?.call(this);
   }
@@ -157,6 +168,7 @@ class _$WatchUserListsImpl implements _WatchUserLists {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_WatchUserLists value)? watchUserLists,
+    TResult Function(_AddList value)? addList,
     required TResult orElse(),
   }) {
     if (watchUserLists != null) {
@@ -166,12 +178,164 @@ class _$WatchUserListsImpl implements _WatchUserLists {
   }
 }
 
-abstract class _WatchUserLists implements UserListsEvent {
+abstract class _WatchUserLists implements ListsEvent {
   const factory _WatchUserLists() = _$WatchUserListsImpl;
 }
 
 /// @nodoc
-mixin _$UserListsState {
+abstract class _$$AddListImplCopyWith<$Res> {
+  factory _$$AddListImplCopyWith(
+          _$AddListImpl value, $Res Function(_$AddListImpl) then) =
+      __$$AddListImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ListOfThings list});
+
+  $ListOfThingsCopyWith<$Res> get list;
+}
+
+/// @nodoc
+class __$$AddListImplCopyWithImpl<$Res>
+    extends _$ListsEventCopyWithImpl<$Res, _$AddListImpl>
+    implements _$$AddListImplCopyWith<$Res> {
+  __$$AddListImplCopyWithImpl(
+      _$AddListImpl _value, $Res Function(_$AddListImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ListsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? list = null,
+  }) {
+    return _then(_$AddListImpl(
+      null == list
+          ? _value.list
+          : list // ignore: cast_nullable_to_non_nullable
+              as ListOfThings,
+    ));
+  }
+
+  /// Create a copy of ListsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ListOfThingsCopyWith<$Res> get list {
+    return $ListOfThingsCopyWith<$Res>(_value.list, (value) {
+      return _then(_value.copyWith(list: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$AddListImpl implements _AddList {
+  const _$AddListImpl(this.list);
+
+  @override
+  final ListOfThings list;
+
+  @override
+  String toString() {
+    return 'ListsEvent.addList(list: $list)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AddListImpl &&
+            (identical(other.list, list) || other.list == list));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, list);
+
+  /// Create a copy of ListsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AddListImplCopyWith<_$AddListImpl> get copyWith =>
+      __$$AddListImplCopyWithImpl<_$AddListImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() watchUserLists,
+    required TResult Function(ListOfThings list) addList,
+  }) {
+    return addList(list);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? watchUserLists,
+    TResult? Function(ListOfThings list)? addList,
+  }) {
+    return addList?.call(list);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchUserLists,
+    TResult Function(ListOfThings list)? addList,
+    required TResult orElse(),
+  }) {
+    if (addList != null) {
+      return addList(list);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_WatchUserLists value) watchUserLists,
+    required TResult Function(_AddList value) addList,
+  }) {
+    return addList(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_WatchUserLists value)? watchUserLists,
+    TResult? Function(_AddList value)? addList,
+  }) {
+    return addList?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WatchUserLists value)? watchUserLists,
+    TResult Function(_AddList value)? addList,
+    required TResult orElse(),
+  }) {
+    if (addList != null) {
+      return addList(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AddList implements ListsEvent {
+  const factory _AddList(final ListOfThings list) = _$AddListImpl;
+
+  ListOfThings get list;
+
+  /// Create a copy of ListsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AddListImplCopyWith<_$AddListImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$ListsState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -219,23 +383,23 @@ mixin _$UserListsState {
 }
 
 /// @nodoc
-abstract class $UserListsStateCopyWith<$Res> {
-  factory $UserListsStateCopyWith(
-          UserListsState value, $Res Function(UserListsState) then) =
-      _$UserListsStateCopyWithImpl<$Res, UserListsState>;
+abstract class $ListsStateCopyWith<$Res> {
+  factory $ListsStateCopyWith(
+          ListsState value, $Res Function(ListsState) then) =
+      _$ListsStateCopyWithImpl<$Res, ListsState>;
 }
 
 /// @nodoc
-class _$UserListsStateCopyWithImpl<$Res, $Val extends UserListsState>
-    implements $UserListsStateCopyWith<$Res> {
-  _$UserListsStateCopyWithImpl(this._value, this._then);
+class _$ListsStateCopyWithImpl<$Res, $Val extends ListsState>
+    implements $ListsStateCopyWith<$Res> {
+  _$ListsStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UserListsState
+  /// Create a copy of ListsState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -248,13 +412,13 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$UserListsStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$ListsStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UserListsState
+  /// Create a copy of ListsState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -265,7 +429,7 @@ class _$InitialImpl implements Initial {
 
   @override
   String toString() {
-    return 'UserListsState.initial()';
+    return 'ListsState.initial()';
   }
 
   @override
@@ -346,7 +510,7 @@ class _$InitialImpl implements Initial {
   }
 }
 
-abstract class Initial implements UserListsState {
+abstract class Initial implements ListsState {
   const factory Initial() = _$InitialImpl;
 }
 
@@ -359,13 +523,13 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$UserListsStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$ListsStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UserListsState
+  /// Create a copy of ListsState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -376,7 +540,7 @@ class _$LoadingImpl implements Loading {
 
   @override
   String toString() {
-    return 'UserListsState.loading()';
+    return 'ListsState.loading()';
   }
 
   @override
@@ -457,7 +621,7 @@ class _$LoadingImpl implements Loading {
   }
 }
 
-abstract class Loading implements UserListsState {
+abstract class Loading implements ListsState {
   const factory Loading() = _$LoadingImpl;
 }
 
@@ -472,13 +636,13 @@ abstract class _$$LoadedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadedImplCopyWithImpl<$Res>
-    extends _$UserListsStateCopyWithImpl<$Res, _$LoadedImpl>
+    extends _$ListsStateCopyWithImpl<$Res, _$LoadedImpl>
     implements _$$LoadedImplCopyWith<$Res> {
   __$$LoadedImplCopyWithImpl(
       _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UserListsState
+  /// Create a copy of ListsState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -509,7 +673,7 @@ class _$LoadedImpl implements Loaded {
 
   @override
   String toString() {
-    return 'UserListsState.loaded(lists: $lists)';
+    return 'ListsState.loaded(lists: $lists)';
   }
 
   @override
@@ -524,7 +688,7 @@ class _$LoadedImpl implements Loaded {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_lists));
 
-  /// Create a copy of UserListsState
+  /// Create a copy of ListsState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -601,12 +765,12 @@ class _$LoadedImpl implements Loaded {
   }
 }
 
-abstract class Loaded implements UserListsState {
+abstract class Loaded implements ListsState {
   const factory Loaded(final List<UserList> lists) = _$LoadedImpl;
 
   List<UserList> get lists;
 
-  /// Create a copy of UserListsState
+  /// Create a copy of ListsState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>

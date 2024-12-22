@@ -23,6 +23,7 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     required String label,
     required List<FormFieldValidator<String>> validators,
     required String sectionName,
+    required bool isLoading,
     @Default(null) String? currentValue,
     @Default(null) void Function(String)? onChange,
     @Default(false) bool deletable,
@@ -37,6 +38,7 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     required List<dynamic> options,
     required String Function(dynamic) optionToString,
     required String sectionName,
+    required bool isLoading,
     @Default(null) List<FormFieldValidator<String>>? validators,
     @Default(DropDownType.string) DropDownType type,
     @Default(null) void Function(dynamic)? onChange,
@@ -50,6 +52,7 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     required bool currentValue,
     required List<FormFieldValidator<bool>> validators,
     required String sectionName,
+    required bool isLoading,
     @Default(null) void Function(String)? onChange,
     @Default(false) bool deletable,
     @Default(null) void Function()? onDelete,
@@ -59,6 +62,7 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     required String id,
     required String label,
     required String sectionName,
+    required bool isLoading,
     required void Function() cancel,
   }) = FormInputFieldInfoCancelButton;
 
@@ -66,6 +70,7 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     required String id,
     required String label,
     required String sectionName,
+    required bool isLoading,
     required void Function(Map<String, dynamic>?) save,
   }) = FormInputFieldInfoSubmitButton;
 
@@ -81,6 +86,7 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     required List<FormFieldValidator<String>> validatorsLeft,
     required List<FormFieldValidator<String>> validatorsRight,
     required String sectionName,
+    required bool isLoading,
     @Default(false) bool deletable,
     @Default(null) void Function()? onDelete,
   }) = FormInputFieldInfoTwoAutoCompleteFields;
@@ -89,6 +95,7 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     required String id,
     required String label,
     required String sectionName,
+    required bool isLoading,
     required void Function() callback,
   }) = FormInputFieldInfoCustomButton;
 
@@ -98,6 +105,7 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     required DateTime currentValue,
     required String sectionName,
     required InputType inputType,
+    required bool isLoading,
     @Default(null) FormFieldValidator<DateTime?>? validator,
     @Default(null) void Function(DateTime value)? onChange,
     @Default(false) bool deletable,
@@ -110,6 +118,7 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     required (double, double) range,
     required List<FormFieldValidator<bool>> validators,
     required String sectionName,
+    required bool isLoading,
     @Default(null) double? currentValue,
     @Default(null) (double, double)? currentValues,
     @Default(false) bool rangeSlider,
@@ -123,6 +132,7 @@ sealed class FormInputFieldInfo with _$FormInputFieldInfo {
     required Iterable<String> currentValue,
     required List<FormFieldValidator<bool>> validators,
     required String sectionName,
+    required bool isLoading,
   }) = FormInputFieldInfoChips;
 
   const factory FormInputFieldInfo.shimmer({

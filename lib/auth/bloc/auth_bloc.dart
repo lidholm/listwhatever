@@ -17,6 +17,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LoginWithEmailAndPassword>(_onLoginWithEmailAndPassword);
     on<SignUpWithApple>(_onSignUpWithApple);
     on<SignUpWithGoogle>(_onSignUpWithGoogle);
+    on<SignUpWithEmailAndPassword>(_onSignUpWithEmailAndPassword);
     on<Logout>(_onLogout);
 
     _authSubscription = authRepository.user.listen(_userChanged);
@@ -82,6 +83,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   void _onSignUpWithGoogle(SignUpWithGoogle event, Emitter<AuthState> emit) {
     print('SignUpWithGoogle');
+  }
+
+  Future<void> _onSignUpWithEmailAndPassword(
+    SignUpWithEmailAndPassword event,
+    Emitter<AuthState> emit,
+  ) async {
+    print('LoginWithEmailAndPassword ${event.email} ${event.password}');
+    await authRepository.signUpWithEmailAndPassword(
+      event.email,
+      event.password,
+    );
   }
 
   void _onLogout(Logout event, Emitter<AuthState> emit) {

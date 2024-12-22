@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:listwhatever/pages/lists/models/list_of_things.dart';
 
 part 'user_list.freezed.dart';
 part 'user_list.g.dart';
@@ -16,4 +17,13 @@ class UserList with _$UserList {
 
   factory UserList.fromJson(Map<String, Object?> json) =>
       _$UserListFromJson(json);
+
+  factory UserList.fromList(ListOfThings list) => UserList(
+        id: null,
+        listId: list.id ?? 'Fix',
+        listName: list.name,
+        ownerId: list.ownerId ?? 'Fix',
+        isOwnList: true,
+        imageFilename: '',
+      );
 }

@@ -24,6 +24,7 @@ mixin _$FormInputFieldInfo {
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -37,6 +38,7 @@ mixin _$FormInputFieldInfo {
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -49,15 +51,16 @@ mixin _$FormInputFieldInfo {
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         checkbox,
-    required TResult Function(
-            String id, String label, String sectionName, void Function() cancel)
+    required TResult Function(String id, String label, String sectionName,
+            bool isLoading, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)
+            bool isLoading, void Function(Map<String, dynamic>?) save)
         submitButton,
     required TResult Function(
             String id,
@@ -71,11 +74,12 @@ mixin _$FormInputFieldInfo {
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
     required TResult Function(String id, String label, String sectionName,
-            void Function() callback)
+            bool isLoading, void Function() callback)
         customButton,
     required TResult Function(
             String id,
@@ -83,6 +87,7 @@ mixin _$FormInputFieldInfo {
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -94,6 +99,7 @@ mixin _$FormInputFieldInfo {
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -105,7 +111,8 @@ mixin _$FormInputFieldInfo {
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)
+            String sectionName,
+            bool isLoading)
         chips,
     required TResult Function(String sectionName) shimmer,
   }) =>
@@ -117,6 +124,7 @@ mixin _$FormInputFieldInfo {
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -130,6 +138,7 @@ mixin _$FormInputFieldInfo {
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -142,15 +151,16 @@ mixin _$FormInputFieldInfo {
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
     TResult? Function(String id, String label, String sectionName,
-            void Function() cancel)?
+            bool isLoading, void Function() cancel)?
         cancelButton,
     TResult? Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
+            bool isLoading, void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult? Function(
             String id,
@@ -164,11 +174,12 @@ mixin _$FormInputFieldInfo {
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
     TResult? Function(String id, String label, String sectionName,
-            void Function() callback)?
+            bool isLoading, void Function() callback)?
         customButton,
     TResult? Function(
             String id,
@@ -176,6 +187,7 @@ mixin _$FormInputFieldInfo {
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -187,6 +199,7 @@ mixin _$FormInputFieldInfo {
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -198,7 +211,8 @@ mixin _$FormInputFieldInfo {
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            bool isLoading)?
         chips,
     TResult? Function(String sectionName)? shimmer,
   }) =>
@@ -210,6 +224,7 @@ mixin _$FormInputFieldInfo {
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -223,6 +238,7 @@ mixin _$FormInputFieldInfo {
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -235,15 +251,16 @@ mixin _$FormInputFieldInfo {
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
     TResult Function(String id, String label, String sectionName,
-            void Function() cancel)?
+            bool isLoading, void Function() cancel)?
         cancelButton,
     TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
+            bool isLoading, void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult Function(
             String id,
@@ -257,11 +274,12 @@ mixin _$FormInputFieldInfo {
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
     TResult Function(String id, String label, String sectionName,
-            void Function() callback)?
+            bool isLoading, void Function() callback)?
         customButton,
     TResult Function(
             String id,
@@ -269,6 +287,7 @@ mixin _$FormInputFieldInfo {
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -280,6 +299,7 @@ mixin _$FormInputFieldInfo {
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -291,7 +311,8 @@ mixin _$FormInputFieldInfo {
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            bool isLoading)?
         chips,
     TResult Function(String sectionName)? shimmer,
     required TResult orElse(),
@@ -406,6 +427,7 @@ abstract class _$$FormInputFieldInfoTextAreaImplCopyWith<$Res>
       String label,
       List<String? Function(String?)> validators,
       String sectionName,
+      bool isLoading,
       String? currentValue,
       void Function(String)? onChange,
       bool deletable,
@@ -432,6 +454,7 @@ class __$$FormInputFieldInfoTextAreaImplCopyWithImpl<$Res>
     Object? label = null,
     Object? validators = null,
     Object? sectionName = null,
+    Object? isLoading = null,
     Object? currentValue = freezed,
     Object? onChange = freezed,
     Object? deletable = null,
@@ -455,6 +478,10 @@ class __$$FormInputFieldInfoTextAreaImplCopyWithImpl<$Res>
           ? _value.sectionName
           : sectionName // ignore: cast_nullable_to_non_nullable
               as String,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       currentValue: freezed == currentValue
           ? _value.currentValue
           : currentValue // ignore: cast_nullable_to_non_nullable
@@ -489,6 +516,7 @@ class _$FormInputFieldInfoTextAreaImpl
       required this.label,
       required final List<String? Function(String?)> validators,
       required this.sectionName,
+      required this.isLoading,
       this.currentValue = null,
       this.onChange = null,
       this.deletable = false,
@@ -511,6 +539,8 @@ class _$FormInputFieldInfoTextAreaImpl
   @override
   final String sectionName;
   @override
+  final bool isLoading;
+  @override
   @JsonKey()
   final String? currentValue;
   @override
@@ -528,7 +558,7 @@ class _$FormInputFieldInfoTextAreaImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo.textArea(id: $id, label: $label, validators: $validators, sectionName: $sectionName, currentValue: $currentValue, onChange: $onChange, deletable: $deletable, onDelete: $onDelete, controller: $controller)';
+    return 'FormInputFieldInfo.textArea(id: $id, label: $label, validators: $validators, sectionName: $sectionName, isLoading: $isLoading, currentValue: $currentValue, onChange: $onChange, deletable: $deletable, onDelete: $onDelete, controller: $controller)';
   }
 
   @override
@@ -540,6 +570,7 @@ class _$FormInputFieldInfoTextAreaImpl
       ..add(DiagnosticsProperty('label', label))
       ..add(DiagnosticsProperty('validators', validators))
       ..add(DiagnosticsProperty('sectionName', sectionName))
+      ..add(DiagnosticsProperty('isLoading', isLoading))
       ..add(DiagnosticsProperty('currentValue', currentValue))
       ..add(DiagnosticsProperty('onChange', onChange))
       ..add(DiagnosticsProperty('deletable', deletable))
@@ -558,6 +589,8 @@ class _$FormInputFieldInfoTextAreaImpl
                 .equals(other._validators, _validators) &&
             (identical(other.sectionName, sectionName) ||
                 other.sectionName == sectionName) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             (identical(other.currentValue, currentValue) ||
                 other.currentValue == currentValue) &&
             (identical(other.onChange, onChange) ||
@@ -577,6 +610,7 @@ class _$FormInputFieldInfoTextAreaImpl
       label,
       const DeepCollectionEquality().hash(_validators),
       sectionName,
+      isLoading,
       currentValue,
       onChange,
       deletable,
@@ -600,6 +634,7 @@ class _$FormInputFieldInfoTextAreaImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -613,6 +648,7 @@ class _$FormInputFieldInfoTextAreaImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -625,15 +661,16 @@ class _$FormInputFieldInfoTextAreaImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         checkbox,
-    required TResult Function(
-            String id, String label, String sectionName, void Function() cancel)
+    required TResult Function(String id, String label, String sectionName,
+            bool isLoading, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)
+            bool isLoading, void Function(Map<String, dynamic>?) save)
         submitButton,
     required TResult Function(
             String id,
@@ -647,11 +684,12 @@ class _$FormInputFieldInfoTextAreaImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
     required TResult Function(String id, String label, String sectionName,
-            void Function() callback)
+            bool isLoading, void Function() callback)
         customButton,
     required TResult Function(
             String id,
@@ -659,6 +697,7 @@ class _$FormInputFieldInfoTextAreaImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -670,6 +709,7 @@ class _$FormInputFieldInfoTextAreaImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -681,12 +721,13 @@ class _$FormInputFieldInfoTextAreaImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)
+            String sectionName,
+            bool isLoading)
         chips,
     required TResult Function(String sectionName) shimmer,
   }) {
-    return textArea(id, label, validators, sectionName, currentValue, onChange,
-        deletable, onDelete, controller);
+    return textArea(id, label, validators, sectionName, isLoading, currentValue,
+        onChange, deletable, onDelete, controller);
   }
 
   @override
@@ -697,6 +738,7 @@ class _$FormInputFieldInfoTextAreaImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -710,6 +752,7 @@ class _$FormInputFieldInfoTextAreaImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -722,15 +765,16 @@ class _$FormInputFieldInfoTextAreaImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
     TResult? Function(String id, String label, String sectionName,
-            void Function() cancel)?
+            bool isLoading, void Function() cancel)?
         cancelButton,
     TResult? Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
+            bool isLoading, void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult? Function(
             String id,
@@ -744,11 +788,12 @@ class _$FormInputFieldInfoTextAreaImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
     TResult? Function(String id, String label, String sectionName,
-            void Function() callback)?
+            bool isLoading, void Function() callback)?
         customButton,
     TResult? Function(
             String id,
@@ -756,6 +801,7 @@ class _$FormInputFieldInfoTextAreaImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -767,6 +813,7 @@ class _$FormInputFieldInfoTextAreaImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -778,12 +825,13 @@ class _$FormInputFieldInfoTextAreaImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            bool isLoading)?
         chips,
     TResult? Function(String sectionName)? shimmer,
   }) {
-    return textArea?.call(id, label, validators, sectionName, currentValue,
-        onChange, deletable, onDelete, controller);
+    return textArea?.call(id, label, validators, sectionName, isLoading,
+        currentValue, onChange, deletable, onDelete, controller);
   }
 
   @override
@@ -794,6 +842,7 @@ class _$FormInputFieldInfoTextAreaImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -807,6 +856,7 @@ class _$FormInputFieldInfoTextAreaImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -819,15 +869,16 @@ class _$FormInputFieldInfoTextAreaImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
     TResult Function(String id, String label, String sectionName,
-            void Function() cancel)?
+            bool isLoading, void Function() cancel)?
         cancelButton,
     TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
+            bool isLoading, void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult Function(
             String id,
@@ -841,11 +892,12 @@ class _$FormInputFieldInfoTextAreaImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
     TResult Function(String id, String label, String sectionName,
-            void Function() callback)?
+            bool isLoading, void Function() callback)?
         customButton,
     TResult Function(
             String id,
@@ -853,6 +905,7 @@ class _$FormInputFieldInfoTextAreaImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -864,6 +917,7 @@ class _$FormInputFieldInfoTextAreaImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -875,14 +929,15 @@ class _$FormInputFieldInfoTextAreaImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            bool isLoading)?
         chips,
     TResult Function(String sectionName)? shimmer,
     required TResult orElse(),
   }) {
     if (textArea != null) {
-      return textArea(id, label, validators, sectionName, currentValue,
-          onChange, deletable, onDelete, controller);
+      return textArea(id, label, validators, sectionName, isLoading,
+          currentValue, onChange, deletable, onDelete, controller);
     }
     return orElse();
   }
@@ -958,6 +1013,7 @@ abstract class FormInputFieldInfoTextArea implements FormInputFieldInfo {
           required final String label,
           required final List<String? Function(String?)> validators,
           required final String sectionName,
+          required final bool isLoading,
           final String? currentValue,
           final void Function(String)? onChange,
           final bool deletable,
@@ -970,6 +1026,7 @@ abstract class FormInputFieldInfoTextArea implements FormInputFieldInfo {
   List<String? Function(String?)> get validators;
   @override
   String get sectionName;
+  bool get isLoading;
   String? get currentValue;
   void Function(String)? get onChange;
   bool get deletable;
@@ -1000,6 +1057,7 @@ abstract class _$$FormInputFieldInfoDropDownImplCopyWith<$Res>
       List<dynamic> options,
       String Function(dynamic) optionToString,
       String sectionName,
+      bool isLoading,
       List<String? Function(String?)>? validators,
       DropDownType type,
       void Function(dynamic)? onChange,
@@ -1028,6 +1086,7 @@ class __$$FormInputFieldInfoDropDownImplCopyWithImpl<$Res>
     Object? options = null,
     Object? optionToString = null,
     Object? sectionName = null,
+    Object? isLoading = null,
     Object? validators = freezed,
     Object? type = null,
     Object? onChange = freezed,
@@ -1059,6 +1118,10 @@ class __$$FormInputFieldInfoDropDownImplCopyWithImpl<$Res>
           ? _value.sectionName
           : sectionName // ignore: cast_nullable_to_non_nullable
               as String,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       validators: freezed == validators
           ? _value._validators
           : validators // ignore: cast_nullable_to_non_nullable
@@ -1095,6 +1158,7 @@ class _$FormInputFieldInfoDropDownImpl
       required final List<dynamic> options,
       required this.optionToString,
       required this.sectionName,
+      required this.isLoading,
       final List<String? Function(String?)>? validators = null,
       this.type = DropDownType.string,
       this.onChange = null,
@@ -1121,6 +1185,8 @@ class _$FormInputFieldInfoDropDownImpl
   final String Function(dynamic) optionToString;
   @override
   final String sectionName;
+  @override
+  final bool isLoading;
   final List<String? Function(String?)>? _validators;
   @override
   @JsonKey()
@@ -1147,7 +1213,7 @@ class _$FormInputFieldInfoDropDownImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo.dropdown(id: $id, label: $label, currentValue: $currentValue, options: $options, optionToString: $optionToString, sectionName: $sectionName, validators: $validators, type: $type, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
+    return 'FormInputFieldInfo.dropdown(id: $id, label: $label, currentValue: $currentValue, options: $options, optionToString: $optionToString, sectionName: $sectionName, isLoading: $isLoading, validators: $validators, type: $type, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
   }
 
   @override
@@ -1161,6 +1227,7 @@ class _$FormInputFieldInfoDropDownImpl
       ..add(DiagnosticsProperty('options', options))
       ..add(DiagnosticsProperty('optionToString', optionToString))
       ..add(DiagnosticsProperty('sectionName', sectionName))
+      ..add(DiagnosticsProperty('isLoading', isLoading))
       ..add(DiagnosticsProperty('validators', validators))
       ..add(DiagnosticsProperty('type', type))
       ..add(DiagnosticsProperty('onChange', onChange))
@@ -1182,6 +1249,8 @@ class _$FormInputFieldInfoDropDownImpl
                 other.optionToString == optionToString) &&
             (identical(other.sectionName, sectionName) ||
                 other.sectionName == sectionName) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             const DeepCollectionEquality()
                 .equals(other._validators, _validators) &&
             (identical(other.type, type) || other.type == type) &&
@@ -1202,6 +1271,7 @@ class _$FormInputFieldInfoDropDownImpl
       const DeepCollectionEquality().hash(_options),
       optionToString,
       sectionName,
+      isLoading,
       const DeepCollectionEquality().hash(_validators),
       type,
       onChange,
@@ -1225,6 +1295,7 @@ class _$FormInputFieldInfoDropDownImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -1238,6 +1309,7 @@ class _$FormInputFieldInfoDropDownImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -1250,15 +1322,16 @@ class _$FormInputFieldInfoDropDownImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         checkbox,
-    required TResult Function(
-            String id, String label, String sectionName, void Function() cancel)
+    required TResult Function(String id, String label, String sectionName,
+            bool isLoading, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)
+            bool isLoading, void Function(Map<String, dynamic>?) save)
         submitButton,
     required TResult Function(
             String id,
@@ -1272,11 +1345,12 @@ class _$FormInputFieldInfoDropDownImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
     required TResult Function(String id, String label, String sectionName,
-            void Function() callback)
+            bool isLoading, void Function() callback)
         customButton,
     required TResult Function(
             String id,
@@ -1284,6 +1358,7 @@ class _$FormInputFieldInfoDropDownImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -1295,6 +1370,7 @@ class _$FormInputFieldInfoDropDownImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -1306,12 +1382,24 @@ class _$FormInputFieldInfoDropDownImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)
+            String sectionName,
+            bool isLoading)
         chips,
     required TResult Function(String sectionName) shimmer,
   }) {
-    return dropdown(id, label, currentValue, options, optionToString,
-        sectionName, validators, type, onChange, deletable, onDelete);
+    return dropdown(
+        id,
+        label,
+        currentValue,
+        options,
+        optionToString,
+        sectionName,
+        isLoading,
+        validators,
+        type,
+        onChange,
+        deletable,
+        onDelete);
   }
 
   @override
@@ -1322,6 +1410,7 @@ class _$FormInputFieldInfoDropDownImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -1335,6 +1424,7 @@ class _$FormInputFieldInfoDropDownImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -1347,15 +1437,16 @@ class _$FormInputFieldInfoDropDownImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
     TResult? Function(String id, String label, String sectionName,
-            void Function() cancel)?
+            bool isLoading, void Function() cancel)?
         cancelButton,
     TResult? Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
+            bool isLoading, void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult? Function(
             String id,
@@ -1369,11 +1460,12 @@ class _$FormInputFieldInfoDropDownImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
     TResult? Function(String id, String label, String sectionName,
-            void Function() callback)?
+            bool isLoading, void Function() callback)?
         customButton,
     TResult? Function(
             String id,
@@ -1381,6 +1473,7 @@ class _$FormInputFieldInfoDropDownImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -1392,6 +1485,7 @@ class _$FormInputFieldInfoDropDownImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -1403,12 +1497,24 @@ class _$FormInputFieldInfoDropDownImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            bool isLoading)?
         chips,
     TResult? Function(String sectionName)? shimmer,
   }) {
-    return dropdown?.call(id, label, currentValue, options, optionToString,
-        sectionName, validators, type, onChange, deletable, onDelete);
+    return dropdown?.call(
+        id,
+        label,
+        currentValue,
+        options,
+        optionToString,
+        sectionName,
+        isLoading,
+        validators,
+        type,
+        onChange,
+        deletable,
+        onDelete);
   }
 
   @override
@@ -1419,6 +1525,7 @@ class _$FormInputFieldInfoDropDownImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -1432,6 +1539,7 @@ class _$FormInputFieldInfoDropDownImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -1444,15 +1552,16 @@ class _$FormInputFieldInfoDropDownImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
     TResult Function(String id, String label, String sectionName,
-            void Function() cancel)?
+            bool isLoading, void Function() cancel)?
         cancelButton,
     TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
+            bool isLoading, void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult Function(
             String id,
@@ -1466,11 +1575,12 @@ class _$FormInputFieldInfoDropDownImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
     TResult Function(String id, String label, String sectionName,
-            void Function() callback)?
+            bool isLoading, void Function() callback)?
         customButton,
     TResult Function(
             String id,
@@ -1478,6 +1588,7 @@ class _$FormInputFieldInfoDropDownImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -1489,6 +1600,7 @@ class _$FormInputFieldInfoDropDownImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -1500,14 +1612,26 @@ class _$FormInputFieldInfoDropDownImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            bool isLoading)?
         chips,
     TResult Function(String sectionName)? shimmer,
     required TResult orElse(),
   }) {
     if (dropdown != null) {
-      return dropdown(id, label, currentValue, options, optionToString,
-          sectionName, validators, type, onChange, deletable, onDelete);
+      return dropdown(
+          id,
+          label,
+          currentValue,
+          options,
+          optionToString,
+          sectionName,
+          isLoading,
+          validators,
+          type,
+          onChange,
+          deletable,
+          onDelete);
     }
     return orElse();
   }
@@ -1585,6 +1709,7 @@ abstract class FormInputFieldInfoDropDown implements FormInputFieldInfo {
       required final List<dynamic> options,
       required final String Function(dynamic) optionToString,
       required final String sectionName,
+      required final bool isLoading,
       final List<String? Function(String?)>? validators,
       final DropDownType type,
       final void Function(dynamic)? onChange,
@@ -1598,6 +1723,7 @@ abstract class FormInputFieldInfoDropDown implements FormInputFieldInfo {
   String Function(dynamic) get optionToString;
   @override
   String get sectionName;
+  bool get isLoading;
   List<String? Function(String?)>? get validators;
   DropDownType get type;
   void Function(dynamic)? get onChange;
@@ -1627,6 +1753,7 @@ abstract class _$$FormInputFieldInfoCheckboxImplCopyWith<$Res>
       bool currentValue,
       List<String? Function(bool?)> validators,
       String sectionName,
+      bool isLoading,
       void Function(String)? onChange,
       bool deletable,
       void Function()? onDelete});
@@ -1652,6 +1779,7 @@ class __$$FormInputFieldInfoCheckboxImplCopyWithImpl<$Res>
     Object? currentValue = null,
     Object? validators = null,
     Object? sectionName = null,
+    Object? isLoading = null,
     Object? onChange = freezed,
     Object? deletable = null,
     Object? onDelete = freezed,
@@ -1677,6 +1805,10 @@ class __$$FormInputFieldInfoCheckboxImplCopyWithImpl<$Res>
           ? _value.sectionName
           : sectionName // ignore: cast_nullable_to_non_nullable
               as String,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       onChange: freezed == onChange
           ? _value.onChange
           : onChange // ignore: cast_nullable_to_non_nullable
@@ -1704,6 +1836,7 @@ class _$FormInputFieldInfoCheckboxImpl
       required this.currentValue,
       required final List<String? Function(bool?)> validators,
       required this.sectionName,
+      required this.isLoading,
       this.onChange = null,
       this.deletable = false,
       this.onDelete = null})
@@ -1726,6 +1859,8 @@ class _$FormInputFieldInfoCheckboxImpl
   @override
   final String sectionName;
   @override
+  final bool isLoading;
+  @override
   @JsonKey()
   final void Function(String)? onChange;
   @override
@@ -1737,7 +1872,7 @@ class _$FormInputFieldInfoCheckboxImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo.checkbox(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
+    return 'FormInputFieldInfo.checkbox(id: $id, label: $label, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, isLoading: $isLoading, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
   }
 
   @override
@@ -1750,6 +1885,7 @@ class _$FormInputFieldInfoCheckboxImpl
       ..add(DiagnosticsProperty('currentValue', currentValue))
       ..add(DiagnosticsProperty('validators', validators))
       ..add(DiagnosticsProperty('sectionName', sectionName))
+      ..add(DiagnosticsProperty('isLoading', isLoading))
       ..add(DiagnosticsProperty('onChange', onChange))
       ..add(DiagnosticsProperty('deletable', deletable))
       ..add(DiagnosticsProperty('onDelete', onDelete));
@@ -1768,6 +1904,8 @@ class _$FormInputFieldInfoCheckboxImpl
                 .equals(other._validators, _validators) &&
             (identical(other.sectionName, sectionName) ||
                 other.sectionName == sectionName) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             (identical(other.onChange, onChange) ||
                 other.onChange == onChange) &&
             (identical(other.deletable, deletable) ||
@@ -1784,6 +1922,7 @@ class _$FormInputFieldInfoCheckboxImpl
       currentValue,
       const DeepCollectionEquality().hash(_validators),
       sectionName,
+      isLoading,
       onChange,
       deletable,
       onDelete);
@@ -1805,6 +1944,7 @@ class _$FormInputFieldInfoCheckboxImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -1818,6 +1958,7 @@ class _$FormInputFieldInfoCheckboxImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -1830,15 +1971,16 @@ class _$FormInputFieldInfoCheckboxImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         checkbox,
-    required TResult Function(
-            String id, String label, String sectionName, void Function() cancel)
+    required TResult Function(String id, String label, String sectionName,
+            bool isLoading, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)
+            bool isLoading, void Function(Map<String, dynamic>?) save)
         submitButton,
     required TResult Function(
             String id,
@@ -1852,11 +1994,12 @@ class _$FormInputFieldInfoCheckboxImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
     required TResult Function(String id, String label, String sectionName,
-            void Function() callback)
+            bool isLoading, void Function() callback)
         customButton,
     required TResult Function(
             String id,
@@ -1864,6 +2007,7 @@ class _$FormInputFieldInfoCheckboxImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -1875,6 +2019,7 @@ class _$FormInputFieldInfoCheckboxImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -1886,12 +2031,13 @@ class _$FormInputFieldInfoCheckboxImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)
+            String sectionName,
+            bool isLoading)
         chips,
     required TResult Function(String sectionName) shimmer,
   }) {
-    return checkbox(id, label, currentValue, validators, sectionName, onChange,
-        deletable, onDelete);
+    return checkbox(id, label, currentValue, validators, sectionName, isLoading,
+        onChange, deletable, onDelete);
   }
 
   @override
@@ -1902,6 +2048,7 @@ class _$FormInputFieldInfoCheckboxImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -1915,6 +2062,7 @@ class _$FormInputFieldInfoCheckboxImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -1927,15 +2075,16 @@ class _$FormInputFieldInfoCheckboxImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
     TResult? Function(String id, String label, String sectionName,
-            void Function() cancel)?
+            bool isLoading, void Function() cancel)?
         cancelButton,
     TResult? Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
+            bool isLoading, void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult? Function(
             String id,
@@ -1949,11 +2098,12 @@ class _$FormInputFieldInfoCheckboxImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
     TResult? Function(String id, String label, String sectionName,
-            void Function() callback)?
+            bool isLoading, void Function() callback)?
         customButton,
     TResult? Function(
             String id,
@@ -1961,6 +2111,7 @@ class _$FormInputFieldInfoCheckboxImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -1972,6 +2123,7 @@ class _$FormInputFieldInfoCheckboxImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -1983,12 +2135,13 @@ class _$FormInputFieldInfoCheckboxImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            bool isLoading)?
         chips,
     TResult? Function(String sectionName)? shimmer,
   }) {
     return checkbox?.call(id, label, currentValue, validators, sectionName,
-        onChange, deletable, onDelete);
+        isLoading, onChange, deletable, onDelete);
   }
 
   @override
@@ -1999,6 +2152,7 @@ class _$FormInputFieldInfoCheckboxImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -2012,6 +2166,7 @@ class _$FormInputFieldInfoCheckboxImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -2024,15 +2179,16 @@ class _$FormInputFieldInfoCheckboxImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
     TResult Function(String id, String label, String sectionName,
-            void Function() cancel)?
+            bool isLoading, void Function() cancel)?
         cancelButton,
     TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
+            bool isLoading, void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult Function(
             String id,
@@ -2046,11 +2202,12 @@ class _$FormInputFieldInfoCheckboxImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
     TResult Function(String id, String label, String sectionName,
-            void Function() callback)?
+            bool isLoading, void Function() callback)?
         customButton,
     TResult Function(
             String id,
@@ -2058,6 +2215,7 @@ class _$FormInputFieldInfoCheckboxImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -2069,6 +2227,7 @@ class _$FormInputFieldInfoCheckboxImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -2080,14 +2239,15 @@ class _$FormInputFieldInfoCheckboxImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            bool isLoading)?
         chips,
     TResult Function(String sectionName)? shimmer,
     required TResult orElse(),
   }) {
     if (checkbox != null) {
       return checkbox(id, label, currentValue, validators, sectionName,
-          onChange, deletable, onDelete);
+          isLoading, onChange, deletable, onDelete);
     }
     return orElse();
   }
@@ -2164,6 +2324,7 @@ abstract class FormInputFieldInfoCheckbox implements FormInputFieldInfo {
       required final bool currentValue,
       required final List<String? Function(bool?)> validators,
       required final String sectionName,
+      required final bool isLoading,
       final void Function(String)? onChange,
       final bool deletable,
       final void Function()? onDelete}) = _$FormInputFieldInfoCheckboxImpl;
@@ -2174,6 +2335,7 @@ abstract class FormInputFieldInfoCheckbox implements FormInputFieldInfo {
   List<String? Function(bool?)> get validators;
   @override
   String get sectionName;
+  bool get isLoading;
   void Function(String)? get onChange;
   bool get deletable;
   void Function()? get onDelete;
@@ -2196,7 +2358,11 @@ abstract class _$$FormInputFieldInfoCancelButtonImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id, String label, String sectionName, void Function() cancel});
+      {String id,
+      String label,
+      String sectionName,
+      bool isLoading,
+      void Function() cancel});
 }
 
 /// @nodoc
@@ -2217,6 +2383,7 @@ class __$$FormInputFieldInfoCancelButtonImplCopyWithImpl<$Res>
     Object? id = null,
     Object? label = null,
     Object? sectionName = null,
+    Object? isLoading = null,
     Object? cancel = null,
   }) {
     return _then(_$FormInputFieldInfoCancelButtonImpl(
@@ -2232,6 +2399,10 @@ class __$$FormInputFieldInfoCancelButtonImplCopyWithImpl<$Res>
           ? _value.sectionName
           : sectionName // ignore: cast_nullable_to_non_nullable
               as String,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       cancel: null == cancel
           ? _value.cancel
           : cancel // ignore: cast_nullable_to_non_nullable
@@ -2249,6 +2420,7 @@ class _$FormInputFieldInfoCancelButtonImpl
       {required this.id,
       required this.label,
       required this.sectionName,
+      required this.isLoading,
       required this.cancel});
 
   @override
@@ -2258,11 +2430,13 @@ class _$FormInputFieldInfoCancelButtonImpl
   @override
   final String sectionName;
   @override
+  final bool isLoading;
+  @override
   final void Function() cancel;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo.cancelButton(id: $id, label: $label, sectionName: $sectionName, cancel: $cancel)';
+    return 'FormInputFieldInfo.cancelButton(id: $id, label: $label, sectionName: $sectionName, isLoading: $isLoading, cancel: $cancel)';
   }
 
   @override
@@ -2273,6 +2447,7 @@ class _$FormInputFieldInfoCancelButtonImpl
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('label', label))
       ..add(DiagnosticsProperty('sectionName', sectionName))
+      ..add(DiagnosticsProperty('isLoading', isLoading))
       ..add(DiagnosticsProperty('cancel', cancel));
   }
 
@@ -2285,11 +2460,14 @@ class _$FormInputFieldInfoCancelButtonImpl
             (identical(other.label, label) || other.label == label) &&
             (identical(other.sectionName, sectionName) ||
                 other.sectionName == sectionName) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             (identical(other.cancel, cancel) || other.cancel == cancel));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, label, sectionName, cancel);
+  int get hashCode =>
+      Object.hash(runtimeType, id, label, sectionName, isLoading, cancel);
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -2309,6 +2487,7 @@ class _$FormInputFieldInfoCancelButtonImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -2322,6 +2501,7 @@ class _$FormInputFieldInfoCancelButtonImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -2334,15 +2514,16 @@ class _$FormInputFieldInfoCancelButtonImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         checkbox,
-    required TResult Function(
-            String id, String label, String sectionName, void Function() cancel)
+    required TResult Function(String id, String label, String sectionName,
+            bool isLoading, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)
+            bool isLoading, void Function(Map<String, dynamic>?) save)
         submitButton,
     required TResult Function(
             String id,
@@ -2356,11 +2537,12 @@ class _$FormInputFieldInfoCancelButtonImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
     required TResult Function(String id, String label, String sectionName,
-            void Function() callback)
+            bool isLoading, void Function() callback)
         customButton,
     required TResult Function(
             String id,
@@ -2368,6 +2550,7 @@ class _$FormInputFieldInfoCancelButtonImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -2379,6 +2562,7 @@ class _$FormInputFieldInfoCancelButtonImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -2390,11 +2574,12 @@ class _$FormInputFieldInfoCancelButtonImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)
+            String sectionName,
+            bool isLoading)
         chips,
     required TResult Function(String sectionName) shimmer,
   }) {
-    return cancelButton(id, label, sectionName, cancel);
+    return cancelButton(id, label, sectionName, isLoading, cancel);
   }
 
   @override
@@ -2405,6 +2590,7 @@ class _$FormInputFieldInfoCancelButtonImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -2418,6 +2604,7 @@ class _$FormInputFieldInfoCancelButtonImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -2430,15 +2617,16 @@ class _$FormInputFieldInfoCancelButtonImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
     TResult? Function(String id, String label, String sectionName,
-            void Function() cancel)?
+            bool isLoading, void Function() cancel)?
         cancelButton,
     TResult? Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
+            bool isLoading, void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult? Function(
             String id,
@@ -2452,11 +2640,12 @@ class _$FormInputFieldInfoCancelButtonImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
     TResult? Function(String id, String label, String sectionName,
-            void Function() callback)?
+            bool isLoading, void Function() callback)?
         customButton,
     TResult? Function(
             String id,
@@ -2464,6 +2653,7 @@ class _$FormInputFieldInfoCancelButtonImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -2475,6 +2665,7 @@ class _$FormInputFieldInfoCancelButtonImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -2486,11 +2677,12 @@ class _$FormInputFieldInfoCancelButtonImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            bool isLoading)?
         chips,
     TResult? Function(String sectionName)? shimmer,
   }) {
-    return cancelButton?.call(id, label, sectionName, cancel);
+    return cancelButton?.call(id, label, sectionName, isLoading, cancel);
   }
 
   @override
@@ -2501,6 +2693,7 @@ class _$FormInputFieldInfoCancelButtonImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -2514,6 +2707,7 @@ class _$FormInputFieldInfoCancelButtonImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -2526,15 +2720,16 @@ class _$FormInputFieldInfoCancelButtonImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
     TResult Function(String id, String label, String sectionName,
-            void Function() cancel)?
+            bool isLoading, void Function() cancel)?
         cancelButton,
     TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
+            bool isLoading, void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult Function(
             String id,
@@ -2548,11 +2743,12 @@ class _$FormInputFieldInfoCancelButtonImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
     TResult Function(String id, String label, String sectionName,
-            void Function() callback)?
+            bool isLoading, void Function() callback)?
         customButton,
     TResult Function(
             String id,
@@ -2560,6 +2756,7 @@ class _$FormInputFieldInfoCancelButtonImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -2571,6 +2768,7 @@ class _$FormInputFieldInfoCancelButtonImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -2582,13 +2780,14 @@ class _$FormInputFieldInfoCancelButtonImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            bool isLoading)?
         chips,
     TResult Function(String sectionName)? shimmer,
     required TResult orElse(),
   }) {
     if (cancelButton != null) {
-      return cancelButton(id, label, sectionName, cancel);
+      return cancelButton(id, label, sectionName, isLoading, cancel);
     }
     return orElse();
   }
@@ -2663,6 +2862,7 @@ abstract class FormInputFieldInfoCancelButton implements FormInputFieldInfo {
           {required final String id,
           required final String label,
           required final String sectionName,
+          required final bool isLoading,
           required final void Function() cancel}) =
       _$FormInputFieldInfoCancelButtonImpl;
 
@@ -2670,6 +2870,7 @@ abstract class FormInputFieldInfoCancelButton implements FormInputFieldInfo {
   String get label;
   @override
   String get sectionName;
+  bool get isLoading;
   void Function() get cancel;
 
   /// Create a copy of FormInputFieldInfo
@@ -2694,6 +2895,7 @@ abstract class _$$FormInputFieldInfoSubmitButtonImplCopyWith<$Res>
       {String id,
       String label,
       String sectionName,
+      bool isLoading,
       void Function(Map<String, dynamic>?) save});
 }
 
@@ -2715,6 +2917,7 @@ class __$$FormInputFieldInfoSubmitButtonImplCopyWithImpl<$Res>
     Object? id = null,
     Object? label = null,
     Object? sectionName = null,
+    Object? isLoading = null,
     Object? save = null,
   }) {
     return _then(_$FormInputFieldInfoSubmitButtonImpl(
@@ -2730,6 +2933,10 @@ class __$$FormInputFieldInfoSubmitButtonImplCopyWithImpl<$Res>
           ? _value.sectionName
           : sectionName // ignore: cast_nullable_to_non_nullable
               as String,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       save: null == save
           ? _value.save
           : save // ignore: cast_nullable_to_non_nullable
@@ -2747,6 +2954,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
       {required this.id,
       required this.label,
       required this.sectionName,
+      required this.isLoading,
       required this.save});
 
   @override
@@ -2756,11 +2964,13 @@ class _$FormInputFieldInfoSubmitButtonImpl
   @override
   final String sectionName;
   @override
+  final bool isLoading;
+  @override
   final void Function(Map<String, dynamic>?) save;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo.submitButton(id: $id, label: $label, sectionName: $sectionName, save: $save)';
+    return 'FormInputFieldInfo.submitButton(id: $id, label: $label, sectionName: $sectionName, isLoading: $isLoading, save: $save)';
   }
 
   @override
@@ -2771,6 +2981,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('label', label))
       ..add(DiagnosticsProperty('sectionName', sectionName))
+      ..add(DiagnosticsProperty('isLoading', isLoading))
       ..add(DiagnosticsProperty('save', save));
   }
 
@@ -2783,11 +2994,14 @@ class _$FormInputFieldInfoSubmitButtonImpl
             (identical(other.label, label) || other.label == label) &&
             (identical(other.sectionName, sectionName) ||
                 other.sectionName == sectionName) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             (identical(other.save, save) || other.save == save));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, label, sectionName, save);
+  int get hashCode =>
+      Object.hash(runtimeType, id, label, sectionName, isLoading, save);
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -2807,6 +3021,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -2820,6 +3035,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -2832,15 +3048,16 @@ class _$FormInputFieldInfoSubmitButtonImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         checkbox,
-    required TResult Function(
-            String id, String label, String sectionName, void Function() cancel)
+    required TResult Function(String id, String label, String sectionName,
+            bool isLoading, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)
+            bool isLoading, void Function(Map<String, dynamic>?) save)
         submitButton,
     required TResult Function(
             String id,
@@ -2854,11 +3071,12 @@ class _$FormInputFieldInfoSubmitButtonImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
     required TResult Function(String id, String label, String sectionName,
-            void Function() callback)
+            bool isLoading, void Function() callback)
         customButton,
     required TResult Function(
             String id,
@@ -2866,6 +3084,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -2877,6 +3096,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -2888,11 +3108,12 @@ class _$FormInputFieldInfoSubmitButtonImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)
+            String sectionName,
+            bool isLoading)
         chips,
     required TResult Function(String sectionName) shimmer,
   }) {
-    return submitButton(id, label, sectionName, save);
+    return submitButton(id, label, sectionName, isLoading, save);
   }
 
   @override
@@ -2903,6 +3124,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -2916,6 +3138,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -2928,15 +3151,16 @@ class _$FormInputFieldInfoSubmitButtonImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
     TResult? Function(String id, String label, String sectionName,
-            void Function() cancel)?
+            bool isLoading, void Function() cancel)?
         cancelButton,
     TResult? Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
+            bool isLoading, void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult? Function(
             String id,
@@ -2950,11 +3174,12 @@ class _$FormInputFieldInfoSubmitButtonImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
     TResult? Function(String id, String label, String sectionName,
-            void Function() callback)?
+            bool isLoading, void Function() callback)?
         customButton,
     TResult? Function(
             String id,
@@ -2962,6 +3187,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -2973,6 +3199,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -2984,11 +3211,12 @@ class _$FormInputFieldInfoSubmitButtonImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            bool isLoading)?
         chips,
     TResult? Function(String sectionName)? shimmer,
   }) {
-    return submitButton?.call(id, label, sectionName, save);
+    return submitButton?.call(id, label, sectionName, isLoading, save);
   }
 
   @override
@@ -2999,6 +3227,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -3012,6 +3241,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -3024,15 +3254,16 @@ class _$FormInputFieldInfoSubmitButtonImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
     TResult Function(String id, String label, String sectionName,
-            void Function() cancel)?
+            bool isLoading, void Function() cancel)?
         cancelButton,
     TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
+            bool isLoading, void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult Function(
             String id,
@@ -3046,11 +3277,12 @@ class _$FormInputFieldInfoSubmitButtonImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
     TResult Function(String id, String label, String sectionName,
-            void Function() callback)?
+            bool isLoading, void Function() callback)?
         customButton,
     TResult Function(
             String id,
@@ -3058,6 +3290,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -3069,6 +3302,7 @@ class _$FormInputFieldInfoSubmitButtonImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -3080,13 +3314,14 @@ class _$FormInputFieldInfoSubmitButtonImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            bool isLoading)?
         chips,
     TResult Function(String sectionName)? shimmer,
     required TResult orElse(),
   }) {
     if (submitButton != null) {
-      return submitButton(id, label, sectionName, save);
+      return submitButton(id, label, sectionName, isLoading, save);
     }
     return orElse();
   }
@@ -3161,6 +3396,7 @@ abstract class FormInputFieldInfoSubmitButton implements FormInputFieldInfo {
           {required final String id,
           required final String label,
           required final String sectionName,
+          required final bool isLoading,
           required final void Function(Map<String, dynamic>?) save}) =
       _$FormInputFieldInfoSubmitButtonImpl;
 
@@ -3168,6 +3404,7 @@ abstract class FormInputFieldInfoSubmitButton implements FormInputFieldInfo {
   String get label;
   @override
   String get sectionName;
+  bool get isLoading;
   void Function(Map<String, dynamic>?) get save;
 
   /// Create a copy of FormInputFieldInfo
@@ -3200,6 +3437,7 @@ abstract class _$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWith<$Res>
       List<String? Function(String?)> validatorsLeft,
       List<String? Function(String?)> validatorsRight,
       String sectionName,
+      bool isLoading,
       bool deletable,
       void Function()? onDelete});
 }
@@ -3230,6 +3468,7 @@ class __$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWithImpl<$Res>
     Object? validatorsLeft = null,
     Object? validatorsRight = null,
     Object? sectionName = null,
+    Object? isLoading = null,
     Object? deletable = null,
     Object? onDelete = freezed,
   }) {
@@ -3278,6 +3517,10 @@ class __$$FormInputFieldInfoTwoAutoCompleteFieldsImplCopyWithImpl<$Res>
           ? _value.sectionName
           : sectionName // ignore: cast_nullable_to_non_nullable
               as String,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       deletable: null == deletable
           ? _value.deletable
           : deletable // ignore: cast_nullable_to_non_nullable
@@ -3307,6 +3550,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
       required final List<String? Function(String?)> validatorsLeft,
       required final List<String? Function(String?)> validatorsRight,
       required this.sectionName,
+      required this.isLoading,
       this.deletable = false,
       this.onDelete = null})
       : _optionsLeft = optionsLeft,
@@ -3361,6 +3605,8 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
   @override
   final String sectionName;
   @override
+  final bool isLoading;
+  @override
   @JsonKey()
   final bool deletable;
   @override
@@ -3369,7 +3615,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo.twoAutoCompleteFields(id: $id, id2: $id2, labelLeft: $labelLeft, labelRight: $labelRight, currentValueLeft: $currentValueLeft, currentValueRight: $currentValueRight, optionsLeft: $optionsLeft, optionsRight: $optionsRight, validatorsLeft: $validatorsLeft, validatorsRight: $validatorsRight, sectionName: $sectionName, deletable: $deletable, onDelete: $onDelete)';
+    return 'FormInputFieldInfo.twoAutoCompleteFields(id: $id, id2: $id2, labelLeft: $labelLeft, labelRight: $labelRight, currentValueLeft: $currentValueLeft, currentValueRight: $currentValueRight, optionsLeft: $optionsLeft, optionsRight: $optionsRight, validatorsLeft: $validatorsLeft, validatorsRight: $validatorsRight, sectionName: $sectionName, isLoading: $isLoading, deletable: $deletable, onDelete: $onDelete)';
   }
 
   @override
@@ -3389,6 +3635,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
       ..add(DiagnosticsProperty('validatorsLeft', validatorsLeft))
       ..add(DiagnosticsProperty('validatorsRight', validatorsRight))
       ..add(DiagnosticsProperty('sectionName', sectionName))
+      ..add(DiagnosticsProperty('isLoading', isLoading))
       ..add(DiagnosticsProperty('deletable', deletable))
       ..add(DiagnosticsProperty('onDelete', onDelete));
   }
@@ -3418,6 +3665,8 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
                 .equals(other._validatorsRight, _validatorsRight) &&
             (identical(other.sectionName, sectionName) ||
                 other.sectionName == sectionName) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             (identical(other.deletable, deletable) ||
                 other.deletable == deletable) &&
             (identical(other.onDelete, onDelete) ||
@@ -3438,6 +3687,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
       const DeepCollectionEquality().hash(_validatorsLeft),
       const DeepCollectionEquality().hash(_validatorsRight),
       sectionName,
+      isLoading,
       deletable,
       onDelete);
 
@@ -3460,6 +3710,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -3473,6 +3724,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -3485,15 +3737,16 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         checkbox,
-    required TResult Function(
-            String id, String label, String sectionName, void Function() cancel)
+    required TResult Function(String id, String label, String sectionName,
+            bool isLoading, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)
+            bool isLoading, void Function(Map<String, dynamic>?) save)
         submitButton,
     required TResult Function(
             String id,
@@ -3507,11 +3760,12 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
     required TResult Function(String id, String label, String sectionName,
-            void Function() callback)
+            bool isLoading, void Function() callback)
         customButton,
     required TResult Function(
             String id,
@@ -3519,6 +3773,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -3530,6 +3785,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -3541,7 +3797,8 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)
+            String sectionName,
+            bool isLoading)
         chips,
     required TResult Function(String sectionName) shimmer,
   }) {
@@ -3557,6 +3814,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
         validatorsLeft,
         validatorsRight,
         sectionName,
+        isLoading,
         deletable,
         onDelete);
   }
@@ -3569,6 +3827,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -3582,6 +3841,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -3594,15 +3854,16 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
     TResult? Function(String id, String label, String sectionName,
-            void Function() cancel)?
+            bool isLoading, void Function() cancel)?
         cancelButton,
     TResult? Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
+            bool isLoading, void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult? Function(
             String id,
@@ -3616,11 +3877,12 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
     TResult? Function(String id, String label, String sectionName,
-            void Function() callback)?
+            bool isLoading, void Function() callback)?
         customButton,
     TResult? Function(
             String id,
@@ -3628,6 +3890,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -3639,6 +3902,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -3650,7 +3914,8 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            bool isLoading)?
         chips,
     TResult? Function(String sectionName)? shimmer,
   }) {
@@ -3666,6 +3931,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
         validatorsLeft,
         validatorsRight,
         sectionName,
+        isLoading,
         deletable,
         onDelete);
   }
@@ -3678,6 +3944,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -3691,6 +3958,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -3703,15 +3971,16 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
     TResult Function(String id, String label, String sectionName,
-            void Function() cancel)?
+            bool isLoading, void Function() cancel)?
         cancelButton,
     TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
+            bool isLoading, void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult Function(
             String id,
@@ -3725,11 +3994,12 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
     TResult Function(String id, String label, String sectionName,
-            void Function() callback)?
+            bool isLoading, void Function() callback)?
         customButton,
     TResult Function(
             String id,
@@ -3737,6 +4007,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -3748,6 +4019,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -3759,7 +4031,8 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            bool isLoading)?
         chips,
     TResult Function(String sectionName)? shimmer,
     required TResult orElse(),
@@ -3777,6 +4050,7 @@ class _$FormInputFieldInfoTwoAutoCompleteFieldsImpl
           validatorsLeft,
           validatorsRight,
           sectionName,
+          isLoading,
           deletable,
           onDelete);
     }
@@ -3862,6 +4136,7 @@ abstract class FormInputFieldInfoTwoAutoCompleteFields
           required final List<String? Function(String?)> validatorsLeft,
           required final List<String? Function(String?)> validatorsRight,
           required final String sectionName,
+          required final bool isLoading,
           final bool deletable,
           final void Function()? onDelete}) =
       _$FormInputFieldInfoTwoAutoCompleteFieldsImpl;
@@ -3878,6 +4153,7 @@ abstract class FormInputFieldInfoTwoAutoCompleteFields
   List<String? Function(String?)> get validatorsRight;
   @override
   String get sectionName;
+  bool get isLoading;
   bool get deletable;
   void Function()? get onDelete;
 
@@ -3900,7 +4176,11 @@ abstract class _$$FormInputFieldInfoCustomButtonImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id, String label, String sectionName, void Function() callback});
+      {String id,
+      String label,
+      String sectionName,
+      bool isLoading,
+      void Function() callback});
 }
 
 /// @nodoc
@@ -3921,6 +4201,7 @@ class __$$FormInputFieldInfoCustomButtonImplCopyWithImpl<$Res>
     Object? id = null,
     Object? label = null,
     Object? sectionName = null,
+    Object? isLoading = null,
     Object? callback = null,
   }) {
     return _then(_$FormInputFieldInfoCustomButtonImpl(
@@ -3936,6 +4217,10 @@ class __$$FormInputFieldInfoCustomButtonImplCopyWithImpl<$Res>
           ? _value.sectionName
           : sectionName // ignore: cast_nullable_to_non_nullable
               as String,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       callback: null == callback
           ? _value.callback
           : callback // ignore: cast_nullable_to_non_nullable
@@ -3953,6 +4238,7 @@ class _$FormInputFieldInfoCustomButtonImpl
       {required this.id,
       required this.label,
       required this.sectionName,
+      required this.isLoading,
       required this.callback});
 
   @override
@@ -3962,11 +4248,13 @@ class _$FormInputFieldInfoCustomButtonImpl
   @override
   final String sectionName;
   @override
+  final bool isLoading;
+  @override
   final void Function() callback;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo.customButton(id: $id, label: $label, sectionName: $sectionName, callback: $callback)';
+    return 'FormInputFieldInfo.customButton(id: $id, label: $label, sectionName: $sectionName, isLoading: $isLoading, callback: $callback)';
   }
 
   @override
@@ -3977,6 +4265,7 @@ class _$FormInputFieldInfoCustomButtonImpl
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('label', label))
       ..add(DiagnosticsProperty('sectionName', sectionName))
+      ..add(DiagnosticsProperty('isLoading', isLoading))
       ..add(DiagnosticsProperty('callback', callback));
   }
 
@@ -3989,13 +4278,15 @@ class _$FormInputFieldInfoCustomButtonImpl
             (identical(other.label, label) || other.label == label) &&
             (identical(other.sectionName, sectionName) ||
                 other.sectionName == sectionName) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             (identical(other.callback, callback) ||
                 other.callback == callback));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, label, sectionName, callback);
+      Object.hash(runtimeType, id, label, sectionName, isLoading, callback);
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -4015,6 +4306,7 @@ class _$FormInputFieldInfoCustomButtonImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -4028,6 +4320,7 @@ class _$FormInputFieldInfoCustomButtonImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -4040,15 +4333,16 @@ class _$FormInputFieldInfoCustomButtonImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         checkbox,
-    required TResult Function(
-            String id, String label, String sectionName, void Function() cancel)
+    required TResult Function(String id, String label, String sectionName,
+            bool isLoading, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)
+            bool isLoading, void Function(Map<String, dynamic>?) save)
         submitButton,
     required TResult Function(
             String id,
@@ -4062,11 +4356,12 @@ class _$FormInputFieldInfoCustomButtonImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
     required TResult Function(String id, String label, String sectionName,
-            void Function() callback)
+            bool isLoading, void Function() callback)
         customButton,
     required TResult Function(
             String id,
@@ -4074,6 +4369,7 @@ class _$FormInputFieldInfoCustomButtonImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -4085,6 +4381,7 @@ class _$FormInputFieldInfoCustomButtonImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -4096,11 +4393,12 @@ class _$FormInputFieldInfoCustomButtonImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)
+            String sectionName,
+            bool isLoading)
         chips,
     required TResult Function(String sectionName) shimmer,
   }) {
-    return customButton(id, label, sectionName, callback);
+    return customButton(id, label, sectionName, isLoading, callback);
   }
 
   @override
@@ -4111,6 +4409,7 @@ class _$FormInputFieldInfoCustomButtonImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -4124,6 +4423,7 @@ class _$FormInputFieldInfoCustomButtonImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -4136,15 +4436,16 @@ class _$FormInputFieldInfoCustomButtonImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
     TResult? Function(String id, String label, String sectionName,
-            void Function() cancel)?
+            bool isLoading, void Function() cancel)?
         cancelButton,
     TResult? Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
+            bool isLoading, void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult? Function(
             String id,
@@ -4158,11 +4459,12 @@ class _$FormInputFieldInfoCustomButtonImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
     TResult? Function(String id, String label, String sectionName,
-            void Function() callback)?
+            bool isLoading, void Function() callback)?
         customButton,
     TResult? Function(
             String id,
@@ -4170,6 +4472,7 @@ class _$FormInputFieldInfoCustomButtonImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -4181,6 +4484,7 @@ class _$FormInputFieldInfoCustomButtonImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -4192,11 +4496,12 @@ class _$FormInputFieldInfoCustomButtonImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            bool isLoading)?
         chips,
     TResult? Function(String sectionName)? shimmer,
   }) {
-    return customButton?.call(id, label, sectionName, callback);
+    return customButton?.call(id, label, sectionName, isLoading, callback);
   }
 
   @override
@@ -4207,6 +4512,7 @@ class _$FormInputFieldInfoCustomButtonImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -4220,6 +4526,7 @@ class _$FormInputFieldInfoCustomButtonImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -4232,15 +4539,16 @@ class _$FormInputFieldInfoCustomButtonImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
     TResult Function(String id, String label, String sectionName,
-            void Function() cancel)?
+            bool isLoading, void Function() cancel)?
         cancelButton,
     TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
+            bool isLoading, void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult Function(
             String id,
@@ -4254,11 +4562,12 @@ class _$FormInputFieldInfoCustomButtonImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
     TResult Function(String id, String label, String sectionName,
-            void Function() callback)?
+            bool isLoading, void Function() callback)?
         customButton,
     TResult Function(
             String id,
@@ -4266,6 +4575,7 @@ class _$FormInputFieldInfoCustomButtonImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -4277,6 +4587,7 @@ class _$FormInputFieldInfoCustomButtonImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -4288,13 +4599,14 @@ class _$FormInputFieldInfoCustomButtonImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            bool isLoading)?
         chips,
     TResult Function(String sectionName)? shimmer,
     required TResult orElse(),
   }) {
     if (customButton != null) {
-      return customButton(id, label, sectionName, callback);
+      return customButton(id, label, sectionName, isLoading, callback);
     }
     return orElse();
   }
@@ -4369,6 +4681,7 @@ abstract class FormInputFieldInfoCustomButton implements FormInputFieldInfo {
           {required final String id,
           required final String label,
           required final String sectionName,
+          required final bool isLoading,
           required final void Function() callback}) =
       _$FormInputFieldInfoCustomButtonImpl;
 
@@ -4376,6 +4689,7 @@ abstract class FormInputFieldInfoCustomButton implements FormInputFieldInfo {
   String get label;
   @override
   String get sectionName;
+  bool get isLoading;
   void Function() get callback;
 
   /// Create a copy of FormInputFieldInfo
@@ -4402,6 +4716,7 @@ abstract class _$$FormInputFieldInfoDateImplCopyWith<$Res>
       DateTime currentValue,
       String sectionName,
       InputType inputType,
+      bool isLoading,
       FormFieldValidator<DateTime?>? validator,
       void Function(DateTime)? onChange,
       bool deletable,
@@ -4427,6 +4742,7 @@ class __$$FormInputFieldInfoDateImplCopyWithImpl<$Res>
     Object? currentValue = null,
     Object? sectionName = null,
     Object? inputType = null,
+    Object? isLoading = null,
     Object? validator = freezed,
     Object? onChange = freezed,
     Object? deletable = null,
@@ -4453,6 +4769,10 @@ class __$$FormInputFieldInfoDateImplCopyWithImpl<$Res>
           ? _value.inputType
           : inputType // ignore: cast_nullable_to_non_nullable
               as InputType,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       validator: freezed == validator
           ? _value.validator
           : validator // ignore: cast_nullable_to_non_nullable
@@ -4484,6 +4804,7 @@ class _$FormInputFieldInfoDateImpl
       required this.currentValue,
       required this.sectionName,
       required this.inputType,
+      required this.isLoading,
       this.validator = null,
       this.onChange = null,
       this.deletable = false,
@@ -4500,6 +4821,8 @@ class _$FormInputFieldInfoDateImpl
   @override
   final InputType inputType;
   @override
+  final bool isLoading;
+  @override
   @JsonKey()
   final FormFieldValidator<DateTime?>? validator;
   @override
@@ -4514,7 +4837,7 @@ class _$FormInputFieldInfoDateImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo.date(id: $id, label: $label, currentValue: $currentValue, sectionName: $sectionName, inputType: $inputType, validator: $validator, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
+    return 'FormInputFieldInfo.date(id: $id, label: $label, currentValue: $currentValue, sectionName: $sectionName, inputType: $inputType, isLoading: $isLoading, validator: $validator, onChange: $onChange, deletable: $deletable, onDelete: $onDelete)';
   }
 
   @override
@@ -4527,6 +4850,7 @@ class _$FormInputFieldInfoDateImpl
       ..add(DiagnosticsProperty('currentValue', currentValue))
       ..add(DiagnosticsProperty('sectionName', sectionName))
       ..add(DiagnosticsProperty('inputType', inputType))
+      ..add(DiagnosticsProperty('isLoading', isLoading))
       ..add(DiagnosticsProperty('validator', validator))
       ..add(DiagnosticsProperty('onChange', onChange))
       ..add(DiagnosticsProperty('deletable', deletable))
@@ -4546,6 +4870,8 @@ class _$FormInputFieldInfoDateImpl
                 other.sectionName == sectionName) &&
             (identical(other.inputType, inputType) ||
                 other.inputType == inputType) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             (identical(other.validator, validator) ||
                 other.validator == validator) &&
             (identical(other.onChange, onChange) ||
@@ -4557,8 +4883,18 @@ class _$FormInputFieldInfoDateImpl
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, label, currentValue,
-      sectionName, inputType, validator, onChange, deletable, onDelete);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      label,
+      currentValue,
+      sectionName,
+      inputType,
+      isLoading,
+      validator,
+      onChange,
+      deletable,
+      onDelete);
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -4577,6 +4913,7 @@ class _$FormInputFieldInfoDateImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -4590,6 +4927,7 @@ class _$FormInputFieldInfoDateImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -4602,15 +4940,16 @@ class _$FormInputFieldInfoDateImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         checkbox,
-    required TResult Function(
-            String id, String label, String sectionName, void Function() cancel)
+    required TResult Function(String id, String label, String sectionName,
+            bool isLoading, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)
+            bool isLoading, void Function(Map<String, dynamic>?) save)
         submitButton,
     required TResult Function(
             String id,
@@ -4624,11 +4963,12 @@ class _$FormInputFieldInfoDateImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
     required TResult Function(String id, String label, String sectionName,
-            void Function() callback)
+            bool isLoading, void Function() callback)
         customButton,
     required TResult Function(
             String id,
@@ -4636,6 +4976,7 @@ class _$FormInputFieldInfoDateImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -4647,6 +4988,7 @@ class _$FormInputFieldInfoDateImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -4658,12 +5000,13 @@ class _$FormInputFieldInfoDateImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)
+            String sectionName,
+            bool isLoading)
         chips,
     required TResult Function(String sectionName) shimmer,
   }) {
-    return date(id, label, currentValue, sectionName, inputType, validator,
-        onChange, deletable, onDelete);
+    return date(id, label, currentValue, sectionName, inputType, isLoading,
+        validator, onChange, deletable, onDelete);
   }
 
   @override
@@ -4674,6 +5017,7 @@ class _$FormInputFieldInfoDateImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -4687,6 +5031,7 @@ class _$FormInputFieldInfoDateImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -4699,15 +5044,16 @@ class _$FormInputFieldInfoDateImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
     TResult? Function(String id, String label, String sectionName,
-            void Function() cancel)?
+            bool isLoading, void Function() cancel)?
         cancelButton,
     TResult? Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
+            bool isLoading, void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult? Function(
             String id,
@@ -4721,11 +5067,12 @@ class _$FormInputFieldInfoDateImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
     TResult? Function(String id, String label, String sectionName,
-            void Function() callback)?
+            bool isLoading, void Function() callback)?
         customButton,
     TResult? Function(
             String id,
@@ -4733,6 +5080,7 @@ class _$FormInputFieldInfoDateImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -4744,6 +5092,7 @@ class _$FormInputFieldInfoDateImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -4755,12 +5104,13 @@ class _$FormInputFieldInfoDateImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            bool isLoading)?
         chips,
     TResult? Function(String sectionName)? shimmer,
   }) {
     return date?.call(id, label, currentValue, sectionName, inputType,
-        validator, onChange, deletable, onDelete);
+        isLoading, validator, onChange, deletable, onDelete);
   }
 
   @override
@@ -4771,6 +5121,7 @@ class _$FormInputFieldInfoDateImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -4784,6 +5135,7 @@ class _$FormInputFieldInfoDateImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -4796,15 +5148,16 @@ class _$FormInputFieldInfoDateImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
     TResult Function(String id, String label, String sectionName,
-            void Function() cancel)?
+            bool isLoading, void Function() cancel)?
         cancelButton,
     TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
+            bool isLoading, void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult Function(
             String id,
@@ -4818,11 +5171,12 @@ class _$FormInputFieldInfoDateImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
     TResult Function(String id, String label, String sectionName,
-            void Function() callback)?
+            bool isLoading, void Function() callback)?
         customButton,
     TResult Function(
             String id,
@@ -4830,6 +5184,7 @@ class _$FormInputFieldInfoDateImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -4841,6 +5196,7 @@ class _$FormInputFieldInfoDateImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -4852,14 +5208,15 @@ class _$FormInputFieldInfoDateImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            bool isLoading)?
         chips,
     TResult Function(String sectionName)? shimmer,
     required TResult orElse(),
   }) {
     if (date != null) {
-      return date(id, label, currentValue, sectionName, inputType, validator,
-          onChange, deletable, onDelete);
+      return date(id, label, currentValue, sectionName, inputType, isLoading,
+          validator, onChange, deletable, onDelete);
     }
     return orElse();
   }
@@ -4936,6 +5293,7 @@ abstract class FormInputFieldInfoDate implements FormInputFieldInfo {
       required final DateTime currentValue,
       required final String sectionName,
       required final InputType inputType,
+      required final bool isLoading,
       final FormFieldValidator<DateTime?>? validator,
       final void Function(DateTime)? onChange,
       final bool deletable,
@@ -4947,6 +5305,7 @@ abstract class FormInputFieldInfoDate implements FormInputFieldInfo {
   @override
   String get sectionName;
   InputType get inputType;
+  bool get isLoading;
   FormFieldValidator<DateTime?>? get validator;
   void Function(DateTime)? get onChange;
   bool get deletable;
@@ -4975,6 +5334,7 @@ abstract class _$$FormInputFieldInfoSliderImplCopyWith<$Res>
       (double, double) range,
       List<String? Function(bool?)> validators,
       String sectionName,
+      bool isLoading,
       double? currentValue,
       (double, double)? currentValues,
       bool rangeSlider,
@@ -5001,6 +5361,7 @@ class __$$FormInputFieldInfoSliderImplCopyWithImpl<$Res>
     Object? range = null,
     Object? validators = null,
     Object? sectionName = null,
+    Object? isLoading = null,
     Object? currentValue = freezed,
     Object? currentValues = freezed,
     Object? rangeSlider = null,
@@ -5027,6 +5388,10 @@ class __$$FormInputFieldInfoSliderImplCopyWithImpl<$Res>
           ? _value.sectionName
           : sectionName // ignore: cast_nullable_to_non_nullable
               as String,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       currentValue: freezed == currentValue
           ? _value.currentValue
           : currentValue // ignore: cast_nullable_to_non_nullable
@@ -5058,6 +5423,7 @@ class _$FormInputFieldInfoSliderImpl
       required this.range,
       required final List<String? Function(bool?)> validators,
       required this.sectionName,
+      required this.isLoading,
       this.currentValue = null,
       this.currentValues = null,
       this.rangeSlider = false,
@@ -5081,6 +5447,8 @@ class _$FormInputFieldInfoSliderImpl
   @override
   final String sectionName;
   @override
+  final bool isLoading;
+  @override
   @JsonKey()
   final double? currentValue;
   @override
@@ -5095,7 +5463,7 @@ class _$FormInputFieldInfoSliderImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo.slider(id: $id, label: $label, range: $range, validators: $validators, sectionName: $sectionName, currentValue: $currentValue, currentValues: $currentValues, rangeSlider: $rangeSlider, type: $type)';
+    return 'FormInputFieldInfo.slider(id: $id, label: $label, range: $range, validators: $validators, sectionName: $sectionName, isLoading: $isLoading, currentValue: $currentValue, currentValues: $currentValues, rangeSlider: $rangeSlider, type: $type)';
   }
 
   @override
@@ -5108,6 +5476,7 @@ class _$FormInputFieldInfoSliderImpl
       ..add(DiagnosticsProperty('range', range))
       ..add(DiagnosticsProperty('validators', validators))
       ..add(DiagnosticsProperty('sectionName', sectionName))
+      ..add(DiagnosticsProperty('isLoading', isLoading))
       ..add(DiagnosticsProperty('currentValue', currentValue))
       ..add(DiagnosticsProperty('currentValues', currentValues))
       ..add(DiagnosticsProperty('rangeSlider', rangeSlider))
@@ -5126,6 +5495,8 @@ class _$FormInputFieldInfoSliderImpl
                 .equals(other._validators, _validators) &&
             (identical(other.sectionName, sectionName) ||
                 other.sectionName == sectionName) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             (identical(other.currentValue, currentValue) ||
                 other.currentValue == currentValue) &&
             (identical(other.currentValues, currentValues) ||
@@ -5143,6 +5514,7 @@ class _$FormInputFieldInfoSliderImpl
       range,
       const DeepCollectionEquality().hash(_validators),
       sectionName,
+      isLoading,
       currentValue,
       currentValues,
       rangeSlider,
@@ -5165,6 +5537,7 @@ class _$FormInputFieldInfoSliderImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -5178,6 +5551,7 @@ class _$FormInputFieldInfoSliderImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -5190,15 +5564,16 @@ class _$FormInputFieldInfoSliderImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         checkbox,
-    required TResult Function(
-            String id, String label, String sectionName, void Function() cancel)
+    required TResult Function(String id, String label, String sectionName,
+            bool isLoading, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)
+            bool isLoading, void Function(Map<String, dynamic>?) save)
         submitButton,
     required TResult Function(
             String id,
@@ -5212,11 +5587,12 @@ class _$FormInputFieldInfoSliderImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
     required TResult Function(String id, String label, String sectionName,
-            void Function() callback)
+            bool isLoading, void Function() callback)
         customButton,
     required TResult Function(
             String id,
@@ -5224,6 +5600,7 @@ class _$FormInputFieldInfoSliderImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -5235,6 +5612,7 @@ class _$FormInputFieldInfoSliderImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -5246,12 +5624,13 @@ class _$FormInputFieldInfoSliderImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)
+            String sectionName,
+            bool isLoading)
         chips,
     required TResult Function(String sectionName) shimmer,
   }) {
-    return slider(id, label, range, validators, sectionName, currentValue,
-        currentValues, rangeSlider, type);
+    return slider(id, label, range, validators, sectionName, isLoading,
+        currentValue, currentValues, rangeSlider, type);
   }
 
   @override
@@ -5262,6 +5641,7 @@ class _$FormInputFieldInfoSliderImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -5275,6 +5655,7 @@ class _$FormInputFieldInfoSliderImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -5287,15 +5668,16 @@ class _$FormInputFieldInfoSliderImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
     TResult? Function(String id, String label, String sectionName,
-            void Function() cancel)?
+            bool isLoading, void Function() cancel)?
         cancelButton,
     TResult? Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
+            bool isLoading, void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult? Function(
             String id,
@@ -5309,11 +5691,12 @@ class _$FormInputFieldInfoSliderImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
     TResult? Function(String id, String label, String sectionName,
-            void Function() callback)?
+            bool isLoading, void Function() callback)?
         customButton,
     TResult? Function(
             String id,
@@ -5321,6 +5704,7 @@ class _$FormInputFieldInfoSliderImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -5332,6 +5716,7 @@ class _$FormInputFieldInfoSliderImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -5343,12 +5728,13 @@ class _$FormInputFieldInfoSliderImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            bool isLoading)?
         chips,
     TResult? Function(String sectionName)? shimmer,
   }) {
-    return slider?.call(id, label, range, validators, sectionName, currentValue,
-        currentValues, rangeSlider, type);
+    return slider?.call(id, label, range, validators, sectionName, isLoading,
+        currentValue, currentValues, rangeSlider, type);
   }
 
   @override
@@ -5359,6 +5745,7 @@ class _$FormInputFieldInfoSliderImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -5372,6 +5759,7 @@ class _$FormInputFieldInfoSliderImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -5384,15 +5772,16 @@ class _$FormInputFieldInfoSliderImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
     TResult Function(String id, String label, String sectionName,
-            void Function() cancel)?
+            bool isLoading, void Function() cancel)?
         cancelButton,
     TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
+            bool isLoading, void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult Function(
             String id,
@@ -5406,11 +5795,12 @@ class _$FormInputFieldInfoSliderImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
     TResult Function(String id, String label, String sectionName,
-            void Function() callback)?
+            bool isLoading, void Function() callback)?
         customButton,
     TResult Function(
             String id,
@@ -5418,6 +5808,7 @@ class _$FormInputFieldInfoSliderImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -5429,6 +5820,7 @@ class _$FormInputFieldInfoSliderImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -5440,14 +5832,15 @@ class _$FormInputFieldInfoSliderImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            bool isLoading)?
         chips,
     TResult Function(String sectionName)? shimmer,
     required TResult orElse(),
   }) {
     if (slider != null) {
-      return slider(id, label, range, validators, sectionName, currentValue,
-          currentValues, rangeSlider, type);
+      return slider(id, label, range, validators, sectionName, isLoading,
+          currentValue, currentValues, rangeSlider, type);
     }
     return orElse();
   }
@@ -5524,6 +5917,7 @@ abstract class FormInputFieldInfoSlider implements FormInputFieldInfo {
       required final (double, double) range,
       required final List<String? Function(bool?)> validators,
       required final String sectionName,
+      required final bool isLoading,
       final double? currentValue,
       final (double, double)? currentValues,
       final bool rangeSlider,
@@ -5535,6 +5929,7 @@ abstract class FormInputFieldInfoSlider implements FormInputFieldInfo {
   List<String? Function(bool?)> get validators;
   @override
   String get sectionName;
+  bool get isLoading;
   double? get currentValue;
   (double, double)? get currentValues;
   bool get rangeSlider;
@@ -5563,7 +5958,8 @@ abstract class _$$FormInputFieldInfoChipsImplCopyWith<$Res>
       Iterable<String> values,
       Iterable<String> currentValue,
       List<String? Function(bool?)> validators,
-      String sectionName});
+      String sectionName,
+      bool isLoading});
 }
 
 /// @nodoc
@@ -5587,6 +5983,7 @@ class __$$FormInputFieldInfoChipsImplCopyWithImpl<$Res>
     Object? currentValue = null,
     Object? validators = null,
     Object? sectionName = null,
+    Object? isLoading = null,
   }) {
     return _then(_$FormInputFieldInfoChipsImpl(
       id: null == id
@@ -5613,6 +6010,10 @@ class __$$FormInputFieldInfoChipsImplCopyWithImpl<$Res>
           ? _value.sectionName
           : sectionName // ignore: cast_nullable_to_non_nullable
               as String,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -5628,7 +6029,8 @@ class _$FormInputFieldInfoChipsImpl
       required this.values,
       required this.currentValue,
       required final List<String? Function(bool?)> validators,
-      required this.sectionName})
+      required this.sectionName,
+      required this.isLoading})
       : _validators = validators;
 
   @override
@@ -5649,10 +6051,12 @@ class _$FormInputFieldInfoChipsImpl
 
   @override
   final String sectionName;
+  @override
+  final bool isLoading;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FormInputFieldInfo.chips(id: $id, label: $label, values: $values, currentValue: $currentValue, validators: $validators, sectionName: $sectionName)';
+    return 'FormInputFieldInfo.chips(id: $id, label: $label, values: $values, currentValue: $currentValue, validators: $validators, sectionName: $sectionName, isLoading: $isLoading)';
   }
 
   @override
@@ -5665,7 +6069,8 @@ class _$FormInputFieldInfoChipsImpl
       ..add(DiagnosticsProperty('values', values))
       ..add(DiagnosticsProperty('currentValue', currentValue))
       ..add(DiagnosticsProperty('validators', validators))
-      ..add(DiagnosticsProperty('sectionName', sectionName));
+      ..add(DiagnosticsProperty('sectionName', sectionName))
+      ..add(DiagnosticsProperty('isLoading', isLoading));
   }
 
   @override
@@ -5681,7 +6086,9 @@ class _$FormInputFieldInfoChipsImpl
             const DeepCollectionEquality()
                 .equals(other._validators, _validators) &&
             (identical(other.sectionName, sectionName) ||
-                other.sectionName == sectionName));
+                other.sectionName == sectionName) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @override
@@ -5692,7 +6099,8 @@ class _$FormInputFieldInfoChipsImpl
       const DeepCollectionEquality().hash(values),
       const DeepCollectionEquality().hash(currentValue),
       const DeepCollectionEquality().hash(_validators),
-      sectionName);
+      sectionName,
+      isLoading);
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -5711,6 +6119,7 @@ class _$FormInputFieldInfoChipsImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -5724,6 +6133,7 @@ class _$FormInputFieldInfoChipsImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -5736,15 +6146,16 @@ class _$FormInputFieldInfoChipsImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         checkbox,
-    required TResult Function(
-            String id, String label, String sectionName, void Function() cancel)
+    required TResult Function(String id, String label, String sectionName,
+            bool isLoading, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)
+            bool isLoading, void Function(Map<String, dynamic>?) save)
         submitButton,
     required TResult Function(
             String id,
@@ -5758,11 +6169,12 @@ class _$FormInputFieldInfoChipsImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
     required TResult Function(String id, String label, String sectionName,
-            void Function() callback)
+            bool isLoading, void Function() callback)
         customButton,
     required TResult Function(
             String id,
@@ -5770,6 +6182,7 @@ class _$FormInputFieldInfoChipsImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -5781,6 +6194,7 @@ class _$FormInputFieldInfoChipsImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -5792,11 +6206,13 @@ class _$FormInputFieldInfoChipsImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)
+            String sectionName,
+            bool isLoading)
         chips,
     required TResult Function(String sectionName) shimmer,
   }) {
-    return chips(id, label, values, currentValue, validators, sectionName);
+    return chips(
+        id, label, values, currentValue, validators, sectionName, isLoading);
   }
 
   @override
@@ -5807,6 +6223,7 @@ class _$FormInputFieldInfoChipsImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -5820,6 +6237,7 @@ class _$FormInputFieldInfoChipsImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -5832,15 +6250,16 @@ class _$FormInputFieldInfoChipsImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
     TResult? Function(String id, String label, String sectionName,
-            void Function() cancel)?
+            bool isLoading, void Function() cancel)?
         cancelButton,
     TResult? Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
+            bool isLoading, void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult? Function(
             String id,
@@ -5854,11 +6273,12 @@ class _$FormInputFieldInfoChipsImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
     TResult? Function(String id, String label, String sectionName,
-            void Function() callback)?
+            bool isLoading, void Function() callback)?
         customButton,
     TResult? Function(
             String id,
@@ -5866,6 +6286,7 @@ class _$FormInputFieldInfoChipsImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -5877,6 +6298,7 @@ class _$FormInputFieldInfoChipsImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -5888,12 +6310,13 @@ class _$FormInputFieldInfoChipsImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            bool isLoading)?
         chips,
     TResult? Function(String sectionName)? shimmer,
   }) {
     return chips?.call(
-        id, label, values, currentValue, validators, sectionName);
+        id, label, values, currentValue, validators, sectionName, isLoading);
   }
 
   @override
@@ -5904,6 +6327,7 @@ class _$FormInputFieldInfoChipsImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -5917,6 +6341,7 @@ class _$FormInputFieldInfoChipsImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -5929,15 +6354,16 @@ class _$FormInputFieldInfoChipsImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
     TResult Function(String id, String label, String sectionName,
-            void Function() cancel)?
+            bool isLoading, void Function() cancel)?
         cancelButton,
     TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
+            bool isLoading, void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult Function(
             String id,
@@ -5951,11 +6377,12 @@ class _$FormInputFieldInfoChipsImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
     TResult Function(String id, String label, String sectionName,
-            void Function() callback)?
+            bool isLoading, void Function() callback)?
         customButton,
     TResult Function(
             String id,
@@ -5963,6 +6390,7 @@ class _$FormInputFieldInfoChipsImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -5974,6 +6402,7 @@ class _$FormInputFieldInfoChipsImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -5985,13 +6414,15 @@ class _$FormInputFieldInfoChipsImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            bool isLoading)?
         chips,
     TResult Function(String sectionName)? shimmer,
     required TResult orElse(),
   }) {
     if (chips != null) {
-      return chips(id, label, values, currentValue, validators, sectionName);
+      return chips(
+          id, label, values, currentValue, validators, sectionName, isLoading);
     }
     return orElse();
   }
@@ -6068,7 +6499,8 @@ abstract class FormInputFieldInfoChips implements FormInputFieldInfo {
       required final Iterable<String> values,
       required final Iterable<String> currentValue,
       required final List<String? Function(bool?)> validators,
-      required final String sectionName}) = _$FormInputFieldInfoChipsImpl;
+      required final String sectionName,
+      required final bool isLoading}) = _$FormInputFieldInfoChipsImpl;
 
   String get id;
   String get label;
@@ -6077,6 +6509,7 @@ abstract class FormInputFieldInfoChips implements FormInputFieldInfo {
   List<String? Function(bool?)> get validators;
   @override
   String get sectionName;
+  bool get isLoading;
 
   /// Create a copy of FormInputFieldInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -6176,6 +6609,7 @@ class _$FormInputFieldInfoShimmerImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -6189,6 +6623,7 @@ class _$FormInputFieldInfoShimmerImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -6201,15 +6636,16 @@ class _$FormInputFieldInfoShimmerImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)
         checkbox,
-    required TResult Function(
-            String id, String label, String sectionName, void Function() cancel)
+    required TResult Function(String id, String label, String sectionName,
+            bool isLoading, void Function() cancel)
         cancelButton,
     required TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)
+            bool isLoading, void Function(Map<String, dynamic>?) save)
         submitButton,
     required TResult Function(
             String id,
@@ -6223,11 +6659,12 @@ class _$FormInputFieldInfoShimmerImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)
         twoAutoCompleteFields,
     required TResult Function(String id, String label, String sectionName,
-            void Function() callback)
+            bool isLoading, void Function() callback)
         customButton,
     required TResult Function(
             String id,
@@ -6235,6 +6672,7 @@ class _$FormInputFieldInfoShimmerImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -6246,6 +6684,7 @@ class _$FormInputFieldInfoShimmerImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -6257,7 +6696,8 @@ class _$FormInputFieldInfoShimmerImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)
+            String sectionName,
+            bool isLoading)
         chips,
     required TResult Function(String sectionName) shimmer,
   }) {
@@ -6272,6 +6712,7 @@ class _$FormInputFieldInfoShimmerImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -6285,6 +6726,7 @@ class _$FormInputFieldInfoShimmerImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -6297,15 +6739,16 @@ class _$FormInputFieldInfoShimmerImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
     TResult? Function(String id, String label, String sectionName,
-            void Function() cancel)?
+            bool isLoading, void Function() cancel)?
         cancelButton,
     TResult? Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
+            bool isLoading, void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult? Function(
             String id,
@@ -6319,11 +6762,12 @@ class _$FormInputFieldInfoShimmerImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
     TResult? Function(String id, String label, String sectionName,
-            void Function() callback)?
+            bool isLoading, void Function() callback)?
         customButton,
     TResult? Function(
             String id,
@@ -6331,6 +6775,7 @@ class _$FormInputFieldInfoShimmerImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -6342,6 +6787,7 @@ class _$FormInputFieldInfoShimmerImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -6353,7 +6799,8 @@ class _$FormInputFieldInfoShimmerImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            bool isLoading)?
         chips,
     TResult? Function(String sectionName)? shimmer,
   }) {
@@ -6368,6 +6815,7 @@ class _$FormInputFieldInfoShimmerImpl
             String label,
             List<String? Function(String?)> validators,
             String sectionName,
+            bool isLoading,
             String? currentValue,
             void Function(String)? onChange,
             bool deletable,
@@ -6381,6 +6829,7 @@ class _$FormInputFieldInfoShimmerImpl
             List<dynamic> options,
             String Function(dynamic) optionToString,
             String sectionName,
+            bool isLoading,
             List<String? Function(String?)>? validators,
             DropDownType type,
             void Function(dynamic)? onChange,
@@ -6393,15 +6842,16 @@ class _$FormInputFieldInfoShimmerImpl
             bool currentValue,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             void Function(String)? onChange,
             bool deletable,
             void Function()? onDelete)?
         checkbox,
     TResult Function(String id, String label, String sectionName,
-            void Function() cancel)?
+            bool isLoading, void Function() cancel)?
         cancelButton,
     TResult Function(String id, String label, String sectionName,
-            void Function(Map<String, dynamic>?) save)?
+            bool isLoading, void Function(Map<String, dynamic>?) save)?
         submitButton,
     TResult Function(
             String id,
@@ -6415,11 +6865,12 @@ class _$FormInputFieldInfoShimmerImpl
             List<String? Function(String?)> validatorsLeft,
             List<String? Function(String?)> validatorsRight,
             String sectionName,
+            bool isLoading,
             bool deletable,
             void Function()? onDelete)?
         twoAutoCompleteFields,
     TResult Function(String id, String label, String sectionName,
-            void Function() callback)?
+            bool isLoading, void Function() callback)?
         customButton,
     TResult Function(
             String id,
@@ -6427,6 +6878,7 @@ class _$FormInputFieldInfoShimmerImpl
             DateTime currentValue,
             String sectionName,
             InputType inputType,
+            bool isLoading,
             FormFieldValidator<DateTime?>? validator,
             void Function(DateTime)? onChange,
             bool deletable,
@@ -6438,6 +6890,7 @@ class _$FormInputFieldInfoShimmerImpl
             (double, double) range,
             List<String? Function(bool?)> validators,
             String sectionName,
+            bool isLoading,
             double? currentValue,
             (double, double)? currentValues,
             bool rangeSlider,
@@ -6449,7 +6902,8 @@ class _$FormInputFieldInfoShimmerImpl
             Iterable<String> values,
             Iterable<String> currentValue,
             List<String? Function(bool?)> validators,
-            String sectionName)?
+            String sectionName,
+            bool isLoading)?
         chips,
     TResult Function(String sectionName)? shimmer,
     required TResult orElse(),
