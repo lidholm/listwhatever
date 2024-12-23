@@ -17,6 +17,7 @@ enum RouteName {
   home._('/'),
   list._('/list'),
   addList._('/addList'),
+  addListItem._('/addListItem'),
   details._('submit'),
   tabBar._('tabbar'),
   signUp._('signup'),

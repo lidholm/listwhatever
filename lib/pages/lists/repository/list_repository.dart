@@ -30,7 +30,9 @@ class ListRepository {
   ListOfThings convertToUserList(String id, Map<String, dynamic> data) {
     final list = ListOfThings.fromJson(data);
     return list.copyWith(
-        id: id, imageFilename: 'assets/images/restaurants.jpeg');
+      id: id,
+      imageFilename: 'assets/images/restaurants.jpeg',
+    );
   }
 
   Future<String> addList(ListOfThings list) async {
