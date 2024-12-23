@@ -8,5 +8,8 @@ service cloud.firestore {
         allow read, write: if true;//  if request.auth != null && request.time < timestamp.date(2025, 1, 16);
       }
     }
+    match /lists/{listId} {
+      allow read, write: if true;//  if request.auth != null && request.time < timestamp.date(2025, 1, 16);
+    }
  }
 }

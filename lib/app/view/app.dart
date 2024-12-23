@@ -7,6 +7,7 @@ import 'package:listwhatever/auth/bloc/auth_bloc.dart';
 import 'package:listwhatever/changeUserBloc/change_user_bloc_bloc.dart';
 import 'package:listwhatever/l10n/l10n.dart';
 import 'package:listwhatever/pages/lists/bloc/lists_bloc.dart';
+import 'package:listwhatever/pages/lists/repository/list_repository.dart';
 import 'package:listwhatever/pages/lists/repository/user_list_repository.dart';
 import 'package:listwhatever/routing/go_router_configuration.dart';
 
@@ -20,6 +21,7 @@ class App extends StatelessWidget {
       future: authRepository.user.first,
       builder: (context, snapshot) {
         final user = snapshot.data;
+        final listRepository = ListRepository();
         final userListRepository = UserListRepository(userId: user?.id);
 
         final theme = ListWhateverTheme(context);
@@ -27,6 +29,7 @@ class App extends StatelessWidget {
         return MultiRepositoryProvider(
           providers: [
             RepositoryProvider.value(value: authRepository),
+            RepositoryProvider.value(value: listRepository),
             RepositoryProvider.value(value: userListRepository),
           ],
           child: MultiBlocProvider(
@@ -39,8 +42,10 @@ class App extends StatelessWidget {
                 create: (_) => AuthBloc(authRepository: authRepository),
               ),
               BlocProvider(
-                create: (_) =>
-                    ListsBloc(userListRepository: userListRepository),
+                create: (_) => ListsBloc(
+                  listRepository: listRepository,
+                  userListRepository: userListRepository,
+                ),
               ),
             ],
             child: Builder(

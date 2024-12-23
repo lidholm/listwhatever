@@ -26,26 +26,27 @@ class UserListTile extends StatelessWidget {
     return ShimmerLoading(
       isLoading: isLoading,
       child: Container(
-          height: 100,
-          decoration: BoxDecoration(
-            color: Colors.grey.shade800,
-            borderRadius: BorderRadius.circular(imageRadius),
-          ),
-          child: Row(
-            spacing: 24,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 16),
-                child: buildImage(),
-              ),
-              Column(
-                spacing: 8,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [buildTitle(context), buildSubtitle(context)],
-              ),
-            ],
-          )),
+        height: 100,
+        decoration: BoxDecoration(
+          color: Colors.grey.shade800,
+          borderRadius: BorderRadius.circular(imageRadius),
+        ),
+        child: Row(
+          spacing: 24,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 16),
+              child: buildImage(),
+            ),
+            Column(
+              spacing: 8,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [buildTitle(context), buildSubtitle(context)],
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -55,11 +56,14 @@ class UserListTile extends StatelessWidget {
     }
     return ClipRRect(
       borderRadius: BorderRadius.circular(imageRadius),
-      child: Image.asset(
-        height: imageHeight,
-        width: imageWidth,
-        list.imageFilename ?? 'default',
-        fit: BoxFit.cover,
+      child: Hero(
+        tag: list.listName,
+        child: Image.asset(
+          height: imageHeight,
+          width: imageWidth,
+          list.imageFilename ?? 'default',
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }

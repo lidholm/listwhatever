@@ -18,9 +18,9 @@ class UserList with _$UserList {
   factory UserList.fromJson(Map<String, Object?> json) =>
       _$UserListFromJson(json);
 
-  factory UserList.fromList(ListOfThings list) => UserList(
+  factory UserList.fromList(ListOfThings list, String listId) => UserList(
         id: null,
-        listId: list.id ?? 'Fix',
+        listId: listId,
         listName: list.name,
         ownerId: list.ownerId ?? 'Fix',
         isOwnList: true,

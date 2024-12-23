@@ -35,7 +35,10 @@ class UserListRepository {
 
   UserList convertToUserList(String id, Map<String, dynamic> data) {
     final list = UserList.fromJson(data);
-    return list.copyWith();
+    return list.copyWith(
+      imageFilename: 'assets/images/restaurants.jpeg',
+      id: id,
+    );
   }
 
   Future<String> addUserList(UserList userList) async {
