@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:listwhatever/pages/list/bloc/list_bloc.dart';
 import 'package:listwhatever/pages/list/bloc/list_event.dart';
 import 'package:listwhatever/pages/list/bloc/list_state.dart';
 import 'package:listwhatever/pages/lists/models/list_of_things.dart';
-import 'package:listwhatever/routing/go_router_configuration.dart';
+import 'package:listwhatever/pages/lists/routes/add_list_page_route.dart';
+import 'package:listwhatever/routing/routes.dart';
+
+const addListButtonKey = Key('AddListButtonKey');
 
 class ListPage extends StatefulWidget {
   const ListPage({required this.listId, super.key});
@@ -31,8 +33,9 @@ class _ListPageState extends State<ListPage> {
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        key: addListButtonKey,
         onPressed: () {
-          GoRouter.of(context).pushNamed(RouteName.addListItem.value);
+          const AddListPageRoute().push<void>(context);
         },
         child: const Icon(Icons.add),
       ),

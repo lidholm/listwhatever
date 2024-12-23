@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:listwhatever/components/shimmer/shimmer_loading.dart';
 import 'package:listwhatever/pages/lists/models/user_list.dart';
-import 'package:listwhatever/routing/go_router_configuration.dart';
 
 const String className = 'UserListTile';
 
@@ -127,6 +125,6 @@ class UserListTile extends StatelessWidget {
   void onTap(BuildContext context) {
     // context.read<FilterBloc>().add(UpdateFiltersForSelectedList(listId));
     // ListItemsPageRoute(actualListId: listId).push<void>(context);
-    GoRouter.of(context).pushNamed(RouteName.list.value);
+    // GoRouter.of(context).pushNamed(RouteName.list.value);
   }
 }

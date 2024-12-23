@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:listwhatever/auth/bloc/auth_bloc.dart';
 import 'package:listwhatever/pages/auth/social_button.dart';
-import 'package:listwhatever/routing/go_router_configuration.dart';
 
 class LogInOptionsPage extends StatelessWidget {
   const LogInOptionsPage({super.key});
@@ -96,7 +94,7 @@ class LogInOptionsPage extends StatelessWidget {
   }
 
   void signUp(BuildContext context) {
-    GoRouter.of(context).goNamed(RouteName.signUp.value);
+    // GoRouter.of(context).goNamed(RouteName.signUp.value);
   }
 
   void logInWithEmailAndPassword(

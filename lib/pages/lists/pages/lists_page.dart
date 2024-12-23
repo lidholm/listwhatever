@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:listwhatever/components/shimmer/shimmer.dart';
 import 'package:listwhatever/components/shimmer/shimmer_loading.dart';
 import 'package:listwhatever/pages/lists/bloc/lists_bloc.dart';
 import 'package:listwhatever/pages/lists/components/list_tiles.dart';
 import 'package:listwhatever/pages/lists/components/lists_page_app_bar.dart';
-import 'package:listwhatever/routing/go_router_configuration.dart';
 
 class ListsPage extends StatefulWidget {
   const ListsPage({super.key});
@@ -31,7 +29,7 @@ class _ListsPageState extends State<ListsPage> {
       body: const Shimmer(linearGradient: shimmerGradient, child: ListTiles()),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          GoRouter.of(context).pushNamed(RouteName.addList.value);
+          // GoRouter.of(context).pushNamed(RouteName.addList.value);
         },
         child: const Icon(Icons.add),
       ),

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:listwhatever/auth/bloc/auth_bloc.dart';
 import 'package:listwhatever/pages/auth/social_button.dart';
 // import 'package:listwhatever/auth_repository.dart';
-import 'package:listwhatever/routing/go_router_configuration.dart';
 
 class SignInOptionsPage extends StatelessWidget {
   const SignInOptionsPage({super.key});
@@ -98,7 +96,7 @@ class SignInOptionsPage extends StatelessWidget {
                     const Text('Already have an account?'),
                     TextButton(
                       onPressed: () {
-                        GoRouter.of(context).goNamed(RouteName.logIn.value);
+                        // GoRouter.of(context).goNamed(RouteName.logIn.value);
                       },
                       child: const Text('Log In'),
                     ),
@@ -113,7 +111,7 @@ class SignInOptionsPage extends StatelessWidget {
   }
 
   void logIn(BuildContext context) {
-    GoRouter.of(context).goNamed(RouteName.logIn.value);
+    // GoRouter.of(context).goNamed(RouteName.logIn.value);
   }
 
   void register(BuildContext context) {

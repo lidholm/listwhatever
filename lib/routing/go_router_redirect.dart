@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listwhatever/auth/bloc/auth_bloc.dart';
-import 'package:listwhatever/routing/go_router_configuration.dart';
 
 FutureOr<String?> routerRedirect(BuildContext context, GoRouterState state) {
   print('routerRedirect state.matchedLocation: ${state.matchedLocation}');
@@ -36,7 +35,7 @@ FutureOr<String?> routerRedirect(BuildContext context, GoRouterState state) {
 }
 
 bool isLoggingInPage(GoRouterState state) {
-  return [RouteName.logIn.value, RouteName.signUp.value]
+  return [] // [RouteName.logIn.value, RouteName.signUp.value]
       .contains(state.matchedLocation.replaceAll('/', ''));
 }
 
@@ -51,6 +50,6 @@ bool isLoggedOut(AuthBloc authBloc) {
 }
 
 bool isProtectedPage(GoRouterState state) {
-  return ![RouteName.logIn.value, RouteName.signUp.value]
+  return ![] //[RouteName.logIn.value, RouteName.signUp.value]
       .contains(state.matchedLocation.replaceAll('/', ''));
 }
