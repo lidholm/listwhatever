@@ -6,6 +6,7 @@ import 'package:listwhatever/pages/auth/log_in_options_page.dart';
 import 'package:listwhatever/pages/auth/profile_page.dart';
 import 'package:listwhatever/pages/auth/sign_up_options_page.dart';
 import 'package:listwhatever/pages/list/pages/list_page.dart';
+import 'package:listwhatever/pages/lists/models/list_of_things.dart';
 import 'package:listwhatever/pages/lists/pages/add_list_page.dart';
 import 'package:listwhatever/pages/lists/pages/lists_page.dart';
 import 'package:listwhatever/routing/go_router_redirect.dart';
@@ -48,7 +49,18 @@ GoRouter getGoRouterConfiguration(BuildContext context) {
             name: RouteName.list.value,
             path: 'list',
             builder: (BuildContext context, GoRouterState state) {
-              return const ListPage();
+              return const ListPage(
+                list: ListOfThings(
+                  id: '',
+                  name: 'Test list',
+                  withMap: false,
+                  withDates: false,
+                  withTimes: false,
+                  shared: false,
+                  sharedWith: {},
+                  ownerId: 'Super Mario',
+                ),
+              );
             },
           ),
           GoRoute(

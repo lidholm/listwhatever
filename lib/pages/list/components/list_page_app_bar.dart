@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:listwhatever/auth/bloc/auth_bloc.dart';
 
 const toolbarHeight = 60.0;
 
@@ -14,13 +12,13 @@ class ListPageAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: const Text('List'),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.logout),
-          onPressed: () {
-            context.read<AuthBloc>().add(Logout());
-          },
-        ),
+      actions: const [
+        // IconButton(
+        //   icon: const Icon(Icons.logout),
+        //   onPressed: () {
+        //     context.read<AuthBloc>().add(Logout());
+        //   },
+        // ),
       ],
     );
   }
