@@ -13,64 +13,62 @@ import 'package:listwhatever/pages/lists/repository/user_list_repository.dart';
 import 'package:listwhatever/routing/go_router_configuration.dart';
 
 class App extends StatelessWidget {
-  const App({super.key});
+  const App({
+    required this.authRepository,
+    required this.userListRepository,
+    super.key,
+  });
+  final AuthRepository authRepository;
+  final UserListRepository userListRepository;
 
   @override
   Widget build(BuildContext context) {
-    final authRepository = AuthRepository();
-    return FutureBuilder(
-      future: authRepository.user.first,
-      builder: (context, snapshot) {
-        final user = snapshot.data;
-        final listRepository = ListRepository();
-        final userListRepository = UserListRepository(userId: user?.id);
+    final listRepository = ListRepository();
+    // final userListRepository = UserListRepository(userId: user?.id);
 
-        final theme = ListWhateverTheme(context);
+    final theme = ListWhateverTheme(context);
 
-        return MultiRepositoryProvider(
-          providers: [
-            RepositoryProvider.value(value: authRepository),
-            RepositoryProvider.value(value: listRepository),
-            RepositoryProvider.value(value: userListRepository),
-          ],
-          child: MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (_) =>
-                    ChangeUserBloc(userListRepository: userListRepository),
-              ),
-              BlocProvider(
-                create: (_) => AuthBloc(authRepository: authRepository),
-              ),
-              BlocProvider(
-                create: (_) => ListsBloc(
-                  listRepository: listRepository,
-                  userListRepository: userListRepository,
-                ),
-              ),
-              BlocProvider(
-                create: (_) => ListBloc(
-                  listRepository: listRepository,
-                  userListRepository: userListRepository,
-                ),
-              ),
-            ],
-            child: Builder(
-              builder: (context) {
-                return AuthenticatedUserListener(
-                  child: MaterialApp.router(
-                    routerConfig: getGoRouterConfiguration(context),
-                    theme: theme.getThemeData(),
-                    localizationsDelegates:
-                        AppLocalizations.localizationsDelegates,
-                    supportedLocales: AppLocalizations.supportedLocales,
-                  ),
-                );
-              },
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider.value(value: authRepository),
+        RepositoryProvider.value(value: listRepository),
+        RepositoryProvider.value(value: userListRepository),
+      ],
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (_) =>
+                ChangeUserBloc(userListRepository: userListRepository),
+          ),
+          BlocProvider(
+            create: (_) => AuthBloc(authRepository: authRepository),
+          ),
+          BlocProvider(
+            create: (_) => ListsBloc(
+              listRepository: listRepository,
+              userListRepository: userListRepository,
             ),
           ),
-        );
-      },
+          BlocProvider(
+            create: (_) => ListBloc(
+              listRepository: listRepository,
+              userListRepository: userListRepository,
+            ),
+          ),
+        ],
+        child: Builder(
+          builder: (context) {
+            return AuthenticatedUserListener(
+              child: MaterialApp.router(
+                routerConfig: getGoRouterConfiguration(context),
+                theme: theme.getThemeData(),
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                supportedLocales: AppLocalizations.supportedLocales,
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }

@@ -144,8 +144,12 @@ class AddListItemForm extends StatelessWidget {
     return [];
   }
 
-  FormInputFieldInfo categoryField(String indexKey, String left, String right,
-      {required bool isLoading}) {
+  FormInputFieldInfo categoryField(
+    String indexKey,
+    String left,
+    String right, {
+    required bool isLoading,
+  }) {
     return FormInputFieldInfo.twoAutoCompleteFields(
       id: getCategoryId(Side.left, indexKey),
       id2: getCategoryId(Side.right, indexKey),
@@ -213,8 +217,11 @@ class AddListItemForm extends StatelessWidget {
     return [];
   }
 
-  FormInputFieldInfo urlField(String indexKey, String url,
-      {required bool isLoading}) {
+  FormInputFieldInfo urlField(
+    String indexKey,
+    String url, {
+    required bool isLoading,
+  }) {
     return FormInputFieldInfo.textArea(
       id: getUrlId(indexKey),
       label: 'Url',

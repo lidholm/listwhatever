@@ -25,5 +25,10 @@ Future<void> main() async {
     await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
   }
 
-  await bootstrap(() => const App());
+  await bootstrap(
+    (authRepository, userListRepository) => App(
+      authRepository: authRepository,
+      userListRepository: userListRepository,
+    ),
+  );
 }
