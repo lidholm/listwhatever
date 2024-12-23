@@ -1,8 +1,12 @@
-part of 'list_bloc.dart';
+import 'package:listwhatever/pages/lists/models/list_of_things.dart';
 
-@freezed
-class ListState with _$ListState {
-  const factory ListState.initial() = _Initial;
-  const factory ListState.loading() = _Loading;
-  const factory ListState.loaded(ListOfThings list) = _Loaded;
+sealed class ListState {}
+
+class ListInitial extends ListState {}
+
+class ListLoading extends ListState {}
+
+class ListLoaded extends ListState {
+  ListLoaded(this.list);
+  final ListOfThings list;
 }

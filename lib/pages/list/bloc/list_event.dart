@@ -1,7 +1,13 @@
-part of 'list_bloc.dart';
+import 'package:listwhatever/pages/lists/models/list_of_things.dart';
 
-@freezed
-class ListEvent with _$ListEvent {
-  const factory ListEvent.getList(String listId) = _GetList;
-  const factory ListEvent.addList(ListOfThings list) = _AddList;
+sealed class ListEvent {}
+
+class GetList extends ListEvent {
+  GetList(this.listId);
+  final String listId;
+}
+
+class AddList extends ListEvent {
+  AddList(this.list);
+  final ListOfThings list;
 }

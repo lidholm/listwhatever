@@ -394,23 +394,23 @@ mixin _$ListState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
+    required TResult Function(ListInitial value) initial,
+    required TResult Function(ListLoading value) loading,
+    required TResult Function(ListLoaded value) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(ListInitial value)? initial,
+    TResult? Function(ListLoading value)? loading,
+    TResult? Function(ListLoaded value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
+    TResult Function(ListInitial value)? initial,
+    TResult Function(ListLoading value)? loading,
+    TResult Function(ListLoaded value)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -437,18 +437,18 @@ class _$ListStateCopyWithImpl<$Res, $Val extends ListState>
 }
 
 /// @nodoc
-abstract class _$$InitialImplCopyWith<$Res> {
-  factory _$$InitialImplCopyWith(
-          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
-      __$$InitialImplCopyWithImpl<$Res>;
+abstract class _$$ListInitialImplCopyWith<$Res> {
+  factory _$$ListInitialImplCopyWith(
+          _$ListInitialImpl value, $Res Function(_$ListInitialImpl) then) =
+      __$$ListInitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InitialImplCopyWithImpl<$Res>
-    extends _$ListStateCopyWithImpl<$Res, _$InitialImpl>
-    implements _$$InitialImplCopyWith<$Res> {
-  __$$InitialImplCopyWithImpl(
-      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
+class __$$ListInitialImplCopyWithImpl<$Res>
+    extends _$ListStateCopyWithImpl<$Res, _$ListInitialImpl>
+    implements _$$ListInitialImplCopyWith<$Res> {
+  __$$ListInitialImplCopyWithImpl(
+      _$ListInitialImpl _value, $Res Function(_$ListInitialImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of ListState
@@ -457,8 +457,8 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitialImpl implements _Initial {
-  const _$InitialImpl();
+class _$ListInitialImpl implements ListInitial {
+  const _$ListInitialImpl();
 
   @override
   String toString() {
@@ -468,7 +468,7 @@ class _$InitialImpl implements _Initial {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitialImpl);
+        (other.runtimeType == runtimeType && other is _$ListInitialImpl);
   }
 
   @override
@@ -511,9 +511,9 @@ class _$InitialImpl implements _Initial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
+    required TResult Function(ListInitial value) initial,
+    required TResult Function(ListLoading value) loading,
+    required TResult Function(ListLoaded value) loaded,
   }) {
     return initial(this);
   }
@@ -521,9 +521,9 @@ class _$InitialImpl implements _Initial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(ListInitial value)? initial,
+    TResult? Function(ListLoading value)? loading,
+    TResult? Function(ListLoaded value)? loaded,
   }) {
     return initial?.call(this);
   }
@@ -531,9 +531,9 @@ class _$InitialImpl implements _Initial {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
+    TResult Function(ListInitial value)? initial,
+    TResult Function(ListLoading value)? loading,
+    TResult Function(ListLoaded value)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -543,23 +543,23 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements ListState {
-  const factory _Initial() = _$InitialImpl;
+abstract class ListInitial implements ListState {
+  const factory ListInitial() = _$ListInitialImpl;
 }
 
 /// @nodoc
-abstract class _$$LoadingImplCopyWith<$Res> {
-  factory _$$LoadingImplCopyWith(
-          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
-      __$$LoadingImplCopyWithImpl<$Res>;
+abstract class _$$ListLoadingImplCopyWith<$Res> {
+  factory _$$ListLoadingImplCopyWith(
+          _$ListLoadingImpl value, $Res Function(_$ListLoadingImpl) then) =
+      __$$ListLoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$ListStateCopyWithImpl<$Res, _$LoadingImpl>
-    implements _$$LoadingImplCopyWith<$Res> {
-  __$$LoadingImplCopyWithImpl(
-      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
+class __$$ListLoadingImplCopyWithImpl<$Res>
+    extends _$ListStateCopyWithImpl<$Res, _$ListLoadingImpl>
+    implements _$$ListLoadingImplCopyWith<$Res> {
+  __$$ListLoadingImplCopyWithImpl(
+      _$ListLoadingImpl _value, $Res Function(_$ListLoadingImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of ListState
@@ -568,8 +568,8 @@ class __$$LoadingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadingImpl implements _Loading {
-  const _$LoadingImpl();
+class _$ListLoadingImpl implements ListLoading {
+  const _$ListLoadingImpl();
 
   @override
   String toString() {
@@ -579,7 +579,7 @@ class _$LoadingImpl implements _Loading {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadingImpl);
+        (other.runtimeType == runtimeType && other is _$ListLoadingImpl);
   }
 
   @override
@@ -622,9 +622,9 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
+    required TResult Function(ListInitial value) initial,
+    required TResult Function(ListLoading value) loading,
+    required TResult Function(ListLoaded value) loaded,
   }) {
     return loading(this);
   }
@@ -632,9 +632,9 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(ListInitial value)? initial,
+    TResult? Function(ListLoading value)? loading,
+    TResult? Function(ListLoaded value)? loaded,
   }) {
     return loading?.call(this);
   }
@@ -642,9 +642,9 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
+    TResult Function(ListInitial value)? initial,
+    TResult Function(ListLoading value)? loading,
+    TResult Function(ListLoaded value)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -654,15 +654,15 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements ListState {
-  const factory _Loading() = _$LoadingImpl;
+abstract class ListLoading implements ListState {
+  const factory ListLoading() = _$ListLoadingImpl;
 }
 
 /// @nodoc
-abstract class _$$LoadedImplCopyWith<$Res> {
-  factory _$$LoadedImplCopyWith(
-          _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
-      __$$LoadedImplCopyWithImpl<$Res>;
+abstract class _$$ListLoadedImplCopyWith<$Res> {
+  factory _$$ListLoadedImplCopyWith(
+          _$ListLoadedImpl value, $Res Function(_$ListLoadedImpl) then) =
+      __$$ListLoadedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ListOfThings list});
 
@@ -670,11 +670,11 @@ abstract class _$$LoadedImplCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$LoadedImplCopyWithImpl<$Res>
-    extends _$ListStateCopyWithImpl<$Res, _$LoadedImpl>
-    implements _$$LoadedImplCopyWith<$Res> {
-  __$$LoadedImplCopyWithImpl(
-      _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
+class __$$ListLoadedImplCopyWithImpl<$Res>
+    extends _$ListStateCopyWithImpl<$Res, _$ListLoadedImpl>
+    implements _$$ListLoadedImplCopyWith<$Res> {
+  __$$ListLoadedImplCopyWithImpl(
+      _$ListLoadedImpl _value, $Res Function(_$ListLoadedImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of ListState
@@ -684,7 +684,7 @@ class __$$LoadedImplCopyWithImpl<$Res>
   $Res call({
     Object? list = null,
   }) {
-    return _then(_$LoadedImpl(
+    return _then(_$ListLoadedImpl(
       null == list
           ? _value.list
           : list // ignore: cast_nullable_to_non_nullable
@@ -705,8 +705,8 @@ class __$$LoadedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadedImpl implements _Loaded {
-  const _$LoadedImpl(this.list);
+class _$ListLoadedImpl implements ListLoaded {
+  const _$ListLoadedImpl(this.list);
 
   @override
   final ListOfThings list;
@@ -720,7 +720,7 @@ class _$LoadedImpl implements _Loaded {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoadedImpl &&
+            other is _$ListLoadedImpl &&
             (identical(other.list, list) || other.list == list));
   }
 
@@ -732,8 +732,8 @@ class _$LoadedImpl implements _Loaded {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
-      __$$LoadedImplCopyWithImpl<_$LoadedImpl>(this, _$identity);
+  _$$ListLoadedImplCopyWith<_$ListLoadedImpl> get copyWith =>
+      __$$ListLoadedImplCopyWithImpl<_$ListLoadedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -772,9 +772,9 @@ class _$LoadedImpl implements _Loaded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
+    required TResult Function(ListInitial value) initial,
+    required TResult Function(ListLoading value) loading,
+    required TResult Function(ListLoaded value) loaded,
   }) {
     return loaded(this);
   }
@@ -782,9 +782,9 @@ class _$LoadedImpl implements _Loaded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(ListInitial value)? initial,
+    TResult? Function(ListLoading value)? loading,
+    TResult? Function(ListLoaded value)? loaded,
   }) {
     return loaded?.call(this);
   }
@@ -792,9 +792,9 @@ class _$LoadedImpl implements _Loaded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
+    TResult Function(ListInitial value)? initial,
+    TResult Function(ListLoading value)? loading,
+    TResult Function(ListLoaded value)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -804,14 +804,14 @@ class _$LoadedImpl implements _Loaded {
   }
 }
 
-abstract class _Loaded implements ListState {
-  const factory _Loaded(final ListOfThings list) = _$LoadedImpl;
+abstract class ListLoaded implements ListState {
+  const factory ListLoaded(final ListOfThings list) = _$ListLoadedImpl;
 
   ListOfThings get list;
 
   /// Create a copy of ListState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
+  _$$ListLoadedImplCopyWith<_$ListLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

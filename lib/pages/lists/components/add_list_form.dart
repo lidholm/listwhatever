@@ -8,6 +8,7 @@ import 'package:listwhatever/form/form_generator.dart';
 import 'package:listwhatever/form/form_input_field_info.dart';
 import 'package:listwhatever/form/form_input_section.dart';
 import 'package:listwhatever/pages/list/bloc/list_bloc.dart';
+import 'package:listwhatever/pages/list/bloc/list_event.dart';
 import 'package:listwhatever/pages/lists/models/list_of_things.dart';
 
 const String className = 'ListTiles';
@@ -207,7 +208,7 @@ class AddListForm extends StatelessWidget {
     );
     // LoggerHelper.logger.d('newList: $newList');
     // if (widget.listId == null) {
-    listBloc.add(ListEvent.addList(newList));
+    listBloc.add(AddList(newList));
     // } else {
     //   listCrudBloc.add(UpdateList(newList));
     // }
