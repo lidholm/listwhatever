@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:listwhatever/components/shimmer/shimmer_loading.dart';
 import 'package:listwhatever/pages/lists/models/user_list.dart';
+import 'package:listwhatever/routing/go_router_configuration.dart';
 
 const String className = 'UserListTile';
 
@@ -25,26 +27,29 @@ class UserListTile extends StatelessWidget {
   Widget buildTile(BuildContext context) {
     return ShimmerLoading(
       isLoading: isLoading,
-      child: Container(
-        height: 100,
-        decoration: BoxDecoration(
-          color: Colors.grey.shade800,
-          borderRadius: BorderRadius.circular(imageRadius),
-        ),
-        child: Row(
-          spacing: 24,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 16),
-              child: buildImage(),
-            ),
-            Column(
-              spacing: 8,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [buildTitle(context), buildSubtitle(context)],
-            ),
-          ],
+      child: GestureDetector(
+        onTap: () => onTap(context),
+        child: Container(
+          height: 100,
+          decoration: BoxDecoration(
+            color: Colors.grey.shade800,
+            borderRadius: BorderRadius.circular(imageRadius),
+          ),
+          child: Row(
+            spacing: 24,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 16),
+                child: buildImage(),
+              ),
+              Column(
+                spacing: 8,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [buildTitle(context), buildSubtitle(context)],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -119,8 +124,9 @@ class UserListTile extends StatelessWidget {
     );
   }
 
-  void onTap(BuildContext context, String listId) {
+  void onTap(BuildContext context) {
     // context.read<FilterBloc>().add(UpdateFiltersForSelectedList(listId));
     // ListItemsPageRoute(actualListId: listId).push<void>(context);
+    GoRouter.of(context).pushNamed(RouteName.list.value);
   }
 }

@@ -5,6 +5,7 @@ import 'package:listwhatever/auth/bloc/auth_bloc.dart';
 import 'package:listwhatever/pages/auth/log_in_options_page.dart';
 import 'package:listwhatever/pages/auth/profile_page.dart';
 import 'package:listwhatever/pages/auth/sign_up_options_page.dart';
+import 'package:listwhatever/pages/list/pages/list_page.dart';
 import 'package:listwhatever/pages/lists/pages/add_list_page.dart';
 import 'package:listwhatever/pages/lists/pages/lists_page.dart';
 import 'package:listwhatever/routing/go_router_redirect.dart';
@@ -13,7 +14,8 @@ import 'package:listwhatever/tab_bar/view/tab_bar_page.dart';
 
 enum RouteName {
   home._('/'),
-  listItems._('/listItems'),
+  list._('/list'),
+  addList._('/addList'),
   details._('submit'),
   tabBar._('tabbar'),
   signUp._('signup'),
@@ -32,7 +34,7 @@ GoRouter getGoRouterConfiguration(BuildContext context) {
       BlocProvider.of<AuthBloc>(context).stream,
     ]),
     debugLogDiagnostics: true,
-    initialLocation: '/${RouteName.listItems.value}',
+    initialLocation: '/${RouteName.home.value}',
     redirect: routerRedirect,
     routes: <RouteBase>[
       GoRoute(
@@ -43,8 +45,15 @@ GoRouter getGoRouterConfiguration(BuildContext context) {
         },
         routes: <RouteBase>[
           GoRoute(
-            name: RouteName.listItems.value,
-            path: 'listItems',
+            name: RouteName.list.value,
+            path: 'list',
+            builder: (BuildContext context, GoRouterState state) {
+              return const ListPage();
+            },
+          ),
+          GoRoute(
+            name: RouteName.addList.value,
+            path: 'addList',
             builder: (BuildContext context, GoRouterState state) {
               return const AddListPage();
             },

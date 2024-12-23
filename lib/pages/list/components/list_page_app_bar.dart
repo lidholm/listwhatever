@@ -13,7 +13,7 @@ class ListPageAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text('Lists'),
+      title: const Text('List'),
       actions: [
         IconButton(
           icon: const Icon(Icons.logout),

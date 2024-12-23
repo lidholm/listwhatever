@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:listwhatever/components/shimmer/shimmer.dart';
 import 'package:listwhatever/components/shimmer/shimmer_loading.dart';
 import 'package:listwhatever/pages/lists/bloc/lists_bloc.dart';
-import 'package:listwhatever/pages/lists/components/list_page_app_bar.dart';
 import 'package:listwhatever/pages/lists/components/list_tiles.dart';
+import 'package:listwhatever/pages/lists/components/lists_page_app_bar.dart';
 import 'package:listwhatever/routing/go_router_configuration.dart';
 
 class ListsPage extends StatefulWidget {
@@ -27,11 +27,11 @@ class _ListsPageState extends State<ListsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const ListPageAppBar(),
+      appBar: const ListsPageAppBar(),
       body: const Shimmer(linearGradient: shimmerGradient, child: ListTiles()),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          GoRouter.of(context).pushNamed(RouteName.listItems.value);
+          GoRouter.of(context).pushNamed(RouteName.addList.value);
         },
         child: const Icon(Icons.add),
       ),
