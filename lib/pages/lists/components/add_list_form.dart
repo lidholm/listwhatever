@@ -7,7 +7,7 @@ import 'package:listwhatever/form/form_axis_direction.dart';
 import 'package:listwhatever/form/form_generator.dart';
 import 'package:listwhatever/form/form_input_field_info.dart';
 import 'package:listwhatever/form/form_input_section.dart';
-import 'package:listwhatever/pages/lists/bloc/lists_bloc.dart';
+import 'package:listwhatever/pages/list/bloc/list_bloc.dart';
 import 'package:listwhatever/pages/lists/models/list_of_things.dart';
 
 const String className = 'ListTiles';
@@ -180,7 +180,7 @@ class AddListForm extends StatelessWidget {
     ListOfThings? list,
     Map<String, dynamic> values,
   ) async {
-    final listBloc = BlocProvider.of<ListsBloc>(context);
+    final listBloc = BlocProvider.of<ListBloc>(context);
     final goRouter = GoRouter.of(context);
 
     // String? imageFilename;
@@ -207,7 +207,7 @@ class AddListForm extends StatelessWidget {
     );
     // LoggerHelper.logger.d('newList: $newList');
     // if (widget.listId == null) {
-    listBloc.add(ListsEvent.addList(newList));
+    listBloc.add(ListEvent.addList(newList));
     // } else {
     //   listCrudBloc.add(UpdateList(newList));
     // }

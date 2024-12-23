@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:listwhatever/pages/lists/models/list_of_things.dart';
 import 'package:listwhatever/pages/lists/models/user_list.dart';
 import 'package:listwhatever/pages/lists/repository/list_repository.dart';
 import 'package:listwhatever/pages/lists/repository/user_list_repository.dart';
@@ -15,7 +14,6 @@ class ListsBloc extends Bloc<ListsEvent, ListsState> {
     required this.userListRepository,
   }) : super(const Initial()) {
     on<_WatchUserLists>(_onWatchUserLists);
-    on<_AddList>(_onAddList);
   }
   final UserListRepository userListRepository;
   final ListRepository listRepository;
@@ -32,16 +30,5 @@ class ListsBloc extends Bloc<ListsEvent, ListsState> {
         return ListsState.loaded(lists);
       },
     );
-  }
-
-  Future<void> _onAddList(
-    _AddList event,
-    Emitter<ListsState> emit,
-  ) async {
-    emit(const ListsState.loading());
-    final listId = await listRepository.addList(event.list);
-
-    final userList = UserList.fromList(event.list, listId);
-    await userListRepository.addUserList(userList);
   }
 }

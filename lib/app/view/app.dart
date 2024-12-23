@@ -6,6 +6,7 @@ import 'package:listwhatever/auth/authenticated_user_listener.dart';
 import 'package:listwhatever/auth/bloc/auth_bloc.dart';
 import 'package:listwhatever/changeUserBloc/change_user_bloc_bloc.dart';
 import 'package:listwhatever/l10n/l10n.dart';
+import 'package:listwhatever/pages/list/bloc/list_bloc.dart';
 import 'package:listwhatever/pages/lists/bloc/lists_bloc.dart';
 import 'package:listwhatever/pages/lists/repository/list_repository.dart';
 import 'package:listwhatever/pages/lists/repository/user_list_repository.dart';
@@ -43,6 +44,12 @@ class App extends StatelessWidget {
               ),
               BlocProvider(
                 create: (_) => ListsBloc(
+                  listRepository: listRepository,
+                  userListRepository: userListRepository,
+                ),
+              ),
+              BlocProvider(
+                create: (_) => ListBloc(
                   listRepository: listRepository,
                   userListRepository: userListRepository,
                 ),

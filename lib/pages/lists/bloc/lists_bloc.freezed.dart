@@ -19,38 +19,32 @@ mixin _$ListsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() watchUserLists,
-    required TResult Function(ListOfThings list) addList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? watchUserLists,
-    TResult? Function(ListOfThings list)? addList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? watchUserLists,
-    TResult Function(ListOfThings list)? addList,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_WatchUserLists value) watchUserLists,
-    required TResult Function(_AddList value) addList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_WatchUserLists value)? watchUserLists,
-    TResult? Function(_AddList value)? addList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_WatchUserLists value)? watchUserLists,
-    TResult Function(_AddList value)? addList,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -119,7 +113,6 @@ class _$WatchUserListsImpl implements _WatchUserLists {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() watchUserLists,
-    required TResult Function(ListOfThings list) addList,
   }) {
     return watchUserLists();
   }
@@ -128,7 +121,6 @@ class _$WatchUserListsImpl implements _WatchUserLists {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? watchUserLists,
-    TResult? Function(ListOfThings list)? addList,
   }) {
     return watchUserLists?.call();
   }
@@ -137,7 +129,6 @@ class _$WatchUserListsImpl implements _WatchUserLists {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? watchUserLists,
-    TResult Function(ListOfThings list)? addList,
     required TResult orElse(),
   }) {
     if (watchUserLists != null) {
@@ -150,7 +141,6 @@ class _$WatchUserListsImpl implements _WatchUserLists {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_WatchUserLists value) watchUserLists,
-    required TResult Function(_AddList value) addList,
   }) {
     return watchUserLists(this);
   }
@@ -159,7 +149,6 @@ class _$WatchUserListsImpl implements _WatchUserLists {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_WatchUserLists value)? watchUserLists,
-    TResult? Function(_AddList value)? addList,
   }) {
     return watchUserLists?.call(this);
   }
@@ -168,7 +157,6 @@ class _$WatchUserListsImpl implements _WatchUserLists {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_WatchUserLists value)? watchUserLists,
-    TResult Function(_AddList value)? addList,
     required TResult orElse(),
   }) {
     if (watchUserLists != null) {
@@ -180,158 +168,6 @@ class _$WatchUserListsImpl implements _WatchUserLists {
 
 abstract class _WatchUserLists implements ListsEvent {
   const factory _WatchUserLists() = _$WatchUserListsImpl;
-}
-
-/// @nodoc
-abstract class _$$AddListImplCopyWith<$Res> {
-  factory _$$AddListImplCopyWith(
-          _$AddListImpl value, $Res Function(_$AddListImpl) then) =
-      __$$AddListImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({ListOfThings list});
-
-  $ListOfThingsCopyWith<$Res> get list;
-}
-
-/// @nodoc
-class __$$AddListImplCopyWithImpl<$Res>
-    extends _$ListsEventCopyWithImpl<$Res, _$AddListImpl>
-    implements _$$AddListImplCopyWith<$Res> {
-  __$$AddListImplCopyWithImpl(
-      _$AddListImpl _value, $Res Function(_$AddListImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ListsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? list = null,
-  }) {
-    return _then(_$AddListImpl(
-      null == list
-          ? _value.list
-          : list // ignore: cast_nullable_to_non_nullable
-              as ListOfThings,
-    ));
-  }
-
-  /// Create a copy of ListsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ListOfThingsCopyWith<$Res> get list {
-    return $ListOfThingsCopyWith<$Res>(_value.list, (value) {
-      return _then(_value.copyWith(list: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$AddListImpl implements _AddList {
-  const _$AddListImpl(this.list);
-
-  @override
-  final ListOfThings list;
-
-  @override
-  String toString() {
-    return 'ListsEvent.addList(list: $list)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AddListImpl &&
-            (identical(other.list, list) || other.list == list));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, list);
-
-  /// Create a copy of ListsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AddListImplCopyWith<_$AddListImpl> get copyWith =>
-      __$$AddListImplCopyWithImpl<_$AddListImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() watchUserLists,
-    required TResult Function(ListOfThings list) addList,
-  }) {
-    return addList(list);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? watchUserLists,
-    TResult? Function(ListOfThings list)? addList,
-  }) {
-    return addList?.call(list);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? watchUserLists,
-    TResult Function(ListOfThings list)? addList,
-    required TResult orElse(),
-  }) {
-    if (addList != null) {
-      return addList(list);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_WatchUserLists value) watchUserLists,
-    required TResult Function(_AddList value) addList,
-  }) {
-    return addList(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_WatchUserLists value)? watchUserLists,
-    TResult? Function(_AddList value)? addList,
-  }) {
-    return addList?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_WatchUserLists value)? watchUserLists,
-    TResult Function(_AddList value)? addList,
-    required TResult orElse(),
-  }) {
-    if (addList != null) {
-      return addList(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _AddList implements ListsEvent {
-  const factory _AddList(final ListOfThings list) = _$AddListImpl;
-
-  ListOfThings get list;
-
-  /// Create a copy of ListsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AddListImplCopyWith<_$AddListImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

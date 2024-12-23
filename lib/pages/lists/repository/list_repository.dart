@@ -11,20 +11,21 @@ class ListRepository {
     return (await getFirestore()).collection(path);
   }
 
-  // Stream<List<UserList>> loadList() async* {
-  //   if (userId == null || userId == anonymousId) {
-  //     yield [];
-  //     return;
-  //   }
+  Future<DocumentReference<Map<String, dynamic>>> getCollectionWithId(
+    String listId,
+  ) async {
+    final path = '/lists/$listId';
+    print('ListRepository path: $path');
+    return (await getFirestore()).doc(path);
+  }
 
-  //   final listsCollection = await getCollection();
+  Future<ListOfThings> loadList(String listId) async {
+    final listsCollection = await getCollectionWithId(listId);
 
-  //   yield* listsCollection.snapshots().map((snapshot) {
-  //     return snapshot.docs.map((doc) {
-  //       return convertToUserList(doc.id, doc.data());
-  //     }).toList();
-  //   });
-  // }
+    final snapshot = await listsCollection.get();
+    final data = snapshot.data();
+    return convertToUserList(snapshot.id, data!);
+  }
 
   ListOfThings convertToUserList(String id, Map<String, dynamic> data) {
     final list = ListOfThings.fromJson(data);
