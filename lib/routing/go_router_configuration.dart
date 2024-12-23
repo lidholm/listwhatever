@@ -5,6 +5,7 @@ import 'package:listwhatever/auth/bloc/auth_bloc.dart';
 import 'package:listwhatever/pages/auth/log_in_options_page.dart';
 import 'package:listwhatever/pages/auth/profile_page.dart';
 import 'package:listwhatever/pages/auth/sign_up_options_page.dart';
+import 'package:listwhatever/pages/list/pages/add_list_item_page.dart';
 import 'package:listwhatever/pages/list/pages/list_page.dart';
 import 'package:listwhatever/pages/lists/models/list_of_things.dart';
 import 'package:listwhatever/pages/lists/pages/add_list_page.dart';
@@ -14,10 +15,10 @@ import 'package:listwhatever/routing/go_router_refresh_stream.dart';
 import 'package:listwhatever/tab_bar/view/tab_bar_page.dart';
 
 enum RouteName {
-  home._('/'),
-  list._('/list'),
-  addList._('/addList'),
-  addListItem._('/addListItem'),
+  home._('lists'),
+  list._('list'),
+  addList._('addList'),
+  addListItem._('addListItem'),
   details._('submit'),
   tabBar._('tabbar'),
   signUp._('signup'),
@@ -41,26 +42,17 @@ GoRouter getGoRouterConfiguration(BuildContext context) {
     routes: <RouteBase>[
       GoRoute(
         name: RouteName.home.value,
-        path: '/',
+        path: '/lists',
         builder: (BuildContext context, GoRouterState state) {
           return const ListsPage();
         },
         routes: <RouteBase>[
           GoRoute(
             name: RouteName.list.value,
-            path: 'list',
+            path: '/:id',
             builder: (BuildContext context, GoRouterState state) {
-              return const ListPage(
-                list: ListOfThings(
-                  id: '',
-                  name: 'Test list',
-                  withMap: false,
-                  withDates: false,
-                  withTimes: false,
-                  shared: false,
-                  sharedWith: {},
-                  ownerId: 'Super Mario',
-                ),
+              return ListPage(
+                listId: state.pathParameters['id']!,
               );
             },
           ),
@@ -69,6 +61,13 @@ GoRouter getGoRouterConfiguration(BuildContext context) {
             path: 'addList',
             builder: (BuildContext context, GoRouterState state) {
               return const AddListPage();
+            },
+          ),
+          GoRoute(
+            name: RouteName.addListItem.value,
+            path: 'addListItem',
+            builder: (BuildContext context, GoRouterState state) {
+              return const AddListItemPage();
             },
           ),
           GoRoute(

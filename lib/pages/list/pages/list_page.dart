@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/pages/list/bloc/list_bloc.dart';
+import 'package:listwhatever/pages/list/bloc/list_event.dart';
+import 'package:listwhatever/pages/list/bloc/list_state.dart';
 import 'package:listwhatever/pages/lists/models/list_of_things.dart';
 import 'package:listwhatever/routing/go_router_configuration.dart';
 
 class ListPage extends StatefulWidget {
-  const ListPage({required this.list, super.key});
-  final ListOfThings list;
+  const ListPage({required this.listId, super.key});
+  final String listId;
 
   @override
   State<ListPage> createState() => _ListPageState();
@@ -13,7 +17,18 @@ class ListPage extends StatefulWidget {
 
 class _ListPageState extends State<ListPage> {
   @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<ListBloc>(context).add(GetList(widget.listId));
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final listState = context.watch<ListBloc>().state;
+
+    getLoading(listState);
+    final list = getList(listState);
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -35,7 +50,7 @@ class _ListPageState extends State<ListPage> {
             backgroundColor: Colors.black,
             centerTitle: true,
             title: Text(
-              widget.list.name,
+              list?.name ?? '',
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 24,
@@ -66,5 +81,26 @@ class _ListPageState extends State<ListPage> {
         ],
       ),
     );
+  }
+
+  bool getLoading(ListState listState) {
+    return switch (listState) {
+      ListInitial() => true,
+      ListLoading() => true,
+      ListLoaded() => false,
+    };
+  }
+
+  ListOfThings? getList(ListState listState) {
+    if (listState is ListInitial) {
+      return null;
+    }
+    if (listState is ListLoading) {
+      return null;
+    }
+    if (listState is ListLoaded) {
+      return listState.list;
+    }
+    return null;
   }
 }

@@ -20,7 +20,7 @@ FutureOr<String?> routerRedirect(BuildContext context, GoRouterState state) {
   if (isLoggedIn(authBloc)) {
     if (isLoggingInPage(state)) {
       print('routerRedirect return /');
-      return '/listItems';
+      return '/list';
     }
   }
 
