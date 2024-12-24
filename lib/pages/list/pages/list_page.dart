@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:listwhatever/pages/list/bloc/list_bloc.dart';
 import 'package:listwhatever/pages/list/bloc/list_event.dart';
 import 'package:listwhatever/pages/list/bloc/list_state.dart';
+import 'package:listwhatever/pages/list/models/list_item.dart';
 import 'package:listwhatever/pages/list/routes/add_list_item_page_route.dart';
 import 'package:listwhatever/pages/lists/models/list_of_things.dart';
 import 'package:listwhatever/routing/routes.dart';
@@ -30,6 +33,7 @@ class _ListPageState extends State<ListPage> {
 
     getLoading(listState);
     final list = getList(listState);
+    final items = getItems(listState);
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -72,13 +76,13 @@ class _ListPageState extends State<ListPage> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: ListTile(
-                      title: Text('Item ${index + 1}'),
-                      subtitle: const Text('Something here'),
+                      title: Text(items[index].name),
+                      subtitle: Text(getSubtitle(items[index])),
                     ),
                   ),
                 );
               },
-              childCount: 20, // Number of items in the list
+              childCount: items.length,
             ),
           ),
         ],
@@ -105,5 +109,25 @@ class _ListPageState extends State<ListPage> {
       return listState.list;
     }
     return null;
+  }
+
+  List<ListItem> getItems(ListState listState) {
+    if (listState is ListInitial) {
+      return [];
+    }
+    if (listState is ListLoading) {
+      return [];
+    }
+    if (listState is ListLoaded) {
+      return listState.listItems;
+    }
+    return [];
+  }
+
+  String getSubtitle(ListItem item) {
+    if (item.info == null) {
+      return '';
+    }
+    return item.info!.substring(0, min(item.info!.length, 60));
   }
 }
