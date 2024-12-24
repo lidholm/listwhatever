@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:listwhatever/firestore/firestore.dart';
+import 'package:listwhatever/pages/list/models/list_item.dart';
 import 'package:listwhatever/pages/lists/models/list_of_things.dart';
 
 class ListRepository {
@@ -24,6 +25,9 @@ class ListRepository {
 
     final snapshot = await listsCollection.get();
     final data = snapshot.data();
+    if (data == null) {
+      print('No data. listId: $listId');
+    }
     return convertToUserList(snapshot.id, data!);
   }
 
@@ -38,6 +42,13 @@ class ListRepository {
   Future<String> addList(ListOfThings list) async {
     final listsCollection = await getCollection();
     final ref = await listsCollection.add(list.toJson());
+    return ref.id;
+  }
+
+  Future<String> addListItem(String listId, ListItem listItem) async {
+    final listsCollection =
+        (await getCollectionWithId(listId)).collection('items');
+    final ref = await listsCollection.add(listItem.toJson());
     return ref.id;
   }
 }
