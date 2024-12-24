@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:listwhatever/auth/bloc/auth_bloc.dart';
-import 'package:listwhatever/pages/auth/social_button.dart';
+import 'package:listwhatever/pages/auth/components/social_button.dart';
 
-class LogInOptionsPage extends StatelessWidget {
-  const LogInOptionsPage({super.key});
+class SignInOptionsPage extends StatelessWidget {
+  const SignInOptionsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final nameController = TextEditingController(text: 'Regular');
     final emailController = TextEditingController(text: 'regular@email.com');
     final passwordController = TextEditingController(text: 'test1234!');
 
@@ -22,10 +23,18 @@ class LogInOptionsPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Text(
-                  'Log in',
+                  'Create Account',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                TextField(
+                  controller: nameController,
+                  decoration: const InputDecoration(
+                    labelText: 'Name',
+                    prefixIcon: Icon(Icons.person),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -48,12 +57,15 @@ class LogInOptionsPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 ElevatedButton(
-                  onPressed: () => logInWithEmailAndPassword(
-                    context,
-                    emailController.text,
-                    passwordController.text,
-                  ),
-                  child: const Text('Log in'),
+                  onPressed: () {
+                    context.read<AuthBloc>().add(
+                          SignUpWithEmailAndPassword(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          ),
+                        );
+                  },
+                  child: const Text('Sign Up'),
                 ),
                 const SizedBox(height: 20),
                 const Center(child: Text('or')),
@@ -63,12 +75,16 @@ class LogInOptionsPage extends StatelessWidget {
                   children: [
                     SocialButton(
                       icon: HugeIcons.strokeRoundedApple,
-                      onPressed: () => appleSignUp(context),
+                      onPressed: () {
+                        // Handle Apple sign-in
+                      },
                     ),
                     const SizedBox(width: 20),
                     SocialButton(
                       icon: HugeIcons.strokeRoundedGoogle,
-                      onPressed: () => googleSignUp(context),
+                      onPressed: () {
+                        // Handle Google sign-in
+                      },
                     ),
                   ],
                 ),
@@ -76,12 +92,12 @@ class LogInOptionsPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Don't have an account?"),
+                    const Text('Already have an account?'),
                     TextButton(
                       onPressed: () {
-                        signUp(context);
+                        // GoRouter.of(context).goNamed(RouteName.logIn.value);
                       },
-                      child: const Text('Sign up'),
+                      child: const Text('Log In'),
                     ),
                   ],
                 ),
@@ -93,17 +109,12 @@ class LogInOptionsPage extends StatelessWidget {
     );
   }
 
-  void signUp(BuildContext context) {
-    // GoRouter.of(context).goNamed(RouteName.signUp.value);
+  void logIn(BuildContext context) {
+    // GoRouter.of(context).goNamed(RouteName.logIn.value);
   }
 
-  void logInWithEmailAndPassword(
-    BuildContext context,
-    String email,
-    String password,
-  ) {
-    BlocProvider.of<AuthBloc>(context)
-        .add(LoginWithEmailAndPassword(email: email, password: password));
+  void register(BuildContext context) {
+    BlocProvider.of<AuthBloc>(context).add(RegisterWithEmailAndPassword());
   }
 
   void appleSignUp(BuildContext context) {

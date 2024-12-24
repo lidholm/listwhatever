@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listwhatever/pages/auth/routes/login_page_route.dart';
 import 'package:listwhatever/pages/lists/routes/add_list_page_route.dart';
 import 'package:listwhatever/pages/lists/routes/lists_page_route.dart';
 
@@ -36,10 +37,10 @@ part 'routes.g.dart';
     //   path: 'user_profile',
     //   name: 'user_profile',
     // ),
-    // TypedGoRoute<LoginPageRoute>(
-    //   path: 'login',
-    //   name: 'login',
-    // ),
+    TypedGoRoute<LoginPageRoute>(
+      path: 'login',
+      name: 'login',
+    ),
   ],
 )
 @immutable

@@ -26,6 +26,11 @@ RouteBase get $mainPageRoute => GoRouteData.$route(
             ),
           ],
         ),
+        GoRouteData.$route(
+          path: 'login',
+          name: 'login',
+          factory: $LoginPageRouteExtension._fromState,
+        ),
       ],
     );
 
@@ -70,6 +75,24 @@ extension $AddListPageRouteExtension on AddListPageRoute {
 
   String get location => GoRouteData.$location(
         '/lists/add',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $LoginPageRouteExtension on LoginPageRoute {
+  static LoginPageRoute _fromState(GoRouterState state) =>
+      const LoginPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/login',
       );
 
   void go(BuildContext context) => context.go(location);
