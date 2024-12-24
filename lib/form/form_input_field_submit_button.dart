@@ -14,6 +14,7 @@ class FormInputFieldSubmitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
+      key: Key(field.id),
       onPressed: () {
         if (formKey.currentState?.saveAndValidate() ?? false) {
           field.save(formKey.currentState?.value);

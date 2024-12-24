@@ -24,13 +24,13 @@ class ListWhateverTheme {
           fontSize: 72,
           fontWeight: FontWeight.bold,
         ),
-        bodyMedium: GoogleFonts.merriweather(),
-        displaySmall: GoogleFonts.pacifico(),
-        titleLarge: GoogleFonts.oswald(
-          fontSize: 20,
-        ),
-        titleMedium: GoogleFonts.inter(),
-        titleSmall: GoogleFonts.inter(),
+        // bodyMedium: GoogleFonts.merriweather(),
+        // displaySmall: GoogleFonts.pacifico(),
+        // titleLarge: GoogleFonts.oswald(
+        //   fontSize: 20,
+        // ),
+        // titleMedium: GoogleFonts.inter(),
+        // titleSmall: GoogleFonts.inter(),
       ),
     );
   }

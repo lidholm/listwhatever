@@ -6,12 +6,15 @@ import 'package:listwhatever/app/view/app.dart';
 import 'package:listwhatever/auth/auth_repository.dart';
 import 'package:listwhatever/auth/models/authentication_user.dart';
 import 'package:listwhatever/pages/lists/models/user_list.dart';
+import 'package:listwhatever/pages/lists/repository/list_repository.dart';
 import 'package:listwhatever/pages/lists/repository/user_list_repository.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockAuthRepository extends Mock implements AuthRepository {}
 
 class MockUserListRepository extends Mock implements UserListRepository {}
+
+class MockListRepository extends Mock implements ListRepository {}
 
 class MockUser extends Mock implements User {}
 
@@ -24,10 +27,12 @@ void main() {
     late AuthRepository authRepository;
     late UserListRepository userListRepository;
     late MockAuthenticationUser authenticationUser;
+    late ListRepository listRepository;
 
     setUp(() {
       authRepository = MockAuthRepository();
       userListRepository = MockUserListRepository();
+      listRepository = MockListRepository();
       authenticationUser = MockAuthenticationUser();
 
       when(() => authRepository.user)
@@ -67,6 +72,7 @@ void main() {
         App(
           authRepository: authRepository,
           userListRepository: userListRepository,
+          listRepository: listRepository,
         ),
       );
       await tester.pump(const Duration(milliseconds: 300));

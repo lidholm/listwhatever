@@ -5,6 +5,8 @@ import 'package:listwhatever/components/shimmer/shimmer_loading.dart';
 import 'package:listwhatever/pages/lists/bloc/lists_bloc.dart';
 import 'package:listwhatever/pages/lists/components/list_tiles.dart';
 import 'package:listwhatever/pages/lists/components/lists_page_app_bar.dart';
+import 'package:listwhatever/pages/lists/routes/add_list_page_route.dart';
+import 'package:listwhatever/routing/routes.dart';
 
 class ListsPage extends StatefulWidget {
   const ListsPage({super.key});
@@ -29,7 +31,7 @@ class _ListsPageState extends State<ListsPage> {
       body: const Shimmer(linearGradient: shimmerGradient, child: ListTiles()),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // GoRouter.of(context).pushNamed(RouteName.addList.value);
+          const AddListPageRoute().push<void>(context);
         },
         child: const Icon(Icons.add),
       ),

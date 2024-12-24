@@ -71,6 +71,13 @@
       "type": "dart",
       "program": "lib/main_production.dart",
       "args": ["--flavor", "production", "--target", "lib/main_production.dart"]
+    },
+    {
+      "name": "Integration Test",
+      "request": "launch",
+      "type": "dart",
+      "program": "integration_test/add_list_test.dart",
+      "args": ["--flavor", "development", "-d", "emulator-5554"]
     }
   ]
 }

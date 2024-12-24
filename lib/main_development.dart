@@ -26,9 +26,15 @@ Future<void> main() async {
   }
 
   await bootstrap(
-    (authRepository, userListRepository) => App(
+    (
+      authRepository,
+      userListRepository,
+      listRepository,
+    ) =>
+        App(
       authRepository: authRepository,
       userListRepository: userListRepository,
+      listRepository: listRepository,
     ),
   );
 }

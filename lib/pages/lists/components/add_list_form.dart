@@ -43,14 +43,14 @@ enum FieldId {
   final String value;
 }
 
+final addListFormKey = GlobalKey<FormBuilderState>();
+
 class AddListForm extends StatelessWidget {
-  AddListForm({
+  const AddListForm({
     required this.list,
     super.key,
   });
   final ListOfThings? list;
-
-  final _formKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +91,7 @@ class AddListForm extends StatelessWidget {
     ];
 
     final formGenerator = FormGenerator(
-      formKey: _formKey,
+      formKey: addListFormKey,
       sections: sections,
       fields: fields,
       isLoading: isLoading,

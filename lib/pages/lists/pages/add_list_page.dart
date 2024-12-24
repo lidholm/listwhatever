@@ -25,7 +25,7 @@ class _AddListPageState extends State<AddListPage> {
       appBar: AppBar(
         title: const Text('Add list'),
       ),
-      body: AddListForm(list: null),
+      body: const AddListForm(list: null),
     );
   }
 }

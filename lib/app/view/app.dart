@@ -16,16 +16,15 @@ class App extends StatelessWidget {
   const App({
     required this.authRepository,
     required this.userListRepository,
+    required this.listRepository,
     super.key,
   });
   final AuthRepository authRepository;
   final UserListRepository userListRepository;
+  final ListRepository listRepository;
 
   @override
   Widget build(BuildContext context) {
-    final listRepository = ListRepository();
-    // final userListRepository = UserListRepository(userId: user?.id);
-
     final theme = ListWhateverTheme(context);
 
     return MultiRepositoryProvider(
