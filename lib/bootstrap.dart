@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
 import 'package:listwhatever/auth/auth_repository.dart';
+import 'package:listwhatever/pages/list/repository/list_item_repository.dart';
 import 'package:listwhatever/pages/lists/repository/list_repository.dart';
 import 'package:listwhatever/pages/lists/repository/user_list_repository.dart';
 
@@ -28,6 +29,7 @@ Future<void> bootstrap(
     AuthRepository authRepository,
     UserListRepository userListRepository,
     ListRepository listRepository,
+    ListItemRepository listItemRepository,
   ) builder,
 ) async {
   FlutterError.onError = (details) {
@@ -42,11 +44,14 @@ Future<void> bootstrap(
   final userId = user.id;
   final userListRepository = UserListRepository(userId: userId);
   final listRepository = ListRepository();
+  final listItemRepository = ListItemRepository();
+
   runApp(
     await builder(
       authRepository,
       userListRepository,
       listRepository,
+      listItemRepository,
     ),
   );
 }

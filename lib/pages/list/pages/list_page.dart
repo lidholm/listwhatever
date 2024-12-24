@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:listwhatever/pages/list/bloc/list_bloc.dart';
 import 'package:listwhatever/pages/list/bloc/list_event.dart';
 import 'package:listwhatever/pages/list/bloc/list_state.dart';
+import 'package:listwhatever/pages/list/routes/add_list_item_page_route.dart';
 import 'package:listwhatever/pages/lists/models/list_of_things.dart';
-import 'package:listwhatever/pages/lists/routes/add_list_page_route.dart';
 import 'package:listwhatever/routing/routes.dart';
 
 const addListButtonKey = Key('AddListButtonKey');
@@ -35,7 +35,7 @@ class _ListPageState extends State<ListPage> {
       floatingActionButton: FloatingActionButton(
         key: addListButtonKey,
         onPressed: () {
-          const AddListPageRoute().push<void>(context);
+          AddListItemPageRoute(actualListId: list!.id!).push<void>(context);
         },
         child: const Icon(Icons.add),
       ),

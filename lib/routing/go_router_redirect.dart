@@ -37,7 +37,9 @@ FutureOr<String?> routerRedirect(BuildContext context, GoRouterState state) {
 }
 
 bool isLoggingInPage(GoRouterState state) {
-  final urls = [LoginPageRoute().location];
+  final urls = [
+    const LoginPageRoute().location,
+  ];
   // [RouteName.logIn.value, RouteName.signUp.value]
   return urls.contains(state.matchedLocation.replaceAll('/', ''));
 }
@@ -53,6 +55,10 @@ bool isLoggedOut(AuthBloc authBloc) {
 }
 
 bool isProtectedPage(GoRouterState state) {
-  return ![] //[RouteName.logIn.value, RouteName.signUp.value]
+  final nonProtectedRoutes = [
+    const LoginPageRoute().location,
+  ];
+  //[RouteName.logIn.value, RouteName.signUp.value]
+  return !nonProtectedRoutes
       .contains(state.matchedLocation.replaceAll('/', ''));
 }

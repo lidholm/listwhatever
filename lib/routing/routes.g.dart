@@ -20,6 +20,18 @@ RouteBase get $mainPageRoute => GoRouteData.$route(
           factory: $ListsPageRouteExtension._fromState,
           routes: [
             GoRouteData.$route(
+              path: ':actualListId',
+              name: 'items',
+              factory: $ListPageRouteExtension._fromState,
+              routes: [
+                GoRouteData.$route(
+                  path: 'add',
+                  name: 'addListItem',
+                  factory: $AddListItemPageRouteExtension._fromState,
+                ),
+              ],
+            ),
+            GoRouteData.$route(
               path: 'add',
               name: 'addList',
               factory: $AddListPageRouteExtension._fromState,
@@ -57,6 +69,45 @@ extension $ListsPageRouteExtension on ListsPageRoute {
 
   String get location => GoRouteData.$location(
         '/lists',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $ListPageRouteExtension on ListPageRoute {
+  static ListPageRoute _fromState(GoRouterState state) => ListPageRoute(
+        actualListId: state.pathParameters['actualListId']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/lists/${Uri.encodeComponent(actualListId)}',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $AddListItemPageRouteExtension on AddListItemPageRoute {
+  static AddListItemPageRoute _fromState(GoRouterState state) =>
+      AddListItemPageRoute(
+        actualListId: state.pathParameters['actualListId']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/lists/${Uri.encodeComponent(actualListId)}/add',
       );
 
   void go(BuildContext context) => context.go(location);

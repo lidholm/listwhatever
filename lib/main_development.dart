@@ -30,11 +30,13 @@ Future<void> main() async {
       authRepository,
       userListRepository,
       listRepository,
+      listItemRepository,
     ) =>
         App(
       authRepository: authRepository,
       userListRepository: userListRepository,
       listRepository: listRepository,
+      listItemRepository: listItemRepository,
     ),
   );
 }

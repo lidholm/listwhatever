@@ -10,6 +10,9 @@ service cloud.firestore {
     }
     match /lists/{listId} {
       allow read, write: if true;//  if request.auth != null && request.time < timestamp.date(2025, 1, 16);
+       match /items/{itemId} {
+        allow read, write: if true;//  if request.auth != null && request.time < timestamp.date(2025, 1, 16);
+      }
     }
  }
 }

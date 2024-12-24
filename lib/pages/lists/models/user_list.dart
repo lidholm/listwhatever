@@ -26,4 +26,13 @@ class UserList with _$UserList {
         isOwnList: true,
         imageFilename: '',
       );
+
+  factory UserList.shimmerList() => const UserList(
+        id: null,
+        listId: '',
+        listName: '',
+        ownerId: '',
+        isOwnList: true,
+        imageFilename: '',
+      );
 }

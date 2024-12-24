@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listwhatever/pages/auth/routes/login_page_route.dart';
+import 'package:listwhatever/pages/list/routes/add_list_item_page_route.dart';
+import 'package:listwhatever/pages/list/routes/lists_page_route.dart';
 import 'package:listwhatever/pages/lists/routes/add_list_page_route.dart';
 import 'package:listwhatever/pages/lists/routes/lists_page_route.dart';
 
@@ -13,20 +15,20 @@ part 'routes.g.dart';
       path: 'lists',
       name: 'lists',
       routes: [
-        //   TypedGoRoute<ListItemsPageRoute>(
-        //     path: ':actualListId',
-        //     name: 'items',
-        //     routes: [
-        //       TypedGoRoute<AddListItemPageRoute>(
-        //         path: 'add',
-        //         name: 'addListItem',
-        //       ),
-        //       TypedGoRoute<EditListItemPageRoute>(
-        //         path: ':itemId/edit',
-        //         name: 'editListItem',
-        //       ),
-        //     ],
-        //   ),
+        TypedGoRoute<ListPageRoute>(
+          path: ':actualListId',
+          name: 'items',
+          routes: [
+            TypedGoRoute<AddListItemPageRoute>(
+              path: 'add',
+              name: 'addListItem',
+            ),
+            //       TypedGoRoute<EditListItemPageRoute>(
+            //         path: ':itemId/edit',
+            //         name: 'editListItem',
+            //       ),
+          ],
+        ),
         TypedGoRoute<AddListPageRoute>(
           path: 'add',
           name: 'addList',

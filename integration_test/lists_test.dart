@@ -5,6 +5,7 @@ import 'package:integration_test/integration_test.dart';
 import 'package:listwhatever/app/view/app.dart';
 import 'package:listwhatever/auth/auth_repository.dart';
 import 'package:listwhatever/auth/models/authentication_user.dart';
+import 'package:listwhatever/pages/list/repository/list_item_repository.dart';
 import 'package:listwhatever/pages/lists/models/user_list.dart';
 import 'package:listwhatever/pages/lists/repository/list_repository.dart';
 import 'package:listwhatever/pages/lists/repository/user_list_repository.dart';
@@ -15,6 +16,8 @@ class MockAuthRepository extends Mock implements AuthRepository {}
 class MockUserListRepository extends Mock implements UserListRepository {}
 
 class MockListRepository extends Mock implements ListRepository {}
+
+class MockListItemRepository extends Mock implements ListItemRepository {}
 
 class MockUser extends Mock implements User {}
 
@@ -28,12 +31,14 @@ void main() {
     late UserListRepository userListRepository;
     late MockAuthenticationUser authenticationUser;
     late ListRepository listRepository;
+    late ListItemRepository listItemRepository;
 
     setUp(() {
       authRepository = MockAuthRepository();
       userListRepository = MockUserListRepository();
       listRepository = MockListRepository();
       authenticationUser = MockAuthenticationUser();
+      listItemRepository = MockListItemRepository();
 
       when(() => authRepository.user)
           .thenAnswer((_) => Stream.value(authenticationUser).take(1));
@@ -73,6 +78,7 @@ void main() {
           authRepository: authRepository,
           userListRepository: userListRepository,
           listRepository: listRepository,
+          listItemRepository: listItemRepository,
         ),
       );
       await tester.pump(const Duration(milliseconds: 300));

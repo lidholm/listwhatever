@@ -7,6 +7,7 @@ import 'package:listwhatever/auth/bloc/auth_bloc.dart';
 import 'package:listwhatever/changeUserBloc/change_user_bloc_bloc.dart';
 import 'package:listwhatever/l10n/l10n.dart';
 import 'package:listwhatever/pages/list/bloc/list_bloc.dart';
+import 'package:listwhatever/pages/list/repository/list_item_repository.dart';
 import 'package:listwhatever/pages/lists/bloc/lists_bloc.dart';
 import 'package:listwhatever/pages/lists/repository/list_repository.dart';
 import 'package:listwhatever/pages/lists/repository/user_list_repository.dart';
@@ -17,11 +18,13 @@ class App extends StatelessWidget {
     required this.authRepository,
     required this.userListRepository,
     required this.listRepository,
+    required this.listItemRepository,
     super.key,
   });
   final AuthRepository authRepository;
   final UserListRepository userListRepository;
   final ListRepository listRepository;
+  final ListItemRepository listItemRepository;
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +55,7 @@ class App extends StatelessWidget {
             create: (_) => ListBloc(
               listRepository: listRepository,
               userListRepository: userListRepository,
+              listItemRepository: listItemRepository,
             ),
           ),
         ],

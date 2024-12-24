@@ -35,17 +35,7 @@ class ListTiles extends StatelessWidget {
 
   List<UserList> getLists(ListsState listsState) {
     if (isLoadingState(listsState)) {
-      return List.generate(
-        4,
-        (i) => const UserList(
-          id: 'id',
-          listId: 'listId',
-          listName: 'Restaurants in SD',
-          imageFilename: 'assets/images/restaurants.jpeg',
-          ownerId: 'ownerId',
-          isOwnList: true,
-        ),
-      );
+      return List.generate(4, (i) => UserList.shimmerList());
     }
 
     return (listsState as Loaded).lists;

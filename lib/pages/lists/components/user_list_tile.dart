@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:listwhatever/components/shimmer/shimmer_loading.dart';
+import 'package:listwhatever/pages/list/routes/lists_page_route.dart';
 import 'package:listwhatever/pages/lists/models/user_list.dart';
+import 'package:listwhatever/routing/routes.dart';
 
 const String className = 'UserListTile';
 
@@ -123,8 +125,6 @@ class UserListTile extends StatelessWidget {
   }
 
   void onTap(BuildContext context) {
-    // context.read<FilterBloc>().add(UpdateFiltersForSelectedList(listId));
-    // ListItemsPageRoute(actualListId: listId).push<void>(context);
-    // GoRouter.of(context).pushNamed(RouteName.list.value);
+    ListPageRoute(actualListId: list.listId).push<void>(context);
   }
 }

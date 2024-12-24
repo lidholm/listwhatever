@@ -6,6 +6,7 @@ import 'package:integration_test/integration_test.dart';
 import 'package:listwhatever/app/view/app.dart';
 import 'package:listwhatever/auth/auth_repository.dart';
 import 'package:listwhatever/auth/models/authentication_user.dart';
+import 'package:listwhatever/pages/list/repository/list_item_repository.dart';
 import 'package:listwhatever/pages/lists/components/add_list_form.dart';
 import 'package:listwhatever/pages/lists/models/list_of_things.dart';
 import 'package:listwhatever/pages/lists/models/user_list.dart';
@@ -18,6 +19,8 @@ class MockAuthRepository extends Mock implements AuthRepository {}
 class MockUserListRepository extends Mock implements UserListRepository {}
 
 class MockListRepository extends Mock implements ListRepository {}
+
+class MockListItemRepository extends Mock implements ListItemRepository {}
 
 class MockUser extends Mock implements User {}
 
@@ -35,6 +38,7 @@ void main() {
     late UserListRepository userListRepository;
     late ListRepository listRepository;
     late MockAuthenticationUser authenticationUser;
+    late ListItemRepository listItemRepository;
 
     setUpAll(() {
       registerFallbackValue(MockUserList());
@@ -46,6 +50,7 @@ void main() {
       userListRepository = MockUserListRepository();
       listRepository = MockListRepository();
       authenticationUser = MockAuthenticationUser();
+      listItemRepository = MockListItemRepository();
 
       when(() => authRepository.user)
           .thenAnswer((_) => Stream.value(authenticationUser));
@@ -86,6 +91,7 @@ void main() {
           authRepository: authRepository,
           userListRepository: userListRepository,
           listRepository: listRepository,
+          listItemRepository: listItemRepository,
         ),
       );
       // Finds the floating action button to tap on.
