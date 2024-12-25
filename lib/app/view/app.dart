@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:listwhatever/app/view/app_theme.dart';
+import 'package:listwhatever/app/view/app_router.dart';
 import 'package:listwhatever/auth/auth_repository.dart';
-import 'package:listwhatever/auth/authenticated_user_listener.dart';
 import 'package:listwhatever/auth/bloc/auth_bloc.dart';
 import 'package:listwhatever/changeUserBloc/change_user_bloc_bloc.dart';
-import 'package:listwhatever/l10n/l10n.dart';
 import 'package:listwhatever/pages/list/bloc/list_bloc.dart';
 import 'package:listwhatever/pages/list/repository/list_item_repository.dart';
 import 'package:listwhatever/pages/lists/bloc/lists_bloc.dart';
 import 'package:listwhatever/pages/lists/repository/list_repository.dart';
 import 'package:listwhatever/pages/lists/repository/user_list_repository.dart';
-import 'package:listwhatever/routing/go_router_configuration.dart';
 
 class App extends StatelessWidget {
   const App({
@@ -19,7 +16,7 @@ class App extends StatelessWidget {
     required this.userListRepository,
     required this.listRepository,
     required this.listItemRepository,
-    super.key,
+    required super.key,
   });
   final AuthRepository authRepository;
   final UserListRepository userListRepository;
@@ -28,8 +25,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = ListWhateverTheme(context);
-
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider.value(value: authRepository),
@@ -61,14 +56,7 @@ class App extends StatelessWidget {
         ],
         child: Builder(
           builder: (context) {
-            return AuthenticatedUserListener(
-              child: MaterialApp.router(
-                routerConfig: getGoRouterConfiguration(context),
-                theme: theme.getThemeData(),
-                localizationsDelegates: AppLocalizations.localizationsDelegates,
-                supportedLocales: AppLocalizations.supportedLocales,
-              ),
-            );
+            return const AppRouter();
           },
         ),
       ),

@@ -33,6 +33,7 @@ Future<void> main() async {
       listItemRepository,
     ) =>
         App(
+      key: const Key('appkey'),
       authRepository: authRepository,
       userListRepository: userListRepository,
       listRepository: listRepository,

@@ -12,7 +12,7 @@ class ListsBloc extends Bloc<ListsEvent, ListsState> {
   ListsBloc({
     required this.listRepository,
     required this.userListRepository,
-  }) : super(const Initial()) {
+  }) : super(const ListsInitial()) {
     on<_WatchUserLists>(_onWatchUserLists);
   }
   final UserListRepository userListRepository;

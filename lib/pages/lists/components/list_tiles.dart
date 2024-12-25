@@ -38,10 +38,10 @@ class ListTiles extends StatelessWidget {
       return List.generate(4, (i) => UserList.shimmerList());
     }
 
-    return (listsState as Loaded).lists;
+    return (listsState as ListsLoaded).lists;
   }
 
   bool isLoadingState(ListsState listsState) {
-    return listsState is! Loaded;
+    return listsState is! ListsLoaded;
   }
 }

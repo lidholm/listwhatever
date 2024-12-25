@@ -84,7 +84,7 @@ void main() {
           .thenAnswer((_) => Future.value('newlistid'));
     });
 
-    testWidgets('verify that list of UserLists show up', (tester) async {
+    testWidgets('verify that right data is tried to be saved', (tester) async {
       // Load app widget.
       await tester.pumpWidget(
         App(
@@ -92,6 +92,7 @@ void main() {
           userListRepository: userListRepository,
           listRepository: listRepository,
           listItemRepository: listItemRepository,
+          key: const Key('appkey'),
         ),
       );
       // Finds the floating action button to tap on.
