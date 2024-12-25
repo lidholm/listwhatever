@@ -22,31 +22,28 @@ class UserListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ShimmerLoading(
-      isLoading: isLoading,
-      child: GestureDetector(
-        onTap: () => onTap(context),
-        child: Container(
-          height: 100,
-          decoration: BoxDecoration(
-            color: Colors.grey.shade800,
-            borderRadius: BorderRadius.circular(imageRadius),
-          ),
-          child: Row(
-            spacing: 24,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 16),
-                child: buildImage(),
-              ),
-              Column(
-                spacing: 8,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [buildTitle(context), buildSubtitle(context)],
-              ),
-            ],
-          ),
+    return GestureDetector(
+      onTap: () => onTap(context),
+      child: Container(
+        height: 100,
+        decoration: BoxDecoration(
+          color: Colors.grey.shade800,
+          borderRadius: BorderRadius.circular(imageRadius),
+        ),
+        child: Row(
+          spacing: 24,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 16),
+              child: buildImage(),
+            ),
+            Column(
+              spacing: 8,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [buildTitle(context), buildSubtitle(context)],
+            ),
+          ],
         ),
       ),
     );
