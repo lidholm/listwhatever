@@ -17,6 +17,7 @@ class ListTiles extends StatelessWidget {
     print('listsState: $listsState');
 
     final lists = getLists(listsState);
+    final isLoading = isLoadingState(listsState);
 
     return Padding(
       padding: const EdgeInsets.all(16),
@@ -26,7 +27,7 @@ class ListTiles extends StatelessWidget {
           final list = lists[index];
           return UserListTile(
             list: list,
-            isLoading: isLoadingState(listsState),
+            isLoading: isLoading,
           );
         }),
       ),

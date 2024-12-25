@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:listwhatever/components/shimmer/shimmer_container.dart';
 import 'package:listwhatever/components/shimmer/shimmer_loading.dart';
 import 'package:listwhatever/pages/list/routes/lists_page_route.dart';
 import 'package:listwhatever/pages/lists/models/user_list.dart';
@@ -21,10 +22,6 @@ class UserListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return buildTile(context);
-  }
-
-  Widget buildTile(BuildContext context) {
     return ShimmerLoading(
       isLoading: isLoading,
       child: GestureDetector(
@@ -57,7 +54,7 @@ class UserListTile extends StatelessWidget {
 
   Widget buildImage() {
     if (isLoading) {
-      return buildShimmerContainer(imageHeight, imageWidth);
+      return const ShimmerContainer(height: imageHeight, width: imageWidth);
     }
     return ClipRRect(
       borderRadius: BorderRadius.circular(imageRadius),
@@ -75,7 +72,7 @@ class UserListTile extends StatelessWidget {
 
   Widget buildTitle(BuildContext context) {
     if (isLoading) {
-      return buildShimmerContainer(20, 160);
+      return const ShimmerContainer(height: 20, width: 160);
     }
 
     return Text(
@@ -86,22 +83,11 @@ class UserListTile extends StatelessWidget {
 
   Widget buildSubtitle(BuildContext context) {
     if (isLoading) {
-      return buildShimmerContainer(20, 140);
+      return const ShimmerContainer(height: 20, width: 140);
     }
     return Text(
       'Number of items: 14',
       style: Theme.of(context).textTheme.titleMedium,
-    );
-  }
-
-  Widget buildShimmerContainer(double height, double width) {
-    return Container(
-      height: height,
-      width: width,
-      decoration: BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(imageRadius),
-      ),
     );
   }
 
