@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listwhatever/pages/list/pages/list_page.dart';
+import 'package:listwhatever/pages/lists/pages/add_list_page.dart';
 
 @immutable
 class ListPageRoute extends GoRouteData {
@@ -9,6 +10,9 @@ class ListPageRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
+    if (actualListId == 'add') {
+      return const AddListPage();
+    }
     return ListPage(listId: actualListId);
   }
 }
