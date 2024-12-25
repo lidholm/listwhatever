@@ -8,31 +8,31 @@ import 'package:listwhatever/pages/auth/routes/login_page_route.dart';
 import 'package:listwhatever/routing/routes.dart';
 
 FutureOr<String?> routerRedirect(BuildContext context, GoRouterState state) {
-  print('routerRedirect state.matchedLocation: ${state.matchedLocation}');
+  // print('routerRedirect state.matchedLocation: ${state.matchedLocation}');
 
   final authBloc = BlocProvider.of<AuthBloc>(context);
-  print('routerRedirect authBloc.state: ${authBloc.state}');
+  // print('routerRedirect authBloc.state: ${authBloc.state}');
 
   if (state.matchedLocation == '/unknown') {
-    print('routerRedirect return /');
+    // print('routerRedirect return /');
     return '/';
   }
 
   if (isLoggedIn(authBloc)) {
     if (isLoggingInPage(state)) {
-      print('routerRedirect return /');
+      // print('routerRedirect return /');
       return '/list';
     }
   }
 
   if (isLoggedOut(authBloc)) {
     if (isProtectedPage(state)) {
-      print('routerRedirect return /login');
+      // print('routerRedirect return /login');
       return '/login';
     }
   }
 
-  print('routerRedirect return null');
+  // print('routerRedirect return null');
   return null;
 }
 
@@ -45,7 +45,7 @@ bool isLoggingInPage(GoRouterState state) {
 }
 
 bool isLoggedIn(AuthBloc authBloc) {
-  print('go_router_redirect: authBloc.state: ${authBloc.state}');
+  // print('go_router_redirect: authBloc.state: ${authBloc.state}');
   return authBloc.state is AuthLoggedIn ||
       authBloc.state is AuthOnboardingRequired;
 }
