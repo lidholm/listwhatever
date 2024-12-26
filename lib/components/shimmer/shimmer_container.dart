@@ -4,8 +4,11 @@ import 'package:listwhatever/components/shimmer/shimmer_loading.dart';
 const imageRadius = 12.0;
 
 class ShimmerContainer extends StatelessWidget {
-  const ShimmerContainer(
-      {required this.height, required this.width, super.key});
+  const ShimmerContainer({
+    required this.height,
+    required this.width,
+    super.key,
+  });
   final double height;
   final double width;
 

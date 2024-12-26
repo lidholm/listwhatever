@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:listwhatever/components/shimmer/shimmer_container.dart';
-import 'package:listwhatever/components/shimmer/shimmer_loading.dart';
 import 'package:listwhatever/pages/list/routes/lists_page_route.dart';
 import 'package:listwhatever/pages/lists/models/user_list.dart';
 import 'package:listwhatever/routing/routes.dart';
