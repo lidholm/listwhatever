@@ -11,7 +11,9 @@ import 'package:listwhatever/form/form_input_section.dart';
 import 'package:listwhatever/helpers/constants.dart';
 import 'package:listwhatever/pages/list/bloc/list_bloc.dart';
 import 'package:listwhatever/pages/list/bloc/list_event.dart';
+import 'package:listwhatever/pages/list/bloc/list_state.dart';
 import 'package:listwhatever/pages/list/models/list_item.dart';
+import 'package:listwhatever/pages/lists/models/list_of_things.dart';
 
 const String className = 'AddListItemPage';
 
@@ -55,24 +57,39 @@ class AddListItemPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    useEffect(
+      // ignore: body_might_complete_normally_nullable
+      () {
+        print('AddListItemPage: Calling bloc');
+        BlocProvider.of<ListBloc>(context).add(GetList(listId));
+      },
+      const [],
+    );
+
+    final listState = context.watch<ListBloc>().state;
+    final isLoading = getLoading(listState);
+    getList(listState);
+
+    print('AddListItemPage: listState: $listState');
+
     final categories = useState(<String, (String, String)>{});
     final urls = useState(<String, String>{});
 
     final fields = [
-      nameInputField(isLoading: false),
-      extraInfoField(isLoading: false),
-      ...categoryFields(isLoading: false, categories: categories),
-      addCategoryButton(isLoading: false, categories: categories),
-      ...urlFields(isLoading: false, urls: urls),
-      addUrlButton(isLoading: false, urls: urls),
+      nameInputField(isLoading: isLoading),
+      extraInfoField(isLoading: isLoading),
+      ...categoryFields(isLoading: isLoading, categories: categories),
+      addCategoryButton(isLoading: isLoading, categories: categories),
+      ...urlFields(isLoading: isLoading, urls: urls),
+      addUrlButton(isLoading: isLoading, urls: urls),
       // if (list!.withDates) dateInputField(isLoading: false),
       // if (list!.withMap) ...[
       //   searchLocationButton(isLoading: false),
       //   addressField(isLoading: false),
       //   latLongField(isLoading: false),
       // ],
-      cancelButton(isLoading: false),
-      submitButton(context: context, isLoading: false),
+      cancelButton(isLoading: isLoading),
+      submitButton(context: context, isLoading: isLoading),
     ];
 
     final sections = getSections();
@@ -424,8 +441,10 @@ class AddListItemPage extends HookWidget {
     );
   }
 
-  FormInputFieldInfo submitButton(
-      {required BuildContext context, required bool isLoading}) {
+  FormInputFieldInfo submitButton({
+    required BuildContext context,
+    required bool isLoading,
+  }) {
     return FormInputFieldInfo.submitButton(
       id: FieldId.submit.value,
       label: 'Submit',
@@ -473,5 +492,26 @@ class AddListItemPage extends HookWidget {
     //       .add(UpdateListItem(list!.id!, listItem));
     // }
     GoRouter.of(context).pop();
+  }
+
+  bool getLoading(ListState listState) {
+    return switch (listState) {
+      ListInitial() => true,
+      ListLoading() => true,
+      ListLoaded() => false,
+    };
+  }
+
+  ListOfThings? getList(ListState listState) {
+    if (listState is ListInitial) {
+      return null;
+    }
+    if (listState is ListLoading) {
+      return null;
+    }
+    if (listState is ListLoaded) {
+      return listState.list;
+    }
+    return null;
   }
 }

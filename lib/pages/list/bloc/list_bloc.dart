@@ -47,6 +47,9 @@ class ListBloc extends Bloc<ListEvent, ListState> {
   ) async {
     emit(ListLoading());
 
+    final listItemId =
+        await listItemRepository.addListItem(event.listId, event.listItem);
+
     final list = await listRepository.loadList(event.listId);
     final listItems = await listItemRepository.loadListItems(event.listId);
     emit(ListLoaded(list: list, listItems: listItems));

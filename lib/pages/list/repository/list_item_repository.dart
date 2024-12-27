@@ -32,9 +32,9 @@ class ListItemRepository {
     );
   }
 
-  // Future<String> addList(ListOfThings list) async {
-  //   final listsCollection = await getCollection();
-  //   final ref = await listsCollection.add(list.toJson());
-  //   return ref.id;
-  // }
+  Future<String> addListItem(String listId, ListItem listItem) async {
+    final listItemsCollection = await getCollection(listId);
+    final ref = await listItemsCollection.add(listItem.toJson());
+    return ref.id;
+  }
 }

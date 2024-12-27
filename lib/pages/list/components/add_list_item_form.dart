@@ -10,6 +10,7 @@ import 'package:listwhatever/form/form_input_section.dart';
 import 'package:listwhatever/helpers/constants.dart';
 import 'package:listwhatever/pages/list/bloc/list_bloc.dart';
 import 'package:listwhatever/pages/list/bloc/list_event.dart';
+import 'package:listwhatever/pages/list/models/list_item.dart';
 import 'package:listwhatever/pages/lists/models/list_of_things.dart';
 
 const String className = 'AddListItemPage';
@@ -413,31 +414,11 @@ class AddListItemForm extends StatelessWidget {
     final listBloc = BlocProvider.of<ListBloc>(context);
     final goRouter = GoRouter.of(context);
 
-    // String? imageFilename;
-    // if (values.containsKey(FieldId.listTypeImage.value)) {
-    //   imageFilename = await uploadImage(values[FieldId.listTypeImage.value] as List);
-    //   // LoggerHelper.logger.i('$className: imageFilename: $imageFilename');
-    // }
+    final newItem = ListItem(id: 'idItem', name: 'Hello');
 
-    // final filterTypes = getFilterTypes(values);
-    // // LoggerHelper.logger.d('values: $values');
-    final newList = ListOfThings(
-      id: null, //widget.listId,
-      name: values[FieldId.name.value]! as String,
-      // imageFilename: imageFilename,
-      withMap: false, // values[FieldId.withMap.value] as bool,
-      withDates: false, // values[FieldId.withDates.value] as bool,
-      withTimes: false, // values[FieldId.withTimes.value] as bool,
-      shared: false, //values[AddListValues.share.toString()] as bool,
-      // shareCodeForViewer: null,
-      // shareCodeForEditor: null,
-      sharedWith: {},
-      ownerId: list?.ownerId,
-      // filterTypes: filterTypes,
-    );
     // LoggerHelper.logger.d('newList: $newList');
     // if (widget.listId == null) {
-    listBloc.add(AddList(newList));
+    listBloc.add(AddListItem(list!.id!, newItem));
     // } else {
     //   listCrudBloc.add(UpdateList(newList));
     // }
