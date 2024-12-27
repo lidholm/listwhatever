@@ -1,12 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:listwhatever/auth/auth_repository.dart';
+import 'package:listwhatever/auth/bloc/auth_bloc.dart';
 import 'package:listwhatever/auth/models/authentication_user.dart';
+import 'package:listwhatever/pages/list/bloc/list_bloc.dart';
 import 'package:listwhatever/pages/list/repository/list_item_repository.dart';
+import 'package:listwhatever/pages/lists/bloc/lists_bloc.dart';
 import 'package:listwhatever/pages/lists/models/user_list.dart';
 import 'package:listwhatever/pages/lists/repository/list_repository.dart';
 import 'package:listwhatever/pages/lists/repository/user_list_repository.dart';
 import 'package:mocktail/mocktail.dart';
+
+import 'add_list_item_test.dart';
 
 class MockAuthRepository extends Mock implements AuthRepository {}
 
@@ -21,7 +26,28 @@ class MockUser extends Mock implements User {}
 class MockAuthenticationUser extends Mock implements AuthenticationUser {}
 
 class MockData {
-  MockData() {
+  late MockAuthRepository authRepository;
+  late MockUserListRepository userListRepository;
+  late MockListRepository listRepository;
+  late MockAuthenticationUser authenticationUser;
+  late MockListItemRepository listItemRepository;
+  late ListBloc listBloc;
+  late ListsBloc listsBloc;
+  late AuthBloc authBloc;
+
+  void setup() {
+    authRepository = MockAuthRepository();
+    userListRepository = MockUserListRepository();
+    listRepository = MockListRepository();
+    authenticationUser = MockAuthenticationUser();
+    listItemRepository = MockListItemRepository();
+    listBloc = MockListBloc();
+    listsBloc = MockListsBloc();
+    authBloc = MockAuthBloc();
+
+    registerFallbackValue(MockUserList());
+    registerFallbackValue(MockListOfThings());
+
     when(() => authRepository.user)
         .thenAnswer((_) => Stream.value(authenticationUser).take(1));
 
@@ -49,9 +75,4 @@ class MockData {
       ]).take(1),
     );
   }
-  final authRepository = MockAuthRepository();
-  final userListRepository = MockUserListRepository();
-  final listRepository = MockListRepository();
-  final authenticationUser = MockAuthenticationUser();
-  final listItemRepository = MockListItemRepository();
 }

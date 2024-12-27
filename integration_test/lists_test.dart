@@ -5,8 +5,6 @@ import 'package:integration_test/integration_test.dart';
 import 'package:listwhatever/app/view/app.dart';
 import 'package:listwhatever/components/shimmer/shimmer_loading.dart';
 import 'package:listwhatever/pages/lists/components/user_list_tile.dart';
-import 'package:listwhatever/pages/lists/models/user_list.dart';
-import 'package:mocktail/mocktail.dart';
 
 import 'mock_data.dart';
 
@@ -17,7 +15,7 @@ void main() {
     late MockData mockData;
 
     setUp(() {
-      mockData = MockData();
+      mockData = MockData()..setup();
     });
 
     testWidgets('verify that shimmers show up', (tester) async {
